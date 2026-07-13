@@ -12,6 +12,8 @@ Use the current taxonomy unless the user explicitly asks to change it:
 design/
   mdl/  Mosaic Design Language specifications
   mds/  Mosaic Design System specifications
+engineering/
+  meg/  Mosaic Engineering Guidelines specifications
 ```
 
 Each specification belongs in its own folder and should be split into focused Markdown chapters:
@@ -28,7 +30,7 @@ references.md
 
 ## Documentation Rules
 
-- Follow the existing `MDL-*` and `MDS-*` folder naming conventions.
+- Follow the existing `MDL-*`, `MDS-*`, and `MEG-*` folder naming conventions.
 - Keep one major specification folder per commit when committing documentation imports or large additions.
 - Preserve metadata comments at the top of generated or split files when present.
 - Put decision records close to the specification they govern, usually in `*-adrs.md`.

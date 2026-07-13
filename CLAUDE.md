@@ -12,6 +12,8 @@ Use the established layout:
 design/
   mdl/  Mosaic Design Language
   mds/  Mosaic Design System
+engineering/
+  meg/  Mosaic Engineering Guidelines
 ```
 
 Specifications are folder-based and split into chapter files. Match the existing pattern:
@@ -30,6 +32,7 @@ references.md
 
 - Keep MDL content under `design/mdl`.
 - Keep MDS content under `design/mds`.
+- Keep MEG content under `engineering/meg`.
 - Preserve existing naming conventions, metadata blocks, and chapter ordering.
 - Keep ADRs and decision notes near the specification they affect.
 - Validate Mermaid syntax after editing Mermaid diagrams.

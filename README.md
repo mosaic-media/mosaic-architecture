@@ -10,6 +10,8 @@ It is intended to be the source of truth for how Mosaic is understood, designed,
 design/
   mdl/  Mosaic Design Language
   mds/  Mosaic Design System
+engineering/
+  meg/  Mosaic Engineering Guidelines
 ```
 
 ### Mosaic Design Language
@@ -38,6 +40,19 @@ These documents describe:
 
 Start here when a decision affects visual systems, presentation primitives, runtime design infrastructure, or component behaviour.
 
+### Mosaic Engineering Guidelines
+
+`engineering/meg` contains engineering standards and implementation-facing architecture guidelines.
+
+These documents describe:
+
+- Go engineering standards
+- event-driven runtime behaviour
+- domain-driven design practices
+- hexagonal architecture boundaries
+
+Start here when a decision affects service structure, runtime behaviour, domain modelling, dependency direction, or engineering quality standards.
+
 ## Documentation Conventions
 
 Each specification is stored as a folder with one Markdown file per chapter.
@@ -64,6 +79,7 @@ Place decisions close to the system they govern:
 
 - MDL decisions belong under `design/mdl`
 - MDS decisions belong under `design/mds`
+- MEG decisions belong under `engineering/meg`
 - cross-cutting decisions should reference the upstream specification they depend on
 
 When a decision changes the meaning of an existing specification, update both the ADR section and the affected chapter.
