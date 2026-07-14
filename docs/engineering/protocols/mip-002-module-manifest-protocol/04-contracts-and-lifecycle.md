@@ -131,7 +131,7 @@ Subscriptions should target public Module events or Platform events.
 
 Modules should not subscribe to another Module's private events.
 
-Every event name should follow the MIP-001 namespaced event naming rules.
+Every event name should follow the [MIP-001](../mip-001-event-protocol/index.md) namespaced event naming rules.
 
 The manifest provides:
 

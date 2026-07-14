@@ -15,7 +15,7 @@ Version: 0.4
 
 MIP-002 defines the canonical manifest contract for Mosaic modules.
 
-MEG-006 explains how engineers build module support.
+[MEG-006](../../guides/meg-006-module-platform/index.md) explains how engineers build module support.
 
 MIP-002 defines the protocol that makes module admission safe and repeatable.
 
