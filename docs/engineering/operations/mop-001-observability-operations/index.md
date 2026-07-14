@@ -2,7 +2,7 @@
 File: docs/engineering/operations/mop-001-observability-operations/index.md
 Document: MOP-001
 Status: Draft
-Version: 0.1
+Version: 0.4
 -->
 
 # MOP-001 — Observability Operations
@@ -15,7 +15,7 @@ Version: 0.1
 
 MOP-001 defines operational expectations for Mosaic health, diagnostics, alerting and debugging.
 
-MEG-008 explains observability engineering guidance.
+[MEG-008](../../guides/meg-008-observability/index.md) explains observability engineering guidance.
 
 MOP-001 defines how Mosaic should be operated using those observability surfaces.
 
