@@ -4,7 +4,7 @@ Document: MDS-006
 Chapter: 02
 Title: Runtime World
 Status: Draft
-Version: 0.2
+Version: 0.4
 -->
 
 # Runtime World
@@ -49,38 +49,32 @@ Traditional applications frequently construct interfaces from application state.
 
 Examples.
 
-```text
-Database
+```mermaid
+flowchart TD
 
-↓
+N1["Database"]
+N2["API"]
+N3["State"]
+N4["UI"]
 
-API
-
-↓
-
-State
-
-↓
-
-UI
+N1 --> N2
+N2 --> N3
+N3 --> N4
 ```
 
 Mosaic intentionally follows a different model.
 
-```text
-World
+```mermaid
+flowchart TD
 
-↓
+N1["World"]
+N2["Behaviour"]
+N3["Composition"]
+N4["Presentation"]
 
-Behaviour
-
-↓
-
-Composition
-
-↓
-
-Presentation
+N1 --> N2
+N2 --> N3
+N3 --> N4
 ```
 
 The Runtime World represents meaning.
@@ -104,20 +98,17 @@ Not:
 
 Instead.
 
-```
-World
+```mermaid
+flowchart TD
 
-↓
+N1["World"]
+N2["Current Behaviour"]
+N3["Current Context"]
+N4["Current Focus"]
 
-Current Behaviour
-
-↓
-
-Current Context
-
-↓
-
-Current Focus
+N1 --> N2
+N2 --> N3
+N3 --> N4
 ```
 
 The World evolves.
@@ -167,20 +158,17 @@ The Runtime World is defined by behaviour.
 
 Example.
 
-```
-Watching
+```mermaid
+flowchart TD
 
-↓
+N1["Watching"]
+N2["Episode"]
+N3["Playback"]
+N4["Paused"]
 
-Episode
-
-↓
-
-Playback
-
-↓
-
-Paused
+N1 --> N2
+N2 --> N3
+N3 --> N4
 ```
 
 The World changes because behaviour changed.
@@ -195,16 +183,15 @@ The Runtime World should never reset unnecessarily.
 
 Example.
 
-```
-Playback
+```mermaid
+flowchart TD
 
-↓
+N1["Playback"]
+N2["Search"]
+N3["Playback"]
 
-Search
-
-↓
-
-Playback
+N1 --> N2
+N2 --> N3
 ```
 
 Search temporarily changes Context.
@@ -262,14 +249,17 @@ Only the Runtime World determines current Focus.
 Examples.
 
 ```
+
 Current Film
 ```
 
 ```
+
 Current Book
 ```
 
 ```
+
 Current Album
 ```
 
@@ -286,6 +276,7 @@ The Runtime World also owns Context.
 Examples.
 
 ```
+
 Browsing
 
 Watching
@@ -314,20 +305,17 @@ Relationships are considered first-class runtime concepts.
 
 Examples.
 
-```
-Episode
+```mermaid
+flowchart TD
 
-↓
+N1["Episode"]
+N2["Series"]
+N3["Franchise"]
+N4["Studio"]
 
-Series
-
-↓
-
-Franchise
-
-↓
-
-Studio
+N1 --> N2
+N2 --> N3
+N3 --> N4
 ```
 
 The Composition Engine consumes these relationships while solving understanding.
@@ -342,20 +330,17 @@ Every behavioural system observes the Runtime World.
 
 Conceptually.
 
-```text
-Runtime World
+```mermaid
+flowchart TD
 
-↓
+N1["Runtime World"]
+N2["Behaviour"]
+N3["Composition"]
+N4["Presentation"]
 
-Behaviour
-
-↓
-
-Composition
-
-↓
-
-Presentation
+N1 --> N2
+N2 --> N3
+N3 --> N4
 ```
 
 Changes propagate naturally.
@@ -371,18 +356,22 @@ The Runtime World evolves through behavioural mutations.
 Examples.
 
 ```
+
 Playback Started
 ```
 
 ```
+
 Playback Paused
 ```
 
 ```
+
 Focus Changed
 ```
 
 ```
+
 Episode Completed
 ```
 
@@ -400,20 +389,17 @@ The Runtime World should evolve identically.
 
 Example.
 
-```
-Watch Episode
+```mermaid
+flowchart TD
 
-↓
+N1["Watch Episode"]
+N2["Pause"]
+N3["Resume"]
+N4["Complete"]
 
-Pause
-
-↓
-
-Resume
-
-↓
-
-Complete
+N1 --> N2
+N2 --> N3
+N3 --> N4
 ```
 
 Every Mosaic client should produce the same Runtime World.
@@ -462,20 +448,17 @@ Future implementations may expose immutable Runtime World snapshots.
 
 Conceptually.
 
-```text
-Runtime World
+```mermaid
+flowchart TD
 
-↓
+N1["Runtime World"]
+N2["Snapshot"]
+N3["Composition Solver"]
+N4["Presentation"]
 
-Snapshot
-
-↓
-
-Composition Solver
-
-↓
-
-Presentation
+N1 --> N2
+N2 --> N3
+N3 --> N4
 ```
 
 Snapshots improve:
@@ -686,15 +669,3 @@ Every runtime system observes it.
 None redefine it.
 
 The Runtime World is therefore the foundation upon which the entire Mosaic runtime architecture is built.
-
----
-
-# Review Status
-
-**Status**
-
-Draft
-
-**Next File**
-
-`03-composition-solver.md`

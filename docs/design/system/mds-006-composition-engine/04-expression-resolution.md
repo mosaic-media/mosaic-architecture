@@ -4,7 +4,7 @@ Document: MDS-006
 Chapter: 04
 Title: Expression Resolution
 Status: Draft
-Version: 0.2
+Version: 0.4
 -->
 
 # Expression Resolution
@@ -45,38 +45,32 @@ It does not translate understanding into components.
 
 Traditional UI frameworks often follow this process.
 
-```text
-Data
+```mermaid
+flowchart TD
 
-↓
+N1["Data"]
+N2["Widgets"]
+N3["Render"]
 
-Widgets
-
-↓
-
-Render
+N1 --> N2
+N2 --> N3
 ```
 
 Mosaic intentionally introduces an intermediate layer.
 
-```text
-Behaviour
+```mermaid
+flowchart TD
 
-↓
+N1["Behaviour"]
+N2["Composition"]
+N3["Expressions"]
+N4["Presentation"]
+N5["Components"]
 
-Composition
-
-↓
-
-Expressions
-
-↓
-
-Presentation
-
-↓
-
-Components
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
 ```
 
 Expressions preserve conceptual meaning while remaining independent from implementation.
@@ -136,12 +130,13 @@ Several responsibilities have merged.
 
 Preferred.
 
-```text
-Hero
+```mermaid
+flowchart TD
 
-↓
+N1["Hero"]
+N2["Actions"]
 
-Actions
+N1 --> N2
 ```
 
 Each Expression communicates one idea.
@@ -154,24 +149,19 @@ The Presentation Model later determines how those ideas are visually combined.
 
 Expression Resolution consumes:
 
-```text
-Composition
+```mermaid
+flowchart TD
 
-↓
+N1["Composition"]
+N2["Hierarchy"]
+N3["Priority"]
+N4["Grouping"]
+N5["Behaviour"]
 
-Hierarchy
-
-↓
-
-Priority
-
-↓
-
-Grouping
-
-↓
-
-Behaviour
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
 ```
 
 The Runtime World is no longer consulted directly.
@@ -186,24 +176,19 @@ Expression Resolution simply communicates it.
 
 Expression Resolution produces:
 
-```text
-Presentation Model
+```mermaid
+flowchart TD
 
-↓
+N1["Presentation Model"]
+N2["Expression Tree"]
+N3["Presentation Metadata"]
+N4["Interaction Model"]
+N5["Material Intent"]
 
-Expression Tree
-
-↓
-
-Presentation Metadata
-
-↓
-
-Interaction Model
-
-↓
-
-Material Intent
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
 ```
 
 These outputs remain completely independent from rendering technologies.
@@ -216,16 +201,19 @@ Future implementations may internally represent Expressions as a tree.
 
 Conceptually.
 
-```text
-Hero
+```mermaid
+flowchart TD
 
-├── Progress
+N1["Hero"]
+N2["Progress"]
+N3["Actions"]
+N4["Metadata"]
+N5["Relationships"]
 
-├── Actions
-
-├── Metadata
-
-└── Relationships
+N1 --> N2
+N1 --> N3
+N1 --> N4
+N1 --> N5
 ```
 
 This tree represents conceptual communication.
@@ -264,6 +252,7 @@ The Timeline may appear as:
 It remains:
 
 ```
+
 Timeline
 ```
 
@@ -277,16 +266,15 @@ Expressions inherit behavioural meaning.
 
 Example.
 
-```
-Playback
+```mermaid
+flowchart TD
 
-↓
+N1["Playback"]
+N2["Progress"]
+N3["Timeline"]
 
-Progress
-
-↓
-
-Timeline
+N1 --> N2
+N2 --> N3
 ```
 
 Every implementation should preserve this relationship.
@@ -331,28 +319,31 @@ Expression Resolution also produces Material Intent.
 
 Examples.
 
-```text
-Hero
+```mermaid
+flowchart TD
 
-↓
+N1["Hero"]
+N2["Hero Material"]
 
-Hero Material
+N1 --> N2
 ```
 
-```text
-Overlay
+```mermaid
+flowchart TD
 
-↓
+N1["Overlay"]
+N2["Overlay Material"]
 
-Overlay Material
+N1 --> N2
 ```
 
-```text
-Navigation
+```mermaid
+flowchart TD
 
-↓
+N1["Navigation"]
+N2["Surface Material"]
 
-Surface Material
+N1 --> N2
 ```
 
 The Material System later resolves these into physical behaviour.
@@ -369,28 +360,31 @@ Expressions also communicate editorial intent.
 
 Examples.
 
-```text
-Hero
+```mermaid
+flowchart TD
 
-↓
+N1["Hero"]
+N2["Heading"]
 
-Heading
+N1 --> N2
 ```
 
-```text
-Metadata
+```mermaid
+flowchart TD
 
-↓
+N1["Metadata"]
+N2["Supporting"]
 
-Supporting
+N1 --> N2
 ```
 
-```text
-Diagnostics
+```mermaid
+flowchart TD
 
-↓
+N1["Diagnostics"]
+N2["Caption"]
 
-Caption
+N1 --> N2
 ```
 
 Typography therefore becomes another consequence of Expression Resolution.
@@ -435,32 +429,35 @@ Example.
 
 Desktop.
 
-```text
-Timeline
+```mermaid
+flowchart TD
 
-↓
+N1["Timeline"]
+N2["Expanded Expression"]
 
-Expanded Expression
+N1 --> N2
 ```
 
 Phone.
 
-```text
-Timeline
+```mermaid
+flowchart TD
 
-↓
+N1["Timeline"]
+N2["Compact Expression"]
 
-Compact Expression
+N1 --> N2
 ```
 
 Voice.
 
-```text
-Timeline
+```mermaid
+flowchart TD
 
-↓
+N1["Timeline"]
+N2["Spoken Expression"]
 
-Spoken Expression
+N1 --> N2
 ```
 
 The conceptual identity remains unchanged.
@@ -475,18 +472,21 @@ Expressions may contain other Expressions.
 
 Example.
 
-```text
-Hero
+```mermaid
+flowchart TD
 
-├── Artwork
+N1["Hero"]
+N2["Artwork"]
+N3["Heading"]
+N4["Progress"]
+N5["Actions"]
+N6["Metadata"]
 
-├── Heading
-
-├── Progress
-
-├── Actions
-
-└── Metadata
+N1 --> N2
+N1 --> N3
+N1 --> N4
+N1 --> N5
+N1 --> N6
 ```
 
 Each child remains independently meaningful.
@@ -685,15 +685,3 @@ It separates:
 allowing every Mosaic client to present one consistent World regardless of rendering technology.
 
 Expressions are therefore one of the most important architectural abstractions within the entire Mosaic platform.
-
----
-
-# Review Status
-
-**Status**
-
-Draft
-
-**Next File**
-
-`05-runtime-hierarchy.md`

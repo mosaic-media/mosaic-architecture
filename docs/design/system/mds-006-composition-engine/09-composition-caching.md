@@ -4,7 +4,7 @@ Document: MDS-006
 Chapter: 09
 Title: Composition Caching
 Status: Draft
-Version: 0.2
+Version: 0.4
 -->
 
 # Composition Caching
@@ -51,12 +51,13 @@ It should never optimise behaviour.
 
 Users should experience:
 
-```text
-Same Behaviour
+```mermaid
+flowchart TD
 
-↓
+N1["Same Behaviour"]
+N2["Same Composition"]
 
-Same Composition
+N1 --> N2
 ```
 
 Whether the result was:
@@ -74,24 +75,19 @@ Caching always follows behaviour.
 
 Conceptually.
 
-```text
-Behaviour
+```mermaid
+flowchart TD
 
-↓
+N1["Behaviour"]
+N2["Runtime World"]
+N3["Cache Decision"]
+N4["Pipeline"]
+N5["Presentation"]
 
-Runtime World
-
-↓
-
-Cache Decision
-
-↓
-
-Pipeline
-
-↓
-
-Presentation
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
 ```
 
 Behaviour always determines whether cached information remains valid.
@@ -106,24 +102,19 @@ The Composition Engine may cache several conceptual artefacts.
 
 Examples include:
 
-```text
-Runtime World Snapshot
+```mermaid
+flowchart TD
 
-↓
+N1["Runtime World Snapshot"]
+N2["Composition"]
+N3["Expression Tree"]
+N4["Presentation Model"]
+N5["Adaptive Layout"]
 
-Composition
-
-↓
-
-Expression Tree
-
-↓
-
-Presentation Model
-
-↓
-
-Adaptive Layout
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
 ```
 
 Each stage may possess its own cache.
@@ -138,16 +129,15 @@ Immutable Runtime World snapshots provide the foundation for deterministic cachi
 
 Conceptually.
 
-```text
-Runtime World
+```mermaid
+flowchart TD
 
-↓
+N1["Runtime World"]
+N2["Snapshot"]
+N3["Cache Key"]
 
-Snapshot
-
-↓
-
-Cache Key
+N1 --> N2
+N2 --> N3
 ```
 
 Future runtime systems may compare snapshots to determine whether downstream stages require recomputation.
@@ -223,16 +213,15 @@ Presentation Models may also be cached.
 
 Conceptually.
 
-```text
-Expression Tree
+```mermaid
+flowchart TD
 
-↓
+N1["Expression Tree"]
+N2["Presentation Model"]
+N3["Cache"]
 
-Presentation Model
-
-↓
-
-Cache
+N1 --> N2
+N2 --> N3
 ```
 
 Presentation caching should remain independent from rendering technology.
@@ -277,20 +266,17 @@ Invalidation should propagate naturally through the runtime hierarchy.
 
 Example.
 
-```text
-Focus
+```mermaid
+flowchart TD
 
-↓
+N1["Focus"]
+N2["Hero"]
+N3["Supporting Expressions"]
+N4["Presentation"]
 
-Hero
-
-↓
-
-Supporting Expressions
-
-↓
-
-Presentation
+N1 --> N2
+N2 --> N3
+N3 --> N4
 ```
 
 Peripheral Expressions should remain valid whenever possible.
@@ -364,30 +350,28 @@ Implementation-specific values should never become behavioural cache keys.
 
 Preferred.
 
-```text
-Behaviour
+```mermaid
+flowchart TD
 
-↓
+N1["Behaviour"]
+N2["Small Runtime Change"]
+N3["Local Recompute"]
 
-Small Runtime Change
-
-↓
-
-Local Recompute
+N1 --> N2
+N2 --> N3
 ```
 
 Avoid.
 
-```text
-Behaviour
+```mermaid
+flowchart TD
 
-↓
+N1["Behaviour"]
+N2["Entire Runtime Pipeline"]
+N3["Complete Rebuild"]
 
-Entire Runtime Pipeline
-
-↓
-
-Complete Rebuild
+N1 --> N2
+N2 --> N3
 ```
 
 Incremental recomputation preserves responsiveness while strengthening continuity.
@@ -462,28 +446,31 @@ Future runtime implementations may expose conceptual cache profiles.
 
 Examples.
 
-```text
-Performance
+```mermaid
+flowchart TD
 
-↓
+N1["Performance"]
+N2["Aggressive Cache"]
 
-Aggressive Cache
+N1 --> N2
 ```
 
-```text
-Balanced
+```mermaid
+flowchart TD
 
-↓
+N1["Balanced"]
+N2["Incremental Cache"]
 
-Incremental Cache
+N1 --> N2
 ```
 
-```text
-Development
+```mermaid
+flowchart TD
 
-↓
+N1["Development"]
+N2["Minimal Cache"]
 
-Minimal Cache
+N1 --> N2
 ```
 
 Profiles alter optimisation.
@@ -656,15 +643,3 @@ Users should therefore experience:
 - consistency,
 
 without ever realising a cache existed.
-
----
-
-# Review Status
-
-**Status**
-
-Draft
-
-**Next File**
-
-`10-multi-device-composition.md`

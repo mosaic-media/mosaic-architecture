@@ -4,7 +4,7 @@ Document: MDS-006
 Chapter: 05
 Title: Runtime Hierarchy
 Status: Draft
-Version: 0.2
+Version: 0.4
 -->
 
 # Runtime Hierarchy
@@ -49,20 +49,17 @@ Traditional applications frequently define hierarchy statically.
 
 Example.
 
-```text
-Header
+```mermaid
+flowchart TD
 
-↓
+N1["Header"]
+N2["Sidebar"]
+N3["Content"]
+N4["Footer"]
 
-Sidebar
-
-↓
-
-Content
-
-↓
-
-Footer
+N1 --> N2
+N2 --> N3
+N3 --> N4
 ```
 
 This hierarchy exists regardless of:
@@ -75,20 +72,17 @@ Mosaic intentionally rejects this model.
 
 Instead.
 
-```text
-Behaviour
+```mermaid
+flowchart TD
 
-↓
+N1["Behaviour"]
+N2["Priority"]
+N3["Hierarchy"]
+N4["Expressions"]
 
-Priority
-
-↓
-
-Hierarchy
-
-↓
-
-Expressions
+N1 --> N2
+N2 --> N3
+N3 --> N4
 ```
 
 Hierarchy becomes the consequence of behaviour.
@@ -101,28 +95,21 @@ Runtime Hierarchy should evolve continuously.
 
 Example.
 
-```
-Browsing
+```mermaid
+flowchart TD
 
-↓
+N1["Browsing"]
+N2["Hero"]
+N3["Watching"]
+N4["Playback"]
+N5["Episode Complete"]
+N6["Continue Watching"]
 
-Hero
-
-↓
-
-Watching
-
-↓
-
-Playback
-
-↓
-
-Episode Complete
-
-↓
-
-Continue Watching
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
+N5 --> N6
 ```
 
 Nothing has been rebuilt.
@@ -137,28 +124,21 @@ Users should perceive continuity rather than transition.
 
 Runtime Hierarchy evaluates:
 
-```text
-Behaviour
+```mermaid
+flowchart TD
 
-↓
+N1["Behaviour"]
+N2["Focus"]
+N3["Context"]
+N4["Priority"]
+N5["Relationships"]
+N6["Composition"]
 
-Focus
-
-↓
-
-Context
-
-↓
-
-Priority
-
-↓
-
-Relationships
-
-↓
-
-Composition
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
+N5 --> N6
 ```
 
 Rendering information is intentionally absent.
@@ -171,24 +151,19 @@ Hierarchy exists before presentation.
 
 Runtime Hierarchy produces:
 
-```text
-Hero
+```mermaid
+flowchart TD
 
-↓
+N1["Hero"]
+N2["Primary"]
+N3["Supporting"]
+N4["Peripheral"]
+N5["Background"]
 
-Primary
-
-↓
-
-Supporting
-
-↓
-
-Peripheral
-
-↓
-
-Background
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
 ```
 
 Every Expression receives exactly one current hierarchical role.
@@ -203,12 +178,13 @@ Exactly one Hero should normally exist.
 
 Example.
 
-```
-Playback
+```mermaid
+flowchart TD
 
-↓
+N1["Playback"]
+N2["Episode"]
 
-Episode
+N1 --> N2
 ```
 
 The Hero receives:
@@ -233,18 +209,21 @@ Example.
 Current activity.
 
 ```
+
 Browsing Reviews
 ```
 
 Reviews become:
 
 ```
+
 Primary
 ```
 
 Playback information becomes:
 
 ```
+
 Supporting
 ```
 
@@ -260,20 +239,17 @@ Relationships influence Runtime Hierarchy.
 
 Example.
 
-```
-Episode
+```mermaid
+flowchart TD
 
-↓
+N1["Episode"]
+N2["Next Episode"]
+N3["Series"]
+N4["Franchise"]
 
-Next Episode
-
-↓
-
-Series
-
-↓
-
-Franchise
+N1 --> N2
+N2 --> N3
+N3 --> N4
 ```
 
 The closer a relationship is to the user's current behaviour...
@@ -392,22 +368,24 @@ Hierarchy should change only when behaviour justifies it.
 
 Poor.
 
-```
-Minor Layout Change
+```mermaid
+flowchart TD
 
-↓
+N1["Minor Layout Change"]
+N2["Hierarchy Changes"]
 
-Hierarchy Changes
+N1 --> N2
 ```
 
 Preferred.
 
-```
-Behaviour Changes
+```mermaid
+flowchart TD
 
-↓
+N1["Behaviour Changes"]
+N2["Hierarchy Evolves"]
 
-Hierarchy Evolves
+N1 --> N2
 ```
 
 Visual adaptation alone should never reorganise conceptual importance.
@@ -478,20 +456,17 @@ Future implementations may internally represent Runtime Hierarchy through Hierar
 
 Conceptually.
 
-```text
-Composition
+```mermaid
+flowchart TD
 
-↓
+N1["Composition"]
+N2["Hierarchy Profile"]
+N3["Expression Ordering"]
+N4["Presentation"]
 
-Hierarchy Profile
-
-↓
-
-Expression Ordering
-
-↓
-
-Presentation
+N1 --> N2
+N2 --> N3
+N3 --> N4
 ```
 
 Profiles improve:
@@ -681,15 +656,3 @@ It ensures that:
 Hierarchy is therefore never authored.
 
 It is continuously solved from the evolving World.
-
----
-
-# Review Status
-
-**Status**
-
-Draft
-
-**Next File**
-
-`06-adaptive-layout.md`

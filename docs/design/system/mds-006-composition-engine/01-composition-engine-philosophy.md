@@ -4,7 +4,7 @@ Document: MDS-006
 Chapter: 01
 Title: Composition Engine Philosophy
 Status: Draft
-Version: 0.2
+Version: 0.4
 -->
 
 # Composition Engine Philosophy
@@ -47,20 +47,17 @@ Everything within the Composition Engine derives from this statement.
 
 Traditional software typically follows this model.
 
-```text
-Data
+```mermaid
+flowchart TD
 
-↓
+N1["Data"]
+N2["Templates"]
+N3["Components"]
+N4["Render"]
 
-Templates
-
-↓
-
-Components
-
-↓
-
-Render
+N1 --> N2
+N2 --> N3
+N3 --> N4
 ```
 
 Every user receives essentially the same interface.
@@ -69,28 +66,21 @@ Mosaic intentionally rejects this assumption.
 
 Instead.
 
-```text
-World
+```mermaid
+flowchart TD
 
-↓
+N1["World"]
+N2["Behaviour"]
+N3["Composition"]
+N4["Expressions"]
+N5["Presentation"]
+N6["Render"]
 
-Behaviour
-
-↓
-
-Composition
-
-↓
-
-Expressions
-
-↓
-
-Presentation
-
-↓
-
-Render
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
+N5 --> N6
 ```
 
 The interface becomes the consequence of understanding.
@@ -125,38 +115,32 @@ Never the first.
 
 Incorrect.
 
-```text
-Screen
+```mermaid
+flowchart TD
 
-↓
+N1["Screen"]
+N2["Populate Widgets"]
+N3["Display"]
 
-Populate Widgets
-
-↓
-
-Display
+N1 --> N2
+N2 --> N3
 ```
 
 Preferred.
 
-```text
-Behaviour
+```mermaid
+flowchart TD
 
-↓
+N1["Behaviour"]
+N2["Composition"]
+N3["Expressions"]
+N4["Presentation"]
+N5["Rendering"]
 
-Composition
-
-↓
-
-Expressions
-
-↓
-
-Presentation
-
-↓
-
-Rendering
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
 ```
 
 Rendering technology should remain almost irrelevant to the conceptual architecture.
@@ -169,34 +153,30 @@ The Composition Engine never stops.
 
 Traditional interfaces frequently behave like this.
 
-```text
-Open Screen
+```mermaid
+flowchart TD
 
-↓
+N1["Open Screen"]
+N2["Render"]
+N3["Finished"]
 
-Render
-
-↓
-
-Finished
+N1 --> N2
+N2 --> N3
 ```
 
 Mosaic instead behaves like this.
 
-```text
-World Changes
+```mermaid
+flowchart TD
 
-↓
+N1["World Changes"]
+N2["Composition Evolves"]
+N3["Presentation Evolves"]
+N4["World Changes Again"]
 
-Composition Evolves
-
-↓
-
-Presentation Evolves
-
-↓
-
-World Changes Again
+N1 --> N2
+N2 --> N3
+N3 --> N4
 ```
 
 The runtime continuously accompanies the user.
@@ -209,28 +189,31 @@ Everything begins with the user's World.
 
 Examples.
 
-```
-Watching
+```mermaid
+flowchart TD
 
-↓
+N1["Watching"]
+N2["Episode"]
 
-Episode
-```
-
-```
-Reading
-
-↓
-
-Book
+N1 --> N2
 ```
 
+```mermaid
+flowchart TD
+
+N1["Reading"]
+N2["Book"]
+
+N1 --> N2
 ```
-Listening
 
-↓
+```mermaid
+flowchart TD
 
-Album
+N1["Listening"]
+N2["Album"]
+
+N1 --> N2
 ```
 
 The engine never asks:
@@ -269,6 +252,7 @@ It produces Expressions.
 Examples.
 
 ```
+
 Timeline
 
 Progress
@@ -587,15 +571,3 @@ Users should never feel that screens are appearing.
 They should feel that their World is naturally evolving around them.
 
 That uninterrupted evolution is the defining objective of the Composition Engine.
-
----
-
-# Review Status
-
-**Status**
-
-Draft
-
-**Next File**
-
-`02-runtime-world.md`

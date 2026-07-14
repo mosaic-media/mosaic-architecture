@@ -4,7 +4,7 @@ Document: MDS-006
 Chapter: 13
 Title: Contributor Guidance
 Status: Draft
-Version: 0.2
+Version: 0.4
 -->
 
 # Contributor Guidance
@@ -49,30 +49,28 @@ Instead ask:
 
 Good.
 
-```text
-Watching
+```mermaid
+flowchart TD
 
-↓
+N1["Watching"]
+N2["Episode"]
+N3["Playback"]
 
-Episode
-
-↓
-
-Playback
+N1 --> N2
+N2 --> N3
 ```
 
 Poor.
 
-```text
-Home Screen
+```mermaid
+flowchart TD
 
-↓
+N1["Home Screen"]
+N2["Episode Screen"]
+N3["Player Screen"]
 
-Episode Screen
-
-↓
-
-Player Screen
+N1 --> N2
+N2 --> N3
 ```
 
 Screens are implementation.
@@ -122,34 +120,30 @@ The implementation should probably not begin yet.
 
 Never think:
 
-```text
-Card
+```mermaid
+flowchart TD
 
-↓
+N1["Card"]
+N2["Button"]
+N3["List"]
 
-Button
-
-↓
-
-List
+N1 --> N2
+N2 --> N3
 ```
 
 Instead think:
 
-```text
-Hero
+```mermaid
+flowchart TD
 
-↓
+N1["Hero"]
+N2["Timeline"]
+N3["Actions"]
+N4["Relationships"]
 
-Timeline
-
-↓
-
-Actions
-
-↓
-
-Relationships
+N1 --> N2
+N2 --> N3
+N3 --> N4
 ```
 
 Components are merely one possible implementation of Expressions.
@@ -184,38 +178,32 @@ Rendering should remain the final concern.
 
 Preferred.
 
-```text
-Behaviour
+```mermaid
+flowchart TD
 
-↓
+N1["Behaviour"]
+N2["Composition"]
+N3["Expressions"]
+N4["Presentation"]
+N5["Rendering"]
 
-Composition
-
-↓
-
-Expressions
-
-↓
-
-Presentation
-
-↓
-
-Rendering
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
 ```
 
 Avoid.
 
-```text
-Widgets
+```mermaid
+flowchart TD
 
-↓
+N1["Widgets"]
+N2["State"]
+N3["Behaviour"]
 
-State
-
-↓
-
-Behaviour
+N1 --> N2
+N2 --> N3
 ```
 
 The runtime should always lead implementation.
@@ -248,22 +236,24 @@ Before recomputing ask:
 
 Preferred.
 
-```text
-Timeline
+```mermaid
+flowchart TD
 
-↓
+N1["Timeline"]
+N2["Updates"]
 
-Updates
+N1 --> N2
 ```
 
 Avoid.
 
-```text
-Entire World
+```mermaid
+flowchart TD
 
-↓
+N1["Entire World"]
+N2["Rebuilt"]
 
-Rebuilt
+N1 --> N2
 ```
 
 Incremental evolution preserves both continuity and performance.
@@ -366,22 +356,24 @@ Performance optimisation should never alter behavioural correctness.
 
 Preferred.
 
-```text
-Same Runtime
+```mermaid
+flowchart TD
 
-↓
+N1["Same Runtime"]
+N2["Better Cache"]
 
-Better Cache
+N1 --> N2
 ```
 
 Avoid.
 
-```text
-Different Runtime
+```mermaid
+flowchart TD
 
-↓
+N1["Different Runtime"]
+N2["Faster Execution"]
 
-Faster Execution
+N1 --> N2
 ```
 
 Optimise execution.
@@ -477,15 +469,3 @@ and instinctively begin asking:
 When every contributor naturally thinks in Worlds rather than interfaces, Mosaic stops behaving like an application.
 
 It begins behaving like a companion that always understands where the user is, what matters now, and how to guide them there without ever making them think about the machinery underneath.
-
----
-
-# Review Status
-
-**Status**
-
-Draft
-
-**Next File**
-
-`glossary.md`

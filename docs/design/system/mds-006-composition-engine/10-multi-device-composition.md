@@ -4,7 +4,7 @@ Document: MDS-006
 Chapter: 10
 Title: Multi-Device Composition
 Status: Draft
-Version: 0.2
+Version: 0.4
 -->
 
 # Multi-Device Composition
@@ -59,40 +59,34 @@ Traditional applications frequently solve interfaces separately.
 
 Examples.
 
-```
-Mobile UI
+```mermaid
+flowchart TD
 
-↓
+N1["Mobile UI"]
+N2["Desktop UI"]
+N3["TV UI"]
 
-Desktop UI
-
-↓
-
-TV UI
+N1 --> N2
+N2 --> N3
 ```
 
 These experiences often diverge over time.
 
 Mosaic intentionally solves once.
 
-```
-Runtime World
+```mermaid
+flowchart TD
 
-↓
+N1["Runtime World"]
+N2["Composition"]
+N3["Expressions"]
+N4["Device Projection"]
+N5["Presentation"]
 
-Composition
-
-↓
-
-Expressions
-
-↓
-
-Device Projection
-
-↓
-
-Presentation
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
 ```
 
 The World remains identical.
@@ -138,6 +132,7 @@ Every client consumes the same solved Composition.
 Examples.
 
 ```
+
 Hero
 
 Timeline
@@ -161,36 +156,30 @@ The Composition Engine projects solved Expressions into device-specific layouts.
 
 Conceptually.
 
-```text
-Composition
+```mermaid
+flowchart TD
 
-↓
+N1["Composition"]
+N2["Expression Tree"]
+N3["Adaptive Layout"]
+N4["Phone"]
 
-Expression Tree
-
-↓
-
-Adaptive Layout
-
-↓
-
-Phone
+N1 --> N2
+N2 --> N3
+N3 --> N4
 ```
 
-```text
-Composition
+```mermaid
+flowchart TD
 
-↓
+N1["Composition"]
+N2["Expression Tree"]
+N3["Adaptive Layout"]
+N4["Desktop"]
 
-Expression Tree
-
-↓
-
-Adaptive Layout
-
-↓
-
-Desktop
+N1 --> N2
+N2 --> N3
+N3 --> N4
 ```
 
 Behaviour remains identical.
@@ -314,42 +303,34 @@ Not remove it.
 
 Incorrect.
 
-```
-Desktop
+```mermaid
+flowchart TD
 
-↓
+N1["Desktop"]
+N2["Cast"]
+N3["Phone"]
+N4["Removed"]
 
-Cast
-
-↓
-
-Phone
-
-↓
-
-Removed
+N1 --> N2
+N2 --> N3
+N3 --> N4
 ```
 
 Preferred.
 
-```
-Desktop
+```mermaid
+flowchart TD
 
-↓
+N1["Desktop"]
+N2["Cast"]
+N3["Phone"]
+N4["Collapsed"]
+N5["Expandable"]
 
-Cast
-
-↓
-
-Phone
-
-↓
-
-Collapsed
-
-↓
-
-Expandable
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
 ```
 
 Understanding remains available.
@@ -754,15 +735,3 @@ regardless of:
 Presentation may change.
 
 Understanding never should.
-
----
-
-# Review Status
-
-**Status**
-
-Draft
-
-**Next File**
-
-`11-governance.md`

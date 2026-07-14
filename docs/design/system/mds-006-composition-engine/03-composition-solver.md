@@ -4,7 +4,7 @@ Document: MDS-006
 Chapter: 03
 Title: Composition Solver
 Status: Draft
-Version: 0.2
+Version: 0.4
 -->
 
 # Composition Solver
@@ -54,38 +54,32 @@ Presentation is derived afterwards.
 
 Traditional applications generally solve interfaces.
 
-```text
-Data
+```mermaid
+flowchart TD
 
-↓
+N1["Data"]
+N2["Templates"]
+N3["Layout"]
+N4["Render"]
 
-Templates
-
-↓
-
-Layout
-
-↓
-
-Render
+N1 --> N2
+N2 --> N3
+N3 --> N4
 ```
 
 Mosaic intentionally solves understanding.
 
-```text
-Runtime World
+```mermaid
+flowchart TD
 
-↓
+N1["Runtime World"]
+N2["Composition Solver"]
+N3["Expressions"]
+N4["Presentation"]
 
-Composition Solver
-
-↓
-
-Expressions
-
-↓
-
-Presentation
+N1 --> N2
+N2 --> N3
+N3 --> N4
 ```
 
 The Solver therefore replaces manually authored interface structure with behavioural reasoning.
@@ -119,32 +113,23 @@ The Solver consumes one Runtime World snapshot.
 
 Conceptually.
 
-```text
-Runtime World
+```mermaid
+flowchart TD
 
-↓
+N1["Runtime World"]
+N2["Focus"]
+N3["Context"]
+N4["Behaviour"]
+N5["Relationships"]
+N6["Information"]
+N7["Capabilities"]
 
-Focus
-
-↓
-
-Context
-
-↓
-
-Behaviour
-
-↓
-
-Relationships
-
-↓
-
-Information
-
-↓
-
-Capabilities
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
+N5 --> N6
+N6 --> N7
 ```
 
 These become the complete behavioural inputs for solving.
@@ -159,32 +144,23 @@ The Solver produces a solved Composition.
 
 Outputs include:
 
-```text
-Hero
+```mermaid
+flowchart TD
 
-↓
+N1["Hero"]
+N2["Hierarchy"]
+N3["Expressions"]
+N4["Priority"]
+N5["Grouping"]
+N6["Behavioural Intent"]
+N7["Presentation Model"]
 
-Hierarchy
-
-↓
-
-Expressions
-
-↓
-
-Priority
-
-↓
-
-Grouping
-
-↓
-
-Behavioural Intent
-
-↓
-
-Presentation Model
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
+N5 --> N6
+N6 --> N7
 ```
 
 Every downstream runtime system consumes these outputs.
@@ -251,21 +227,21 @@ Only one Focus should normally exist.
 Example.
 
 ```
+
 Watching Frieren
 ```
 
 The Solver identifies:
 
-```
-Hero
+```mermaid
+flowchart TD
 
-↓
+N1["Hero"]
+N2["Frieren"]
+N3["Episode 18"]
 
-Frieren
-
-↓
-
-Episode 18
+N1 --> N2
+N2 --> N3
 ```
 
 Everything else becomes supporting information.
@@ -280,24 +256,19 @@ Relationships significantly influence Composition.
 
 Example.
 
-```
-Episode
+```mermaid
+flowchart TD
 
-↓
+N1["Episode"]
+N2["Season"]
+N3["Series"]
+N4["Manga"]
+N5["Author"]
 
-Season
-
-↓
-
-Series
-
-↓
-
-Manga
-
-↓
-
-Author
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
 ```
 
 The Solver evaluates:
@@ -318,20 +289,17 @@ Priority should emerge from behaviour.
 
 Conceptually.
 
-```text
-Behaviour
+```mermaid
+flowchart TD
 
-↓
+N1["Behaviour"]
+N2["Priority"]
+N3["Hierarchy"]
+N4["Expressions"]
 
-Priority
-
-↓
-
-Hierarchy
-
-↓
-
-Expressions
+N1 --> N2
+N2 --> N3
+N3 --> N4
 ```
 
 Priority should never be inferred from:
@@ -352,24 +320,19 @@ Instead it produces Expressions.
 
 Example.
 
-```
-Continue Watching
+```mermaid
+flowchart TD
 
-↓
+N1["Continue Watching"]
+N2["Timeline"]
+N3["Relationships"]
+N4["Metadata"]
+N5["Actions"]
 
-Timeline
-
-↓
-
-Relationships
-
-↓
-
-Metadata
-
-↓
-
-Actions
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
 ```
 
 Later specifications determine how these Expressions become Tiles and Components.
@@ -385,6 +348,7 @@ Related information should naturally group together.
 Example.
 
 ```
+
 Current Episode
 
 Progress
@@ -395,6 +359,7 @@ Next Episode
 Rather than:
 
 ```
+
 Current Episode
 
 Codec
@@ -458,16 +423,15 @@ Future implementations may represent the Runtime World internally as a graph.
 
 Conceptually.
 
-```text
-Runtime Graph
+```mermaid
+flowchart TD
 
-↓
+N1["Runtime Graph"]
+N2["Solver"]
+N3["Composition"]
 
-Solver
-
-↓
-
-Composition
+N1 --> N2
+N2 --> N3
 ```
 
 The graph remains an implementation detail.
@@ -482,24 +446,19 @@ Future runtime implementations may internally construct Composition Profiles.
 
 Conceptually.
 
-```text
-Runtime World
+```mermaid
+flowchart TD
 
-↓
+N1["Runtime World"]
+N2["Solver"]
+N3["Composition Profile"]
+N4["Expressions"]
+N5["Presentation"]
 
-Solver
-
-↓
-
-Composition Profile
-
-↓
-
-Expressions
-
-↓
-
-Presentation
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
 ```
 
 Profiles improve:
@@ -516,32 +475,23 @@ Applications should remain unaware of their existence.
 
 Conceptually.
 
-```text
-Runtime World
+```mermaid
+flowchart TD
 
-↓
+N1["Runtime World"]
+N2["Behaviour"]
+N3["Priority"]
+N4["Relationships"]
+N5["Grouping"]
+N6["Expressions"]
+N7["Presentation Model"]
 
-Behaviour
-
-↓
-
-Priority
-
-↓
-
-Relationships
-
-↓
-
-Grouping
-
-↓
-
-Expressions
-
-↓
-
-Presentation Model
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
+N5 --> N6
+N6 --> N7
 ```
 
 Every stage contributes exactly one responsibility.
@@ -730,15 +680,3 @@ The interface is therefore never manually designed.
 It is continuously solved.
 
 That distinction is the defining architectural characteristic of the Mosaic Composition Engine.
-
----
-
-# Review Status
-
-**Status**
-
-Draft
-
-**Next File**
-
-`04-expression-resolution.md`

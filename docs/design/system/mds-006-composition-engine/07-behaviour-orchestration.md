@@ -4,7 +4,7 @@ Document: MDS-006
 Chapter: 07
 Title: Behaviour Orchestration
 Status: Draft
-Version: 0.2
+Version: 0.4
 -->
 
 # Behaviour Orchestration
@@ -55,56 +55,42 @@ Behaviour Orchestration determines *how every subsystem evolves together*.
 
 Traditional interfaces frequently behave like this.
 
-```text
-State Changes
+```mermaid
+flowchart TD
 
-↓
+N1["State Changes"]
+N2["Layout Updates"]
+N3["Animation"]
+N4["Theme Updates"]
+N5["Done"]
 
-Layout Updates
-
-↓
-
-Animation
-
-↓
-
-Theme Updates
-
-↓
-
-Done
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
 ```
 
 Each subsystem behaves independently.
 
 Mosaic intentionally behaves differently.
 
-```text
-Behaviour
+```mermaid
+flowchart TD
 
-↓
+N1["Behaviour"]
+N2["Composition"]
+N3["Expressions"]
+N4["Materials"]
+N5["Motion"]
+N6["Presentation"]
+N7["Understanding"]
 
-Composition
-
-↓
-
-Expressions
-
-↓
-
-Materials
-
-↓
-
-Motion
-
-↓
-
-Presentation
-
-↓
-
-Understanding
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
+N5 --> N6
+N6 --> N7
 ```
 
 The runtime behaves as one coordinated organism.
@@ -141,36 +127,25 @@ Behaviour always possesses the highest authority.
 
 Every behavioural event should follow the same conceptual pipeline.
 
-```text
-Behaviour
+```mermaid
+flowchart TD
 
-↓
+N1["Behaviour"]
+N2["Runtime World"]
+N3["Composition Solver"]
+N4["Expression Resolution"]
+N5["Hierarchy Update"]
+N6["Presentation Model"]
+N7["Motion"]
+N8["Rendering"]
 
-Runtime World
-
-↓
-
-Composition Solver
-
-↓
-
-Expression Resolution
-
-↓
-
-Hierarchy Update
-
-↓
-
-Presentation Model
-
-↓
-
-Motion
-
-↓
-
-Rendering
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
+N5 --> N6
+N6 --> N7
+N7 --> N8
 ```
 
 Each stage contributes one responsibility.
@@ -183,16 +158,15 @@ No stage should bypass another.
 
 Every orchestration cycle begins from one immutable Runtime World snapshot.
 
-```text
-Runtime World
+```mermaid
+flowchart TD
 
-↓
+N1["Runtime World"]
+N2["Snapshot"]
+N3["Entire Pipeline"]
 
-Snapshot
-
-↓
-
-Entire Pipeline
+N1 --> N2
+N2 --> N3
 ```
 
 This guarantees that every subsystem responds to identical behavioural information.
@@ -207,32 +181,23 @@ Subsystems should evolve in a predictable order.
 
 Preferred order.
 
-```text
-Behaviour
+```mermaid
+flowchart TD
 
-↓
+N1["Behaviour"]
+N2["Composition"]
+N3["Expressions"]
+N4["Materials"]
+N5["Typography"]
+N6["Motion"]
+N7["Presentation"]
 
-Composition
-
-↓
-
-Expressions
-
-↓
-
-Materials
-
-↓
-
-Typography
-
-↓
-
-Motion
-
-↓
-
-Presentation
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
+N5 --> N6
+N6 --> N7
 ```
 
 This ordering mirrors the architectural dependency chain established throughout MDL and MDS.
@@ -245,38 +210,32 @@ One behavioural event should produce one coherent runtime update.
 
 Poor.
 
-```text
-Playback
+```mermaid
+flowchart TD
 
-↓
+N1["Playback"]
+N2["Composition"]
+N3["Later..."]
+N4["Materials"]
+N5["Later..."]
+N6["Motion"]
 
-Composition
-
-↓
-
-Later...
-
-↓
-
-Materials
-
-↓
-
-Later...
-
-↓
-
-Motion
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
+N5 --> N6
 ```
 
 Preferred.
 
-```text
-Playback
+```mermaid
+flowchart TD
 
-↓
+N1["Playback"]
+N2["Entire Runtime Evolves Together"]
 
-Entire Runtime Evolves Together
+N1 --> N2
 ```
 
 Users should never perceive intermediate states.
@@ -315,20 +274,17 @@ Future implementations may internally construct a dependency graph.
 
 Conceptually.
 
-```text
-Behaviour
+```mermaid
+flowchart TD
 
-↓
+N1["Behaviour"]
+N2["Dependency Graph"]
+N3["Affected Systems"]
+N4["Presentation"]
 
-Dependency Graph
-
-↓
-
-Affected Systems
-
-↓
-
-Presentation
+N1 --> N2
+N2 --> N3
+N3 --> N4
 ```
 
 The graph remains an implementation detail.
@@ -388,24 +344,19 @@ Material systems should never update independently.
 
 Preferred.
 
-```text
-Composition
+```mermaid
+flowchart TD
 
-↓
+N1["Composition"]
+N2["Hero Material"]
+N3["Atmosphere"]
+N4["Refraction"]
+N5["Presentation"]
 
-Hero Material
-
-↓
-
-Atmosphere
-
-↓
-
-Refraction
-
-↓
-
-Presentation
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
 ```
 
 Every Material subsystem should receive identical behavioural inputs.
@@ -448,20 +399,17 @@ Rendering begins only after orchestration completes.
 
 Conceptually.
 
-```text
-Behaviour
+```mermaid
+flowchart TD
 
-↓
+N1["Behaviour"]
+N2["Runtime Systems"]
+N3["Presentation Model"]
+N4["Renderer"]
 
-Runtime Systems
-
-↓
-
-Presentation Model
-
-↓
-
-Renderer
+N1 --> N2
+N2 --> N3
+N3 --> N4
 ```
 
 Rendering frameworks should remain passive consumers.
@@ -476,26 +424,26 @@ If one subsystem cannot update.
 
 Preferred.
 
-```text
-Behaviour
+```mermaid
+flowchart TD
 
-↓
+N1["Behaviour"]
+N2["Graceful Degradation"]
+N3["Presentation Continues"]
 
-Graceful Degradation
-
-↓
-
-Presentation Continues
+N1 --> N2
+N2 --> N3
 ```
 
 Avoid.
 
-```text
-Behaviour
+```mermaid
+flowchart TD
 
-↓
+N1["Behaviour"]
+N2["Entire Runtime Stops"]
 
-Entire Runtime Stops
+N1 --> N2
 ```
 
 The Composition Engine should remain resilient.
@@ -733,15 +681,3 @@ should evolve together from one shared behavioural understanding.
 Users should never perceive multiple systems updating.
 
 They should simply feel that their World naturally continued.
-
----
-
-# Review Status
-
-**Status**
-
-Draft
-
-**Next File**
-
-`08-runtime-pipelines.md`

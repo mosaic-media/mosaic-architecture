@@ -2,7 +2,7 @@
 File: docs/design/system/mds-006-composition-engine/index.md
 Document: MDS-006
 Status: Draft
-Version: 0.2
+Version: 0.4
 -->
 
 # MDS-006 — Composition Engine
@@ -45,60 +45,37 @@ It solves understanding.
 
 # Relationship to Previous Specifications
 
-```text
-Vision
+```mermaid
+flowchart TD
 
-↓
+N1["Vision"]
+N2["Principles"]
+N3["Mental Model"]
+N4["Interaction"]
+N5["Composition"]
+N6["Tokens"]
+N7["Colour"]
+N8["Materials"]
+N9["Typography"]
+N10["Motion"]
+N11["Composition Engine"]
+N12["Tile Framework"]
+N13["Components"]
+N14["Presentation"]
 
-Principles
-
-↓
-
-Mental Model
-
-↓
-
-Interaction
-
-↓
-
-Composition
-
-↓
-
-Tokens
-
-↓
-
-Colour
-
-↓
-
-Materials
-
-↓
-
-Typography
-
-↓
-
-Motion
-
-↓
-
-Composition Engine
-
-↓
-
-Tile Framework
-
-↓
-
-Components
-
-↓
-
-Presentation
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
+N5 --> N6
+N6 --> N7
+N7 --> N8
+N8 --> N9
+N9 --> N10
+N10 --> N11
+N11 --> N12
+N12 --> N13
+N13 --> N14
 ```
 
 The Composition Engine consumes every previous specification.
@@ -168,28 +145,21 @@ Every runtime decision should reinforce that principle.
 
 The Composition Engine separates runtime construction into several conceptual layers.
 
-```text
-World
+```mermaid
+flowchart TD
 
-↓
+N1["World"]
+N2["Behaviour"]
+N3["Composition Solver"]
+N4["Expression Resolution"]
+N5["Presentation Model"]
+N6["Rendering"]
 
-Behaviour
-
-↓
-
-Composition Solver
-
-↓
-
-Expression Resolution
-
-↓
-
-Presentation Model
-
-↓
-
-Rendering
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
+N5 --> N6
 ```
 
 Each layer contributes one responsibility.
@@ -252,9 +222,9 @@ design/
 
         13-contributor-guidance.md
 
-        glossary.md
-
         references.md
+
+        glossary.md
 ```
 
 ---
@@ -263,26 +233,10 @@ design/
 
 Required reading:
 
-- MDL-001 → MDL-005
-- MDS-001 → MDS-005
+- [MDL-001](../../language/mdl-001-vision/index.md) → [MDL-005](../../language/mdl-005-composition-model/index.md)
+- [MDS-001](../mds-001-design-token-architecture/index.md) → [MDS-005](../mds-005-motion-system/index.md)
 
 Downstream specifications:
 
-- MDS-007 Tile Framework
-- MDS-008 Component Library
-
----
-
-# Review Status
-
-**Status**
-
-Draft
-
-**Owner**
-
-Lead Runtime Architecture Team
-
-**Next File**
-
-`00-document-control.md`
+- [MDS-007 — Tile Framework](../mds-007-tile-framework/index.md)
+- [MDS-008 — Component Library](../mds-008-component-library/index.md)

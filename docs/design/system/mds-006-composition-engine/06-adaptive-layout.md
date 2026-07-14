@@ -4,7 +4,7 @@ Document: MDS-006
 Chapter: 06
 Title: Adaptive Layout
 Status: Draft
-Version: 0.2
+Version: 0.4
 -->
 
 # Adaptive Layout
@@ -53,40 +53,34 @@ It never changes:
 
 Traditional responsive systems generally behave like this.
 
-```text
-Viewport
+```mermaid
+flowchart TD
 
-↓
+N1["Viewport"]
+N2["Breakpoints"]
+N3["Different Layout"]
 
-Breakpoints
-
-↓
-
-Different Layout
+N1 --> N2
+N2 --> N3
 ```
 
 Meaning frequently changes because layout changed.
 
 Mosaic intentionally follows:
 
-```text
-Composition
+```mermaid
+flowchart TD
 
-↓
+N1["Composition"]
+N2["Hierarchy"]
+N3["Expressions"]
+N4["Adaptive Layout"]
+N5["Presentation"]
 
-Hierarchy
-
-↓
-
-Expressions
-
-↓
-
-Adaptive Layout
-
-↓
-
-Presentation
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
 ```
 
 Understanding remains constant.
@@ -147,28 +141,21 @@ Only layout.
 
 Adaptive Layout evaluates:
 
-```text
-Expression Tree
+```mermaid
+flowchart TD
 
-↓
+N1["Expression Tree"]
+N2["Hierarchy"]
+N3["Device Class"]
+N4["Orientation"]
+N5["Viewing Distance"]
+N6["Capabilities"]
 
-Hierarchy
-
-↓
-
-Device Class
-
-↓
-
-Orientation
-
-↓
-
-Viewing Distance
-
-↓
-
-Capabilities
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
+N5 --> N6
 ```
 
 Notice that Behaviour has already been solved.
@@ -183,20 +170,17 @@ It does not decide.
 
 Adaptive Layout produces:
 
-```text
-Spatial Regions
+```mermaid
+flowchart TD
 
-↓
+N1["Spatial Regions"]
+N2["Expression Placement"]
+N3["Density"]
+N4["Presentation Constraints"]
 
-Expression Placement
-
-↓
-
-Density
-
-↓
-
-Presentation Constraints
+N1 --> N2
+N2 --> N3
+N3 --> N4
 ```
 
 These outputs remain independent from components.
@@ -211,24 +195,19 @@ Adaptive Layout organises Expressions into conceptual regions.
 
 Examples.
 
-```text
-Hero
+```mermaid
+flowchart TD
 
-↓
+N1["Hero"]
+N2["Primary Region"]
+N3["Supporting Region"]
+N4["Peripheral Region"]
+N5["Navigation"]
 
-Primary Region
-
-↓
-
-Supporting Region
-
-↓
-
-Peripheral Region
-
-↓
-
-Navigation
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
 ```
 
 Regions communicate behavioural organisation.
@@ -279,16 +258,15 @@ Remove Relationships
 
 Preferred.
 
-```text
-Relationships
+```mermaid
+flowchart TD
 
-↓
+N1["Relationships"]
+N2["Collapsed"]
+N3["Expandable"]
 
-Collapsed
-
-↓
-
-Expandable
+N1 --> N2
+N2 --> N3
 ```
 
 Understanding remains available.
@@ -491,22 +469,24 @@ Small environmental changes should produce small layout changes.
 
 Preferred.
 
-```text
-Window Slightly Wider
+```mermaid
+flowchart TD
 
-↓
+N1["Window Slightly Wider"]
+N2["Additional Supporting Expression Appears"]
 
-Additional Supporting Expression Appears
+N1 --> N2
 ```
 
 Avoid.
 
-```text
-Window Slightly Wider
+```mermaid
+flowchart TD
 
-↓
+N1["Window Slightly Wider"]
+N2["Entire Layout Rebuilt"]
 
-Entire Layout Rebuilt
+N1 --> N2
 ```
 
 Incremental adaptation preserves orientation.
@@ -681,15 +661,3 @@ The user's World remains identical across:
 Only the physical arrangement changes.
 
 That distinction allows Mosaic to remain one coherent Companion regardless of where users choose to experience it.
-
----
-
-# Review Status
-
-**Status**
-
-Draft
-
-**Next File**
-
-`07-behaviour-orchestration.md`

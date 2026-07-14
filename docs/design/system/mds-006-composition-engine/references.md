@@ -3,7 +3,7 @@ File: docs/design/system/mds-006-composition-engine/references.md
 Document: MDS-006
 Title: References
 Status: Draft
-Version: 0.2
+Version: 0.4
 -->
 
 # References
@@ -50,7 +50,7 @@ External implementation technologies exist only to realise this model.
 
 # Internal References
 
-## MDL-001 — Vision
+## [MDL-001 — Mosaic Design Language Vision](../../language/mdl-001-vision/index.md)
 
 Provides:
 
@@ -62,7 +62,7 @@ The Composition Engine exists to continuously express the Companion rather than 
 
 ---
 
-## MDL-002 — Principles
+## [MDL-002 — Principles](../../language/mdl-002-principles/index.md)
 
 Provides:
 
@@ -75,7 +75,7 @@ The Composition Engine continuously applies these principles at runtime.
 
 ---
 
-## MDL-003 — Mental Model
+## [MDL-003 — Mental Model](../../language/mdl-003-mental-model/index.md)
 
 Provides:
 
@@ -91,7 +91,7 @@ Everything within the Composition Engine begins here.
 
 ---
 
-## MDL-004 — Interaction Model
+## [MDL-004 — Interaction Model](../../language/mdl-004-interaction-model/index.md)
 
 Provides:
 
@@ -108,7 +108,7 @@ It responds to it.
 
 ---
 
-## MDL-005 — Composition Model
+## [MDL-005 — Composition Model](../../language/mdl-005-composition-model/index.md)
 
 Provides:
 
@@ -123,7 +123,7 @@ The Composition Solver is the runtime implementation of the Composition Model.
 
 ---
 
-## MDS-001 — Design Token Architecture
+## [MDS-001 — Design Token Architecture](../mds-001-design-token-architecture/index.md)
 
 Provides:
 
@@ -135,7 +135,7 @@ The Composition Engine produces Presentation Models consumed by downstream Desig
 
 ---
 
-## MDS-002 — Colour System
+## [MDS-002 — Colour System](../mds-002-colour-system/index.md)
 
 Provides:
 
@@ -149,7 +149,7 @@ The Colour System determines how.
 
 ---
 
-## MDS-003 — Material System
+## [MDS-003 — Material System](../mds-003-material-system/index.md)
 
 Provides:
 
@@ -163,7 +163,7 @@ The Material System resolves physical behaviour.
 
 ---
 
-## MDS-004 — Typography System
+## [MDS-004 — Typography System](../mds-004-typography-system/index.md)
 
 Provides:
 
@@ -177,7 +177,7 @@ Typography communicates it to the user.
 
 ---
 
-## MDS-005 — Motion System
+## [MDS-005 — Motion System](../mds-005-motion-system/index.md)
 
 Provides:
 
@@ -195,8 +195,8 @@ The Motion System communicates its evolution.
 
 The following specifications directly depend upon MDS-006.
 
-- MDS-007 Tile Framework
-- MDS-008 Component Library
+- [MDS-007 — Tile Framework](../mds-007-tile-framework/index.md)
+- [MDS-008 — Component Library](../mds-008-component-library/index.md)
 
 These specifications implement presentation.
 
@@ -210,24 +210,19 @@ The Composition Engine intentionally follows a runtime-first architecture.
 
 Conceptually.
 
-```text
-Behaviour
+```mermaid
+flowchart TD
 
-↓
+N1["Behaviour"]
+N2["World"]
+N3["Composition"]
+N4["Presentation"]
+N5["Rendering"]
 
-World
-
-↓
-
-Composition
-
-↓
-
-Presentation
-
-↓
-
-Rendering
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
 ```
 
 Traditional interface frameworks often reverse this ordering.
@@ -303,20 +298,17 @@ The graph itself is intentionally **not** part of the architectural contract.
 
 The architectural contract remains:
 
-```text
-Runtime World
+```mermaid
+flowchart TD
 
-↓
+N1["Runtime World"]
+N2["Composition Solver"]
+N3["Expressions"]
+N4["Presentation"]
 
-Composition Solver
-
-↓
-
-Expressions
-
-↓
-
-Presentation
+N1 --> N2
+N2 --> N3
+N3 --> N4
 ```
 
 Graph technology is replaceable.
@@ -351,20 +343,17 @@ This differs significantly from request-driven interface architectures.
 
 The Composition Engine intentionally separates:
 
-```text
-Behaviour
+```mermaid
+flowchart TD
 
-↓
+N1["Behaviour"]
+N2["Composition"]
+N3["Presentation"]
+N4["Rendering"]
 
-Composition
-
-↓
-
-Presentation
-
-↓
-
-Rendering
+N1 --> N2
+N2 --> N3
+N3 --> N4
 ```
 
 Every client therefore shares identical behavioural understanding while remaining free to implement presentation using:
@@ -401,28 +390,21 @@ The Composition Engine represents the reasoning layer of the Companion.
 
 Conceptually.
 
-```text
-World
+```mermaid
+flowchart TD
 
-↓
+N1["World"]
+N2["Behaviour"]
+N3["Understanding"]
+N4["Composition"]
+N5["Presentation"]
+N6["User"]
 
-Behaviour
-
-↓
-
-Understanding
-
-↓
-
-Composition
-
-↓
-
-Presentation
-
-↓
-
-User
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
+N5 --> N6
 ```
 
 The Companion understands first.
@@ -437,16 +419,16 @@ That ordering should remain fundamental throughout the lifetime of Mosaic.
 
 Required reading before contributing to MDS-006.
 
-- MDL-001 Vision
-- MDL-002 Principles
-- MDL-003 Mental Model
-- MDL-004 Interaction Model
-- MDL-005 Composition Model
-- MDS-001 Design Token Architecture
-- MDS-002 Colour System
-- MDS-003 Material System
-- MDS-004 Typography System
-- MDS-005 Motion System
+- [MDL-001 — Mosaic Design Language Vision](../../language/mdl-001-vision/index.md)
+- [MDL-002 — Principles](../../language/mdl-002-principles/index.md)
+- [MDL-003 — Mental Model](../../language/mdl-003-mental-model/index.md)
+- [MDL-004 — Interaction Model](../../language/mdl-004-interaction-model/index.md)
+- [MDL-005 — Composition Model](../../language/mdl-005-composition-model/index.md)
+- [MDS-001 — Design Token Architecture](../mds-001-design-token-architecture/index.md)
+- [MDS-002 — Colour System](../mds-002-colour-system/index.md)
+- [MDS-003 — Material System](../mds-003-material-system/index.md)
+- [MDS-004 — Typography System](../mds-004-typography-system/index.md)
+- [MDS-005 — Motion System](../mds-005-motion-system/index.md)
 
 Together these specifications define the conceptual foundation of the Composition Engine.
 
@@ -456,8 +438,8 @@ Together these specifications define the conceptual foundation of the Compositio
 
 Future contributors may also wish to review:
 
-- MDS-007 Tile Framework
-- MDS-008 Component Library
+- [MDS-007 — Tile Framework](../mds-007-tile-framework/index.md)
+- [MDS-008 — Component Library](../mds-008-component-library/index.md)
 
 These specifications describe how Expressions become reusable presentation primitives while preserving the runtime architecture established here.
 
@@ -484,9 +466,9 @@ This concludes **MDS-006 — Composition Engine**.
 
 The next specification in the Mosaic Design System is:
 
-> **MDS-007 — Tile Framework**
+> **[MDS-007 — Tile Framework](../mds-007-tile-framework/index.md)**
 
-Where MDS-006 defines **how the user's World is solved**, MDS-007 defines **how that solved understanding becomes reusable presentation primitives**.
+Where MDS-006 defines **how the user's World is solved**, [MDS-007](../mds-007-tile-framework/index.md) defines **how that solved understanding becomes reusable presentation primitives**.
 
 It formalises:
 

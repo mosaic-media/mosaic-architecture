@@ -4,7 +4,7 @@ Document: MDS-006
 Chapter: 08
 Title: Runtime Pipelines
 Status: Draft
-Version: 0.2
+Version: 0.4
 -->
 
 # Runtime Pipelines
@@ -43,38 +43,32 @@ They do not define architecture.
 
 Many runtime frameworks follow this model.
 
-```text
-State
+```mermaid
+flowchart TD
 
-↓
+N1["State"]
+N2["Render"]
+N3["Done"]
 
-Render
-
-↓
-
-Done
+N1 --> N2
+N2 --> N3
 ```
 
 Mosaic intentionally follows:
 
-```text
-Behaviour
+```mermaid
+flowchart TD
 
-↓
+N1["Behaviour"]
+N2["Pipeline"]
+N3["Understanding"]
+N4["Presentation"]
+N5["Render"]
 
-Pipeline
-
-↓
-
-Understanding
-
-↓
-
-Presentation
-
-↓
-
-Render
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
 ```
 
 The runtime solves understanding before rendering begins.
@@ -102,36 +96,25 @@ Not implementation.
 
 Every behavioural event should travel through the same conceptual pipeline.
 
-```text
-Behaviour
+```mermaid
+flowchart TD
 
-↓
+N1["Behaviour"]
+N2["Runtime World"]
+N3["Composition Solver"]
+N4["Expression Resolution"]
+N5["Hierarchy Resolution"]
+N6["Adaptive Layout"]
+N7["Presentation Model"]
+N8["Rendering"]
 
-Runtime World
-
-↓
-
-Composition Solver
-
-↓
-
-Expression Resolution
-
-↓
-
-Hierarchy Resolution
-
-↓
-
-Adaptive Layout
-
-↓
-
-Presentation Model
-
-↓
-
-Rendering
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
+N5 --> N6
+N6 --> N7
+N7 --> N8
 ```
 
 No stage should be skipped.
@@ -227,20 +210,17 @@ Resolve behavioural importance.
 
 Outputs include:
 
-```text
-Hero
+```mermaid
+flowchart TD
 
-↓
+N1["Hero"]
+N2["Primary"]
+N3["Supporting"]
+N4["Peripheral"]
 
-Primary
-
-↓
-
-Supporting
-
-↓
-
-Peripheral
+N1 --> N2
+N2 --> N3
+N3 --> N4
 ```
 
 Every Expression receives exactly one current runtime role.
@@ -318,30 +298,28 @@ Playback progress.
 
 Preferred.
 
-```text
-Behaviour
+```mermaid
+flowchart TD
 
-↓
+N1["Behaviour"]
+N2["Timeline Expression"]
+N3["Presentation Update"]
 
-Timeline Expression
-
-↓
-
-Presentation Update
+N1 --> N2
+N2 --> N3
 ```
 
 Avoid.
 
-```text
-Behaviour
+```mermaid
+flowchart TD
 
-↓
+N1["Behaviour"]
+N2["Entire Pipeline"]
+N3["Complete Rebuild"]
 
-Entire Pipeline
-
-↓
-
-Complete Rebuild
+N1 --> N2
+N2 --> N3
 ```
 
 Incremental execution improves performance while preserving behavioural correctness.
@@ -384,20 +362,17 @@ Every stage should consume immutable inputs.
 
 Conceptually.
 
-```text
-Snapshot
+```mermaid
+flowchart TD
 
-↓
+N1["Snapshot"]
+N2["Stage"]
+N3["Snapshot"]
+N4["Next Stage"]
 
-Stage
-
-↓
-
-Snapshot
-
-↓
-
-Next Stage
+N1 --> N2
+N2 --> N3
+N3 --> N4
 ```
 
 Immutable snapshots improve:
@@ -417,26 +392,26 @@ Pipelines should degrade gracefully.
 
 Preferred.
 
-```text
-Material Failure
+```mermaid
+flowchart TD
 
-↓
+N1["Material Failure"]
+N2["Fallback Material"]
+N3["Continue"]
 
-Fallback Material
-
-↓
-
-Continue
+N1 --> N2
+N2 --> N3
 ```
 
 Avoid.
 
-```text
-Material Failure
+```mermaid
+flowchart TD
 
-↓
+N1["Material Failure"]
+N2["Entire Runtime Stops"]
 
-Entire Runtime Stops
+N1 --> N2
 ```
 
 The user's World should remain available whenever practical.
@@ -449,28 +424,26 @@ Pipeline stages should cache deterministic outputs.
 
 Examples.
 
-```text
-Runtime World
+```mermaid
+flowchart TD
 
-↓
+N1["Runtime World"]
+N2["Composition"]
+N3["Cache"]
 
-Composition
-
-↓
-
-Cache
+N1 --> N2
+N2 --> N3
 ```
 
-```text
-Expression Tree
+```mermaid
+flowchart TD
 
-↓
+N1["Expression Tree"]
+N2["Presentation Model"]
+N3["Cache"]
 
-Presentation Model
-
-↓
-
-Cache
+N1 --> N2
+N2 --> N3
 ```
 
 Only affected stages should recompute after behavioural changes.
@@ -688,15 +661,3 @@ The runtime therefore remains:
 Users should never perceive these pipelines.
 
 They should simply experience a World that continually understands and responds to them.
-
----
-
-# Review Status
-
-**Status**
-
-Draft
-
-**Next File**
-
-`09-composition-caching.md`

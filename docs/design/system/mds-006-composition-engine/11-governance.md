@@ -4,7 +4,7 @@ Document: MDS-006
 Chapter: 11
 Title: Composition Engine Governance
 Status: Draft
-Version: 0.2
+Version: 0.4
 -->
 
 # Composition Engine Governance
@@ -361,15 +361,3 @@ They should simply experience a platform that always understands them.
 | ADR-151 | Expressions are the stable contract between runtime and presentation. |
 | ADR-152 | Adaptive Layout projects understanding without redefining it. |
 | ADR-153 | Modules enrich the Runtime World but never own composition. |
-
----
-
-# Review Status
-
-**Status**
-
-Draft
-
-**Next File**
-
-`12-adrs.md`
