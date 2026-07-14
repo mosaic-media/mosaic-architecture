@@ -2,7 +2,7 @@
 File: docs/engineering/documentation/mdg-001-documentation-authority-guide/index.md
 Document: MDG-001
 Status: Draft
-Version: 0.2
+Version: 0.4
 -->
 
 # MDG-001 — Documentation Authority Guide

@@ -2,7 +2,7 @@
 File: docs/engineering/documentation/mdg-001-documentation-authority-guide/02-document-types.md
 Document: MDG-001
 Status: Draft
-Version: 0.2
+Version: 0.4
 -->
 
 # 02 — Document Types
@@ -305,7 +305,7 @@ MDGs govern the documentation ecosystem rather than the Mosaic platform.
 
 ---
 
-# Choosing the Correct Document Type
+# Document Type Selection
 
 When creating new documentation, authors should first determine the primary question being answered.
 

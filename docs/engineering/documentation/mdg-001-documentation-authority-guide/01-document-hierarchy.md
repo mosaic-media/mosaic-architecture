@@ -2,7 +2,7 @@
 File: docs/engineering/documentation/mdg-001-documentation-authority-guide/01-document-hierarchy.md
 Document: MDG-001
 Status: Draft
-Version: 0.2
+Version: 0.4
 -->
 
 # 01 — Documentation Hierarchy
@@ -31,26 +31,30 @@ Every document created within the Mosaic Architecture repository shall belong to
 
 Mosaic documentation is organised into four primary disciplines.
 
-```text
-Engineering
+```mermaid
+flowchart TD
 
-├── Architecture
-├── Guides
-├── Protocols
-└── Operations
+N1["Engineering"]
+N2["Architecture"]
+N3["Guides"]
+N4["Protocols"]
+N5["Operations"]
+N6["Design"]
+N7["Design Language"]
+N8["Design System"]
+N9["Product"]
+N10["(Future)"]
+N11["Community"]
+N12["(Future)"]
 
-Design
-
-├── Design Language
-└── Design System
-
-Product
-
-└── (Future)
-
-Community
-
-└── (Future)
+N1 --> N2
+N1 --> N3
+N1 --> N4
+N1 --> N5
+N6 --> N7
+N6 --> N8
+N9 --> N10
+N11 --> N12
 ```
 
 Within these disciplines, document types provide progressively greater levels of detail.
@@ -103,35 +107,23 @@ Engineering guidance, integration protocols and operational documentation then d
 
 The normal progression is illustrated below.
 
-```text
-Idea
+```mermaid
+flowchart TD
 
-↓
+N1["Idea"]
+N2["MDP<br/>(Mosaic Design Proposal)"]
+N3["Accepted"]
+N4["MAD<br/>(Mosaic Architecture Decision)"]
+N5["MAC<br/>(Mosaic Architecture Canon)"]
+N6["MEG / MIP / MOP"]
+N7["Implementation"]
 
-MDP
-(Mosaic Design Proposal)
-
-↓
-
-Accepted
-
-↓
-
-MAD
-(Mosaic Architecture Decision)
-
-↓
-
-MAC
-(Mosaic Architecture Canon)
-
-↓
-
-MEG / MIP / MOP
-
-↓
-
-Implementation
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
+N5 --> N6
+N6 --> N7
 ```
 
 This progression preserves both architectural intent and the reasoning that produced it.
@@ -142,24 +134,19 @@ This progression preserves both architectural intent and the reasoning that prod
 
 Design documentation follows a similar progression.
 
-```text
-Design Philosophy
+```mermaid
+flowchart TD
 
-↓
+N1["Design Philosophy"]
+N2["MDL"]
+N3["MDS"]
+N4["Renderer Implementations"]
+N5["Applications"]
 
-MDL
-
-↓
-
-MDS
-
-↓
-
-Renderer Implementations
-
-↓
-
-Applications
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
 ```
 
 The Design Language defines principles.
@@ -196,32 +183,19 @@ Lower-level documents realise those principles.
 
 The dependency direction is therefore always downward.
 
-```text
-          Architecture
+```mermaid
+flowchart TD
 
-               │
+N1["Architecture"]
+N2["Engineering Guidance"]
+N3["Integration Protocols"]
+N4["Operational Practice"]
+N5["Implementation"]
 
-               ▼
-
-      Engineering Guidance
-
-               │
-
-               ▼
-
-      Integration Protocols
-
-               │
-
-               ▼
-
-       Operational Practice
-
-               │
-
-               ▼
-
-        Implementation
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
 ```
 
 Lower-level documents may not redefine concepts established by higher-level documents.

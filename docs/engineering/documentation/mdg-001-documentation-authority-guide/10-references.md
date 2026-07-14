@@ -2,7 +2,7 @@
 File: docs/engineering/documentation/mdg-001-documentation-authority-guide/10-references.md
 Document: MDG-001
 Status: Draft
-Version: 0.2
+Version: 0.4
 -->
 
 # 10 — References
@@ -26,7 +26,7 @@ The following documents govern or are governed by this specification.
 | Document | Relationship |
 |----------|--------------|
 | MDG-001 | Governing documentation standard. |
-| MAC-001 | Applies the standards defined by this guide. |
+| [MAC-001](../../architecture/mac-001-platform-architecture/index.md) | Applies the standards defined by this guide. |
 | MEG Series | Should conform to this guide. |
 | MIP Series | Should conform to this guide. |
 | MOP Series | Should conform to this guide. |
@@ -43,11 +43,11 @@ As the documentation library expands, additional references should be maintained
 
 Examples include:
 
-- MAC-001 — Platform Architecture
-- MAC-002 — Capability Model
-- MEG-001 — Go Best Practices
-- MDL-001 — Design Philosophy
-- MDS-001 — Design Principles
+- [MAC-001 — Platform Architecture](../../architecture/mac-001-platform-architecture/index.md)
+- [MAC-001 — Platform Architecture](../../architecture/mac-001-platform-architecture/03-capability-model.md), Capability Model
+- [MEG-001 — Go Engineering Standards](../../guides/meg-001-go-engineering-standards/index.md)
+- [MDL-001 — Mosaic Design Language Vision](../../../design/language/mdl-001-vision/index.md)
+- [MDS-001 — Design Token Architecture](../../../design/system/mds-001-design-token-architecture/index.md)
 
 References should always identify the authoritative document rather than duplicate its contents.
 

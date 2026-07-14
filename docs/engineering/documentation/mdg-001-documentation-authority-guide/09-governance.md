@@ -2,7 +2,7 @@
 File: docs/engineering/documentation/mdg-001-documentation-authority-guide/09-governance.md
 Document: MDG-001
 Status: Draft
-Version: 0.2
+Version: 0.4
 -->
 
 # 09 — Governance
@@ -37,6 +37,8 @@ Architecture should never silently evolve through implementation alone.
 # Ownership
 
 Every specification should have an identified owner.
+
+The Document Control chapter should identify an individual owner by a stable Git username where personal stewardship applies. Team or organisational ownership may remain explicit when responsibility genuinely belongs to that group.
 
 Ownership is responsible for:
 
@@ -91,24 +93,19 @@ Changes affecting architectural behaviour should follow the established document
 
 Typically:
 
-```text
-Proposal
+```mermaid
+flowchart TD
 
-↓
+N1["Proposal"]
+N2["Architecture Review"]
+N3["Architecture Decision"]
+N4["Architecture Canon"]
+N5["Supporting Documentation"]
 
-Architecture Review
-
-↓
-
-Architecture Decision
-
-↓
-
-Architecture Canon
-
-↓
-
-Supporting Documentation
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
 ```
 
 Direct modification of accepted architectural documents without appropriate review should be avoided.

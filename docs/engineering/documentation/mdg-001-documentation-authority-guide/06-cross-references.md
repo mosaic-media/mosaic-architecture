@@ -2,7 +2,7 @@
 File: docs/engineering/documentation/mdg-001-documentation-authority-guide/06-cross-references.md
 Document: MDG-001
 Status: Draft
-Version: 0.2
+Version: 0.4
 -->
 
 # 06 — Cross References
@@ -59,39 +59,37 @@ Lower-level documents build upon them.
 
 For example:
 
-```text
-MAC
+```mermaid
+flowchart TD
 
-↓
+N1["MAC"]
+N2["MEG"]
+N3["Implementation"]
 
-MEG
-
-↓
-
-Implementation
+N1 --> N2
+N2 --> N3
 ```
 
 Engineering Guides should therefore reference the Architecture Canon rather than redefining architectural concepts.
 
 Similarly:
 
-```text
-MDL
+```mermaid
+flowchart TD
 
-↓
+N1["MDL"]
+N2["MDS"]
+N3["Renderers"]
 
-MDS
-
-↓
-
-Renderers
+N1 --> N2
+N2 --> N3
 ```
 
 Design Systems should reference the Design Language rather than repeating design philosophy.
 
 ---
 
-# Referencing Architecture Decisions
+# Architecture Decision References
 
 Architecture Decisions preserve historical reasoning.
 
@@ -110,7 +108,7 @@ Readers interested in architectural rationale can then consult the corresponding
 
 ---
 
-# Referencing Proposals
+# Proposal References
 
 Design Proposals represent work in progress.
 
@@ -123,7 +121,7 @@ Rejected proposals may continue to exist for historical context but should not b
 
 ---
 
-# Referencing Engineering Guides
+# Engineering Guide References
 
 Architecture documents should avoid implementation examples.
 
@@ -145,6 +143,12 @@ This separation preserves the long-term stability of the Architecture Canon whil
 
 References should use the official document identifier.
 
+Every navigational reference to another published Mosaic document must be a
+relative Markdown hyperlink. Link an identifier-only reference as
+`[ID](relative/path/index.md)`. When a title is included, use the catalogued
+form `[ID — Canonical Title](relative/path/index.md)`. Link directly to a
+chapter or anchor when the reference concerns that narrower material.
+
 Preferred format:
 
 ```text
@@ -163,13 +167,18 @@ References within a document should use descriptive language.
 
 Preferred:
 
-> The Capability Model is defined by MAC-002.
+> The Capability Model is defined in [MAC-001 — Platform Architecture](../../architecture/mac-001-platform-architecture/03-capability-model.md).
 
 Avoid:
 
 > See above.
 
 Descriptive references remain meaningful even when documentation is reorganised.
+
+References to documents that are not published must remain unlinked and include
+either `planned; not yet published` or `deferred; not yet published`. This makes
+the absence deliberate and prevents unavailable identifiers from appearing to
+be broken navigation.
 
 ---
 
@@ -196,26 +205,26 @@ Mutually dependent documents should be avoided wherever possible.
 
 For example:
 
-```text
-MAC-001
+```mermaid
+flowchart TD
 
-↓
+N1["MAC-001"]
+N2["MAC-002"]
+N3["MAC-003"]
 
-MAC-002
-
-↓
-
-MAC-003
+N1 --> N2
+N2 --> N3
 ```
 
 is preferable to:
 
-```text
-MAC-001
+```mermaid
+flowchart LR
 
-↔
+N1["MAC-001"]
+N2["MAC-002"]
 
-MAC-002
+N1 <--> N2
 ```
 
 Where circular relationships cannot be avoided, each document should clearly establish which concepts it owns.
@@ -261,42 +270,34 @@ Readers should be able to follow an architectural concept naturally.
 
 For example:
 
-```text
-MDP
+```mermaid
+flowchart TD
 
-↓
+N1["MDP"]
+N2["MAD"]
+N3["MAC"]
+N4["MEG"]
+N5["Implementation"]
 
-MAD
-
-↓
-
-MAC
-
-↓
-
-MEG
-
-↓
-
-Implementation
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
 ```
 
 Likewise:
 
-```text
-MDL
+```mermaid
+flowchart TD
 
-↓
+N1["MDL"]
+N2["MDS"]
+N3["Renderer"]
+N4["Application"]
 
-MDS
-
-↓
-
-Renderer
-
-↓
-
-Application
+N1 --> N2
+N2 --> N3
+N3 --> N4
 ```
 
 This progression allows readers to understand not only how Mosaic is implemented, but why those implementations exist.

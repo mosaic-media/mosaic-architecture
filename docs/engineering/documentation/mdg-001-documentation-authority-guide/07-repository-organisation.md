@@ -2,7 +2,7 @@
 File: docs/engineering/documentation/mdg-001-documentation-authority-guide/07-repository-organisation.md
 Document: MDG-001
 Status: Draft
-Version: 0.2
+Version: 0.4
 -->
 
 # 07 — Repository Organisation
@@ -82,9 +82,9 @@ Each specification should exist within its own directory.
 For example:
 
 ```text
-MAC-001 Platform Architecture/
+mac-001-platform-architecture/
 
-    README.md
+    index.md
 
     00-document-control.md
 
@@ -108,7 +108,7 @@ Specifications should follow a consistent chapter structure.
 Typical organisation is:
 
 ```text
-README.md
+index.md
 
 00-document-control.md
 
@@ -118,9 +118,9 @@ README.md
 
 ...
 
-10-references.md
+references.md
 
-11-glossary.md
+glossary.md
 ```
 
 Additional chapters may be introduced where appropriate.
@@ -142,7 +142,7 @@ Directories should use descriptive names.
 Preferred:
 
 ```text
-MAC-001 Platform Architecture
+mac-001-platform-architecture
 ```
 
 Avoid:
@@ -155,13 +155,13 @@ Architecture
 Platform
 ```
 
-Document identifiers should always remain visible within the directory name.
+Document identifiers should always remain visible within the directory name. Directory names must use URL-safe lowercase slugs so source paths remain stable across GitHub and documentation tooling.
 
 ---
 
 # File Naming
 
-Chapter filenames should use a numbered prefix.
+Content chapter filenames should use a numbered prefix.
 
 For example:
 
@@ -182,7 +182,7 @@ Benefits include:
 - stable navigation
 - consistent chapter references
 
-Numbering should remain sequential.
+Numbering should remain sequential. The landing page, References and Glossary use the stable names `index.md`, `references.md` and `glossary.md` without numbered prefixes.
 
 ---
 
@@ -192,8 +192,13 @@ Every Markdown document should begin with a metadata block.
 
 Example:
 
-```html
-
+```text
+<!--
+File: docs/engineering/guides/meg-001-go-engineering-standards/index.md
+Document: MEG-001
+Status: Draft
+Version: 0.4
+-->
 ```
 
 Metadata provides:
@@ -205,6 +210,8 @@ Metadata provides:
 
 Metadata should remain synchronised with the document.
 
+Repository and section landing pages use the same fields. For those pages, `Document` contains the page identity rather than a specification identifier.
+
 ---
 
 # Repository Hierarchy
@@ -214,41 +221,43 @@ The documentation repository should remain organised by discipline.
 Example:
 
 ```text
-engineering/
+docs/
+
+  engineering/
 
     architecture/
 
-        MAC-001/
+        mac-001-platform-architecture/
 
-        MAD-001/
+        mad-001-example-decision/
 
-        MDP-001/
+        mdp-001-example-proposal/
+
+    documentation/
+
+        mdg-001-documentation-authority-guide/
 
     guides/
 
-        MEG-001/
+        meg-001-go-engineering-standards/
 
     protocols/
 
-        MIP-001/
+        mip-001-event-protocol/
 
     operations/
 
-        MOP-001/
+        mop-001-observability-operations/
 
-documentation/
-
-    MDG-001/
-
-design/
+  design/
 
     language/
 
-        MDL-001/
+        mdl-001-vision/
 
     system/
 
-        MDS-001/
+        mds-001-design-token-architecture/
 ```
 
 Future disciplines may be introduced without affecting existing documentation.

@@ -2,7 +2,7 @@
 File: docs/engineering/documentation/mdg-001-documentation-authority-guide/00-document-control.md
 Document: MDG-001
 Status: Draft
-Version: 0.2
+Version: 0.4
 -->
 
 # 00 — Document Control
@@ -17,7 +17,7 @@ Version: 0.2
 | Title | Documentation Authority Guide |
 | Classification | Mosaic Documentation Guide |
 | Status | Draft |
-| Version | 0.1 |
+| Version | 0.4 |
 | Owner | Mosaic Architecture |
 | Repository | mosaic-architecture |
 

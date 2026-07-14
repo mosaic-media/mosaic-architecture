@@ -2,7 +2,7 @@
 File: docs/engineering/documentation/mdg-001-documentation-authority-guide/04-writing-standards.md
 Document: MDG-001
 Status: Draft
-Version: 0.2
+Version: 0.4
 -->
 
 # 04 — Writing Standards
@@ -89,7 +89,7 @@ When terminology evolves, older documents should be updated unless historical ac
 
 ---
 
-# Defining Concepts
+# Concept Definitions
 
 New concepts should be introduced before they are used extensively.
 
@@ -123,39 +123,30 @@ Every Mosaic specification should follow a consistent structure.
 
 Typically:
 
-```text
-README
+```mermaid
+flowchart TD
 
-↓
+N1["index.md"]
+N2["00 Document Control"]
+N3["Purpose"]
+N4["Concepts"]
+N5["Architecture"]
+N6["Implementation Guidance (where appropriate)"]
+N7["References"]
+N8["Glossary"]
 
-00 Document Control
-
-↓
-
-Purpose
-
-↓
-
-Concepts
-
-↓
-
-Architecture
-
-↓
-
-Implementation Guidance (where appropriate)
-
-↓
-
-References
-
-↓
-
-Glossary
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
+N5 --> N6
+N6 --> N7
+N7 --> N8
 ```
 
 Individual document types may extend this structure where appropriate.
+
+The `index.md` page introduces the specification. Authored pages should not include review-status summaries or manual previous and next page links. Metadata communicates document maturity, while the documentation portal provides navigation between pages.
 
 ---
 
@@ -230,6 +221,18 @@ Preferred diagram types include:
 - process flows
 
 Diagrams should remain implementation independent unless the document specifically requires implementation detail.
+
+Authored relationship diagrams must use Mermaid. This includes flows,
+lifecycles, state transitions, hierarchies, dependencies and interactions,
+including small diagrams with only two nodes. Mermaid source must use stable
+synthetic identifiers and quoted labels when punctuation, repeated labels or
+code-like text could make node identifiers ambiguous.
+
+Text and unlabelled fences are appropriate only when fixed-width source is the
+subject, such as repository trees, commands, source code, configuration, logs,
+schemas, templates, notation, coordinate layouts or interface wireframes that
+Mermaid cannot represent faithfully. Authors must not use ASCII arrows or
+non-file tree glyphs as a substitute for Mermaid.
 
 ---
 

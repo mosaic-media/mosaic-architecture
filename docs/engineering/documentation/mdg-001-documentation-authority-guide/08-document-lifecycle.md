@@ -2,7 +2,7 @@
 File: docs/engineering/documentation/mdg-001-documentation-authority-guide/08-document-lifecycle.md
 Document: MDG-001
 Status: Draft
-Version: 0.2
+Version: 0.4
 -->
 
 # 08 — Document Lifecycle
@@ -31,44 +31,35 @@ Understanding this lifecycle ensures that documentation remains coherent while p
 
 Every significant architectural concept should progress through the following lifecycle.
 
-```text
-Idea
+```mermaid
+flowchart TD
 
-↓
+N1["Idea"]
+N2["MDP<br/>(Mosaic Design Proposal)"]
+N3["Architecture Review"]
+N4["Accepted"]
+N5["MAD<br/>(Mosaic Architecture Decision)"]
+N6["MAC Updated"]
+N7["Supporting Documentation"]
+N8["MEG"]
+N9["MIP"]
+N10["MOP"]
+N11["MDL"]
+N12["MDS"]
+N13["Implementation"]
 
-MDP
-(Mosaic Design Proposal)
-
-↓
-
-Architecture Review
-
-↓
-
-Accepted
-
-↓
-
-MAD
-(Mosaic Architecture Decision)
-
-↓
-
-MAC Updated
-
-↓
-
-Supporting Documentation
-
-    ├── MEG
-    ├── MIP
-    ├── MOP
-    ├── MDL
-    └── MDS
-
-↓
-
-Implementation
+N7 --> N8
+N7 --> N9
+N7 --> N10
+N7 --> N11
+N7 --> N12
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
+N5 --> N6
+N6 --> N7
+N7 --> N13
 ```
 
 Each stage has a distinct responsibility.
