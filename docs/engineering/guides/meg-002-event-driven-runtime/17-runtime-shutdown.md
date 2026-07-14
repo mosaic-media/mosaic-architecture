@@ -2,7 +2,7 @@
 File: docs/engineering/guides/meg-002-event-driven-runtime/17-runtime-shutdown.md
 Document: MEG-002
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Runtime Shutdown
@@ -170,7 +170,7 @@ Examples include:
 - HTTP listeners stop accepting requests
 - event publishers reject new publications
 - schedulers stop creating future work
-- extension loading stops
+- module loading stops
 
 Existing work continues.
 
@@ -321,9 +321,9 @@ Business correctness depends upon eventual execution.
 
 ---
 
-# Extension Shutdown
+# Module Shutdown
 
-Extensions participate in runtime shutdown exactly like Core capabilities.
+Modules participate in runtime shutdown exactly like Platform capabilities.
 
 Lifecycle.
 
@@ -336,14 +336,14 @@ Shutdown Notification
 
 ↓
 
-Extension Cleanup
+Module Cleanup
 
 ↓
 
-Extension Stops
+Module Stops
 ```
 
-Extensions should never require special shutdown handling.
+Modules should never require special shutdown handling.
 
 The runtime should treat all capabilities equally.
 
@@ -441,7 +441,7 @@ WorkerStopped
 ```
 
 ```
-ExtensionStopped
+ModuleStopped
 ```
 
 ```
@@ -578,7 +578,7 @@ Examples include:
 - worker cancellation
 - queue draining
 - retry persistence
-- extension cleanup
+- module cleanup
 - scheduler shutdown
 
 Shutdown is part of normal runtime behaviour.
@@ -705,7 +705,7 @@ A runtime that cannot stop predictably cannot be considered production ready.
 
 Graceful shutdown is therefore not merely an operational concern.
 
-It is a core architectural property of the Mosaic Runtime.
+It is a fundamental architectural property of the Mosaic Runtime.
 
 ---
 

@@ -2,7 +2,7 @@
 File: docs/engineering/guides/meg-002-event-driven-runtime/01-runtime-philosophy.md
 Document: MEG-002
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Runtime Philosophy
@@ -313,7 +313,7 @@ This aligns with common event-driven architecture principles, where autonomous c
 
 One of the defining characteristics of the runtime is progressive capability.
 
-Installing an extension should not require modifying existing capabilities.
+Installing a module should not require modifying existing capabilities.
 
 Instead:
 
@@ -322,7 +322,7 @@ Existing Runtime
 
 ↓
 
-Install Extension
+Install Module
 
 ↓
 
@@ -453,7 +453,7 @@ Within Mosaic:
 - The runtime owns time.
 - The runtime owns reliability.
 - Business state never belongs to the runtime.
-- Extensions integrate through events rather than direct dependencies.
+- Modules integrate through events rather than direct dependencies.
 
 These principles define the architectural identity of the Mosaic platform.
 

@@ -1,5 +1,5 @@
 # Architecture
 
-Architecture specifications for Mosaic platform structure and system boundaries will live here.
+Architecture Canon specifications define accepted Mosaic platform structure, boundaries and long-lived architectural responsibility.
 
-This section is reserved for future MAC documents.
+This section contains MAC documents. Engineering guides, protocols and operations documents should reference Architecture Canon documents rather than redefining the architecture they implement.

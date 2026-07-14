@@ -2,7 +2,7 @@
 File: docs/engineering/guides/meg-008-observability/08-performance-telemetry.md
 Document: MEG-008
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Performance Telemetry

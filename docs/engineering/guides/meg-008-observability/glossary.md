@@ -2,7 +2,7 @@
 File: docs/engineering/guides/meg-008-observability/glossary.md
 Document: MEG-008
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Glossary

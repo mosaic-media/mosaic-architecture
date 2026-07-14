@@ -2,7 +2,7 @@
 File: docs/engineering/guides/meg-002-event-driven-runtime/08-publishers.md
 Document: MEG-002
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Publishers
@@ -579,7 +579,7 @@ They perform one task exceptionally well:
 
 By remaining unaware of downstream behaviour, publishers allow the Mosaic Runtime to grow indefinitely without increasing coupling between capabilities.
 
-This simplicity is one of the key architectural properties that enables Mosaic's extension-first platform.
+This simplicity is one of the key architectural properties that enables Mosaic's module-first platform.
 
 ---
 

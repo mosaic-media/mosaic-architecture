@@ -2,7 +2,7 @@
 File: docs/engineering/guides/meg-002-event-driven-runtime/14-event-ordering.md
 Document: MEG-002
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Event Ordering
@@ -618,7 +618,7 @@ Relaxing ordering guarantees is one of the key architectural decisions enabling 
 Because the runtime does not attempt to globally sequence every event:
 
 - worker pools remain highly parallel
-- extensions remain independent
+- modules remain independent
 - failures remain isolated
 - throughput scales naturally
 - capabilities evolve independently

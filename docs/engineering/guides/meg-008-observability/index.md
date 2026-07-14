@@ -2,7 +2,7 @@
 File: docs/engineering/guides/meg-008-observability/index.md
 Document: MEG-008
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # MEG-008 — Observability
@@ -93,7 +93,7 @@ MEG-006
 
 ↓
 
-Extension Platform
+Module Platform
 
 ↓
 
@@ -152,7 +152,7 @@ Those concerns belong to previous MEG specifications.
 
 ---
 
-# Core Question
+# Guiding Question
 
 MEG-008 exists to answer one question.
 
@@ -290,7 +290,7 @@ Required reading:
 - MEG-003 Domain-Driven Design
 - MEG-004 Hexagonal Architecture
 - MEG-005 Capability Runtime
-- MEG-006 Extension Platform
+- MEG-006 Module Platform
 - MEG-007 Storage Architecture
 
 Future companion specifications:

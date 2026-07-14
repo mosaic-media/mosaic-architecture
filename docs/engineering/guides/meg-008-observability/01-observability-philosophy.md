@@ -2,7 +2,7 @@
 File: docs/engineering/guides/meg-008-observability/01-observability-philosophy.md
 Document: MEG-008
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Observability Philosophy
@@ -23,7 +23,7 @@ Within Mosaic this includes:
 - storage operations
 - metadata processing
 - streaming
-- extension execution
+- module execution
 
 Understanding this behaviour requires more than logs.
 

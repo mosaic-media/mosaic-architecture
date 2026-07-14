@@ -2,7 +2,7 @@
 File: docs/engineering/guides/meg-008-observability/04-distributed-tracing.md
 Document: MEG-008
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Distributed Tracing

@@ -2,7 +2,7 @@
 File: docs/engineering/guides/meg-008-observability/11-opentelemetry.md
 Document: MEG-008
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # OpenTelemetry

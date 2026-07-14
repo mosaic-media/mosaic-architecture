@@ -2,7 +2,7 @@
 File: docs/engineering/guides/meg-002-event-driven-runtime/references.md
 Document: MEG-002
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # References
@@ -273,7 +273,7 @@ The following specifications complement MEG-002.
 
 - MEG-003 Domain-Driven Design
 - MEG-004 Hexagonal Architecture
-- MEG-005 Extension Platform
+- MEG-005 Module Platform
 - MEG-006 Runtime Architecture
 - MEG-007 Storage Architecture
 - MEG-008 Observability

@@ -2,7 +2,7 @@
 File: docs/engineering/guides/meg-002-event-driven-runtime/16-correlation-and-observability.md
 Document: MEG-002
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Correlation and Observability
@@ -13,7 +13,7 @@ Version: 0.1
 
 # Purpose
 
-As the Mosaic Runtime grows, individual business operations will span multiple capabilities, workers and extensions.
+As the Mosaic Runtime grows, individual business operations will span multiple capabilities, workers and modules.
 
 Consider a simple user action.
 
@@ -254,7 +254,7 @@ Tracing should span:
 - HTTP
 - Workers
 - Event Bus
-- Extensions
+- Modules
 - External APIs
 
 OpenTelemetry provides a vendor-neutral standard for propagating tracing context across distributed systems. ([opentelemetry.io](https://opentelemetry.io/docs/concepts/signals/traces/))
@@ -446,7 +446,7 @@ BackpressureApplied
 ```
 
 ```
-ExtensionLoaded
+ModuleLoaded
 ```
 
 These are runtime events.
@@ -504,9 +504,9 @@ Not merely process existence.
 
 ---
 
-# Correlation Across Extensions
+# Correlation Across Modules
 
-Third-party extensions participate exactly like Core.
+Third-party modules participate exactly like Platform capabilities.
 
 Example.
 
@@ -515,20 +515,20 @@ MediaImported
 
 ↓
 
-Core
+Platform Capability
 
 ↓
 
-Third-Party Extension
+Third-Party Module
 
 ↓
 
-Analytics Extension
+Analytics Module
 ```
 
 Every event shares the same Correlation ID.
 
-The runtime should make extension boundaries invisible during tracing.
+The runtime should make module boundaries invisible during tracing.
 
 ---
 
@@ -540,7 +540,7 @@ Operators should be able to answer:
 
 - Which media?
 - Which worker?
-- Which extension?
+- Which module?
 - Which retry?
 - Which API?
 - Which event?
@@ -673,7 +673,7 @@ Within Mosaic:
 - Metrics SHOULD describe platform health.
 - Traces SHOULD describe workflow execution.
 - Runtime instrumentation SHOULD be automatic.
-- Extensions MUST participate in runtime observability.
+- Modules MUST participate in runtime observability.
 - Sensitive information MUST NOT appear in logs or traces.
 - Every significant runtime action SHOULD be observable.
 
@@ -692,7 +692,7 @@ By making:
 - scheduling
 - retries
 - queues
-- extensions
+- modules
 
 fully observable, the Mosaic Runtime becomes significantly easier to:
 
@@ -721,7 +721,7 @@ Every worker.
 
 Every retry.
 
-Every extension.
+Every module.
 
 Every workflow.
 

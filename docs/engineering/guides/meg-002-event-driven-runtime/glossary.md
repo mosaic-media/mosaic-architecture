@@ -2,7 +2,7 @@
 File: docs/engineering/guides/meg-002-event-driven-runtime/glossary.md
 Document: MEG-002
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Glossary
@@ -21,7 +21,7 @@ Runtime terminology should remain consistent across:
 - ADRs
 - Source Code
 - Documentation
-- Extension SDKs
+- Module SDKs
 - Operational Guides
 
 Where a term has a specific meaning within the Mosaic Runtime, that definition takes precedence over informal usage.
@@ -288,7 +288,7 @@ Replay enables:
 
 - rebuilding projections
 - diagnostics
-- extension installation
+- module installation
 - recovery
 
 Replay should produce identical business behaviour to live execution.
@@ -435,7 +435,7 @@ This glossary supports every document within the Event-Driven Runtime specificat
 Definitions should remain consistent across:
 
 - runtime implementation
-- extension SDKs
+- module SDKs
 - architecture specifications
 - operational tooling
 - contributor documentation

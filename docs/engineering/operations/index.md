@@ -1,5 +1,5 @@
 # Operations
 
-Operational specifications for Mosaic runtime support, deployment, observability, and service ownership will live here.
+Operations specifications define how Mosaic is operated, diagnosed, maintained and recovered.
 
-This section is reserved for future MOP documents.
+This section contains MOP documents. Engineering guides should reference operations documents when implementation guidance becomes operational procedure.

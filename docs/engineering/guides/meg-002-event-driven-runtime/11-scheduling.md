@@ -2,7 +2,7 @@
 File: docs/engineering/guides/meg-002-event-driven-runtime/11-scheduling.md
 Document: MEG-002
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Scheduling
@@ -62,7 +62,7 @@ Examples include:
 - Metadata refresh
 - Cache invalidation
 - Periodic library scanning
-- Extension health checks
+- Module health checks
 - Retry backoff
 - Cleanup tasks
 - Token expiration

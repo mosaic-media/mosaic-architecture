@@ -2,7 +2,7 @@
 File: docs/engineering/guides/meg-002-event-driven-runtime/00-document-control.md
 Document: MEG-002
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Document Control
@@ -39,9 +39,9 @@ MEG-002 is the authoritative specification governing event-driven behaviour thro
 
 This specification applies to:
 
-- Mosaic Core
-- First-party Extensions
-- Third-party Extensions
+- Mosaic Platform
+- First-party Modules
+- Third-party Modules
 - Background Workers
 - Schedulers
 - Event Publishers
@@ -164,7 +164,7 @@ Changes affecting:
 - event delivery guarantees
 - runtime semantics
 - lifecycle behaviour
-- extension interaction
+- module interaction
 
 SHOULD be accompanied by an Architectural Decision Record (ADR).
 
@@ -202,7 +202,7 @@ MEG-002 intentionally favours:
 
 The runtime should encourage independent capability evolution without sacrificing operational clarity.
 
-This reflects established practice in mature event-driven systems, where idempotency, observability, ordering guarantees and bounded failure handling are treated as first-class architectural concerns rather than implementation details.  [oai_citation:0‡Encore Framework](https://encore.dev/articles/event-driven-architecture?utm_source=chatgpt.com)
+This reflects established practice in mature event-driven systems, where idempotency, observability, ordering guarantees and bounded failure handling are treated as first-class architectural concerns rather than implementation details.  [Encore Framework](https://encore.dev/articles/event-driven-architecture)
 
 ---
 
@@ -215,7 +215,7 @@ It does **not** define:
 - business domains
 - storage technologies
 - transport protocols
-- extension packaging
+- module packaging
 - deployment architecture
 
 Those concerns belong to other MEG specifications.

@@ -2,7 +2,7 @@
 File: docs/engineering/guides/meg-008-observability/02-logging.md
 Document: MEG-008
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Structured Logging
@@ -29,7 +29,7 @@ Within the platform, logs exist to describe meaningful architectural events occu
 - Runtime
 - Capabilities
 - Storage
-- Extensions
+- Modules
 
 Structured Logging provides the Runtime's chronological memory.
 

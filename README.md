@@ -44,9 +44,10 @@ The current imported specification set lives in:
 - `docs/design/language` for MDL documents
 - `docs/design/system` for MDS documents
 - `docs/engineering/documentation` for MDG documents
+- `docs/engineering/architecture` for MAC documents
 - `docs/engineering/guides` for MEG documents
-
-The remaining engineering sections are reserved for future document types.
+- `docs/engineering/protocols` for MIP documents
+- `docs/engineering/operations` for MOP documents
 
 ## Document Types
 
@@ -91,6 +92,9 @@ Place decisions close to the system they govern:
 - MDS decisions belong under `docs/design/system`
 - MDG decisions belong under `docs/engineering/documentation`
 - MEG decisions belong under `docs/engineering/guides`
+- MAC decisions belong under `docs/engineering/architecture`
+- MIP decisions belong under `docs/engineering/protocols`
+- MOP decisions belong under `docs/engineering/operations`
 - cross-cutting decisions should reference the upstream specification they depend on
 
 When a decision changes the meaning of an existing specification, update both the ADR section and the affected chapter.

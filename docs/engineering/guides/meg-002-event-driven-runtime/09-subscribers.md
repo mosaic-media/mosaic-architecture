@@ -2,7 +2,7 @@
 File: docs/engineering/guides/meg-002-event-driven-runtime/09-subscribers.md
 Document: MEG-002
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Subscribers

@@ -2,7 +2,7 @@
 File: docs/engineering/guides/meg-008-observability/00-document-control.md
 Document: MEG-008
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Document Control
@@ -54,7 +54,7 @@ This specification applies to:
 - Runtime Services
 - Capabilities
 - Storage Systems
-- Extension Platform
+- Module Platform
 - SDK
 - Operational Tooling
 
@@ -113,7 +113,7 @@ Specifically:
 - **MEG-003** defines business modelling.
 - **MEG-004** defines architectural boundaries.
 - **MEG-005** defines Runtime Architecture.
-- **MEG-006** defines the Extension Platform.
+- **MEG-006** defines the Module Platform.
 - **MEG-007** defines Storage Architecture.
 - **MEG-008** defines how every previous architectural layer becomes operationally visible.
 

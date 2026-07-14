@@ -2,7 +2,7 @@
 File: docs/engineering/guides/meg-002-event-driven-runtime/02-why-events.md
 Document: MEG-002
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Why Events?
@@ -15,7 +15,7 @@ Version: 0.1
 
 Every architectural decision carries trade-offs.
 
-The Mosaic Runtime intentionally adopts an event-driven architecture because it aligns with the platform's core design goals:
+The Mosaic Runtime intentionally adopts an event-driven architecture because it aligns with the platform's foundational design goals:
 
 - Extensibility
 - Loose coupling
@@ -229,10 +229,10 @@ MediaImported
 
 ↓
 
-AI Recommendation Extension
+AI Recommendation Module
 ```
 
-The extension simply subscribes.
+The module simply subscribes.
 
 The runtime already understands how to deliver events.
 
@@ -314,20 +314,20 @@ Loose coupling is one of the defining characteristics of event-driven architectu
 
 ---
 
-# Extension Independence
+# Module Independence
 
-Extensions should integrate naturally.
+Modules should integrate naturally.
 
 Example.
 
 Without events:
 
 ```
-Extension
+Module
 
 ↓
 
-Modify Core
+Modify Platform
 
 ↓
 
@@ -341,7 +341,7 @@ Deploy
 With events:
 
 ```
-Install Extension
+Install Module
 
 ↓
 
@@ -617,7 +617,7 @@ Within Mosaic:
 - Events communicate facts.
 - Capabilities SHOULD publish events after state changes.
 - Capabilities SHOULD remain unaware of subscribers.
-- Extensions SHOULD integrate through events.
+- Modules SHOULD integrate through events.
 - Direct capability dependencies SHOULD be minimised.
 - Background work SHOULD originate from events where practical.
 - The runtime SHOULD coordinate rather than orchestrate business behaviour.
@@ -634,7 +634,7 @@ They allow independently developed capabilities to cooperate without depending u
 
 That single architectural decision enables:
 
-- extension-first development
+- module-first development
 - progressive capability
 - background processing
 - resilience

@@ -2,7 +2,7 @@
 File: docs/engineering/guides/meg-002-event-driven-runtime/19-contributor-guidance.md
 Document: MEG-002
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Contributor Guidance
@@ -15,7 +15,7 @@ Version: 0.1
 
 The Mosaic Runtime is shared infrastructure.
 
-Every capability, extension and application depends upon it behaving consistently.
+Every capability, module and application depends upon it behaving consistently.
 
 Unlike ordinary business code, runtime changes affect the entire ecosystem.
 
@@ -266,11 +266,11 @@ Architecture documentation should evolve alongside runtime behaviour.
 
 ---
 
-# Extension Compatibility
+# Module Compatibility
 
 Contributors should assume:
 
-Third-party extensions already exist.
+Third-party modules already exist.
 
 Runtime changes should minimise:
 
@@ -340,7 +340,7 @@ Contributors SHOULD validate:
 - worker cancellation
 - scheduling
 - event ordering
-- extension compatibility
+- module compatibility
 
 The runtime should be tested under failure as thoroughly as under success.
 
@@ -454,7 +454,7 @@ The Event-Driven Runtime is one of the most stable components within the Mosaic 
 
 Every capability depends upon it.
 
-Every extension trusts it.
+Every module trusts it.
 
 Every contributor therefore shares responsibility for preserving its:
 

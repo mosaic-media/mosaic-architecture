@@ -2,7 +2,7 @@
 File: docs/engineering/guides/meg-008-observability/references.md
 Document: MEG-008
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # References
@@ -172,7 +172,7 @@ This principle appears repeatedly throughout:
 
 Rather than relying upon source code or debugger sessions.
 
-Explainability is treated as a core architectural responsibility.
+Explainability is treated as a fundamental architectural responsibility.
 
 ---
 
@@ -301,7 +301,7 @@ The following specifications complement MEG-008.
 - MEG-003 Domain-Driven Design
 - MEG-004 Hexagonal Architecture
 - MEG-005 Capability Runtime
-- MEG-006 Extension Platform
+- MEG-006 Module Platform
 - MEG-007 Storage Architecture
 
 ---

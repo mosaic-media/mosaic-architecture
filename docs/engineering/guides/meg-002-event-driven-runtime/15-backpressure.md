@@ -2,7 +2,7 @@
 File: docs/engineering/guides/meg-002-event-driven-runtime/15-backpressure.md
 Document: MEG-002
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Backpressure
@@ -22,7 +22,7 @@ However, temporary spikes are inevitable.
 Examples include:
 
 - importing a large media library
-- installing a new extension
+- installing a new module
 - rebuilding metadata
 - replaying historical events
 - recovering after downtime
@@ -441,14 +441,14 @@ Rather than failing continuously, the runtime should reduce throughput to sustai
 
 ---
 
-# Extension Isolation
+# Module Isolation
 
-Extensions should never be capable of overwhelming the runtime.
+Modules should never be capable of overwhelming the runtime.
 
 Suppose:
 
 ```
-Third-Party Extension
+Third-Party Module
 
 ↓
 
@@ -457,11 +457,11 @@ Produces Millions Of Events
 
 The runtime should:
 
-- isolate the extension
+- isolate the module
 - apply backpressure
-- preserve Core functionality
+- preserve platform functionality
 
-Core stability always takes precedence over extension throughput.
+Platform stability always takes precedence over module throughput.
 
 ---
 
@@ -619,9 +619,9 @@ Continuing to accept work after resource exhaustion.
 
 ---
 
-## Extension Starvation
+## Module Starvation
 
-Allowing one extension to consume all runtime capacity.
+Allowing one module to consume all runtime capacity.
 
 ---
 
@@ -641,7 +641,7 @@ Within Mosaic:
 - Every worker pool MUST be bounded.
 - The runtime MUST apply backpressure before resource exhaustion.
 - Queue depth MUST remain observable.
-- Extensions MUST be isolated from one another.
+- Modules MUST be isolated from one another.
 - Recovery SHOULD occur automatically.
 - Replay MUST respect runtime limits.
 - High-priority work SHOULD remain responsive during overload.
@@ -678,14 +678,14 @@ It is to process work sustainably.
 Within Mosaic, backpressure ensures:
 
 - predictable resource usage
-- resilient extensions
+- resilient modules
 - protected infrastructure
 - graceful degradation
 - operational stability
 
 The runtime should always prefer temporary slowdown over permanent failure.
 
-That single principle keeps the platform healthy as it grows from a handful of capabilities to hundreds of independently developed extensions.
+That single principle keeps the platform healthy as it grows from a handful of capabilities to hundreds of independently developed modules.
 
 ---
 

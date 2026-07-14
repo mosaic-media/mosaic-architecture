@@ -2,7 +2,7 @@
 File: docs/engineering/guides/meg-002-event-driven-runtime/index.md
 Document: MEG-002
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # MEG-002 — Event-Driven Runtime
@@ -22,7 +22,7 @@ This approach enables:
 - Loose coupling
 - High cohesion
 - Horizontal scalability
-- Extension interoperability
+- Module interoperability
 - Background processing
 - Reactive workflows
 - Independent deployment
@@ -51,7 +51,7 @@ Runtime Behaviour
 
 ↓
 
-Extensions
+Modules
 
 ↓
 
@@ -93,7 +93,7 @@ This specification intentionally does **not** define:
 - Business domains
 - HTTP APIs
 - Storage architecture
-- Extension SDK
+- Module SDK
 - Deployment
 - Infrastructure
 
@@ -101,7 +101,7 @@ These concerns are defined by later MEG specifications.
 
 ---
 
-# Core Question
+# Guiding Question
 
 MEG-002 exists to answer one question.
 
@@ -175,7 +175,7 @@ After reading MEG-002 contributors should understand:
 - how retries work
 - how failures are handled
 - how background workers integrate with the runtime
-- how independent extensions cooperate without direct dependencies
+- how independent modules cooperate without direct dependencies
 
 without discussing any individual business domain.
 
@@ -251,7 +251,7 @@ Future companion specifications:
 
 - MEG-003 Domain Driven Design
 - MEG-004 Hexagonal Architecture
-- MEG-005 Extension Platform
+- MEG-005 Module Platform
 - MEG-006 Runtime Architecture
 
 ---

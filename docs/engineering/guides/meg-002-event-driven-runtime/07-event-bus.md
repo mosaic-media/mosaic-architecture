@@ -2,7 +2,7 @@
 File: docs/engineering/guides/meg-002-event-driven-runtime/07-event-bus.md
 Document: MEG-002
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Event Bus
@@ -39,7 +39,7 @@ The Event Bus should never understand:
 - playback
 - metadata
 - users
-- extensions
+- modules
 
 Those are business concepts.
 
@@ -308,12 +308,12 @@ Subscriptions should remain static throughout the application's lifetime unless 
 
 ---
 
-# Dynamic Extensions
+# Dynamic Modules
 
-Extensions register subscriptions exactly like Core capabilities.
+Modules register subscriptions exactly like Platform capabilities.
 
 ```
-Extension Loaded
+Module Loaded
 
 ↓
 
@@ -326,9 +326,9 @@ Begin Receiving
 
 The Event Bus makes no distinction between:
 
-- Core
-- First-party extensions
-- Third-party extensions
+- Platform capabilities
+- First-party modules
+- Third-party modules
 
 Every capability participates equally.
 
@@ -580,7 +580,7 @@ Within Mosaic:
 - Subscriber failures MUST NOT affect other subscribers.
 - Runtime routing MUST remain transparent to publishers.
 - The Event Bus MUST remain observable.
-- Extensions MUST integrate through the same Event Bus as Core capabilities.
+- Modules MUST integrate through the same Event Bus as Platform capabilities.
 
 ---
 

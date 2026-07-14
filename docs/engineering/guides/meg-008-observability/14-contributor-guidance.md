@@ -2,7 +2,7 @@
 File: docs/engineering/guides/meg-008-observability/14-contributor-guidance.md
 Document: MEG-008
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Contributor Guidance
