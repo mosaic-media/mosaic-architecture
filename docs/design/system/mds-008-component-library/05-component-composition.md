@@ -50,34 +50,30 @@ Traditional UI frameworks frequently begin by composing widgets.
 
 Examples.
 
-```text
-Card
+```mermaid
+flowchart TD
 
-↓
+N1["Card"]
+N2["Image"]
+N3["Text"]
+N4["Buttons"]
 
-Image
-
-↓
-
-Text
-
-↓
-
-Buttons
+N1 --> N2
+N2 --> N3
+N3 --> N4
 ```
 
 Mosaic intentionally begins one layer higher.
 
-```text
-Resolved Tile
+```mermaid
+flowchart TD
 
-↓
+N1["Resolved Tile"]
+N2["Component Composition"]
+N3["Platform Rendering"]
 
-Component Composition
-
-↓
-
-Platform Rendering
+N1 --> N2
+N2 --> N3
 ```
 
 The Tile determines composition.
@@ -92,30 +88,28 @@ Components should never determine what belongs together.
 
 Incorrect.
 
-```text
-Media
+```mermaid
+flowchart TD
 
-↓
+N1["Media"]
+N2["Text"]
+N3["Looks Correct"]
 
-Text
-
-↓
-
-Looks Correct
+N1 --> N2
+N2 --> N3
 ```
 
 Correct.
 
-```text
-Hero Tile
+```mermaid
+flowchart TD
 
-↓
+N1["Hero Tile"]
+N2["Resolved Contract"]
+N3["Component Composition"]
 
-Resolved Contract
-
-↓
-
-Component Composition
+N1 --> N2
+N2 --> N3
 ```
 
 Runtime understanding always precedes implementation.
@@ -128,24 +122,19 @@ Every Component Composition should implement one Tile.
 
 Example.
 
-```text
-Hero Tile
+```mermaid
+flowchart TD
 
-↓
+N1["Hero Tile"]
+N2["Container"]
+N3["Media"]
+N4["Text"]
+N5["Action"]
 
-Container
-
-↓
-
-Media
-
-↓
-
-Text
-
-↓
-
-Action
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
 ```
 
 The Tile remains the behavioural unit.
@@ -158,28 +147,21 @@ Components remain implementation details.
 
 Component Composition consumes:
 
-```text
-Resolved Tile
+```mermaid
+flowchart TD
 
-↓
+N1["Resolved Tile"]
+N2["Material Contract"]
+N3["Typography Contract"]
+N4["Motion Contract"]
+N5["Interaction Contract"]
+N6["Accessibility Contract"]
 
-Material Contract
-
-↓
-
-Typography Contract
-
-↓
-
-Motion Contract
-
-↓
-
-Interaction Contract
-
-↓
-
-Accessibility Contract
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
+N5 --> N6
 ```
 
 Every required decision has already been made.
@@ -190,16 +172,15 @@ Every required decision has already been made.
 
 Component Composition produces:
 
-```text
-Platform Component Tree
+```mermaid
+flowchart TD
 
-↓
+N1["Platform Component Tree"]
+N2["Rendering Tree"]
+N3["Accessibility Tree"]
 
-Rendering Tree
-
-↓
-
-Accessibility Tree
+N1 --> N2
+N2 --> N3
 ```
 
 Behaviour does not appear within these outputs.
@@ -248,12 +229,13 @@ Text Components render resolved Typography Contracts.
 
 Example.
 
-```text
-Heading
+```mermaid
+flowchart TD
 
-↓
+N1["Heading"]
+N2["Text Component"]
 
-Text Component
+N1 --> N2
 ```
 
 Typography should never be chosen by Component Composition.
@@ -268,16 +250,15 @@ Action Components render behavioural intent.
 
 Example.
 
-```text
-Action Tile
+```mermaid
+flowchart TD
 
-↓
+N1["Action Tile"]
+N2["Interaction Contract"]
+N3["Action Component"]
 
-Interaction Contract
-
-↓
-
-Action Component
+N1 --> N2
+N2 --> N3
 ```
 
 Buttons remain implementation details.
@@ -308,14 +289,17 @@ Components may contain other Components.
 
 Example.
 
-```text
-Container
+```mermaid
+flowchart TD
 
-├── Media
+N1["Container"]
+N2["Media"]
+N3["Text"]
+N4["Action"]
 
-├── Text
-
-└── Action
+N1 --> N2
+N1 --> N3
+N1 --> N4
 ```
 
 Nested composition improves implementation.
@@ -350,16 +334,15 @@ Editorial hierarchy should remain intact.
 
 Example.
 
-```text
-Heading
+```mermaid
+flowchart TD
 
-↓
+N1["Heading"]
+N2["Supporting"]
+N3["Caption"]
 
-Supporting
-
-↓
-
-Caption
+N1 --> N2
+N2 --> N3
 ```
 
 Component Composition should preserve this ordering exactly.
@@ -456,26 +439,26 @@ Updated Contracts should generally update existing Components.
 
 Preferred.
 
-```text
-New Contract
+```mermaid
+flowchart TD
 
-↓
+N1["New Contract"]
+N2["Existing Component Tree"]
+N3["Updated Rendering"]
 
-Existing Component Tree
-
-↓
-
-Updated Rendering
+N1 --> N2
+N2 --> N3
 ```
 
 Avoid.
 
-```text
-Destroy Tree
+```mermaid
+flowchart TD
 
-↓
+N1["Destroy Tree"]
+N2["Create Tree"]
 
-Create Tree
+N1 --> N2
 ```
 
 Stable implementation improves performance while preserving continuity.
@@ -678,15 +661,3 @@ Every Component tree should faithfully reflect:
 - one runtime contract.
 
 By keeping implementation downstream from behaviour, Mosaic ensures that rendering technology can evolve indefinitely without changing the architectural language of the platform.
-
----
-
-# Review Status
-
-**Status**
-
-Draft
-
-**Next File**
-
-`06-rendering-architecture.md`

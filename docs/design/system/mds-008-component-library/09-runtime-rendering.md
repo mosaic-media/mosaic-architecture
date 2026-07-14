@@ -55,24 +55,19 @@ Traditional applications frequently merge:
 
 Mosaic intentionally separates these concerns.
 
-```text
-Behaviour
+```mermaid
+flowchart TD
 
-↓
+N1["Behaviour"]
+N2["Runtime Resolution"]
+N3["Component Contracts"]
+N4["Runtime Rendering"]
+N5["Presentation"]
 
-Runtime Resolution
-
-↓
-
-Component Contracts
-
-↓
-
-Runtime Rendering
-
-↓
-
-Presentation
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
 ```
 
 By the time rendering begins...
@@ -87,20 +82,17 @@ Runtime Rendering consumes SDUI contracts.
 
 Normal Mosaic presentation follows this path.
 
-```text
-Platform
+```mermaid
+flowchart TD
 
-↓
+N1["Platform"]
+N2["Runtime SDUI"]
+N3["Client Renderer"]
+N4["Presentation"]
 
-Runtime SDUI
-
-↓
-
-Client Renderer
-
-↓
-
-Presentation
+N1 --> N2
+N2 --> N3
+N3 --> N4
 ```
 
 The Platform emits the same semantic UI to every client.
@@ -109,20 +101,17 @@ Each renderer, backed by its platform-specific MDL library, translates that inte
 
 Recovery presentation follows a separate path.
 
-```text
-Supervisor
+```mermaid
+flowchart TD
 
-↓
+N1["Supervisor"]
+N2["Recovery SDUI"]
+N3["Client Renderer"]
+N4["Presentation"]
 
-Recovery SDUI
-
-↓
-
-Client Renderer
-
-↓
-
-Presentation
+N1 --> N2
+N2 --> N3
+N3 --> N4
 ```
 
 The renderer should not infer product meaning from either contract.
@@ -188,30 +177,28 @@ Recovery follows the same presentation architecture.
 
 For Web fallback.
 
-```text
-Recovery SDUI
+```mermaid
+flowchart TD
 
-↓
+N1["Recovery SDUI"]
+N2["Embedded HTML Renderer"]
+N3["Browser"]
 
-Embedded HTML Renderer
-
-↓
-
-Browser
+N1 --> N2
+N2 --> N3
 ```
 
 For a native client such as Flutter.
 
-```text
-Recovery SDUI
+```mermaid
+flowchart TD
 
-↓
+N1["Recovery SDUI"]
+N2["Native Client Renderer"]
+N3["Native Widgets"]
 
-Native Client Renderer
-
-↓
-
-Native Widgets
+N1 --> N2
+N2 --> N3
 ```
 
 Flutter and other native clients do not need embedded recovery HTML.
@@ -228,20 +215,17 @@ Instead it continuously reflects the evolving Runtime World.
 
 Conceptually.
 
-```text
-Behaviour
+```mermaid
+flowchart TD
 
-↓
+N1["Behaviour"]
+N2["Contracts Update"]
+N3["Rendering Evolves"]
+N4["Presentation Evolves"]
 
-Contracts Update
-
-↓
-
-Rendering Evolves
-
-↓
-
-Presentation Evolves
+N1 --> N2
+N2 --> N3
+N3 --> N4
 ```
 
 The renderer should appear alive without becoming behaviourally intelligent.
@@ -252,28 +236,21 @@ The renderer should appear alive without becoming behaviourally intelligent.
 
 Every rendering update should broadly follow this pipeline.
 
-```text
-Resolved Components
+```mermaid
+flowchart TD
 
-↓
+N1["Resolved Components"]
+N2["Change Detection"]
+N3["Render Scheduling"]
+N4["Composition"]
+N5["GPU Submission"]
+N6["Presentation"]
 
-Change Detection
-
-↓
-
-Render Scheduling
-
-↓
-
-Composition
-
-↓
-
-GPU Submission
-
-↓
-
-Presentation
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
+N5 --> N6
 ```
 
 Each stage performs one responsibility.
@@ -300,20 +277,17 @@ Rendering work should be prioritised according to Runtime Hierarchy.
 
 Preferred order.
 
-```text
-Hero
+```mermaid
+flowchart TD
 
-↓
+N1["Hero"]
+N2["Primary"]
+N3["Supporting"]
+N4["Peripheral"]
 
-Primary
-
-↓
-
-Supporting
-
-↓
-
-Peripheral
+N1 --> N2
+N2 --> N3
+N3 --> N4
 ```
 
 Scheduling should reinforce behavioural importance.
@@ -328,22 +302,24 @@ Rendering should update only affected presentation.
 
 Preferred.
 
-```text
-Timeline Updated
+```mermaid
+flowchart TD
 
-↓
+N1["Timeline Updated"]
+N2["Timeline Rendered"]
 
-Timeline Rendered
+N1 --> N2
 ```
 
 Avoid.
 
-```text
-Timeline Updated
+```mermaid
+flowchart TD
 
-↓
+N1["Timeline Updated"]
+N2["Entire Scene Re-rendered"]
 
-Entire Scene Re-rendered
+N1 --> N2
 ```
 
 Incremental rendering improves responsiveness without affecting behavioural correctness.
@@ -371,24 +347,19 @@ Future implementations may internally compose layers.
 
 Conceptually.
 
-```text
-Canvas
+```mermaid
+flowchart TD
 
-↓
+N1["Canvas"]
+N2["Materials"]
+N3["Content"]
+N4["Overlay"]
+N5["System UI"]
 
-Materials
-
-↓
-
-Content
-
-↓
-
-Overlay
-
-↓
-
-System UI
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
 ```
 
 Layer composition remains an implementation concern.
@@ -547,40 +518,37 @@ Future runtime implementations may expose conceptual rendering profiles.
 
 Examples.
 
-```text
-High Fidelity
+```mermaid
+flowchart TD
 
-↓
+N1["High Fidelity"]
+N2["Full Materials"]
+N3["Full Motion"]
 
-Full Materials
-
-↓
-
-Full Motion
+N1 --> N2
+N2 --> N3
 ```
 
-```text
-Balanced
+```mermaid
+flowchart TD
 
-↓
+N1["Balanced"]
+N2["Reduced Effects"]
+N3["Equivalent Behaviour"]
 
-Reduced Effects
-
-↓
-
-Equivalent Behaviour
+N1 --> N2
+N2 --> N3
 ```
 
-```text
-Efficiency
+```mermaid
+flowchart TD
 
-↓
+N1["Efficiency"]
+N2["Simplified Rendering"]
+N3["Equivalent Behaviour"]
 
-Simplified Rendering
-
-↓
-
-Equivalent Behaviour
+N1 --> N2
+N2 --> N3
 ```
 
 Rendering quality may change.
@@ -643,26 +611,26 @@ Rendering failures should degrade gracefully.
 
 Preferred.
 
-```text
-Advanced Material Fails
+```mermaid
+flowchart TD
 
-↓
+N1["Advanced Material Fails"]
+N2["Fallback Material"]
+N3["Continue"]
 
-Fallback Material
-
-↓
-
-Continue
+N1 --> N2
+N2 --> N3
 ```
 
 Avoid.
 
-```text
-Rendering Error
+```mermaid
+flowchart TD
 
-↓
+N1["Rendering Error"]
+N2["Blank Screen"]
 
-Blank Screen
+N1 --> N2
 ```
 
 Presentation quality may reduce.
@@ -820,15 +788,3 @@ By the time rendering begins:
 Rendering simply makes those decisions visible efficiently and consistently.
 
 That deliberate simplicity is one of the defining architectural strengths of Mosaic.
-
----
-
-# Review Status
-
-**Status**
-
-Draft
-
-**Next File**
-
-`10-component-optimisation.md`

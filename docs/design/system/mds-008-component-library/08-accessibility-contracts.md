@@ -54,20 +54,17 @@ This frequently results in:
 
 Mosaic intentionally resolves accessibility centrally.
 
-```text
-Runtime
+```mermaid
+flowchart TD
 
-↓
+N1["Runtime"]
+N2["Accessibility Contract"]
+N3["Platform Component"]
+N4["Accessible Presentation"]
 
-Accessibility Contract
-
-↓
-
-Platform Component
-
-↓
-
-Accessible Presentation
+N1 --> N2
+N2 --> N3
+N3 --> N4
 ```
 
 Behaviour remains identical.
@@ -82,26 +79,26 @@ Accessibility should always be resolved before Components exist.
 
 Incorrect.
 
-```text
-Component
+```mermaid
+flowchart TD
 
-↓
+N1["Component"]
+N2["Accessibility Logic"]
 
-Accessibility Logic
+N1 --> N2
 ```
 
 Correct.
 
-```text
-Runtime
+```mermaid
+flowchart TD
 
-↓
+N1["Runtime"]
+N2["Accessibility Contract"]
+N3["Component"]
 
-Accessibility Contract
-
-↓
-
-Component
+N1 --> N2
+N2 --> N3
 ```
 
 Components consume accessibility.
@@ -114,24 +111,19 @@ They do not create it.
 
 Accessibility Contracts are generated from:
 
-```text
-Resolved Tile
+```mermaid
+flowchart TD
 
-↓
+N1["Resolved Tile"]
+N2["Accessibility Profile"]
+N3["Interaction Profile"]
+N4["Typography Profile"]
+N5["Material Profile"]
 
-Accessibility Profile
-
-↓
-
-Interaction Profile
-
-↓
-
-Typography Profile
-
-↓
-
-Material Profile
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
 ```
 
 All behavioural decisions have already been made.
@@ -193,12 +185,13 @@ Every interactive Component should expose an accessible name.
 
 Example.
 
-```text
-Resume Tile
+```mermaid
+flowchart TD
 
-↓
+N1["Resume Tile"]
+N2["Resume playback"]
 
-Resume playback
+N1 --> N2
 ```
 
 Not.
@@ -220,6 +213,7 @@ Additional context should remain available when required.
 Examples.
 
 ```
+
 Continue watching.
 
 Episode 18.
@@ -239,20 +233,17 @@ Focus order should follow Runtime Hierarchy.
 
 Preferred.
 
-```text
-Hero
+```mermaid
+flowchart TD
 
-↓
+N1["Hero"]
+N2["Primary"]
+N3["Supporting"]
+N4["Peripheral"]
 
-Primary
-
-↓
-
-Supporting
-
-↓
-
-Peripheral
+N1 --> N2
+N2 --> N3
+N3 --> N4
 ```
 
 Focus should never depend upon rendering order alone.
@@ -613,15 +604,3 @@ regardless of:
 Accessibility is therefore not an additional feature.
 
 It is part of the architectural contract every Component faithfully implements.
-
----
-
-# Review Status
-
-**Status**
-
-Draft
-
-**Next File**
-
-`09-runtime-rendering.md`

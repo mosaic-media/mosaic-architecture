@@ -47,22 +47,24 @@ Instead ask:
 
 Good.
 
-```text
-Component Contract
+```mermaid
+flowchart TD
 
-↓
+N1["Component Contract"]
+N2["Rendering"]
 
-Rendering
+N1 --> N2
 ```
 
 Poor.
 
-```text
-Widget
+```mermaid
+flowchart TD
 
-↓
+N1["Widget"]
+N2["Behaviour"]
 
-Behaviour
+N1 --> N2
 ```
 
 Components should consume behaviour.
@@ -108,38 +110,32 @@ The architecture has already drifted.
 
 Preferred.
 
-```text
-Behaviour
+```mermaid
+flowchart TD
 
-↓
+N1["Behaviour"]
+N2["Expression"]
+N3["Tile"]
+N4["Component"]
+N5["Rendering"]
 
-Expression
-
-↓
-
-Tile
-
-↓
-
-Component
-
-↓
-
-Rendering
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
 ```
 
 Avoid.
 
-```text
-Component
+```mermaid
+flowchart TD
 
-↓
+N1["Component"]
+N2["Behaviour"]
+N3["Rendering"]
 
-Behaviour
-
-↓
-
-Rendering
+N1 --> N2
+N2 --> N3
 ```
 
 Dependencies should always flow downward.
@@ -177,26 +173,26 @@ Components should remain stateless.
 
 Preferred.
 
-```text
-Contract
+```mermaid
+flowchart TD
 
-↓
+N1["Contract"]
+N2["Render"]
 
-Render
+N1 --> N2
 ```
 
 Avoid.
 
-```text
-Component State
+```mermaid
+flowchart TD
 
-↓
+N1["Component State"]
+N2["Behaviour"]
+N3["Render"]
 
-Behaviour
-
-↓
-
-Render
+N1 --> N2
+N2 --> N3
 ```
 
 State belongs to the Runtime World.
@@ -275,22 +271,24 @@ Optimise only after correctness.
 
 Preferred.
 
-```text
-Correct
+```mermaid
+flowchart TD
 
-↓
+N1["Correct"]
+N2["Optimised"]
 
-Optimised
+N1 --> N2
 ```
 
 Avoid.
 
-```text
-Optimised
+```mermaid
+flowchart TD
 
-↓
+N1["Optimised"]
+N2["Different Behaviour"]
 
-Different Behaviour
+N1 --> N2
 ```
 
 Behavioural correctness always has higher priority than rendering performance.
@@ -410,15 +408,3 @@ Replaceable.
 The runtime architecture remains the intelligence of Mosaic.
 
 The Component Library simply gives that intelligence a visible form.
-
----
-
-# Review Status
-
-**Status**
-
-Draft
-
-**Next File**
-
-`glossary.md`

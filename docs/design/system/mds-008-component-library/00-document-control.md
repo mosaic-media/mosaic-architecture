@@ -19,8 +19,8 @@ Version: 0.4
 | Classification | Internal |
 | Status | Draft |
 | Version | 0.4 |
-| Owner | Lead UI Platform Architecture Team |
-| Parent Specifications | MDL-001 → MDL-005, MDS-001 → MDS-007 |
+| Owner | AdamNi-7080 |
+| Parent Specifications | [MDL-001](../../language/mdl-001-vision/index.md) → [MDL-005](../../language/mdl-005-composition-model/index.md), [MDS-001](../mds-001-design-token-architecture/index.md) → [MDS-007](../mds-007-tile-framework/index.md) |
 | Repository | `/design/mds/MDS-008 Component Library/` |
 
 ---
@@ -120,42 +120,34 @@ Components influence nothing upstream.
 
 Traditional UI frameworks frequently behave like this.
 
-```text
-Components
+```mermaid
+flowchart TD
 
-↓
+N1["Components"]
+N2["State"]
+N3["Behaviour"]
+N4["Rendering"]
 
-State
-
-↓
-
-Behaviour
-
-↓
-
-Rendering
+N1 --> N2
+N2 --> N3
+N3 --> N4
 ```
 
 Mosaic intentionally reverses this dependency.
 
-```text
-Behaviour
+```mermaid
+flowchart TD
 
-↓
+N1["Behaviour"]
+N2["Composition"]
+N3["Tiles"]
+N4["Components"]
+N5["Rendering"]
 
-Composition
-
-↓
-
-Tiles
-
-↓
-
-Components
-
-↓
-
-Rendering
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
 ```
 
 Components become passive renderers of behavioural presentation.
@@ -166,12 +158,12 @@ Components become passive renderers of behavioural presentation.
 
 Before reading this specification contributors should already understand:
 
-- MDL-001 Vision
-- MDL-002 Principles
-- MDL-003 Mental Model
-- MDL-004 Interaction Model
-- MDL-005 Composition Model
-- MDS-001 → MDS-007
+- [MDL-001 — Mosaic Design Language Vision](../../language/mdl-001-vision/index.md)
+- [MDL-002 — Principles](../../language/mdl-002-principles/index.md)
+- [MDL-003 — Mental Model](../../language/mdl-003-mental-model/index.md)
+- [MDL-004 — Interaction Model](../../language/mdl-004-interaction-model/index.md)
+- [MDL-005 — Composition Model](../../language/mdl-005-composition-model/index.md)
+- [MDS-001](../mds-001-design-token-architecture/index.md) → [MDS-007](../mds-007-tile-framework/index.md)
 
 MDS-008 assumes every architectural decision has already been made.
 
@@ -242,24 +234,3 @@ MDS-008 succeeds when:
 Users should never perceive Components.
 
 They should simply experience a Companion that always behaves consistently.
-
----
-
-# Review Status
-
-**Status**
-
-Draft
-
-**Dependencies**
-
-- MDL-001 → MDL-005
-- MDS-001 → MDS-007
-
-**Supersedes**
-
-None.
-
-**Next File**
-
-`01-component-philosophy.md`

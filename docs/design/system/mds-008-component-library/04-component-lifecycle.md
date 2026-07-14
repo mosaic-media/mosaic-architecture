@@ -48,20 +48,17 @@ Traditional UI frameworks frequently merge:
 
 Mosaic intentionally separates them.
 
-```text
-Tile
+```mermaid
+flowchart TD
 
-↓
+N1["Tile"]
+N2["Persistent Behaviour"]
+N3["Component"]
+N4["Disposable Implementation"]
 
-Persistent Behaviour
-
-↓
-
-Component
-
-↓
-
-Disposable Implementation
+N1 --> N2
+N2 --> N3
+N3 --> N4
 ```
 
 Components may be:
@@ -79,28 +76,21 @@ Behavioural continuity remains unaffected because the Tile survives.
 
 Every Component progresses through the same conceptual lifecycle.
 
-```text
-Created
+```mermaid
+flowchart TD
 
-↓
+N1["Created"]
+N2["Bound"]
+N3["Rendered"]
+N4["Updated"]
+N5["Detached"]
+N6["Released"]
 
-Bound
-
-↓
-
-Rendered
-
-↓
-
-Updated
-
-↓
-
-Detached
-
-↓
-
-Released
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
+N5 --> N6
 ```
 
 Each stage communicates one implementation responsibility.
@@ -160,26 +150,26 @@ Most Components spend the majority of their lifetime receiving updated Contracts
 
 Preferred.
 
-```text
-New Contract
+```mermaid
+flowchart TD
 
-↓
+N1["New Contract"]
+N2["Existing Component"]
+N3["Updated Rendering"]
 
-Existing Component
-
-↓
-
-Updated Rendering
+N1 --> N2
+N2 --> N3
 ```
 
 Avoid.
 
-```text
-Destroy Component
+```mermaid
+flowchart TD
 
-↓
+N1["Destroy Component"]
+N2["Create Component"]
 
-Create Component
+N1 --> N2
 ```
 
 Updating preserves rendering efficiency while maintaining behavioural continuity.
@@ -224,26 +214,26 @@ Components should evolve only because their Contracts evolve.
 
 Incorrect.
 
-```text
-Component
+```mermaid
+flowchart TD
 
-↓
+N1["Component"]
+N2["Internal State"]
+N3["Rendering"]
 
-Internal State
-
-↓
-
-Rendering
+N1 --> N2
+N2 --> N3
 ```
 
 Correct.
 
-```text
-Updated Contract
+```mermaid
+flowchart TD
 
-↓
+N1["Updated Contract"]
+N2["Updated Component"]
 
-Updated Component
+N1 --> N2
 ```
 
 The runtime owns behavioural evolution.
@@ -258,26 +248,26 @@ Components should remain stateless.
 
 Preferred.
 
-```text
-Contract
+```mermaid
+flowchart TD
 
-↓
+N1["Contract"]
+N2["Render"]
 
-Render
+N1 --> N2
 ```
 
 Avoid.
 
-```text
-Contract
+```mermaid
+flowchart TD
 
-↓
+N1["Contract"]
+N2["Mutable Component State"]
+N3["Render"]
 
-Mutable Component State
-
-↓
-
-Render
+N1 --> N2
+N2 --> N3
 ```
 
 State belongs upstream.
@@ -308,12 +298,14 @@ Component identity should never be exposed to users.
 Users should perceive:
 
 ```
+
 Hero Tile
 ```
 
 Not:
 
 ```
+
 Hero Component Instance
 ```
 
@@ -327,16 +319,15 @@ Tile identity remains behaviourally meaningful.
 
 Material changes should normally produce:
 
-```text
-Updated Material Contract
+```mermaid
+flowchart TD
 
-↓
+N1["Updated Material Contract"]
+N2["Same Component"]
+N3["Updated Material Rendering"]
 
-Same Component
-
-↓
-
-Updated Material Rendering
+N1 --> N2
+N2 --> N3
 ```
 
 Component replacement should rarely be necessary.
@@ -451,22 +442,24 @@ If a Component fails.
 
 Preferred.
 
-```text
-Fallback Component
+```mermaid
+flowchart TD
 
-↓
+N1["Fallback Component"]
+N2["Continue Rendering"]
 
-Continue Rendering
+N1 --> N2
 ```
 
 Avoid.
 
-```text
-Rendering Stops
+```mermaid
+flowchart TD
 
-↓
+N1["Rendering Stops"]
+N2["Behaviour Lost"]
 
-Behaviour Lost
+N1 --> N2
 ```
 
 Implementation failures should not compromise runtime understanding wherever practical.
@@ -661,15 +654,3 @@ Contracts evolve.
 Components render.
 
 This separation allows Mosaic to optimise rendering aggressively without ever compromising behavioural continuity or architectural clarity.
-
----
-
-# Review Status
-
-**Status**
-
-Draft
-
-**Next File**
-
-`05-component-composition.md`

@@ -58,24 +58,19 @@ Traditional UI architectures frequently combine:
 
 Mosaic intentionally separates these responsibilities.
 
-```text
-Runtime World
+```mermaid
+flowchart TD
 
-↓
+N1["Runtime World"]
+N2["Composition"]
+N3["Tiles"]
+N4["Components"]
+N5["Rendering"]
 
-Composition
-
-↓
-
-Tiles
-
-↓
-
-Components
-
-↓
-
-Rendering
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
 ```
 
 Rendering becomes the final implementation stage.
@@ -173,16 +168,15 @@ Each client owns a renderer that transforms Mosaic SDUI into native presentation
 
 Conceptually.
 
-```text
-SDUI Contract
+```mermaid
+flowchart TD
 
-↓
+N1["SDUI Contract"]
+N2["Client Renderer"]
+N3["Native Presentation"]
 
-Client Renderer
-
-↓
-
-Native Presentation
+N1 --> N2
+N2 --> N3
 ```
 
 The Platform and Supervisor provide SDUI contracts.
@@ -199,48 +193,38 @@ Every renderer is a first-class implementation of Mosaic presentation.
 
 Web rendering follows this shape.
 
-```text
-Runtime SDUI
+```mermaid
+flowchart TD
 
-↓
+N1["Runtime SDUI"]
+N2["Web Renderer"]
+N3["MDL Web Library"]
+N4["HTML / CSS / JavaScript"]
+N5["Browser"]
 
-Web Renderer
-
-↓
-
-MDL Web Library
-
-↓
-
-HTML / CSS / JavaScript
-
-↓
-
-Browser
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
 ```
 
 A native client follows the same architectural model.
 
 Flutter is the clearest current example of a non-Web native client, but the architecture does not depend on Flutter.
 
-```text
-Runtime SDUI
+```mermaid
+flowchart TD
 
-↓
+N1["Runtime SDUI"]
+N2["Native Client Renderer"]
+N3["Native MDL Library"]
+N4["Native UI / Graphics Primitives"]
+N5["Native Application"]
 
-Native Client Renderer
-
-↓
-
-Native MDL Library
-
-↓
-
-Native UI / Graphics Primitives
-
-↓
-
-Native Application
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
 ```
 
 The only significant difference between platforms should be renderer implementation.
@@ -268,20 +252,17 @@ Each renderer links against its platform's MDL implementation.
 
 Conceptually.
 
-```text
-Platform
+```mermaid
+flowchart TD
 
-↓
+N1["Platform"]
+N2["Renderer"]
+N3["MDL Library"]
+N4["Native Graphics API"]
 
-Renderer
-
-↓
-
-MDL Library
-
-↓
-
-Native Graphics API
+N1 --> N2
+N2 --> N3
+N3 --> N4
 ```
 
 This avoids inserting another runtime layer and allows each client to remain idiomatic.
@@ -310,20 +291,17 @@ The renderer combines:
 
 Conceptually.
 
-```text
-Semantic SDUI
+```mermaid
+flowchart TD
 
-↓
+N1["Semantic SDUI"]
+N2["Renderer"]
+N3["MDL Library"]
+N4["Native Presentation"]
 
-Renderer
-
-↓
-
-MDL Library
-
-↓
-
-Native Presentation
+N1 --> N2
+N2 --> N3
+N3 --> N4
 ```
 
 This preserves a clean boundary.
@@ -390,32 +368,23 @@ MDL may be split into multiple implementation projects.
 
 Conceptually.
 
-```text
-mdl-spec
+```mermaid
+flowchart TD
 
-↓
+N1["mdl-spec"]
+N2["mdl-web"]
+N3["mdl-flutter"]
+N4["mdl-winui"]
+N5["mdl-macos"]
+N6["mdl-android-tv"]
+N7["mdl-apple-tv"]
 
-mdl-web
-
-↓
-
-mdl-flutter
-
-↓
-
-mdl-winui
-
-↓
-
-mdl-macos
-
-↓
-
-mdl-android-tv
-
-↓
-
-mdl-apple-tv
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
+N5 --> N6
+N6 --> N7
 ```
 
 Flutter is an example native client implementation.
@@ -675,24 +644,19 @@ Every rendering decision should originate from Component Contracts.
 
 Every rendered frame follows the same conceptual pipeline.
 
-```text
-Resolved Tile
+```mermaid
+flowchart TD
 
-↓
+N1["Resolved Tile"]
+N2["Component Contract"]
+N3["Platform Component"]
+N4["Rendering"]
+N5["Presentation"]
 
-Component Contract
-
-↓
-
-Platform Component
-
-↓
-
-Rendering
-
-↓
-
-Presentation
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
 ```
 
 Every upstream decision has already been made.
@@ -705,28 +669,21 @@ Rendering simply implements it.
 
 Rendering consumes:
 
-```text
-Platform Components
+```mermaid
+flowchart TD
 
-↓
+N1["Platform Components"]
+N2["Material Profiles"]
+N3["Typography Profiles"]
+N4["Motion Profiles"]
+N5["Interaction Profiles"]
+N6["Accessibility Profiles"]
 
-Material Profiles
-
-↓
-
-Typography Profiles
-
-↓
-
-Motion Profiles
-
-↓
-
-Interaction Profiles
-
-↓
-
-Accessibility Profiles
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
+N5 --> N6
 ```
 
 Rendering never consumes:
@@ -761,20 +718,17 @@ Rendering should respect runtime hierarchy.
 
 Conceptually.
 
-```text
-Canvas
+```mermaid
+flowchart TD
 
-↓
+N1["Canvas"]
+N2["Supporting"]
+N3["Hero"]
+N4["Overlay"]
 
-Supporting
-
-↓
-
-Hero
-
-↓
-
-Overlay
+N1 --> N2
+N2 --> N3
+N3 --> N4
 ```
 
 This ordering originates from the Material System.
@@ -805,20 +759,22 @@ Typography rendering should consume resolved typography.
 
 Examples.
 
-```text
-Heading
+```mermaid
+flowchart TD
 
-↓
+N1["Heading"]
+N2["Text Rendering"]
 
-Text Rendering
+N1 --> N2
 ```
 
-```text
-Supporting
+```mermaid
+flowchart TD
 
-↓
+N1["Supporting"]
+N2["Text Rendering"]
 
-Text Rendering
+N1 --> N2
 ```
 
 The rendering layer should never choose:
@@ -869,22 +825,24 @@ Rendering should update only affected regions whenever practical.
 
 Preferred.
 
-```text
-Timeline
+```mermaid
+flowchart TD
 
-↓
+N1["Timeline"]
+N2["Render Timeline"]
 
-Render Timeline
+N1 --> N2
 ```
 
 Avoid.
 
-```text
-Timeline
+```mermaid
+flowchart TD
 
-↓
+N1["Timeline"]
+N2["Render Entire Screen"]
 
-Render Entire Screen
+N1 --> N2
 ```
 
 Incremental rendering preserves performance without affecting runtime behaviour.
@@ -897,20 +855,17 @@ Future implementations may internally use rendering layers.
 
 Examples.
 
-```text
-Canvas Layer
+```mermaid
+flowchart TD
 
-↓
+N1["Canvas Layer"]
+N2["Material Layer"]
+N3["Content Layer"]
+N4["Overlay Layer"]
 
-Material Layer
-
-↓
-
-Content Layer
-
-↓
-
-Overlay Layer
+N1 --> N2
+N2 --> N3
+N3 --> N4
 ```
 
 Layering remains an implementation concern.
@@ -1039,26 +994,26 @@ Rendering failures should degrade gracefully.
 
 Preferred.
 
-```text
-Material Effect Fails
+```mermaid
+flowchart TD
 
-↓
+N1["Material Effect Fails"]
+N2["Fallback Material"]
+N3["Continue Rendering"]
 
-Fallback Material
-
-↓
-
-Continue Rendering
+N1 --> N2
+N2 --> N3
 ```
 
 Avoid.
 
-```text
-Rendering Failure
+```mermaid
+flowchart TD
 
-↓
+N1["Rendering Failure"]
+N2["Blank Interface"]
 
-Blank Interface
+N1 --> N2
 ```
 
 Behavioural continuity should remain the highest priority.
@@ -1215,15 +1170,3 @@ By the time rendering begins:
 Rendering simply makes those decisions visible.
 
 That disciplined separation is what allows Mosaic to evolve for decades while remaining behaviourally consistent across every future platform.
-
----
-
-# Review Status
-
-**Status**
-
-Draft
-
-**Next File**
-
-`07-platform-components.md`

@@ -62,20 +62,17 @@ Rendering technologies cannot consume these architectural concepts directly.
 
 Components provide the final bridge.
 
-```text
-Resolved Tile
+```mermaid
+flowchart TD
 
-↓
+N1["Resolved Tile"]
+N2["Component"]
+N3["Rendering"]
+N4["User"]
 
-Component
-
-↓
-
-Rendering
-
-↓
-
-User
+N1 --> N2
+N2 --> N3
+N3 --> N4
 ```
 
 Components are implementation.
@@ -104,34 +101,30 @@ Behaviour belongs elsewhere.
 
 Incorrect.
 
-```text
-Button
+```mermaid
+flowchart TD
 
-↓
+N1["Button"]
+N2["Play"]
+N3["Behaviour"]
 
-Play
-
-↓
-
-Behaviour
+N1 --> N2
+N2 --> N3
 ```
 
 Correct.
 
-```text
-Action Tile
+```mermaid
+flowchart TD
 
-↓
+N1["Action Tile"]
+N2["Resolved Interaction"]
+N3["Action Component"]
+N4["Rendering"]
 
-Resolved Interaction
-
-↓
-
-Action Component
-
-↓
-
-Rendering
+N1 --> N2
+N2 --> N3
+N3 --> N4
 ```
 
 The behavioural decision already exists.
@@ -187,22 +180,24 @@ A Component should faithfully preserve Tile identity.
 
 Example.
 
-```text
-Hero Tile
+```mermaid
+flowchart TD
 
-↓
+N1["Hero Tile"]
+N2["Hero Component"]
 
-Hero Component
+N1 --> N2
 ```
 
 Not.
 
-```text
-Hero Tile
+```mermaid
+flowchart TD
 
-↓
+N1["Hero Tile"]
+N2["Large Card"]
 
-Large Card
+N1 --> N2
 ```
 
 Component naming should reflect architectural identity.
@@ -571,15 +566,3 @@ They should never:
 By the time a Component exists, the user's World has already been completely understood.
 
 The Component simply makes that understanding visible.
-
----
-
-# Review Status
-
-**Status**
-
-Draft
-
-**Next File**
-
-`02-component-taxonomy.md`

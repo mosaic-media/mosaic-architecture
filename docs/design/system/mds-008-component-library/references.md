@@ -56,7 +56,7 @@ Rendering technologies merely implement it.
 
 # Internal References
 
-## MDL-001 — Vision
+## [MDL-001 — Mosaic Design Language Vision](../../language/mdl-001-vision/index.md)
 
 Provides:
 
@@ -72,7 +72,7 @@ Never the implementation.
 
 ---
 
-## MDL-002 — Principles
+## [MDL-002 — Principles](../../language/mdl-002-principles/index.md)
 
 Provides:
 
@@ -87,7 +87,7 @@ Implementation should never redefine those principles.
 
 ---
 
-## MDL-003 — Mental Model
+## [MDL-003 — Mental Model](../../language/mdl-003-mental-model/index.md)
 
 Provides:
 
@@ -102,7 +102,7 @@ They simply render it.
 
 ---
 
-## MDL-004 — Interaction Model
+## [MDL-004 — Interaction Model](../../language/mdl-004-interaction-model/index.md)
 
 Provides:
 
@@ -116,7 +116,7 @@ They never determine interaction.
 
 ---
 
-## MDL-005 — Composition Model
+## [MDL-005 — Composition Model](../../language/mdl-005-composition-model/index.md)
 
 Provides:
 
@@ -129,7 +129,7 @@ Component trees should always reflect solved Composition rather than invent thei
 
 ---
 
-## MDS-001 — Design Token Architecture
+## [MDS-001 — Design Token Architecture](../mds-001-design-token-architecture/index.md)
 
 Provides:
 
@@ -137,11 +137,11 @@ Provides:
 - Resolution
 - Semantic contracts
 
-Component Contracts continue the runtime resolution architecture established by MDS-001.
+Component Contracts continue the runtime resolution architecture established by [MDS-001](../mds-001-design-token-architecture/index.md).
 
 ---
 
-## MDS-002 — Colour System
+## [MDS-002 — Colour System](../mds-002-colour-system/index.md)
 
 Provides:
 
@@ -155,7 +155,7 @@ They never determine colour independently.
 
 ---
 
-## MDS-003 — Material System
+## [MDS-003 — Material System](../mds-003-material-system/index.md)
 
 Provides:
 
@@ -169,7 +169,7 @@ They never reinterpret them.
 
 ---
 
-## MDS-004 — Typography System
+## [MDS-004 — Typography System](../mds-004-typography-system/index.md)
 
 Provides:
 
@@ -183,7 +183,7 @@ Editorial decisions always remain upstream.
 
 ---
 
-## MDS-005 — Motion System
+## [MDS-005 — Motion System](../mds-005-motion-system/index.md)
 
 Provides:
 
@@ -197,7 +197,7 @@ Behavioural sequencing remains runtime owned.
 
 ---
 
-## MDS-006 — Composition Engine
+## [MDS-006 — Composition Engine](../mds-006-composition-engine/index.md)
 
 Provides:
 
@@ -212,7 +212,7 @@ They consume only resolved presentation.
 
 ---
 
-## MDS-007 — Tile Framework
+## [MDS-007 — Tile Framework](../mds-007-tile-framework/index.md)
 
 Provides:
 
@@ -232,32 +232,23 @@ The Component Library intentionally concludes the architectural pipeline.
 
 Conceptually.
 
-```text
-Behaviour
+```mermaid
+flowchart TD
 
-↓
+N1["Behaviour"]
+N2["Composition"]
+N3["Expressions"]
+N4["Tiles"]
+N5["Components"]
+N6["Rendering"]
+N7["User"]
 
-Composition
-
-↓
-
-Expressions
-
-↓
-
-Tiles
-
-↓
-
-Components
-
-↓
-
-Rendering
-
-↓
-
-User
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
+N5 --> N6
+N6 --> N7
 ```
 
 Everything upstream determines meaning.
@@ -309,20 +300,17 @@ Accessibility is treated as an architectural requirement rather than a platform 
 
 The Component Library assumes:
 
-```text
-Runtime
+```mermaid
+flowchart TD
 
-↓
+N1["Runtime"]
+N2["Accessibility Contracts"]
+N3["Components"]
+N4["Accessible Presentation"]
 
-Accessibility Contracts
-
-↓
-
-Components
-
-↓
-
-Accessible Presentation
+N1 --> N2
+N2 --> N3
+N3 --> N4
 ```
 
 Accessibility therefore remains behaviourally identical across every supported client.
@@ -333,16 +321,15 @@ Accessibility therefore remains behaviourally identical across every supported c
 
 The Component Library intentionally separates:
 
-```text
-Component Contracts
+```mermaid
+flowchart TD
 
-↓
+N1["Component Contracts"]
+N2["Platform Components"]
+N3["Rendering"]
 
-Platform Components
-
-↓
-
-Rendering
+N1 --> N2
+N2 --> N3
 ```
 
 Future rendering technologies should require only:
@@ -421,32 +408,23 @@ Components represent the visible body of the Companion.
 
 Conceptually.
 
-```text
-World
+```mermaid
+flowchart TD
 
-↓
+N1["World"]
+N2["Behaviour"]
+N3["Expressions"]
+N4["Tiles"]
+N5["Components"]
+N6["Presentation"]
+N7["User"]
 
-Behaviour
-
-↓
-
-Expressions
-
-↓
-
-Tiles
-
-↓
-
-Components
-
-↓
-
-Presentation
-
-↓
-
-User
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
+N5 --> N6
+N6 --> N7
 ```
 
 The Companion understands first.
@@ -461,18 +439,18 @@ This ordering should remain fundamental throughout the lifetime of Mosaic.
 
 Required reading before contributing to MDS-008.
 
-- MDL-001 Vision
-- MDL-002 Principles
-- MDL-003 Mental Model
-- MDL-004 Interaction Model
-- MDL-005 Composition Model
-- MDS-001 Design Token Architecture
-- MDS-002 Colour System
-- MDS-003 Material System
-- MDS-004 Typography System
-- MDS-005 Motion System
-- MDS-006 Composition Engine
-- MDS-007 Tile Framework
+- [MDL-001 — Mosaic Design Language Vision](../../language/mdl-001-vision/index.md)
+- [MDL-002 — Principles](../../language/mdl-002-principles/index.md)
+- [MDL-003 — Mental Model](../../language/mdl-003-mental-model/index.md)
+- [MDL-004 — Interaction Model](../../language/mdl-004-interaction-model/index.md)
+- [MDL-005 — Composition Model](../../language/mdl-005-composition-model/index.md)
+- [MDS-001 — Design Token Architecture](../mds-001-design-token-architecture/index.md)
+- [MDS-002 — Colour System](../mds-002-colour-system/index.md)
+- [MDS-003 — Material System](../mds-003-material-system/index.md)
+- [MDS-004 — Typography System](../mds-004-typography-system/index.md)
+- [MDS-005 — Motion System](../mds-005-motion-system/index.md)
+- [MDS-006 — Composition Engine](../mds-006-composition-engine/index.md)
+- [MDS-007 — Tile Framework](../mds-007-tile-framework/index.md)
 
 Together these specifications define the complete architectural foundation of the Component Library.
 

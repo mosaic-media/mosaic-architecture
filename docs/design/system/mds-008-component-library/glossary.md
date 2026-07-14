@@ -415,13 +415,13 @@ The Web Renderer is distinct from the Embedded Recovery Renderer.
 
 | Specification | Primary Concepts |
 |---------------|------------------|
-| MDL-001 Vision | Companion |
-| MDL-002 Principles | Behaviour Before Interface |
-| MDL-003 Mental Model | World |
-| MDL-004 Interaction Model | Behaviour |
-| MDL-005 Composition Model | Hierarchy |
-| MDS-006 Composition Engine | Expressions, Presentation Model |
-| MDS-007 Tile Framework | Tiles, Runtime Tile Resolution |
+| [MDL-001 — Mosaic Design Language Vision](../../language/mdl-001-vision/index.md) | Companion |
+| [MDL-002 — Principles](../../language/mdl-002-principles/index.md) | Behaviour Before Interface |
+| [MDL-003 — Mental Model](../../language/mdl-003-mental-model/index.md) | World |
+| [MDL-004 — Interaction Model](../../language/mdl-004-interaction-model/index.md) | Behaviour |
+| [MDL-005 — Composition Model](../../language/mdl-005-composition-model/index.md) | Hierarchy |
+| [MDS-006 — Composition Engine](../mds-006-composition-engine/index.md) | Expressions, Presentation Model |
+| [MDS-007 — Tile Framework](../mds-007-tile-framework/index.md) | Tiles, Runtime Tile Resolution |
 
 ---
 
@@ -436,15 +436,3 @@ Future contributors should:
 - avoid framework-specific terminology within architectural documentation.
 
 Component terminology should remain independent from implementation technologies.
-
----
-
-# Review Status
-
-**Status**
-
-Draft
-
-**Next File**
-
-End.

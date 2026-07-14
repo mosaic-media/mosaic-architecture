@@ -372,15 +372,3 @@ They should simply experience a platform that behaves consistently everywhere.
 | ADR-179 | Platform implementations never redefine runtime behaviour. |
 | ADR-180 | Accessibility is contract-driven rather than component-driven. |
 | ADR-181 | Modules never implement Components directly. |
-
----
-
-# Review Status
-
-**Status**
-
-Draft
-
-**Next File**
-
-`12-adrs.md`

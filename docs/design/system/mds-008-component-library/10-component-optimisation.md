@@ -72,22 +72,24 @@ Optimisation should never introduce behavioural side effects.
 
 Preferred.
 
-```text
-Same Behaviour
+```mermaid
+flowchart TD
 
-↓
+N1["Same Behaviour"]
+N2["Better Performance"]
 
-Better Performance
+N1 --> N2
 ```
 
 Avoid.
 
-```text
-Simpler Behaviour
+```mermaid
+flowchart TD
 
-↓
+N1["Simpler Behaviour"]
+N2["Better Performance"]
 
-Better Performance
+N1 --> N2
 ```
 
 Performance improvements should never weaken runtime understanding.
@@ -134,16 +136,15 @@ Large collections should virtualise presentation.
 
 Example.
 
-```text
-1000 Tiles
+```mermaid
+flowchart TD
 
-↓
+N1["1000 Tiles"]
+N2["Visible Components"]
+N3["Render"]
 
-Visible Components
-
-↓
-
-Render
+N1 --> N2
+N2 --> N3
 ```
 
 Tiles continue existing behaviourally.
@@ -158,30 +159,28 @@ Only affected Components should update.
 
 Preferred.
 
-```text
-Timeline
+```mermaid
+flowchart TD
 
-↓
+N1["Timeline"]
+N2["Timeline Component"]
+N3["Render"]
 
-Timeline Component
-
-↓
-
-Render
+N1 --> N2
+N2 --> N3
 ```
 
 Avoid.
 
-```text
-Timeline
+```mermaid
+flowchart TD
 
-↓
+N1["Timeline"]
+N2["Entire Hero Tree"]
+N3["Render"]
 
-Entire Hero Tree
-
-↓
-
-Render
+N1 --> N2
+N2 --> N3
 ```
 
 Behavioural locality should naturally produce rendering locality.
@@ -194,20 +193,17 @@ Future implementations should compare Component Contracts before updating.
 
 Conceptually.
 
-```text
-Old Contract
+```mermaid
+flowchart TD
 
-↓
+N1["Old Contract"]
+N2["Compare"]
+N3["Changed?"]
+N4["Update"]
 
-Compare
-
-↓
-
-Changed?
-
-↓
-
-Update
+N1 --> N2
+N2 --> N3
+N3 --> N4
 ```
 
 Equivalent Contracts should not trigger unnecessary rendering.
@@ -371,28 +367,31 @@ Future implementations may expose conceptual performance profiles.
 
 Examples.
 
-```text
-Maximum Quality
+```mermaid
+flowchart TD
 
-↓
+N1["Maximum Quality"]
+N2["Highest Fidelity"]
 
-Highest Fidelity
+N1 --> N2
 ```
 
-```text
-Balanced
+```mermaid
+flowchart TD
 
-↓
+N1["Balanced"]
+N2["Adaptive Optimisation"]
 
-Adaptive Optimisation
+N1 --> N2
 ```
 
-```text
-Efficiency
+```mermaid
+flowchart TD
 
-↓
+N1["Efficiency"]
+N2["Simplified Rendering"]
 
-Simplified Rendering
+N1 --> N2
 ```
 
 Performance Profiles should never alter:
@@ -429,26 +428,26 @@ Optimisation failures should degrade gracefully.
 
 Preferred.
 
-```text
-GPU Optimisation Disabled
+```mermaid
+flowchart TD
 
-↓
+N1["GPU Optimisation Disabled"]
+N2["CPU Rendering"]
+N3["Continue"]
 
-CPU Rendering
-
-↓
-
-Continue
+N1 --> N2
+N2 --> N3
 ```
 
 Avoid.
 
-```text
-Optimisation Failed
+```mermaid
+flowchart TD
 
-↓
+N1["Optimisation Failed"]
+N2["Behaviour Changes"]
 
-Behaviour Changes
+N1 --> N2
 ```
 
 Optimisation should always remain optional.
@@ -607,15 +606,3 @@ They should simply experience a Companion that feels:
 The implementation may become dramatically more sophisticated over time.
 
 The behavioural experience should remain exactly the same.
-
----
-
-# Review Status
-
-**Status**
-
-Draft
-
-**Next File**
-
-`11-governance.md`

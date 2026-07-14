@@ -71,40 +71,37 @@ Every Platform Component consumes the same Component Contract.
 
 Conceptually.
 
-```text
-Resolved Tile
+```mermaid
+flowchart TD
 
-↓
+N1["Resolved Tile"]
+N2["Component Contract"]
+N3["Flutter Component"]
 
-Component Contract
-
-↓
-
-Flutter Component
+N1 --> N2
+N2 --> N3
 ```
 
-```text
-Resolved Tile
+```mermaid
+flowchart TD
 
-↓
+N1["Resolved Tile"]
+N2["Component Contract"]
+N3["React Component"]
 
-Component Contract
-
-↓
-
-React Component
+N1 --> N2
+N2 --> N3
 ```
 
-```text
-Resolved Tile
+```mermaid
+flowchart TD
 
-↓
+N1["Resolved Tile"]
+N2["Component Contract"]
+N3["SwiftUI Component"]
 
-Component Contract
-
-↓
-
-SwiftUI Component
+N1 --> N2
+N2 --> N3
 ```
 
 The implementation differs.
@@ -194,16 +191,15 @@ Platform differences should remain invisible to users.
 
 Future platforms should require only:
 
-```text
-Component Contract
+```mermaid
+flowchart TD
 
-↓
+N1["Component Contract"]
+N2["Platform Adapter"]
+N3["Rendering"]
 
-Platform Adapter
-
-↓
-
-Rendering
+N1 --> N2
+N2 --> N3
 ```
 
 The architecture intentionally assumes that rendering technologies will continue evolving.
@@ -542,15 +538,3 @@ Rendering engines come and go.
 The Component Contract remains stable.
 
 Users should therefore experience the same Companion regardless of which device or framework happens to be rendering it.
-
----
-
-# Review Status
-
-**Status**
-
-Draft
-
-**Next File**
-
-`08-accessibility-contracts.md`

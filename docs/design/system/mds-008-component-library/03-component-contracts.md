@@ -57,20 +57,17 @@ This tightly couples behaviour to implementation.
 
 Mosaic intentionally follows:
 
-```text
-Runtime
+```mermaid
+flowchart TD
 
-↓
+N1["Runtime"]
+N2["Component Contract"]
+N3["Component"]
+N4["Rendering"]
 
-Component Contract
-
-↓
-
-Component
-
-↓
-
-Rendering
+N1 --> N2
+N2 --> N3
+N3 --> N4
 ```
 
 Behaviour remains external.
@@ -83,20 +80,17 @@ A Component Contract should never be modified by a Component.
 
 Conceptually.
 
-```text
-Resolved Tile
+```mermaid
+flowchart TD
 
-↓
+N1["Resolved Tile"]
+N2["Component Contract"]
+N3["Read Only"]
+N4["Component"]
 
-Component Contract
-
-↓
-
-Read Only
-
-↓
-
-Component
+N1 --> N2
+N2 --> N3
+N3 --> N4
 ```
 
 Components render.
@@ -111,28 +105,31 @@ Every Component Contract communicates one implementation responsibility.
 
 Examples.
 
-```text
-Text Component
+```mermaid
+flowchart TD
 
-↓
+N1["Text Component"]
+N2["Typography Contract"]
 
-Typography Contract
+N1 --> N2
 ```
 
-```text
-Media Component
+```mermaid
+flowchart TD
 
-↓
+N1["Media Component"]
+N2["Media Contract"]
 
-Media Contract
+N1 --> N2
 ```
 
-```text
-Action Component
+```mermaid
+flowchart TD
 
-↓
+N1["Action Component"]
+N2["Interaction Contract"]
 
-Interaction Contract
+N1 --> N2
 ```
 
 Responsibilities remain intentionally isolated.
@@ -143,28 +140,21 @@ Responsibilities remain intentionally isolated.
 
 Component Contracts originate from:
 
-```text
-Resolved Tile
+```mermaid
+flowchart TD
 
-↓
+N1["Resolved Tile"]
+N2["Material Profile"]
+N3["Typography Profile"]
+N4["Motion Profile"]
+N5["Interaction Profile"]
+N6["Accessibility Profile"]
 
-Material Profile
-
-↓
-
-Typography Profile
-
-↓
-
-Motion Profile
-
-↓
-
-Interaction Profile
-
-↓
-
-Accessibility Profile
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
+N5 --> N6
 ```
 
 Components receive the completed result.
@@ -200,20 +190,17 @@ Material behaviour is fully resolved before reaching Components.
 
 Example.
 
-```text
-Hero Tile
+```mermaid
+flowchart TD
 
-↓
+N1["Hero Tile"]
+N2["Hero Material"]
+N3["Material Contract"]
+N4["Hero Component"]
 
-Hero Material
-
-↓
-
-Material Contract
-
-↓
-
-Hero Component
+N1 --> N2
+N2 --> N3
+N3 --> N4
 ```
 
 Components should never select Materials independently.
@@ -226,16 +213,15 @@ Typography follows the same model.
 
 Example.
 
-```text
-Heading
+```mermaid
+flowchart TD
 
-↓
+N1["Heading"]
+N2["Typography Contract"]
+N3["Text Component"]
 
-Typography Contract
-
-↓
-
-Text Component
+N1 --> N2
+N2 --> N3
 ```
 
 The Component simply renders the supplied typography.
@@ -386,26 +372,26 @@ Components should consume Contracts without introducing additional behavioural s
 
 Preferred.
 
-```text
-Contract
+```mermaid
+flowchart TD
 
-↓
+N1["Contract"]
+N2["Render"]
 
-Render
+N1 --> N2
 ```
 
 Avoid.
 
-```text
-Contract
+```mermaid
+flowchart TD
 
-↓
+N1["Contract"]
+N2["Component State"]
+N3["Render"]
 
-Component State
-
-↓
-
-Render
+N1 --> N2
+N2 --> N3
 ```
 
 Runtime owns behaviour.
@@ -418,16 +404,15 @@ Components remain passive.
 
 When behaviour changes:
 
-```text
-New Contract
+```mermaid
+flowchart TD
 
-↓
+N1["New Contract"]
+N2["Same Component"]
+N3["Updated Presentation"]
 
-Same Component
-
-↓
-
-Updated Presentation
+N1 --> N2
+N2 --> N3
 ```
 
 Whenever practical...
@@ -624,15 +609,3 @@ Contracts communicate behaviour.
 Components implement behaviour.
 
 By preserving this separation, Mosaic ensures that rendering technologies remain replaceable while behavioural understanding remains permanently stable.
-
----
-
-# Review Status
-
-**Status**
-
-Draft
-
-**Next File**
-
-`04-component-lifecycle.md`

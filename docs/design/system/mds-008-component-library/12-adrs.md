@@ -33,7 +33,7 @@ Future contributors should understand these decisions before modifying the Compo
 
 # Decision Format
 
-Decision format, lifecycle and review expectations are governed by **MDG-001 — Documentation Authority Guide**.
+Decision format, lifecycle and review expectations are governed by **[MDG-001 — Documentation Authority Guide](../../../engineering/documentation/mdg-001-documentation-authority-guide/index.md)**.
 
 This chapter records decisions specific to this specification and avoids redefining the shared ADR process.
 
@@ -400,24 +400,19 @@ An earlier presentation architecture placed an MDL Runtime between SDUI and clie
 
 Conceptually.
 
-```text
-Platform
+```mermaid
+flowchart TD
 
-↓
+N1["Platform"]
+N2["SDUI"]
+N3["MDL Runtime"]
+N4["Renderer"]
+N5["Native Presentation"]
 
-SDUI
-
-↓
-
-MDL Runtime
-
-↓
-
-Renderer
-
-↓
-
-Native Presentation
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
 ```
 
 The MDL Runtime would have enriched SDUI with presentation information before rendering.
@@ -543,15 +538,3 @@ Implementation belongs to Components.
 Rendering belongs to platforms.
 
 Maintaining these boundaries allows Mosaic to continuously adopt new UI technologies without ever compromising its behavioural architecture.
-
----
-
-# Review Status
-
-**Status**
-
-Draft
-
-**Next File**
-
-`13-contributor-guidance.md`

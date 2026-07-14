@@ -55,60 +55,37 @@ Components simply render.
 
 # Relationship to Previous Specifications
 
-```text
-Vision
+```mermaid
+flowchart TD
 
-↓
+N1["Vision"]
+N2["Principles"]
+N3["Mental Model"]
+N4["Interaction"]
+N5["Composition"]
+N6["Tokens"]
+N7["Colour"]
+N8["Materials"]
+N9["Typography"]
+N10["Motion"]
+N11["Composition Engine"]
+N12["Tile Framework"]
+N13["Component Library"]
+N14["Rendering"]
 
-Principles
-
-↓
-
-Mental Model
-
-↓
-
-Interaction
-
-↓
-
-Composition
-
-↓
-
-Tokens
-
-↓
-
-Colour
-
-↓
-
-Materials
-
-↓
-
-Typography
-
-↓
-
-Motion
-
-↓
-
-Composition Engine
-
-↓
-
-Tile Framework
-
-↓
-
-Component Library
-
-↓
-
-Rendering
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
+N5 --> N6
+N6 --> N7
+N7 --> N8
+N8 --> N9
+N9 --> N10
+N10 --> N11
+N11 --> N12
+N12 --> N13
+N13 --> N14
 ```
 
 The Component Library consumes:
@@ -189,24 +166,19 @@ This is the single most important architectural principle of the Component Libra
 
 The Component Library separates implementation into several conceptual layers.
 
-```text
-Resolved Tile
+```mermaid
+flowchart TD
 
-↓
+N1["Resolved Tile"]
+N2["Component Contract"]
+N3["Platform Component"]
+N4["Rendering"]
+N5["Pixels"]
 
-Component Contract
-
-↓
-
-Platform Component
-
-↓
-
-Rendering
-
-↓
-
-Pixels
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
 ```
 
 Each layer contributes exactly one responsibility.
@@ -279,27 +251,11 @@ design/
 
 Required reading:
 
-- MDL-001 → MDL-005
-- MDS-001 → MDS-007
+- [MDL-001](../../language/mdl-001-vision/index.md) → [MDL-005](../../language/mdl-005-composition-model/index.md)
+- [MDS-001](../mds-001-design-token-architecture/index.md) → [MDS-007](../mds-007-tile-framework/index.md)
 
 Downstream specifications:
 
 There are currently no downstream Design System specifications.
 
 Platform implementation guides may build upon this specification.
-
----
-
-# Review Status
-
-**Status**
-
-Draft
-
-**Owner**
-
-Lead UI Platform Architecture Team
-
-**Next File**
-
-`00-document-control.md`
