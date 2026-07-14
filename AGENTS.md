@@ -81,6 +81,19 @@ The README should remain a current orientation guide for:
 
 Do not let the README drift behind the repository structure.
 
+## Landing Page Maintenance
+
+Landing pages are the concise orientation layer for the documentation portal. Keep them useful without allowing them to compete with authoritative specifications.
+
+- Keep `docs/index.md` focused on a short Mosaic overview, documentation map, and goal-based starting points.
+- Keep discipline and document-family `index.md` pages as curated catalogues with one-sentence summaries, reading guidance, and direct links to authoritative specification `index.md` pages.
+- When adding, removing, renaming, or materially changing the purpose of a specification, update its nearest document-family landing page in the same change.
+- Update the parent Design or Engineering landing page when a reader journey, document family, or discipline-level relationship changes.
+- Update the root landing page only when the overall documentation map or a goal-based starting point changes.
+- Treat landing-page descriptions as non-normative summaries. Do not duplicate requirements, definitions, protocol rules, or operational procedures from the owning specification.
+- Keep `.pages` navigation labels and ordering synchronised with the catalogues. Use clear reader-facing names while preserving URL-safe source paths.
+- Update the root `README.md` when visible documentation organisation or navigation conventions change.
+
 ## Scope Discipline
 
 Avoid introducing new top-level folders, naming schemes, or document formats unless the user asks for them or the existing structure cannot support the work.

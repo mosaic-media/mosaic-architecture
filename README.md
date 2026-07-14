@@ -126,6 +126,17 @@ The MkDocs portal is configured with:
 
 Metadata comments are preserved in source files. A MkDocs hook renders the document identity, Status, and Version visibly in the generated site at build time.
 
+## Landing Pages and Navigation
+
+The portal uses landing pages as a concise orientation layer over the authoritative specifications:
+
+- `docs/index.md` provides a short overview and goal-based starting points.
+- discipline landing pages route readers into Design or Engineering.
+- document-family landing pages catalogue the specifications they contain with one-sentence summaries and reading guidance.
+- specification `index.md` pages introduce the purpose and scope of the authoritative document before its detailed chapters.
+
+Landing-page summaries must link to the specification that owns each concept and must not become a second source of normative requirements. When a specification is added, removed, renamed or materially changes purpose, update its nearest catalogue and any affected reading path in the same change. Keep `.pages` navigation and this README synchronised when the visible structure changes.
+
 ## Branding
 
 Light Mosaic branding is configured through `mkdocs.yml` and `docs/stylesheets/mosaic.css`.
