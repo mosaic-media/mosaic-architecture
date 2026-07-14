@@ -2,7 +2,7 @@
 File: docs/engineering/guides/meg-007-storage-architecture/11-backup-and-restore.md
 Document: MEG-007
 Status: Draft
-Version: 0.2
+Version: 0.4
 -->
 
 # Backup and Restore
@@ -80,16 +80,15 @@ Recovery effort should remain proportional to information value.
 
 Storage systems naturally divide into:
 
-```text
-Critical
+```mermaid
+flowchart TD
 
-↓
+N1["Critical"]
+N2["Important"]
+N3["Rebuildable"]
 
-Important
-
-↓
-
-Rebuildable
+N1 --> N2
+N2 --> N3
 ```
 
 This classification determines backup policy.
@@ -140,12 +139,13 @@ These SHOULD generally not be backed up.
 
 Instead.
 
-```text
-Restore
+```mermaid
+flowchart TD
 
-↓
+N1["Restore"]
+N2["Rebuild"]
 
-Rebuild
+N1 --> N2
 ```
 
 Derived information should remain disposable.
@@ -156,24 +156,19 @@ Derived information should remain disposable.
 
 Typical backup flow.
 
-```text
-PostgreSQL
+```mermaid
+flowchart TD
 
-↓
+N1["PostgreSQL"]
+N2["Backup"]
+N3["Archive"]
+N4["Verify"]
+N5["Retention"]
 
-Backup
-
-↓
-
-Archive
-
-↓
-
-Verify
-
-↓
-
-Retention
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
 ```
 
 Every backup should be:
@@ -248,16 +243,15 @@ DuckDB SHOULD generally rebuild rather than restore.
 
 Recovery flow.
 
-```text
-Restore PostgreSQL
+```mermaid
+flowchart TD
 
-↓
+N1["Restore PostgreSQL"]
+N2["Replay Events"]
+N3["Rebuild DuckDB"]
 
-Replay Events
-
-↓
-
-Rebuild DuckDB
+N1 --> N2
+N2 --> N3
 ```
 
 Analytical correctness should derive from business correctness.
@@ -272,12 +266,13 @@ MOS Cache should never be restored.
 
 Preferred.
 
-```text
-Delete
+```mermaid
+flowchart TD
 
-↓
+N1["Delete"]
+N2["Rebuild"]
 
-Rebuild
+N1 --> N2
 ```
 
 Cache regeneration should occur automatically during Runtime startup.
@@ -310,18 +305,21 @@ Examples.
 Business State.
 
 ```
+
 Frequent
 ```
 
 Blob Storage.
 
 ```
+
 Scheduled
 ```
 
 Caches.
 
 ```
+
 Never
 ```
 
@@ -335,32 +333,23 @@ Not implementation convenience.
 
 Recovery follows storage ownership.
 
-```text
-Configuration
+```mermaid
+flowchart TD
 
-↓
+N1["Configuration"]
+N2["PostgreSQL"]
+N3["Blob Storage"]
+N4["MOS Archives"]
+N5["DuckDB Rebuild"]
+N6["MOS Cache Rebuild"]
+N7["Runtime Startup"]
 
-PostgreSQL
-
-↓
-
-Blob Storage
-
-↓
-
-MOS Archives
-
-↓
-
-DuckDB Rebuild
-
-↓
-
-MOS Cache Rebuild
-
-↓
-
-Runtime Startup
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
+N5 --> N6
+N6 --> N7
 ```
 
 Derived information always follows authoritative information.
@@ -371,32 +360,23 @@ Derived information always follows authoritative information.
 
 Complete platform recovery should follow this sequence.
 
-```text
-Provision Runtime
+```mermaid
+flowchart TD
 
-↓
+N1["Provision Runtime"]
+N2["Restore Configuration"]
+N3["Restore PostgreSQL"]
+N4["Restore Blob Storage"]
+N5["Import MOS Archives"]
+N6["Rebuild Derived Storage"]
+N7["Start Runtime"]
 
-Restore Configuration
-
-↓
-
-Restore PostgreSQL
-
-↓
-
-Restore Blob Storage
-
-↓
-
-Import MOS Archives
-
-↓
-
-Rebuild Derived Storage
-
-↓
-
-Start Runtime
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
+N5 --> N6
+N6 --> N7
 ```
 
 Recovery should be deterministic.
@@ -444,7 +424,7 @@ Especially:
 - authentication data
 - capability configuration
 
-Encryption policy belongs to the Security Architecture (MEG-009).
+Encryption policy belongs to the Security Architecture ([MEG-009](../meg-009-security-architecture/index.md)).
 
 Backup systems should integrate with those requirements.
 
@@ -588,23 +568,3 @@ Within Mosaic:
 - DuckDB and MOS Cache preserve performance, not permanence.
 
 By restoring authoritative information first and rebuilding everything else, the platform achieves both reliable recovery and operational simplicity.
-
----
-
-# Review Status
-
-**Status**
-
-Draft
-
-**Owner**
-
-Lead Software Architect
-
-**Previous File**
-
-`10-migrations.md`
-
-**Next File**
-
-`12-storage-guidelines.md`

@@ -2,7 +2,7 @@
 File: docs/engineering/guides/meg-007-storage-architecture/01-storage-philosophy.md
 Document: MEG-007
 Status: Draft
-Version: 0.2
+Version: 0.4
 -->
 
 # Storage Philosophy
@@ -88,7 +88,7 @@ The Domain simply persists business concepts.
 
 Repositories determine where those concepts ultimately live.
 
-This continues the architectural boundaries established in MEG-004.
+This continues the architectural boundaries established in [MEG-004](../meg-004-hexagonal-architecture/index.md).
 
 ---
 
@@ -98,42 +98,46 @@ Consider several examples.
 
 Business transactions.
 
-```
-Strong Consistency
+```mermaid
+flowchart TD
 
-↓
+N1["Strong Consistency"]
+N2["PostgreSQL"]
 
-PostgreSQL
+N1 --> N2
 ```
 
 Analytics.
 
-```
-Large Scans
+```mermaid
+flowchart TD
 
-↓
+N1["Large Scans"]
+N2["DuckDB"]
 
-DuckDB
+N1 --> N2
 ```
 
 Artwork.
 
-```
-Binary Objects
+```mermaid
+flowchart TD
 
-↓
+N1["Binary Objects"]
+N2["Blob Storage"]
 
-Blob Storage
+N1 --> N2
 ```
 
 Cached metadata.
 
-```
-Derived Information
+```mermaid
+flowchart TD
 
-↓
+N1["Derived Information"]
+N2["MOS Cache"]
 
-MOS Cache
+N1 --> N2
 ```
 
 Attempting to force these workloads into one storage engine usually produces unnecessary compromise.
@@ -164,12 +168,13 @@ Every piece of business information has exactly one authoritative owner.
 
 Example.
 
-```
-Playback Progress
+```mermaid
+flowchart TD
 
-↓
+N1["Playback Progress"]
+N2["PostgreSQL"]
 
-PostgreSQL
+N1 --> N2
 ```
 
 Analytics derived from playback may exist elsewhere.
@@ -197,6 +202,7 @@ Examples include:
 These should generally be treated as:
 
 ```
+
 Derived Data
 ```
 
@@ -298,24 +304,19 @@ They should remain independent from transactional persistence.
 
 Every category of information follows a lifecycle.
 
-```
-Created
+```mermaid
+flowchart TD
 
-↓
+N1["Created"]
+N2["Active"]
+N3["Referenced"]
+N4["Archived"]
+N5["Removed"]
 
-Active
-
-↓
-
-Referenced
-
-↓
-
-Archived
-
-↓
-
-Removed
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
 ```
 
 Different information progresses through these stages differently.
@@ -352,12 +353,13 @@ Storage engines should remain replaceable.
 
 Suppose:
 
-```
-Blob Storage
+```mermaid
+flowchart TD
 
-↓
+N1["Blob Storage"]
+N2["Alternative Blob Store"]
 
-Alternative Blob Store
+N1 --> N2
 ```
 
 The Domain should remain unchanged.
@@ -376,28 +378,31 @@ Every storage technology owns one responsibility.
 
 Examples.
 
-```
-PostgreSQL
+```mermaid
+flowchart TD
 
-↓
+N1["PostgreSQL"]
+N2["Transactional Business Data"]
 
-Transactional Business Data
-```
-
-```
-DuckDB
-
-↓
-
-Analytical Data
+N1 --> N2
 ```
 
+```mermaid
+flowchart TD
+
+N1["DuckDB"]
+N2["Analytical Data"]
+
+N1 --> N2
 ```
-Blob Storage
 
-↓
+```mermaid
+flowchart TD
 
-Binary Assets
+N1["Blob Storage"]
+N2["Binary Assets"]
+
+N1 --> N2
 ```
 
 Ownership should remain explicit.
@@ -510,23 +515,3 @@ the platform can naturally select the most appropriate storage technology for ea
 Within Mosaic, storage exists to preserve information.
 
 It should never dictate the architecture built upon it.
-
----
-
-# Review Status
-
-**Status**
-
-Draft
-
-**Owner**
-
-Lead Software Architect
-
-**Previous File**
-
-`00-document-control.md`
-
-**Next File**
-
-`02-storage-taxonomy.md`

@@ -2,7 +2,7 @@
 File: docs/engineering/guides/meg-007-storage-architecture/06-mos-archives.md
 Document: MEG-007
 Status: Draft
-Version: 0.2
+Version: 0.4
 -->
 
 # MOS Archives
@@ -65,22 +65,25 @@ A MOS archive is a portable package describing media.
 
 Conceptually.
 
-```text
-MOS Archive
+```mermaid
+flowchart TD
 
-├── Media Identity
+N1["MOS Archive"]
+N2["Media Identity"]
+N3["Metadata"]
+N4["Artwork References"]
+N5["Provider References"]
+N6["Playback Metadata"]
+N7["Relationships"]
+N8["Archive Metadata"]
 
-├── Metadata
-
-├── Artwork References
-
-├── Provider References
-
-├── Playback Metadata
-
-├── Relationships
-
-└── Archive Metadata
+N1 --> N2
+N1 --> N3
+N1 --> N4
+N1 --> N5
+N1 --> N6
+N1 --> N7
+N1 --> N8
 ```
 
 The archive is self-describing.
@@ -93,32 +96,30 @@ It should remain readable independently of the Runtime.
 
 Without MOS:
 
-```
-Runtime
+```mermaid
+flowchart TD
 
-↓
+N1["Runtime"]
+N2["Database"]
+N3["Media Lost Outside Runtime"]
 
-Database
-
-↓
-
-Media Lost Outside Runtime
+N1 --> N2
+N2 --> N3
 ```
 
 Media knowledge becomes tightly coupled to one installation.
 
 Instead.
 
-```
-Runtime
+```mermaid
+flowchart TD
 
-↓
+N1["Runtime"]
+N2["MOS Archive"]
+N3["Portable"]
 
-MOS Archive
-
-↓
-
-Portable
+N1 --> N2
+N2 --> N3
 ```
 
 The archive becomes:
@@ -159,6 +160,7 @@ The Runtime executes media.
 MOS should not be mistaken for:
 
 ```
+
 Primary Persistence
 ```
 
@@ -180,28 +182,21 @@ It does not replace it.
 
 Conceptually.
 
-```text
-Archive Header
+```mermaid
+flowchart TD
 
-↓
+N1["Archive Header"]
+N2["Media Entries"]
+N3["Provider References"]
+N4["Relationships"]
+N5["Checksums"]
+N6["Manifest"]
 
-Media Entries
-
-↓
-
-Provider References
-
-↓
-
-Relationships
-
-↓
-
-Checksums
-
-↓
-
-Manifest
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
+N5 --> N6
 ```
 
 Every archive should remain self-describing.
@@ -258,28 +253,31 @@ MOS archives SHOULD preserve external provider mappings.
 
 Examples.
 
-```text
-TMDB
+```mermaid
+flowchart TD
 
-↓
+N1["TMDB"]
+N2["12345"]
 
-12345
+N1 --> N2
 ```
 
-```text
-AniList
+```mermaid
+flowchart TD
 
-↓
+N1["AniList"]
+N2["99887"]
 
-99887
+N1 --> N2
 ```
 
-```text
-IMDb
+```mermaid
+flowchart TD
 
-↓
+N1["IMDb"]
+N2["tt1234567"]
 
-tt1234567
+N1 --> N2
 ```
 
 These mappings allow the Runtime to reconnect archived media with external ecosystems when appropriate.
@@ -417,28 +415,21 @@ Corrupted archives should never partially import.
 
 Import follows a deterministic lifecycle.
 
-```text
-Read Archive
+```mermaid
+flowchart TD
 
-↓
+N1["Read Archive"]
+N2["Validate"]
+N3["Verify Integrity"]
+N4["Migrate"]
+N5["Import"]
+N6["Complete"]
 
-Validate
-
-↓
-
-Verify Integrity
-
-↓
-
-Migrate
-
-↓
-
-Import
-
-↓
-
-Complete
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
+N5 --> N6
 ```
 
 Import should never modify an archive.
@@ -633,23 +624,3 @@ while remaining completely independent of:
 Within Mosaic, a MOS archive should still be meaningful decades later, even if the Runtime that created it no longer exists.
 
 That permanence is its defining architectural responsibility.
-
----
-
-# Review Status
-
-**Status**
-
-Draft
-
-**Owner**
-
-Lead Software Architect
-
-**Previous File**
-
-`05-blob-storage.md`
-
-**Next File**
-
-`07-mos-cache.md`

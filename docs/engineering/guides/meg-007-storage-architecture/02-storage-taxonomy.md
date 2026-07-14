@@ -2,7 +2,7 @@
 File: docs/engineering/guides/meg-007-storage-architecture/02-storage-taxonomy.md
 Document: MEG-007
 Status: Draft
-Version: 0.2
+Version: 0.4
 -->
 
 # Storage Taxonomy
@@ -51,32 +51,25 @@ Only afterwards does it determine:
 
 ---
 
-# Storage Taxonomy
+# Storage Classes
 
 Every piece of information belongs to one of the following categories.
 
-```text
-Business State
+```mermaid
+flowchart TD
 
-↓
+N1["Business State"]
+N2["Operational State"]
+N3["Analytical State"]
+N4["Binary Assets"]
+N5["Derived Assets"]
+N6["Archive Data"]
 
-Operational State
-
-↓
-
-Analytical State
-
-↓
-
-Binary Assets
-
-↓
-
-Derived Assets
-
-↓
-
-Archive Data
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
+N5 --> N6
 ```
 
 Each category possesses distinct architectural characteristics.
@@ -197,12 +190,13 @@ Examples include:
 
 Derived Assets should generally satisfy one principle.
 
-```
-Delete
+```mermaid
+flowchart TD
 
-↓
+N1["Delete"]
+N2["Rebuild"]
 
-Rebuild
+N1 --> N2
 ```
 
 If regeneration is possible, permanent durability becomes less important.
@@ -253,28 +247,31 @@ Every storage category has exactly one owner.
 
 Examples.
 
-```
-Business State
+```mermaid
+flowchart TD
 
-↓
+N1["Business State"]
+N2["Capabilities"]
 
-Capabilities
-```
-
-```
-Operational State
-
-↓
-
-Runtime
+N1 --> N2
 ```
 
+```mermaid
+flowchart TD
+
+N1["Operational State"]
+N2["Runtime"]
+
+N1 --> N2
 ```
-Analytical State
 
-↓
+```mermaid
+flowchart TD
 
-Analytics Capability
+N1["Analytical State"]
+N2["Analytics Capability"]
+
+N1 --> N2
 ```
 
 Ownership determines:
@@ -295,18 +292,21 @@ Different storage classes require different consistency guarantees.
 Business State.
 
 ```
+
 Strong Consistency
 ```
 
 Operational State.
 
 ```
+
 Eventually Disposable
 ```
 
 Derived Assets.
 
 ```
+
 Rebuildable
 ```
 
@@ -322,23 +322,26 @@ Storage categories differ dramatically in lifespan.
 
 Operational.
 
-```
-Milliseconds
+```mermaid
+flowchart TD
 
-↓
+N1["Milliseconds"]
+N2["Minutes"]
 
-Minutes
+N1 --> N2
 ```
 
 Business.
 
 ```
+
 Years
 ```
 
 Archives.
 
 ```
+
 Potentially Forever
 ```
 
@@ -386,18 +389,21 @@ Different categories mutate differently.
 Business State.
 
 ```
+
 Continuous Updates
 ```
 
 Operational State.
 
 ```
+
 Constant Change
 ```
 
 Archive Data.
 
 ```
+
 Almost Never
 ```
 
@@ -412,18 +418,21 @@ Recovery differs by storage class.
 Business State.
 
 ```
+
 Restore Backup
 ```
 
 Derived Assets.
 
 ```
+
 Rebuild
 ```
 
 Operational State.
 
 ```
+
 Restart Runtime
 ```
 
@@ -453,12 +462,14 @@ Not storage implementation.
 Search indexes belong to:
 
 ```
+
 Derived Assets
 ```
 
 Not:
 
 ```
+
 Business State
 ```
 
@@ -473,6 +484,7 @@ The authoritative business information remains elsewhere.
 Caches are always:
 
 ```
+
 Derived Assets
 ```
 
@@ -490,22 +502,24 @@ Storage categories should remain independent of implementation.
 
 Example.
 
-```
-Business State
+```mermaid
+flowchart TD
 
-↓
+N1["Business State"]
+N2["PostgreSQL"]
 
-PostgreSQL
+N1 --> N2
 ```
 
 Later.
 
-```
-Business State
+```mermaid
+flowchart TD
 
-↓
+N1["Business State"]
+N2["Alternative Database"]
 
-Alternative Database
+N1 --> N2
 ```
 
 The taxonomy remains unchanged.
@@ -622,23 +636,3 @@ the platform first asks:
 That simple question prevents storage technologies from becoming architectural decisions.
 
 Instead, architecture remains driven by information itself.
-
----
-
-# Review Status
-
-**Status**
-
-Draft
-
-**Owner**
-
-Lead Software Architect
-
-**Previous File**
-
-`01-storage-philosophy.md`
-
-**Next File**
-
-`03-postgresql.md`

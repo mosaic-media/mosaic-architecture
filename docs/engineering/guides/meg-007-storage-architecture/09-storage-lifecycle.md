@@ -2,7 +2,7 @@
 File: docs/engineering/guides/meg-007-storage-architecture/09-storage-lifecycle.md
 Document: MEG-007
 Status: Draft
-Version: 0.2
+Version: 0.4
 -->
 
 # Storage Lifecycle
@@ -60,32 +60,23 @@ Never dictate it.
 
 Every piece of information progresses through a common lifecycle.
 
-```text
-Discovered
+```mermaid
+flowchart TD
 
-↓
+N1["Discovered"]
+N2["Imported"]
+N3["Enriched"]
+N4["Active"]
+N5["Referenced"]
+N6["Archived"]
+N7["Deleted"]
 
-Imported
-
-↓
-
-Enriched
-
-↓
-
-Active
-
-↓
-
-Referenced
-
-↓
-
-Archived
-
-↓
-
-Deleted
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
+N5 --> N6
+N6 --> N7
 ```
 
 Different storage systems participate at different stages.
@@ -96,16 +87,15 @@ Different storage systems participate at different stages.
 
 Initially.
 
-```text
-External Source
+```mermaid
+flowchart TD
 
-↓
+N1["External Source"]
+N2["Metadata"]
+N3["Capability"]
 
-Metadata
-
-↓
-
-Capability
+N1 --> N2
+N2 --> N3
 ```
 
 At this stage:
@@ -126,16 +116,15 @@ Import creates Business State.
 
 Typical flow.
 
-```text
-Media Source
+```mermaid
+flowchart TD
 
-↓
+N1["Media Source"]
+N2["Repository"]
+N3["PostgreSQL"]
 
-Repository
-
-↓
-
-PostgreSQL
+N1 --> N2
+N2 --> N3
 ```
 
 Business information now becomes durable.
@@ -165,24 +154,19 @@ Examples include:
 
 Typical flow.
 
-```text
-PostgreSQL
+```mermaid
+flowchart TD
 
-↓
+N1["PostgreSQL"]
+N2["Metadata Capability"]
+N3["DuckDB"]
+N4["Blob Storage"]
+N5["MOS Cache"]
 
-Metadata Capability
-
-↓
-
-DuckDB
-
-↓
-
-Blob Storage
-
-↓
-
-MOS Cache
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
 ```
 
 Business State remains authoritative.
@@ -199,36 +183,40 @@ Information exists simultaneously across multiple storage systems.
 
 Example.
 
-```text
-PostgreSQL
+```mermaid
+flowchart TD
 
-↓
+N1["PostgreSQL"]
+N2["Business Truth"]
 
-Business Truth
+N1 --> N2
 ```
 
-```text
-DuckDB
+```mermaid
+flowchart TD
 
-↓
+N1["DuckDB"]
+N2["Analytics"]
 
-Analytics
+N1 --> N2
 ```
 
-```text
-Blob Storage
+```mermaid
+flowchart TD
 
-↓
+N1["Blob Storage"]
+N2["Artwork"]
 
-Artwork
+N1 --> N2
 ```
 
-```text
-MOS Cache
+```mermaid
+flowchart TD
 
-↓
+N1["MOS Cache"]
+N2["Resolved Metadata"]
 
-Resolved Metadata
+N1 --> N2
 ```
 
 Every storage system owns its own responsibility.
@@ -243,24 +231,19 @@ Capabilities consume information through repositories.
 
 Typical flow.
 
-```text
-Capability
+```mermaid
+flowchart TD
 
-↓
+N1["Capability"]
+N2["Repository"]
+N3["PostgreSQL"]
+N4["Blob Storage"]
+N5["MOS Cache"]
 
-Repository
-
-↓
-
-PostgreSQL
-
-↓
-
-Blob Storage
-
-↓
-
-MOS Cache
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
 ```
 
 Storage remains invisible.
@@ -294,24 +277,19 @@ Their lifecycle depends entirely upon the authoritative information from which t
 
 Cache follows its own lifecycle.
 
-```text
-Generate
+```mermaid
+flowchart TD
 
-↓
+N1["Generate"]
+N2["Use"]
+N3["Invalidate"]
+N4["Delete"]
+N5["Regenerate"]
 
-Use
-
-↓
-
-Invalidate
-
-↓
-
-Delete
-
-↓
-
-Regenerate
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
 ```
 
 Notice:
@@ -326,28 +304,21 @@ Business correctness should never depend upon cache persistence.
 
 Binary assets follow a distinct lifecycle.
 
-```text
-Download
+```mermaid
+flowchart TD
 
-↓
+N1["Download"]
+N2["Blob Storage"]
+N3["Reference"]
+N4["Cache"]
+N5["Archive"]
+N6["Delete"]
 
-Blob Storage
-
-↓
-
-Reference
-
-↓
-
-Cache
-
-↓
-
-Archive
-
-↓
-
-Delete
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
+N5 --> N6
 ```
 
 Binary assets remain independent of:
@@ -363,24 +334,19 @@ They simply become referenced resources.
 
 Analytical information progresses differently.
 
-```text
-Business Events
+```mermaid
+flowchart TD
 
-↓
+N1["Business Events"]
+N2["DuckDB"]
+N3["Aggregation"]
+N4["Reports"]
+N5["Recommendation Inputs"]
 
-DuckDB
-
-↓
-
-Aggregation
-
-↓
-
-Reports
-
-↓
-
-Recommendation Inputs
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
 ```
 
 Analytics evolve continuously.
@@ -395,28 +361,21 @@ MOS Archives exist for long-term portability.
 
 Typical lifecycle.
 
-```text
-Business State
+```mermaid
+flowchart TD
 
-↓
+N1["Business State"]
+N2["Export"]
+N3["MOS Archive"]
+N4["Transport"]
+N5["Import"]
+N6["Business State"]
 
-Export
-
-↓
-
-MOS Archive
-
-↓
-
-Transport
-
-↓
-
-Import
-
-↓
-
-Business State
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
+N5 --> N6
 ```
 
 The archive remains independent of:
@@ -488,24 +447,26 @@ Storage migration should preserve lifecycle.
 
 Example.
 
-```text
-PostgreSQL
+```mermaid
+flowchart TD
 
-↓
+N1["PostgreSQL"]
+N2["New Version"]
 
-New Version
+N1 --> N2
 ```
 
 Business State survives.
 
 Likewise.
 
-```text
-Blob Storage
+```mermaid
+flowchart TD
 
-↓
+N1["Blob Storage"]
+N2["New Provider"]
 
-New Provider
+N1 --> N2
 ```
 
 Blob identity remains unchanged.
@@ -542,28 +503,21 @@ The platform should avoid backing up information that is cheaper to rebuild.
 
 Recovery should mirror lifecycle.
 
-```text
-Restore Business State
+```mermaid
+flowchart TD
 
-↓
+N1["Restore Business State"]
+N2["Restore Archives"]
+N3["Restore Blob References"]
+N4["Rebuild DuckDB"]
+N5["Rebuild MOS Cache"]
+N6["Resume Runtime"]
 
-Restore Archives
-
-↓
-
-Restore Blob References
-
-↓
-
-Rebuild DuckDB
-
-↓
-
-Rebuild MOS Cache
-
-↓
-
-Resume Runtime
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
+N5 --> N6
 ```
 
 Recovery should never require restoring analytical or cached datasets.
@@ -578,26 +532,26 @@ Transitions between storage systems should always be explicit.
 
 Example.
 
-```text
-Business Event
+```mermaid
+flowchart TD
 
-↓
+N1["Business Event"]
+N2["Analytics Pipeline"]
+N3["DuckDB"]
 
-Analytics Pipeline
-
-↓
-
-DuckDB
+N1 --> N2
+N2 --> N3
 ```
 
 Rather than.
 
-```text
-Database Trigger
+```mermaid
+flowchart TD
 
-↓
+N1["Database Trigger"]
+N2["Hidden Write"]
 
-Hidden Write
+N1 --> N2
 ```
 
 Storage transitions should remain:
@@ -648,29 +602,24 @@ Storage transitions SHOULD be event driven.
 
 Example.
 
-```text
-MediaImported
+```mermaid
+flowchart TD
 
-↓
+N1["MediaImported"]
+N2["Metadata Capability"]
+N3["Blob Storage"]
+N4["MOS Cache"]
+N5["DuckDB"]
 
-Metadata Capability
-
-↓
-
-Blob Storage
-
-↓
-
-MOS Cache
-
-↓
-
-DuckDB
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
 ```
 
 Each capability reacts independently.
 
-The Storage Architecture naturally complements the Runtime Architecture established in MEG-002 and MEG-005.
+The Storage Architecture naturally complements the Runtime Architecture established in [MEG-002](../meg-002-event-driven-runtime/index.md) and [MEG-005](../meg-005-runtime-architecture/index.md).
 
 ---
 
@@ -779,23 +728,3 @@ Within Mosaic, every storage transition should reflect a genuine change in the i
 > **Authoritative information leads. Derived information follows.**
 
 That simple rule keeps the entire Storage Architecture predictable, recoverable and easy to evolve.
-
----
-
-# Review Status
-
-**Status**
-
-Draft
-
-**Owner**
-
-Lead Software Architect
-
-**Previous File**
-
-`08-repositories.md`
-
-**Next File**
-
-`10-migrations.md`

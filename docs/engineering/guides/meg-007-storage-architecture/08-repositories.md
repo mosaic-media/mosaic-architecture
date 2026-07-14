@@ -2,7 +2,7 @@
 File: docs/engineering/guides/meg-007-storage-architecture/08-repositories.md
 Document: MEG-007
 Status: Draft
-Version: 0.2
+Version: 0.4
 -->
 
 # Repositories
@@ -82,16 +82,15 @@ Business behaviour remains inside the Domain.
 
 Conceptually.
 
-```text
-Domain
+```mermaid
+flowchart TD
 
-↓
+N1["Domain"]
+N2["Repository"]
+N3["Storage"]
 
-Repository
-
-↓
-
-Storage
+N1 --> N2
+N2 --> N3
 ```
 
 Every persistence operation crosses this boundary.
@@ -121,12 +120,13 @@ PlaybackRepository
 The Domain owns:
 
 ```
+
 PlaybackRepository
 ```
 
 Infrastructure implements it.
 
-This follows the Repository pattern established earlier in MEG-003 and the dependency rules established in MEG-004.
+This follows the Repository pattern established earlier in [MEG-003](../meg-003-domain-driven-design/index.md) and the dependency rules established in [MEG-004](../meg-004-hexagonal-architecture/index.md).
 
 ---
 
@@ -136,20 +136,22 @@ Every Aggregate Root SHOULD own one Repository.
 
 Examples.
 
+```mermaid
+flowchart TD
+
+N1["Library"]
+N2["LibraryRepository"]
+
+N1 --> N2
 ```
-Library
 
-↓
+```mermaid
+flowchart TD
 
-LibraryRepository
-```
+N1["Playback"]
+N2["PlaybackRepository"]
 
-```
-Playback
-
-↓
-
-PlaybackRepository
+N1 --> N2
 ```
 
 Repositories follow business ownership.
@@ -164,14 +166,17 @@ One Repository MAY coordinate multiple storage engines.
 
 Example.
 
-```text
-PlaybackRepository
+```mermaid
+flowchart TD
 
-├── PostgreSQL
+N1["PlaybackRepository"]
+N2["PostgreSQL"]
+N3["Blob Storage"]
+N4["MOS Cache"]
 
-├── Blob Storage
-
-└── MOS Cache
+N1 --> N2
+N1 --> N3
+N1 --> N4
 ```
 
 The Domain remains unaware.
@@ -188,12 +193,13 @@ Repositories persist Business State.
 
 Example.
 
-```text
-PlaybackRepository
+```mermaid
+flowchart TD
 
-↓
+N1["PlaybackRepository"]
+N2["PostgreSQL"]
 
-PostgreSQL
+N1 --> N2
 ```
 
 Business entities should never be stored directly by:
@@ -231,17 +237,19 @@ Repositories should persist blob references.
 
 Example.
 
-```text
-Movie
+```mermaid
+flowchart TD
 
-↓
+N1["Movie"]
+N2["PosterBlobID"]
 
-PosterBlobID
+N1 --> N2
 ```
 
 They should not persist:
 
 ```
+
 Poster Bytes
 ```
 
@@ -257,24 +265,24 @@ Repositories MAY import and export MOS archives.
 
 Example.
 
-```text
-LibraryRepository
+```mermaid
+flowchart TD
 
-↓
+N1["LibraryRepository"]
+N2["Export MOS"]
 
-Export MOS
+N1 --> N2
 ```
 
-```text
-MOS Archive
+```mermaid
+flowchart TD
 
-↓
+N1["MOS Archive"]
+N2["Import"]
+N3["LibraryRepository"]
 
-Import
-
-↓
-
-LibraryRepository
+N1 --> N2
+N2 --> N3
 ```
 
 MOS remains a transport format.
@@ -289,24 +297,19 @@ Repositories MAY consult MOS Cache.
 
 Typical flow.
 
-```text
-Repository
+```mermaid
+flowchart TD
 
-↓
+N1["Repository"]
+N2["MOS Cache"]
+N3["Miss"]
+N4["Primary Storage"]
+N5["Update Cache"]
 
-MOS Cache
-
-↓
-
-Miss
-
-↓
-
-Primary Storage
-
-↓
-
-Update Cache
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
 ```
 
 Cache usage should remain transparent.
@@ -355,20 +358,17 @@ Repositories participate in transactions.
 
 Typical flow.
 
-```text
-Load Aggregate
+```mermaid
+flowchart TD
 
-↓
+N1["Load Aggregate"]
+N2["Business Behaviour"]
+N3["Save Aggregate"]
+N4["Commit"]
 
-Business Behaviour
-
-↓
-
-Save Aggregate
-
-↓
-
-Commit
+N1 --> N2
+N2 --> N3
+N3 --> N4
 ```
 
 Repositories persist completed business state.
@@ -383,20 +383,17 @@ Repositories SHOULD NOT publish Runtime Events.
 
 Typical flow.
 
-```text
-Aggregate
+```mermaid
+flowchart TD
 
-↓
+N1["Aggregate"]
+N2["Repository"]
+N3["Commit"]
+N4["Runtime Publishes"]
 
-Repository
-
-↓
-
-Commit
-
-↓
-
-Runtime Publishes
+N1 --> N2
+N2 --> N3
+N3 --> N4
 ```
 
 Persistence and Runtime coordination remain separate architectural concerns.
@@ -409,14 +406,17 @@ Repositories MAY compose specialised storage providers.
 
 Example.
 
-```text
-MetadataRepository
+```mermaid
+flowchart TD
 
-├── PostgreSQL
+N1["MetadataRepository"]
+N2["PostgreSQL"]
+N3["DuckDB"]
+N4["Blob Storage"]
 
-├── DuckDB
-
-├── Blob Storage
+N1 --> N2
+N1 --> N3
+N1 --> N4
 ```
 
 Each storage provider owns one responsibility.
@@ -445,12 +445,13 @@ Storage implementations may evolve.
 
 Example.
 
-```text
-Blob Storage
+```mermaid
+flowchart TD
 
-↓
+N1["Blob Storage"]
+N2["Alternative Blob Provider"]
 
-Alternative Blob Provider
+N1 --> N2
 ```
 
 The Repository changes.
@@ -467,12 +468,13 @@ Repositories SHOULD be replaceable.
 
 Example.
 
-```text
-LibraryRepository
+```mermaid
+flowchart TD
 
-↓
+N1["LibraryRepository"]
+N2["In-Memory Repository"]
 
-In-Memory Repository
+N1 --> N2
 ```
 
 Domain tests should require no:
@@ -593,23 +595,3 @@ while quietly coordinating:
 - MOS Cache
 
 This separation allows storage technologies to evolve continuously while the business model remains completely unchanged.
-
----
-
-# Review Status
-
-**Status**
-
-Draft
-
-**Owner**
-
-Lead Software Architect
-
-**Previous File**
-
-`07-mos-cache.md`
-
-**Next File**
-
-`09-storage-lifecycle.md`

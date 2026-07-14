@@ -2,7 +2,7 @@
 File: docs/engineering/guides/meg-007-storage-architecture/14-contributor-guidance.md
 Document: MEG-007
 Status: Draft
-Version: 0.2
+Version: 0.4
 -->
 
 # Contributor Guidance
@@ -124,6 +124,7 @@ Ask one question.
 If the answer is:
 
 ```
+
 No
 ```
 
@@ -376,32 +377,23 @@ Poor architecture eventually destroys it.
 
 New contributors SHOULD study MEG-007 in the following order.
 
-```text
-Storage Philosophy
+```mermaid
+flowchart TD
 
-↓
+N1["Storage Philosophy"]
+N2["Storage Taxonomy"]
+N3["Storage Engines"]
+N4["Repositories"]
+N5["Storage Lifecycle"]
+N6["Migrations"]
+N7["Backup &amp; Restore"]
 
-Storage Taxonomy
-
-↓
-
-Storage Engines
-
-↓
-
-Repositories
-
-↓
-
-Storage Lifecycle
-
-↓
-
-Migrations
-
-↓
-
-Backup & Restore
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
+N5 --> N6
+N6 --> N7
 ```
 
 Understanding the taxonomy first makes almost every later storage decision considerably easier.
@@ -475,23 +467,3 @@ Because ultimately:
 The platform exists to protect the user's information.
 
 The Storage Architecture exists to ensure that protection continues for decades.
-
----
-
-# Review Status
-
-**Status**
-
-Draft
-
-**Owner**
-
-Lead Software Architect
-
-**Previous File**
-
-`13-adrs.md`
-
-**Next File**
-
-`glossary.md`

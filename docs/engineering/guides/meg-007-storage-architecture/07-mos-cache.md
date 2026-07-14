@@ -2,7 +2,7 @@
 File: docs/engineering/guides/meg-007-storage-architecture/07-mos-cache.md
 Document: MEG-007
 Status: Draft
-Version: 0.2
+Version: 0.4
 -->
 
 # MOS Cache
@@ -61,20 +61,23 @@ The MOS Cache is a high-performance cache format storing derived media informati
 
 Conceptually.
 
-```text
-MOS Cache
+```mermaid
+flowchart TD
 
-├── Resolved Metadata
+N1["MOS Cache"]
+N2["Resolved Metadata"]
+N3["Provider Mappings"]
+N4["Artwork Metadata"]
+N5["Search Indexes"]
+N6["Playback Metadata"]
+N7["Derived Runtime Data"]
 
-├── Provider Mappings
-
-├── Artwork Metadata
-
-├── Search Indexes
-
-├── Playback Metadata
-
-└── Derived Runtime Data
+N1 --> N2
+N1 --> N3
+N1 --> N4
+N1 --> N5
+N1 --> N6
+N1 --> N7
 ```
 
 Every entry represents information that can be regenerated.
@@ -85,44 +88,36 @@ Every entry represents information that can be regenerated.
 
 Without caching.
 
-```text
-Media
+```mermaid
+flowchart TD
 
-↓
+N1["Media"]
+N2["TMDB"]
+N3["AniList"]
+N4["TVDB"]
+N5["Normalise"]
+N6["Runtime"]
 
-TMDB
-
-↓
-
-AniList
-
-↓
-
-TVDB
-
-↓
-
-Normalise
-
-↓
-
-Runtime
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
+N5 --> N6
 ```
 
 Every request repeats identical work.
 
 Instead.
 
-```text
-Media
+```mermaid
+flowchart TD
 
-↓
+N1["Media"]
+N2["MOS Cache"]
+N3["Runtime"]
 
-MOS Cache
-
-↓
-
-Runtime
+N1 --> N2
+N2 --> N3
 ```
 
 Expensive work occurs once.
@@ -158,12 +153,13 @@ Those remain authoritative elsewhere.
 
 Every MOS Cache entry MUST satisfy one requirement.
 
-```
-Delete
+```mermaid
+flowchart TD
 
-↓
+N1["Delete"]
+N2["Rebuild"]
 
-Rebuild
+N1 --> N2
 ```
 
 If deletion would permanently lose information:
@@ -178,30 +174,28 @@ The cache exists only for derived information.
 
 MOS Archive.
 
-```text
-Portable
+```mermaid
+flowchart TD
 
-↓
+N1["Portable"]
+N2["Durable"]
+N3["Authoritative"]
 
-Durable
-
-↓
-
-Authoritative
+N1 --> N2
+N2 --> N3
 ```
 
 MOS Cache.
 
-```text
-Local
+```mermaid
+flowchart TD
 
-↓
+N1["Local"]
+N2["Ephemeral"]
+N3["Derived"]
 
-Ephemeral
-
-↓
-
-Derived
+N1 --> N2
+N2 --> N3
 ```
 
 The two formats intentionally solve different problems.
@@ -216,24 +210,19 @@ They should never replace one another.
 
 Typical lifecycle.
 
-```text
-Business Information
+```mermaid
+flowchart TD
 
-↓
+N1["Business Information"]
+N2["Metadata Resolution"]
+N3["Normalisation"]
+N4["MOS Cache"]
+N5["Runtime Consumption"]
 
-Metadata Resolution
-
-↓
-
-Normalisation
-
-↓
-
-MOS Cache
-
-↓
-
-Runtime Consumption
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
 ```
 
 Cache generation should remain deterministic.
@@ -278,22 +267,24 @@ Cache entries SHOULD remain small.
 
 Preferred.
 
-```text
-One Media Object
+```mermaid
+flowchart TD
 
-↓
+N1["One Media Object"]
+N2["One Cache Entry"]
 
-One Cache Entry
+N1 --> N2
 ```
 
 Avoid.
 
-```text
-Entire Library
+```mermaid
+flowchart TD
 
-↓
+N1["Entire Library"]
+N2["One Cache Entry"]
 
-One Cache Entry
+N1 --> N2
 ```
 
 Fine-grained caches reduce:
@@ -310,24 +301,19 @@ One of the MOS Cache's primary responsibilities is provider resolution.
 
 Example.
 
-```text
-AniList
+```mermaid
+flowchart TD
 
-↓
+N1["AniList"]
+N2["TMDB"]
+N3["TVDB"]
+N4["IMDb"]
+N5["Resolved Mapping"]
 
-TMDB
-
-↓
-
-TVDB
-
-↓
-
-IMDb
-
-↓
-
-Resolved Mapping
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
 ```
 
 This avoids repeated metadata translation throughout the Runtime.
@@ -383,16 +369,15 @@ Search indexes naturally belong inside the MOS Cache.
 
 Example.
 
-```text
-Metadata
+```mermaid
+flowchart TD
 
-↓
+N1["Metadata"]
+N2["Search Index"]
+N3["MOS Cache"]
 
-Search Index
-
-↓
-
-MOS Cache
+N1 --> N2
+N2 --> N3
 ```
 
 Indexes remain:
@@ -477,20 +462,17 @@ Rebuilding should always be possible.
 
 Conceptually.
 
-```text
-Delete Cache
+```mermaid
+flowchart TD
 
-↓
+N1["Delete Cache"]
+N2["Resolve Metadata"]
+N3["Generate Cache"]
+N4["Continue"]
 
-Resolve Metadata
-
-↓
-
-Generate Cache
-
-↓
-
-Continue
+N1 --> N2
+N2 --> N3
+N3 --> N4
 ```
 
 The Runtime should never require backup restoration to recover cache contents.
@@ -640,23 +622,3 @@ It promises only one thing:
 > **Everything stored here can always be rebuilt.**
 
 That single guarantee allows the Runtime to optimise aggressively without ever compromising the integrity of the platform's authoritative information.
-
----
-
-# Review Status
-
-**Status**
-
-Draft
-
-**Owner**
-
-Lead Software Architect
-
-**Previous File**
-
-`06-mos-archives.md`
-
-**Next File**
-
-`08-repositories.md`

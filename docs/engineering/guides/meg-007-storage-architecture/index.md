@@ -2,7 +2,7 @@
 File: docs/engineering/guides/meg-007-storage-architecture/index.md
 Document: MEG-007
 Status: Draft
-Version: 0.2
+Version: 0.4
 -->
 
 # MEG-007 — Storage Architecture
@@ -52,60 +52,37 @@ The Storage Architecture defines where those responsibilities belong.
 
 # Relationship to MEG
 
-```
-MEG-001
+```mermaid
+flowchart TD
 
-↓
+N1["MEG-001"]
+N2["Engineering Standards"]
+N3["MEG-002"]
+N4["Reactive Runtime"]
+N5["MEG-003"]
+N6["Domain Model"]
+N7["MEG-004"]
+N8["Hexagonal Architecture"]
+N9["MEG-005"]
+N10["Capability Runtime"]
+N11["MEG-006"]
+N12["Module Platform"]
+N13["MEG-007"]
+N14["Storage Architecture"]
 
-Engineering Standards
-
-↓
-
-MEG-002
-
-↓
-
-Reactive Runtime
-
-↓
-
-MEG-003
-
-↓
-
-Domain Model
-
-↓
-
-MEG-004
-
-↓
-
-Hexagonal Architecture
-
-↓
-
-MEG-005
-
-↓
-
-Capability Runtime
-
-↓
-
-MEG-006
-
-↓
-
-Module Platform
-
-↓
-
-MEG-007
-
-↓
-
-Storage Architecture
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
+N5 --> N6
+N6 --> N7
+N7 --> N8
+N8 --> N9
+N9 --> N10
+N10 --> N11
+N11 --> N12
+N12 --> N13
+N13 --> N14
 ```
 
 Previous specifications define:
@@ -183,46 +160,36 @@ rather than familiarity or convenience.
 
 The Mosaic platform intentionally separates storage into distinct layers.
 
-```
-Business Data
+```mermaid
+flowchart TD
 
-↓
+N1["Business Data"]
+N2["Operational Data"]
+N3["Analytical Data"]
+N4["Media Assets"]
+N5["Derived Assets"]
 
-Operational Data
-
-↓
-
-Analytical Data
-
-↓
-
-Media Assets
-
-↓
-
-Derived Assets
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
 ```
 
 Implemented as:
 
-```
-PostgreSQL
+```mermaid
+flowchart TD
 
-↓
+N1["PostgreSQL"]
+N2["DuckDB"]
+N3["Blob Storage"]
+N4["MOS Archives"]
+N5["MOS Cache"]
 
-DuckDB
-
-↓
-
-Blob Storage
-
-↓
-
-MOS Archives
-
-↓
-
-MOS Cache
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
 ```
 
 Each storage system owns one responsibility.
@@ -285,9 +252,9 @@ engineering/
 
         14-contributor-guidance.md
 
-        glossary.md
-
         references.md
+
+        glossary.md
 ```
 
 ---
@@ -296,12 +263,12 @@ engineering/
 
 Required reading:
 
-- MEG-001 Go Engineering Standards
-- MEG-002 Reactive Runtime
-- MEG-003 Domain-Driven Design
-- MEG-004 Hexagonal Architecture
-- MEG-005 Capability Runtime Architecture
-- MEG-006 Module Platform
+- [MEG-001 — Go Engineering Standards](../meg-001-go-engineering-standards/index.md)
+- [MEG-002 — Event-Driven Runtime](../meg-002-event-driven-runtime/index.md)
+- [MEG-003 — Domain-Driven Design](../meg-003-domain-driven-design/index.md)
+- [MEG-004 — Hexagonal Architecture](../meg-004-hexagonal-architecture/index.md)
+- [MEG-005 — Runtime Architecture](../meg-005-runtime-architecture/index.md)
+- [MEG-006 — Module Platform](../meg-006-module-platform/index.md)
 
 ---
 
@@ -319,19 +286,3 @@ The Storage Architecture is intended to produce a platform that is:
 - Operationally predictable
 
 Every storage engine should own one clear responsibility and evolve independently of the others.
-
----
-
-# Review Status
-
-**Status**
-
-Draft
-
-**Owner**
-
-Lead Software Architect
-
-**Next File**
-
-`00-document-control.md`

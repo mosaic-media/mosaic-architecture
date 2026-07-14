@@ -2,7 +2,7 @@
 File: docs/engineering/guides/meg-007-storage-architecture/05-blob-storage.md
 Document: MEG-007
 Status: Draft
-Version: 0.2
+Version: 0.4
 -->
 
 # Blob Storage
@@ -110,20 +110,22 @@ Every binary asset has exactly one owning capability.
 
 Example.
 
+```mermaid
+flowchart TD
+
+N1["Metadata"]
+N2["Artwork"]
+
+N1 --> N2
 ```
-Metadata
 
-↓
+```mermaid
+flowchart TD
 
-Artwork
-```
+N1["Playback"]
+N2["Generated Preview"]
 
-```
-Playback
-
-↓
-
-Generated Preview
+N1 --> N2
 ```
 
 Ownership determines:
@@ -146,6 +148,7 @@ Every blob SHOULD possess a stable identifier.
 Example.
 
 ```
+
 blob://artwork/6c3d9f...
 ```
 
@@ -167,22 +170,24 @@ Business State should reference blobs.
 
 Example.
 
-```text
-Movie
+```mermaid
+flowchart TD
 
-↓
+N1["Movie"]
+N2["Poster Blob ID"]
 
-Poster Blob ID
+N1 --> N2
 ```
 
 Rather than:
 
-```
-Movie
+```mermaid
+flowchart TD
 
-↓
+N1["Movie"]
+N2["Poster Bytes"]
 
-Poster Bytes
+N1 --> N2
 ```
 
 Relational storage references assets.
@@ -201,17 +206,19 @@ Suppose artwork changes.
 
 Preferred.
 
-```
-New Blob
+```mermaid
+flowchart TD
 
-↓
+N1["New Blob"]
+N2["New Reference"]
 
-New Reference
+N1 --> N2
 ```
 
 Rather than:
 
 ```
+
 Overwrite Existing Blob
 ```
 
@@ -243,6 +250,7 @@ previews/
 or
 
 ```
+
 Content Addressable Storage
 ```
 
@@ -258,12 +266,13 @@ Where practical, blobs SHOULD be content-addressed.
 
 Example.
 
-```
-SHA-256
+```mermaid
+flowchart TD
 
-↓
+N1["SHA-256"]
+N2["Blob ID"]
 
-Blob ID
+N1 --> N2
 ```
 
 Benefits include:
@@ -282,16 +291,15 @@ Duplicate assets SHOULD exist only once.
 
 Example.
 
-```
-Same Poster
+```mermaid
+flowchart TD
 
-↓
+N1["Same Poster"]
+N2["One Blob"]
+N3["Many References"]
 
-One Blob
-
-↓
-
-Many References
+N1 --> N2
+N2 --> N3
 ```
 
 Capabilities reference the same blob.
@@ -324,16 +332,15 @@ Blob Storage naturally supports caching.
 
 Example.
 
-```
-Blob
+```mermaid
+flowchart TD
 
-↓
+N1["Blob"]
+N2["Edge Cache"]
+N3["Client"]
 
-Edge Cache
-
-↓
-
-Client
+N1 --> N2
+N2 --> N3
 ```
 
 Caching should improve:
@@ -352,28 +359,21 @@ The authoritative blob remains unchanged.
 
 Binary assets generally follow this lifecycle.
 
-```text
-Created
+```mermaid
+flowchart TD
 
-↓
+N1["Created"]
+N2["Stored"]
+N3["Referenced"]
+N4["Cached"]
+N5["Archived"]
+N6["Deleted"]
 
-Stored
-
-↓
-
-Referenced
-
-↓
-
-Cached
-
-↓
-
-Archived
-
-↓
-
-Deleted
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
+N5 --> N6
 ```
 
 Blob Storage owns:
@@ -418,12 +418,14 @@ Some assets may remain remote.
 Example.
 
 ```
+
 TMDB Artwork URL
 ```
 
 ↓
 
 ```
+
 Blob Reference
 ```
 
@@ -451,20 +453,17 @@ Unreferenced blobs SHOULD eventually be removed.
 
 Example.
 
-```
-Reference Removed
+```mermaid
+flowchart TD
 
-↓
+N1["Reference Removed"]
+N2["Blob Unused"]
+N3["Retention Period"]
+N4["Delete Blob"]
 
-Blob Unused
-
-↓
-
-Retention Period
-
-↓
-
-Delete Blob
+N1 --> N2
+N2 --> N3
+N3 --> N4
 ```
 
 Garbage collection should remain:
@@ -636,23 +635,3 @@ By separating binary assets from structured information, Mosaic gains:
 Databases describe the platform.
 
 Blob Storage preserves what the platform sees.
-
----
-
-# Review Status
-
-**Status**
-
-Draft
-
-**Owner**
-
-Lead Software Architect
-
-**Previous File**
-
-`04-duckdb.md`
-
-**Next File**
-
-`06-mos-archives.md`

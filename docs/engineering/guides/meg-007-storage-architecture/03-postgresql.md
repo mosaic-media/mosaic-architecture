@@ -2,7 +2,7 @@
 File: docs/engineering/guides/meg-007-storage-architecture/03-postgresql.md
 Document: MEG-007
 Status: Draft
-Version: 0.2
+Version: 0.4
 -->
 
 # PostgreSQL
@@ -102,22 +102,27 @@ PostgreSQL is the authoritative source of truth for Business State.
 Examples include:
 
 ```
+
 User
 ```
 
 ```
+
 Library
 ```
 
 ```
+
 Collection
 ```
 
 ```
+
 Playback Progress
 ```
 
 ```
+
 Capability Configuration
 ```
 
@@ -133,20 +138,22 @@ Every Capability owns its own business data.
 
 Example.
 
+```mermaid
+flowchart TD
+
+N1["Playback"]
+N2["Playback Tables"]
+
+N1 --> N2
 ```
-Playback
 
-↓
+```mermaid
+flowchart TD
 
-Playback Tables
-```
+N1["Metadata"]
+N2["Metadata Tables"]
 
-```
-Metadata
-
-↓
-
-Metadata Tables
+N1 --> N2
 ```
 
 Capabilities should never directly mutate another capability's business tables.
@@ -158,7 +165,7 @@ Cross-capability communication occurs through:
 
 Never shared persistence.
 
-This reinforces the ownership model established in MEG-003.
+This reinforces the ownership model established in [MEG-003](../meg-003-domain-driven-design/index.md).
 
 ---
 
@@ -168,16 +175,15 @@ The Domain never interacts directly with PostgreSQL.
 
 Conceptually.
 
-```
-Aggregate
+```mermaid
+flowchart TD
 
-↓
+N1["Aggregate"]
+N2["Repository"]
+N3["PostgreSQL"]
 
-Repository
-
-↓
-
-PostgreSQL
+N1 --> N2
+N2 --> N3
 ```
 
 Repositories translate:
@@ -198,16 +204,15 @@ PostgreSQL provides strong transactional guarantees.
 
 Examples include:
 
-```
-Playback Progress Updated
+```mermaid
+flowchart TD
 
-↓
+N1["Playback Progress Updated"]
+N2["Commit"]
+N3["Domain Event Published"]
 
-Commit
-
-↓
-
-Domain Event Published
+N1 --> N2
+N2 --> N3
 ```
 
 Business correctness depends upon these guarantees.
@@ -223,6 +228,7 @@ Every table has exactly one owning capability.
 Example.
 
 ```
+
 playback_sessions
 ```
 
@@ -231,6 +237,7 @@ playback_sessions
 Playback Capability.
 
 ```
+
 libraries
 ```
 
@@ -239,6 +246,7 @@ libraries
 Library Capability.
 
 ```
+
 collections
 ```
 
@@ -280,30 +288,28 @@ Foreign keys SHOULD remain inside capability boundaries.
 
 Poor.
 
-```text
-playback
+```mermaid
+flowchart TD
 
-↓
+N1["playback"]
+N2["metadata"]
+N3["foreign key"]
 
-metadata
-
-↓
-
-foreign key
+N1 --> N2
+N2 --> N3
 ```
 
 Preferred.
 
-```
-PlaybackCompleted
+```mermaid
+flowchart TD
 
-↓
+N1["PlaybackCompleted"]
+N2["Runtime Event"]
+N3["Metadata Reacts"]
 
-Runtime Event
-
-↓
-
-Metadata Reacts
+N1 --> N2
+N2 --> N3
 ```
 
 Business relationships should generally be maintained through capability interaction rather than cross-capability relational coupling.
@@ -353,24 +359,19 @@ Successful transactions frequently produce Domain Events.
 
 Typical flow.
 
-```
-Aggregate Updated
+```mermaid
+flowchart TD
 
-↓
+N1["Aggregate Updated"]
+N2["Repository Save"]
+N3["Commit"]
+N4["Outbox/Event Publication"]
+N5["Runtime Event"]
 
-Repository Save
-
-↓
-
-Commit
-
-↓
-
-Outbox/Event Publication
-
-↓
-
-Runtime Event
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
 ```
 
 PostgreSQL persists the business state.
@@ -407,12 +408,14 @@ PostgreSQL persists them.
 Example.
 
 ```
+
 LibraryID
 ```
 
 ↓
 
 ```
+
 libraries.id
 ```
 
@@ -582,23 +585,3 @@ Everything else:
 belongs elsewhere.
 
 By resisting the temptation to store everything in one database, Mosaic preserves both architectural clarity and long-term scalability.
-
----
-
-# Review Status
-
-**Status**
-
-Draft
-
-**Owner**
-
-Lead Software Architect
-
-**Previous File**
-
-`02-storage-taxonomy.md`
-
-**Next File**
-
-`04-duckdb.md`

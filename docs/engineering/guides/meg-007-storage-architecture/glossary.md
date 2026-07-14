@@ -2,7 +2,7 @@
 File: docs/engineering/guides/meg-007-storage-architecture/glossary.md
 Document: MEG-007
 Status: Draft
-Version: 0.2
+Version: 0.4
 -->
 
 # Glossary
@@ -123,12 +123,13 @@ A storage mechanism preserving derived information solely for performance.
 
 Caches should always satisfy one principle.
 
-```
-Delete
+```mermaid
+flowchart TD
 
-↓
+N1["Delete"]
+N2["Rebuild"]
 
-Rebuild
+N1 --> N2
 ```
 
 Caches are never authoritative.
@@ -400,23 +401,3 @@ Definitions should remain consistent across:
 - Architecture Specifications
 
 Whenever storage terminology evolves, this glossary SHOULD be updated before introducing new terminology elsewhere.
-
----
-
-# Review Status
-
-**Status**
-
-Draft
-
-**Owner**
-
-Lead Software Architect
-
-**Previous File**
-
-`14-contributor-guidance.md`
-
-**Next File**
-
-`references.md`

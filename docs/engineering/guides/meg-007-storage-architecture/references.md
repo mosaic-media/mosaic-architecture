@@ -2,7 +2,7 @@
 File: docs/engineering/guides/meg-007-storage-architecture/references.md
 Document: MEG-007
 Status: Draft
-Version: 0.2
+Version: 0.4
 -->
 
 # References
@@ -102,40 +102,44 @@ Research consistently identifies domain alignment and workload optimisation as t
 
 A major influence upon this specification is the distinction between:
 
-```
-OLTP
+```mermaid
+flowchart TD
 
-↓
+N1["OLTP"]
+N2["Transactional Databases"]
 
-Transactional Databases
+N1 --> N2
 ```
 
 and
 
-```
-OLAP
+```mermaid
+flowchart TD
 
-↓
+N1["OLAP"]
+N2["Analytical Databases"]
 
-Analytical Databases
+N1 --> N2
 ```
 
 Within Mosaic this becomes:
 
+```mermaid
+flowchart TD
+
+N1["PostgreSQL"]
+N2["Business State"]
+
+N1 --> N2
 ```
-PostgreSQL
 
-↓
+```mermaid
+flowchart TD
 
-Business State
-```
+N1["DuckDB"]
+N2["Analytical State"]
 
-```
-DuckDB
-
-↓
-
-Analytical State
+N1 --> N2
 ```
 
 Keeping these workloads independent allows each engine to optimise for its own responsibilities. DuckDB itself recommends persistent embedded storage for read-write workloads while focusing on analytical processing rather than replacing an OLTP database.  [DuckDB](https://duckdb.org/faq)
@@ -305,45 +309,45 @@ The following specifications complement MEG-007.
 
 ## Engineering
 
-- MEG-001 Go Engineering Standards
-- MEG-002 Reactive Runtime
-- MEG-003 Domain-Driven Design
-- MEG-004 Hexagonal Architecture
-- MEG-005 Capability Runtime
-- MEG-006 Module Platform
+- [MEG-001 — Go Engineering Standards](../meg-001-go-engineering-standards/index.md)
+- [MEG-002 — Event-Driven Runtime](../meg-002-event-driven-runtime/index.md)
+- [MEG-003 — Domain-Driven Design](../meg-003-domain-driven-design/index.md)
+- [MEG-004 — Hexagonal Architecture](../meg-004-hexagonal-architecture/index.md)
+- [MEG-005 — Runtime Architecture](../meg-005-runtime-architecture/index.md)
+- [MEG-006 — Module Platform](../meg-006-module-platform/index.md)
 
 ---
 
 ## Planned Engineering Specifications
 
-- MEG-008 Observability
-- MEG-009 Security
-- MEG-010 Performance Engineering
-- MEG-011 Deployment Architecture
-- MEG-012 API Architecture
+- [MEG-008 — Observability](../meg-008-observability/index.md)
+- [MEG-009 — Security Architecture](../meg-009-security-architecture/index.md)
+- [MEG-010 — Performance Engineering](../meg-010-performance-engineering/index.md)
+- MEG-011 Deployment Architecture *(planned; not yet published)*
+- MEG-012 API Architecture *(planned; not yet published)*
 
 ---
 
 ## Mosaic Design Language
 
-- MDL-001 Vision
-- MDL-002 Principles
-- MDL-003 Mental Model
-- MDL-004 Interaction Model
-- MDL-005 Composition Model
+- [MDL-001 — Mosaic Design Language Vision](../../../design/language/mdl-001-vision/index.md)
+- [MDL-002 — Principles](../../../design/language/mdl-002-principles/index.md)
+- [MDL-003 — Mental Model](../../../design/language/mdl-003-mental-model/index.md)
+- [MDL-004 — Interaction Model](../../../design/language/mdl-004-interaction-model/index.md)
+- [MDL-005 — Composition Model](../../../design/language/mdl-005-composition-model/index.md)
 
 ---
 
 ## Mosaic Design Specifications
 
-- MDS-001 Design Token Architecture
-- MDS-002 Colour System
-- MDS-003 Material System
-- MDS-004 Typography System
-- MDS-005 Motion System
-- MDS-006 Composition Engine
-- MDS-007 Tile Framework
-- MDS-008 Component Library
+- [MDS-001 — Design Token Architecture](../../../design/system/mds-001-design-token-architecture/index.md)
+- [MDS-002 — Colour System](../../../design/system/mds-002-colour-system/index.md)
+- [MDS-003 — Material System](../../../design/system/mds-003-material-system/index.md)
+- [MDS-004 — Typography System](../../../design/system/mds-004-typography-system/index.md)
+- [MDS-005 — Motion System](../../../design/system/mds-005-motion-system/index.md)
+- [MDS-006 — Composition Engine](../../../design/system/mds-006-composition-engine/index.md)
+- [MDS-007 — Tile Framework](../../../design/system/mds-007-tile-framework/index.md)
+- [MDS-008 — Component Library](../../../design/system/mds-008-component-library/index.md)
 
 ---
 
@@ -405,23 +409,3 @@ The resulting Storage Architecture intentionally emphasises:
 Within Mosaic, storage exists to preserve information.
 
 Everything else, databases, caches, object stores and archive formats, exists solely to serve that purpose.
-
----
-
-# Review Status
-
-**Status**
-
-Draft
-
-**Owner**
-
-Lead Software Architect
-
-**Previous File**
-
-`glossary.md`
-
-**Next File**
-
-**End of Specification**

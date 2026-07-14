@@ -2,7 +2,7 @@
 File: docs/engineering/guides/meg-007-storage-architecture/10-migrations.md
 Document: MEG-007
 Status: Draft
-Version: 0.2
+Version: 0.4
 -->
 
 # Migrations
@@ -44,22 +44,24 @@ Migrations exist to preserve information while allowing storage architecture to 
 
 Users should experience:
 
-```
-Upgrade
+```mermaid
+flowchart TD
 
-↓
+N1["Upgrade"]
+N2["Continue"]
 
-Continue
+N1 --> N2
 ```
 
 Not:
 
-```
-Upgrade
+```mermaid
+flowchart TD
 
-↓
+N1["Upgrade"]
+N2["Rebuild Everything"]
 
-Rebuild Everything
+N1 --> N2
 ```
 
 ---
@@ -123,28 +125,31 @@ Every persistent storage system SHOULD expose a schema version.
 
 Examples.
 
-```text
-PostgreSQL
+```mermaid
+flowchart TD
 
-↓
+N1["PostgreSQL"]
+N2["Schema 14"]
 
-Schema 14
+N1 --> N2
 ```
 
-```text
-DuckDB
+```mermaid
+flowchart TD
 
-↓
+N1["DuckDB"]
+N2["Schema 6"]
 
-Schema 6
+N1 --> N2
 ```
 
-```text
-MOS Archive
+```mermaid
+flowchart TD
 
-↓
+N1["MOS Archive"]
+N2["Version 3"]
 
-Version 3
+N1 --> N2
 ```
 
 Version identifiers allow the Runtime to determine which migrations must execute.
@@ -155,32 +160,23 @@ Version identifiers allow the Runtime to determine which migrations must execute
 
 Every migration follows the same high-level lifecycle.
 
-```text
-Current Version
+```mermaid
+flowchart TD
 
-↓
+N1["Current Version"]
+N2["Validate"]
+N3["Backup (Optional)"]
+N4["Execute Migration"]
+N5["Verify"]
+N6["Commit"]
+N7["Ready"]
 
-Validate
-
-↓
-
-Backup (Optional)
-
-↓
-
-Execute Migration
-
-↓
-
-Verify
-
-↓
-
-Commit
-
-↓
-
-Ready
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
+N5 --> N6
+N6 --> N7
 ```
 
 Migration should never become partially complete.
@@ -188,12 +184,14 @@ Migration should never become partially complete.
 Either:
 
 ```
+
 Old Version
 ```
 
 or
 
 ```
+
 New Version
 ```
 
@@ -238,17 +236,19 @@ Rebuilding is often preferable to complex migration.
 
 Where practical:
 
-```
-Delete
+```mermaid
+flowchart TD
 
-↓
+N1["Delete"]
+N2["Rebuild"]
 
-Rebuild
+N1 --> N2
 ```
 
 should be preferred over:
 
 ```
+
 Complex Transformation
 ```
 
@@ -264,17 +264,19 @@ Blob migration should preserve:
 
 Changing:
 
-```text
-Filesystem
+```mermaid
+flowchart TD
 
-↓
+N1["Filesystem"]
+N2["Object Storage"]
 
-Object Storage
+N1 --> N2
 ```
 
 should not require changing:
 
 ```
+
 PosterBlobID
 ```
 
@@ -310,12 +312,13 @@ MOS Cache generally SHOULD NOT be migrated.
 
 Preferred.
 
-```text
-Delete Cache
+```mermaid
+flowchart TD
 
-↓
+N1["Delete Cache"]
+N2["Rebuild"]
 
-Rebuild
+N1 --> N2
 ```
 
 Migration effort should never exceed regeneration effort.
@@ -330,16 +333,15 @@ Capability configuration may require migration.
 
 Example.
 
-```text
-Configuration v1
+```mermaid
+flowchart TD
 
-↓
+N1["Configuration v1"]
+N2["Migration"]
+N3["Configuration v2"]
 
-Migration
-
-↓
-
-Configuration v2
+N1 --> N2
+N2 --> N3
 ```
 
 Capabilities SHOULD provide configuration migration logic where schema evolution requires it.
@@ -356,28 +358,21 @@ The Runtime Kernel coordinates migrations during startup.
 
 Conceptually.
 
-```text
-Runtime Startup
+```mermaid
+flowchart TD
 
-↓
+N1["Runtime Startup"]
+N2["Detect Versions"]
+N3["Plan Migrations"]
+N4["Execute"]
+N5["Verify"]
+N6["Continue Startup"]
 
-Detect Versions
-
-↓
-
-Plan Migrations
-
-↓
-
-Execute
-
-↓
-
-Verify
-
-↓
-
-Continue Startup
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
+N5 --> N6
 ```
 
 Capabilities should not independently execute migrations.
@@ -392,16 +387,15 @@ Migration order follows dependency order.
 
 Example.
 
-```text
-Business State
+```mermaid
+flowchart TD
 
-↓
+N1["Business State"]
+N2["Derived State"]
+N3["Caches"]
 
-Derived State
-
-↓
-
-Caches
+N1 --> N2
+N2 --> N3
 ```
 
 Never the reverse.
@@ -418,20 +412,17 @@ Migration failures MUST stop startup.
 
 Example.
 
-```text
-Migration Failed
+```mermaid
+flowchart TD
 
-↓
+N1["Migration Failed"]
+N2["Rollback (Where Practical)"]
+N3["Report Failure"]
+N4["Stop Runtime"]
 
-Rollback (Where Practical)
-
-↓
-
-Report Failure
-
-↓
-
-Stop Runtime
+N1 --> N2
+N2 --> N3
+N3 --> N4
 ```
 
 Continuing execution against partially migrated storage is prohibited.
@@ -630,23 +621,3 @@ Within Mosaic, migrations exist for one purpose:
 > **Allow the platform to evolve while ensuring that the information users care about remains intact.**
 
 Information should outlive every implementation that stores it.
-
----
-
-# Review Status
-
-**Status**
-
-Draft
-
-**Owner**
-
-Lead Software Architect
-
-**Previous File**
-
-`09-storage-lifecycle.md`
-
-**Next File**
-
-`11-backup-and-restore.md`

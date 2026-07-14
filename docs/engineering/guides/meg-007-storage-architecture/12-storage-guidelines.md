@@ -2,7 +2,7 @@
 File: docs/engineering/guides/meg-007-storage-architecture/12-storage-guidelines.md
 Document: MEG-007
 Status: Draft
-Version: 0.2
+Version: 0.4
 -->
 
 # Storage Guidelines
@@ -83,26 +83,32 @@ Every piece of information belongs to one storage class.
 Examples.
 
 ```
+
 Business State
 ```
 
 ```
+
 Operational State
 ```
 
 ```
+
 Analytical State
 ```
 
 ```
+
 Binary Assets
 ```
 
 ```
+
 Derived Assets
 ```
 
 ```
+
 Archive Data
 ```
 
@@ -178,30 +184,28 @@ Suppose new analytical data is required.
 
 Poor.
 
-```
-Business
+```mermaid
+flowchart TD
 
-↓
+N1["Business"]
+N2["DuckDB"]
 
-DuckDB
+N1 --> N2
 ```
 
 Preferred.
 
-```
-Business
+```mermaid
+flowchart TD
 
-↓
+N1["Business"]
+N2["PostgreSQL"]
+N3["Runtime Event"]
+N4["DuckDB"]
 
-PostgreSQL
-
-↓
-
-Runtime Event
-
-↓
-
-DuckDB
+N1 --> N2
+N2 --> N3
+N3 --> N4
 ```
 
 Analytics should always derive from Business State.
@@ -244,12 +248,14 @@ If yes:
 Consider:
 
 ```
+
 MOS Cache
 ```
 
 or
 
 ```
+
 DuckDB
 ```
 
@@ -313,6 +319,7 @@ Before introducing new persistence ask:
 If the answer is:
 
 ```
+
 No
 ```
 
@@ -328,26 +335,26 @@ Derived storage should generally be updated through Runtime Events.
 
 Example.
 
-```
-PlaybackCompleted
+```mermaid
+flowchart TD
 
-↓
+N1["PlaybackCompleted"]
+N2["Analytics"]
+N3["DuckDB"]
 
-Analytics
-
-↓
-
-DuckDB
+N1 --> N2
+N2 --> N3
 ```
 
 Avoid:
 
-```
-Playback Repository
+```mermaid
+flowchart TD
 
-↓
+N1["Playback Repository"]
+N2["Write DuckDB"]
 
-Write DuckDB
+N1 --> N2
 ```
 
 Storage responsibilities should remain separated.
@@ -363,14 +370,17 @@ Ask:
 Possible answers.
 
 ```
+
 Restore Backup
 ```
 
 ```
+
 Rebuild
 ```
 
 ```
+
 Re-import
 ```
 
@@ -496,7 +506,7 @@ The remaining documents describe:
 - terminology
 - references
 
-Together, MEG-001 through MEG-007 now define:
+Together, [MEG-001](../meg-001-go-engineering-standards/index.md) through MEG-007 now define:
 
 - engineering
 - execution
@@ -523,23 +533,3 @@ Within Mosaic, every persistence decision should answer one question:
 Once that answer is known, almost every other storage decision follows naturally.
 
 That is why the Storage Taxonomy, not PostgreSQL or DuckDB, sits at the centre of the Storage Architecture.
-
----
-
-# Review Status
-
-**Status**
-
-Draft
-
-**Owner**
-
-Lead Software Architect
-
-**Previous File**
-
-`11-backup-and-restore.md`
-
-**Next File**
-
-`13-adrs.md`

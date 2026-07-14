@@ -2,7 +2,7 @@
 File: docs/engineering/guides/meg-007-storage-architecture/04-duckdb.md
 Document: MEG-007
 Status: Draft
-Version: 0.2
+Version: 0.4
 -->
 
 # DuckDB
@@ -113,18 +113,22 @@ DuckDB may become authoritative for analytical information.
 Examples include:
 
 ```
+
 Recommendation Vectors
 ```
 
 ```
+
 Similarity Scores
 ```
 
 ```
+
 Popularity Rankings
 ```
 
 ```
+
 Content Correlations
 ```
 
@@ -142,30 +146,28 @@ DuckDB should never become the authoritative store for business entities.
 
 Poor.
 
-```
-DuckDB
+```mermaid
+flowchart TD
 
-↓
+N1["DuckDB"]
+N2["Playback Progress"]
 
-Playback Progress
+N1 --> N2
 ```
 
 Preferred.
 
-```
-PostgreSQL
+```mermaid
+flowchart TD
 
-↓
+N1["PostgreSQL"]
+N2["Playback Progress"]
+N3["DuckDB"]
+N4["Viewing Statistics"]
 
-Playback Progress
-
-↓
-
-DuckDB
-
-↓
-
-Viewing Statistics
+N1 --> N2
+N2 --> N3
+N3 --> N4
 ```
 
 Business ownership remains unchanged.
@@ -207,16 +209,15 @@ DuckDB receives information from:
 
 Typical flow.
 
-```
-Business Event
+```mermaid
+flowchart TD
 
-↓
+N1["Business Event"]
+N2["Analytical Pipeline"]
+N3["DuckDB"]
 
-Analytical Pipeline
-
-↓
-
-DuckDB
+N1 --> N2
+N2 --> N3
 ```
 
 Capabilities should never write directly into analytical tables as part of transactional workflows.
@@ -231,24 +232,19 @@ One of DuckDB's primary responsibilities is metadata correlation.
 
 Examples include:
 
-```
-TMDB
+```mermaid
+flowchart TD
 
-↓
+N1["TMDB"]
+N2["AniList"]
+N3["TVDB"]
+N4["IMDb"]
+N5["Internal IDs"]
 
-AniList
-
-↓
-
-TVDB
-
-↓
-
-IMDb
-
-↓
-
-Internal IDs
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
 ```
 
 Large cross-provider mapping datasets are naturally analytical.
@@ -265,21 +261,21 @@ Recommendation generation naturally belongs within DuckDB.
 
 Example.
 
-```
-Viewing History
+```mermaid
+flowchart TD
 
-↓
+N1["Viewing History"]
+N2["Similarity Analysis"]
+N3["Recommendation Scores"]
 
-Similarity Analysis
-
-↓
-
-Recommendation Scores
+N1 --> N2
+N2 --> N3
 ```
 
 The resulting recommendations become:
 
 ```
+
 Derived Data
 ```
 
@@ -334,20 +330,22 @@ DuckDB MAY maintain derived analytical views.
 
 Examples include:
 
+```mermaid
+flowchart TD
+
+N1["Top Movies"]
+N2["Materialised View"]
+
+N1 --> N2
 ```
-Top Movies
 
-↓
+```mermaid
+flowchart TD
 
-Materialised View
-```
+N1["Trending Anime"]
+N2["Materialised View"]
 
-```
-Trending Anime
-
-↓
-
-Materialised View
+N1 --> N2
 ```
 
 These views improve analytical performance.
@@ -377,16 +375,15 @@ DuckDB should consume Runtime Events.
 
 Example.
 
-```
-PlaybackCompleted
+```mermaid
+flowchart TD
 
-↓
+N1["PlaybackCompleted"]
+N2["Analytics Pipeline"]
+N3["DuckDB"]
 
-Analytics Pipeline
-
-↓
-
-DuckDB
+N1 --> N2
+N2 --> N3
 ```
 
 This preserves loose coupling between:
@@ -549,23 +546,3 @@ It intentionally does **not** remember:
 - configuration
 
 By separating analytical processing from transactional persistence, Mosaic gains the ability to perform sophisticated queries, recommendations and reporting without compromising the integrity or performance of the business systems that drive the platform.
-
----
-
-# Review Status
-
-**Status**
-
-Draft
-
-**Owner**
-
-Lead Software Architect
-
-**Previous File**
-
-`03-postgresql.md`
-
-**Next File**
-
-`05-blob-storage.md`
