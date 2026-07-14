@@ -1,3 +1,10 @@
+<!--
+File: docs/index.md
+Document: Mosaic Architecture
+Status: Draft
+Version: 0.1
+-->
+
 # Mosaic Architecture
 
 This site is the documentation portal for Mosaic architecture, design language, design system, and engineering guidance.

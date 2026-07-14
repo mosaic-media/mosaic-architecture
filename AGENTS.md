@@ -4,11 +4,11 @@ This repository is the internal documentation home for Mosaic architecture, note
 
 Agents working in this repo should preserve the existing documentation structure and keep the root `README.md` accurate as the repository grows.
 
-## MDG-001 Authority
+## [MDG-001](docs/engineering/documentation/mdg-001-documentation-authority-guide/index.md) Authority
 
 [MDG-001 — Documentation Authority Guide](docs/engineering/documentation/mdg-001-documentation-authority-guide/index.md) is the governing standard for all authored documentation in this repository.
 
-Before creating, splitting, renaming, reorganising, or materially editing specifications, read the relevant MDG-001 chapters:
+Before creating, splitting, renaming, reorganising, or materially editing specifications, read the relevant [MDG-001](docs/engineering/documentation/mdg-001-documentation-authority-guide/index.md) chapters:
 
 - `02-document-types.md` for document-type responsibilities and separation of concerns.
 - `03-versioning.md` for status and version progression.
@@ -16,7 +16,7 @@ Before creating, splitting, renaming, reorganising, or materially editing specif
 - `06-cross-references.md` for references, traceability, and avoiding duplication.
 - `07-repository-organisation.md` for folder, chapter, metadata, generated-content, and navigation conventions.
 
-If these agent instructions ever conflict with MDG-001, MDG-001 wins. Update the agent instructions instead of bypassing the documentation rules.
+If these agent instructions ever conflict with [MDG-001](docs/engineering/documentation/mdg-001-documentation-authority-guide/index.md), [MDG-001](docs/engineering/documentation/mdg-001-documentation-authority-guide/index.md) wins. Update the agent instructions instead of bypassing the documentation rules.
 
 ## Repository Structure
 
@@ -43,24 +43,28 @@ index.md
 01-...
 02-...
 ...
-glossary.md
 references.md
+glossary.md
 ```
 
 ## Documentation Rules
 
-- Follow the existing `MDL-*`, `MDS-*`, `MDG-*`, `MAC-*`, `MEG-*`, `MIP-*`, and `MOP-*` folder naming conventions.
+- Follow the existing `MDP-*`, `MAD-*`, `MAC-*`, `MEG-*`, `MIP-*`, `MOP-*`, `MDL-*`, `MDS-*`, and `MDG-*` folder naming conventions.
 - Use URL-safe lowercase folder slugs in the MkDocs tree, such as `meg-005-runtime-architecture`.
 - Choose the correct document type before adding content. Do not put Canon material in MEGs, protocol contracts outside MIPs, operational procedures outside MOPs, or ADR process rules outside MDG.
 - Keep one authoritative home for each architectural concept. Summarise only when necessary and use references instead of duplicating explanations.
+- Make every reference to another published Mosaic document a relative Markdown hyperlink. Link identifier-only references to the target `index.md`, use the catalogued `ID — Canonical Title` when naming a document, and link directly to a chapter or anchor when appropriate. Leave unavailable identifiers unlinked and mark them `planned; not yet published` or `deferred; not yet published`.
 - Keep one major specification folder per commit when committing documentation imports or large additions.
-- Preserve and maintain metadata comments at the top of specification Markdown files. `File:` must match the current repo-relative path, and `Document:`, `Status:`, and `Version:` must remain accurate.
-- Update `Version:` only when MDG-001 says the change is meaningful. Do not bump versions for typo-only or formatting-only edits.
+- Preserve and maintain metadata comments at the top of every authored Markdown file under `docs/`. `File:` must match the current repo-relative path, and `Document:`, `Status:`, and `Version:` must remain accurate.
+- Do not add Review Status sections or manual previous/next page links. Metadata communicates maturity and MkDocs provides page transitions.
+- Use `AdamNi-7080` for personally owned specifications; preserve explicit team or organisational ownership where responsibility genuinely belongs to that group.
+- Update `Version:` only when [MDG-001](docs/engineering/documentation/mdg-001-documentation-authority-guide/index.md) says the change is meaningful. Do not bump versions for typo-only or formatting-only edits.
 - Put decision records close to the specification they govern, usually in `*-adrs.md`.
 - Update affected chapters when a decision changes the meaning of an existing specification.
 - Keep References near the end and Glossary as the final chapter of each specification. `.pages` files should list references before glossary when both exist.
-- Use MDG-001 canonical terminology, including `Platform` for Mosaic platform ownership and `Module` for Mosaic extensibility, while preserving established domain terms and external source titles.
+- Use [MDG-001](docs/engineering/documentation/mdg-001-documentation-authority-guide/index.md) canonical terminology, including `Platform` for Mosaic platform ownership and `Module` for Mosaic extensibility, while preserving established domain terms and external source titles.
 - Validate Mermaid blocks before considering documentation work complete.
+- Use Mermaid for flows, lifecycles, state transitions, hierarchies, dependencies and interactions. Do not author relationship diagrams with ASCII arrows or non-file tree glyphs; retain text fences only when fixed-width literal or spatial layout is the subject.
 - Update `.pages` navigation files when adding or removing specification folders.
 - Treat authored Markdown under `docs/` as canonical. Do not make generated output the source of truth.
 
@@ -72,7 +76,7 @@ The README should remain a current orientation guide for:
 
 - what this repo is for
 - how the documentation is organised
-- where MDL, MDS, MDG, MAC, MEG, MIP, and MOP material lives
+- where MDP, MAD, MAC, MEG, MIP, MOP, MDL, MDS, and MDG material lives
 - how decisions and references should be maintained
 
 Do not let the README drift behind the repository structure.

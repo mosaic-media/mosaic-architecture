@@ -10,10 +10,8 @@ from pathlib import PurePosixPath
 COMMENT_RE = re.compile(r"\A<!--\n(?P<body>.*?)\n-->\n?", re.DOTALL)
 FIELD_RE = re.compile(r"^(?P<key>Document|Specification|Status|Version):\s*(?P<value>.+?)\s*$", re.MULTILINE)
 HEADING_RE = re.compile(r"^#\s+(?P<heading>.+)$", re.MULTILINE)
-ID_RE = re.compile(r"\b(?P<id>(?:MAC|MDP|MEG|MIP|MOP|MDL|MDS)-\d{3})\b", re.IGNORECASE)
-TITLE_ID_PREFIX_RE = re.compile(r"^(?:MAC|MDP|MEG|MIP|MOP|MDL|MDS)-\d{3}\s+[—-]\s+(.+)$", re.IGNORECASE)
-OWNER_ROW_RE = re.compile(r"^\|\s*Owner\s*\|.*\|\s*$\n?", re.MULTILINE)
-REVIEW_STATUS_RE = re.compile(r"\n---\n\n# Review Status\b.*\Z", re.DOTALL)
+ID_RE = re.compile(r"\b(?P<id>(?:MDP|MAD|MAC|MEG|MIP|MOP|MDL|MDS|MDG)-\d{3})\b", re.IGNORECASE)
+TITLE_ID_PREFIX_RE = re.compile(r"^(?:MDP|MAD|MAC|MEG|MIP|MOP|MDL|MDS|MDG)-\d{3}\s+[—-]\s+(.+)$", re.IGNORECASE)
 
 
 def on_nav(nav, config, files):
@@ -28,7 +26,6 @@ def on_nav(nav, config, files):
 
 def on_page_markdown(markdown: str, page, config, files) -> str:
     """Add a visible metadata block from the source file's top comment."""
-    markdown = _remove_boilerplate(markdown)
     heading = _heading_from_markdown(markdown)
     if heading:
         page.title = _display_title(heading)
@@ -46,18 +43,13 @@ def on_page_markdown(markdown: str, page, config, files) -> str:
         "",
         f"    | Field | Value |",
         f"    | --- | --- |",
-        f"    | Document ID | {metadata['document_id']} |",
+        f"    | {metadata['document_label']} | {metadata['document']} |",
         f"    | Status | {metadata['status']} |",
         f"    | Version | {metadata['version']} |",
         "",
     ]
 
     return markdown[: match.end()] + "\n".join(table) + "\n" + markdown[match.end() :]
-
-
-def _remove_boilerplate(markdown: str) -> str:
-    markdown = OWNER_ROW_RE.sub("", markdown)
-    return REVIEW_STATUS_RE.sub("", markdown)
 
 
 def _iter_pages(items):
@@ -90,15 +82,18 @@ def _display_title(heading: str) -> str:
 
 def _parse_metadata(comment: str, markdown: str, src_uri: str) -> dict[str, str] | None:
     fields = {m.group("key").lower(): m.group("value") for m in FIELD_RE.finditer(comment)}
-    document_id = fields.get("document") or fields.get("specification") or _document_id_from_heading(markdown) or _document_id_from_path(src_uri)
+    document = fields.get("document") or _document_id_from_heading(markdown) or _document_id_from_path(src_uri)
     status = fields.get("status")
     version = fields.get("version")
 
-    if not document_id or not status or not version:
+    if not document or not status or not version:
         return None
 
+    is_specification = ID_RE.fullmatch(document) is not None
+
     return {
-        "document_id": document_id.upper(),
+        "document": document.upper() if is_specification else document,
+        "document_label": "Document ID" if is_specification else "Document",
         "status": status,
         "version": version,
     }

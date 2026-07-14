@@ -49,20 +49,21 @@ The current imported specification set lives in:
 - `docs/engineering/protocols` for MIP documents
 - `docs/engineering/operations` for MOP documents
 
-MEG-006 contains the Module Platform and its integrated Developer Platform guidance, including SDK, CLI, local development, deterministic Test Harness Modules and publication workflow boundaries.
+[MEG-006](docs/engineering/guides/meg-006-module-platform/index.md) contains the Module Platform and its integrated Developer Platform guidance, including SDK, CLI, local development, deterministic Test Harness Modules and publication workflow boundaries.
 
 ## Document Types
 
 The structure is intended to support these document families without another major reorganisation:
 
-- `MAC` — Mosaic Architecture
-- `MDG` — Mosaic Documentation Guides
-- `MDP` — Mosaic Design Process
-- `MEG` — Mosaic Engineering Guidelines
+- `MDP` — Mosaic Design Proposal
+- `MAD` — Mosaic Architecture Decision
+- `MAC` — Mosaic Architecture Canon
+- `MEG` — Mosaic Engineering Guide
 - `MIP` — Mosaic Integration Protocol
-- `MOP` — Mosaic Operations
+- `MOP` — Mosaic Operations & Playbook
 - `MDL` — Mosaic Design Language
 - `MDS` — Mosaic Design System
+- `MDG` — Mosaic Documentation Guide
 
 ## Documentation Conventions
 
@@ -85,6 +86,12 @@ Folder names are URL-safe slugs such as `meg-001-go-engineering-standards`. The 
 Chapter-level files are preferred over large monolithic documents because they are easier to review, diff, discuss, and evolve independently.
 
 References should appear near the end of a specification and glossary should remain the final authored chapter.
+
+Every authored Markdown page begins with `File`, `Document`, `Status`, and `Version` metadata. Source pages do not carry review-status summaries or manual previous/next links; document maturity comes from metadata and page transitions come from MkDocs.
+
+Every reference to another published Mosaic document is a relative Markdown hyperlink. Identifier-only references link to the target specification's `index.md`; named references use the catalogued `ID — Canonical Title`, while chapter-specific references may link directly to the relevant chapter or anchor. Unpublished identifiers remain unlinked and are marked `planned; not yet published` or `deferred; not yet published`.
+
+Relationship diagrams use Mermaid rather than ASCII arrows or hierarchy glyphs. Text fences remain appropriate for literal fixed-width material such as repository trees, commands, configuration, logs, templates, notation and interface wireframes.
 
 ## Decision Records
 
@@ -117,7 +124,7 @@ The MkDocs portal is configured with:
 - section index pages
 - GitHub repository and edit-page links
 
-Specification metadata comments are preserved in source files. A MkDocs hook renders Document ID, Status, and Version visibly in the generated site at build time.
+Metadata comments are preserved in source files. A MkDocs hook renders the document identity, Status, and Version visibly in the generated site at build time.
 
 ## Branding
 
@@ -128,7 +135,7 @@ The temporary header logo is stored at `docs/assets/images/mosaic-logo-dark.jpg`
 ## Working Guidelines
 
 - Keep documents focused on durable reasoning, not transient implementation details.
-- Prefer explicit ownership, status, version, and scope metadata.
+- Keep ownership explicit in Document Control and keep page metadata synchronised.
 - Preserve links between vision, principles, design language, design system, and implementation-facing guidance.
 - Use Mermaid diagrams where they clarify relationships, and validate Mermaid syntax before committing.
 - Commit each major specification folder independently so history remains reviewable.

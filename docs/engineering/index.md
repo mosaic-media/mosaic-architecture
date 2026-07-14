@@ -1,3 +1,10 @@
+<!--
+File: docs/engineering/index.md
+Document: Engineering
+Status: Draft
+Version: 0.1
+-->
+
 # Engineering
 
 Engineering documentation defines how Mosaic software is structured, operated, and evolved.

@@ -4,11 +4,11 @@ This repository stores internal Mosaic documentation: architecture notes, design
 
 Follow the existing documentation structure and keep `README.md` up to date whenever the repository changes.
 
-## MDG-001 Authority
+## [MDG-001](docs/engineering/documentation/mdg-001-documentation-authority-guide/index.md) Authority
 
 [MDG-001 — Documentation Authority Guide](docs/engineering/documentation/mdg-001-documentation-authority-guide/index.md) is the source of truth for documentation work in this repository.
 
-Before creating, splitting, renaming, reorganising, or materially editing specifications, consult the relevant MDG-001 chapters:
+Before creating, splitting, renaming, reorganising, or materially editing specifications, consult the relevant [MDG-001](docs/engineering/documentation/mdg-001-documentation-authority-guide/index.md) chapters:
 
 - `02-document-types.md` for where each kind of content belongs.
 - `03-versioning.md` for status and version changes.
@@ -16,7 +16,7 @@ Before creating, splitting, renaming, reorganising, or materially editing specif
 - `06-cross-references.md` for traceability and duplication control.
 - `07-repository-organisation.md` for folders, chapter order, metadata, generated content, and navigation.
 
-If this file conflicts with MDG-001, follow MDG-001 and update this file.
+If this file conflicts with [MDG-001](docs/engineering/documentation/mdg-001-documentation-authority-guide/index.md), follow [MDG-001](docs/engineering/documentation/mdg-001-documentation-authority-guide/index.md) and update this file.
 
 ## Structure To Follow
 
@@ -58,13 +58,15 @@ references.md
 - Keep MOP content under `docs/engineering/operations`.
 - Preserve existing naming conventions, metadata blocks, and chapter ordering.
 - Keep specification metadata accurate. `File:` must match the current repo-relative Markdown path, and `Document:`, `Status:`, and `Version:` must reflect the specification.
-- Update `Version:` only for meaningful MDG-001 review progression. Do not bump versions for typo-only or formatting-only edits.
-- Keep each document type within its MDG-001 responsibility: MAC defines accepted architecture, MEG explains engineering practice, MIP defines integration contracts, MOP defines operational procedures, MDL/MDS define design language and system material, and MDG defines documentation standards.
+- Update `Version:` only for meaningful [MDG-001](docs/engineering/documentation/mdg-001-documentation-authority-guide/index.md) review progression. Do not bump versions for typo-only or formatting-only edits.
+- Keep each document type within its [MDG-001](docs/engineering/documentation/mdg-001-documentation-authority-guide/index.md) responsibility: MAC defines accepted architecture, MEG explains engineering practice, MIP defines integration contracts, MOP defines operational procedures, MDL/MDS define design language and system material, and MDG defines documentation standards.
 - Prefer one authoritative home for each concept. Replace duplicated explanations with concise summaries and links to the owning specification.
-- Use MDG-001 canonical terminology, including `Platform` for Mosaic platform ownership and `Module` for Mosaic extensibility, while preserving established domain terms and external source titles.
+- Make every reference to another published Mosaic document a relative Markdown hyperlink. Link identifier-only references to the target `index.md`, use the catalogued `ID — Canonical Title` when naming a document, and link directly to a chapter or anchor when appropriate. Leave unavailable identifiers unlinked and mark them `planned; not yet published` or `deferred; not yet published`.
+- Use [MDG-001](docs/engineering/documentation/mdg-001-documentation-authority-guide/index.md) canonical terminology, including `Platform` for Mosaic platform ownership and `Module` for Mosaic extensibility, while preserving established domain terms and external source titles.
 - Keep ADRs and decision notes near the specification they affect.
 - Keep References near the end and Glossary as the final chapter. `.pages` files should list references before glossary when both exist.
 - Validate Mermaid syntax after editing Mermaid diagrams.
+- Use Mermaid for flows, lifecycles, state transitions, hierarchies, dependencies and interactions. Do not author relationship diagrams with ASCII arrows or non-file tree glyphs; retain text fences only when fixed-width literal or spatial layout is the subject.
 - Update `.pages` navigation files when adding or removing specification folders.
 - If committing, commit each major specification folder independently.
 - Treat authored Markdown under `docs/` as canonical. Do not make generated output the source of truth.

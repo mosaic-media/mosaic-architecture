@@ -1,3 +1,10 @@
+<!--
+File: docs/engineering/protocols/index.md
+Document: Protocols
+Status: Draft
+Version: 0.1
+-->
+
 # Protocols
 
 Integration Protocol specifications define Mosaic interoperability contracts, message shapes and compatibility expectations.

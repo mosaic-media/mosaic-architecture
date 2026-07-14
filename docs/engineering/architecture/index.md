@@ -1,3 +1,10 @@
+<!--
+File: docs/engineering/architecture/index.md
+Document: Architecture
+Status: Draft
+Version: 0.1
+-->
+
 # Architecture
 
 Architecture Canon specifications define accepted Mosaic platform structure, boundaries and long-lived architectural responsibility.

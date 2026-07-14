@@ -1,3 +1,10 @@
+<!--
+File: docs/engineering/operations/index.md
+Document: Operations
+Status: Draft
+Version: 0.1
+-->
+
 # Operations
 
 Operations specifications define how Mosaic is operated, diagnosed, maintained and recovered.
