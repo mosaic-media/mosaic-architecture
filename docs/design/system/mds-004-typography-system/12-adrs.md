@@ -4,7 +4,7 @@ Document: MDS-004
 Chapter: 12
 Title: Architectural Decision Records
 Status: Draft
-Version: 0.2
+Version: 0.4
 -->
 
 # Architectural Decision Records
@@ -31,7 +31,7 @@ Future contributors should understand these decisions before proposing changes t
 
 # Decision Format
 
-Decision format, lifecycle and review expectations are governed by **MDG-001 — Documentation Authority Guide**.
+Decision format, lifecycle and review expectations are governed by **[MDG-001 — Documentation Authority Guide](../../../engineering/documentation/mdg-001-documentation-authority-guide/index.md)**.
 
 This chapter records decisions specific to this specification and avoids redefining the shared ADR process.
 
@@ -364,15 +364,3 @@ Every implementation should therefore preserve:
 - companionship,
 
 while allowing rendering technology to evolve independently.
-
----
-
-# Review Status
-
-**Status**
-
-Draft
-
-**Next File**
-
-`13-contributor-guidance.md`

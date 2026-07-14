@@ -4,7 +4,7 @@ Document: MDS-004
 Chapter: 13
 Title: Contributor Guidance
 Status: Draft
-Version: 0.2
+Version: 0.4
 -->
 
 # Contributor Guidance
@@ -42,12 +42,14 @@ Instead ask:
 Good.
 
 ```
+
 Heading
 ```
 
 Poor.
 
 ```
+
 24px
 ```
 
@@ -61,38 +63,32 @@ Typography exists to communicate language.
 
 Good process.
 
-```text
-Meaning
+```mermaid
+flowchart TD
 
-↓
+N1["Meaning"]
+N2["Language"]
+N3["Editorial Role"]
+N4["Typography"]
+N5["Presentation"]
 
-Language
-
-↓
-
-Editorial Role
-
-↓
-
-Typography
-
-↓
-
-Presentation
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
 ```
 
 Poor process.
 
-```text
-Typography
+```mermaid
+flowchart TD
 
-↓
+N1["Typography"]
+N2["Visual Style"]
+N3["Write Content"]
 
-Visual Style
-
-↓
-
-Write Content
+N1 --> N2
+N2 --> N3
 ```
 
 The words should determine the typography.
@@ -166,6 +162,7 @@ Typography should communicate confidence through restraint.
 Components should never request:
 
 ```
+
 18px
 
 Bold
@@ -174,12 +171,14 @@ Bold
 Instead request:
 
 ```
+
 Heading
 ```
 
 or
 
 ```
+
 Supporting
 ```
 
@@ -213,22 +212,24 @@ Examples.
 
 Poor.
 
-```
-Beautiful
+```mermaid
+flowchart TD
 
-↓
+N1["Beautiful"]
+N2["Unreadable"]
 
-Unreadable
+N1 --> N2
 ```
 
 Preferred.
 
-```
-Readable
+```mermaid
+flowchart TD
 
-↓
+N1["Readable"]
+N2["Beautiful"]
 
-Beautiful
+N1 --> N2
 ```
 
 Typography exists to communicate.
@@ -397,15 +398,3 @@ When every contributor naturally thinks in editorial language rather than typogr
 Readers will simply experience calm, confident understanding.
 
 That is the ultimate objective of the Mosaic Typography System.
-
----
-
-# Review Status
-
-**Status**
-
-Draft
-
-**Next File**
-
-`glossary.md`

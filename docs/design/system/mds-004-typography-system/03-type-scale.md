@@ -4,7 +4,7 @@ Document: MDS-004
 Chapter: 03
 Title: Type Scale
 Status: Draft
-Version: 0.2
+Version: 0.4
 -->
 
 # Type Scale
@@ -76,28 +76,21 @@ They communicate almost nothing.
 
 Mosaic instead thinks in reading roles.
 
-```text
-Display
+```mermaid
+flowchart TD
 
-↓
+N1["Display"]
+N2["Heading"]
+N3["Section"]
+N4["Body"]
+N5["Supporting"]
+N6["Caption"]
 
-Heading
-
-↓
-
-Section
-
-↓
-
-Body
-
-↓
-
-Supporting
-
-↓
-
-Caption
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
+N5 --> N6
 ```
 
 Values exist only to support those roles.
@@ -132,28 +125,21 @@ Applications should never depend upon physical measurements.
 
 The Mosaic Type Scale contains six primary levels.
 
-```text
-Display
+```mermaid
+flowchart TD
 
-↓
+N1["Display"]
+N2["Heading"]
+N3["Section"]
+N4["Body"]
+N5["Supporting"]
+N6["Caption"]
 
-Heading
-
-↓
-
-Section
-
-↓
-
-Body
-
-↓
-
-Supporting
-
-↓
-
-Caption
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
+N5 --> N6
 ```
 
 Each level exists because it communicates a different editorial responsibility.
@@ -280,16 +266,15 @@ Each level should feel related to the levels around it.
 
 Example.
 
-```text
-Heading
+```mermaid
+flowchart TD
 
-↓
+N1["Heading"]
+N2["Section"]
+N3["Body"]
 
-Section
-
-↓
-
-Body
+N1 --> N2
+N2 --> N3
 ```
 
 The transition should feel gradual.
@@ -320,20 +305,17 @@ Poor.
 
 Preferred.
 
-```text
-Display
+```mermaid
+flowchart TD
 
-↓
+N1["Display"]
+N2["Heading"]
+N3["Section"]
+N4["Body"]
 
-Heading
-
-↓
-
-Section
-
-↓
-
-Body
+N1 --> N2
+N2 --> N3
+N3 --> N4
 ```
 
 Readers perceive rhythm.
@@ -666,15 +648,3 @@ Users should naturally know:
 without consciously analysing typography.
 
 That effortless progression is the defining objective of the Mosaic Type Scale.
-
----
-
-# Review Status
-
-**Status**
-
-Draft
-
-**Next File**
-
-`04-reading-rhythm.md`

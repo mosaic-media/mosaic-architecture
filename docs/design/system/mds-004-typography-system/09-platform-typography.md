@@ -4,7 +4,7 @@ Document: MDS-004
 Chapter: 09
 Title: Platform Typography
 Status: Draft
-Version: 0.2
+Version: 0.4
 -->
 
 # Platform Typography
@@ -72,30 +72,19 @@ Editorial meaning should remain platform independent.
 
 Conceptually.
 
-```text
-Heading
+```mermaid
+flowchart TD
 
-↓
+N1["Heading"]
+N2["Web<br/>Heading"]
+N3["Flutter<br/>Heading"]
+N4["SwiftUI<br/>Heading"]
+N5["Compose"]
 
-Web
-
-Heading
-
-↓
-
-Flutter
-
-Heading
-
-↓
-
-SwiftUI
-
-Heading
-
-↓
-
-Compose
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
 ```
 
 Only rendering changes.
@@ -132,20 +121,17 @@ Every platform should consume the output of the Typography Resolver.
 
 Conceptually.
 
-```text
-Editorial Role
+```mermaid
+flowchart TD
 
-↓
+N1["Editorial Role"]
+N2["Typography Resolver"]
+N3["Platform Typography"]
+N4["Rendering"]
 
-Typography Resolver
-
-↓
-
-Platform Typography
-
-↓
-
-Rendering
+N1 --> N2
+N2 --> N3
+N3 --> N4
 ```
 
 Platforms should never reinterpret editorial roles.
@@ -196,16 +182,15 @@ Platform Typography should define predictable fallback behaviour.
 
 Conceptually.
 
-```text
-Primary Typeface
+```mermaid
+flowchart TD
 
-↓
+N1["Primary Typeface"]
+N2["Platform Fallback"]
+N3["System Typeface"]
 
-Platform Fallback
-
-↓
-
-System Typeface
+N1 --> N2
+N2 --> N3
 ```
 
 Fallbacks should preserve:
@@ -481,15 +466,3 @@ They should simply feel that the Companion remains:
 - familiar,
 
 regardless of the device in their hands.
-
----
-
-# Review Status
-
-**Status**
-
-Draft
-
-**Next File**
-
-`10-variable-fonts.md`

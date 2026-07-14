@@ -4,7 +4,7 @@ Document: MDS-004
 Chapter: 01
 Title: Typography Philosophy
 Status: Draft
-Version: 0.2
+Version: 0.4
 -->
 
 # Typography Philosophy
@@ -50,24 +50,28 @@ Examples.
 Poor.
 
 ```
+
 WATCH NOW
 ```
 
 Preferred.
 
 ```
+
 Continue watching
 ```
 
 Poor.
 
 ```
+
 LIBRARY UPDATED
 ```
 
 Preferred.
 
 ```
+
 New episodes are available
 ```
 
@@ -159,20 +163,17 @@ Typography should encourage continuous reading.
 
 Users should naturally progress from:
 
-```text
-Hero
+```mermaid
+flowchart TD
 
-↓
+N1["Hero"]
+N2["Supporting Information"]
+N3["Context"]
+N4["Detail"]
 
-Supporting Information
-
-↓
-
-Context
-
-↓
-
-Detail
+N1 --> N2
+N2 --> N3
+N3 --> N4
 ```
 
 Every transition should feel inevitable.
@@ -484,15 +485,3 @@ When successful, users should never think about typography.
 They should simply feel that understanding came effortlessly.
 
 That quiet confidence is the defining characteristic of the Mosaic Typography System.
-
----
-
-# Review Status
-
-**Status**
-
-Draft
-
-**Next File**
-
-`02-editorial-hierarchy.md`

@@ -4,7 +4,7 @@ Document: MDS-004
 Chapter: 06
 Title: Responsive Typography
 Status: Draft
-Version: 0.2
+Version: 0.4
 -->
 
 # Responsive Typography
@@ -75,30 +75,19 @@ Only physical implementation changes.
 
 Conceptually.
 
-```text
-Heading
+```mermaid
+flowchart TD
 
-↓
+N1["Heading"]
+N2["Desktop<br/>Heading"]
+N3["Tablet<br/>Heading"]
+N4["Phone<br/>Heading"]
+N5["Television"]
 
-Desktop
-
-Heading
-
-↓
-
-Tablet
-
-Heading
-
-↓
-
-Phone
-
-Heading
-
-↓
-
-Television
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
 ```
 
 One editorial role.
@@ -194,28 +183,21 @@ Every editorial role should scale proportionally.
 
 Conceptually.
 
-```text
-Display
+```mermaid
+flowchart TD
 
-↓
+N1["Display"]
+N2["Heading"]
+N3["Section"]
+N4["Body"]
+N5["Supporting"]
+N6["Caption"]
 
-Heading
-
-↓
-
-Section
-
-↓
-
-Body
-
-↓
-
-Supporting
-
-↓
-
-Caption
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
+N5 --> N6
 ```
 
 The relationships between roles should remain stable regardless of implementation.
@@ -566,15 +548,3 @@ Not:
 > This is the mobile version.
 
 That consistency is one of the defining goals of the Mosaic Typography System.
-
----
-
-# Review Status
-
-**Status**
-
-Draft
-
-**Next File**
-
-`07-accessibility.md`

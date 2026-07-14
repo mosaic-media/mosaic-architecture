@@ -4,7 +4,7 @@ Document: MDS-004
 Chapter: 04
 Title: Reading Rhythm
 Status: Draft
-Version: 0.2
+Version: 0.4
 -->
 
 # Reading Rhythm
@@ -92,20 +92,17 @@ Metric
 
 Reading.
 
-```text
-Current Focus
+```mermaid
+flowchart TD
 
-↓
+N1["Current Focus"]
+N2["Progress"]
+N3["Supporting Context"]
+N4["Related Discovery"]
 
-Progress
-
-↓
-
-Supporting Context
-
-↓
-
-Related Discovery
+N1 --> N2
+N2 --> N3
+N3 --> N4
 ```
 
 The second encourages understanding rather than information processing.
@@ -118,20 +115,17 @@ Reading Rhythm should never exist independently.
 
 It follows:
 
-```text
-Composition
+```mermaid
+flowchart TD
 
-↓
+N1["Composition"]
+N2["Editorial Hierarchy"]
+N3["Reading Rhythm"]
+N4["Presentation"]
 
-Editorial Hierarchy
-
-↓
-
-Reading Rhythm
-
-↓
-
-Presentation
+N1 --> N2
+N2 --> N3
+N3 --> N4
 ```
 
 Composition establishes understanding.
@@ -148,20 +142,17 @@ The Composition should support this behaviour.
 
 Preferred.
 
-```text
-Hero
+```mermaid
+flowchart TD
 
-↓
+N1["Hero"]
+N2["Primary Action"]
+N3["Supporting Context"]
+N4["Related Information"]
 
-Primary Action
-
-↓
-
-Supporting Context
-
-↓
-
-Related Information
+N1 --> N2
+N2 --> N3
+N3 --> N4
 ```
 
 Avoid fragmented reading paths requiring constant visual searching.
@@ -218,24 +209,19 @@ Whitespace is part of typography.
 
 Conceptually.
 
-```text
-Heading
+```mermaid
+flowchart TD
 
-↓
+N1["Heading"]
+N2["Space"]
+N3["Body"]
+N4["Space"]
+N5["Supporting"]
 
-Space
-
-↓
-
-Body
-
-↓
-
-Space
-
-↓
-
-Supporting
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
 ```
 
 Spacing communicates pauses.
@@ -324,16 +310,15 @@ Description
 
 Preferred.
 
-```text
-Title
+```mermaid
+flowchart TD
 
-↓
+N1["Title"]
+N2["Description"]
+N3["Supporting Metadata"]
 
-Description
-
-↓
-
-Supporting Metadata
+N1 --> N2
+N2 --> N3
 ```
 
 Supporting information should remain available without constantly demanding attention.
@@ -629,15 +614,3 @@ The interface should feel less like software...
 ...and more like a thoughtfully edited publication.
 
 When Reading Rhythm succeeds, understanding becomes almost effortless.
-
----
-
-# Review Status
-
-**Status**
-
-Draft
-
-**Next File**
-
-`05-hero-typography.md`

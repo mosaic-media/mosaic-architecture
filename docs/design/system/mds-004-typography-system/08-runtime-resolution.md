@@ -4,7 +4,7 @@ Document: MDS-004
 Chapter: 08
 Title: Runtime Typography Resolution
 Status: Draft
-Version: 0.2
+Version: 0.4
 -->
 
 # Runtime Typography Resolution
@@ -67,16 +67,15 @@ Without Runtime Resolution, every component would need to understand:
 
 Instead.
 
-```text
-Heading
+```mermaid
+flowchart TD
 
-↓
+N1["Heading"]
+N2["Runtime Resolver"]
+N3["Rendered Typography"]
 
-Runtime Resolver
-
-↓
-
-Rendered Typography
+N1 --> N2
+N2 --> N3
 ```
 
 Components remain simple.
@@ -89,32 +88,23 @@ Typography remains consistent.
 
 Every typographic role follows the same conceptual pipeline.
 
-```text
-Editorial Role
+```mermaid
+flowchart TD
 
-↓
+N1["Editorial Role"]
+N2["Type Scale"]
+N3["Responsive Rules"]
+N4["Accessibility"]
+N5["Runtime Context"]
+N6["Platform Adaptation"]
+N7["Resolved Typography"]
 
-Type Scale
-
-↓
-
-Responsive Rules
-
-↓
-
-Accessibility
-
-↓
-
-Runtime Context
-
-↓
-
-Platform Adaptation
-
-↓
-
-Resolved Typography
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
+N5 --> N6
+N6 --> N7
 ```
 
 Each stage contributes one responsibility.
@@ -127,32 +117,23 @@ No stage duplicates another.
 
 Runtime Typography Resolution evaluates:
 
-```text
-Editorial Role
+```mermaid
+flowchart TD
 
-↓
+N1["Editorial Role"]
+N2["Current Context"]
+N3["Device Class"]
+N4["Viewing Distance"]
+N5["Accessibility"]
+N6["User Preferences"]
+N7["Platform Capability"]
 
-Current Context
-
-↓
-
-Device Class
-
-↓
-
-Viewing Distance
-
-↓
-
-Accessibility
-
-↓
-
-User Preferences
-
-↓
-
-Platform Capability
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
+N5 --> N6
+N6 --> N7
 ```
 
 Typography adapts according to these inputs while preserving one editorial language.
@@ -163,46 +144,23 @@ Typography adapts according to these inputs while preserving one editorial langu
 
 Typography should always resolve using the same conceptual order.
 
-```text
-1.
+```mermaid
+flowchart TD
 
-Editorial Role
+N1["1.<br/>Editorial Role"]
+N2["2.<br/>Type Scale"]
+N3["3.<br/>Reading Rhythm"]
+N4["4.<br/>Accessibility"]
+N5["5.<br/>Responsive Rules"]
+N6["6.<br/>Platform Adaptation"]
+N7["7.<br/>Rendered Typography"]
 
-↓
-
-2.
-
-Type Scale
-
-↓
-
-3.
-
-Reading Rhythm
-
-↓
-
-4.
-
-Accessibility
-
-↓
-
-5.
-
-Responsive Rules
-
-↓
-
-6.
-
-Platform Adaptation
-
-↓
-
-7.
-
-Rendered Typography
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
+N5 --> N6
+N6 --> N7
 ```
 
 Meaning always precedes implementation.
@@ -213,12 +171,13 @@ Meaning always precedes implementation.
 
 One of the strongest guarantees within Mosaic is:
 
-```text
-Heading
+```mermaid
+flowchart TD
 
-↓
+N1["Heading"]
+N2["Always Heading"]
 
-Always Heading
+N1 --> N2
 ```
 
 The Heading may become:
@@ -231,6 +190,7 @@ The Heading may become:
 but it never stops being:
 
 ```
+
 Heading
 ```
 
@@ -372,30 +332,28 @@ Typography updates should occur incrementally.
 
 Preferred.
 
-```text
-Accessibility Changes
+```mermaid
+flowchart TD
 
-↓
+N1["Accessibility Changes"]
+N2["Body"]
+N3["Supporting"]
+N4["Caption"]
 
-Body
-
-↓
-
-Supporting
-
-↓
-
-Caption
+N1 --> N2
+N2 --> N3
+N3 --> N4
 ```
 
 Avoid.
 
-```text
-Accessibility Changes
+```mermaid
+flowchart TD
 
-↓
+N1["Accessibility Changes"]
+N2["Entire Typography System Rebuilt"]
 
-Entire Typography System Rebuilt
+N1 --> N2
 ```
 
 Readers should perceive continuity.
@@ -656,15 +614,3 @@ They should simply request:
 > **Heading**
 
 The Typography System does everything else.
-
----
-
-# Review Status
-
-**Status**
-
-Draft
-
-**Next File**
-
-`09-platform-typography.md`

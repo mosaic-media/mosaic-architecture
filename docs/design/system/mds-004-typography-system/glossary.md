@@ -3,7 +3,7 @@ File: docs/design/system/mds-004-typography-system/glossary.md
 Document: MDS-004
 Title: Glossary
 Status: Draft
-Version: 0.2
+Version: 0.4
 -->
 
 # Glossary
@@ -300,13 +300,13 @@ Within Mosaic, Weight is resolved by the Typography Resolver rather than selecte
 
 | Specification | Primary Concepts |
 |---------------|------------------|
-| MDL-001 Vision | Companion, Immersion |
-| MDL-002 Principles | Calm Interfaces |
-| MDL-003 Mental Model | World, Focus |
-| MDL-004 Interaction Model | Reading Behaviour |
-| MDL-005 Composition Model | Hero, Hierarchy |
-| MDS-001 Design Token Architecture | Semantic Roles |
-| MDS-003 Material System | Hero Material, Canvas |
+| [MDL-001 — Mosaic Design Language Vision](../../language/mdl-001-vision/index.md) | Companion, Immersion |
+| [MDL-002 — Principles](../../language/mdl-002-principles/index.md) | Calm Interfaces |
+| [MDL-003 — Mental Model](../../language/mdl-003-mental-model/index.md) | World, Focus |
+| [MDL-004 — Interaction Model](../../language/mdl-004-interaction-model/index.md) | Reading Behaviour |
+| [MDL-005 — Composition Model](../../language/mdl-005-composition-model/index.md) | Hero, Hierarchy |
+| [MDS-001 — Design Token Architecture](../mds-001-design-token-architecture/index.md) | Semantic Roles |
+| [MDS-003 — Material System](../mds-003-material-system/index.md) | Hero Material, Canvas |
 
 ---
 
@@ -321,15 +321,3 @@ Future contributors should:
 - avoid platform-specific terminology inside architectural specifications.
 
 Typography terminology should remain independent from rendering technology.
-
----
-
-# Review Status
-
-**Status**
-
-Draft
-
-**Next File**
-
-`references.md`

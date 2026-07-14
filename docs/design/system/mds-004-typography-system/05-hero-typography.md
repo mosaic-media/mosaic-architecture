@@ -4,7 +4,7 @@ Document: MDS-004
 Chapter: 05
 Title: Hero Typography
 Status: Draft
-Version: 0.2
+Version: 0.4
 -->
 
 # Hero Typography
@@ -76,6 +76,7 @@ Every Composition should normally possess one Hero voice.
 Poor.
 
 ```
+
 Featured
 
 Trending
@@ -89,16 +90,15 @@ Every heading competes.
 
 Preferred.
 
-```
-Continue Watching
+```mermaid
+flowchart TD
 
-↓
+N1["Continue Watching"]
+N2["Frieren"]
+N3["Episode 18"]
 
-Frieren
-
-↓
-
-Episode 18
+N1 --> N2
+N2 --> N3
 ```
 
 One clear editorial voice.
@@ -136,16 +136,15 @@ Hero Typography provides context.
 
 Relationship.
 
-```text
-Artwork
+```mermaid
+flowchart TD
 
-↓
+N1["Artwork"]
+N2["Hero Typography"]
+N3["Supporting Information"]
 
-Hero Typography
-
-↓
-
-Supporting Information
+N1 --> N2
+N2 --> N3
 ```
 
 Typography should never obscure artwork.
@@ -162,24 +161,19 @@ Hero Typography establishes the editorial rhythm for the entire Composition.
 
 Typical progression.
 
-```text
-Hero Title
+```mermaid
+flowchart TD
 
-↓
+N1["Hero Title"]
+N2["Supporting Metadata"]
+N3["Primary Action"]
+N4["Context"]
+N5["Related Information"]
 
-Supporting Metadata
-
-↓
-
-Primary Action
-
-↓
-
-Context
-
-↓
-
-Related Information
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
 ```
 
 Readers should instinctively understand where to continue.
@@ -221,15 +215,18 @@ Hero Typography should gracefully support varying title lengths.
 Examples.
 
 ```
+
 Up
 ```
 
 ```
+
 The Lord of the Rings:
 The Return of the King
 ```
 
 ```
+
 Frieren:
 Beyond Journey's End
 ```
@@ -276,16 +273,15 @@ Dolby Vision
 
 Preferred.
 
-```text
-Title
+```mermaid
+flowchart TD
 
-↓
+N1["Title"]
+N2["Synopsis"]
+N3["Supporting Metadata"]
 
-Synopsis
-
-↓
-
-Supporting Metadata
+N1 --> N2
+N2 --> N3
 ```
 
 Technical information should never interrupt editorial flow.
@@ -593,15 +589,3 @@ It should introduce the user's current World without demanding attention for its
 The entertainment remains the emotional centre.
 
 Hero Typography simply gives it a voice.
-
----
-
-# Review Status
-
-**Status**
-
-Draft
-
-**Next File**
-
-`06-responsive-typography.md`

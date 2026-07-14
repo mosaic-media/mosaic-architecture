@@ -4,7 +4,7 @@ Document: MDS-004
 Chapter: 07
 Title: Accessibility
 Status: Draft
-Version: 0.2
+Version: 0.4
 -->
 
 # Accessibility
@@ -63,22 +63,24 @@ Always.
 
 Poor.
 
-```
-More Information
+```mermaid
+flowchart TD
 
-↓
+N1["More Information"]
+N2["Smaller Text"]
 
-Smaller Text
+N1 --> N2
 ```
 
 Preferred.
 
-```
-Comfortable Reading
+```mermaid
+flowchart TD
 
-↓
+N1["Comfortable Reading"]
+N2["Progressive Disclosure"]
 
-Progressive Disclosure
+N1 --> N2
 ```
 
 The Composition Model already provides mechanisms for reducing density.
@@ -95,34 +97,30 @@ Example.
 
 Incorrect.
 
-```
-Heading
+```mermaid
+flowchart TD
 
-↓
+N1["Heading"]
+N2["Body"]
+N3["Both become similar."]
 
-Body
-
-↓
-
-Both become similar.
+N1 --> N2
+N2 --> N3
 ```
 
 Preferred.
 
-```
-Heading
+```mermaid
+flowchart TD
 
-↓
+N1["Heading"]
+N2["Scales"]
+N3["Body"]
+N4["Scales proportionally."]
 
-Scales
-
-↓
-
-Body
-
-↓
-
-Scales proportionally.
+N1 --> N2
+N2 --> N3
+N3 --> N4
 ```
 
 Editorial relationships should remain immediately recognisable.
@@ -193,30 +191,28 @@ Examples.
 
 Correct.
 
-```
-Heading
+```mermaid
+flowchart TD
 
-↓
+N1["Heading"]
+N2["Weight"]
+N3["Spacing"]
+N4["Hierarchy"]
 
-Weight
-
-↓
-
-Spacing
-
-↓
-
-Hierarchy
+N1 --> N2
+N2 --> N3
+N3 --> N4
 ```
 
 Incorrect.
 
-```
-Heading
+```mermaid
+flowchart TD
 
-↓
+N1["Heading"]
+N2["Blue Text"]
 
-Blue Text
+N1 --> N2
 ```
 
 Colour may reinforce hierarchy.
@@ -556,15 +552,3 @@ regardless of:
 Typography succeeds when reading feels effortless.
 
 Accessibility ensures that effortless experience belongs to everyone.
-
----
-
-# Review Status
-
-**Status**
-
-Draft
-
-**Next File**
-
-`08-runtime-resolution.md`

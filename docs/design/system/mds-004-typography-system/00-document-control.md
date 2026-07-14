@@ -3,7 +3,7 @@ File: docs/design/system/mds-004-typography-system/00-document-control.md
 Document: MDS-004
 Title: Typography System
 Status: Draft
-Version: 0.2
+Version: 0.4
 -->
 
 # Document Control
@@ -18,9 +18,9 @@ Version: 0.2
 | Title | Mosaic Design System — Typography System |
 | Classification | Internal |
 | Status | Draft |
-| Version | 0.1 |
-| Owner | Lead Design Systems Architect |
-| Parent Specifications | MDL-001 → MDL-005, MDS-001, MDS-002, MDS-003 |
+| Version | 0.4 |
+| Owner | AdamNi-7080 |
+| Parent Specifications | [MDL-001](../../language/mdl-001-vision/index.md) → [MDL-005](../../language/mdl-005-composition-model/index.md), [MDS-001](../mds-001-design-token-architecture/index.md), [MDS-002](../mds-002-colour-system/index.md), [MDS-003](../mds-003-material-system/index.md) |
 | Repository | `/design/mds/MDS-004 Typography System/` |
 
 ---
@@ -137,14 +137,14 @@ Typography should encourage users to read naturally rather than process interfac
 
 Before reading this specification contributors should already understand:
 
-- MDL-001 Vision
-- MDL-002 Principles
-- MDL-003 Mental Model
-- MDL-004 Interaction Model
-- MDL-005 Composition Model
-- MDS-001 Design Token Architecture
-- MDS-002 Colour System
-- MDS-003 Material System
+- [MDL-001 — Mosaic Design Language Vision](../../language/mdl-001-vision/index.md)
+- [MDL-002 — Principles](../../language/mdl-002-principles/index.md)
+- [MDL-003 — Mental Model](../../language/mdl-003-mental-model/index.md)
+- [MDL-004 — Interaction Model](../../language/mdl-004-interaction-model/index.md)
+- [MDL-005 — Composition Model](../../language/mdl-005-composition-model/index.md)
+- [MDS-001 — Design Token Architecture](../mds-001-design-token-architecture/index.md)
+- [MDS-002 — Colour System](../mds-002-colour-system/index.md)
+- [MDS-003 — Material System](../mds-003-material-system/index.md)
 
 Typography builds upon every one of these systems.
 
@@ -210,26 +210,3 @@ Users should remember:
 - the entertainment.
 
 They should rarely remember the typography itself.
-
----
-
-# Review Status
-
-**Status**
-
-Draft
-
-**Dependencies**
-
-- MDL-001 → MDL-005
-- MDS-001
-- MDS-002
-- MDS-003
-
-**Supersedes**
-
-None.
-
-**Next File**
-
-`01-typography-philosophy.md`

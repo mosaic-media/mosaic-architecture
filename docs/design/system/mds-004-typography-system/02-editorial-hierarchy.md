@@ -4,7 +4,7 @@ Document: MDS-004
 Chapter: 02
 Title: Editorial Hierarchy
 Status: Draft
-Version: 0.2
+Version: 0.4
 -->
 
 # Editorial Hierarchy
@@ -65,6 +65,7 @@ Traditional software instead presents information transactionally.
 Examples.
 
 ```
+
 Runtime
 
 Genre
@@ -80,20 +81,17 @@ Everything receives identical emphasis.
 
 Editorial Hierarchy instead tells a story.
 
-```
-Current Focus
+```mermaid
+flowchart TD
 
-↓
+N1["Current Focus"]
+N2["Current Progress"]
+N3["Supporting Information"]
+N4["Additional Context"]
 
-Current Progress
-
-↓
-
-Supporting Information
-
-↓
-
-Additional Context
+N1 --> N2
+N2 --> N3
+N3 --> N4
 ```
 
 The user reads naturally.
@@ -110,20 +108,17 @@ Never the reverse.
 
 Conceptually.
 
-```text
-Composition
+```mermaid
+flowchart TD
 
-↓
+N1["Composition"]
+N2["Editorial Hierarchy"]
+N3["Typography"]
+N4["Presentation"]
 
-Editorial Hierarchy
-
-↓
-
-Typography
-
-↓
-
-Presentation
+N1 --> N2
+N2 --> N3
+N3 --> N4
 ```
 
 The Composition determines:
@@ -142,28 +137,21 @@ Every Composition should establish one natural reading path.
 
 Typical order.
 
-```text
-Hero
+```mermaid
+flowchart TD
 
-↓
+N1["Hero"]
+N2["Primary Action"]
+N3["Supporting Information"]
+N4["Context"]
+N5["Relationships"]
+N6["Peripheral Information"]
 
-Primary Action
-
-↓
-
-Supporting Information
-
-↓
-
-Context
-
-↓
-
-Relationships
-
-↓
-
-Peripheral Information
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
+N5 --> N6
 ```
 
 Readers should never consciously search for the next piece of information.
@@ -176,28 +164,21 @@ Editorial Hierarchy should quietly guide them.
 
 The Typography System defines six editorial levels.
 
-```text
-Display
+```mermaid
+flowchart TD
 
-↓
+N1["Display"]
+N2["Heading"]
+N3["Section"]
+N4["Body"]
+N5["Supporting"]
+N6["Caption"]
 
-Heading
-
-↓
-
-Section
-
-↓
-
-Body
-
-↓
-
-Supporting
-
-↓
-
-Caption
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
+N5 --> N6
 ```
 
 Each level exists for one purpose.
@@ -330,6 +311,7 @@ Example.
 Current Context.
 
 ```
+
 Watching
 ```
 
@@ -344,6 +326,7 @@ Supporting.
 Later.
 
 ```
+
 Browsing Reviews
 ```
 
@@ -365,24 +348,19 @@ Editorial Hierarchy should work together with Breathing Space.
 
 Example.
 
-```
-Heading
+```mermaid
+flowchart TD
 
-↓
+N1["Heading"]
+N2["Space"]
+N3["Body"]
+N4["Space"]
+N5["Supporting"]
 
-Space
-
-↓
-
-Body
-
-↓
-
-Space
-
-↓
-
-Supporting
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
 ```
 
 Whitespace communicates editorial rhythm.
@@ -685,15 +663,3 @@ Typography should therefore feel less like interface chrome...
 ...and more like a carefully edited publication.
 
 That editorial quality is one of the defining characteristics of the Mosaic Design System.
-
----
-
-# Review Status
-
-**Status**
-
-Draft
-
-**Next File**
-
-`03-type-scale.md`

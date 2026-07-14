@@ -2,7 +2,7 @@
 File: docs/design/system/mds-004-typography-system/index.md
 Document: MDS-004
 Status: Draft
-Version: 0.2
+Version: 0.4
 -->
 
 # MDS-004 — Typography System
@@ -35,48 +35,31 @@ It is effortless understanding.
 
 # Relationship to Previous Specifications
 
-```text
-Vision
+```mermaid
+flowchart TD
 
-↓
+N1["Vision"]
+N2["Principles"]
+N3["Mental Model"]
+N4["Interaction"]
+N5["Composition"]
+N6["Design Tokens"]
+N7["Colour"]
+N8["Materials"]
+N9["Typography"]
+N10["Motion"]
+N11["Components"]
 
-Principles
-
-↓
-
-Mental Model
-
-↓
-
-Interaction
-
-↓
-
-Composition
-
-↓
-
-Design Tokens
-
-↓
-
-Colour
-
-↓
-
-Materials
-
-↓
-
-Typography
-
-↓
-
-Motion
-
-↓
-
-Components
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
+N5 --> N6
+N6 --> N7
+N7 --> N8
+N8 --> N9
+N9 --> N10
+N10 --> N11
 ```
 
 Typography consumes:
@@ -153,24 +136,19 @@ Not:
 
 Typography separates into several conceptual systems.
 
-```text
-Editorial Hierarchy
+```mermaid
+flowchart TD
 
-↓
+N1["Editorial Hierarchy"]
+N2["Reading Rhythm"]
+N3["Responsive Scaling"]
+N4["Runtime Adaptation"]
+N5["Presentation"]
 
-Reading Rhythm
-
-↓
-
-Responsive Scaling
-
-↓
-
-Runtime Adaptation
-
-↓
-
-Presentation
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
 ```
 
 Each layer contributes one responsibility.
@@ -231,9 +209,9 @@ design/
 
         13-contributor-guidance.md
 
-        glossary.md
-
         references.md
+
+        glossary.md
 ```
 
 ---
@@ -242,30 +220,14 @@ design/
 
 Required reading:
 
-- MDL-001 → MDL-005
-- MDS-001 Design Token Architecture
-- MDS-002 Colour System
-- MDS-003 Material System
+- [MDL-001](../../language/mdl-001-vision/index.md) → [MDL-005](../../language/mdl-005-composition-model/index.md)
+- [MDS-001 — Design Token Architecture](../mds-001-design-token-architecture/index.md)
+- [MDS-002 — Colour System](../mds-002-colour-system/index.md)
+- [MDS-003 — Material System](../mds-003-material-system/index.md)
 
 Downstream specifications:
 
-- MDS-005 Motion System
-- MDS-006 Composition Engine
-- MDS-007 Tile Framework
-- MDS-008 Component Library
-
----
-
-# Review Status
-
-**Status**
-
-Draft
-
-**Owner**
-
-Lead Design Systems Architect
-
-**Next File**
-
-`00-document-control.md`
+- [MDS-005 — Motion System](../mds-005-motion-system/index.md)
+- [MDS-006 — Composition Engine](../mds-006-composition-engine/index.md)
+- [MDS-007 — Tile Framework](../mds-007-tile-framework/index.md)
+- [MDS-008 — Component Library](../mds-008-component-library/index.md)

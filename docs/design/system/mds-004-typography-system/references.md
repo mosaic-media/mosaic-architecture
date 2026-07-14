@@ -3,7 +3,7 @@ File: docs/design/system/mds-004-typography-system/references.md
 Document: MDS-004
 Title: References
 Status: Draft
-Version: 0.2
+Version: 0.4
 -->
 
 # References
@@ -48,7 +48,7 @@ External references provide inspiration rather than specification.
 
 # Internal References
 
-## MDL-001 — Vision
+## [MDL-001 — Mosaic Design Language Vision](../../language/mdl-001-vision/index.md)
 
 Provides:
 
@@ -61,7 +61,7 @@ Typography should reinforce the feeling that the user is accompanied rather than
 
 ---
 
-## MDL-002 — Principles
+## [MDL-002 — Principles](../../language/mdl-002-principles/index.md)
 
 Provides:
 
@@ -74,7 +74,7 @@ Typography should strengthen these principles through language, hierarchy and rh
 
 ---
 
-## MDL-003 — Mental Model
+## [MDL-003 — Mental Model](../../language/mdl-003-mental-model/index.md)
 
 Provides:
 
@@ -89,7 +89,7 @@ It should never redefine them.
 
 ---
 
-## MDL-004 — Interaction Model
+## [MDL-004 — Interaction Model](../../language/mdl-004-interaction-model/index.md)
 
 Provides:
 
@@ -102,7 +102,7 @@ Editorial rhythm should reinforce behavioural continuity.
 
 ---
 
-## MDL-005 — Composition Model
+## [MDL-005 — Composition Model](../../language/mdl-005-composition-model/index.md)
 
 Provides:
 
@@ -118,7 +118,7 @@ It should never compete with it.
 
 ---
 
-## MDS-001 — Design Token Architecture
+## [MDS-001 — Design Token Architecture](../mds-001-design-token-architecture/index.md)
 
 Provides:
 
@@ -130,7 +130,7 @@ The Typography System consumes semantic roles rather than defining implementatio
 
 ---
 
-## MDS-002 — Colour System
+## [MDS-002 — Colour System](../mds-002-colour-system/index.md)
 
 Provides:
 
@@ -142,7 +142,7 @@ Typography should remain readable regardless of atmospheric adaptation.
 
 ---
 
-## MDS-003 — Material System
+## [MDS-003 — Material System](../mds-003-material-system/index.md)
 
 Provides:
 
@@ -161,10 +161,10 @@ Its rhythm should feel physically related to them.
 
 The following specifications directly depend upon MDS-004.
 
-- MDS-005 Motion System
-- MDS-006 Composition Engine
-- MDS-007 Tile Framework
-- MDS-008 Component Library
+- [MDS-005 — Motion System](../mds-005-motion-system/index.md)
+- [MDS-006 — Composition Engine](../mds-006-composition-engine/index.md)
+- [MDS-007 — Tile Framework](../mds-007-tile-framework/index.md)
+- [MDS-008 — Component Library](../mds-008-component-library/index.md)
 
 These specifications should consume Typography.
 
@@ -211,20 +211,17 @@ Accessibility is considered an architectural requirement.
 
 The Typography System assumes:
 
-```text
-Editorial Hierarchy
+```mermaid
+flowchart TD
 
-↓
+N1["Editorial Hierarchy"]
+N2["Accessibility"]
+N3["Runtime Resolution"]
+N4["Presentation"]
 
-Accessibility
-
-↓
-
-Runtime Resolution
-
-↓
-
-Presentation
+N1 --> N2
+N2 --> N3
+N3 --> N4
 ```
 
 This ordering ensures that readability always has higher priority than stylistic expression.
@@ -301,24 +298,19 @@ The Typography System represents the spoken voice of the Companion.
 
 Conceptually.
 
-```text
-Companion
+```mermaid
+flowchart TD
 
-↓
+N1["Companion"]
+N2["Editorial Language"]
+N3["Typography"]
+N4["Reading"]
+N5["Understanding"]
 
-Editorial Language
-
-↓
-
-Typography
-
-↓
-
-Reading
-
-↓
-
-Understanding
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
 ```
 
 This relationship should remain consistent throughout every Mosaic experience.
@@ -331,14 +323,14 @@ Typography is therefore considered behavioural as well as visual.
 
 Required reading before contributing to MDS-004.
 
-- MDL-001 Vision
-- MDL-002 Principles
-- MDL-003 Mental Model
-- MDL-004 Interaction Model
-- MDL-005 Composition Model
-- MDS-001 Design Token Architecture
-- MDS-002 Colour System
-- MDS-003 Material System
+- [MDL-001 — Mosaic Design Language Vision](../../language/mdl-001-vision/index.md)
+- [MDL-002 — Principles](../../language/mdl-002-principles/index.md)
+- [MDL-003 — Mental Model](../../language/mdl-003-mental-model/index.md)
+- [MDL-004 — Interaction Model](../../language/mdl-004-interaction-model/index.md)
+- [MDL-005 — Composition Model](../../language/mdl-005-composition-model/index.md)
+- [MDS-001 — Design Token Architecture](../mds-001-design-token-architecture/index.md)
+- [MDS-002 — Colour System](../mds-002-colour-system/index.md)
+- [MDS-003 — Material System](../mds-003-material-system/index.md)
 
 Together these specifications define the conceptual foundation of the Typography System.
 
@@ -348,10 +340,10 @@ Together these specifications define the conceptual foundation of the Typography
 
 Future contributors may also wish to review:
 
-- MDS-005 Motion System
-- MDS-006 Composition Engine
-- MDS-007 Tile Framework
-- MDS-008 Component Library
+- [MDS-005 — Motion System](../mds-005-motion-system/index.md)
+- [MDS-006 — Composition Engine](../mds-006-composition-engine/index.md)
+- [MDS-007 — Tile Framework](../mds-007-tile-framework/index.md)
+- [MDS-008 — Component Library](../mds-008-component-library/index.md)
 
 These specifications describe how typography participates in interaction, composition and presentation.
 
@@ -378,9 +370,9 @@ This concludes **MDS-004 — Typography System**.
 
 The next specification in the Mosaic Design System is:
 
-> **MDS-005 — Motion System**
+> **[MDS-005 — Motion System](../mds-005-motion-system/index.md)**
 
-Where MDS-004 defines **how the Companion speaks**, MDS-005 defines **how the world moves**.
+Where MDS-004 defines **how the Companion speaks**, [MDS-005](../mds-005-motion-system/index.md) defines **how the world moves**.
 
 It formalises:
 

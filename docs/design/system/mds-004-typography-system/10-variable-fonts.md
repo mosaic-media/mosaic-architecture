@@ -4,7 +4,7 @@ Document: MDS-004
 Chapter: 10
 Title: Variable Fonts
 Status: Draft
-Version: 0.2
+Version: 0.4
 -->
 
 # Variable Fonts
@@ -72,6 +72,7 @@ Traditional typography requires discrete font files.
 Examples.
 
 ```
+
 Regular
 
 Medium
@@ -85,30 +86,19 @@ Variable Fonts instead expose continuous typographic behaviour.
 
 Conceptually.
 
-```text
-Weight
+```mermaid
+flowchart TD
 
-↓
+N1["Weight"]
+N2["Continuous<br/>Width"]
+N3["Continuous<br/>Optical Size"]
+N4["Continuous<br/>Grade"]
+N5["Continuous"]
 
-Continuous
-
-Width
-
-↓
-
-Continuous
-
-Optical Size
-
-↓
-
-Continuous
-
-Grade
-
-↓
-
-Continuous
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
 ```
 
 The Typography Resolver determines appropriate values.
@@ -121,20 +111,17 @@ Applications remain unaware of these details.
 
 The Typography System currently recognises the following conceptual variable axes.
 
-```
-Weight
+```mermaid
+flowchart TD
 
-↓
+N1["Weight"]
+N2["Width"]
+N3["Optical Size"]
+N4["Grade"]
 
-Width
-
-↓
-
-Optical Size
-
-↓
-
-Grade
+N1 --> N2
+N2 --> N3
+N3 --> N4
 ```
 
 Future axes may be supported provided they reinforce editorial understanding rather than visual novelty.
@@ -149,20 +136,22 @@ Communicate hierarchy.
 
 Examples.
 
+```mermaid
+flowchart TD
+
+N1["Heading"]
+N2["Higher Weight"]
+
+N1 --> N2
 ```
-Heading
 
-↓
+```mermaid
+flowchart TD
 
-Higher Weight
-```
+N1["Body"]
+N2["Moderate Weight"]
 
-```
-Body
-
-↓
-
-Moderate Weight
+N1 --> N2
 ```
 
 Weight should communicate confidence rather than heaviness.
@@ -272,12 +261,13 @@ Materials carry environmental adaptation.
 
 One of the strongest guarantees within Mosaic is:
 
-```text
-Heading
+```mermaid
+flowchart TD
 
-↓
+N1["Heading"]
+N2["Always Heading"]
 
-Always Heading
+N1 --> N2
 ```
 
 Variable Font adjustments should never change editorial meaning.
@@ -404,24 +394,19 @@ Variable Fonts should participate within Runtime Typography Resolution.
 
 Conceptually.
 
-```text
-Editorial Role
+```mermaid
+flowchart TD
 
-↓
+N1["Editorial Role"]
+N2["Typography Resolver"]
+N3["Variable Font Axes"]
+N4["Resolved Typography"]
+N5["Presentation"]
 
-Typography Resolver
-
-↓
-
-Variable Font Axes
-
-↓
-
-Resolved Typography
-
-↓
-
-Presentation
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
 ```
 
 Applications request editorial intent.
@@ -602,15 +587,3 @@ Readers should simply experience typography that always feels comfortable, calm 
 The technology exists to serve the editorial language.
 
 Never to replace it.
-
----
-
-# Review Status
-
-**Status**
-
-Draft
-
-**Next File**
-
-`11-governance.md`
