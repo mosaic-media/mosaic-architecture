@@ -1,0 +1,367 @@
+<!--
+File: engineering/meg/MEG-006 Extension Platform/references.md
+Document: MEG-006
+Status: Draft
+Version: 0.1
+-->
+
+# References
+
+> *The Extension Platform is built upon decades of experience in plugin architectures, capability systems and software platforms, adapted into a capability-oriented ecosystem for Mosaic.*
+
+---
+
+# Purpose
+
+This document records the primary references that influenced the Extension Platform described throughout MEG-006.
+
+Unlike a traditional plugin system, the Mosaic Extension Platform combines ideas from:
+
+- Plugin Architecture
+- Microkernel Architecture
+- Capability-Oriented Design
+- Manifest-Driven Platforms
+- SDK Design
+- Runtime Composition
+
+into a single platform model.
+
+The objective is not to imitate existing systems.
+
+It is to adapt proven architectural principles into a platform capable of evolving for many years.
+
+---
+
+# Primary References
+
+## Eclipse Plugin Architecture
+
+The Eclipse Platform remains one of the most influential plugin architectures ever developed.
+
+Relevant concepts include:
+
+- plugin manifests
+- extension points
+- plugin registry
+- runtime discovery
+- deployment-time composition
+
+Many architectural ideas behind capability discovery and registration align closely with Eclipse's plugin registry, although Mosaic replaces extension points with capability contracts.  [oai_citation:0‡Eclipse Foundation](https://www.eclipse.org/articles/Article-Plug-in-architecture/plugin_architecture.html?utm_source=chatgpt.com)
+
+---
+
+## Microkernel Architecture
+
+Microkernel architecture strongly influenced:
+
+- Runtime Kernel
+- Runtime Services
+- Extension isolation
+- capability loading
+
+Within Mosaic:
+
+The Runtime remains intentionally small.
+
+Capabilities provide platform functionality.
+
+This mirrors the architectural philosophy of microkernel operating systems while adapting it to an application platform.  [oai_citation:1‡arc42 Quality Model](https://quality.arc42.org/approaches/plugin-architecture?utm_source=chatgpt.com)
+
+---
+
+# Manifest-Driven Platforms
+
+## Manifest-First Discovery
+
+Modern extension platforms increasingly separate:
+
+- discovery
+- validation
+- activation
+- execution
+
+through machine-readable manifests.
+
+This strongly influenced:
+
+- Capability Manifest
+- Discovery
+- Registration
+- Dependency Resolution
+
+Within Mosaic, manifests are intentionally treated as architectural contracts rather than implementation details.  [oai_citation:2‡OpenClaw](https://docs.openclaw.ai/plugins/architecture-internals?utm_source=chatgpt.com)
+
+---
+
+## Extension Manifests
+
+Modern browser extension ecosystems demonstrate the value of:
+
+- explicit permissions
+- declarative metadata
+- schema validation
+- compatibility checking
+
+Many permission and manifest concepts within MEG-006 were inspired by these approaches while remaining platform agnostic.  [oai_citation:3‡emdashcms.org](https://emdashcms.org/learn/plugin-system?utm_source=chatgpt.com)
+
+---
+
+# SDK Design
+
+The Extension SDK intentionally follows long-established SDK principles.
+
+Relevant concepts include:
+
+- stable contracts
+- implementation hiding
+- backwards compatibility
+- explicit versioning
+
+The SDK should remain considerably more stable than the Runtime implementation beneath it.
+
+This separation protects extension authors from internal Runtime evolution.
+
+---
+
+# Dependency Management
+
+Dependency Resolution within Mosaic draws inspiration from plugin systems that:
+
+- validate dependency graphs
+- detect cycles
+- resolve versions
+- construct activation order
+
+The Runtime intentionally performs these operations before executing capability code.  [oai_citation:4‡GitHub](https://ithub.global.ssl.fastly.net/open-gsd/gsd-core/blob/next/docs/reference/capability-manifest.md?utm_source=chatgpt.com)
+
+---
+
+# Capability-Oriented Design
+
+Although "Capability-Oriented Architecture" is not yet a widely standardised software architecture term, several modern platforms have independently converged upon similar ideas.
+
+Common themes include:
+
+- capability discovery
+- capability registries
+- manifest-driven execution
+- contract-based integration
+- runtime validation
+
+Mosaic extends these ideas into a unified Runtime Architecture centred around independently evolving business capabilities.  [oai_citation:5‡Extentos](https://extentos.com/docs/concepts/capabilities?utm_source=chatgpt.com)
+
+---
+
+# Software Engineering References
+
+## Domain-Driven Design
+
+**Author**
+
+Eric Evans
+
+The Extension Platform deliberately preserves the Domain boundaries defined in MEG-003.
+
+Capabilities own:
+
+- business behaviour
+- business language
+- business state
+
+The Runtime owns execution.
+
+---
+
+## Hexagonal Architecture
+
+**Author**
+
+Alistair Cockburn
+
+The Extension Platform builds directly upon:
+
+- Ports
+- Adapters
+- dependency inversion
+- infrastructure isolation
+
+Extensions communicate exclusively through Runtime contracts.
+
+Runtime implementation remains hidden.
+
+---
+
+## Clean Architecture
+
+**Author**
+
+Robert C. Martin
+
+Referenced primarily for:
+
+- dependency direction
+- policy vs implementation
+- long-term maintainability
+
+Many Runtime contracts intentionally reinforce these architectural principles.
+
+---
+
+# Go References
+
+The Extension SDK intentionally embraces idiomatic Go.
+
+Recommended references include:
+
+## Effective Go
+
+Topics include:
+
+- interfaces
+- package design
+- composition
+- explicit construction
+
+https://go.dev/doc/effective_go
+
+---
+
+## Go Code Review Comments
+
+Topics include:
+
+- interface ownership
+- dependency management
+- package boundaries
+
+https://go.dev/wiki/CodeReviewComments
+
+---
+
+# Internal Mosaic Specifications
+
+The following specifications complement MEG-006.
+
+## Engineering
+
+- MEG-001 Go Engineering Standards
+- MEG-002 Reactive Runtime
+- MEG-003 Domain-Driven Design
+- MEG-004 Hexagonal Architecture
+- MEG-005 Runtime Architecture
+
+---
+
+## Planned Engineering Specifications
+
+- MEG-007 Storage Architecture
+- MEG-008 Observability
+- MEG-009 Security
+- MEG-010 Performance Engineering
+
+---
+
+## Mosaic Design Language
+
+- MDL-001 Vision
+- MDL-002 Principles
+- MDL-003 Mental Model
+- MDL-004 Interaction Model
+- MDL-005 Composition Model
+
+---
+
+## Mosaic Design Specifications
+
+- MDS-001 Design Token Architecture
+- MDS-002 Colour System
+- MDS-003 Material System
+- MDS-004 Typography System
+- MDS-005 Motion System
+- MDS-006 Composition Engine
+- MDS-007 Tile Framework
+- MDS-008 Component Library
+
+---
+
+# Platform Principles
+
+The Extension Platform established throughout MEG-006 intentionally builds upon several enduring architectural principles.
+
+These include:
+
+- The Runtime remains small.
+- Capabilities provide business value.
+- Discovery precedes execution.
+- Manifests define contracts.
+- SDKs hide implementation.
+- Permissions follow least privilege.
+- Dependencies remain explicit.
+- Capabilities remain independently deployable.
+- Core and extensions are architectural equals.
+- Platform growth occurs through composition rather than modification.
+
+These principles should remain considerably more stable than the implementation techniques used to realise them.
+
+---
+
+# Keeping References Current
+
+Extension platforms continue to evolve.
+
+Marketplace ecosystems continue to mature.
+
+Manifest standards continue to improve.
+
+This reference list SHOULD therefore be reviewed periodically to ensure:
+
+- architectural guidance remains relevant
+- obsolete practices are removed
+- better ecosystem patterns are incorporated
+
+The platform philosophy should remain stable even as extension technology evolves.
+
+---
+
+# Closing Statement
+
+MEG-006 intentionally does not describe a traditional plugin framework.
+
+Instead, it describes an ecosystem architecture built around independently evolving capabilities.
+
+The resulting Extension Platform intentionally emphasises:
+
+- capability-oriented design
+- manifest-first discovery
+- Runtime stability
+- SDK contracts
+- explicit permissions
+- long-term ecosystem evolution
+
+Every future capability should integrate into the platform by satisfying Runtime contracts rather than modifying Runtime implementation.
+
+The Runtime provides execution.
+
+Capabilities provide value.
+
+The platform exists so that those capabilities can continue evolving long after the Runtime itself has stabilised.
+
+---
+
+# Review Status
+
+**Status**
+
+Draft
+
+**Owner**
+
+Lead Software Architect
+
+**Previous File**
+
+`glossary.md`
+
+**Next File**
+
+**End of Specification**

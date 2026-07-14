@@ -1,0 +1,7 @@
+title: Extension Platform
+arrange:
+  - index.md
+  - 00-document-control.md
+  - ...
+  - glossary.md
+  - references.md
