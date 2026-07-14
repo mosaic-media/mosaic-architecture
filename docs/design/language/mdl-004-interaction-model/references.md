@@ -3,7 +3,7 @@ File: docs/design/language/mdl-004-interaction-model/references.md
 Document: MDL-004
 Title: References
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # References
@@ -254,7 +254,7 @@ Major behavioural discoveries included:
 - Context changes are more common than Focus changes.
 - Movement exists to preserve understanding.
 - Composition evolves continuously.
-- Plugins participate in behaviour rather than defining it.
+- Modules participate in behaviour rather than defining it.
 
 These discoveries distinguish the Mosaic Interaction Model from traditional page-based applications.
 

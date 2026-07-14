@@ -4,7 +4,7 @@ Document: MDS-003
 Chapter: 04
 Title: Acrylic
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Acrylic
@@ -440,11 +440,11 @@ Users should experience premium materials without perceiving computational cost.
 
 ---
 
-# Plugins
+# Modules
 
-Extensions never define Acrylic.
+Modules never define Acrylic.
 
-Plugins contribute:
+Modules contribute:
 
 - Information,
 - Artwork,
@@ -452,7 +452,7 @@ Plugins contribute:
 
 The Material System determines how Acrylic behaves.
 
-This guarantees every extension inherits the same physical language.
+This guarantees every module inherits the same physical language.
 
 ---
 

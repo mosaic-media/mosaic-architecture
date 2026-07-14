@@ -2,7 +2,7 @@
 File: docs/engineering/guides/meg-004-hexagonal-architecture/09-composition-root.md
 Document: MEG-004
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Composition Root
@@ -52,7 +52,7 @@ The Composition Root is the only location where:
 
 Every other part of the application remains unaware of concrete implementations.
 
-The Composition Root is a single, logical location where an application's object graph is assembled.  [oai_citation:0‡R2 Dev](https://pub-979cff47d4d84105ade2d75c354ef020.r2.dev/Dependency%20Injection%20Principles.pdf?utm_source=chatgpt.com)
+The Composition Root is a single, logical location where an application's object graph is assembled.  [R2 Dev](https://pub-979cff47d4d84105ade2d75c354ef020.r2.dev/Dependency%20Injection%20Principles.pdf)
 
 ---
 
@@ -244,7 +244,7 @@ Explicit construction is:
 - easier to understand
 - easier to test
 
-The Go ecosystem generally favours explicit wiring over runtime dependency injection containers.  [oai_citation:1‡R2 Dev](https://pub-979cff47d4d84105ade2d75c354ef020.r2.dev/Dependency%20Injection%20Principles.pdf?utm_source=chatgpt.com)
+The Go ecosystem generally favours explicit wiring over runtime dependency injection containers.  [R2 Dev](https://pub-979cff47d4d84105ade2d75c354ef020.r2.dev/Dependency%20Injection%20Principles.pdf)
 
 ---
 

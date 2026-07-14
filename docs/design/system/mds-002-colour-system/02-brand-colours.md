@@ -4,7 +4,7 @@ Document: MDS-002
 Chapter: 02
 Title: Brand Colours
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Brand Colours
@@ -269,7 +269,7 @@ Future Mosaic products should inherit the same Brand Architecture.
 Examples include:
 
 ```
-Mosaic Core
+Mosaic Platform
 
 ↓
 

@@ -4,7 +4,7 @@ Document: MDL-002
 Chapter: 11
 Title: Principle Governance
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Principle Governance
@@ -252,7 +252,7 @@ Future contributors should understand:
 - why it changed
 - what replaced it
 
-Maintaining decision history is a common governance practice because it preserves architectural reasoning rather than only documenting the latest state.  [oai_citation:0‡Ramotion](https://www.ramotion.com/blog/design-system-guide-chapter-2-principles-and-governance/?utm_source=chatgpt.com)
+Maintaining decision history is a common governance practice because it preserves architectural reasoning rather than only documenting the latest state.  [Ramotion](https://www.ramotion.com/blog/design-system-guide-chapter-2-principles-and-governance/)
 
 ---
 

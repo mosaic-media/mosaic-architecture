@@ -4,7 +4,7 @@ Document: MDL-004
 Chapter: 10
 Title: User Behaviour vs System Behaviour
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # User Behaviour vs System Behaviour
@@ -198,7 +198,7 @@ Provider synchronising...
 
 Relationship graph rebuilding...
 
-Loading plugins...
+Loading modules...
 ```
 
 The platform has leaked implementation.
@@ -254,7 +254,7 @@ Good examples.
 - metadata refresh
 - artwork updates
 - relationship indexing
-- plugin synchronisation
+- module synchronisation
 
 These should generally occur in the background.
 
@@ -307,15 +307,15 @@ The Interaction Model therefore governs experience rather than implementation.
 
 ---
 
-# Plugins
+# Modules
 
-Extensions should contribute capability.
+Modules should contribute capability.
 
 They should never redefine behavioural expectations.
 
 For example.
 
-Anime Plugin.
+Anime Module.
 
 System Behaviour.
 
@@ -335,7 +335,7 @@ User Behaviour.
 Continue Watching.
 ```
 
-Every plugin should reinforce the same behavioural language.
+Every module should reinforce the same behavioural language.
 
 ---
 
@@ -362,7 +362,7 @@ when attempting ordinary entertainment tasks.
 
 ## Behaviour Fragmentation
 
-Different plugins introduce different interaction expectations.
+Different modules introduce different interaction expectations.
 
 Users must continually relearn behaviour.
 

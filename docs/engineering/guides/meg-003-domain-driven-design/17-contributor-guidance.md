@@ -2,7 +2,7 @@
 File: docs/engineering/guides/meg-003-domain-driven-design/17-contributor-guidance.md
 Document: MEG-003
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Contributor Guidance
@@ -156,7 +156,7 @@ Ask:
 
 Only if the answer is "no" should a Domain Service be introduced.
 
-Large numbers of Domain Services usually indicate weak Aggregate modelling.  [oai_citation:0‡Reddit](https://www.reddit.com/r/DomainDrivenDesign/comments/1sgqsv8/most_ddd_advice_starts_in_the_wrong_place/?utm_source=chatgpt.com)
+Large numbers of Domain Services usually indicate weak Aggregate modelling.  [Reddit](https://www.reddit.com/r/DomainDrivenDesign/comments/1sgqsv8/most_ddd_advice_starts_in_the_wrong_place/)
 
 ---
 

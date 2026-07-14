@@ -4,7 +4,7 @@ Document: MDS-006
 Chapter: 04
 Title: Expression Resolution
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Expression Resolution
@@ -530,19 +530,19 @@ Determinism enables:
 
 ---
 
-# Plugins
+# Modules
 
-Extensions contribute:
+Modules contribute:
 
 - information,
 - relationships,
 - behaviours.
 
-Plugins never contribute Expressions.
+Modules never contribute Expressions.
 
 The Composition Engine determines which Expressions exist.
 
-Every extension therefore inherits the same conceptual language.
+Every module therefore inherits the same conceptual language.
 
 ---
 
@@ -626,9 +626,9 @@ Different platforms inventing different conceptual Expressions.
 
 ---
 
-## Plugin Expressions
+## Module Expressions
 
-Extensions defining custom interface structures.
+Modules defining custom interface structures.
 
 ---
 

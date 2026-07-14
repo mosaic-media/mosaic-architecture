@@ -2,7 +2,7 @@
 File: docs/engineering/documentation/mdg-001-documentation-authority-guide/11-glossary.md
 Document: MDG-001
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # 11 — Glossary
@@ -177,7 +177,7 @@ A statically compiled unit of functionality contributing capabilities to the Mos
 
 Modules are ordinary Go projects built against the Mosaic SDK.
 
-Modules are not runtime plugins.
+Modules are not runtime modules.
 
 ---
 

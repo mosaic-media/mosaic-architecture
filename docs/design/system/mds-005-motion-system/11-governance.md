@@ -4,7 +4,7 @@ Document: MDS-005
 Chapter: 11
 Title: Motion System Governance
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Motion System Governance
@@ -262,16 +262,16 @@ Behaviour must remain recognisably Mosaic.
 
 ---
 
-# Plugin Governance
+# Module Governance
 
-Extensions must never introduce:
+Modules must never introduce:
 
 - independent animation systems,
 - custom transition languages,
 - proprietary Material Motion,
 - alternative behavioural timing.
 
-Plugins contribute:
+Modules contribute:
 
 - behavioural events,
 - information,
@@ -361,7 +361,7 @@ Only understanding should remain.
 | ADR-135 | Behaviour always precedes movement. |
 | ADR-136 | Runtime Motion Resolution owns implementation while preserving behavioural meaning. |
 | ADR-137 | Accessibility always has higher authority than animation fidelity. |
-| ADR-138 | Extensions inherit the Motion System rather than extending it. |
+| ADR-138 | Modules inherit the Motion System rather than extending it. |
 
 ---
 

@@ -2,7 +2,7 @@
 File: docs/engineering/guides/meg-001-go-engineering-standards/16-boy-scout-rule.md
 Document: MEG-001
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # The Boy Scout Rule
@@ -21,7 +21,7 @@ The Boy Scout Rule provides a simple philosophy for maintaining long-lived softw
 
 Every change, regardless of size, should improve the codebase in some measurable way.
 
-Within Mosaic, this principle is considered a core engineering responsibility.
+Within Mosaic, this principle is considered a fundamental engineering responsibility.
 
 ---
 

@@ -3,7 +3,7 @@ File: docs/design/system/mds-002-colour-system/references.md
 Document: MDS-002
 Title: References
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # References

@@ -2,7 +2,7 @@
 File: docs/engineering/guides/meg-007-storage-architecture/00-document-control.md
 Document: MEG-007
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Document Control
@@ -110,7 +110,7 @@ Specifically:
 - **MEG-003** defines business modelling.
 - **MEG-004** defines dependency boundaries.
 - **MEG-005** defines Runtime Architecture.
-- **MEG-006** defines the Extension Platform.
+- **MEG-006** defines the Module Platform.
 - **MEG-007** defines Storage Architecture.
 
 Together they establish both how the platform behaves and how that behaviour is persisted.
@@ -250,7 +250,7 @@ It does **not** define:
 
 - business behaviour
 - runtime execution
-- extension lifecycle
+- module lifecycle
 - deployment topology
 
 Those concerns belong to other engineering specifications.

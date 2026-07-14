@@ -4,7 +4,7 @@ Document: MDS-002
 Chapter: 06
 Title: Theme Architecture
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Theme Architecture
@@ -453,20 +453,20 @@ Only presentation adapts.
 
 ---
 
-# Plugins
+# Modules
 
-Extensions should never provide themes.
+Modules should never provide themes.
 
 They consume them.
 
-Plugins inherit:
+Modules inherit:
 
 - Semantic Colours
 - Runtime Atmosphere
 - Accessibility
 - Brand
 
-This ensures every extension automatically participates in future redesigns.
+This ensures every module automatically participates in future redesigns.
 
 ---
 
@@ -538,9 +538,9 @@ Recognition decreases.
 
 ---
 
-## Plugin Themes
+## Module Themes
 
-Extensions introducing independent visual identities.
+Modules introducing independent visual identities.
 
 The ecosystem fragments.
 

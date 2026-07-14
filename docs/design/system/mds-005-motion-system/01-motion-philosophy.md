@@ -4,7 +4,7 @@ Document: MDS-005
 Chapter: 01
 Title: Motion Philosophy
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Motion Philosophy

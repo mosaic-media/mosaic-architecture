@@ -4,7 +4,7 @@ Document: MDS-002
 Chapter: 03
 Title: Semantic Colours
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Semantic Colours

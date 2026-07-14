@@ -2,7 +2,7 @@
 File: docs/engineering/guides/meg-001-go-engineering-standards/11-testing.md
 Document: MEG-001
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Testing
@@ -240,10 +240,10 @@ Benefits include:
 
 - reduced duplication
 - improved readability
-- easier extension
+- easier module
 - consistent structure
 
-Table-driven testing is an established Go convention. ([go.dev](https://go.dev/wiki/TableDrivenTests?utm_source=chatgpt.com))
+Table-driven testing is an established Go convention. ([go.dev](https://go.dev/wiki/TableDrivenTests))
 
 ---
 
@@ -388,7 +388,7 @@ go test -race ./...
 
 The race detector identifies concurrent access to shared memory before defects reach production.
 
-Concurrent code without race testing should be considered incomplete. The Go race detector is specifically designed to uncover data races during testing. ([go.dev](https://go.dev/doc/articles/race_detector?utm_source=chatgpt.com))
+Concurrent code without race testing should be considered incomplete. The Go race detector is specifically designed to uncover data races during testing. ([go.dev](https://go.dev/doc/articles/race_detector))
 
 ---
 

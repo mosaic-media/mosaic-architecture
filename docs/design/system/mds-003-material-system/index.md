@@ -2,7 +2,7 @@
 File: docs/design/system/mds-003-material-system/index.md
 Document: MDS-003
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # MDS-003 — Material System
@@ -131,7 +131,7 @@ They do not define them.
 
 ---
 
-# Core Question
+# Guiding Question
 
 MDS-003 exists to answer one question.
 

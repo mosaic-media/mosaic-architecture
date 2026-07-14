@@ -2,7 +2,7 @@
 File: docs/engineering/guides/meg-001-go-engineering-standards/18-contributor-guidance.md
 Document: MEG-001
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Contributor Guidance
@@ -157,7 +157,7 @@ Every contributor SHOULD complete the following checklist.
 - ADR referenced if applicable.
 - Architecture documentation updated if required.
 
-Go expects exported packages and exported identifiers to have documentation comments. Documentation is part of the public API, not an optional extra.  [oai_citation:0‡Go](https://go.dev/doc/comment?utm_source=chatgpt.com)
+Go expects exported packages and exported identifiers to have documentation comments. Documentation is part of the public API, not an optional extra.  [Go](https://go.dev/doc/comment)
 
 ---
 

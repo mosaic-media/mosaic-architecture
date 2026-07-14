@@ -4,7 +4,7 @@ Document: MDS-006
 Chapter: 13
 Title: Contributor Guidance
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Contributor Guidance
@@ -286,16 +286,16 @@ Only presentation should adapt.
 
 ---
 
-# Plugins Enrich Worlds
+# Modules Enrich Worlds
 
-Extensions should contribute:
+Modules should contribute:
 
 - information,
 - relationships,
 - behaviour,
 - capabilities.
 
-Plugins should never attempt to solve:
+Modules should never attempt to solve:
 
 - hierarchy,
 - composition,
@@ -418,9 +418,9 @@ Building independent runtime models for different clients.
 
 ---
 
-### Plugin Ownership
+### Module Ownership
 
-Allowing extensions to bypass the Composition Engine.
+Allowing modules to bypass the Composition Engine.
 
 ---
 

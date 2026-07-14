@@ -4,7 +4,7 @@ Document: MDL-005
 Chapter: 03
 Title: Priority
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Priority
@@ -17,7 +17,7 @@ Hierarchy determines **how understanding is organised**.
 
 Priority determines **why one piece of information deserves more attention than another**.
 
-Priority is one of the core behavioural inputs to the Composition Model.
+Priority is one of the Platform foundation behavioural inputs to the Composition Model.
 
 Without Priority, every Composition becomes arbitrary.
 
@@ -373,9 +373,9 @@ It does not determine it.
 
 ---
 
-# Priority And Plugins
+# Priority And Modules
 
-Extensions should never assign visual priority.
+Modules should never assign visual priority.
 
 Instead they contribute Information.
 
@@ -387,7 +387,7 @@ The platform evaluates Priority using:
 - temporal relevance
 - user intent
 
-This ensures every plugin behaves consistently.
+This ensures every module behaves consistently.
 
 ---
 

@@ -2,7 +2,7 @@
 File: docs/engineering/guides/meg-005-runtime-architecture/13-runtime-modelling-guidelines.md
 Document: MEG-005
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Runtime Modelling Guidelines
@@ -492,7 +492,7 @@ Simple diagrams frequently reveal:
 
 Architecture should become obvious before code exists.
 
-Good architecture documentation should clearly communicate component responsibilities and interactions while remaining easy to evolve alongside the system.  [oai_citation:0‡Qt](https://www.qt.io/software-insights/best-practices-for-architecture-documentation?utm_source=chatgpt.com)
+Good architecture documentation should clearly communicate component responsibilities and interactions while remaining easy to evolve alongside the system.  [Qt](https://www.qt.io/software-insights/best-practices-for-architecture-documentation)
 
 ---
 
@@ -559,7 +559,7 @@ The remaining documents describe:
 - terminology
 - references
 
-The next specification, **MEG-006 – Extension Platform**, will build directly upon this Runtime Architecture by defining how third-party capabilities integrate into the Runtime without modifying it.
+The next specification, **MEG-006 – Module Platform**, will build directly upon this Runtime Architecture by defining how third-party capabilities integrate into the Runtime without modifying it.
 
 ---
 

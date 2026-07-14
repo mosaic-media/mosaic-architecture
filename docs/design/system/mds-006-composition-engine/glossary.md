@@ -3,7 +3,7 @@ File: docs/design/system/mds-006-composition-engine/glossary.md
 Document: MDS-006
 Title: Glossary
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Glossary

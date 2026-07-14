@@ -2,7 +2,7 @@
 File: docs/design/system/mds-006-composition-engine/index.md
 Document: MDS-006
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # MDS-006 — Composition Engine
@@ -142,7 +142,7 @@ The Composition Engine constructs experience.
 
 ---
 
-# Core Question
+# Guiding Question
 
 MDS-006 exists to answer one question.
 

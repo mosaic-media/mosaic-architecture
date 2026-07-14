@@ -2,7 +2,7 @@
 File: docs/engineering/guides/meg-005-runtime-architecture/16-references.md
 Document: MEG-005
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # References
@@ -124,7 +124,7 @@ The Runtime itself remains infrastructure.
 
 Its relationship with the Domain follows the Ports and Adapters principles established in MEG-004.
 
-Runtime Services expose capabilities through contracts rather than direct implementation dependencies.  [oai_citation:0‡Wikipedia](https://en.wikipedia.org/wiki/Hexagonal_architecture_%28software%29?utm_source=chatgpt.com)
+Runtime Services expose capabilities through contracts rather than direct implementation dependencies.  [Wikipedia](https://en.wikipedia.org/wiki/Hexagonal_architecture_%28software%29)
 
 ---
 
@@ -143,7 +143,7 @@ The Runtime Composition Root follows the principles of:
 - centralised construction
 - constructor injection
 
-Every Runtime executable assembles its object graph explicitly during startup.  [oai_citation:1‡blog.ploeh.dk](https://blog.ploeh.dk/2011/07/28/CompositionRoot/?utm_source=chatgpt.com)
+Every Runtime executable assembles its object graph explicitly during startup.  [blog.ploeh.dk](https://blog.ploeh.dk/2011/07/28/CompositionRoot/)
 
 ---
 
@@ -248,7 +248,7 @@ The following specifications complement MEG-005.
 
 ## Planned Engineering Specifications
 
-- MEG-006 Extension Platform
+- MEG-006 Module Platform
 - MEG-007 Storage Architecture
 - MEG-008 Observability
 - MEG-009 Security

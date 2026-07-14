@@ -4,7 +4,7 @@ Document: MDL-001
 Chapter: 01
 Title: Background & Problem Statement
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Background & Problem Statement
@@ -103,7 +103,7 @@ Even seemingly insignificant actions require users to:
 - understand visual hierarchy
 - identify where they were before
 
-Research into media multitasking consistently demonstrates that people switch between digital content extremely frequently, often without consciously recognising how often those interruptions occur. These switches impose measurable cognitive overhead and fragment attention.  [oai_citation:0‡PMC](https://pmc.ncbi.nlm.nih.gov/articles/PMC3171998/?utm_source=chatgpt.com)
+Research into media multitasking consistently demonstrates that people switch between digital content extremely frequently, often without consciously recognising how often those interruptions occur. These switches impose measurable cognitive overhead and fragment attention.  [PMC](https://pmc.ncbi.nlm.nih.gov/articles/PMC3171998/)
 
 For Mosaic, every unnecessary context switch is considered design friction.
 
@@ -266,7 +266,7 @@ If management becomes more important than enjoyment, the proposal should be reco
 
 ---
 
-# Core Design Challenge
+# Design Challenge
 
 The central challenge addressed by Mosaic can be represented as follows.
 

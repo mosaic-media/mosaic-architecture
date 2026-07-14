@@ -2,7 +2,7 @@
 File: docs/engineering/documentation/mdg-001-documentation-authority-guide/04-writing-standards.md
 Document: MDG-001
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # 04 — Writing Standards
@@ -80,7 +80,7 @@ For example:
 | Preferred | Avoid |
 |-----------|-------|
 | Platform | Core (unless historically required) |
-| Module | Plugin, Extension |
+| Module | Extension, Plugin |
 | Capability | Service, Feature |
 | Provider | Adapter (unless referring specifically to Hexagonal Architecture) |
 | Supervisor | Runtime Manager |

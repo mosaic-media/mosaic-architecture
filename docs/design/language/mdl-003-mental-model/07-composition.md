@@ -4,7 +4,7 @@ Document: MDL-003
 Chapter: 07
 Title: Composition
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Composition
@@ -268,7 +268,7 @@ Downloads
 
 News
 
-Plugins
+Modules
 
 Friends
 
@@ -413,7 +413,7 @@ Progress
 
 ↓
 
-Plugin
+Module
 
 ↓
 

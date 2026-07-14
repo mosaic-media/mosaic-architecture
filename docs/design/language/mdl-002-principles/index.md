@@ -2,7 +2,7 @@
 File: docs/design/language/mdl-002-principles/index.md
 Document: MDL-002
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # MDL-002 — Principles
@@ -121,7 +121,7 @@ This specification contains:
 
 # The Seven Principles
 
-The Mosaic Design Language is currently governed by seven core principles.
+The Mosaic Design Language is currently governed by seven governing principles.
 
 1. Context Before Prediction
 2. Enhancement Before Persuasion
@@ -136,7 +136,7 @@ These principles intentionally describe behaviour rather than appearance.
 A contributor should be able to apply them whether designing:
 
 - a backend service
-- a plugin
+- a module
 - a GraphQL schema
 - a mobile client
 - a television interface

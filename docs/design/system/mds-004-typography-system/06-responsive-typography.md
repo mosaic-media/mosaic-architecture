@@ -4,7 +4,7 @@ Document: MDS-004
 Chapter: 06
 Title: Responsive Typography
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Responsive Typography
@@ -428,11 +428,11 @@ Readers should experience one editorial voice.
 
 ---
 
-# Plugins
+# Modules
 
-Extensions should never define responsive typography.
+Modules should never define responsive typography.
 
-Plugins contribute:
+Modules contribute:
 
 - information
 - relationships
@@ -445,7 +445,7 @@ The Typography System determines:
 - rhythm
 - implementation
 
-Every extension therefore automatically inherits future typographic improvements.
+Every module therefore automatically inherits future typographic improvements.
 
 ---
 

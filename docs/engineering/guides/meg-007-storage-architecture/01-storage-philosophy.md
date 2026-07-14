@@ -2,7 +2,7 @@
 File: docs/engineering/guides/meg-007-storage-architecture/01-storage-philosophy.md
 Document: MEG-007
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Storage Philosophy
@@ -152,7 +152,7 @@ Each storage engine is selected because it excels at a particular workload.
 
 Not because it can perform every workload adequately.
 
-Polyglot persistence deliberately embraces multiple specialised databases instead of forcing all workloads into a single storage technology.  [oai_citation:0‡thesai.org](https://thesai.org/Publications/ViewPaper?Code=ijacsa&Issue=5&SerialNo=99&Volume=13&utm_source=chatgpt.com)
+Polyglot persistence deliberately embraces multiple specialised databases instead of forcing all workloads into a single storage technology.  [thesai.org](https://thesai.org/Publications/ViewPaper?Code=ijacsa&Issue=5&SerialNo=99&Volume=13)
 
 ---
 
@@ -452,7 +452,7 @@ The Runtime should never introduce another persistence technology merely because
 
 Each engine must solve a distinct problem that existing storage cannot solve cleanly.
 
-One of the primary trade-offs of polyglot persistence is increased operational complexity, so each additional datastore should have a clear architectural justification.  [oai_citation:1‡thesai.org](https://thesai.org/Publications/ViewPaper?Code=ijacsa&Issue=5&SerialNo=99&Volume=13&utm_source=chatgpt.com)
+One of the primary trade-offs of polyglot persistence is increased operational complexity, so each additional datastore should have a clear architectural justification.  [thesai.org](https://thesai.org/Publications/ViewPaper?Code=ijacsa&Issue=5&SerialNo=99&Volume=13)
 
 ---
 

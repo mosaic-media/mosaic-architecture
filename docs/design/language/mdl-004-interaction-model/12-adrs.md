@@ -4,7 +4,7 @@ Document: MDL-004
 Chapter: 12
 Title: Architectural Decision Records
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Architectural Decision Records
@@ -27,33 +27,15 @@ They explain why Mosaic behaves differently from traditional media applications.
 
 Future contributors should use these ADRs to understand the behavioural intent behind the Interaction Model before proposing alternative interaction patterns.
 
-Architecture Decision Records are intended to capture significant architectural decisions together with their context and consequences so future contributors understand not only *what* was decided but *why*.  [oai_citation:0‡Google Cloud Documentation](https://docs.cloud.google.com/architecture/architecture-decision-records?hl=en&utm_source=chatgpt.com)
+Architecture Decision Records are intended to capture significant architectural decisions together with their context and consequences so future contributors understand not only *what* was decided but *why*.  [Google Cloud Documentation](https://docs.cloud.google.com/architecture/architecture-decision-records?hl=en)
 
 ---
 
-# ADR Format
+# Decision Format
 
-Every ADR within MDL follows the standard Mosaic format.
+Decision format, lifecycle and review expectations are governed by **MDG-001 — Documentation Authority Guide**.
 
-```text
-ADR Number
-
-Status
-
-Context
-
-Decision
-
-Consequences
-
-Alternatives Considered
-
-Related Specifications
-```
-
-Each ADR should capture exactly one behavioural decision.
-
----
+This chapter records decisions specific to this specification and avoids redefining the shared ADR process.
 
 # ADR-058
 
@@ -317,7 +299,7 @@ without understanding implementation.
 
 ## Title
 
-Plugins Participate In Behaviour Rather Than Define Behaviour
+Modules Participate In Behaviour Rather Than Define Behaviour
 
 ### Status
 
@@ -325,11 +307,11 @@ Accepted
 
 ### Context
 
-Allowing plugins to define independent interaction models fragments product identity.
+Allowing modules to define independent interaction models fragments product identity.
 
 ### Decision
 
-Plugins contribute:
+Modules contribute:
 
 - Information
 - Relationships
@@ -344,7 +326,7 @@ The platform remains responsible for:
 
 ### Consequences
 
-Every extension naturally feels like part of the same product.
+Every module naturally feels like part of the same product.
 
 ---
 

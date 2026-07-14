@@ -2,7 +2,7 @@
 File: docs/engineering/guides/meg-003-domain-driven-design/12-repositories.md
 Document: MEG-003
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Repositories
@@ -53,7 +53,7 @@ They manage:
 
 Everything else is an implementation detail.
 
-This reflects the classic DDD Repository pattern, whose purpose is to isolate the domain model from persistence concerns while presenting aggregates as though they were held in an in-memory collection.  [oai_citation:0‡O'Reilly Media](https://www.oreilly.com/library/view/implementing-domain-driven-design/9780133039900/ch12.html?utm_source=chatgpt.com)
+This reflects the classic DDD Repository pattern, whose purpose is to isolate the domain model from persistence concerns while presenting aggregates as though they were held in an in-memory collection.  [O'Reilly Media](https://www.oreilly.com/library/view/implementing-domain-driven-design/9780133039900/ch12.html)
 
 ---
 
@@ -186,7 +186,7 @@ Repositories persist Aggregate boundaries.
 
 Not implementation details.
 
-This one-repository-per-aggregate-root approach is one of the core recommendations of DDD because repositories preserve aggregate consistency boundaries.  [oai_citation:1‡Microsoft Learn](https://learn.microsoft.com/en-us/dotnet/architecture/microservices/microservice-ddd-cqrs-patterns/infrastructure-persistence-layer-design?utm_source=chatgpt.com)
+This one-repository-per-aggregate-root approach is one of the Platform foundation recommendations of DDD because repositories preserve aggregate consistency boundaries.  [Microsoft Learn](https://learn.microsoft.com/en-us/dotnet/architecture/microservices/microservice-ddd-cqrs-patterns/infrastructure-persistence-layer-design)
 
 ---
 
@@ -314,7 +314,7 @@ The Domain knows nothing about PostgreSQL.
 
 Infrastructure knows everything.
 
-This separation preserves persistence ignorance while allowing different infrastructure implementations.  [oai_citation:2‡Stack and System](https://stackandsystem.com/series/domain-driven-design/9-repositories-in-domain-driven-design?utm_source=chatgpt.com)
+This separation preserves persistence ignorance while allowing different infrastructure implementations.  [Stack and System](https://stackandsystem.com/series/domain-driven-design/9-repositories-in-domain-driven-design)
 
 ---
 

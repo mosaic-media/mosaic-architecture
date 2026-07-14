@@ -4,7 +4,7 @@ Document: MDS-006
 Chapter: 02
 Title: Runtime World
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Runtime World
@@ -434,7 +434,7 @@ Applications.
 
 Observe.
 
-Plugins.
+Modules.
 
 ↓
 
@@ -521,9 +521,9 @@ The World model intentionally supports this evolution.
 
 ---
 
-# Plugins
+# Modules
 
-Extensions contribute to the Runtime World.
+Modules contribute to the Runtime World.
 
 Examples include:
 
@@ -532,7 +532,7 @@ Examples include:
 - relationships
 - behavioural events
 
-Plugins never directly modify:
+Modules never directly modify:
 
 - Composition
 - Hierarchy

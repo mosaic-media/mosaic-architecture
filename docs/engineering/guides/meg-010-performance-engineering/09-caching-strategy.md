@@ -2,7 +2,7 @@
 File: docs/engineering/guides/meg-010-performance-engineering/09-caching-strategy.md
 Document: MEG-010
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Caching Strategy
@@ -92,7 +92,7 @@ Examples include:
 - metadata
 - configuration
 - capability discovery
-- extension manifests
+- module manifests
 - external API responses
 - computed read models
 
@@ -166,7 +166,7 @@ Cache invalidation should occur when:
 - source data changes
 - configuration changes
 - capabilities are updated
-- extensions are installed or removed
+- modules are installed or removed
 
 Invalidation should be deterministic wherever possible.
 

@@ -2,7 +2,7 @@
 File: docs/engineering/guides/meg-003-domain-driven-design/02-ubiquitous-language.md
 Document: MEG-003
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Ubiquitous Language
@@ -307,7 +307,7 @@ Language should remain consistent *within* a context.
 
 Not necessarily globally.
 
-This principle is central to Evans' concept of bounded contexts. ([books.google.com](https://books.google.com/books/about/Domain_Driven_Design_Reference.html?id=ccRsBgAAQBAJ&utm_source=chatgpt.com))
+This principle is central to Evans' concept of bounded contexts. ([books.google.com](https://books.google.com/books/about/Domain_Driven_Design_Reference.html?id=ccRsBgAAQBAJ))
 
 ---
 

@@ -2,7 +2,7 @@
 File: docs/engineering/guides/meg-001-go-engineering-standards/10-concurrency.md
 Document: MEG-001
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Concurrency
@@ -29,7 +29,7 @@ Examples include:
 - Scheduler execution
 - Blob synchronisation
 - Docker orchestration
-- Extension communication
+- Module communication
 
 For this reason, concurrency is considered an architectural concern rather than merely a language feature.
 
@@ -232,7 +232,7 @@ Benefits include:
 
 This is simpler than manually coordinating channels and wait groups.
 
-The `errgroup` package is widely recommended for managing groups of related goroutines. ([pkg.go.dev](https://pkg.go.dev/golang.org/x/sync/errgroup?utm_source=chatgpt.com))
+The `errgroup` package is widely recommended for managing groups of related goroutines. ([pkg.go.dev](https://pkg.go.dev/golang.org/x/sync/errgroup))
 
 ---
 
@@ -383,7 +383,7 @@ Mutexes are entirely appropriate when protecting shared state.
 
 Do not force channel-based designs where simple locking is clearer.
 
-The Go proverb "Do not communicate by sharing memory; instead, share memory by communicating" is guidance rather than an absolute rule. Simpler synchronisation mechanisms should be chosen where they better fit the problem. ([go.dev](https://go.dev/blog/share-memory-by-communicating?utm_source=chatgpt.com))
+The Go proverb "Do not communicate by sharing memory; instead, share memory by communicating" is guidance rather than an absolute rule. Simpler synchronisation mechanisms should be chosen where they better fit the problem. ([go.dev](https://go.dev/blog/share-memory-by-communicating))
 
 ---
 
@@ -554,7 +554,7 @@ Concurrent access to mutable memory without:
 - atomics
 - channels
 
-The race detector should never report data races in production code. Running tests with `-race` is an important part of validating concurrent programs. ([go.dev](https://go.dev/doc/articles/race_detector?utm_source=chatgpt.com))
+The race detector should never report data races in production code. Running tests with `-race` is an important part of validating concurrent programs. ([go.dev](https://go.dev/doc/articles/race_detector))
 
 ---
 

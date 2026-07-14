@@ -4,7 +4,7 @@ Document: MDS-006
 Chapter: 12
 Title: Architectural Decision Records
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Architectural Decision Records
@@ -30,29 +30,11 @@ Future contributors should understand these decisions before modifying the Compo
 
 ---
 
-# ADR Format
+# Decision Format
 
-Every Mosaic ADR follows the standard structure.
+Decision format, lifecycle and review expectations are governed by **MDG-001 — Documentation Authority Guide**.
 
-```text
-ADR Number
-
-Status
-
-Context
-
-Decision
-
-Consequences
-
-Alternatives Considered
-
-Related Specifications
-```
-
-Each ADR documents one architectural decision.
-
----
+This chapter records decisions specific to this specification and avoids redefining the shared ADR process.
 
 # ADR-154
 
@@ -254,7 +236,7 @@ Caching, replay and multi-device synchronisation become reliable architectural c
 
 ## Title
 
-Extensions Enrich The Runtime World
+Modules Enrich The Runtime World
 
 ### Status
 
@@ -262,17 +244,17 @@ Accepted
 
 ### Context
 
-Allowing plugins to construct presentation fragments runtime consistency.
+Allowing modules to construct presentation fragments runtime consistency.
 
 ### Decision
 
-Extensions contribute behaviour, relationships and information only.
+Modules contribute behaviour, relationships and information only.
 
 The Composition Engine owns runtime solving.
 
 ### Consequences
 
-Community extensions inherit every future runtime improvement automatically.
+Community modules inherit every future runtime improvement automatically.
 
 ---
 
@@ -297,7 +279,7 @@ ADR160["Adaptive Layout"]
 
 ADR161["Deterministic Pipelines"]
 
-ADR162["Extensions"]
+ADR162["Modules"]
 
 ADR154 --> ADR155
 ADR155 --> ADR156

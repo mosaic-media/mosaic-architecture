@@ -4,7 +4,7 @@ Document: MDS-003
 Chapter: 10
 Title: Runtime Material Resolution
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Runtime Material Resolution
@@ -449,11 +449,11 @@ Rendering effort should therefore support user understanding.
 
 ---
 
-# Plugin Behaviour
+# Module Behaviour
 
-Extensions never resolve materials.
+Modules never resolve materials.
 
-Plugins contribute:
+Modules contribute:
 
 - artwork
 - information
@@ -466,7 +466,7 @@ The platform resolves:
 - Refraction
 - Lighting
 
-This guarantees every extension inherits identical physical behaviour.
+This guarantees every module inherits identical physical behaviour.
 
 ---
 

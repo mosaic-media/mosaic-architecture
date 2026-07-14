@@ -2,7 +2,7 @@
 File: docs/engineering/documentation/mdg-001-documentation-authority-guide/00-document-control.md
 Document: MDG-001
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # 00 — Document Control

@@ -4,7 +4,7 @@ Document: MDL-005
 Chapter: 05
 Title: Anchors
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Anchors
@@ -68,7 +68,7 @@ Without Anchors, users repeatedly reconstruct their mental model.
 
 With Anchors, users simply observe the World evolving.
 
-Stable anchor points are widely recognised as one of the primary mechanisms for preserving users' spatial memory while interfaces adapt.  [oai_citation:0‡uxmatters.com](https://www.uxmatters.com/mt/archives/2026/05/designing-stable-user-interfaces.php?utm_source=chatgpt.com)
+Stable anchor points are widely recognised as one of the primary mechanisms for preserving users' spatial memory while interfaces adapt.  [uxmatters.com](https://www.uxmatters.com/mt/archives/2026/05/designing-stable-user-interfaces.php)
 
 ---
 

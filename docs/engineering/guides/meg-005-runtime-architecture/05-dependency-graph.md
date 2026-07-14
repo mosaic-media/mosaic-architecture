@@ -2,7 +2,7 @@
 File: docs/engineering/guides/meg-005-runtime-architecture/05-dependency-graph.md
 Document: MEG-005
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Dependency Graph
@@ -201,7 +201,7 @@ is prohibited.
 
 Cycles prevent deterministic startup.
 
-A dependency graph without cycles forms a Directed Acyclic Graph (DAG), allowing a valid execution order to be derived using topological sorting.  [oai_citation:0‡Wikipedia](https://en.wikipedia.org/wiki/Dependency_graph?utm_source=chatgpt.com)
+A dependency graph without cycles forms a Directed Acyclic Graph (DAG), allowing a valid execution order to be derived using topological sorting.  [Wikipedia](https://en.wikipedia.org/wiki/Dependency_graph)
 
 ---
 
@@ -380,7 +380,7 @@ Recommendations
 
 ↓
 
-Machine Learning Extension
+Machine Learning Module
 
 (Optional)
 ```
@@ -406,8 +406,8 @@ Runtime mutation of the dependency graph should be rare.
 
 Examples where it may occur include:
 
-- extension installation
-- extension removal
+- module installation
+- module removal
 - runtime upgrades
 
 Even then:

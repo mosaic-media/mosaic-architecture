@@ -2,7 +2,7 @@
 File: docs/engineering/guides/meg-010-performance-engineering/index.md
 Document: MEG-010
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # MEG-010 — Performance Engineering
@@ -94,7 +94,7 @@ MEG-006
 
 ↓
 
-Extension Platform
+Module Platform
 
 ↓
 
@@ -171,7 +171,7 @@ Those concerns belong to previous or future MEG specifications.
 
 ---
 
-# Core Question
+# Guiding Question
 
 MEG-010 exists to answer one question.
 
@@ -309,7 +309,7 @@ Required reading:
 - MEG-003 Domain-Driven Design
 - MEG-004 Hexagonal Architecture
 - MEG-005 Capability Runtime
-- MEG-006 Extension Platform
+- MEG-006 Module Platform
 - MEG-007 Storage Architecture
 - MEG-008 Observability
 - MEG-009 Security Architecture

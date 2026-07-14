@@ -2,7 +2,7 @@
 File: docs/engineering/guides/meg-001-go-engineering-standards/13-design-patterns.md
 Document: MEG-001
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Design Patterns
@@ -173,7 +173,7 @@ Docker
 
 ↓
 
-Extension Runtime
+Module Runtime
 ```
 
 Adapters isolate external systems from internal architecture.

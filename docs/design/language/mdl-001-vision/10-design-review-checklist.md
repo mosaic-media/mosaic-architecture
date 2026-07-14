@@ -4,7 +4,7 @@ Document: MDL-001
 Chapter: 10
 Title: Design Review Checklist
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Design Review Checklist
@@ -27,7 +27,7 @@ Reviewers should ask:
 
 Every significant feature, interaction, component, motion system or architectural proposal should be reviewed against this checklist before implementation.
 
-Structured design review checklists are widely used because they improve consistency, reduce omissions and encourage objective discussions over subjective preference.  [oai_citation:0‡Smartsheet](https://www.smartsheet.com/content/design-review-checklist-templates?utm_source=chatgpt.com)
+Structured design review checklists are widely used because they improve consistency, reduce omissions and encourage objective discussions over subjective preference.  [Smartsheet](https://www.smartsheet.com/content/design-review-checklist-templates)
 
 ---
 
@@ -252,7 +252,7 @@ Will this behave consistently across supported devices?
 
 ### E4
 
-Can future extensions participate naturally?
+Can future modules participate naturally?
 
 - [ ] Yes
 - [ ] No

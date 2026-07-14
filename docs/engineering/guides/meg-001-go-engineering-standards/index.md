@@ -2,7 +2,7 @@
 File: docs/engineering/guides/meg-001-go-engineering-standards/index.md
 Document: MEG-001
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # MEG-001 — Go Engineering Standards
@@ -111,7 +111,7 @@ Those are defined by the MDL, MDS and future architecture specifications.
 
 ---
 
-# Core Question
+# Guiding Question
 
 MEG-001 exists to answer one question.
 

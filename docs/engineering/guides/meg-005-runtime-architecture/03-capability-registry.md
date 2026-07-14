@@ -2,7 +2,7 @@
 File: docs/engineering/guides/meg-005-runtime-architecture/03-capability-registry.md
 Document: MEG-005
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Capability Registry
@@ -17,9 +17,9 @@ The Mosaic Runtime is intentionally modular.
 
 Capabilities may be:
 
-- built into Core
-- provided by first-party extensions
-- provided by third-party extensions
+- built into the Platform distribution
+- provided by first-party modules
+- provided by third-party modules
 - enabled
 - disabled
 - upgraded
@@ -126,7 +126,7 @@ Capability Registry
 
 ├── Recommendations
 
-└── Extensions
+└── Modules
 ```
 
 Every Runtime service discovers capabilities through the Registry.
@@ -181,7 +181,7 @@ Capability Registry
 Runtime Discovers
 ```
 
-The Runtime becomes open for extension while remaining closed for modification.
+The Runtime becomes open for module while remaining closed for modification.
 
 ---
 
@@ -285,7 +285,7 @@ The Registry owns this metadata.
 
 The capability owns its accuracy.
 
-Modern service registries similarly maintain metadata describing registered services, allowing runtime discovery without hard-coded dependencies.  [oai_citation:0‡microservices.io](https://microservices.io/patterns/service-registry.html?utm_source=chatgpt.com)
+Modern service registries similarly maintain metadata describing registered services, allowing runtime discovery without hard-coded dependencies.  [microservices.io](https://microservices.io/patterns/service-registry.html)
 
 ---
 
@@ -515,12 +515,12 @@ The Runtime remains unaware of implementation differences.
 
 ---
 
-# Extension Integration
+# Module Integration
 
-Extensions register exactly like Core capabilities.
+Modules register exactly like Platform capabilities.
 
 ```
-Extension Loaded
+Module Loaded
 
 ↓
 
@@ -537,13 +537,13 @@ Runtime Discovers
 
 The Registry should make no distinction between:
 
-- Core
+- Platform capabilities
 - First-party
 - Third-party
 
 Everything becomes a capability.
 
-This is one of the architectural foundations enabling Mosaic's extension-first design.
+This is one of the architectural foundations enabling Mosaic's module-first design.
 
 ---
 
@@ -595,7 +595,7 @@ It provides:
 
 Dependency injection remains the responsibility of the Composition Root.
 
-Using a registry for runtime discovery is distinct from using a Service Locator for dependency resolution, which obscures dependencies and is generally discouraged.  [oai_citation:1‡Reddit](https://www.reddit.com/r/softwarearchitecture/comments/1241cgj?utm_source=chatgpt.com)
+Using a registry for runtime discovery is distinct from using a Service Locator for dependency resolution, which obscures dependencies and is generally discouraged.  [Reddit](https://www.reddit.com/r/softwarearchitecture/comments/1241cgj)
 
 ---
 
@@ -674,7 +674,7 @@ Within Mosaic:
 - Capabilities MUST expose metadata and lifecycle information.
 - Business behaviour MUST remain independent of the Registry.
 - The Registry MUST NOT become a dependency injection container.
-- Core and extensions MUST register identically.
+- Built-in and module-delivered capabilities MUST register identically.
 - Capability discovery MUST remain explicit and observable.
 
 ---

@@ -4,7 +4,7 @@ Document: MDS-002
 Chapter: 07
 Title: Light and Dark
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Light and Dark
@@ -432,18 +432,18 @@ The design language should remain recognisable.
 
 ---
 
-# Plugins
+# Modules
 
-Extensions should remain completely unaware of Light and Dark Modes.
+Modules should remain completely unaware of Light and Dark Modes.
 
-Plugins consume:
+Modules consume:
 
 - Semantic Colours
 - Runtime Tokens
 
 The Theme Resolver determines final implementation.
 
-This guarantees that every extension automatically supports:
+This guarantees that every module automatically supports:
 
 - Light Mode
 - Dark Mode

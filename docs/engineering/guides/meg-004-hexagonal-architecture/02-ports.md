@@ -2,7 +2,7 @@
 File: docs/engineering/guides/meg-004-hexagonal-architecture/02-ports.md
 Document: MEG-004
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Ports
@@ -297,7 +297,7 @@ Large Ports increase coupling.
 
 Small Ports improve flexibility.
 
-This aligns closely with Go's preference for small interfaces representing behaviour rather than broad capability sets. ([go.dev](https://go.dev/doc/effective_go?utm_source=chatgpt.com))
+This aligns closely with Go's preference for small interfaces representing behaviour rather than broad capability sets. ([go.dev](https://go.dev/doc/effective_go))
 
 ---
 

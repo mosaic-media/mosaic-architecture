@@ -2,7 +2,7 @@
 File: docs/engineering/guides/meg-004-hexagonal-architecture/05-adapters.md
 Document: MEG-004
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Adapters
@@ -329,7 +329,7 @@ MetadataProvider
 
 Changing Adapters requires no Domain changes.
 
-This is the core value proposition of Ports and Adapters.  [oai_citation:0‡AWS Documentation](https://docs.aws.amazon.com/prescriptive-guidance/latest/cloud-design-patterns/hexagonal-architecture.html?utm_source=chatgpt.com)
+This is the Platform foundation value proposition of Ports and Adapters.  [AWS Documentation](https://docs.aws.amazon.com/prescriptive-guidance/latest/cloud-design-patterns/hexagonal-architecture.html)
 
 ---
 

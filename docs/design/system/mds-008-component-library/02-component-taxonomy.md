@@ -4,7 +4,7 @@ Document: MDS-008
 Chapter: 02
 Title: Component Taxonomy
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Component Taxonomy
@@ -487,13 +487,13 @@ This keeps implementation clean and predictable.
 
 ---
 
-# Plugins
+# Modules
 
-Extensions never provide Components.
+Modules never provide Components.
 
 Platform implementations provide Components.
 
-Extensions contribute runtime behaviour only.
+Modules contribute runtime behaviour only.
 
 This preserves one coherent implementation vocabulary across the ecosystem.
 

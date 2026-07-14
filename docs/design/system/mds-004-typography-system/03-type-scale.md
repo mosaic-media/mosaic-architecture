@@ -4,7 +4,7 @@ Document: MDS-004
 Chapter: 03
 Title: Type Scale
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Type Scale

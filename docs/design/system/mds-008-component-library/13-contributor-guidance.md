@@ -4,7 +4,7 @@ Document: MDS-008
 Chapter: 13
 Title: Contributor Guidance
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Contributor Guidance
@@ -297,9 +297,9 @@ Behavioural correctness always has higher priority than rendering performance.
 
 ---
 
-# Plugins Never Render
+# Modules Never Render
 
-Extensions contribute:
+Modules contribute:
 
 - behaviour,
 - Expressions,
@@ -311,7 +311,7 @@ They never contribute:
 - rendering,
 - UI frameworks.
 
-Every extension should inherit presentation automatically.
+Every module should inherit presentation automatically.
 
 ---
 

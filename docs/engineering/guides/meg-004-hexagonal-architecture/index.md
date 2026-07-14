@@ -2,7 +2,7 @@
 File: docs/engineering/guides/meg-004-hexagonal-architecture/index.md
 Document: MEG-004
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # MEG-004 — Hexagonal Architecture
@@ -21,7 +21,7 @@ During that time:
 - APIs will change
 - protocols will change
 - storage engines will change
-- extensions will change
+- modules will change
 - user interfaces will change
 
 The business, however, should remain stable.
@@ -116,7 +116,7 @@ Those concerns are defined by other MEG specifications.
 
 ---
 
-# Core Question
+# Guiding Question
 
 MEG-004 exists to answer one question.
 
@@ -151,7 +151,7 @@ The Domain should never depend upon:
 
 Instead, those technologies adapt themselves to the Domain through Ports and Adapters.
 
-Hexagonal Architecture (also known as Ports and Adapters) exists specifically to isolate business logic from external technologies through dependency inversion.  [oai_citation:0‡AWS Documentation](https://docs.aws.amazon.com/prescriptive-guidance/latest/cloud-design-patterns/hexagonal-architecture.html?utm_source=chatgpt.com)
+Hexagonal Architecture (also known as Ports and Adapters) exists specifically to isolate business logic from external technologies through dependency inversion.  [AWS Documentation](https://docs.aws.amazon.com/prescriptive-guidance/latest/cloud-design-patterns/hexagonal-architecture.html)
 
 ---
 
@@ -265,7 +265,7 @@ Required reading:
 
 Future companion specifications:
 
-- MEG-005 Extension Platform
+- MEG-005 Module Platform
 - MEG-006 Runtime Architecture
 - MEG-007 Storage Architecture
 

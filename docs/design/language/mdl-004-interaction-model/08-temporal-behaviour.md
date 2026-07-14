@@ -4,7 +4,7 @@ Document: MDL-004
 Chapter: 08
 Title: Temporal Behaviour
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Temporal Behaviour
@@ -260,7 +260,7 @@ Examples include:
 - metadata refresh
 - artwork updates
 - relationship discovery
-- plugin synchronisation
+- module synchronisation
 
 Users should simply discover a richer World the next time they return.
 
@@ -373,13 +373,13 @@ Only the Information changes.
 
 ---
 
-# Plugins
+# Modules
 
-Plugins should contribute temporal Information.
+Modules should contribute temporal Information.
 
 Examples.
 
-Anime Plugin.
+Anime Module.
 
 ```
 Episode
@@ -389,7 +389,7 @@ Episode
 Tomorrow
 ```
 
-Music Plugin.
+Music Module.
 
 ```
 Concert
@@ -399,7 +399,7 @@ Concert
 Next Month
 ```
 
-Book Plugin.
+Book Module.
 
 ```
 Next Volume
@@ -409,7 +409,7 @@ Next Volume
 Publishing Soon
 ```
 
-The plugin contributes temporal knowledge.
+The module contributes temporal knowledge.
 
 The platform decides:
 

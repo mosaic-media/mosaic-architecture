@@ -4,7 +4,7 @@ Document: MDS-005
 Chapter: 05
 Title: Refraction Motion
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Refraction Motion
@@ -458,11 +458,11 @@ Environmental motion should never become computationally dominant.
 
 ---
 
-# Plugins
+# Modules
 
-Extensions never participate in Refraction Motion.
+Modules never participate in Refraction Motion.
 
-Plugins contribute:
+Modules contribute:
 
 - artwork,
 - behavioural events.
@@ -473,7 +473,7 @@ The Motion System determines:
 - diffusion,
 - temporal behaviour.
 
-Every extension therefore inherits identical environmental motion.
+Every module therefore inherits identical environmental motion.
 
 ---
 

@@ -2,7 +2,7 @@
 File: docs/engineering/guides/meg-005-runtime-architecture/07-worker-manager.md
 Document: MEG-005
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Worker Manager
@@ -188,7 +188,7 @@ The Worker Manager should view workers as a pool of interchangeable execution re
 
 Individual workers should rarely matter.
 
-Worker pools are a well-established concurrency pattern because they bound resource usage while allowing work to be processed concurrently.  [oai_citation:0‡Buntime](https://buntime.djalmajr.dev/concepts/worker-pool/?utm_source=chatgpt.com)
+Worker pools are a well-established concurrency pattern because they bound resource usage while allowing work to be processed concurrently.  [Buntime](https://buntime.djalmajr.dev/concepts/worker-pool/)
 
 ---
 
@@ -403,7 +403,7 @@ Execution Failed
 
 Worker recovery belongs entirely to the Worker Manager.
 
-This separation mirrors the classic manager/worker pattern, where the manager owns worker lifecycle while workers focus solely on execution.  [oai_citation:1‡fprime.jpl.nasa.gov](https://fprime.jpl.nasa.gov/latest/docs/user-manual/design-patterns/manager-worker/?utm_source=chatgpt.com)
+This separation mirrors the classic manager/worker pattern, where the manager owns worker lifecycle while workers focus solely on execution.  [fprime.jpl.nasa.gov](https://fprime.jpl.nasa.gov/latest/docs/user-manual/design-patterns/manager-worker/)
 
 ---
 

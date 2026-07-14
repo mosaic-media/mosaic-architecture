@@ -2,7 +2,7 @@
 File: docs/design/system/mds-008-component-library/index.md
 Document: MDS-008
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # MDS-008 — Component Library
@@ -157,7 +157,7 @@ The Component Library simply implements their decisions.
 
 ---
 
-# Core Question
+# Guiding Question
 
 MDS-008 exists to answer one question.
 

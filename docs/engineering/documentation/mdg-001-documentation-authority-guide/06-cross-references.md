@@ -2,7 +2,7 @@
 File: docs/engineering/documentation/mdg-001-documentation-authority-guide/06-cross-references.md
 Document: MDG-001
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # 06 — Cross References

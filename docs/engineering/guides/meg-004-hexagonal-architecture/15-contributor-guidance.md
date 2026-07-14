@@ -2,7 +2,7 @@
 File: docs/engineering/guides/meg-004-hexagonal-architecture/15-contributor-guidance.md
 Document: MEG-004
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Contributor Guidance
@@ -172,7 +172,7 @@ Changing one affects:
 - the Domain
 - every Adapter
 - every test
-- every extension
+- every module
 
 Before modifying a Port ask:
 

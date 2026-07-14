@@ -4,7 +4,7 @@ Document: MDL-005
 Chapter: 11
 Title: Composition Model Governance
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Composition Model Governance
@@ -220,13 +220,13 @@ Not several.
 
 ---
 
-# Extensions
+# Modules
 
-Extensions should strengthen Composition.
+Modules should strengthen Composition.
 
 They should never redefine it.
 
-Plugins contribute:
+Modules contribute:
 
 - Information
 - Relationships
@@ -239,7 +239,7 @@ The Composition Solver determines:
 - Grouping
 - Expressions
 
-This separation ensures that every extension naturally feels like part of the same World.
+This separation ensures that every module naturally feels like part of the same World.
 
 ---
 
@@ -268,7 +268,7 @@ Introducing new compositional concepts should remain rare.
 The Composition Model succeeds when:
 
 - every client communicates the same hierarchy
-- plugins naturally integrate
+- modules naturally integrate
 - contributors rarely invent new composition concepts
 - users instinctively know where to look
 - adaptive behaviour feels inevitable rather than surprising
@@ -286,7 +286,7 @@ Users should experience understanding rather than organisation.
 | ADR-067 | Composition is considered long-lived product architecture. |
 | ADR-068 | Hierarchy and priority are platform responsibilities rather than presentation concerns. |
 | ADR-069 | Composition should evolve through refinement rather than replacement. |
-| ADR-070 | Extensions contribute understanding rather than compositional behaviour. |
+| ADR-070 | Modules contribute understanding rather than compositional behaviour. |
 
 ---
 

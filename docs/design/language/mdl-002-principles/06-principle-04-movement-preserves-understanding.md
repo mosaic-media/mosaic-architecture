@@ -5,7 +5,7 @@ Chapter: 06
 Principle: 04
 Title: Movement Preserves Understanding
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Principle 04 — Movement Preserves Understanding
@@ -46,7 +46,7 @@ Mosaic rejects decorative animation.
 
 Motion should always strengthen the user's mental model of the interface.
 
-Meaningful interface animation consistently emphasises continuity, orientation and explanation rather than visual spectacle.  [oai_citation:0‡UIE All You Can Learn Library](https://aycl.uie.com/virtual_seminars/ux_in_motion_principles_for_creating_meaningful_animation_in_interfaces?utm_source=chatgpt.com)
+Meaningful interface animation consistently emphasises continuity, orientation and explanation rather than visual spectacle.  [UIE All You Can Learn Library](https://aycl.uie.com/virtual_seminars/ux_in_motion_principles_for_creating_meaningful_animation_in_interfaces)
 
 ---
 
@@ -374,11 +374,11 @@ It must never become the only mechanism through which understanding is communica
 
 ---
 
-# Plugin Guidance
+# Module Guidance
 
-Extensions should never define custom animation behaviour.
+Modules should never define custom animation behaviour.
 
-Instead, plugins contribute information.
+Instead, modules contribute information.
 
 The Mosaic composition engine determines:
 
@@ -387,7 +387,7 @@ The Mosaic composition engine determines:
 - emphasis
 - transition
 
-This ensures that all movement remains consistent regardless of which extension introduced the information.
+This ensures that all movement remains consistent regardless of which module introduced the information.
 
 ---
 

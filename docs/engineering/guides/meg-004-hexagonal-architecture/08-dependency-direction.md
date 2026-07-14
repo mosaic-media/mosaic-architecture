@@ -2,7 +2,7 @@
 File: docs/engineering/guides/meg-004-hexagonal-architecture/08-dependency-direction.md
 Document: MEG-004
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Dependency Direction
@@ -76,7 +76,7 @@ The reverse direction is prohibited.
 
 The Domain should remain the least coupled part of the platform.
 
-This inward dependency rule is the defining characteristic shared by Hexagonal, Onion and Clean Architecture.  [oai_citation:0‡AWS Documentation](https://docs.aws.amazon.com/prescriptive-guidance/latest/hexagonal-architectures/overview.html?utm_source=chatgpt.com)
+This inward dependency rule is the defining characteristic shared by Hexagonal, Onion and Clean Architecture.  [AWS Documentation](https://docs.aws.amazon.com/prescriptive-guidance/latest/hexagonal-architectures/overview.html)
 
 ---
 
@@ -343,14 +343,14 @@ Storage remains entirely outside the Hexagon.
 
 ---
 
-# Extension Dependencies
+# Module Dependencies
 
-Extensions are infrastructure.
+Modules are infrastructure.
 
 They depend upon:
 
 ```
-Extension SDK
+Module SDK
 
 ↓
 
@@ -367,9 +367,9 @@ Domain
 
 The Domain should never know:
 
-- which extensions exist
-- how extensions load
-- where extensions execute
+- which modules exist
+- how modules load
+- where modules execute
 
 This allows capabilities to remain stable regardless of platform composition.
 
@@ -411,7 +411,7 @@ The Domain owns the abstraction.
 
 Infrastructure implements it.
 
-This inversion allows infrastructure to remain replaceable.  [oai_citation:1‡AWS Documentation](https://docs.aws.amazon.com/prescriptive-guidance/latest/cloud-design-patterns/hexagonal-architecture.html?utm_source=chatgpt.com)
+This inversion allows infrastructure to remain replaceable.  [AWS Documentation](https://docs.aws.amazon.com/prescriptive-guidance/latest/cloud-design-patterns/hexagonal-architecture.html)
 
 ---
 

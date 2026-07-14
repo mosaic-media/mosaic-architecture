@@ -2,7 +2,7 @@
 File: docs/engineering/guides/meg-007-storage-architecture/02-storage-taxonomy.md
 Document: MEG-007
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Storage Taxonomy
@@ -94,7 +94,7 @@ Examples include:
 - collections
 - playback progress
 - capability configuration
-- extension configuration
+- module configuration
 
 Business State is:
 

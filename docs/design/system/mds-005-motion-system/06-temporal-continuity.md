@@ -4,7 +4,7 @@ Document: MDS-005
 Chapter: 06
 Title: Temporal Continuity
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Temporal Continuity
@@ -530,11 +530,11 @@ This shift in perspective defines the Motion System.
 
 ---
 
-# Plugins
+# Modules
 
-Extensions should never introduce independent temporal models.
+Modules should never introduce independent temporal models.
 
-Plugins contribute:
+Modules contribute:
 
 - behaviour,
 - information,
@@ -546,7 +546,7 @@ The Motion System determines:
 - continuity,
 - environmental evolution.
 
-Every extension therefore feels like part of one continuous platform.
+Every module therefore feels like part of one continuous platform.
 
 ---
 

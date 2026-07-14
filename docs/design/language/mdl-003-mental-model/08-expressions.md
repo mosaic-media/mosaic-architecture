@@ -4,7 +4,7 @@ Document: MDL-003
 Chapter: 08
 Title: Expressions
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Expressions
@@ -314,7 +314,7 @@ Notification
 
 The platform chooses.
 
-Not the plugin.
+Not the module.
 
 ---
 
@@ -336,10 +336,10 @@ The information has become coupled to presentation.
 
 ---
 
-## Plugins Choosing Expressions
+## Modules Choosing Expressions
 
 ```
-Plugin
+Module
 
 ↓
 
@@ -348,7 +348,7 @@ Hero
 
 Incorrect.
 
-Plugins should contribute information.
+Modules should contribute information.
 
 The Composition Engine determines Expression.
 
@@ -500,7 +500,7 @@ The platform gains:
 
 - reusable communication patterns
 - device independence
-- plugin consistency
+- module consistency
 - presentation flexibility
 - future-proof architecture
 

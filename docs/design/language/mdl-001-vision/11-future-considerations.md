@@ -4,7 +4,7 @@ Document: MDL-001
 Chapter: 11
 Title: Future Considerations
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Future Considerations
@@ -21,9 +21,9 @@ This chapter documents areas that are expected to evolve while preserving the ph
 
 Future considerations are **not commitments**.
 
-They are strategic directions that should be explored when they strengthen the core vision.
+They are strategic directions that should be explored when they strengthen the Platform foundation vision.
 
-A mature design language should provide long-term direction while remaining flexible enough to accommodate future implementation and organisational changes.  [oai_citation:0‡U.S. Web Design System (USWDS)](https://designsystem.digital.gov/next/looking-ahead/vision/?utm_source=chatgpt.com)
+A mature design language should provide long-term direction while remaining flexible enough to accommodate future implementation and organisational changes.  [U.S. Web Design System (USWDS)](https://designsystem.digital.gov/next/looking-ahead/vision/)
 
 ---
 
@@ -80,7 +80,7 @@ Future systems should ask:
 This distinction may ultimately influence:
 
 - GraphQL
-- extension APIs
+- module APIs
 - runtime composition
 - adaptive interfaces
 
@@ -204,26 +204,26 @@ Not increase interaction.
 
 # Future Direction 07
 
-## Extension Ecosystem
+## Module Ecosystem
 
-The Mosaic extension ecosystem should strengthen rather than fragment the product.
+The Mosaic module ecosystem should strengthen rather than fragment the product.
 
-Future extension systems should prioritise:
+Future module systems should prioritise:
 
 - shared terminology
 - shared interaction models
 - shared composition rules
 - shared visual language
 
-Extensions should feel native.
+Modules should feel native.
 
 Users should rarely distinguish between:
 
-Core Mosaic
+Mosaic Platform
 
 and
 
-Community extensions.
+Community modules.
 
 ---
 
@@ -318,7 +318,7 @@ Only the understanding of how best to realise it.
 
 | ADR | Decision |
 |------|----------|
-| ADR-037 | Future implementation should evolve without redefining the core philosophy. |
+| ADR-037 | Future implementation should evolve without redefining the Platform foundation philosophy. |
 | ADR-038 | Information is expected to become increasingly independent from presentation. |
 | ADR-039 | Accessibility is considered a driver of better design rather than a compliance exercise. |
 | ADR-040 | Future innovation must strengthen the companion philosophy rather than replace it. |

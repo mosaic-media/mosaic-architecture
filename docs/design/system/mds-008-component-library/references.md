@@ -3,7 +3,7 @@ File: docs/design/system/mds-008-component-library/references.md
 Document: MDS-008
 Title: References
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # References
@@ -536,11 +536,11 @@ Together, the MDL and MDS define a complete architecture spanning:
 From this point onwards, future documentation should transition from design architecture into product and engineering specifications, such as:
 
 - Mosaic Runtime Architecture
-- Extension SDK
+- Module SDK
 - Storage Architecture
 - Media Pipeline
 - Networking
-- Plugin Runtime
+- Module Runtime
 - API Specifications
 - Client Implementation Guides
 

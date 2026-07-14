@@ -3,7 +3,7 @@ File: docs/design/system/mds-006-composition-engine/references.md
 Document: MDS-006
 Title: References
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # References
@@ -498,6 +498,6 @@ It formalises:
 - Tile interaction
 - Tile orchestration
 - Runtime tile resolution
-- Extension tile integration
+- Module tile integration
 
 The Tile Framework bridges the final gap between the runtime intelligence of the Composition Engine and the visual Component Library, allowing Mosaic to construct interfaces that remain adaptive, behavioural and entirely driven by understanding rather than static layouts.

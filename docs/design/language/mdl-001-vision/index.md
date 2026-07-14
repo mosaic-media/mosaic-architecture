@@ -3,7 +3,7 @@ File: docs/design/language/mdl-001-vision/index.md
 Specification: MDL-001
 Title: Mosaic Design Language Vision
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # MDL-001 — Mosaic Design Language Vision
@@ -105,7 +105,7 @@ Small documents:
 - version more cleanly
 - minimise merge conflicts
 - encourage focused discussion
-- can be assembled into PDF, mdBook or documentation websites using tooling such as mdBook's `SUMMARY.md` and `book.toml`.  [oai_citation:0‡Rust Language](https://rust-lang.github.io/mdBook/guide/creating.html?utm_source=chatgpt.com)
+- can be assembled into PDF, mdBook or documentation websites using tooling such as mdBook's `SUMMARY.md` and `book.toml`.  [Rust Language](https://rust-lang.github.io/mdBook/guide/creating.html)
 
 ---
 

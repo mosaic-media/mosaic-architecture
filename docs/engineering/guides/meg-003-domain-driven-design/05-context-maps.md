@@ -2,7 +2,7 @@
 File: docs/engineering/guides/meg-003-domain-driven-design/05-context-maps.md
 Document: MEG-003
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Context Maps
@@ -22,7 +22,7 @@ Examples include:
 - Playback
 - Recommendations
 - Authentication
-- Extensions
+- Modules
 
 Although each context evolves independently, they rarely exist in complete isolation.
 
@@ -148,7 +148,7 @@ At a high level, the Mosaic platform resembles:
      Recommendations  Analytics
            │
            ▼
-      Extensions
+      Modules
 ```
 
 This diagram represents business relationships.
@@ -247,10 +247,10 @@ Metadata API
 
 ↓
 
-Extensions
+Modules
 ```
 
-Extensions interact through published contracts.
+Modules interact through published contracts.
 
 They do not depend upon internal implementation.
 
@@ -467,14 +467,14 @@ The event graph effectively becomes the Context Map.
 
 ---
 
-# Extension Relationships
+# Module Relationships
 
-Extensions participate as independent contexts.
+Modules participate as independent contexts.
 
 Example.
 
 ```
-Core Metadata
+Primary Metadata
 
 ↓
 
@@ -482,14 +482,14 @@ MetadataFetched
 
 ↓
 
-Anime Extension
+Anime Module
 ```
 
-The extension consumes published language.
+The module consumes published language.
 
-It never modifies Core.
+It never modifies the Platform foundation.
 
-This allows extensions to remain isolated while participating fully within the platform.
+This allows modules to remain isolated while participating fully within the platform.
 
 ---
 

@@ -4,7 +4,7 @@ Document: MDS-008
 Chapter: 08
 Title: Accessibility Contracts
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Accessibility Contracts
@@ -451,11 +451,11 @@ Accessibility should be predictable.
 
 ---
 
-# Plugins
+# Modules
 
-Extensions never implement accessibility.
+Modules never implement accessibility.
 
-Plugins contribute:
+Modules contribute:
 
 - behaviour
 - information
@@ -463,7 +463,7 @@ Plugins contribute:
 
 The runtime produces Accessibility Contracts.
 
-Every extension therefore automatically inherits future accessibility improvements.
+Every module therefore automatically inherits future accessibility improvements.
 
 ---
 
@@ -545,9 +545,9 @@ Accessibility changing behavioural hierarchy.
 
 ---
 
-## Plugin Accessibility
+## Module Accessibility
 
-Extensions bypassing runtime accessibility.
+Modules bypassing runtime accessibility.
 
 ---
 

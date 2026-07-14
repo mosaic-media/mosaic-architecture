@@ -2,7 +2,7 @@
 File: docs/engineering/guides/meg-004-hexagonal-architecture/01-hexagonal-philosophy.md
 Document: MEG-004
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Hexagonal Philosophy
@@ -98,7 +98,7 @@ This is precisely what Hexagonal Architecture seeks to prevent.
 
 ---
 
-# The Core Principle
+# The Guiding Principle
 
 Everything revolves around one idea.
 
@@ -135,7 +135,7 @@ Database ── Domain ── Runtime
 
                │
 
-         Extensions
+         Modules
 ```
 
 The shape itself is symbolic.
@@ -550,7 +550,7 @@ Within Mosaic:
 - Dependencies always point inward.
 - Technology remains replaceable.
 - Runtime remains infrastructure.
-- Extensions remain infrastructure.
+- Modules remain infrastructure.
 - Storage remains infrastructure.
 - Transport remains infrastructure.
 - Business behaviour remains independent.

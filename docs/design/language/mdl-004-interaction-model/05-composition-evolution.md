@@ -4,7 +4,7 @@ Document: MDL-004
 Chapter: 05
 Title: Composition Evolution
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Composition Evolution
@@ -52,7 +52,7 @@ Examples include:
 - a chapter finishing
 - an album ending
 - new information arriving
-- plugins contributing knowledge
+- modules contributing knowledge
 - relationships becoming relevant
 
 If Composition remained static, the interface would rapidly become less useful.
@@ -238,7 +238,7 @@ Examples include:
 - recommendations
 - timeline
 - metadata
-- extension contributions
+- module contributions
 
 These elements should respond naturally to changing Context.
 
@@ -293,7 +293,7 @@ Compression should occur in the following order.
 3. Secondary Metadata
 4. Decorative Information
 
-Core understanding should always remain visible.
+Primary understanding should always remain visible.
 
 Compression should never remove the user's ability to understand their current World.
 
@@ -335,7 +335,7 @@ The following events should normally trigger Composition Evolution.
 
 - episode released
 - metadata updated
-- plugin contribution
+- module contribution
 - relationship discovered
 - download completed
 
@@ -370,9 +370,9 @@ Composition should accumulate understanding rather than continually forgetting i
 
 ---
 
-# Plugin Behaviour
+# Module Behaviour
 
-Plugins should never directly manipulate Composition.
+Modules should never directly manipulate Composition.
 
 Instead they contribute:
 
@@ -386,7 +386,7 @@ The Composition Engine decides:
 - grouping
 - emphasis
 
-This preserves one coherent behavioural model regardless of installed extensions.
+This preserves one coherent behavioural model regardless of installed modules.
 
 ---
 
@@ -468,9 +468,9 @@ Understanding decreases.
 
 ---
 
-## Plugin Recomposition
+## Module Recomposition
 
-Extensions rearrange interface independently of the Composition Engine.
+Modules rearrange interface independently of the Composition Engine.
 
 The behavioural model fragments.
 

@@ -4,7 +4,7 @@ Document: MDL-002
 Chapter: 02
 Title: Decision Hierarchy
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Decision Hierarchy
@@ -382,7 +382,7 @@ The first layer capable of resolving the disagreement should make the decision.
 
 Escalating beyond that layer is unnecessary.
 
-This mirrors established decision-making frameworks where higher-order principles resolve lower-level implementation conflicts.  [oai_citation:0‡Design Principles](https://principles.design/field-guide/?utm_source=chatgpt.com)
+This mirrors established decision-making frameworks where higher-order principles resolve lower-level implementation conflicts.  [Design Principles](https://principles.design/field-guide/)
 
 ---
 

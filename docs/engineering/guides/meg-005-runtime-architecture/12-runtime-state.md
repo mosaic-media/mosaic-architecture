@@ -2,7 +2,7 @@
 File: docs/engineering/guides/meg-005-runtime-architecture/12-runtime-state.md
 Document: MEG-005
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Runtime State
@@ -686,7 +686,7 @@ Capabilities describe:
 
 Maintaining this separation is one of the most important architectural decisions within Mosaic.
 
-It allows the Runtime to evolve operationally without ever becoming responsible for the business itself.  [oai_citation:0‡Wikipedia](https://en.wikipedia.org/wiki/Architectural_state?utm_source=chatgpt.com)
+It allows the Runtime to evolve operationally without ever becoming responsible for the business itself.  [Wikipedia](https://en.wikipedia.org/wiki/Architectural_state)
 
 ---
 

@@ -4,7 +4,7 @@ Document: MDS-004
 Chapter: 07
 Title: Accessibility
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Accessibility
@@ -393,17 +393,17 @@ Platform preferences should integrate into the Typography Resolver rather than r
 
 ---
 
-# Plugins
+# Modules
 
-Extensions automatically inherit accessibility.
+Modules automatically inherit accessibility.
 
-Plugins should never:
+Modules should never:
 
 - override typography,
 - introduce custom font scales,
 - reduce readability.
 
-Extensions contribute information.
+Modules contribute information.
 
 The Typography System determines how that information becomes readable.
 

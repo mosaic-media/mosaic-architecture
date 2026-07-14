@@ -4,7 +4,7 @@ Document: MDS-003
 Chapter: 13
 Title: Contributor Guidance
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Contributor Guidance
@@ -281,9 +281,9 @@ Physical realism always remains subordinate to understanding.
 
 ---
 
-# Plugins
+# Modules
 
-Extensions should never define:
+Modules should never define:
 
 - Acrylic
 - Blur

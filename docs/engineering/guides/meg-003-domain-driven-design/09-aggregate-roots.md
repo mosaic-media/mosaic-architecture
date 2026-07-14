@@ -2,7 +2,7 @@
 File: docs/engineering/guides/meg-003-domain-driven-design/09-aggregate-roots.md
 Document: MEG-003
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Aggregate Roots
@@ -127,7 +127,7 @@ Multiple Aggregate Roots create ambiguous ownership.
 
 Ownership should always be singular.
 
-Martin Fowler summarises this rule succinctly: external references should point only to the Aggregate Root, which is responsible for maintaining the integrity of the Aggregate.  [oai_citation:0‡martinfowler.com](https://martinfowler.com/bliki/DDD_Aggregate.html?utm_source=chatgpt.com)
+Martin Fowler summarises this rule succinctly: external references should point only to the Aggregate Root, which is responsible for maintaining the integrity of the Aggregate.  [martinfowler.com](https://martinfowler.com/bliki/DDD_Aggregate.html)
 
 ---
 
@@ -318,7 +318,7 @@ Cross-Aggregate references should always use identity.
 
 Never internal object references.
 
-This rule reduces coupling and preserves Aggregate boundaries.  [oai_citation:1‡martinfowler.com](https://martinfowler.com/bliki/DDD_Aggregate.html?utm_source=chatgpt.com)
+This rule reduces coupling and preserves Aggregate boundaries.  [martinfowler.com](https://martinfowler.com/bliki/DDD_Aggregate.html)
 
 ---
 
@@ -574,7 +574,7 @@ Internal Entities may possess local identities if required.
 
 Those identities should never escape the Aggregate boundary.
 
-The Aggregate Root alone has global identity.  [oai_citation:2‡Baeldung on Kotlin](https://www.baeldung.com/cs/aggregate-root-ddd?utm_source=chatgpt.com)
+The Aggregate Root alone has global identity.  [Baeldung on Kotlin](https://www.baeldung.com/cs/aggregate-root-ddd)
 
 ---
 

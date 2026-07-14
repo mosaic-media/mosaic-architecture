@@ -4,7 +4,7 @@ Document: MDS-003
 Chapter: 02
 Title: Material Hierarchy
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Material Hierarchy
@@ -448,11 +448,11 @@ The user's attention naturally remains on current content.
 
 ---
 
-# Plugins
+# Modules
 
-Extensions never define materials.
+Modules never define materials.
 
-Plugins contribute:
+Modules contribute:
 
 - Information
 - Relationships
@@ -465,7 +465,7 @@ The Material System determines:
 - hierarchy
 - atmosphere
 
-Every extension therefore inherits one coherent physical language.
+Every module therefore inherits one coherent physical language.
 
 ---
 
@@ -535,9 +535,9 @@ Users lose physical consistency.
 
 ---
 
-## Plugin Materials
+## Module Materials
 
-Extensions introducing their own material behaviour.
+Modules introducing their own material behaviour.
 
 The physical language fragments.
 

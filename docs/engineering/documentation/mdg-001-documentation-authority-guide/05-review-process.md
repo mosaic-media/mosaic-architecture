@@ -2,7 +2,7 @@
 File: docs/engineering/documentation/mdg-001-documentation-authority-guide/05-review-process.md
 Document: MDG-001
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # 05 — Review Process

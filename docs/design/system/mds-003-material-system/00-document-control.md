@@ -3,7 +3,7 @@ File: docs/design/system/mds-003-material-system/00-document-control.md
 Document: MDS-003
 Title: Material System
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Document Control

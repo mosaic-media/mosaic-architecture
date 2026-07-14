@@ -4,7 +4,7 @@ Document: MDS-008
 Chapter: 07
 Title: Platform Components
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Platform Components
@@ -384,18 +384,18 @@ Behavioural parity is mandatory.
 
 ---
 
-# Plugins
+# Modules
 
-Extensions never implement Platform Components.
+Modules never implement Platform Components.
 
-Plugins contribute:
+Modules contribute:
 
 - behaviour,
 - Expressions.
 
 The Component Library provides platform implementations.
 
-Every extension therefore automatically supports every Mosaic client.
+Every module therefore automatically supports every Mosaic client.
 
 ---
 
@@ -477,9 +477,9 @@ Platform conventions replacing Mosaic interaction.
 
 ---
 
-## Extension Components
+## Module Components
 
-Plugins shipping platform-specific UI implementations.
+Modules shipping platform-specific UI implementations.
 
 ---
 

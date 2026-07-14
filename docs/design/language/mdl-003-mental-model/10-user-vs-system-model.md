@@ -4,7 +4,7 @@ Document: MDL-003
 Chapter: 10
 Title: User Model vs System Model
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # User Model vs System Model
@@ -64,7 +64,7 @@ Examples include:
 - GraphQL
 - HTTP
 - WebSockets
-- Plugins
+- Modules
 - Authentication
 - Caching
 - Event Streams
@@ -186,7 +186,7 @@ Refresh Metadata
 
 Clear Cache
 
-Plugin Failed
+Module Failed
 
 Provider Offline
 
@@ -232,7 +232,7 @@ Administrators occasionally require access to parts of the System Model.
 Examples include:
 
 - storage
-- plugins
+- modules
 - providers
 - users
 - diagnostics
@@ -259,9 +259,9 @@ rather than beginning with raw implementation.
 
 ---
 
-# Extensions
+# Modules
 
-Plugins contribute primarily to the System Model.
+Modules contribute primarily to the System Model.
 
 They provide:
 
@@ -271,7 +271,7 @@ They provide:
 
 They should not redefine the User Model.
 
-Regardless of how many plugins are installed, users should continue experiencing:
+Regardless of how many modules are installed, users should continue experiencing:
 
 - one World
 - one Focus
@@ -318,7 +318,7 @@ The following may change without affecting the User Model:
 - APIs
 - rendering engines
 - frontend frameworks
-- plugin architecture
+- module architecture
 - networking
 - storage
 
@@ -348,9 +348,9 @@ appearing throughout the user experience.
 
 ---
 
-## Plugin Personalities
+## Module Personalities
 
-Plugins introducing competing terminology.
+Modules introducing competing terminology.
 
 ```
 Library
@@ -439,7 +439,7 @@ Examples include:
 
 - Composition Engine
 - Runtime Atmosphere
-- Extension SDK
+- Module SDK
 - GraphQL UI
 - Information Model
 

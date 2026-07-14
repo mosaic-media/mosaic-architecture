@@ -2,7 +2,7 @@
 File: docs/engineering/guides/meg-010-performance-engineering/07-scheduling-efficiency.md
 Document: MEG-010
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Scheduling Efficiency
@@ -82,7 +82,7 @@ Typical categories include:
 - background maintenance
 - scheduled jobs
 - storage operations
-- extension execution
+- module execution
 
 Different workloads may require different scheduling behaviour.
 
@@ -120,7 +120,7 @@ The Runtime should prevent:
 
 - long-running tasks monopolising workers
 - individual capabilities consuming disproportionate resources
-- extensions degrading core platform behaviour
+- modules degrading Platform behaviour
 
 Fair scheduling produces more predictable performance than aggressive scheduling.
 

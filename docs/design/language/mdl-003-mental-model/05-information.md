@@ -4,7 +4,7 @@ Document: MDL-003
 Chapter: 05
 Title: Information
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Information
@@ -25,7 +25,7 @@ Mosaic should fundamentally understand **information**, not interface.
 
 The interface is simply one possible way of communicating that information.
 
-This concept becomes the foundation for the Composition Engine, Extension SDK and future runtime systems.
+This concept becomes the foundation for the Composition Engine, Module SDK and future runtime systems.
 
 ---
 
@@ -102,9 +102,9 @@ The platform should understand these concepts before deciding how they should ap
 
 This distinction is fundamental.
 
-The following statement should be considered a core architectural assumption of Mosaic.
+The following statement should be considered a fundamental architectural assumption of Mosaic.
 
-> **Plugins contribute information.**
+> **Modules contribute information.**
 
 > **Mosaic contributes interface.**
 
@@ -303,7 +303,7 @@ This allows Mosaic to build reusable systems rather than media-specific implemen
 
 ## Example 01
 
-Anime plugin.
+Anime module.
 
 Provides:
 
@@ -315,13 +315,13 @@ Episode Release
 Tomorrow
 ```
 
-The plugin does **not** decide how that information appears.
+The module does **not** decide how that information appears.
 
 ---
 
 ## Example 02
 
-Book plugin.
+Book module.
 
 Provides:
 
@@ -411,7 +411,7 @@ Card
 
 Wrong.
 
-The plugin has started designing the interface.
+The module has started designing the interface.
 
 That responsibility belongs to Mosaic.
 
@@ -477,7 +477,7 @@ Future systems should allow:
 - multiple consumers of the same information
 - multiple presentations of the same information
 - multiple devices sharing the same information
-- plugins contributing information without UI knowledge
+- modules contributing information without UI knowledge
 
 This architectural flexibility is considered one of the primary long-term advantages of the Mosaic platform.
 

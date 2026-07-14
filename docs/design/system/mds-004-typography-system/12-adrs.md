@@ -4,7 +4,7 @@ Document: MDS-004
 Chapter: 12
 Title: Architectural Decision Records
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Architectural Decision Records
@@ -29,29 +29,11 @@ Future contributors should understand these decisions before proposing changes t
 
 ---
 
-# ADR Format
+# Decision Format
 
-Every Mosaic ADR follows the standard structure.
+Decision format, lifecycle and review expectations are governed by **MDG-001 — Documentation Authority Guide**.
 
-```text
-ADR Number
-
-Status
-
-Context
-
-Decision
-
-Consequences
-
-Alternatives Considered
-
-Related Specifications
-```
-
-Each ADR records one significant architectural decision.
-
----
+This chapter records decisions specific to this specification and avoids redefining the shared ADR process.
 
 # ADR-125
 
@@ -275,7 +257,7 @@ Future typography technologies may evolve without affecting application code.
 
 ## Title
 
-Extensions Inherit Typography
+Modules Inherit Typography
 
 ### Status
 
@@ -283,17 +265,17 @@ Accepted
 
 ### Context
 
-Allowing extensions to introduce independent typographic systems fragments product identity.
+Allowing modules to introduce independent typographic systems fragments product identity.
 
 ### Decision
 
-Extensions contribute editorial content.
+Modules contribute editorial content.
 
 The platform owns typography.
 
 ### Consequences
 
-Community extensions inherit future typography improvements automatically.
+Community modules inherit future typography improvements automatically.
 
 ---
 
@@ -318,7 +300,7 @@ ADR131["Accessibility"]
 
 ADR132["Variable Fonts"]
 
-ADR133["Extensions"]
+ADR133["Modules"]
 
 ADR125 --> ADR126
 ADR126 --> ADR127

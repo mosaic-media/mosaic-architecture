@@ -4,7 +4,7 @@ Document: MDS-005
 Chapter: 12
 Title: Architectural Decision Records
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Architectural Decision Records
@@ -30,29 +30,11 @@ Future contributors should consult these records before proposing changes to mov
 
 ---
 
-# ADR Format
+# Decision Format
 
-Every Mosaic ADR follows the standard structure.
+Decision format, lifecycle and review expectations are governed by **MDG-001 — Documentation Authority Guide**.
 
-```text
-ADR Number
-
-Status
-
-Context
-
-Decision
-
-Consequences
-
-Alternatives Considered
-
-Related Specifications
-```
-
-Each ADR documents one significant architectural decision.
-
----
+This chapter records decisions specific to this specification and avoids redefining the shared ADR process.
 
 # ADR-139
 
@@ -305,7 +287,7 @@ Users experience one behavioural language across every Mosaic client.
 
 ## Title
 
-Extensions Inherit Motion
+Modules Inherit Motion
 
 ### Status
 
@@ -313,11 +295,11 @@ Accepted
 
 ### Context
 
-Allowing extensions to introduce independent motion languages fragments behavioural consistency.
+Allowing modules to introduce independent motion languages fragments behavioural consistency.
 
 ### Decision
 
-Extensions contribute:
+Modules contribute:
 
 - behaviour,
 - information,
@@ -327,7 +309,7 @@ The platform owns all movement.
 
 ### Consequences
 
-Community extensions automatically inherit future Motion System improvements.
+Community modules automatically inherit future Motion System improvements.
 
 ---
 
@@ -354,7 +336,7 @@ ADR146["Accessibility"]
 
 ADR147["Platforms"]
 
-ADR148["Extensions"]
+ADR148["Modules"]
 
 ADR139 --> ADR140
 ADR140 --> ADR141

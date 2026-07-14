@@ -4,7 +4,7 @@ Document: MDS-006
 Chapter: 08
 Title: Runtime Pipelines
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Runtime Pipelines
@@ -523,15 +523,15 @@ Behavioural execution remains identical.
 
 ---
 
-# Plugins
+# Modules
 
-Extensions contribute:
+Modules contribute:
 
 - behaviour
 - information
 - relationships
 
-Plugins never participate directly in pipeline execution.
+Modules never participate directly in pipeline execution.
 
 The Composition Engine determines:
 
@@ -539,7 +539,7 @@ The Composition Engine determines:
 - stage boundaries
 - presentation
 
-Every extension therefore inherits identical runtime behaviour.
+Every module therefore inherits identical runtime behaviour.
 
 ---
 

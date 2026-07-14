@@ -2,7 +2,7 @@
 File: docs/engineering/guides/meg-005-runtime-architecture/11-shutdown.md
 Document: MEG-005
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Shutdown
@@ -105,7 +105,7 @@ Each stage owns exactly one responsibility.
 
 Shutdown order is the reverse of startup.
 
-Graceful shutdown in distributed systems commonly follows this pattern: stop accepting new work, drain in-flight work, release resources and terminate cleanly.  [oai_citation:0‡GeeksforGeeks](https://www.geeksforgeeks.org/system-design/graceful-shutdown-in-distributed-systems-and-microservices/?utm_source=chatgpt.com)
+Graceful shutdown in distributed systems commonly follows this pattern: stop accepting new work, drain in-flight work, release resources and terminate cleanly.  [GeeksforGeeks](https://www.geeksforgeeks.org/system-design/graceful-shutdown-in-distributed-systems-and-microservices/)
 
 ---
 
@@ -142,13 +142,13 @@ Examples include:
 - HTTP stops accepting requests
 - schedulers stop creating work
 - event consumers stop consuming
-- extension entry points close
+- module entry points close
 
 Existing work continues.
 
 New work does not begin.
 
-Cooldown is distinct from draining because it closes admission before attempting to complete in-flight work.  [oai_citation:1‡Reddit](https://www.reddit.com/r/node/comments/1s4x8gp/application_lifecycle_is_one_of_the_most_ignored/?utm_source=chatgpt.com)
+Cooldown is distinct from draining because it closes admission before attempting to complete in-flight work.  [Reddit](https://www.reddit.com/r/node/comments/1s4x8gp/application_lifecycle_is_one_of_the_most_ignored/)
 
 ---
 
@@ -300,7 +300,7 @@ This follow-up work may still execute during draining because it belongs to an a
 
 New user requests should not.
 
-This distinction prevents partially completed business workflows while still allowing shutdown to complete predictably.  [oai_citation:2‡Reddit](https://www.reddit.com/r/node/comments/1s4x8gp/application_lifecycle_is_one_of_the_most_ignored/?utm_source=chatgpt.com)
+This distinction prevents partially completed business workflows while still allowing shutdown to complete predictably.  [Reddit](https://www.reddit.com/r/node/comments/1s4x8gp/application_lifecycle_is_one_of_the_most_ignored/)
 
 ---
 

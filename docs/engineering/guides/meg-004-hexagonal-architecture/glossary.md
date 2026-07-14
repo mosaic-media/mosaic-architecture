@@ -2,7 +2,7 @@
 File: docs/engineering/guides/meg-004-hexagonal-architecture/glossary.md
 Document: MEG-004
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Glossary
@@ -21,7 +21,7 @@ These definitions establish the canonical architectural vocabulary for:
 - ADRs
 - Source Code
 - Documentation
-- Extension SDKs
+- Module SDKs
 - Engineering Discussions
 
 Where a term has a specific meaning within the Mosaic Architecture, that definition takes precedence over informal usage.
@@ -194,7 +194,7 @@ Everything inside the Hexagon represents business behaviour.
 
 Everything outside represents infrastructure.
 
-The hexagon is a visual metaphor rather than a structural requirement.  [oai_citation:0‡Alistair Cockburn](https://alistair.cockburn.us/hexagonal-architecture?utm_source=chatgpt.com)
+The hexagon is a visual metaphor rather than a structural requirement.  [Alistair Cockburn](https://alistair.cockburn.us/hexagonal-architecture)
 
 ---
 
@@ -212,7 +212,7 @@ Its central principle is:
 
 Business behaviour remains isolated from external technology.
 
- [oai_citation:1‡Alistair Cockburn](https://alistair.cockburn.us/hexagonal-architecture?utm_source=chatgpt.com)
+ [Alistair Cockburn](https://alistair.cockburn.us/hexagonal-architecture)
 
 ---
 
@@ -353,7 +353,7 @@ Definitions should remain consistent across:
 - Architecture Specifications
 - Runtime Documentation
 - Domain Documentation
-- Extension SDKs
+- Module SDKs
 - Contributor Guidance
 
 Whenever architectural terminology evolves, this glossary SHOULD be updated before introducing new terminology elsewhere.

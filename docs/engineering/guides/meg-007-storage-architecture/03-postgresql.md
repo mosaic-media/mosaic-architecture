@@ -2,7 +2,7 @@
 File: docs/engineering/guides/meg-007-storage-architecture/03-postgresql.md
 Document: MEG-007
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # PostgreSQL
@@ -25,7 +25,7 @@ Examples include:
 - playback progress
 - capability configuration
 - permissions
-- extension configuration
+- module configuration
 
 These concepts define the platform itself.
 
@@ -390,7 +390,7 @@ Examples include:
 - provider settings
 - feature flags
 - user preferences
-- extension configuration
+- module configuration
 
 Configuration should remain durable.
 

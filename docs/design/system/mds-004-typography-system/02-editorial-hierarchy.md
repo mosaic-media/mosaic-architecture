@@ -4,7 +4,7 @@ Document: MDS-004
 Chapter: 02
 Title: Editorial Hierarchy
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Editorial Hierarchy

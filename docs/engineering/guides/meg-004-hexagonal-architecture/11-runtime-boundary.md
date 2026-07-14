@@ -2,7 +2,7 @@
 File: docs/engineering/guides/meg-004-hexagonal-architecture/11-runtime-boundary.md
 Document: MEG-004
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Runtime Boundary
@@ -354,7 +354,7 @@ The Domain simply executes business behaviour again.
 
 It remains unaware that this execution resulted from a retry.
 
-This separation keeps business behaviour deterministic while allowing the Runtime to implement sophisticated recovery strategies.  [oai_citation:0‡AWS Documentation](https://docs.aws.amazon.com/prescriptive-guidance/latest/cloud-design-patterns/hexagonal-architecture.html?utm_source=chatgpt.com)
+This separation keeps business behaviour deterministic while allowing the Runtime to implement sophisticated recovery strategies.  [AWS Documentation](https://docs.aws.amazon.com/prescriptive-guidance/latest/cloud-design-patterns/hexagonal-architecture.html)
 
 ---
 
@@ -438,14 +438,14 @@ Operational telemetry should never pollute the Domain Model.
 
 ---
 
-# Extension Integration
+# Module Integration
 
-Extensions participate through the Runtime boundary.
+Modules participate through the Runtime boundary.
 
 Example.
 
 ```
-Extension
+Module
 
 ↓
 
@@ -470,8 +470,8 @@ Domain
 
 The Domain cannot determine whether the caller is:
 
-- Core
-- Extension
+- Platform capabilities
+- Module
 - Scheduler
 - HTTP
 

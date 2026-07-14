@@ -2,7 +2,7 @@
 File: docs/engineering/guides/meg-003-domain-driven-design/11-domain-events.md
 Document: MEG-003
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Domain Events

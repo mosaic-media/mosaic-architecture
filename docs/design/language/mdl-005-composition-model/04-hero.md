@@ -4,7 +4,7 @@ Document: MDL-005
 Chapter: 04
 Title: Hero
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Hero
@@ -72,7 +72,7 @@ It immediately establishes:
 - the current journey
 - the current story
 
-Well-established design systems use hero sections to establish the primary message and create an immediate visual hierarchy, but Mosaic extends the concept beyond page introductions into a dynamic behavioural role.  [oai_citation:0‡Sky UI](https://sky-ui.cf.sky.com/sections/hero?utm_source=chatgpt.com)
+Well-established design systems use hero sections to establish the primary message and create an immediate visual hierarchy, but Mosaic extends the concept beyond page introductions into a dynamic behavioural role.  [Sky UI](https://sky-ui.cf.sky.com/sections/hero)
 
 ---
 

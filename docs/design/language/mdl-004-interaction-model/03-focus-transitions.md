@@ -4,7 +4,7 @@ Document: MDL-004
 Chapter: 03
 Title: Focus Transitions
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Focus Transitions

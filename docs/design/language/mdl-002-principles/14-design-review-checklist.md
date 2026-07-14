@@ -4,7 +4,7 @@ Document: MDL-002
 Chapter: 14
 Title: Design Review Checklist
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Design Review Checklist
@@ -23,7 +23,7 @@ The objective is not to block change.
 
 The objective is to ensure that change strengthens Mosaic rather than gradually fragmenting it.
 
-Structured review checklists improve consistency, reduce omissions and help teams evaluate work against agreed standards rather than personal taste.  [oai_citation:0‡WPDean](https://wpdean.com/design-system-documentation/?utm_source=chatgpt.com)
+Structured review checklists improve consistency, reduce omissions and help teams evaluate work against agreed standards rather than personal taste.  [WPDean](https://wpdean.com/design-system-documentation/)
 
 ---
 
@@ -35,7 +35,7 @@ This checklist should be completed for:
 - New interaction patterns
 - New components
 - New navigation models
-- New extension capabilities
+- New module capabilities
 - Material System changes
 - Motion changes
 - Composition changes
@@ -279,7 +279,7 @@ Does this increase long-term maintainability?
 
 ### E1
 
-Does this capability belong in the core platform?
+Does this capability belong in the Platform foundation?
 
 - [ ] Yes
 - [ ] No
@@ -288,7 +288,7 @@ Does this capability belong in the core platform?
 
 ### E2
 
-Would an extension provide a better solution?
+Would a module provide a better solution?
 
 - [ ] Yes
 - [ ] No
@@ -297,7 +297,7 @@ Would an extension provide a better solution?
 
 ### E3
 
-Does the proposal strengthen the extension ecosystem?
+Does the proposal strengthen the module ecosystem?
 
 - [ ] Yes
 - [ ] No

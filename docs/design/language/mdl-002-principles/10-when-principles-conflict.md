@@ -4,7 +4,7 @@ Document: MDL-002
 Chapter: 10
 Title: When Principles Conflict
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # When Principles Conflict
@@ -21,7 +21,7 @@ Instead, they provide a framework for making consistent decisions when multiple 
 
 This chapter defines how contributors should resolve situations where two or more principles appear to recommend different approaches.
 
-Principles are valuable precisely because they help teams navigate trade-offs rather than simply describing aspirations.  [oai_citation:0‡Design Principles](https://principles.design/field-guide/?utm_source=chatgpt.com)
+Principles are valuable precisely because they help teams navigate trade-offs rather than simply describing aspirations.  [Design Principles](https://principles.design/field-guide/)
 
 ---
 
@@ -36,7 +36,7 @@ Examples include:
 - Simplicity vs Discoverability
 - Context vs Exploration
 - Continuity vs Efficiency
-- Platform Consistency vs Extension Flexibility
+- Platform Consistency vs Module Flexibility
 
 The objective is not to eliminate these tensions.
 
@@ -184,7 +184,7 @@ However, it also distracts from the user's current entertainment context.
 | Platform Enables | Neutral |
 | Be A Companion | Conflicts |
 
-Three core principles conflict with the proposal.
+Three governing principles conflict with the proposal.
 
 The proposal should therefore be rejected or redesigned.
 
@@ -194,7 +194,7 @@ The proposal should therefore be rejected or redesigned.
 
 ## Scenario
 
-A plugin introduces audiobook progress.
+A module introduces audiobook progress.
 
 Should it create a custom interface...
 

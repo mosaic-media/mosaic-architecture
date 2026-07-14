@@ -2,7 +2,7 @@
 File: docs/engineering/guides/meg-003-domain-driven-design/04-bounded-contexts.md
 Document: MEG-003
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Bounded Contexts
@@ -98,7 +98,7 @@ Recommendations
 
 ↓
 
-Extensions
+Modules
 ```
 
 Eventually:
@@ -149,7 +149,7 @@ Within the Library Context it means:
 
 > A user's organised collection of media.
 
-Within a hypothetical Extension Marketplace it might mean:
+Within a hypothetical Module Marketplace it might mean:
 
 > A repository of installable capabilities.
 
@@ -268,7 +268,7 @@ Within Mosaic those contracts are typically:
 
 - domain events
 - public interfaces
-- extension APIs
+- module APIs
 
 Contexts SHOULD NOT communicate through:
 
@@ -468,14 +468,14 @@ Events become the contract.
 
 ---
 
-# Extensions And Contexts
+# Modules And Contexts
 
-Extensions should align with one primary Bounded Context.
+Modules should align with one primary Bounded Context.
 
 Example.
 
 ```
-TMDB Extension
+TMDB Module
 
 ↓
 
@@ -483,14 +483,14 @@ Metadata Context
 ```
 
 ```
-Infuse Extension
+Infuse Module
 
 ↓
 
 Playback Context
 ```
 
-Extensions should not simultaneously own multiple unrelated business models.
+Modules should not simultaneously own multiple unrelated business models.
 
 If they do, their responsibilities should be reconsidered.
 

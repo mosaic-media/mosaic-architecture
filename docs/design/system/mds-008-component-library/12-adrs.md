@@ -4,7 +4,7 @@ Document: MDS-008
 Chapter: 12
 Title: Architectural Decision Records
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Architectural Decision Records
@@ -31,29 +31,11 @@ Future contributors should understand these decisions before modifying the Compo
 
 ---
 
-# ADR Format
+# Decision Format
 
-Every Mosaic ADR follows the standard structure.
+Decision format, lifecycle and review expectations are governed by **MDG-001 — Documentation Authority Guide**.
 
-```text
-ADR Number
-
-Status
-
-Context
-
-Decision
-
-Consequences
-
-Alternatives Considered
-
-Related Specifications
-```
-
-Each ADR documents one architectural decision.
-
----
+This chapter records decisions specific to this specification and avoids redefining the shared ADR process.
 
 # ADR-182
 
@@ -257,7 +239,7 @@ Every upstream architectural layer remains independent from graphics technology.
 
 ## Title
 
-Extensions Never Implement Components
+Modules Never Implement Components
 
 ### Status
 
@@ -265,17 +247,17 @@ Accepted
 
 ### Context
 
-Plugin-owned rendering fragments presentation quality and behavioural consistency.
+Module-owned rendering fragments presentation quality and behavioural consistency.
 
 ### Decision
 
-Extensions contribute runtime behaviour only.
+Modules contribute runtime behaviour only.
 
 The platform owns Components completely.
 
 ### Consequences
 
-Community extensions automatically inherit future rendering improvements.
+Community modules automatically inherit future rendering improvements.
 
 ---
 
@@ -300,7 +282,7 @@ ADR188["Lifecycle"]
 
 ADR189["Rendering"]
 
-ADR190["Extensions"]
+ADR190["Modules"]
 
 ADR182 --> ADR183
 ADR183 --> ADR184

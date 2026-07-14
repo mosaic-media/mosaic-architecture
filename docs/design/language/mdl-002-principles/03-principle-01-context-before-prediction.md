@@ -5,7 +5,7 @@ Chapter: 03
 Principle: 01
 Title: Context Before Prediction
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Principle 01 — Context Before Prediction
@@ -94,7 +94,7 @@ The interface quietly supports the activity already taking place.
 
 This produces a calmer experience with significantly less cognitive interruption.
 
-Understanding a person's current context is a recognised design principle because people use products within specific situations, environments and goals rather than in isolation.  [oai_citation:0‡GOV.UK](https://www.gov.uk/guidance/government-design-principles?utm_source=chatgpt.com)
+Understanding a person's current context is a recognised design principle because people use products within specific situations, environments and goals rather than in isolation.  [GOV.UK](https://www.gov.uk/guidance/government-design-principles)
 
 ---
 
@@ -213,7 +213,7 @@ Examples include:
 - composition engine
 - runtime atmosphere
 - adaptive layouts
-- plugin framework
+- module framework
 - GraphQL responses
 
 Engineering systems should ask:
@@ -226,31 +226,31 @@ before asking:
 
 ---
 
-# Plugin Guidance
+# Module Guidance
 
-Extensions should contribute information relevant to the user's current context.
+Modules should contribute information relevant to the user's current context.
 
 Good examples:
 
-Anime extension
+Anime module
 
 ```
 Episode airs tomorrow.
 ```
 
-Book extension
+Book module
 
 ```
 Chapter progress updated.
 ```
 
-Music extension
+Music module
 
 ```
 Live concert announced nearby.
 ```
 
-The extension contributes information.
+The module contributes information.
 
 Mosaic decides whether and how that information becomes part of the current composition.
 

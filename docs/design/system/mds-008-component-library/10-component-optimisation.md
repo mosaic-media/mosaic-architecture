@@ -4,7 +4,7 @@ Document: MDS-008
 Chapter: 10
 Title: Component Optimisation
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Component Optimisation
@@ -457,11 +457,11 @@ Behaviour should never depend upon it.
 
 ---
 
-# Plugins
+# Modules
 
-Extensions never participate in optimisation.
+Modules never participate in optimisation.
 
-Plugins contribute:
+Modules contribute:
 
 - behaviour
 - information
@@ -469,7 +469,7 @@ Plugins contribute:
 
 Platform implementations optimise rendering transparently.
 
-Every extension therefore automatically benefits from future optimisation work.
+Every module therefore automatically benefits from future optimisation work.
 
 ---
 

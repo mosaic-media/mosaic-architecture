@@ -3,7 +3,7 @@ File: docs/design/language/mdl-002-principles/00-document-control.md
 Document: MDL-002
 Title: Design Principles
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Document Control
@@ -148,7 +148,7 @@ MDL-002 should be considered required reading for:
 - UX Engineers
 - Frontend Engineers
 - Platform Engineers
-- Plugin Authors
+- Module Authors
 - Community Maintainers
 
 Knowledge of this document is assumed throughout every subsequent MDL and MDS specification.
@@ -162,7 +162,7 @@ After reading MDL-002, a contributor should be capable of answering questions su
 - Which solution is more aligned with Mosaic?
 - Should this interaction exist?
 - Does this feature strengthen or weaken immersion?
-- Should this become part of the core platform or remain an extension?
+- Should this become part of the Platform foundation or remain a module?
 - Does this proposal deserve to become part of the design language?
 
 without relying upon subjective preference.

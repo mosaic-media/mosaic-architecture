@@ -4,7 +4,7 @@ Document: MDL-001
 Chapter: 06
 Title: Design Philosophy
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Design Philosophy
@@ -125,7 +125,7 @@ This philosophy influences:
 - navigation
 - composition
 - notifications
-- plugins
+- modules
 
 Understanding should always precede prediction.
 
@@ -196,7 +196,7 @@ The interface should avoid:
 
 The software should communicate confidence through restraint.
 
-Good design principles are intended to guide trade-offs rather than act as slogans. They provide teams with a consistent basis for choosing one solution over another.  [oai_citation:0‡Design Principles](https://principles.design/about/?utm_source=chatgpt.com)
+Good design principles are intended to guide trade-offs rather than act as slogans. They provide teams with a consistent basis for choosing one solution over another.  [Design Principles](https://principles.design/about/)
 
 ---
 

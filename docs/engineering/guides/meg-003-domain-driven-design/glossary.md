@@ -2,7 +2,7 @@
 File: docs/engineering/guides/meg-003-domain-driven-design/glossary.md
 Document: MEG-003
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Glossary
@@ -21,7 +21,7 @@ The definitions contained within this document establish the canonical business 
 - ADRs
 - Source Code
 - Documentation
-- Extension SDKs
+- Module SDKs
 - Technical Discussions
 
 Where a term has a specific meaning within the Mosaic Domain Model, that definition takes precedence over informal usage.
@@ -368,7 +368,7 @@ Definitions should remain consistent across:
 - Architecture Specifications
 - ADRs
 - Runtime Specifications
-- Extension SDKs
+- Module SDKs
 - Contributor Documentation
 
 Whenever the ubiquitous language evolves, this glossary SHOULD be updated before introducing new terminology elsewhere.

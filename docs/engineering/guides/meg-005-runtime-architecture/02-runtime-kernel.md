@@ -2,7 +2,7 @@
 File: docs/engineering/guides/meg-005-runtime-architecture/02-runtime-kernel.md
 Document: MEG-005
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Runtime Kernel
@@ -54,7 +54,7 @@ It should provide only the minimum capabilities required for the Runtime to func
 
 Everything else becomes a Runtime Service.
 
-This mirrors microkernel operating system design, where the kernel retains only core responsibilities while higher-level services are implemented separately.  [oai_citation:0‡Operating Systems](https://operatingsystemsauthority.com/operating-system-kernel?utm_source=chatgpt.com)
+This mirrors microkernel operating system design, where the kernel retains only essential responsibilities while higher-level services are implemented separately.  [Operating Systems](https://operatingsystemsauthority.com/operating-system-kernel)
 
 ---
 

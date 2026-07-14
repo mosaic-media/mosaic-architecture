@@ -4,7 +4,7 @@ Document: MDS-002
 Chapter: 01
 Title: Colour Philosophy
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Colour Philosophy

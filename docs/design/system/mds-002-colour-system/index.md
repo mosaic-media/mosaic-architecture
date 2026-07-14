@@ -2,7 +2,7 @@
 File: docs/design/system/mds-002-colour-system/index.md
 Document: MDS-002
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # MDS-002 — Colour System
@@ -110,7 +110,7 @@ They do not define it.
 
 ---
 
-# Core Question
+# Guiding Question
 
 MDS-002 exists to answer one question.
 

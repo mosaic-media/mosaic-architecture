@@ -3,7 +3,7 @@ File: docs/design/language/mdl-004-interaction-model/glossary.md
 Document: MDL-004
 Title: Glossary
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Glossary

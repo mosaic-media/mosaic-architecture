@@ -2,7 +2,7 @@
 File: docs/engineering/guides/meg-001-go-engineering-standards/12-performance.md
 Document: MEG-001
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Performance
@@ -213,7 +213,7 @@ Escape analysis should be inspected using:
 go build -gcflags="-m"
 ```
 
-Only optimise escape behaviour when measurements demonstrate heap allocations are a bottleneck.  [oai_citation:0‡Golang Design](https://golang.design/under-the-hood/en/part5toolchain/ch15compile/escape/?utm_source=chatgpt.com)
+Only optimise escape behaviour when measurements demonstrate heap allocations are a bottleneck.  [Golang Design](https://golang.design/under-the-hood/en/part5toolchain/ch15compile/escape/)
 
 ---
 
@@ -328,7 +328,7 @@ It SHOULD only be used when:
 
 It SHOULD NOT become a general-purpose object cache.
 
-Objects stored in a pool may be discarded during garbage collection, so correctness must never depend upon their continued existence.  [oai_citation:1‡Go](https://go.dev/wiki/Performance?utm_source=chatgpt.com)
+Objects stored in a pool may be discarded during garbage collection, so correctness must never depend upon their continued existence.  [Go](https://go.dev/wiki/Performance)
 
 ---
 

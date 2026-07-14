@@ -2,7 +2,7 @@
 File: docs/engineering/guides/meg-001-go-engineering-standards/07-composition-and-polymorphism.md
 Document: MEG-001
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Composition and Polymorphism
@@ -29,7 +29,7 @@ Interfaces are used for polymorphism.
 
 Embedding is used sparingly as a convenience.
 
-This separation produces software that is easier to understand, easier to evolve and significantly less coupled than inheritance-based designs. Go's own documentation describes embedding as a mechanism for code reuse rather than subclassing.  [oai_citation:0‡Go](https://go.dev/doc/effective_go?utm_source=chatgpt.com)
+This separation produces software that is easier to understand, easier to evolve and significantly less coupled than inheritance-based designs. Go's own documentation describes embedding as a mechanism for code reuse rather than subclassing.  [Go](https://go.dev/doc/effective_go)
 
 ---
 
@@ -204,7 +204,7 @@ The logger still exists as a field.
 
 It has **not** become a superclass.
 
-Embedding should therefore be viewed as syntactic convenience rather than inheritance.  [oai_citation:1‡Go](https://go.dev/doc/effective_go?utm_source=chatgpt.com)
+Embedding should therefore be viewed as syntactic convenience rather than inheritance.  [Go](https://go.dev/doc/effective_go)
 
 ---
 

@@ -2,7 +2,7 @@
 File: docs/engineering/guides/meg-007-storage-architecture/glossary.md
 Document: MEG-007
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Glossary

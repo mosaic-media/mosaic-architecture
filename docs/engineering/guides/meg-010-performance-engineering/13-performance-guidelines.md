@@ -2,7 +2,7 @@
 File: docs/engineering/guides/meg-010-performance-engineering/13-performance-guidelines.md
 Document: MEG-010
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Performance Guidelines

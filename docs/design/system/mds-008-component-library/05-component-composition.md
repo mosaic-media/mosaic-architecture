@@ -4,7 +4,7 @@ Document: MDS-008
 Chapter: 05
 Title: Component Composition
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Component Composition
@@ -510,11 +510,11 @@ Behaviour remains identical.
 
 ---
 
-# Plugins
+# Modules
 
-Extensions never define Component Composition.
+Modules never define Component Composition.
 
-Plugins contribute:
+Modules contribute:
 
 - behaviour,
 - Expressions.
@@ -523,7 +523,7 @@ The Tile Framework resolves presentation.
 
 Platform implementations compose Components.
 
-Every extension therefore automatically inherits native implementation quality.
+Every module therefore automatically inherits native implementation quality.
 
 ---
 

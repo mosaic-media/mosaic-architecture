@@ -4,7 +4,7 @@ Document: MDS-006
 Chapter: 06
 Title: Adaptive Layout
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Adaptive Layout
@@ -543,15 +543,15 @@ Not behavioural meaning.
 
 ---
 
-# Plugins
+# Modules
 
-Extensions contribute Expressions.
+Modules contribute Expressions.
 
-Plugins never determine layout.
+Modules never determine layout.
 
 Adaptive Layout remains entirely platform owned.
 
-Every extension therefore automatically inherits future layout improvements.
+Every module therefore automatically inherits future layout improvements.
 
 ---
 
@@ -625,9 +625,9 @@ Widgets determining spatial organisation.
 
 ---
 
-## Plugin Layout
+## Module Layout
 
-Extensions introducing independent layout systems.
+Modules introducing independent layout systems.
 
 ---
 

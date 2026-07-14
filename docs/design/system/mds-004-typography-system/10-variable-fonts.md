@@ -4,7 +4,7 @@ Document: MDS-004
 Chapter: 10
 Title: Variable Fonts
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Variable Fonts
@@ -443,11 +443,11 @@ Variable Fonts should improve flexibility without introducing perceptible perfor
 
 ---
 
-# Plugins
+# Modules
 
-Extensions should never manipulate Variable Font axes.
+Modules should never manipulate Variable Font axes.
 
-Plugins contribute:
+Modules contribute:
 
 - language,
 - information,
@@ -460,7 +460,7 @@ The Typography Resolver determines:
 - optical size,
 - grade.
 
-Every extension therefore inherits future typography improvements automatically.
+Every module therefore inherits future typography improvements automatically.
 
 ---
 

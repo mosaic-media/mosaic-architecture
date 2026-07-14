@@ -4,7 +4,7 @@ Document: MDS-005
 Chapter: 10
 Title: Platform Motion
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Platform Motion
@@ -383,11 +383,11 @@ The Motion System should remain understandable regardless of locale.
 
 ---
 
-# Plugins
+# Modules
 
-Extensions should never provide platform-specific animations.
+Modules should never provide platform-specific animations.
 
-Plugins contribute:
+Modules contribute:
 
 - behaviour
 - information
@@ -399,7 +399,7 @@ Platform Motion determines:
 - interpolation
 - rendering
 
-Every extension therefore automatically inherits future motion improvements.
+Every module therefore automatically inherits future motion improvements.
 
 ---
 

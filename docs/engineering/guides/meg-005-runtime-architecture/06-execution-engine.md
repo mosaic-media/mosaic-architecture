@@ -2,7 +2,7 @@
 File: docs/engineering/guides/meg-005-runtime-architecture/06-execution-engine.md
 Document: MEG-005
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Execution Engine
@@ -122,7 +122,7 @@ Examples include:
 
 - Runtime Events
 - Scheduled Tasks
-- Extension Calls
+- Module Calls
 - Maintenance Tasks
 - Background Jobs
 
@@ -314,7 +314,7 @@ Concurrency should emerge naturally.
 
 The Execution Engine should maximise utilisation while respecting Runtime limits.
 
-Modern execution engines typically coordinate worker pools rather than executing work directly, allowing scheduling and execution responsibilities to remain separate.  [oai_citation:0‡DeepWiki](https://deepwiki.com/taskflow/taskflow/2.2-executor-and-workers?utm_source=chatgpt.com)
+Modern execution engines typically coordinate worker pools rather than executing work directly, allowing scheduling and execution responsibilities to remain separate.  [DeepWiki](https://deepwiki.com/taskflow/taskflow/2.2-executor-and-workers)
 
 ---
 

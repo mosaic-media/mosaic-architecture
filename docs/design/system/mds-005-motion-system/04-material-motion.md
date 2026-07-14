@@ -4,7 +4,7 @@ Document: MDS-005
 Chapter: 04
 Title: Material Motion
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Material Motion
@@ -472,11 +472,11 @@ Materials should continue feeling premium without compromising responsiveness.
 
 ---
 
-# Plugins
+# Modules
 
-Extensions never animate materials.
+Modules never animate materials.
 
-Plugins contribute:
+Modules contribute:
 
 - behavioural events,
 - artwork,
@@ -488,7 +488,7 @@ The Motion System determines:
 - atmosphere redistribution,
 - physical continuity.
 
-Every extension therefore inherits one coherent physical language automatically.
+Every module therefore inherits one coherent physical language automatically.
 
 ---
 

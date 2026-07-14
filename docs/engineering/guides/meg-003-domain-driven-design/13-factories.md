@@ -2,7 +2,7 @@
 File: docs/engineering/guides/meg-003-domain-driven-design/13-factories.md
 Document: MEG-003
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Factories
@@ -86,7 +86,7 @@ This knowledge becomes duplicated throughout the application.
 
 A Factory centralises that knowledge.
 
-DDD factories exist specifically to separate object construction from object use while ensuring newly created Aggregates satisfy all invariants.  [oai_citation:0‡O'Reilly Media](https://www.oreilly.com/library/view/implementing-domain-driven-design/9780133039900/ch11lev1sec1.html?utm_source=chatgpt.com)
+DDD factories exist specifically to separate object construction from object use while ensuring newly created Aggregates satisfy all invariants.  [O'Reilly Media](https://www.oreilly.com/library/view/implementing-domain-driven-design/9780133039900/ch11lev1sec1.html)
 
 ---
 
@@ -251,7 +251,7 @@ This is often preferable to introducing another type.
 
 Only introduce a dedicated Factory when creation logic genuinely becomes complex.
 
-Evans and Vernon both encourage using Aggregate methods as factories where the creation naturally belongs to the Aggregate itself.  [oai_citation:1‡O'Reilly Media](https://www.oreilly.com/library/view/implementing-domain-driven-design/9780133039900/ch11.html?utm_source=chatgpt.com)
+Evans and Vernon both encourage using Aggregate methods as factories where the creation naturally belongs to the Aggregate itself.  [O'Reilly Media](https://www.oreilly.com/library/view/implementing-domain-driven-design/9780133039900/ch11.html)
 
 ---
 

@@ -5,7 +5,7 @@ Chapter: 09
 Principle: 07
 Title: Be A Companion
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Principle 07 — Be A Companion
@@ -48,7 +48,7 @@ The software exists to support a person's entertainment.
 
 Not to become another source of competition for their attention.
 
-This philosophy aligns closely with the ideas behind *Calm Technology*, where technology should inform without constantly demanding focus, moving between the centre and periphery of attention only when necessary.  [oai_citation:0‡Wikipedia](https://en.wikipedia.org/wiki/Calm_technology?utm_source=chatgpt.com)
+This philosophy aligns closely with the ideas behind *Calm Technology*, where technology should inform without constantly demanding focus, moving between the centre and periphery of attention only when necessary.  [Wikipedia](https://en.wikipedia.org/wiki/Calm_technology)
 
 ---
 
@@ -286,7 +286,7 @@ Focused assistance
 
 Peripheral awareness
 
-This mirrors one of the core ideas of Calm Technology, where technology should remain mostly in the user's periphery and move into focus only when required.  [oai_citation:1‡Wikipedia](https://en.wikipedia.org/wiki/Calm_technology?utm_source=chatgpt.com)
+This mirrors one of the Platform foundation ideas of Calm Technology, where technology should remain mostly in the user's periphery and move into focus only when required.  [Wikipedia](https://en.wikipedia.org/wiki/Calm_technology)
 
 ---
 
@@ -299,7 +299,7 @@ This principle applies equally to:
 - music
 - search
 - administration
-- plugins
+- modules
 
 Administration should also behave like a companion.
 
@@ -307,13 +307,13 @@ Although more structured than entertainment experiences, it should remain calm, 
 
 ---
 
-# Plugin Guidance
+# Module Guidance
 
-Extensions should strengthen the companion.
+Modules should strengthen the companion.
 
 They should never replace it.
 
-Plugins contribute:
+Modules contribute:
 
 - information
 - capability
@@ -394,7 +394,7 @@ When it succeeds, users should remember the entertainment...
 | ADR-023 | Mosaic adopts the companion as its primary behavioural metaphor. |
 | ADR-024 | The interface should occupy attention only while providing value. |
 | ADR-025 | Silence is considered a valid interaction outcome. |
-| ADR-026 | Plugins extend the companion rather than creating independent personalities. |
+| ADR-026 | Modules extend the companion rather than creating independent personalities. |
 
 ---
 

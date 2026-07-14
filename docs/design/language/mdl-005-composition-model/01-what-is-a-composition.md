@@ -4,7 +4,7 @@ Document: MDL-005
 Chapter: 01
 Title: What Is A Composition?
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # What Is A Composition?
@@ -277,7 +277,7 @@ News
 
 Statistics
 
-Plugins
+Modules
 
 Friends
 
@@ -419,7 +419,7 @@ The Composition shifts naturally towards:
 - exploration
 - connected works
 
-Discovery becomes an extension of the current World.
+Discovery becomes a module of the current World.
 
 Not a replacement for it.
 

@@ -3,7 +3,7 @@ File: docs/design/system/mds-005-motion-system/00-document-control.md
 Document: MDS-005
 Title: Motion System
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Document Control

@@ -2,7 +2,7 @@
 File: docs/engineering/guides/meg-003-domain-driven-design/03-subdomains.md
 Document: MEG-003
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Subdomains
@@ -23,7 +23,7 @@ Examples include:
 - Authentication
 - Search
 - Recommendations
-- Extensions
+- Modules
 - Users
 - Analytics
 
@@ -78,7 +78,7 @@ Collections
 
 Recommendations
 
-Extensions
+Modules
 ```
 
 Each subdomain owns one coherent business capability.
@@ -118,7 +118,7 @@ Library
 
 Users
 
-Extensions
+Modules
 ```
 
 Complexity becomes naturally partitioned.
@@ -136,11 +136,11 @@ Within Mosaic these categories determine:
 - engineering investment
 - architectural ownership
 - implementation quality
-- extension opportunities
+- module opportunities
 
 Not every capability deserves the same level of sophistication.
 
-This classification is a key part of Evans' strategic design, helping teams focus effort on the areas that provide the greatest competitive advantage. ([books.google.com](https://books.google.com/books/about/Domain_Driven_Design_Reference.html?id=ccRsBgAAQBAJ&utm_source=chatgpt.com))
+This classification is a key part of Evans' strategic design, helping teams focus effort on the areas that provide the greatest competitive advantage. ([books.google.com](https://books.google.com/books/about/Domain_Driven_Design_Reference.html?id=ccRsBgAAQBAJ))
 
 ---
 
@@ -374,7 +374,7 @@ Every capability should align with exactly one primary subdomain.
 Example.
 
 ```
-Metadata Extension
+Metadata Module
 
 ↓
 
@@ -461,25 +461,25 @@ State ownership follows domain ownership.
 
 ---
 
-# Extension Alignment
+# Module Alignment
 
-Extensions should extend domains.
+Modules should extend domains.
 
 Not replace them.
 
 Example.
 
 ```
-Recommendation Extension
+Recommendation Module
 
 ↓
 
 Recommendation Domain
 ```
 
-Extensions integrate naturally because the domain boundaries already exist.
+Modules integrate naturally because the domain boundaries already exist.
 
-The extension model therefore reinforces the domain model.
+The module model therefore reinforces the domain model.
 
 ---
 
@@ -573,7 +573,7 @@ Media Platform
 │
 ├── Recommendations
 │
-└── Extensions
+└── Modules
 ```
 
 This is **not** the implementation architecture.
@@ -627,7 +627,7 @@ They allow Mosaic to:
 - isolate change
 - define ownership
 - scale development
-- grow through extensions
+- grow through modules
 
 The platform becomes easier to evolve because every capability has a clearly defined place within the business.
 

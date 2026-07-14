@@ -4,7 +4,7 @@ Document: MDS-008
 Chapter: 03
 Title: Component Contracts
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Component Contracts
@@ -468,11 +468,11 @@ Only implementation differs.
 
 ---
 
-# Plugins
+# Modules
 
-Extensions never provide Component Contracts.
+Modules never provide Component Contracts.
 
-Plugins contribute:
+Modules contribute:
 
 - Expressions
 - Behaviour
@@ -484,7 +484,7 @@ The Runtime resolves:
 - Contracts
 - Presentation
 
-Every extension therefore inherits identical implementation behaviour.
+Every module therefore inherits identical implementation behaviour.
 
 ---
 

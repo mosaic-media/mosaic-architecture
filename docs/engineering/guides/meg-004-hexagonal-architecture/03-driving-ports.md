@@ -2,7 +2,7 @@
 File: docs/engineering/guides/meg-004-hexagonal-architecture/03-driving-ports.md
 Document: MEG-004
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Driving Ports
@@ -61,7 +61,7 @@ Examples include:
 - CLI
 - Scheduler
 - Event Subscriber
-- Extension
+- Module
 - Test
 
 All interact with the Domain through the same Driving Port.
@@ -394,7 +394,7 @@ Playback Port
 
 ├── Scheduler Adapter
 
-├── Extension Adapter
+├── Module Adapter
 
 └── Test Adapter
 ```
@@ -645,7 +645,7 @@ They remain completely independent of:
 - HTTP
 - CLI
 - Runtime
-- Extensions
+- Modules
 - Transport
 
 By ensuring every external interaction passes through the same business contract, Mosaic guarantees that changing how users interact with the platform never requires changing the Domain itself.

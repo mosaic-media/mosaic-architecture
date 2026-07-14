@@ -2,7 +2,7 @@
 File: docs/engineering/guides/meg-007-storage-architecture/references.md
 Document: MEG-007
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # References
@@ -73,7 +73,7 @@ DuckDB is intentionally used for:
 - reporting
 - analytical processing
 
-rather than transactional persistence.  [oai_citation:0‡DuckDB](https://duckdb.org/docs/current/connect/overview?utm_source=chatgpt.com)
+rather than transactional persistence.  [DuckDB](https://duckdb.org/docs/current/connect/overview)
 
 ---
 
@@ -94,7 +94,7 @@ The guiding architectural principle is:
 
 This is one of the defining architectural characteristics of Mosaic.
 
-Research consistently identifies domain alignment and workload optimisation as the principal benefits of polyglot persistence, while also recognising the additional operational complexity it introduces.  [oai_citation:1‡arXiv](https://arxiv.org/abs/2204.05779?utm_source=chatgpt.com)
+Research consistently identifies domain alignment and workload optimisation as the principal benefits of polyglot persistence, while also recognising the additional operational complexity it introduces.  [arXiv](https://arxiv.org/abs/2204.05779)
 
 ---
 
@@ -138,7 +138,7 @@ DuckDB
 Analytical State
 ```
 
-Keeping these workloads independent allows each engine to optimise for its own responsibilities. DuckDB itself recommends persistent embedded storage for read-write workloads while focusing on analytical processing rather than replacing an OLTP database.  [oai_citation:2‡DuckDB](https://duckdb.org/faq?utm_source=chatgpt.com)
+Keeping these workloads independent allows each engine to optimise for its own responsibilities. DuckDB itself recommends persistent embedded storage for read-write workloads while focusing on analytical processing rather than replacing an OLTP database.  [DuckDB](https://duckdb.org/faq)
 
 ---
 
@@ -264,7 +264,7 @@ Relevant capabilities include:
 - analytical copies
 - SQL interoperability
 
-This architectural direction closely aligns with the separation adopted by Mosaic.  [oai_citation:3‡DuckDB](https://duckdb.org/docs/current/core_extensions/postgres/overview?utm_source=chatgpt.com)
+This architectural direction closely aligns with the separation adopted by Mosaic.  [DuckDB](https://duckdb.org/docs/current/core_modules/postgres/overview)
 
 ---
 
@@ -310,7 +310,7 @@ The following specifications complement MEG-007.
 - MEG-003 Domain-Driven Design
 - MEG-004 Hexagonal Architecture
 - MEG-005 Capability Runtime
-- MEG-006 Extension Platform
+- MEG-006 Module Platform
 
 ---
 

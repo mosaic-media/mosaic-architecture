@@ -2,7 +2,7 @@
 File: docs/design/system/mds-005-motion-system/index.md
 Document: MDS-005
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # MDS-005 — Motion System
@@ -127,7 +127,7 @@ They do not define it.
 
 ---
 
-# Core Question
+# Guiding Question
 
 MDS-005 exists to answer one question.
 

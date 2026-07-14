@@ -2,7 +2,7 @@
 File: docs/design/language/mdl-004-interaction-model/index.md
 Document: MDL-004
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # MDL-004 — Interaction Model
@@ -97,7 +97,7 @@ Those concerns belong to MDS.
 
 ---
 
-# Core Question
+# Guiding Question
 
 MDL-004 exists to answer one question.
 

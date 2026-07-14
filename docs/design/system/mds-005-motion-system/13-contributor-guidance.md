@@ -4,7 +4,7 @@ Document: MDS-005
 Chapter: 13
 Title: Contributor Guidance
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Contributor Guidance
@@ -319,9 +319,9 @@ This separation keeps the behavioural language consistent across the platform.
 
 ---
 
-# Plugins
+# Modules
 
-Extensions should contribute:
+Modules should contribute:
 
 - behaviour,
 - information,
@@ -334,7 +334,7 @@ They should never contribute:
 - animation systems,
 - Material Motion.
 
-Every extension should inherit the Motion System automatically.
+Every module should inherit the Motion System automatically.
 
 ---
 

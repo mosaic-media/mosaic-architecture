@@ -5,7 +5,7 @@ Chapter: 04
 Principle: 02
 Title: Enhancement Before Persuasion
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Principle 02 — Enhancement Before Persuasion
@@ -226,39 +226,39 @@ Examples:
 - sponsored content
 - engagement rankings
 
-The core Mosaic experience should prioritise enhancement information.
+The central Mosaic experience should prioritise enhancement information.
 
-Persuasive information may exist within optional community extensions but should not become part of the default experience.
+Persuasive information may exist within optional community modules but should not become part of the default experience.
 
 ---
 
-# Extension Guidance
+# Module Guidance
 
-Plugins should contribute information that naturally extends the current experience.
+Modules should contribute information that naturally extends the current experience.
 
 Examples.
 
-Anime plugin
+Anime module
 
 ```
 Next episode
 ```
 
-Book plugin
+Book module
 
 ```
 Chapter progress
 ```
 
-Music plugin
+Music module
 
 ```
 Live performance nearby
 ```
 
-Plugins should avoid injecting unrelated promotional content simply because it is available.
+Modules should avoid injecting unrelated promotional content simply because it is available.
 
-The plugin framework exists to deepen experiences.
+The module framework exists to deepen experiences.
 
 Not fragment them.
 
@@ -339,7 +339,7 @@ Not:
 
 | ADR | Decision |
 |------|----------|
-| ADR-008 | Core Mosaic enhances rather than persuades. |
+| ADR-008 | Mosaic Platform enhances rather than persuades. |
 | ADR-009 | Recommendation systems are subordinate to current context. |
 | ADR-010 | The platform should deepen user intent rather than replace it. |
 

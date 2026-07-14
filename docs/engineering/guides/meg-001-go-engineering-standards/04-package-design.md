@@ -2,7 +2,7 @@
 File: docs/engineering/guides/meg-001-go-engineering-standards/04-package-design.md
 Document: MEG-001
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Package Design
@@ -196,7 +196,7 @@ stuff
 
 Go package names become part of every import statement.
 
-Short, meaningful names improve readability throughout the codebase. The Go team explicitly recommends short, clear package names and discourages meaningless names such as `util`, `common`, `api`, `types` or `interfaces`.  [oai_citation:0‡Go](https://go.dev/blog/package-names?utm_source=chatgpt.com)
+Short, meaningful names improve readability throughout the codebase. The Go team explicitly recommends short, clear package names and discourages meaningless names such as `util`, `common`, `api`, `types` or `interfaces`.  [Go](https://go.dev/blog/package-names)
 
 ---
 
@@ -428,7 +428,7 @@ Example:
 package metadata
 ```
 
-Package comments are part of Go's documentation conventions and are expected for exported packages.  [oai_citation:1‡Go](https://go.dev/wiki/CodeReviewComments?utm_source=chatgpt.com)
+Package comments are part of Go's documentation conventions and are expected for exported packages.  [Go](https://go.dev/wiki/CodeReviewComments)
 
 ---
 

@@ -4,7 +4,7 @@ Document: MDL-001
 Chapter: 03
 Title: Product Beliefs
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Product Beliefs
@@ -23,7 +23,7 @@ They exist to guide decision making when requirements, user requests or engineer
 
 Unlike implementation details, product beliefs should remain stable over the lifetime of the platform.
 
-Every future MDL principle, MDS specification and engineering decision should be traceable back to one or more beliefs defined in this chapter. Product visions are most effective when they express enduring beliefs rather than proposed technical solutions.  [oai_citation:0‡Hackney Development System](https://playbook.hackney.gov.uk/Product-Playbook/How%20we%20work/product-vision/?utm_source=chatgpt.com)
+Every future MDL principle, MDS specification and engineering decision should be traceable back to one or more beliefs defined in this chapter. Product visions are most effective when they express enduring beliefs rather than proposed technical solutions.  [Hackney Development System](https://playbook.hackney.gov.uk/Product-Playbook/How%20we%20work/product-vision/)
 
 ---
 

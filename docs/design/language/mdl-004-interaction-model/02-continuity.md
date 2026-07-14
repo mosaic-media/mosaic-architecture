@@ -4,7 +4,7 @@ Document: MDL-004
 Chapter: 02
 Title: Continuity
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Continuity
@@ -454,11 +454,11 @@ Future implementation should preserve conceptual continuity even when interactio
 
 ---
 
-# Plugins
+# Modules
 
-Extensions should preserve continuity.
+Modules should preserve continuity.
 
-Plugin information should naturally enter the existing World.
+Module information should naturally enter the existing World.
 
 It should never create:
 
@@ -468,7 +468,7 @@ It should never create:
 
 The platform owns continuity.
 
-Plugins participate within it.
+Modules participate within it.
 
 ---
 

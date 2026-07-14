@@ -3,7 +3,7 @@ File: docs/design/language/mdl-001-vision/glossary.md
 Document: MDL-001
 Title: Glossary
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Glossary
@@ -20,7 +20,7 @@ Future specifications should reference these definitions rather than redefining 
 
 Where a term is defined here, that definition takes precedence throughout the MDL and MDS.
 
-Maintaining a controlled glossary helps ensure consistent communication between designers, engineers and contributors.  [oai_citation:0‡W3C](https://www.w3.org/WAI/WCAG22/Techniques/general/G62?utm_source=chatgpt.com)
+Maintaining a controlled glossary helps ensure consistent communication between designers, engineers and contributors.  [W3C](https://www.w3.org/WAI/WCAG22/Techniques/general/G62)
 
 ---
 
@@ -205,7 +205,7 @@ rather than pages and navigation.
 
 Attempting to redirect attention towards different entertainment.
 
-Persuasion is intentionally outside the scope of the core Mosaic experience.
+Persuasion is intentionally outside the scope of the Platform foundation Mosaic experience.
 
 ---
 
@@ -318,7 +318,7 @@ New terms should only be introduced when:
 
 Terminology should remain stable once established.
 
-Renaming core concepts should require a formal design review.
+Renaming foundational concepts should require a formal design review.
 
 ---
 

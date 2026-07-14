@@ -4,7 +4,7 @@ Document: MDS-002
 Chapter: 12
 Title: Architectural Decision Records
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Architectural Decision Records
@@ -38,29 +38,11 @@ Future contributors should understand these decisions before proposing changes t
 
 ---
 
-# ADR Format
+# Decision Format
 
-Every Mosaic ADR follows the same structure.
+Decision format, lifecycle and review expectations are governed by **MDG-001 — Documentation Authority Guide**.
 
-```text
-ADR Number
-
-Status
-
-Context
-
-Decision
-
-Consequences
-
-Alternatives Considered
-
-Related Specifications
-```
-
-Each ADR should record one significant architectural decision.
-
----
+This chapter records decisions specific to this specification and avoids redefining the shared ADR process.
 
 # ADR-097
 
@@ -250,7 +232,7 @@ Future acrylic and refraction systems become the primary visual expression of at
 
 ## Title
 
-Extensions Consume Rather Than Define Colour
+Modules Consume Rather Than Define Colour
 
 ### Status
 
@@ -258,11 +240,11 @@ Accepted
 
 ### Context
 
-Allowing extensions to introduce independent colour systems fragments visual identity.
+Allowing modules to introduce independent colour systems fragments visual identity.
 
 ### Decision
 
-Extensions consume:
+Modules consume:
 
 - Semantic Colours
 - Runtime Atmosphere
@@ -271,7 +253,7 @@ The platform remains solely responsible for colour generation.
 
 ### Consequences
 
-Community extensions inherit future visual improvements automatically.
+Community modules inherit future visual improvements automatically.
 
 ---
 
@@ -324,7 +306,7 @@ ADR102["Runtime"]
 
 ADR103["Materials"]
 
-ADR104["Extensions"]
+ADR104["Modules"]
 
 ADR105["Understanding"]
 

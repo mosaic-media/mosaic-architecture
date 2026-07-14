@@ -4,7 +4,7 @@ Document: MDL-002
 Chapter: 13
 Title: Contributor Guidance
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Contributor Guidance
@@ -38,7 +38,7 @@ Every pull request changes the user experience.
 Examples include:
 
 - GraphQL schemas
-- plugin APIs
+- module APIs
 - database models
 - navigation
 - loading behaviour
@@ -197,9 +197,9 @@ Future maintainability is considered part of implementation quality.
 
 ---
 
-# Extension Authors
+# Module Authors
 
-Extension authors should think in terms of capability.
+Module authors should think in terms of capability.
 
 Not interface.
 
@@ -231,7 +231,7 @@ Custom CSS
 Custom Layout
 ```
 
-The extension should enrich Mosaic.
+The module should enrich Mosaic.
 
 It should never fragment it.
 

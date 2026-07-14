@@ -2,7 +2,7 @@
 File: docs/design/language/mdl-001-vision/00-document-control.md
 Document: MDL-001
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Document Control
@@ -49,7 +49,7 @@ The authority of this specification extends to:
 - Component Design
 - Design Tokens
 - Runtime Composition
-- Plugin Experience
+- Module Experience
 - Native Client Experience
 
 This document intentionally does **not** prescribe engineering implementation.
@@ -145,7 +145,7 @@ Minor editorial changes should not alter design intent.
 
 Any modification affecting philosophy, contributor expectations or long-term direction constitutes a major revision.
 
-This approach keeps design intent stable while allowing documentation to evolve through complete revisions rather than fragmented page updates, a practice widely recommended in technical document control.  [oai_citation:0‡Hanford Site](https://www.hanford.gov/tocpmm/files.cfm/TFC-ENG-DESIGN-C-25%2C_Technical_Document_Control%2C_Rev__G-19.pdf?utm_source=chatgpt.com)
+This approach keeps design intent stable while allowing documentation to evolve through complete revisions rather than fragmented page updates, a practice widely recommended in technical document control.  [Hanford Site](https://www.hanford.gov/tocpmm/files.cfm/TFC-ENG-DESIGN-C-25%2C_Technical_Document_Control%2C_Rev__G-19.pdf)
 
 ---
 

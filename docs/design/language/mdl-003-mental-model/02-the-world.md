@@ -4,7 +4,7 @@ Document: MDL-003
 Chapter: 02
 Title: The World
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # The World
@@ -147,7 +147,7 @@ It continuously evolves as:
 - episodes release
 - books are completed
 - albums are discovered
-- plugins contribute information
+- modules contribute information
 - relationships become available
 
 Importantly...

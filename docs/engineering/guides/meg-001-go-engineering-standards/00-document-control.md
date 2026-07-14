@@ -2,7 +2,7 @@
 File: docs/engineering/guides/meg-001-go-engineering-standards/00-document-control.md
 Document: MEG-001
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Document Control
@@ -66,7 +66,7 @@ Unless explicitly stated otherwise, the keywords below are interpreted using the
 | **SHOULD NOT** | Generally discouraged. Exceptions should be documented. |
 | **MAY** | Optional behaviour determined by engineering judgement. |
 
-Examples and code samples contained within this specification are **informative**, unless explicitly stated otherwise. This mirrors common standards-writing practice where examples explain intent rather than introduce mandatory behaviour.  [oai_citation:0‡W3C](https://w3c.github.io/manual-of-style/?utm_source=chatgpt.com)
+Examples and code samples contained within this specification are **informative**, unless explicitly stated otherwise. This mirrors common standards-writing practice where examples explain intent rather than introduce mandatory behaviour.  [W3C](https://w3c.github.io/manual-of-style/)
 
 ---
 
@@ -166,7 +166,7 @@ Primary references include:
 - Go Code Review Comments
 - Go Documentation Guidelines
 
-Where Mosaic introduces additional conventions, those conventions exist to improve consistency across the project rather than redefine the Go language itself. The Go project itself describes the Code Review Comments as a supplement to *Effective Go*, not a complete style guide, which is the philosophy adopted here.  [oai_citation:1‡Google Source](https://go.googlesource.com/wiki/%2B/6fe9f52ac7c4d92cb8fc878d8dee1bda0c63c8a5/CodeReviewComments.md?utm_source=chatgpt.com)
+Where Mosaic introduces additional conventions, those conventions exist to improve consistency across the project rather than redefine the Go language itself. The Go project itself describes the Code Review Comments as a supplement to *Effective Go*, not a complete style guide, which is the philosophy adopted here.  [Google Source](https://go.googlesource.com/wiki/%2B/6fe9f52ac7c4d92cb8fc878d8dee1bda0c63c8a5/CodeReviewComments.md)
 
 ---
 

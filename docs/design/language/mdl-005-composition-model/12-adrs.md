@@ -4,7 +4,7 @@ Document: MDL-005
 Chapter: 12
 Title: Architectural Decision Records
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Architectural Decision Records
@@ -32,29 +32,11 @@ Its decisions should therefore remain traceable throughout the lifetime of the p
 
 ---
 
-# ADR Format
+# Decision Format
 
-Every ADR follows the standard Mosaic structure.
+Decision format, lifecycle and review expectations are governed by **MDG-001 — Documentation Authority Guide**.
 
-```text
-ADR Number
-
-Status
-
-Context
-
-Decision
-
-Consequences
-
-Alternatives Considered
-
-Related Specifications
-```
-
-Each ADR records exactly one significant compositional decision.
-
----
+This chapter records decisions specific to this specification and avoids redefining the shared ADR process.
 
 # ADR-071
 
@@ -240,7 +222,7 @@ Future runtime systems remain adaptive while preserving one coherent composition
 
 ## Title
 
-Plugins Contribute Knowledge Rather Than Layout
+Modules Contribute Knowledge Rather Than Layout
 
 ### Status
 
@@ -248,11 +230,11 @@ Accepted
 
 ### Context
 
-Allowing extensions to generate interface fragments inevitably fragments product identity.
+Allowing modules to generate interface fragments inevitably fragments product identity.
 
 ### Decision
 
-Plugins contribute:
+Modules contribute:
 
 - Information
 - Relationships
@@ -266,7 +248,7 @@ The platform remains solely responsible for:
 
 ### Consequences
 
-Every extension inherits the same compositional language.
+Every module inherits the same compositional language.
 
 The ecosystem scales without creating competing interface paradigms.
 
@@ -343,7 +325,7 @@ ADR075["Density"]
 
 ADR076["Solver"]
 
-ADR077["Plugins"]
+ADR077["Modules"]
 
 ADR078["Device Independence"]
 

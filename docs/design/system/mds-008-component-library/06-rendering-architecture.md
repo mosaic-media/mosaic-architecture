@@ -4,7 +4,7 @@ Document: MDS-008
 Chapter: 06
 Title: Rendering Architecture
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Rendering Architecture
@@ -492,11 +492,11 @@ Behavioural continuity should remain the highest priority.
 
 ---
 
-# Plugins
+# Modules
 
-Extensions never participate directly in rendering.
+Modules never participate directly in rendering.
 
-Plugins contribute:
+Modules contribute:
 
 - behaviour,
 - information,
@@ -504,7 +504,7 @@ Plugins contribute:
 
 Rendering remains entirely platform owned.
 
-Every extension therefore automatically inherits future rendering improvements.
+Every module therefore automatically inherits future rendering improvements.
 
 ---
 

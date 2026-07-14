@@ -2,7 +2,7 @@
 File: docs/engineering/guides/meg-001-go-engineering-standards/06-interfaces-and-abstraction.md
 Document: MEG-001
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Interfaces and Abstraction
@@ -162,7 +162,7 @@ The metadata package simply satisfies it.
 
 The metadata package does **not** need to know the interface exists.
 
-This produces smaller, more focused abstractions and aligns with widely accepted Go design guidance. ([go.dev](https://go.dev/doc/effective_go?v=1&utm_source=chatgpt.com))
+This produces smaller, more focused abstractions and aligns with widely accepted Go design guidance. ([go.dev](https://go.dev/doc/effective_go?v=1))
 
 ---
 

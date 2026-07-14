@@ -3,7 +3,7 @@ File: docs/design/language/mdl-003-mental-model/00-document-control.md
 Document: MDL-003
 Title: Mental Model
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Document Control
@@ -49,7 +49,7 @@ Its authority extends to:
 - User Experience
 - Information Architecture
 - Composition
-- Extension Architecture
+- Module Architecture
 - GraphQL UI
 - Runtime Composition
 - Design Systems
@@ -111,7 +111,7 @@ Users should never need to understand:
 - databases
 - APIs
 - GraphQL
-- plugins
+- modules
 - rendering engines
 
 Instead they should instinctively understand concepts such as:
@@ -150,7 +150,7 @@ Upon completing MDL-003, contributors should understand:
 - what fundamentally exists inside Mosaic
 - how information is organised
 - why the interface behaves as it does
-- how extensions integrate
+- how modules integrate
 - why composition exists
 - how future systems should evolve
 
@@ -195,7 +195,7 @@ Instead, it builds upon them.
 MDL-003 succeeds when:
 
 - contributors naturally describe Mosaic using the same concepts
-- plugins integrate without introducing new conceptual models
+- modules integrate without introducing new conceptual models
 - engineering systems reinforce rather than redefine product behaviour
 - users rarely need explanations for how the product works
 

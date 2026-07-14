@@ -2,7 +2,7 @@
 File: docs/engineering/guides/meg-005-runtime-architecture/15-contributor-guidance.md
 Document: MEG-005
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Contributor Guidance
@@ -18,7 +18,7 @@ The Mosaic Runtime is the execution platform upon which every capability depends
 Unlike business capabilities, changes to the Runtime affect:
 
 - every capability
-- every extension
+- every module
 - every deployment
 - every operator
 

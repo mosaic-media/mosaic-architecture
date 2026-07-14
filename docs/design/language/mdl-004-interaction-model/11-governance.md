@@ -4,7 +4,7 @@ Document: MDL-004
 Chapter: 11
 Title: Interaction Model Governance
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Interaction Model Governance
@@ -145,7 +145,7 @@ One of the greatest long-term risks to Mosaic is behavioural drift.
 Behavioural drift occurs when:
 
 - different clients behave differently
-- plugins introduce competing interaction models
+- modules introduce competing interaction models
 - exceptions accumulate
 - new features ignore established behaviour
 - navigation begins replacing continuity
@@ -185,13 +185,13 @@ because they changed device.
 
 ---
 
-# Extension Governance
+# Module Governance
 
-Plugins participate in the Interaction Model.
+Modules participate in the Interaction Model.
 
 They do not redefine it.
 
-Extensions may contribute:
+Modules may contribute:
 
 - Information
 - Relationships
@@ -306,7 +306,7 @@ The Interaction Model succeeds when:
 
 - behaviour feels consistent across every client
 - users instinctively predict platform behaviour
-- plugins naturally inherit platform interaction
+- modules naturally inherit platform interaction
 - contributors solve behavioural problems using existing concepts
 - new interaction patterns become increasingly rare
 
@@ -320,7 +320,7 @@ The strongest interaction model is one users eventually stop consciously noticin
 |------|----------|
 | ADR-038 | Behaviour is considered part of the long-term product identity. |
 | ADR-039 | Behavioural consistency has higher priority than visual consistency. |
-| ADR-040 | Plugins participate in platform behaviour rather than defining independent interaction models. |
+| ADR-040 | Modules participate in platform behaviour rather than defining independent interaction models. |
 | ADR-041 | Behaviour should evolve through refinement rather than replacement. |
 
 ---

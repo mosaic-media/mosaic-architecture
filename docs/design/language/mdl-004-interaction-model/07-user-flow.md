@@ -4,7 +4,7 @@ Document: MDL-004
 Chapter: 07
 Title: User Flow
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # User Flow
@@ -213,7 +213,7 @@ Examples include:
 
 - downloads
 - users
-- plugins
+- modules
 - libraries
 
 Management intentionally behaves differently from entertainment.

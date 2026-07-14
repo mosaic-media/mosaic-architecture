@@ -4,7 +4,7 @@ Document: MDS-006
 Chapter: 09
 Title: Composition Caching
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Composition Caching
@@ -492,15 +492,15 @@ They never alter behaviour.
 
 ---
 
-# Plugins
+# Modules
 
-Extensions contribute:
+Modules contribute:
 
 - behaviour,
 - information,
 - relationships.
 
-Plugins never manage caches.
+Modules never manage caches.
 
 The Composition Engine owns:
 
@@ -508,7 +508,7 @@ The Composition Engine owns:
 - recomputation,
 - runtime reuse.
 
-Every extension therefore inherits identical runtime performance characteristics.
+Every module therefore inherits identical runtime performance characteristics.
 
 ---
 

@@ -4,7 +4,7 @@ Document: MDL-003
 Chapter: 11
 Title: Mental Model Governance
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Mental Model Governance
@@ -193,9 +193,9 @@ Not the reverse.
 
 ---
 
-# Plugin Governance
+# Module Governance
 
-Plugins should extend the World.
+Modules should extend the World.
 
 They should not redefine it.
 
@@ -204,7 +204,7 @@ Examples.
 Good:
 
 ```
-Book Plugin
+Book Module
 
 ↓
 
@@ -216,7 +216,7 @@ Reading Progress
 Poor:
 
 ```
-Book Plugin
+Book Module
 
 ↓
 
@@ -227,7 +227,7 @@ Reading Workspace
 
 The second example introduces a competing conceptual model.
 
-Plugins enrich existing concepts.
+Modules enrich existing concepts.
 
 They do not create parallel realities.
 
@@ -256,7 +256,7 @@ Revision should be considered only when multiple indicators exist.
 Examples include:
 
 - contributors repeatedly invent competing terminology
-- extensions consistently require conceptual exceptions
+- modules consistently require conceptual exceptions
 - multiple specifications describe the same idea differently
 - users consistently misunderstand the same concept
 - engineering repeatedly introduces workarounds around conceptual boundaries
@@ -323,7 +323,7 @@ Protecting that shared understanding is the primary objective of governance.
 | ADR-034 | The Mental Model is considered product architecture rather than implementation architecture. |
 | ADR-035 | New concepts require formal conceptual review before entering MDL. |
 | ADR-036 | Engineering implementation should adapt to the Mental Model rather than redefining it. |
-| ADR-037 | Plugins extend existing concepts rather than introducing competing conceptual models. |
+| ADR-037 | Modules extend existing concepts rather than introducing competing conceptual models. |
 
 ---
 

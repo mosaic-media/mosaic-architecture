@@ -3,7 +3,7 @@ File: docs/design/language/mdl-002-principles/glossary.md
 Document: MDL-002
 Title: Glossary
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Glossary
@@ -14,7 +14,7 @@ Version: 0.1
 
 This glossary defines terminology introduced by **MDL-002 Principles**.
 
-Definitions contained within this document supplement the core glossary established in **MDL-001 Vision**.
+Definitions contained within this document supplement the Platform foundation glossary established in **MDL-001 Vision**.
 
 Where duplicate terms exist, the definition contained within the most specialised specification should take precedence for that specification only.
 
@@ -22,7 +22,7 @@ Terminology is considered part of the Mosaic Design Language.
 
 Changing terminology changes how contributors think.
 
-For this reason, terminology should evolve deliberately rather than organically. Design systems benefit from maintaining a shared vocabulary because consistent language leads to more consistent decision-making across design and engineering teams.  [oai_citation:0‡Design System University](https://designsystem.university/glossary?utm_source=chatgpt.com)
+For this reason, terminology should evolve deliberately rather than organically. Design systems benefit from maintaining a shared vocabulary because consistent language leads to more consistent decision-making across design and engineering teams.  [Design System University](https://designsystem.university/glossary)
 
 ---
 
@@ -42,7 +42,7 @@ Every principle should document its own anti-patterns.
 
 ## Capability
 
-A piece of functionality provided by either the Mosaic core platform or an extension.
+A piece of functionality provided by either the Mosaic Platform foundation or a module.
 
 Capabilities describe *what* the system can do.
 
@@ -209,7 +209,7 @@ Examples include:
 - engagement feeds
 - popularity rankings
 
-Persuasion is intentionally outside the scope of the core Mosaic experience.
+Persuasion is intentionally outside the scope of the Platform foundation Mosaic experience.
 
 ---
 
@@ -224,11 +224,11 @@ Examples include:
 - composition
 - navigation
 - accessibility
-- extension framework
+- module framework
 
 The platform provides capability.
 
-It should avoid solving highly specialised problems that naturally belong within extensions.
+It should avoid solving highly specialised problems that naturally belong within modules.
 
 ---
 
@@ -329,7 +329,7 @@ New terminology should only be introduced when:
 
 Terminology should remain stable once established.
 
-Renaming a core concept should require:
+Renaming a foundational concept should require:
 
 - Design Review
 - ADR

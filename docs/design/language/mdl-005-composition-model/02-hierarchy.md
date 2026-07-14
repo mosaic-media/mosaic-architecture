@@ -4,7 +4,7 @@ Document: MDL-005
 Chapter: 02
 Title: Hierarchy
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Hierarchy

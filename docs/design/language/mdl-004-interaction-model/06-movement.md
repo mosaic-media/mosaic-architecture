@@ -4,7 +4,7 @@ Document: MDL-004
 Chapter: 06
 Title: Movement
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Movement
@@ -440,11 +440,11 @@ Users should never feel abruptly returned to the beginning.
 
 ---
 
-# Plugin Behaviour
+# Module Behaviour
 
-Plugins never define movement.
+Modules never define movement.
 
-Plugins contribute:
+Modules contribute:
 
 - Information
 - Relationships
@@ -456,7 +456,7 @@ The platform determines:
 - emphasis
 - continuity
 
-This ensures one coherent behavioural language regardless of installed extensions.
+This ensures one coherent behavioural language regardless of installed modules.
 
 ---
 

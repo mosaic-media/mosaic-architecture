@@ -5,7 +5,7 @@ Chapter: 08
 Principle: 06
 Title: The Platform Enables
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Principle 06 — The Platform Enables
@@ -14,15 +14,15 @@ Version: 0.1
 
 # Principle Statement
 
-> **The core Mosaic platform should solve universal problems. Specialised experiences should emerge through extension rather than expansion of the core.**
+> **The Mosaic Platform should solve universal problems. Specialised experiences should emerge through modules rather than expansion of the Platform foundation.**
 
 Mosaic is designed as a platform.
 
-Not because plugins are fashionable.
+Not because modules are fashionable.
 
-Because no core team can anticipate every way people wish to enjoy entertainment.
+Because no central team can anticipate every way people wish to enjoy entertainment.
 
-The responsibility of the core platform is therefore to provide excellent foundations rather than infinite features.
+The responsibility of the Platform foundation is therefore to provide excellent foundations rather than infinite features.
 
 ---
 
@@ -30,7 +30,7 @@ The responsibility of the core platform is therefore to provide excellent founda
 
 Software inevitably grows.
 
-Without clear architectural boundaries, every successful feature request becomes another permanent responsibility of the core application.
+Without clear architectural boundaries, every successful feature request becomes another permanent responsibility of the Platform application.
 
 Eventually:
 
@@ -45,11 +45,11 @@ A platform avoids this by distinguishing between:
 - universal capabilities
 - specialised capabilities
 
-Universal capabilities belong in the core.
+Universal capabilities belong in the Platform foundation.
 
-Specialised capabilities belong at extension points.
+Specialised capabilities belong behind module boundaries.
 
-Extensible platform architectures consistently favour a stable core with well-defined extension points, allowing innovation without increasing coupling or destabilising the platform.  [oai_citation:0‡arc42 Quality Model](https://quality.arc42.org/approaches/plugin-architecture?utm_source=chatgpt.com)
+Extensible platform architectures consistently favour a stable foundation with well-defined module boundaries, allowing innovation without increasing coupling or destabilising the platform.  [arc42 Quality Model](https://quality.arc42.org/approaches/plugin-architecture)
 
 ---
 
@@ -68,15 +68,15 @@ Examples include:
 - search
 - materials
 - design language
-- extension framework
+- module framework
 
-Everything else should justify why it belongs inside the core.
+Everything else should justify why it belongs inside the Platform foundation.
 
 ---
 
-# The Responsibility Of The Core
+# The Responsibility Of The Platform Foundation
 
-The core platform owns:
+The Platform foundation owns:
 
 - consistency
 - composition
@@ -86,15 +86,15 @@ The core platform owns:
 - behaviour
 - quality
 
-The core should not attempt to own every possible entertainment experience.
+The Platform foundation should not attempt to own every possible entertainment experience.
 
 Instead, it provides the environment within which those experiences can exist.
 
 ---
 
-# The Responsibility Of Extensions
+# The Responsibility Of Modules
 
-Extensions exist to provide:
+Modules exist to provide:
 
 - new domains
 - specialised metadata
@@ -102,13 +102,13 @@ Extensions exist to provide:
 - experimental capabilities
 - niche workflows
 
-Extensions should extend Mosaic.
+Modules should extend Mosaic.
 
 They should not become independent applications running inside Mosaic.
 
 ---
 
-# Core First
+# Platform Foundation First
 
 When evaluating a proposal, contributors should first ask:
 
@@ -116,7 +116,7 @@ When evaluating a proposal, contributors should first ask:
 
 If the answer is yes...
 
-The capability probably belongs in the core.
+The capability probably belongs in the Platform foundation.
 
 Examples:
 
@@ -128,7 +128,7 @@ Examples:
 
 ---
 
-# Extension First
+# Module First
 
 If the proposal instead answers:
 
@@ -136,7 +136,7 @@ If the proposal instead answers:
 
 The default assumption should become:
 
-Extension.
+Module.
 
 Examples include:
 
@@ -146,9 +146,9 @@ Examples include:
 - franchise-specific metadata
 - community statistics
 
-The burden of proof lies with moving functionality into the core.
+The burden of proof lies with moving functionality into the Platform foundation.
 
-Not the extension ecosystem.
+Not the module ecosystem.
 
 ---
 
@@ -162,7 +162,7 @@ The platform promises:
 - composition
 - behaviour
 
-Extensions promise:
+Modules promise:
 
 - knowledge
 - capability
@@ -177,9 +177,9 @@ Neither should attempt to perform the other's responsibilities.
 
 One of the most important architectural consequences of this principle is ownership of the interface.
 
-Plugins should not create arbitrary interface.
+Modules should not create arbitrary interfaces.
 
-Plugins should contribute capability.
+Modules should contribute capability.
 
 The platform decides presentation.
 
@@ -198,7 +198,7 @@ Future MDS specifications are expected to formalise this separation through the 
 
 ## Good
 
-Anime extension contributes:
+Anime module contributes:
 
 ```
 Episode Release
@@ -206,7 +206,7 @@ Episode Release
 Tomorrow
 ```
 
-Book extension contributes:
+Book module contributes:
 
 ```
 Chapter Progress
@@ -222,13 +222,13 @@ The platform determines:
 - materials
 - interaction
 
-Every extension therefore feels native.
+Every module therefore feels native.
 
 ---
 
 ## Poor
 
-Anime extension renders:
+Anime module renders:
 
 - custom navigation
 - custom cards
@@ -251,11 +251,11 @@ Not larger systems.
 Good platform evolution looks like:
 
 ```
-Core System
+Platform Foundation
 
 ↓
 
-Extension Point
+Module Point
 
 ↓
 
@@ -308,7 +308,7 @@ This principle reinforces:
 
 It also provides the architectural foundation for:
 
-- Extension Framework
+- Module Framework
 - Composition Engine
 - Runtime Systems
 - Information Model
@@ -321,11 +321,11 @@ Before approving a proposal ask:
 
 - Does every Mosaic user require this capability?
 - Can the existing platform already support it?
-- Would an extension provide the same value?
+- Would a module provide the same value?
 - Does this strengthen the platform or enlarge it?
 - Is the proposal introducing a capability or a dependency?
 
-If uncertainty remains, contributors should default towards extension rather than core implementation.
+If uncertainty remains, contributors should default towards module implementation rather than Platform implementation.
 
 ---
 
@@ -333,7 +333,7 @@ If uncertainty remains, contributors should default towards extension rather tha
 
 A proposal belongs in the platform if removing it would fundamentally weaken Mosaic.
 
-A proposal belongs in an extension if removing it only affects a particular audience or workflow.
+A proposal belongs in a module if removing it only affects a particular audience or workflow.
 
 The platform should remain intentionally small.
 
@@ -349,7 +349,7 @@ They become successful because they enable others to build features without weak
 
 Mosaic should grow by strengthening its systems.
 
-Not by endlessly expanding its core.
+Not by endlessly expanding the Platform foundation.
 
 ---
 
@@ -358,7 +358,7 @@ Not by endlessly expanding its core.
 - MDL-001 Vision
 - MDL-005 Composition Model
 - MDS-003 Composition Engine
-- MDS-011 Extension Design Specification
+- MDS-011 Module Design Specification
 
 ---
 
@@ -366,9 +366,9 @@ Not by endlessly expanding its core.
 
 | ADR | Decision |
 |------|----------|
-| ADR-020 | The core platform owns behaviour, consistency and presentation. |
-| ADR-021 | Extensions own specialised capability rather than interface. |
-| ADR-022 | Platform growth should occur through extension points before core expansion. |
+| ADR-020 | The Platform foundation owns behaviour, consistency and presentation. |
+| ADR-021 | Modules own specialised capability rather than interface. |
+| ADR-022 | Platform growth should occur through module boundaries before Platform expansion. |
 
 ---
 

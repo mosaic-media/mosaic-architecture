@@ -2,7 +2,7 @@
 File: docs/engineering/guides/meg-001-go-engineering-standards/02-thinking-in-go.md
 Document: MEG-001
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Thinking in Go
@@ -37,7 +37,7 @@ Learning Go therefore requires more than learning syntax.
 
 It requires changing how software is designed.
 
-The Go team explicitly cautions against translating Java or C++ designs directly, encouraging developers to think in Go's own idioms instead.  [oai_citation:0‡Go](https://go.dev/doc/effective_go?v=1&utm_source=chatgpt.com)
+The Go team explicitly cautions against translating Java or C++ designs directly, encouraging developers to think in Go's own idioms instead.  [Go](https://go.dev/doc/effective_go?v=1)
 
 ---
 
@@ -183,7 +183,7 @@ Interfaces should exist because multiple consumers require a common behaviour.
 
 Not because every service "might one day" need another implementation.
 
-This aligns with common Go guidance that interfaces generally belong near the consumer and should not be created speculatively.  [oai_citation:1‡GitHub](https://github.com/pthethanh/effective-go?utm_source=chatgpt.com)
+This aligns with common Go guidance that interfaces generally belong near the consumer and should not be created speculatively.  [GitHub](https://github.com/pthethanh/effective-go)
 
 ---
 

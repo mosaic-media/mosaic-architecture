@@ -2,7 +2,7 @@
 File: docs/engineering/guides/meg-004-hexagonal-architecture/12-testing-the-hexagon.md
 Document: MEG-004
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Testing the Hexagon
@@ -98,7 +98,7 @@ The majority of tests should exist at the Domain level.
 
 Business logic should receive the highest testing investment.
 
-This isolation is one of the primary benefits of the Ports and Adapters pattern.  [oai_citation:0‡AWS Documentation](https://docs.aws.amazon.com/prescriptive-guidance/latest/cloud-design-patterns/hexagonal-architecture.html?utm_source=chatgpt.com)
+This isolation is one of the primary benefits of the Ports and Adapters pattern.  [AWS Documentation](https://docs.aws.amazon.com/prescriptive-guidance/latest/cloud-design-patterns/hexagonal-architecture.html)
 
 ---
 
@@ -473,7 +473,7 @@ Prefer:
 
 Avoid excessive mocking frameworks.
 
-Hexagonal Architecture naturally reduces the need for complex mocks because Ports already provide clean substitution points.  [oai_citation:1‡AWS Documentation](https://docs.aws.amazon.com/prescriptive-guidance/latest/cloud-design-patterns/hexagonal-architecture.html?utm_source=chatgpt.com)
+Hexagonal Architecture naturally reduces the need for complex mocks because Ports already provide clean substitution points.  [AWS Documentation](https://docs.aws.amazon.com/prescriptive-guidance/latest/cloud-design-patterns/hexagonal-architecture.html)
 
 ---
 

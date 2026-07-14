@@ -2,7 +2,7 @@
 File: docs/engineering/guides/meg-005-runtime-architecture/08-scheduler-architecture.md
 Document: MEG-005
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Scheduler Architecture
@@ -22,7 +22,7 @@ Examples include:
 - recurring maintenance
 - cache refresh
 - metadata synchronisation
-- extension maintenance
+- module maintenance
 - health verification
 
 These operations require a component capable of answering one question.
@@ -243,7 +243,7 @@ Every 6 Hours
 ```
 
 ```
-Extension Health Check
+Module Health Check
 
 ↓
 
@@ -292,7 +292,7 @@ The Scheduler should not know:
 
 Execution begins only after handoff.
 
-This separation between scheduling and execution allows each subsystem to scale and evolve independently.  [oai_citation:0‡System Design Handbook](https://www.systemdesignhandbook.com/guides/design-a-distributed-job-scheduler/?utm_source=chatgpt.com)
+This separation between scheduling and execution allows each subsystem to scale and evolve independently.  [System Design Handbook](https://www.systemdesignhandbook.com/guides/design-a-distributed-job-scheduler/)
 
 ---
 
@@ -488,7 +488,7 @@ This allows:
 
 to occur independently.
 
-This separation is widely used in distributed schedulers because it keeps scheduling lightweight while worker fleets scale horizontally.  [oai_citation:1‡System Design Handbook](https://www.systemdesignhandbook.com/guides/design-a-distributed-job-scheduler/?utm_source=chatgpt.com)
+This separation is widely used in distributed schedulers because it keeps scheduling lightweight while worker fleets scale horizontally.  [System Design Handbook](https://www.systemdesignhandbook.com/guides/design-a-distributed-job-scheduler/)
 
 ---
 

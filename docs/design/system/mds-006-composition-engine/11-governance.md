@@ -4,7 +4,7 @@ Document: MDS-006
 Chapter: 11
 Title: Composition Engine Governance
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Composition Engine Governance
@@ -24,7 +24,7 @@ Poor governance would gradually fragment:
 - behavioural consistency,
 - runtime hierarchy,
 - composition,
-- plugin integration,
+- module integration,
 - cross-platform parity.
 
 This chapter defines how the Composition Engine should evolve while preserving one coherent runtime architecture.
@@ -161,7 +161,7 @@ Runtime Drift occurs when:
 
 - platforms solve behaviour differently,
 - hierarchy diverges,
-- plugins bypass composition,
+- modules bypass composition,
 - expressions lose semantic consistency,
 - presentation begins influencing behaviour.
 
@@ -178,7 +178,7 @@ Examples include:
 - duplicated runtime logic,
 - presentation-driven behaviour,
 - component-owned hierarchy,
-- plugin-owned composition,
+- module-owned composition,
 - undocumented runtime exceptions.
 
 Runtime Debt should be reduced continuously.
@@ -257,16 +257,16 @@ Never runtime behaviour.
 
 ---
 
-# Plugin Governance
+# Module Governance
 
-Extensions must never define:
+Modules must never define:
 
 - hierarchy,
 - expressions,
 - runtime pipelines,
 - behavioural sequencing.
 
-Plugins contribute:
+Modules contribute:
 
 - behaviour,
 - information,
@@ -342,7 +342,7 @@ The Composition Engine succeeds when:
 - every client constructs the same understanding,
 - runtime remains deterministic,
 - behaviour always precedes presentation,
-- extensions naturally integrate,
+- modules naturally integrate,
 - contributors think in Worlds rather than interfaces,
 - optimisation never weakens behavioural correctness.
 
@@ -360,7 +360,7 @@ They should simply experience a platform that always understands them.
 | ADR-150 | The Composition Solver owns runtime understanding. |
 | ADR-151 | Expressions are the stable contract between runtime and presentation. |
 | ADR-152 | Adaptive Layout projects understanding without redefining it. |
-| ADR-153 | Extensions enrich the Runtime World but never own composition. |
+| ADR-153 | Modules enrich the Runtime World but never own composition. |
 
 ---
 

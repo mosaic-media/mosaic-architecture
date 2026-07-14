@@ -4,7 +4,7 @@ Document: MDL-001
 Chapter: 02
 Title: Vision
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Vision
@@ -21,7 +21,7 @@ It is intentionally aspirational.
 
 It should remain relevant regardless of future implementation details, programming languages, client technologies or architectural changes.
 
-A good product vision acts as a long-lived decision filter rather than a feature list.  [oai_citation:0‡IBM](https://www.ibm.com/docs/en/engineering-lifecycle-management-suite/doors-next/beta?topic=requirements-vision-document&utm_source=chatgpt.com)
+A good product vision acts as a long-lived decision filter rather than a feature list.  [IBM](https://www.ibm.com/docs/en/engineering-lifecycle-management-suite/doors-next/beta?topic=requirements-vision-document)
 
 ---
 
@@ -113,7 +113,7 @@ Immersion.
 
 ---
 
-# Core Belief
+# Guiding Belief
 
 The vision of Mosaic is founded upon one simple belief.
 

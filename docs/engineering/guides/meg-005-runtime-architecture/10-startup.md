@@ -2,7 +2,7 @@
 File: docs/engineering/guides/meg-005-runtime-architecture/10-startup.md
 Document: MEG-005
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Startup
@@ -122,7 +122,7 @@ Begin Execution
 
 Every stage owns exactly one responsibility.
 
-This staged approach mirrors the startup sequence of mature operating systems, where the kernel, core services and applications initialise in dependency order.  [oai_citation:0‡QNX](https://qnx.com/developers/docs/7.1/com.qnx.doc.neutrino.fastboot/topic/fb_system_startup_architecture.html?utm_source=chatgpt.com)
+This staged approach mirrors the startup sequence of mature operating systems, where the kernel, foundational services and applications initialise in dependency order.  [QNX](https://qnx.com/developers/docs/7.1/com.qnx.doc.neutrino.fastboot/topic/fb_system_startup_architecture.html)
 
 ---
 
@@ -153,7 +153,7 @@ Examples include:
 - worker limits
 - scheduler configuration
 - capability configuration
-- extension configuration
+- module configuration
 
 Configuration should be validated immediately.
 
@@ -189,7 +189,7 @@ No Runtime Service should exist before the Kernel.
 
 # Stage 4 — Runtime Services
 
-Core Runtime Services are constructed.
+Platform Runtime Services are constructed.
 
 Examples include:
 
@@ -285,7 +285,7 @@ Failure should terminate startup immediately.
 
 Partial Runtime startup is discouraged.
 
-Failing fast during startup is generally preferable to discovering dependency failures during execution.  [oai_citation:1‡QNX](https://qnx.com/developers/docs/7.1/com.qnx.doc.neutrino.fastboot/topic/fb_system_startup_architecture.html?utm_source=chatgpt.com)
+Failing fast during startup is generally preferable to discovering dependency failures during execution.  [QNX](https://qnx.com/developers/docs/7.1/com.qnx.doc.neutrino.fastboot/topic/fb_system_startup_architecture.html)
 
 ---
 

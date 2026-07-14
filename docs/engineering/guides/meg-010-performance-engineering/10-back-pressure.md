@@ -2,7 +2,7 @@
 File: docs/engineering/guides/meg-010-performance-engineering/10-back-pressure.md
 Document: MEG-010
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Back-Pressure
@@ -81,7 +81,7 @@ Back-pressure may be required when:
 - storage systems become slow
 - external services become unavailable
 - worker pools become saturated
-- extension execution becomes excessive
+- module execution becomes excessive
 - network latency increases
 
 Pressure may originate anywhere within the platform.
@@ -136,7 +136,7 @@ Limits should be applied where appropriate to:
 - repository operations
 - storage connections
 - external API calls
-- extension execution
+- module execution
 - background processing
 
 Unlimited parallelism usually produces contention rather than throughput.
@@ -193,18 +193,18 @@ The system does not become less busy because another identical request arrived h
 
 ---
 
-# Extension Behaviour
+# Module Behaviour
 
-Extensions must respect Runtime back-pressure.
+Modules must respect Runtime back-pressure.
 
-Extensions should:
+Modules should:
 
 - honour execution limits
 - avoid uncontrolled retries
 - avoid creating unbounded background work
 - expose retry behaviour
 
-The Extension Runtime may suspend or delay extensions that ignore platform back-pressure policies.
+The Module Runtime may suspend or delay modules that ignore platform back-pressure policies.
 
 ---
 

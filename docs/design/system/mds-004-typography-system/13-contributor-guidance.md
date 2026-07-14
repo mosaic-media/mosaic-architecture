@@ -4,7 +4,7 @@ Document: MDS-004
 Chapter: 13
 Title: Contributor Guidance
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Contributor Guidance
@@ -19,7 +19,7 @@ Designers choose hierarchy.
 
 Engineers implement typography.
 
-Extension authors contribute language.
+Module authors contribute language.
 
 Writers define content.
 
@@ -112,7 +112,7 @@ Examples include:
 - search,
 - administration,
 - settings,
-- extensions.
+- modules.
 
 Tone may adapt slightly.
 
@@ -270,9 +270,9 @@ The Typography Resolver determines appropriate variable font behaviour.
 
 ---
 
-# Extensions
+# Modules
 
-Extensions should contribute:
+Modules should contribute:
 
 - titles,
 - descriptions,
@@ -288,7 +288,7 @@ They should never define:
 
 The platform owns typography.
 
-Extensions inherit it.
+Modules inherit it.
 
 ---
 

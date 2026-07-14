@@ -2,7 +2,7 @@
 File: docs/design/language/mdl-003-mental-model/index.md
 Document: MDL-003
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # MDL-003 — Mental Model
@@ -19,7 +19,7 @@ MDL-002 established **how** design decisions are made.
 
 MDL-003 defines **how Mosaic thinks**.
 
-This specification establishes the conceptual model that every contributor should internalise before designing interfaces, engineering systems or extension APIs.
+This specification establishes the conceptual model that every contributor should internalise before designing interfaces, engineering systems or module APIs.
 
 Unlike a UI framework, the Mental Model describes concepts rather than components.
 
@@ -70,7 +70,7 @@ This specification defines:
 - Conceptual architecture
 - User mental model
 - Platform mental model
-- Core concepts
+- Foundational concepts
 - Relationships between concepts
 - Information hierarchy
 - World model
@@ -89,7 +89,7 @@ Those concepts belong to later MDL and MDS specifications.
 
 ---
 
-# Core Question
+# Guiding Question
 
 MDL-003 exists to answer one question.
 
@@ -168,7 +168,7 @@ After reading MDL-003 a contributor should naturally understand:
 - how concepts relate
 - what the UI is actually representing
 - why composition behaves the way it does
-- why plugins contribute information rather than interface
+- why modules contribute information rather than interface
 
 without discussing implementation technologies.
 
@@ -232,7 +232,7 @@ Downstream specifications:
 - MDL-004 Interaction Model
 - MDL-005 Composition Model
 - MDS-003 Composition Engine
-- MDS-011 Extension Design Specification
+- MDS-011 Module Design Specification
 
 ---
 

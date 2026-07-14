@@ -4,7 +4,7 @@ Document: MDS-003
 Chapter: 05
 Title: Hero Material
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Hero Material
@@ -429,11 +429,11 @@ Hero quality should remain the primary visual investment.
 
 ---
 
-# Plugins
+# Modules
 
-Extensions never create Hero Materials.
+Modules never create Hero Materials.
 
-Plugins contribute:
+Modules contribute:
 
 - artwork,
 - information,

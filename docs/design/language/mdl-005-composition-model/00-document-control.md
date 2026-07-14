@@ -3,7 +3,7 @@ File: docs/design/language/mdl-005-composition-model/00-document-control.md
 Document: MDL-005
 Title: Composition Model
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Document Control
@@ -203,7 +203,7 @@ MDL-005 succeeds when:
 - users instinctively know where to look
 - information naturally forms hierarchy
 - compositions adapt without becoming confusing
-- plugins integrate without disrupting understanding
+- modules integrate without disrupting understanding
 - different clients express the same composition consistently
 
 Composition should become invisible.

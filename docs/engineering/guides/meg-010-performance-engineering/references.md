@@ -2,7 +2,7 @@
 File: docs/engineering/guides/meg-010-performance-engineering/references.md
 Document: MEG-010
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # References
@@ -49,9 +49,9 @@ Defines capabilities as the primary unit of business execution.
 
 ---
 
-## MEG-006 — Extension Platform
+## MEG-006 — Module Platform
 
-Defines extension execution, lifecycle and Runtime integration.
+Defines module execution, lifecycle and Runtime integration.
 
 ---
 

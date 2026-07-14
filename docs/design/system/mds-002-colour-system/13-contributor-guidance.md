@@ -4,7 +4,7 @@ Document: MDS-002
 Chapter: 13
 Title: Contributor Guidance
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Contributor Guidance
@@ -218,7 +218,7 @@ Components communicate behaviour.
 
 # Runtime Is Platform-Owned
 
-Applications and extensions should never:
+Applications and modules should never:
 
 - analyse artwork
 - generate atmosphere
@@ -233,9 +233,9 @@ Applications simply consume the results.
 
 ---
 
-# Extensions
+# Modules
 
-Extension authors should consume:
+Module authors should consume:
 
 - Semantic Colours
 - Runtime Tokens
@@ -248,7 +248,7 @@ They should never introduce:
 - independent atmosphere
 - alternative semantic colours
 
-The extension should disappear into Mosaic rather than advertising itself.
+The module should disappear into Mosaic rather than advertising itself.
 
 ---
 

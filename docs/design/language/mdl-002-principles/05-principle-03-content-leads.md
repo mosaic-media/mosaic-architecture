@@ -5,7 +5,7 @@ Chapter: 05
 Principle: 03
 Title: Content Leads
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Principle 03 — Content Leads
@@ -44,7 +44,7 @@ Many design systems begin with components.
 
 Mosaic begins with content.
 
-The interface should emerge naturally from the needs of the entertainment rather than forcing entertainment into predefined layouts. This reflects content-first design approaches, where meaning and user needs are defined before interface structure.  [oai_citation:0‡Content-first Design](https://contentfirstdesign.com/how-we-work-ux/?utm_source=chatgpt.com)
+The interface should emerge naturally from the needs of the entertainment rather than forcing entertainment into predefined layouts. This reflects content-first design approaches, where meaning and user needs are defined before interface structure.  [Content-first Design](https://contentfirstdesign.com/how-we-work-ux/)
 
 ---
 
@@ -248,13 +248,13 @@ This distinction should remain consistent regardless of future themes or materia
 
 ---
 
-# Plugin Guidance
+# Module Guidance
 
-Extensions should contribute meaningful content.
+Modules should contribute meaningful content.
 
 Not decorative interface.
 
-Good plugin contribution:
+Good module contribution:
 
 ```
 Episode Release
@@ -264,13 +264,13 @@ Episode Release
 Tomorrow
 ```
 
-Poor plugin contribution:
+Poor module contribution:
 
 ```
 Custom animated dashboard
 ```
 
-Plugins strengthen Mosaic by contributing knowledge.
+Modules strengthen Mosaic by contributing knowledge.
 
 The platform decides how that knowledge should be presented.
 

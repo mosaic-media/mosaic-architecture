@@ -3,7 +3,7 @@ File: docs/design/system/mds-005-motion-system/glossary.md
 Document: MDS-005
 Title: Glossary
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Glossary

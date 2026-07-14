@@ -4,7 +4,7 @@ Document: MDL-004
 Chapter: 04
 Title: Context Transitions
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Context Transitions
@@ -249,7 +249,7 @@ Only relevance has.
 
 # Context Does Not Reset Composition
 
-One of the core behavioural rules of Mosaic is:
+One of the Platform foundation behavioural rules of Mosaic is:
 
 > **Context should evolve the existing Composition whenever practical.**
 

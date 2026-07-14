@@ -2,7 +2,7 @@
 File: docs/engineering/guides/meg-001-go-engineering-standards/05-dependency-management.md
 Document: MEG-001
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Dependency Management
@@ -209,7 +209,7 @@ Reflection-based dependency injection introduces:
 
 Go applications are typically small enough that manual construction remains the simpler solution.
 
-This is the approach encouraged throughout the Go ecosystem. ([go.dev](https://go.dev/doc/effective_go?v=1&utm_source=chatgpt.com))
+This is the approach encouraged throughout the Go ecosystem. ([go.dev](https://go.dev/doc/effective_go?v=1))
 
 ---
 

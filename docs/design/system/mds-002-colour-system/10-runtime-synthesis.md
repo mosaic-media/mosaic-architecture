@@ -4,7 +4,7 @@ Document: MDS-002
 Chapter: 10
 Title: Runtime Synthesis
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Runtime Synthesis
@@ -458,19 +458,19 @@ The platform should continue functioning normally without it.
 
 ---
 
-# Plugin Participation
+# Module Participation
 
-Plugins may contribute:
+Modules may contribute:
 
 - artwork
 - metadata
 - contextual information
 
-Plugins never participate directly in synthesis.
+Modules never participate directly in synthesis.
 
 The synthesis engine remains entirely platform owned.
 
-This guarantees visual consistency regardless of extension source.
+This guarantees visual consistency regardless of module source.
 
 ---
 

@@ -4,7 +4,7 @@ Document: MDS-003
 Chapter: 06
 Title: Overlay Material
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Overlay Material
@@ -410,11 +410,11 @@ Users should never perceive latency introduced by material rendering.
 
 ---
 
-# Plugins
+# Modules
 
-Extensions should never implement Overlay Materials independently.
+Modules should never implement Overlay Materials independently.
 
-Plugins request interactions.
+Modules request interactions.
 
 The platform presents them.
 

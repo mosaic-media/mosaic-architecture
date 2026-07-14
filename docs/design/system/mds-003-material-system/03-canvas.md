@@ -4,7 +4,7 @@ Document: MDS-003
 Chapter: 03
 Title: Canvas
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Canvas

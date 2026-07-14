@@ -4,7 +4,7 @@ Document: MDS-008
 Chapter: 04
 Title: Component Lifecycle
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Component Lifecycle
@@ -515,11 +515,11 @@ Behaviour remains platform independent.
 
 ---
 
-# Plugins
+# Modules
 
-Extensions never participate in Component lifecycle.
+Modules never participate in Component lifecycle.
 
-Plugins contribute:
+Modules contribute:
 
 - behaviour,
 - Expressions,
@@ -531,7 +531,7 @@ The platform owns:
 - Contracts,
 - rendering.
 
-Every extension therefore automatically inherits future implementation improvements.
+Every module therefore automatically inherits future implementation improvements.
 
 ---
 

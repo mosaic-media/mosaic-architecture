@@ -3,7 +3,7 @@ File: docs/design/system/mds-004-typography-system/references.md
 Document: MDS-004
 Title: References
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # References

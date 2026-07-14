@@ -3,7 +3,7 @@ File: docs/design/language/mdl-002-principles/references.md
 Document: MDL-002
 Title: References
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # References
@@ -52,7 +52,7 @@ Defines:
 - Design philosophy
 - Governance
 
-MDL-002 should always be interpreted as a practical extension of MDL-001 rather than an independent specification.
+MDL-002 should always be interpreted as a practical module of MDL-001 rather than an independent specification.
 
 ---
 
@@ -259,7 +259,7 @@ The overall documentation structure of MDL draws inspiration from mature design 
 - components
 - governance
 
-rather than treating a design system as merely a component library.  [oai_citation:0‡Magic Patterns](https://www.magicpatterns.com/blog/design-system-documentation?utm_source=chatgpt.com)
+rather than treating a design system as merely a component library.  [Magic Patterns](https://www.magicpatterns.com/blog/design-system-documentation)
 
 ---
 

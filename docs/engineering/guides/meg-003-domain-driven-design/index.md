@@ -2,7 +2,7 @@
 File: docs/engineering/guides/meg-003-domain-driven-design/index.md
 Document: MEG-003
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # MEG-003 — Domain-Driven Design
@@ -22,7 +22,7 @@ Examples include:
 - Playback
 - Users
 - Authentication
-- Extensions
+- Modules
 - Collections
 - Recommendations
 - Books
@@ -38,7 +38,7 @@ Unlike many implementations of DDD, Mosaic does **not** adopt Domain-Driven Desi
 It adopts DDD because it aligns naturally with:
 
 - Event-Driven Runtime
-- Extension-first architecture
+- Module-first architecture
 - Hexagonal Architecture
 - Autonomous capabilities
 - Long-term platform evolution
@@ -126,7 +126,7 @@ Those concerns are defined by other MEG specifications.
 
 ---
 
-# Core Question
+# Guiding Question
 
 MEG-003 exists to answer one question.
 
@@ -158,7 +158,7 @@ It should **not** describe:
 
 Business concepts should remain independent of technical concerns.
 
-This is one of the central goals of Domain-Driven Design: creating a shared domain model expressed through a ubiquitous language understood by both domain experts and engineers.  [oai_citation:0‡Google Books](https://books.google.com/books/about/Domain_Driven_Design_Reference.html?id=ccRsBgAAQBAJ&utm_source=chatgpt.com)
+This is one of the central goals of Domain-Driven Design: creating a shared domain model expressed through a ubiquitous language understood by both domain experts and engineers.  [Google Books](https://books.google.com/books/about/Domain_Driven_Design_Reference.html?id=ccRsBgAAQBAJ)
 
 ---
 
@@ -282,7 +282,7 @@ Required reading:
 Future companion specifications:
 
 - MEG-004 Hexagonal Architecture
-- MEG-005 Extension Platform
+- MEG-005 Module Platform
 - MEG-006 Runtime Architecture
 
 ---

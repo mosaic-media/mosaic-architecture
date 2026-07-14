@@ -4,7 +4,7 @@ Document: MDS-006
 Chapter: 03
 Title: Composition Solver
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Composition Solver
@@ -17,7 +17,7 @@ The Runtime World represents everything the user currently knows and experiences
 
 The Composition Solver transforms that World into understanding.
 
-It is the decision-making core of the Composition Engine.
+It is the decision-making centre of the Composition Engine.
 
 Unlike traditional layout engines, the Composition Solver does not determine:
 
@@ -556,7 +556,7 @@ Typical Solver triggers include:
 - Behaviour changes
 - Context changes
 - Relationship updates
-- Plugin contributions
+- Module contributions
 - User interaction
 
 Minor visual changes should not invoke complete recomposition.
@@ -565,15 +565,15 @@ The Solver should favour incremental behavioural evolution.
 
 ---
 
-# Plugins
+# Modules
 
-Extensions contribute:
+Modules contribute:
 
 - information,
 - relationships,
 - behaviours.
 
-Plugins never contribute:
+Modules never contribute:
 
 - hierarchy,
 - expressions,
@@ -670,9 +670,9 @@ Beginning with grids rather than hierarchy.
 
 ---
 
-## Plugin Composition
+## Module Composition
 
-Allowing extensions to determine presentation.
+Allowing modules to determine presentation.
 
 ---
 
@@ -708,7 +708,7 @@ Expression Resolution explains:
 
 > **How those solved concepts become reusable runtime expressions.**
 
-Together they form the conceptual core of the Composition Engine.
+Together they form the conceptual centre of the Composition Engine.
 
 ---
 

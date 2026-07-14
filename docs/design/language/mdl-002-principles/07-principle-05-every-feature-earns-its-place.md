@@ -5,7 +5,7 @@ Chapter: 07
 Principle: 05
 Title: Every Feature Earns Its Place
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Principle 05 — Every Feature Earns Its Place
@@ -146,7 +146,7 @@ Will future contributors understand why this feature exists?
 
 # Feature Hierarchy
 
-Not every feature belongs in the core platform.
+Not every feature belongs in the Platform foundation.
 
 ```mermaid
 flowchart TD
@@ -154,8 +154,8 @@ flowchart TD
 UserProblem
 UserProblem --> ExistingSystem
 ExistingSystem --> CorePlatform
-CorePlatform --> Extension
-Extension --> Rejected
+CorePlatform --> Module
+Module --> Rejected
 ```
 
 The preferred outcome is always:
@@ -164,8 +164,8 @@ Existing System
 
 If an existing system cannot solve the problem, contributors should determine whether the capability belongs:
 
-- within the core platform
-- within an extension
+- within the Platform foundation
+- within a module
 - outside Mosaic entirely
 
 ---
@@ -212,7 +212,7 @@ Accepted.
 
 ## Example 03
 
-A plugin introduces a new media type.
+A module introduces a new media type.
 
 Proposal:
 
@@ -220,7 +220,7 @@ Provide information through the existing composition engine.
 
 Reasoning:
 
-The plugin extends existing systems rather than introducing independent interface behaviour.
+The module extends existing systems rather than introducing independent interface behaviour.
 
 Accepted.
 
@@ -262,7 +262,7 @@ Rejected.
 
 Proposal:
 
-Create a completely new widget because one plugin requires it.
+Create a completely new widget because one module requires it.
 
 Problem:
 
@@ -272,15 +272,15 @@ Rejected pending redesign.
 
 ---
 
-# Core Platform vs Extension
+# Platform Foundation vs Module
 
-A useful feature does not automatically belong within the core Mosaic experience.
+A useful feature does not automatically belong within the Platform foundation Mosaic experience.
 
-Core functionality should remain intentionally focused.
+platform functionality should remain intentionally focused.
 
-Community extensions exist precisely because Mosaic is designed as a platform.
+Community modules exist precisely because Mosaic is designed as a platform.
 
-When deciding whether a feature belongs in the core platform, contributors should ask:
+When deciding whether a feature belongs in the Platform foundation, contributors should ask:
 
 > Does every user benefit from this capability?
 
@@ -288,9 +288,9 @@ If the answer is no...
 
 The proposal may still be valuable.
 
-It may simply belong within an extension.
+It may simply belong within a module.
 
-This philosophy helps prevent unnecessary platform growth while encouraging ecosystem innovation. Platform design guidance consistently recommends strengthening core capabilities while enabling specialised functionality through extension points rather than expanding the platform indefinitely.  [oai_citation:0‡W3C](https://www.w3.org/TR/design-principles/?utm_source=chatgpt.com)
+This philosophy helps prevent unnecessary platform growth while encouraging ecosystem innovation. Platform design guidance consistently recommends strengthening platform capabilities while enabling specialised functionality through module boundaries rather than expanding the platform indefinitely.  [W3C](https://www.w3.org/TR/design-principles/)
 
 ---
 
@@ -332,7 +332,7 @@ Before approving a feature ask:
 - What problem does this solve?
 - Does an existing system already solve it?
 - What complexity does it introduce?
-- Could this be implemented as an extension?
+- Could this be implemented as a module?
 - Will contributors still understand why this exists five years from now?
 - If this feature disappeared tomorrow, would users notice?
 
@@ -367,7 +367,7 @@ Its role is to ensure that innovation strengthens the product rather than gradua
 - MDL-001 Vision
 - MDL-005 Composition Model
 - MDS-003 Composition Engine
-- MDS-011 Extension Design Specification
+- MDS-011 Module Design Specification
 
 ---
 
@@ -377,7 +377,7 @@ Its role is to ensure that innovation strengthens the product rather than gradua
 |------|----------|
 | ADR-017 | Every feature must justify its cognitive cost. |
 | ADR-018 | Existing systems should be extended before new systems are introduced. |
-| ADR-019 | Features benefiting specialised audiences should preferentially become extensions rather than core functionality. |
+| ADR-019 | Features benefiting specialised audiences should preferentially become modules rather than platform functionality. |
 
 ---
 

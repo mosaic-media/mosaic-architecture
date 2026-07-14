@@ -2,7 +2,7 @@
 File: docs/engineering/guides/meg-005-runtime-architecture/01-runtime-philosophy.md
 Document: MEG-005
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Runtime Philosophy
@@ -91,7 +91,7 @@ Users install Mosaic because of:
 - Playback
 - Library
 - Metadata
-- Extensions
+- Modules
 
 Not because:
 
@@ -161,7 +161,7 @@ Mosaic capabilities should not concern themselves with:
 
 The Runtime owns these responsibilities.
 
-Modern operating systems separate resource management from application logic, allowing applications to focus on their own behaviour while the kernel manages execution, scheduling and resources.  [oai_citation:0‡Operating Systems](https://operatingsystemsauthority.com/operating-system-kernel?utm_source=chatgpt.com)
+Modern operating systems separate resource management from application logic, allowing applications to focus on their own behaviour while the kernel manages execution, scheduling and resources.  [Operating Systems](https://operatingsystemsauthority.com/operating-system-kernel)
 
 ---
 

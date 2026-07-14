@@ -2,7 +2,7 @@
 File: docs/design/language/mdl-005-composition-model/index.md
 Document: MDL-005
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # MDL-005 — Composition Model
@@ -108,7 +108,7 @@ Those belong to MDS.
 
 ---
 
-# Core Question
+# Guiding Question
 
 MDL-005 exists to answer one question.
 
@@ -184,7 +184,7 @@ After reading MDL-005 contributors should understand:
 - how hierarchy emerges
 - why hero regions exist
 - how adaptive layouts work
-- how plugins participate
+- how modules participate
 - how compositions evolve
 - how future layout engines should reason
 

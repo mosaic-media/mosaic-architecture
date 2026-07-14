@@ -4,7 +4,7 @@ Document: MDS-004
 Chapter: 11
 Title: Typography System Governance
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Typography System Governance
@@ -267,16 +267,16 @@ Editorial differences are not.
 
 ---
 
-# Plugin Governance
+# Module Governance
 
-Extensions should never introduce:
+Modules should never introduce:
 
 - custom typography scales,
 - independent hierarchy,
 - alternative editorial voices,
 - decorative fonts.
 
-Plugins inherit:
+Modules inherit:
 
 - Typography Roles,
 - Reading Rhythm,
@@ -365,7 +365,7 @@ Only understanding should remain.
 | ADR-121 | Editorial hierarchy is a stable public design contract. |
 | ADR-122 | Runtime Typography Resolution owns implementation while preserving editorial meaning. |
 | ADR-123 | Accessibility always has higher authority than typographic aesthetics. |
-| ADR-124 | Extensions inherit the Typography System rather than extending it. |
+| ADR-124 | Modules inherit the Typography System rather than extending it. |
 
 ---
 

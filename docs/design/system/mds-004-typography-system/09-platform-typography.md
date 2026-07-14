@@ -4,7 +4,7 @@ Document: MDS-004
 Chapter: 09
 Title: Platform Typography
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Platform Typography
@@ -338,11 +338,11 @@ Rendering should never distract from reading.
 
 ---
 
-# Plugins
+# Modules
 
-Extensions should never provide platform-specific typography.
+Modules should never provide platform-specific typography.
 
-Plugins contribute:
+Modules contribute:
 
 - information
 - language

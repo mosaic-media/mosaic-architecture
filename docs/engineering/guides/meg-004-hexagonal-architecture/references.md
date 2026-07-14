@@ -2,7 +2,7 @@
 File: docs/engineering/guides/meg-004-hexagonal-architecture/references.md
 Document: MEG-004
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # References
@@ -22,7 +22,7 @@ The Mosaic implementation builds upon those established ideas while adapting the
 - Event-Driven Runtime
 - Domain-Driven Design
 - Go Engineering
-- Extension-first architecture
+- Module-first architecture
 - Long-lived software platforms
 
 The purpose of these references is to explain the architectural lineage of the Mosaic platform rather than prescribe implementation.
@@ -51,7 +51,7 @@ This paper forms the primary architectural foundation of MEG-004.
 
 The central architectural principle adopted by Mosaic is:
 
-> **The application communicates through Ports while Adapters isolate external technologies.**  [oai_citation:0‡Alistair Cockburn](https://alistair.cockburn.us/hexagonal-architecture?utm_source=chatgpt.com)
+> **The application communicates through Ports while Adapters isolate external technologies.**  [Alistair Cockburn](https://alistair.cockburn.us/hexagonal-architecture)
 
 **URL**
 
@@ -71,7 +71,7 @@ Juan Manuel Garrido de Paz
 
 A modern expansion of the original Ports & Adapters architecture including practical implementation guidance.
 
-Recommended reading for contributors wishing to understand the evolution of Hexagonal Architecture beyond the original article.  [oai_citation:1‡Google Books](https://books.google.com/books/about/Hexagonal_Architecture_Explained.html?id=Eim20AEACAAJ&utm_source=chatgpt.com)
+Recommended reading for contributors wishing to understand the evolution of Hexagonal Architecture beyond the original article.  [Google Books](https://books.google.com/books/about/Hexagonal_Architecture_Explained.html?id=Eim20AEACAAJ)
 
 ---
 
@@ -90,7 +90,7 @@ Topics include:
 - replaceable infrastructure
 - technology independence
 
-The AWS guidance aligns closely with Mosaic's goal of protecting the Domain from infrastructure concerns.  [oai_citation:2‡AWS Documentation](https://docs.aws.amazon.com/prescriptive-guidance/latest/cloud-design-patterns/hexagonal-architecture.html?utm_source=chatgpt.com)
+The AWS guidance aligns closely with Mosaic's goal of protecting the Domain from infrastructure concerns.  [AWS Documentation](https://docs.aws.amazon.com/prescriptive-guidance/latest/cloud-design-patterns/hexagonal-architecture.html)
 
 ---
 
@@ -286,7 +286,7 @@ The following specifications complement MEG-004.
 
 ## Planned Engineering Specifications
 
-- MEG-005 Extension Platform
+- MEG-005 Module Platform
 - MEG-006 Runtime Architecture
 - MEG-007 Storage Architecture
 - MEG-008 Observability
@@ -361,7 +361,7 @@ The underlying architectural philosophy should remain stable even as implementat
 
 MEG-004 does not attempt to invent a new architecture.
 
-Instead, it applies the proven principles of Hexagonal Architecture to a modern, event-driven, extension-first platform.
+Instead, it applies the proven principles of Hexagonal Architecture to a modern, event-driven, module-first platform.
 
 The resulting architecture intentionally emphasises:
 

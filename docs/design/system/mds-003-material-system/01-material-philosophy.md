@@ -4,7 +4,7 @@ Document: MDS-003
 Chapter: 01
 Title: Material Philosophy
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Material Philosophy

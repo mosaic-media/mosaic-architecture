@@ -2,7 +2,7 @@
 File: docs/engineering/guides/meg-010-performance-engineering/00-document-control.md
 Document: MEG-010
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Document Control
@@ -123,7 +123,7 @@ It means the roadmap for making it fast is sane.
 - MEG-003 Domain-Driven Design
 - MEG-004 Hexagonal Architecture
 - MEG-005 Capability Runtime
-- MEG-006 Extension Platform
+- MEG-006 Module Platform
 - MEG-007 Storage Architecture
 - MEG-008 Observability
 - MEG-009 Security Architecture

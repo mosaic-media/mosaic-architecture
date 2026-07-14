@@ -4,7 +4,7 @@ Document: MDS-003
 Chapter: 09
 Title: Light Transport
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Light Transport
@@ -391,17 +391,17 @@ This keeps the interface visually stable while remaining computationally efficie
 
 ---
 
-# Plugin Participation
+# Module Participation
 
-Extensions contribute:
+Modules contribute:
 
 - artwork
 - metadata
 - information
 
-Plugins never participate directly in Light Transport.
+Modules never participate directly in Light Transport.
 
-The platform constructs one shared lighting model for every extension.
+The platform constructs one shared lighting model for every module.
 
 This guarantees a consistent physical language throughout the ecosystem.
 

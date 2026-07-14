@@ -2,7 +2,7 @@
 File: docs/engineering/guides/meg-007-storage-architecture/index.md
 Document: MEG-007
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # MEG-007 — Storage Architecture
@@ -97,7 +97,7 @@ MEG-006
 
 ↓
 
-Extension Platform
+Module Platform
 
 ↓
 
@@ -142,14 +142,14 @@ This specification intentionally does **not** define:
 
 - Business behaviour
 - Runtime execution
-- Extension SDKs
+- Module SDKs
 - Deployment topology
 
 Those concerns belong to previous or future MEG specifications.
 
 ---
 
-# Core Question
+# Guiding Question
 
 MEG-007 exists to answer one question.
 
@@ -301,7 +301,7 @@ Required reading:
 - MEG-003 Domain-Driven Design
 - MEG-004 Hexagonal Architecture
 - MEG-005 Capability Runtime Architecture
-- MEG-006 Extension Platform
+- MEG-006 Module Platform
 
 ---
 

@@ -4,7 +4,7 @@ Document: MDL-001
 Chapter: 05
 Title: Non-Goals
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Non-Goals
@@ -25,7 +25,7 @@ These are deliberate decisions.
 
 They are not limitations.
 
-Research and industry guidance consistently recommend documenting explicit non-goals because they reduce scope creep and provide a shared framework for rejecting ideas that fall outside the product vision.  [oai_citation:0‡Courses at Washington](https://courses.cs.washington.edu/courses/cse403/24au/lectures/04-requirements.pdf?utm_source=chatgpt.com)
+Research and industry guidance consistently recommend documenting explicit non-goals because they reduce scope creep and provide a shared framework for rejecting ideas that fall outside the product vision.  [Courses at Washington](https://courses.cs.washington.edu/courses/cse403/24au/lectures/04-requirements.pdf)
 
 ---
 
@@ -92,11 +92,11 @@ Examples of behaviour Mosaic intentionally avoids:
 - "Editor's Picks"
 - "Popular This Week"
 
-These may exist as optional extensions or community plugins.
+These may exist as optional modules or community modules.
 
-They are not part of the core Mosaic experience.
+They are not part of the Platform foundation Mosaic experience.
 
-The core platform always begins with the user's current context.
+The Platform foundation always begins with the user's current context.
 
 ---
 
@@ -179,7 +179,7 @@ Users should never need to understand:
 
 - GraphQL
 - Jellyfin compatibility
-- plugin boundaries
+- module boundaries
 - storage engines
 - metadata providers
 - caching strategies

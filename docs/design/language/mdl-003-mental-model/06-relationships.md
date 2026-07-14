@@ -4,7 +4,7 @@ Document: MDL-003
 Chapter: 06
 Title: Relationships
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Relationships
@@ -499,15 +499,15 @@ Each layer possesses one responsibility.
 
 ---
 
-# Plugins
+# Modules
 
-Plugins should contribute relationships.
+Modules should contribute relationships.
 
 Not interface.
 
 Example.
 
-Anime Extension.
+Anime Module.
 
 ```
 Episode
@@ -517,7 +517,7 @@ Episode
 Next Episode
 ```
 
-Book Extension.
+Book Module.
 
 ```
 Book
@@ -527,7 +527,7 @@ Book
 Audiobook
 ```
 
-Music Extension.
+Music Module.
 
 ```
 Artist

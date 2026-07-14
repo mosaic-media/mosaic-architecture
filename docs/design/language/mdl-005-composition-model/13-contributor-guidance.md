@@ -4,7 +4,7 @@ Document: MDL-005
 Chapter: 13
 Title: Contributor Guidance
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Contributor Guidance
@@ -19,8 +19,8 @@ Unlike the Vision or Principles, contributors will make compositional decisions 
 
 This chapter exists to ensure those decisions remain consistent across:
 
-- core development
-- community extensions
+- foundational development
+- community modules
 - future client applications
 - future engineering teams
 
@@ -268,9 +268,9 @@ Components rarely do.
 
 ---
 
-# Plugins
+# Modules
 
-Extension authors should contribute:
+Module authors should contribute:
 
 - Information
 - Relationships
@@ -285,7 +285,7 @@ They should never attempt to contribute:
 
 Those responsibilities belong exclusively to the Composition Model.
 
-Plugins enrich understanding.
+Modules enrich understanding.
 
 They do not organise it.
 
@@ -331,9 +331,9 @@ Meaning added afterwards.
 
 ---
 
-## Plugin Layout
+## Module Layout
 
-Extension defines interface.
+Module defines interface.
 
 ---
 
@@ -375,7 +375,7 @@ Every significant Composition should satisfy the following.
 - [ ] Breathing Space reinforces understanding.
 - [ ] Expressions remain reusable.
 - [ ] Presentation remains replaceable.
-- [ ] Plugins contribute knowledge rather than layout.
+- [ ] Modules contribute knowledge rather than layout.
 - [ ] Device changes do not alter understanding.
 
 ---

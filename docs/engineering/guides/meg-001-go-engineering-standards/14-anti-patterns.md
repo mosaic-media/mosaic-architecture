@@ -2,7 +2,7 @@
 File: docs/engineering/guides/meg-001-go-engineering-standards/14-anti-patterns.md
 Document: MEG-001
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Anti-Patterns
@@ -83,7 +83,7 @@ The result is:
 - difficult testing
 - slow development
 
-God objects violate the Single Responsibility Principle and are widely recognised as a major software design anti-pattern.  [oai_citation:0‡Bitloops](https://bitloops.com/resources/software-design/anti-patterns-in-software-design?utm_source=chatgpt.com)
+God objects violate the Single Responsibility Principle and are widely recognised as a major software design anti-pattern.  [Bitloops](https://bitloops.com/resources/software-design/anti-patterns-in-software-design)
 
 ---
 
@@ -222,7 +222,7 @@ Large numbers of unused interfaces reduce clarity.
 
 They also encourage unnecessary indirection.
 
-Go developers commonly identify premature interface creation as a frequent source of unnecessary complexity.  [oai_citation:1‡Reddit](https://www.reddit.com/r/golang/comments/1oc5is8/writing_better_go_lessons_from_10_code_reviews/?utm_source=chatgpt.com)
+Go developers commonly identify premature interface creation as a frequent source of unnecessary complexity.  [Reddit](https://www.reddit.com/r/golang/comments/1oc5is8/writing_better_go_lessons_from_10_code_reviews/)
 
 ---
 
@@ -287,7 +287,7 @@ Testing becomes increasingly difficult.
 
 Race conditions become easier to introduce.
 
-Google's Go best practices specifically caution against global package state and global service locators because they obscure ownership and complicate reasoning.  [oai_citation:2‡Chromium Git Repositories](https://chromium.googlesource.com/external/github.com/google/styleguide/%2B/HEAD/go/best-practices.md?utm_source=chatgpt.com)
+Google's Go best practices specifically caution against global package state and global service locators because they obscure ownership and complicate reasoning.  [Chromium Git Repositories](https://chromium.googlesource.com/external/github.com/google/styleguide/%2B/HEAD/go/best-practices.md)
 
 ---
 
@@ -692,7 +692,7 @@ Designing software for hypothetical future requirements.
 
 Examples:
 
-- plugin systems before plugins exist
+- module architecture before module needs exist
 - generic frameworks before use cases exist
 - configuration options nobody uses
 

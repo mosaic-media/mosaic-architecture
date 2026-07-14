@@ -4,7 +4,7 @@ Document: MDL-001
 Chapter: 09
 Title: Contributor Guidance
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Contributor Guidance
@@ -23,7 +23,7 @@ It is not a visual style guide.
 
 It is guidance for making decisions.
 
-Good design system documentation explains not only *what* exists, but *why*, *when* and *how* contributors should use it, reducing inconsistency as teams grow.  [oai_citation:0‡Magic Patterns](https://www.magicpatterns.com/blog/design-system-documentation?utm_source=chatgpt.com)
+Good design system documentation explains not only *what* exists, but *why*, *when* and *how* contributors should use it, reducing inconsistency as teams grow.  [Magic Patterns](https://www.magicpatterns.com/blog/design-system-documentation)
 
 ---
 
@@ -278,7 +278,7 @@ A proposal should demonstrate that it:
 - reuses existing systems where possible
 - does not duplicate existing capabilities
 
-These contribution criteria mirror the governance models used by mature design systems, where proposals must demonstrate usefulness, consistency and broad applicability before becoming part of the core system.  [oai_citation:1‡GOV.UK Design System](https://design-system.service.gov.uk/community/contribution-criteria/?utm_source=chatgpt.com)
+These contribution criteria mirror the governance models used by mature design systems, where proposals must demonstrate usefulness, consistency and broad applicability before becoming part of the Platform foundation system.  [GOV.UK Design System](https://design-system.service.gov.uk/community/contribution-criteria/)
 
 ---
 

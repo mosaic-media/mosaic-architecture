@@ -4,7 +4,7 @@ Document: MDS-004
 Chapter: 08
 Title: Runtime Typography Resolution
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Runtime Typography Resolution
@@ -479,11 +479,11 @@ Words remain the most stable visual element within the interface.
 
 ---
 
-# Plugins
+# Modules
 
-Extensions never resolve typography.
+Modules never resolve typography.
 
-Plugins contribute:
+Modules contribute:
 
 - information,
 - descriptions,
@@ -496,7 +496,7 @@ The Typography Resolver determines:
 - scaling,
 - accessibility.
 
-Every extension therefore automatically inherits future typographic improvements.
+Every module therefore automatically inherits future typographic improvements.
 
 ---
 

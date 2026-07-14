@@ -4,7 +4,7 @@ Document: MDL-005
 Chapter: 10
 Title: Device Independence
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Device Independence
@@ -15,7 +15,7 @@ Version: 0.1
 
 One of the primary goals of the Mosaic Design Language is to ensure that the user's entertainment World remains recognisable regardless of the device through which it is experienced.
 
-This chapter formalises one of the core architectural promises of Mosaic.
+This chapter formalises one of the Platform foundation architectural promises of Mosaic.
 
 > **The World never changes.**
 
@@ -392,11 +392,11 @@ The user should never reconstruct their World simply because the device changed.
 
 ---
 
-# Plugins
+# Modules
 
-Extensions should remain entirely device independent.
+Modules should remain entirely device independent.
 
-Plugins contribute:
+Modules contribute:
 
 - Information
 - Relationships
@@ -408,7 +408,7 @@ The platform determines:
 - Components
 - Layout
 
-Plugins should therefore require no device-specific interface logic.
+Modules should therefore require no device-specific interface logic.
 
 This significantly reduces ecosystem complexity.
 
@@ -436,9 +436,9 @@ The Mental Model fragments.
 
 ---
 
-## Plugin UI
+## Module UI
 
-Extensions rendering completely different experiences on different devices.
+Modules rendering completely different experiences on different devices.
 
 The platform loses ownership of consistency.
 

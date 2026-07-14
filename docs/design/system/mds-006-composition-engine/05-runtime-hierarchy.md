@@ -4,7 +4,7 @@ Document: MDS-006
 Chapter: 05
 Title: Runtime Hierarchy
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Runtime Hierarchy
@@ -512,21 +512,21 @@ Typical hierarchy recalculation triggers include:
 - Behaviour changes
 - Context changes
 - Relationship updates
-- Plugin contributions
+- Module contributions
 
 Ordinary rendering updates should not trigger hierarchy recalculation.
 
 ---
 
-# Plugins
+# Modules
 
-Extensions contribute:
+Modules contribute:
 
 - behaviours
 - information
 - relationships
 
-Plugins never assign:
+Modules never assign:
 
 - Hero
 - Priority
@@ -534,7 +534,7 @@ Plugins never assign:
 
 The Runtime Hierarchy remains entirely platform owned.
 
-Every extension therefore naturally inherits one behavioural language.
+Every module therefore naturally inherits one behavioural language.
 
 ---
 
@@ -624,9 +624,9 @@ Widgets deciding priority.
 
 ---
 
-## Plugin Hierarchy
+## Module Hierarchy
 
-Extensions assigning their own behavioural importance.
+Modules assigning their own behavioural importance.
 
 ---
 

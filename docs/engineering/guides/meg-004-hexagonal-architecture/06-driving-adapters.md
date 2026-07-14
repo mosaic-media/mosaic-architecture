@@ -2,7 +2,7 @@
 File: docs/engineering/guides/meg-004-hexagonal-architecture/06-driving-adapters.md
 Document: MEG-004
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Driving Adapters
@@ -23,7 +23,7 @@ Examples include:
 - CLI commands
 - Scheduled tasks
 - Runtime events
-- Extension calls
+- Module calls
 - Test harnesses
 
 These external interactions differ technologically.
@@ -107,7 +107,7 @@ Runtime Subscriber
 ```
 
 ```
-Extension
+Module
 ```
 
 Every one becomes a Driving Adapter.
@@ -440,18 +440,18 @@ The scheduler invokes the business through the same contract as every other call
 
 ---
 
-# Extensions
+# Modules
 
-Extensions invoke the Domain through Driving Adapters.
+Modules invoke the Domain through Driving Adapters.
 
 Example.
 
 ```
-Extension SDK
+Module SDK
 
 ↓
 
-Extension Adapter
+Module Adapter
 
 ↓
 
@@ -464,8 +464,8 @@ Domain
 
 The Domain remains unaware whether the caller is:
 
-- Core
-- Extension
+- Platform capabilities
+- Module
 - Test
 - CLI
 
@@ -567,7 +567,7 @@ Scheduler
 ```
 
 ```
-Extension Runtime
+Module Runtime
 ```
 
 ```
@@ -666,7 +666,7 @@ Whether requests originate from:
 - HTTP
 - CLI
 - Runtime Events
-- Extensions
+- Modules
 - Tests
 
 the Domain always receives the same business request through the same Driving Port.

@@ -2,7 +2,7 @@
 File: docs/engineering/guides/meg-004-hexagonal-architecture/00-document-control.md
 Document: MEG-004
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Document Control
@@ -41,9 +41,9 @@ MEG-004 is the authoritative specification governing architectural boundaries th
 
 This specification applies to:
 
-- Mosaic Core
-- First-party Extensions
-- Third-party Extensions
+- Mosaic Platform
+- First-party Modules
+- Third-party Modules
 - Runtime Capabilities
 - SDKs
 - Infrastructure Components

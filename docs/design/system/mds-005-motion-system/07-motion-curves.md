@@ -4,7 +4,7 @@ Document: MDS-005
 Chapter: 07
 Title: Motion Curves
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Motion Curves
@@ -428,11 +428,11 @@ Complex mathematical models should be introduced only when they improve behaviou
 
 ---
 
-# Plugins
+# Modules
 
-Extensions never choose Motion Curves.
+Modules never choose Motion Curves.
 
-Plugins communicate:
+Modules communicate:
 
 - behavioural events.
 
@@ -443,7 +443,7 @@ The Motion System determines:
 - curve family,
 - timing.
 
-Every extension therefore inherits the same movement language.
+Every module therefore inherits the same movement language.
 
 ---
 

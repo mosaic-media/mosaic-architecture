@@ -2,7 +2,7 @@
 File: docs/engineering/guides/meg-001-go-engineering-standards/09-context-and-cancellation.md
 Document: MEG-001
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Context and Cancellation
@@ -85,7 +85,7 @@ With context:
 
 One cancellation propagates throughout the entire operation.
 
-This is precisely the design intent of Go's `context` package.  [oai_citation:0‡Go](https://go.dev/blog/context?utm_source=chatgpt.com)
+This is precisely the design intent of Go's `context` package.  [Go](https://go.dev/blog/context)
 
 ---
 
@@ -149,7 +149,7 @@ func (s *Service) FindMedia(
 
 The ordering should remain consistent throughout the entire codebase.
 
-This is an established Go convention.  [oai_citation:1‡Go Packages](https://pkg.go.dev/context?utm_source=chatgpt.com)
+This is an established Go convention.  [Go Packages](https://pkg.go.dev/context)
 
 ---
 
@@ -181,7 +181,7 @@ Every operation receives its own context.
 
 The service remains stateless.
 
-The Go package documentation explicitly advises against storing contexts in structs.  [oai_citation:2‡Go Packages](https://pkg.go.dev/context?utm_source=chatgpt.com)
+The Go package documentation explicitly advises against storing contexts in structs.  [Go Packages](https://pkg.go.dev/context)
 
 ---
 
@@ -310,7 +310,7 @@ ctx, cancel := context.WithTimeout(
 defer cancel()
 ```
 
-Calling `cancel` releases resources associated with the derived context, even if the timeout never expires. Failing to do so may leak timers and child contexts.  [oai_citation:3‡Go Packages](https://pkg.go.dev/context?utm_source=chatgpt.com)
+Calling `cancel` releases resources associated with the derived context, even if the timeout never expires. Failing to do so may leak timers and child contexts.  [Go Packages](https://pkg.go.dev/context)
 
 ---
 
@@ -473,7 +473,7 @@ Application Exits
 
 Every long-running component should honour context cancellation.
 
-This enables predictable shutdown behaviour across the entire platform.  [oai_citation:4‡Go](https://go.dev/doc/database/cancel-operations?utm_source=chatgpt.com)
+This enables predictable shutdown behaviour across the entire platform.  [Go](https://go.dev/doc/database/cancel-operations)
 
 ---
 

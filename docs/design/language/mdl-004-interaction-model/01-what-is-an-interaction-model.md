@@ -4,7 +4,7 @@ Document: MDL-004
 Chapter: 01
 Title: What Is An Interaction Model?
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # What Is An Interaction Model?
@@ -47,7 +47,7 @@ Interaction itself describes behavioural change.
 
 # Why An Interaction Model Exists
 
-A user continually asks the platform questions.
+A user continually asks the Platform foundation questions.
 
 Often without consciously realising it.
 
@@ -131,7 +131,7 @@ Examples include:
 - next episode releases
 - reading progress updates
 - music changes
-- a plugin contributes new information
+- a module contributes new information
 
 These events may occur:
 

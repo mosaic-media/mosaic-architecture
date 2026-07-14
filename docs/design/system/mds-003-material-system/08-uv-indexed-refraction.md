@@ -4,7 +4,7 @@ Document: MDS-003
 Chapter: 08
 Title: UV-Indexed Refraction
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # UV-Indexed Refraction
@@ -504,11 +504,11 @@ Rendering technology remains an implementation detail.
 
 ---
 
-# Plugins
+# Modules
 
-Extensions never interact with UV space.
+Modules never interact with UV space.
 
-Plugins contribute:
+Modules contribute:
 
 - artwork
 - relationships
@@ -520,7 +520,7 @@ The platform constructs:
 - UV field
 - Material behaviour
 
-This guarantees one consistent environmental model across every extension.
+This guarantees one consistent environmental model across every module.
 
 ---
 

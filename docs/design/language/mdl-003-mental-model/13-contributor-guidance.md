@@ -4,7 +4,7 @@ Document: MDL-003
 Chapter: 13
 Title: Contributor Guidance
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Contributor Guidance
@@ -120,7 +120,7 @@ Before writing code, contributors should be capable of describing the proposed f
 - APIs
 - GraphQL
 - databases
-- plugins
+- modules
 
 Instead describe:
 
@@ -278,9 +278,9 @@ Question whether the capability genuinely improves the experience.
 
 ---
 
-# Plugins
+# Modules
 
-Plugin authors should never ask:
+Module authors should never ask:
 
 > What interface should I build?
 
@@ -290,7 +290,7 @@ Instead ask:
 
 Examples.
 
-Anime Plugin.
+Anime Module.
 
 ```
 Episode Release
@@ -302,7 +302,7 @@ Studio
 Soundtrack
 ```
 
-Book Plugin.
+Book Module.
 
 ```
 Reading Progress
@@ -314,7 +314,7 @@ Series Order
 Audiobook
 ```
 
-The plugin contributes knowledge.
+The module contributes knowledge.
 
 Mosaic contributes understanding.
 
@@ -364,11 +364,11 @@ Question whether composition should determine emphasis instead.
 
 ---
 
-## Plugin UI
+## Module UI
 
-An extension attempts to create custom interface.
+A module attempts to create custom interface.
 
-Question whether the extension should instead contribute Information.
+Question whether the module should instead contribute Information.
 
 ---
 
@@ -416,7 +416,7 @@ Every feature should leave the Mental Model simpler...
 
 ...never more complicated.
 
-If contributors consistently think using the concepts introduced by MDL-003, implementation across every client, plugin and platform will naturally begin to feel like one coherent product.
+If contributors consistently think using the concepts introduced by MDL-003, implementation across every client, module and platform will naturally begin to feel like one coherent product.
 
 That is the ultimate purpose of the Mental Model.
 

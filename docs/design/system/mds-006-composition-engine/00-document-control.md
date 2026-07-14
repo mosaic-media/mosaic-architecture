@@ -3,7 +3,7 @@ File: docs/design/system/mds-006-composition-engine/00-document-control.md
 Document: MDS-006
 Title: Composition Engine
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Document Control
@@ -223,7 +223,7 @@ MDS-006 succeeds when:
 - every client constructs identical understanding
 - behaviour consistently produces identical composition
 - adaptive layouts preserve the user's World
-- extensions integrate naturally
+- modules integrate naturally
 - rendering frameworks remain replaceable
 - contributors think in runtime worlds rather than interface trees
 

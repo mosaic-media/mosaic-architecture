@@ -4,7 +4,7 @@ Document: MDL-005
 Chapter: 07
 Title: Density
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Density

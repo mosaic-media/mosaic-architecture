@@ -4,7 +4,7 @@ Document: MDS-008
 Chapter: 01
 Title: Component Philosophy
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Component Philosophy
@@ -419,11 +419,11 @@ Architectural identity remains unchanged.
 
 ---
 
-# Plugins
+# Modules
 
-Extensions never provide Components.
+Modules never provide Components.
 
-Plugins contribute:
+Modules contribute:
 
 - behaviour,
 - Expressions,

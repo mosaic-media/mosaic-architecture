@@ -2,7 +2,7 @@
 File: docs/engineering/guides/meg-005-runtime-architecture/04-service-lifecycle.md
 Document: MEG-005
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Service Lifecycle
@@ -174,7 +174,7 @@ Readiness indicates operational capability.
 
 Not active execution.
 
-Separating "ready" from "running" is a common lifecycle pattern because it allows dependencies to initialise before accepting external work.  [oai_citation:0‡Shelter Design](https://design.shelter.org.uk/digital-framework/the-digital-lifecycle?utm_source=chatgpt.com)
+Separating "ready" from "running" is a common lifecycle pattern because it allows dependencies to initialise before accepting external work.  [Shelter Design](https://design.shelter.org.uk/digital-framework/the-digital-lifecycle)
 
 ---
 
@@ -234,7 +234,7 @@ Existing work continues.
 
 Only new work is rejected.
 
-Separating admission control from shutdown greatly simplifies graceful termination of long-running systems.  [oai_citation:1‡Reddit](https://www.reddit.com/r/node/comments/1s4x8gp/application_lifecycle_is_one_of_the_most_ignored/?utm_source=chatgpt.com)
+Separating admission control from shutdown greatly simplifies graceful termination of long-running systems.  [Reddit](https://www.reddit.com/r/node/comments/1s4x8gp/application_lifecycle_is_one_of_the_most_ignored/)
 
 ---
 

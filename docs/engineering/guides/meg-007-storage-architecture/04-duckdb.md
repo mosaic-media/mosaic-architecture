@@ -2,7 +2,7 @@
 File: docs/engineering/guides/meg-007-storage-architecture/04-duckdb.md
 Document: MEG-007
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # DuckDB
@@ -320,7 +320,7 @@ Examples include:
 - library growth
 - media popularity
 - storage utilisation
-- extension usage
+- module usage
 
 Reporting should never degrade transactional performance.
 

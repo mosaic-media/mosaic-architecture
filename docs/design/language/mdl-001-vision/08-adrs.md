@@ -4,7 +4,7 @@ Document: MDL-001
 Chapter: 08
 Title: Architectural Decision Records
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Architectural Decision Records
@@ -26,35 +26,15 @@ Every design decision recorded here should answer four questions:
 3. Why was this decision chosen?
 4. What are the long-term consequences?
 
-This approach aligns with widely adopted ADR practices, where each decision captures its context, decision and consequences to preserve architectural knowledge over time.  [oai_citation:0‡AWS Documentation](https://docs.aws.amazon.com/prescriptive-guidance/latest/architectural-decision-records/adr-process.html?utm_source=chatgpt.com)
+This approach aligns with widely adopted ADR practices, where each decision captures its context, decision and consequences to preserve architectural knowledge over time.  [AWS Documentation](https://docs.aws.amazon.com/prescriptive-guidance/latest/architectural-decision-records/adr-process.html)
 
 ---
 
-# ADR Format
+# Decision Format
 
-Every future MDL and MDS ADR should follow the same structure.
+Decision format, lifecycle and review expectations are governed by **MDG-001 — Documentation Authority Guide**.
 
-```text
-ADR-XXX
-
-Status
-
-Context
-
-Decision
-
-Consequences
-
-Alternatives Considered
-
-Related Specifications
-```
-
-One ADR should describe one significant decision.
-
-Multiple unrelated decisions should never be combined into a single record.
-
----
+This chapter records decisions specific to this specification and avoids redefining the shared ADR process.
 
 # ADR-001
 
@@ -370,7 +350,7 @@ Future MDL and MDS specifications are expected to introduce additional ADRs cove
 - materials
 - token architecture
 - runtime systems
-- extension model
+- module model
 - accessibility
 - information architecture
 
@@ -391,7 +371,7 @@ Superseded ADRs should never be deleted.
 
 Instead they should reference the ADR that replaces them.
 
-Maintaining this decision history helps future contributors understand how and why the design language evolved, a common recommendation in established ADR practices.  [oai_citation:1‡github.com](https://github.com/architecture-decision-record/architecture-decision-record?utm_source=chatgpt.com)
+Maintaining this decision history helps future contributors understand how and why the design language evolved, a common recommendation in established ADR practices.  [github.com](https://github.com/architecture-decision-record/architecture-decision-record)
 
 ---
 

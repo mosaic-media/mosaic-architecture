@@ -4,7 +4,7 @@ Document: MDS-004
 Chapter: 01
 Title: Typography Philosophy
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Typography Philosophy

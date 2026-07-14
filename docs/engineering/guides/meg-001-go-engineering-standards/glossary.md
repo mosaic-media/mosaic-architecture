@@ -2,7 +2,7 @@
 File: docs/engineering/guides/meg-001-go-engineering-standards/glossary.md
 Document: MEG-001
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Glossary

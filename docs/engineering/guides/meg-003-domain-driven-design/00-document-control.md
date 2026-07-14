@@ -2,7 +2,7 @@
 File: docs/engineering/guides/meg-003-domain-driven-design/00-document-control.md
 Document: MEG-003
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Document Control
@@ -41,9 +41,9 @@ MEG-003 is the authoritative specification governing business modelling within t
 
 This specification applies to:
 
-- Mosaic Core
-- First-party Extensions
-- Third-party Extensions
+- Mosaic Platform
+- First-party Modules
+- Third-party Modules
 - SDK Development
 - Runtime Capabilities
 - Future Platform Features
@@ -210,7 +210,7 @@ The domain model should become deeper as the platform matures.
 
 It should never become more technical.
 
-This follows the central ideas of Domain-Driven Design: focusing on the core domain, collaborating around a ubiquitous language and modelling within explicitly bounded contexts.  [oai_citation:0‡Google Books](https://books.google.com/books/about/Domain_Driven_Design_Reference.html?id=ccRsBgAAQBAJ&utm_source=chatgpt.com)
+This follows the central ideas of Domain-Driven Design: focusing on the Platform foundation domain, collaborating around a ubiquitous language and modelling within explicitly bounded contexts.  [Google Books](https://books.google.com/books/about/Domain_Driven_Design_Reference.html?id=ccRsBgAAQBAJ)
 
 ---
 

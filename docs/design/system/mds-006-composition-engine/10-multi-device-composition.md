@@ -4,7 +4,7 @@ Document: MDS-006
 Chapter: 10
 Title: Multi-Device Composition
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Multi-Device Composition
@@ -587,19 +587,19 @@ The transition should feel like continuing the same experience rather than openi
 
 ---
 
-# Plugins
+# Modules
 
-Extensions contribute:
+Modules contribute:
 
 - behaviour
 - information
 - relationships
 
-Plugins never target specific devices.
+Modules never target specific devices.
 
-The Composition Engine determines how extension content appears everywhere.
+The Composition Engine determines how module content appears everywhere.
 
-Every extension therefore automatically supports future devices.
+Every module therefore automatically supports future devices.
 
 ---
 
@@ -677,9 +677,9 @@ Television invents different conceptual priorities.
 
 ---
 
-## Device Plugins
+## Device Modules
 
-Extensions creating independent device interfaces.
+Modules creating independent device interfaces.
 
 ---
 

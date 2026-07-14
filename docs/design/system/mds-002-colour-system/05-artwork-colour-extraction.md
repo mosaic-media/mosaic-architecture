@@ -4,7 +4,7 @@ Document: MDS-002
 Chapter: 05
 Title: Artwork Colour Extraction
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Artwork Colour Extraction
@@ -434,15 +434,15 @@ Future runtime systems should cache extracted atmosphere aggressively.
 
 ---
 
-# Plugins
+# Modules
 
-Extensions may contribute artwork.
+Modules may contribute artwork.
 
 They should never contribute atmosphere.
 
 Example.
 
-Anime Plugin.
+Anime Module.
 
 ```
 Poster

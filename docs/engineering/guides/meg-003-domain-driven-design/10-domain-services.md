@@ -2,7 +2,7 @@
 File: docs/engineering/guides/meg-003-domain-driven-design/10-domain-services.md
 Document: MEG-003
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Domain Services
@@ -52,7 +52,7 @@ A Domain Service should never become:
 
 It exists only to model business behaviour.
 
-Eric Evans famously describes a Domain Service as appropriate when "it just isn't a thing." In other words, the behaviour is clearly part of the domain but does not naturally belong to an Entity or Value Object.  [oai_citation:0‡O'Reilly Media](https://www.oreilly.com/library/view/implementing-domain-driven-design/9780133039900/ch07.html?utm_source=chatgpt.com)
+Eric Evans famously describes a Domain Service as appropriate when "it just isn't a thing." In other words, the behaviour is clearly part of the domain but does not naturally belong to an Entity or Value Object.  [O'Reilly Media](https://www.oreilly.com/library/view/implementing-domain-driven-design/9780133039900/ch07.html)
 
 ---
 
@@ -189,7 +189,7 @@ State belongs to Aggregates.
 
 Behaviour belongs to Domain Services.
 
-Statelessness is one of the defining characteristics of a Domain Service.  [oai_citation:1‡Domain-Driven Design Guide](https://ddd-practitioners.com/home/glossary/domain-service/?utm_source=chatgpt.com)
+Statelessness is one of the defining characteristics of a Domain Service.  [Domain-Driven Design Guide](https://ddd-practitioners.com/home/glossary/domain-service/)
 
 ---
 

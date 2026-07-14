@@ -2,7 +2,7 @@
 File: docs/engineering/guides/meg-001-go-engineering-standards/08-error-handling.md
 Document: MEG-001
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Error Handling
@@ -166,7 +166,7 @@ This is a deliberate API decision.
 
 Do **not** wrap every error automatically.
 
-If exposing the underlying implementation would leak internal details or constrain future changes, prefer adding context without wrapping. The Go team recommends using `%w` only when you intentionally want callers to inspect the underlying error.  [oai_citation:0‡Go](https://go.dev/blog/go1.13-errors?utm_source=chatgpt.com)
+If exposing the underlying implementation would leak internal details or constrain future changes, prefer adding context without wrapping. The Go team recommends using `%w` only when you intentionally want callers to inspect the underlying error.  [Go](https://go.dev/blog/go1.13-errors)
 
 ---
 

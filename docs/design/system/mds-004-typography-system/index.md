@@ -2,7 +2,7 @@
 File: docs/design/system/mds-004-typography-system/index.md
 Document: MDS-004
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # MDS-004 — Typography System
@@ -121,7 +121,7 @@ Those systems work alongside Typography.
 
 ---
 
-# Core Question
+# Guiding Question
 
 MDS-004 exists to answer one question.
 

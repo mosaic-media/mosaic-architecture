@@ -2,7 +2,7 @@
 File: docs/engineering/guides/meg-005-runtime-architecture/index.md
 Document: MEG-005
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # MEG-005 — Runtime Architecture
@@ -90,7 +90,7 @@ MEG-006
 
 ↓
 
-Extension Platform
+Module Platform
 ```
 
 MEG-002 answers:
@@ -109,7 +109,7 @@ This specification defines:
 
 - Runtime philosophy
 - Runtime composition
-- Core runtime components
+- Platform runtime components
 - Capability registry
 - Service lifecycle
 - Dependency graph
@@ -128,14 +128,14 @@ This specification intentionally does **not** define:
 - Domain modelling
 - Business behaviour
 - Event semantics
-- Extension SDKs
+- Module SDKs
 - Storage implementation
 
 Those concerns belong to other MEG specifications.
 
 ---
 
-# Core Question
+# Guiding Question
 
 MEG-005 exists to answer one question.
 
@@ -294,7 +294,7 @@ Required reading:
 
 Future companion specifications:
 
-- MEG-006 Extension Platform
+- MEG-006 Module Platform
 - MEG-007 Storage Architecture
 - MEG-008 Observability
 

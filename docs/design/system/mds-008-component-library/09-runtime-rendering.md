@@ -4,7 +4,7 @@ Document: MDS-008
 Chapter: 09
 Title: Runtime Rendering
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Runtime Rendering
@@ -532,11 +532,11 @@ Behavioural continuity should remain intact.
 
 ---
 
-# Plugins
+# Modules
 
-Extensions never interact directly with Runtime Rendering.
+Modules never interact directly with Runtime Rendering.
 
-Plugins contribute:
+Modules contribute:
 
 - behaviour,
 - Expressions,
@@ -550,7 +550,7 @@ The runtime resolves:
 
 Rendering simply displays them.
 
-Every extension therefore automatically benefits from rendering improvements.
+Every module therefore automatically benefits from rendering improvements.
 
 ---
 

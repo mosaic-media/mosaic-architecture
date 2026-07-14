@@ -4,7 +4,7 @@ Document: MDS-006
 Chapter: 07
 Title: Behaviour Orchestration
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Behaviour Orchestration
@@ -556,15 +556,15 @@ Behaviour does not.
 
 ---
 
-# Plugins
+# Modules
 
-Extensions contribute:
+Modules contribute:
 
 - behaviours
 - information
 - relationships
 
-Plugins never orchestrate runtime systems.
+Modules never orchestrate runtime systems.
 
 The Composition Engine determines:
 
@@ -572,7 +572,7 @@ The Composition Engine determines:
 - hierarchy
 - subsystem execution
 
-Every extension therefore inherits one coherent runtime architecture.
+Every module therefore inherits one coherent runtime architecture.
 
 ---
 

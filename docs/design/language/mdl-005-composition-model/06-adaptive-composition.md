@@ -4,7 +4,7 @@ Document: MDL-005
 Chapter: 06
 Title: Adaptive Composition
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Adaptive Composition
@@ -25,7 +25,7 @@ Relationships emerge.
 
 Space changes.
 
-Plugins contribute new information.
+Modules contribute new information.
 
 Adaptive Composition exists to ensure that the organisation of understanding evolves naturally without requiring contributors to design every possible state individually.
 
@@ -429,9 +429,9 @@ Only expression changes.
 
 ---
 
-# Plugins
+# Modules
 
-Extensions should not adapt themselves.
+Modules should not adapt themselves.
 
 Instead they contribute:
 
@@ -517,9 +517,9 @@ Meaning has been replaced by geometry.
 
 ---
 
-## Plugin Layout
+## Module Layout
 
-Extensions independently adapting interface.
+Modules independently adapting interface.
 
 Adaptive behaviour becomes inconsistent.
 

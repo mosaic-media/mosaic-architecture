@@ -2,7 +2,7 @@
 File: docs/engineering/guides/meg-004-hexagonal-architecture/13-modelling-guidelines.md
 Document: MEG-004
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Modelling Guidelines
@@ -172,7 +172,7 @@ Ports exist because the Domain requires stable contracts.
 
 Not speculative flexibility.
 
-AWS recommends introducing ports where the business genuinely requires external interaction, rather than creating unnecessary abstraction layers.  [oai_citation:0‡AWS Documentation](https://docs.aws.amazon.com/prescriptive-guidance/latest/hexagonal-architectures/best-practices.html?utm_source=chatgpt.com)
+AWS recommends introducing ports where the business genuinely requires external interaction, rather than creating unnecessary abstraction layers.  [AWS Documentation](https://docs.aws.amazon.com/prescriptive-guidance/latest/hexagonal-architectures/best-practices.html)
 
 ---
 
@@ -469,7 +469,7 @@ The folder structure should communicate:
 
 It should never encourage architectural violations.
 
-A clear separation between domain, entry points and adapters is a common recommendation for Ports and Adapters implementations.  [oai_citation:1‡AWS Documentation](https://docs.aws.amazon.com/prescriptive-guidance/latest/hexagonal-architectures/best-practices.html?utm_source=chatgpt.com)
+A clear separation between domain, entry points and adapters is a common recommendation for Ports and Adapters implementations.  [AWS Documentation](https://docs.aws.amazon.com/prescriptive-guidance/latest/hexagonal-architectures/best-practices.html)
 
 ---
 

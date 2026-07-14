@@ -2,7 +2,7 @@
 File: docs/engineering/guides/meg-004-hexagonal-architecture/10-application-services.md
 Document: MEG-004
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Application Services
@@ -57,7 +57,7 @@ Business rules belong to:
 
 Never the Application Service.
 
-Application services are widely described as thin orchestration layers that load aggregates, invoke domain behaviour and persist the results without containing domain logic themselves.  [oai_citation:0‡Protean Docs](https://docs.proteanhq.com/concepts/building-blocks/application-services/?utm_source=chatgpt.com)
+Application services are widely described as thin orchestration layers that load aggregates, invoke domain behaviour and persist the results without containing domain logic themselves.  [Protean Docs](https://docs.proteanhq.com/concepts/building-blocks/application-services/)
 
 ---
 

@@ -4,7 +4,7 @@ Document: MDS-003
 Chapter: 11
 Title: Material System Governance
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Material System Governance
@@ -253,16 +253,16 @@ No Material proposal should weaken accessibility in pursuit of realism.
 
 ---
 
-# Plugin Governance
+# Module Governance
 
-Extensions must never introduce:
+Modules must never introduce:
 
 - custom materials,
 - independent acrylic systems,
 - proprietary refraction,
 - separate physical hierarchies.
 
-Plugins inherit the Material System.
+Modules inherit the Material System.
 
 They never redefine it.
 
@@ -346,7 +346,7 @@ The strongest Material System is one users feel rather than consciously notice.
 | ADR-107 | Acrylic is the primary physical material of Mosaic. |
 | ADR-108 | Runtime Atmosphere influences Materials rather than components directly. |
 | ADR-109 | Accessibility always has higher authority than material fidelity. |
-| ADR-110 | Extensions inherit the Material System rather than extending it. |
+| ADR-110 | Modules inherit the Material System rather than extending it. |
 
 ---
 

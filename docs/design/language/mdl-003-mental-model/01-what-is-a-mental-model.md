@@ -4,7 +4,7 @@ Document: MDL-003
 Chapter: 01
 Title: What Is A Mental Model?
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # What Is A Mental Model?
@@ -64,7 +64,7 @@ People successfully use cars without understanding combustion engines.
 
 People successfully use electricity without understanding electrical engineering.
 
-Likewise, Mosaic users should successfully use the platform without understanding GraphQL, plugins or runtime composition.
+Likewise, Mosaic users should successfully use the platform without understanding GraphQL, modules or runtime composition.
 
 They should understand only the concepts required to accomplish their goals.
 
@@ -86,7 +86,7 @@ Examples include:
 - SQLite
 - DuckDB
 - WebSockets
-- Plugins
+- Modules
 - Composition Engine
 
 The system model belongs to engineers.
@@ -170,7 +170,7 @@ Notice that:
 
 - databases disappear
 - APIs disappear
-- plugins disappear
+- modules disappear
 - implementation disappears
 
 Only meaningful concepts remain.
@@ -236,9 +236,9 @@ Library Team:
 
 > Mosaic is a database.
 
-Plugin Team:
+Module Team:
 
-> Mosaic is an extension host.
+> Mosaic is a module host.
 
 Each statement is partially true.
 
@@ -290,7 +290,7 @@ A contributor should be capable of explaining Mosaic to a non-technical family m
 
 - GraphQL
 - APIs
-- plugins
+- modules
 - databases
 - servers
 - rendering
@@ -357,7 +357,7 @@ It describes:
 
 without describing how any of them are implemented.
 
-Every interface, API and future extension should reinforce this same conceptual understanding.
+Every interface, API and future module should reinforce this same conceptual understanding.
 
 ---
 

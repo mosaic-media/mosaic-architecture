@@ -3,7 +3,7 @@ File: docs/design/language/mdl-005-composition-model/references.md
 Document: MDL-005
 Title: References
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # References
@@ -226,7 +226,7 @@ Significant discoveries included:
 - Relationships before navigation
 - Expressions before presentation
 - Composition solving rather than authored layouts
-- Plugins contributing understanding rather than interface
+- Modules contributing understanding rather than interface
 
 These discoveries collectively distinguish Mosaic from conventional media platforms.
 
@@ -237,7 +237,7 @@ These discoveries collectively distinguish Mosaic from conventional media platfo
 The broader Mosaic platform architecture introduces concepts such as:
 
 - GraphQL
-- Extensions
+- Modules
 - Runtime composition
 - Adaptive presentation
 - Information graphs

@@ -4,7 +4,7 @@ Document: MDL-003
 Chapter: 04
 Title: Context
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Context
@@ -398,15 +398,15 @@ Future specifications define these transformations.
 
 ---
 
-# Plugin Behaviour
+# Module Behaviour
 
-Extensions should never attempt to own Context.
+Modules should never attempt to own Context.
 
 Instead they contribute information relevant to the existing Context.
 
 Example.
 
-Anime Extension
+Anime Module
 
 ```
 Episode 15
@@ -424,7 +424,7 @@ The platform determines whether that information is:
 - Notification
 - Metadata
 
-The plugin contributes knowledge.
+The module contributes knowledge.
 
 The platform contributes understanding.
 

@@ -4,7 +4,7 @@ Document: MDS-004
 Chapter: 04
 Title: Reading Rhythm
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Reading Rhythm

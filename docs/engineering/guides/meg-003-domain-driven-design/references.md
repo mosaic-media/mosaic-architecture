@@ -2,12 +2,12 @@
 File: docs/engineering/guides/meg-003-domain-driven-design/references.md
 Document: MEG-003
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # References
 
-> *The Mosaic Domain Model is built upon established principles of Domain-Driven Design, adapted for an event-driven, extension-first platform.*
+> *The Mosaic Domain Model is built upon established principles of Domain-Driven Design, adapted for an event-driven, module-first platform.*
 
 ---
 
@@ -281,7 +281,7 @@ The following specifications complement MEG-003.
 ## Planned Engineering Specifications
 
 - MEG-004 Hexagonal Architecture
-- MEG-005 Extension Platform
+- MEG-005 Module Platform
 - MEG-006 Runtime Architecture
 - MEG-007 Storage Architecture
 - MEG-008 Observability

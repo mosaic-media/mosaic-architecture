@@ -3,7 +3,7 @@ File: docs/design/language/mdl-003-mental-model/references.md
 Document: MDL-003
 Title: References
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # References
@@ -55,7 +55,7 @@ Defines:
 - Product beliefs
 - Companion metaphor
 
-MDL-003 should always be interpreted as an implementation-independent extension of the Vision.
+MDL-003 should always be interpreted as an implementation-independent module of the Vision.
 
 ---
 
@@ -93,7 +93,7 @@ The following MDS specifications are expected to implement the Mental Model.
 - MDS-003 Composition Engine
 - MDS-007 Tile Framework
 - MDS-008 Component Library
-- MDS-011 Extension Design Specification
+- MDS-011 Module Design Specification
 
 The Mental Model defines:
 
@@ -286,7 +286,7 @@ Future contributors may also wish to review:
 
 - MDS-003 Composition Engine
 - MDS-007 Tile Framework
-- MDS-011 Extension Design Specification
+- MDS-011 Module Design Specification
 
 These documents provide implementation guidance for the conceptual architecture established here.
 

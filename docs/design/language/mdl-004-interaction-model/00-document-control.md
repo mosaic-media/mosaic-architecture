@@ -3,7 +3,7 @@ File: docs/design/language/mdl-004-interaction-model/00-document-control.md
 Document: MDL-004
 Title: Interaction Model
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Document Control
@@ -55,7 +55,7 @@ Its authority extends to:
 - Runtime Behaviour
 - Composition Behaviour
 - Navigation Behaviour
-- Extension Behaviour
+- Module Behaviour
 
 MDL-004 intentionally does **not** define:
 

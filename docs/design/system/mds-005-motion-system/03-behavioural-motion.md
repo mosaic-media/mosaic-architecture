@@ -4,7 +4,7 @@ Document: MDS-005
 Chapter: 03
 Title: Behavioural Motion
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Behavioural Motion

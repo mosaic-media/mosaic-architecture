@@ -2,7 +2,7 @@
 File: docs/engineering/guides/meg-001-go-engineering-standards/15-code-review-standards.md
 Document: MEG-001
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Code Review Standards
@@ -243,7 +243,7 @@ Explain the reasoning.
 
 Not merely the conclusion.
 
-Google's Go Code Review Comments encourage reviewers to explain the principle behind requested changes so future code improves as well. ([go.dev](https://go.dev/wiki/CodeReviewComments?utm_source=chatgpt.com))
+Google's Go Code Review Comments encourage reviewers to explain the principle behind requested changes so future code improves as well. ([go.dev](https://go.dev/wiki/CodeReviewComments))
 
 ---
 

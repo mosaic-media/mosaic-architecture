@@ -4,7 +4,7 @@ Document: MDL-001
 Chapter: 07
 Title: Governance
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Governance
@@ -68,7 +68,7 @@ Every significant design decision should be traceable to:
 
 No significant design decision should exist without rationale.
 
-Architectural Decision Records (ADRs) are widely recommended as a lightweight mechanism for preserving the context and consequences of important design decisions over time.  [oai_citation:0‡Google Cloud Documentation](https://docs.cloud.google.com/architecture/architecture-decision-records?hl=en&utm_source=chatgpt.com)
+Architectural Decision Records (ADRs) are widely recommended as a lightweight mechanism for preserving the context and consequences of important design decisions over time.  [Google Cloud Documentation](https://docs.cloud.google.com/architecture/architecture-decision-records?hl=en)
 
 ---
 

@@ -4,7 +4,7 @@ Document: MDS-002
 Chapter: 08
 Title: Accessibility
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Accessibility
@@ -342,11 +342,11 @@ This serves as a useful validation technique for ensuring hierarchy does not dep
 
 ---
 
-# Plugin Behaviour
+# Module Behaviour
 
-Extensions inherit accessibility automatically.
+Modules inherit accessibility automatically.
 
-Plugins should never implement independent:
+Modules should never implement independent:
 
 - colour systems
 - contrast systems
@@ -435,7 +435,7 @@ Very high contrast used purely for dramatic effect.
 
 ## Independent Accessibility
 
-Plugins inventing their own accessibility behaviour.
+Modules inventing their own accessibility behaviour.
 
 The platform loses consistency.
 

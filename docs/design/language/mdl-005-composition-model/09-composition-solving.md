@@ -4,7 +4,7 @@ Document: MDL-005
 Chapter: 09
 Title: Composition Solving
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Composition Solving
@@ -445,11 +445,11 @@ Only the presentation changes.
 
 ---
 
-# Solving With Plugins
+# Solving With Modules
 
-Plugins should never influence the solving process directly.
+Modules should never influence the solving process directly.
 
-Plugins contribute:
+Modules contribute:
 
 - Information
 - Relationships
@@ -463,7 +463,7 @@ The platform determines:
 
 This preserves one coherent behavioural language.
 
-Extensions strengthen the World.
+Modules strengthen the World.
 
 They do not redesign it.
 
@@ -619,9 +619,9 @@ Only expression adapts.
 
 ---
 
-## Plugin Solving
+## Module Solving
 
-Extensions determining:
+Modules determining:
 
 - Hero
 - Priority

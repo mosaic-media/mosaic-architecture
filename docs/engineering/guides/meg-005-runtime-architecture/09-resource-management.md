@@ -2,7 +2,7 @@
 File: docs/engineering/guides/meg-005-runtime-architecture/09-resource-management.md
 Document: MEG-005
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Resource Management
@@ -52,7 +52,7 @@ Capabilities borrow them.
 
 This separation ensures that business behaviour remains independent of operational constraints.
 
-Operating systems are commonly described as resource managers because they allocate finite resources while protecting overall system stability.  [oai_citation:0‡cis.temple.edu](https://cis.temple.edu/~giorgio/cis307/readings/intro.html?utm_source=chatgpt.com)
+Operating systems are commonly described as resource managers because they allocate finite resources while protecting overall system stability.  [cis.temple.edu](https://cis.temple.edu/~giorgio/cis307/readings/intro.html)
 
 ---
 

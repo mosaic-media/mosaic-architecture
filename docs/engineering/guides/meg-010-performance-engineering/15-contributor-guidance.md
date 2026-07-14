@@ -2,7 +2,7 @@
 File: docs/engineering/guides/meg-010-performance-engineering/15-contributor-guidance.md
 Document: MEG-010
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Contributor Guidance
@@ -65,7 +65,7 @@ Avoid allowing performance concerns to leak:
 - into the Domain
 - into business logic
 - into capability contracts
-- into extension APIs
+- into module APIs
 
 Architecture should remain clean even when optimisation becomes necessary.
 

@@ -4,7 +4,7 @@ Document: MDS-005
 Chapter: 08
 Title: Motion Accessibility
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Motion Accessibility
@@ -418,11 +418,11 @@ Applications should not implement platform-specific logic independently.
 
 ---
 
-# Plugins
+# Modules
 
-Extensions should never override Motion Accessibility.
+Modules should never override Motion Accessibility.
 
-Plugins contribute:
+Modules contribute:
 
 - behavioural events.
 
@@ -432,7 +432,7 @@ The Motion System determines:
 - simplification,
 - continuity.
 
-Every extension therefore automatically inherits accessible motion.
+Every module therefore automatically inherits accessible motion.
 
 ---
 

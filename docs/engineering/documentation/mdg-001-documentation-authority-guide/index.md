@@ -2,7 +2,7 @@
 File: docs/engineering/documentation/mdg-001-documentation-authority-guide/index.md
 Document: MDG-001
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # MDG-001 — Documentation Authority Guide
@@ -151,7 +151,7 @@ These include:
 
 - platform architects
 - software engineers
-- extension developers
+- module developers
 - designers
 - contributors
 - maintainers

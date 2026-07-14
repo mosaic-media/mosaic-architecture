@@ -2,7 +2,7 @@
 File: docs/engineering/guides/meg-010-performance-engineering/01-performance-philosophy.md
 Document: MEG-010
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Performance Philosophy
@@ -21,7 +21,7 @@ This chapter exists to prevent that behaviour from becoming architecture.
 
 ---
 
-# Core Statement
+# Guiding Statement
 
 Within Mosaic:
 

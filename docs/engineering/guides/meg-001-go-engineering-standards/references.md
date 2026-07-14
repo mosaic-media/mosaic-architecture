@@ -2,7 +2,7 @@
 File: docs/engineering/guides/meg-001-go-engineering-standards/references.md
 Document: MEG-001
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # References
@@ -378,7 +378,7 @@ Examples include:
 
 - Event Architecture
 - Storage Architecture
-- Extension SDK
+- Module SDK
 - Authentication
 - Metadata Platform
 - Runtime Platform

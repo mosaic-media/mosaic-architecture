@@ -3,7 +3,7 @@ File: docs/design/language/mdl-001-vision/references.md
 Document: MDL-001
 Title: References
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # References
@@ -111,7 +111,7 @@ Additional ADR guidance:
 
 - Martin Fowler — Architecture Decision Record
 - UK Government ADR Framework
-- AWS ADR Guidance  [oai_citation:0‡martinfowler.com](https://martinfowler.com/bliki/ArchitectureDecisionRecord.html?utm_source=chatgpt.com)
+- AWS ADR Guidance  [martinfowler.com](https://martinfowler.com/bliki/ArchitectureDecisionRecord.html)
 
 ---
 
@@ -132,7 +132,7 @@ Relevant examples:
 
 - RFC 2026
 - RFC 3426
-- RFC 7764  [oai_citation:1‡RFC Editor](https://www.rfc-editor.org/rfc/rfc2026.html?utm_source=chatgpt.com)
+- RFC 7764  [RFC Editor](https://www.rfc-editor.org/rfc/rfc2026.html)
 
 ---
 

@@ -2,7 +2,7 @@
 File: docs/engineering/guides/meg-005-runtime-architecture/00-document-control.md
 Document: MEG-005
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Document Control
@@ -47,7 +47,7 @@ MEG-005 is the authoritative specification governing the internal architecture o
 
 This specification applies to:
 
-- Mosaic Core
+- Mosaic Platform
 - Runtime Kernel
 - Capability Registry
 - Execution Engine
@@ -229,7 +229,7 @@ Each component should own exactly one responsibility.
 
 Complex behaviour should emerge from cooperation between small runtime services rather than from one large coordinating component.
 
-This reflects well-established operating system design principles in which the kernel provides core execution, scheduling and resource management while higher-level services remain modular and independently evolvable.  [oai_citation:0‡Operating Systems](https://operatingsystemsauthority.com/operating-system-kernel?utm_source=chatgpt.com)
+This reflects well-established operating system design principles in which the kernel provides foundational execution, scheduling and resource management while higher-level services remain modular and independently evolvable.  [Operating Systems](https://operatingsystemsauthority.com/operating-system-kernel)
 
 ---
 
@@ -243,7 +243,7 @@ It does **not** define:
 - domain behaviour
 - runtime semantics
 - storage implementation
-- extension SDKs
+- module SDKs
 
 Those concerns belong to:
 

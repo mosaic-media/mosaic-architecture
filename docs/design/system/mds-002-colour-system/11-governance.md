@@ -4,7 +4,7 @@ Document: MDS-002
 Chapter: 11
 Title: Colour System Governance
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Colour System Governance
@@ -23,9 +23,9 @@ Poor governance leads to:
 - semantic drift
 - accessibility regressions
 - visual fragmentation
-- plugin inconsistency
+- module inconsistency
 
-This chapter defines how the Colour System should evolve while preserving a coherent visual language across every Mosaic client and extension.
+This chapter defines how the Colour System should evolve while preserving a coherent visual language across every Mosaic client and module.
 
 ---
 
@@ -257,16 +257,16 @@ Those concepts belong to MDL.
 
 ---
 
-# Plugin Governance
+# Module Governance
 
-Extensions should never introduce:
+Modules should never introduce:
 
 - Brand colours
 - Runtime colour systems
 - Independent themes
 - Alternative semantic colour hierarchies
 
-Plugins consume the Colour System.
+Modules consume the Colour System.
 
 They do not extend its architecture.
 
@@ -298,7 +298,7 @@ Colour Drift occurs when:
 - duplicate semantic colours appear
 - branding leaks into semantics
 - atmosphere replaces hierarchy
-- plugins introduce independent palettes
+- modules introduce independent palettes
 - components consume primitive colours
 
 Colour Drift weakens the Design System gradually.
@@ -354,7 +354,7 @@ The Colour System succeeds when:
 - Accessibility remains uncompromised.
 - Runtime adaptation feels natural.
 - Contributors naturally reuse Semantic Colours.
-- Extensions visually disappear into the platform.
+- Modules visually disappear into the platform.
 
 The strongest Colour System is one users rarely think about consciously.
 
@@ -369,7 +369,7 @@ They simply feel that everything belongs together.
 | ADR-093 | Semantic colour meaning is treated as a long-lived architectural contract. |
 | ADR-094 | Accessibility always has higher authority than runtime atmosphere. |
 | ADR-095 | Brand identity is independent from entertainment atmosphere. |
-| ADR-096 | Plugins consume the Colour System but never redefine it. |
+| ADR-096 | Modules consume the Colour System but never redefine it. |
 
 ---
 

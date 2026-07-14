@@ -4,7 +4,7 @@ Document: MDS-008
 Chapter: 11
 Title: Component Library Governance
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Component Library Governance
@@ -264,16 +264,16 @@ Optimisation improves implementation only.
 
 ---
 
-# Plugin Governance
+# Module Governance
 
-Extensions must never provide:
+Modules must never provide:
 
 - Components,
 - rendering,
 - framework integrations,
 - platform widgets.
 
-Plugins contribute:
+Modules contribute:
 
 - behaviour,
 - Expressions,
@@ -371,7 +371,7 @@ They should simply experience a platform that behaves consistently everywhere.
 | ADR-178 | Component Contracts are immutable runtime boundaries. |
 | ADR-179 | Platform implementations never redefine runtime behaviour. |
 | ADR-180 | Accessibility is contract-driven rather than component-driven. |
-| ADR-181 | Extensions never implement Components directly. |
+| ADR-181 | Modules never implement Components directly. |
 
 ---
 

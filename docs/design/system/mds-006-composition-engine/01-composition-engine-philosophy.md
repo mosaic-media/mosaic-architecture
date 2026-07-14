@@ -4,7 +4,7 @@ Document: MDS-006
 Chapter: 01
 Title: Composition Engine Philosophy
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Composition Engine Philosophy
@@ -403,13 +403,13 @@ The World remains identical.
 
 ---
 
-# Plugins Enrich Worlds
+# Modules Enrich Worlds
 
-Extensions do not build interfaces.
+Modules do not build interfaces.
 
 They enrich the World.
 
-Plugins contribute:
+Modules contribute:
 
 - information,
 - relationships,
@@ -422,7 +422,7 @@ The Composition Engine determines:
 - expressions,
 - runtime presentation.
 
-This separation ensures every extension naturally feels native.
+This separation ensures every module naturally feels native.
 
 ---
 
@@ -524,9 +524,9 @@ Treating layout as the primary runtime concern.
 
 ---
 
-## Plugin Interfaces
+## Module Interfaces
 
-Allowing extensions to bypass runtime composition.
+Allowing modules to bypass runtime composition.
 
 ---
 

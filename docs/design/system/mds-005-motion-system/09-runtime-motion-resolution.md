@@ -4,7 +4,7 @@ Document: MDS-005
 Chapter: 09
 Title: Runtime Motion Resolution
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Runtime Motion Resolution
@@ -500,11 +500,11 @@ Users gradually learn the movement language because it remains consistent.
 
 ---
 
-# Plugins
+# Modules
 
-Extensions never resolve motion.
+Modules never resolve motion.
 
-Plugins contribute:
+Modules contribute:
 
 - behavioural events,
 - information,
@@ -518,7 +518,7 @@ The Motion Resolver determines:
 - timing,
 - accessibility.
 
-Every extension therefore inherits one coherent movement language automatically.
+Every module therefore inherits one coherent movement language automatically.
 
 ---
 

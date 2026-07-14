@@ -2,7 +2,7 @@
 File: docs/engineering/guides/meg-005-runtime-architecture/glossary.md
 Document: MEG-005
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Glossary
@@ -22,7 +22,7 @@ The definitions contained within this document establish the canonical Runtime v
 - Runtime Documentation
 - Source Code
 - Contributor Guides
-- Extension SDKs
+- Module SDKs
 
 Where a term has a specific meaning within the Runtime, that definition takes precedence over informal usage.
 
@@ -159,7 +159,7 @@ The Runtime Kernel owns:
 
 It intentionally owns no business behaviour.
 
-The Runtime Kernel resembles a microkernel by keeping only essential coordination responsibilities while delegating execution to specialised services.  [oai_citation:0‡AWS Documentation](https://docs.aws.amazon.com/prescriptive-guidance/latest/cloud-design-patterns/hexagonal-architecture.html?utm_source=chatgpt.com)
+The Runtime Kernel resembles a microkernel by keeping only essential coordination responsibilities while delegating execution to specialised services.  [AWS Documentation](https://docs.aws.amazon.com/prescriptive-guidance/latest/cloud-design-patterns/hexagonal-architecture.html)
 
 ---
 
@@ -384,7 +384,7 @@ Definitions should remain consistent across:
 
 - Runtime implementation
 - Runtime documentation
-- Extension Platform
+- Module Platform
 - Contributor Guidance
 - Architecture Specifications
 

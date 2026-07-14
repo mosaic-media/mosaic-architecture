@@ -4,7 +4,7 @@ Document: MDS-002
 Chapter: 09
 Title: Colour Resolution
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Colour Resolution
@@ -459,11 +459,11 @@ Resolution belongs exclusively to the Colour System.
 
 ---
 
-# Extensions
+# Modules
 
-Extensions should never resolve colours.
+Modules should never resolve colours.
 
-Plugins consume:
+Modules consume:
 
 - Semantic Colours
 - Runtime Tokens
@@ -476,7 +476,7 @@ This guarantees future compatibility across:
 - accessibility
 - runtime atmosphere
 
-without plugin modification.
+without module modification.
 
 ---
 

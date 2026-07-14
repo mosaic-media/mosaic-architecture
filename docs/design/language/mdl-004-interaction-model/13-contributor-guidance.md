@@ -4,7 +4,7 @@ Document: MDL-004
 Chapter: 13
 Title: Contributor Guidance
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Contributor Guidance
@@ -239,9 +239,9 @@ This distinction should become instinctive.
 
 ---
 
-# Plugins
+# Modules
 
-Plugin authors should never implement behavioural models.
+Module authors should never implement behavioural models.
 
 Instead they contribute:
 
@@ -257,7 +257,7 @@ The platform determines:
 - Movement
 - Presentation
 
-This separation allows every extension to feel native.
+This separation allows every module to feel native.
 
 ---
 
@@ -310,9 +310,9 @@ Behaviour does not adapt to technology.
 
 ---
 
-## Plugin Behaviour
+## Module Behaviour
 
-Plugins introducing:
+Modules introducing:
 
 - navigation
 - custom interaction
@@ -351,7 +351,7 @@ Every substantial behavioural proposal should satisfy the following.
 - [ ] Composition changes progressively.
 - [ ] Continuity is preserved.
 - [ ] Behaviour remains platform independent.
-- [ ] Plugins participate without redefining interaction.
+- [ ] Modules participate without redefining interaction.
 - [ ] Presentation communicates rather than invents behaviour.
 
 ---

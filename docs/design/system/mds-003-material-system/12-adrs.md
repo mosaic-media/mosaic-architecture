@@ -4,7 +4,7 @@ Document: MDS-003
 Chapter: 12
 Title: Architectural Decision Records
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Architectural Decision Records
@@ -29,29 +29,11 @@ Future contributors should consult these records before proposing changes to the
 
 ---
 
-# ADR Format
+# Decision Format
 
-Every Mosaic ADR follows the standard structure.
+Decision format, lifecycle and review expectations are governed by **MDG-001 — Documentation Authority Guide**.
 
-```text
-ADR Number
-
-Status
-
-Context
-
-Decision
-
-Consequences
-
-Alternatives Considered
-
-Related Specifications
-```
-
-Each ADR documents one significant architectural decision.
-
----
+This chapter records decisions specific to this specification and avoids redefining the shared ADR process.
 
 # ADR-111
 
@@ -272,7 +254,7 @@ The interface feels like one coherent physical environment rather than unrelated
 
 ## Title
 
-Extensions Inherit The Material System
+Modules Inherit The Material System
 
 ### Status
 
@@ -280,11 +262,11 @@ Accepted
 
 ### Context
 
-Allowing plugins to implement independent materials fragments product identity.
+Allowing modules to implement independent materials fragments product identity.
 
 ### Decision
 
-Extensions contribute:
+Modules contribute:
 
 - artwork
 - information
@@ -294,7 +276,7 @@ The platform owns every material behaviour.
 
 ### Consequences
 
-Community extensions automatically inherit future material improvements.
+Community modules automatically inherit future material improvements.
 
 ---
 
@@ -319,7 +301,7 @@ ADR117["Accessibility"]
 
 ADR118["Shared Environment"]
 
-ADR119["Extensions"]
+ADR119["Modules"]
 
 ADR111 --> ADR112
 

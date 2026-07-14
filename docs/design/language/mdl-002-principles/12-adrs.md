@@ -4,7 +4,7 @@ Document: MDL-002
 Chapter: 12
 Title: Architectural Decision Records
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Architectural Decision Records
@@ -23,35 +23,15 @@ This distinction is important.
 
 Future contributors should be able to understand not only the principle itself, but also the design problem that originally motivated it.
 
-ADRs are intentionally lightweight records capturing context, decision and consequences so future teams understand why important architectural choices were made.  [oai_citation:0‡GitHub](https://github.com/architecture-decision-record/architecture-decision-record?utm_source=chatgpt.com)
+ADRs are intentionally lightweight records capturing context, decision and consequences so future teams understand why important architectural choices were made.  [GitHub](https://github.com/architecture-decision-record/architecture-decision-record)
 
 ---
 
-# ADR Format
+# Decision Format
 
-Every future ADR within Mosaic should follow the same structure.
+Decision format, lifecycle and review expectations are governed by **MDG-001 — Documentation Authority Guide**.
 
-```text
-ADR Number
-
-Status
-
-Context
-
-Decision
-
-Consequences
-
-Alternatives Considered
-
-Related Specifications
-```
-
-Each ADR should describe **one** significant decision.
-
-Never multiple.
-
----
+This chapter records decisions specific to this specification and avoids redefining the shared ADR process.
 
 # ADR-041
 
@@ -198,7 +178,7 @@ Future features become cheaper to implement.
 
 ## Title
 
-Core Platform Owns Experience
+Platform Foundation Owns Experience
 
 ### Status
 
@@ -206,24 +186,24 @@ Accepted
 
 ### Context
 
-Extension ecosystems frequently fragment visual consistency by allowing arbitrary interface implementation.
+Module ecosystems frequently fragment visual consistency by allowing arbitrary interface implementation.
 
 ### Decision
 
-The core platform owns:
+The Platform foundation owns:
 
 - presentation
 - composition
 - interaction
 - accessibility
 
-Extensions contribute capability.
+Modules contribute capability.
 
 Not interface.
 
 ### Consequences
 
-Users experience one coherent product regardless of installed extensions.
+Users experience one coherent product regardless of installed modules.
 
 ---
 
@@ -377,7 +357,7 @@ Every superseded ADR should include:
 - rationale
 - migration impact
 
-Maintaining decision history preserves architectural knowledge and avoids repeatedly revisiting settled questions.  [oai_citation:1‡GitHub](https://github.com/architecture-decision-record/architecture-decision-record?utm_source=chatgpt.com)
+Maintaining decision history preserves architectural knowledge and avoids repeatedly revisiting settled questions.  [GitHub](https://github.com/architecture-decision-record/architecture-decision-record)
 
 ---
 

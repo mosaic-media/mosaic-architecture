@@ -4,7 +4,7 @@ Document: MDL-001
 Chapter: 04
 Title: Goals
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Goals
@@ -19,7 +19,7 @@ Goals describe the outcomes MDL exists to achieve.
 
 They intentionally avoid implementation details.
 
-A goal explains **what success looks like**, not **how success is achieved**. This distinction ensures that future engineering and design teams retain flexibility while remaining aligned with the product vision.  [oai_citation:0‡IBM](https://www.ibm.com/docs/en/engineering-lifecycle-management-suite/doors-next/beta?topic=requirements-vision-document&utm_source=chatgpt.com)
+A goal explains **what success looks like**, not **how success is achieved**. This distinction ensures that future engineering and design teams retain flexibility while remaining aligned with the product vision.  [IBM](https://www.ibm.com/docs/en/engineering-lifecycle-management-suite/doors-next/beta?topic=requirements-vision-document)
 
 ---
 
@@ -184,7 +184,7 @@ Future changes may include:
 - new rendering engines
 - new client platforms
 - new interaction models
-- new plugin systems
+- new module systems
 - new AI capabilities
 
 These should evolve beneath the design language rather than forcing the design language to change.

@@ -3,7 +3,7 @@ File: docs/design/system/mds-002-colour-system/00-document-control.md
 Document: MDS-002
 Title: Colour System
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Document Control

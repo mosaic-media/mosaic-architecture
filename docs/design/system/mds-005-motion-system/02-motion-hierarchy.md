@@ -4,7 +4,7 @@ Document: MDS-005
 Chapter: 02
 Title: Motion Hierarchy
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Motion Hierarchy

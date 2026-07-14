@@ -4,7 +4,7 @@ Document: MDS-003
 Chapter: 07
 Title: Refraction
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Refraction
@@ -415,11 +415,11 @@ Users should experience premium materials without perceiving rendering cost.
 
 ---
 
-# Plugins
+# Modules
 
-Extensions never participate in refraction.
+Modules never participate in refraction.
 
-Plugins contribute:
+Modules contribute:
 
 - artwork
 - information
@@ -430,7 +430,7 @@ The Material System determines:
 - diffusion
 - edge behaviour
 
-Every extension therefore inherits identical material quality automatically.
+Every module therefore inherits identical material quality automatically.
 
 ---
 

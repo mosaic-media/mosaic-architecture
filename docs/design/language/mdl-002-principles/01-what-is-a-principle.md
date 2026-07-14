@@ -4,7 +4,7 @@ Document: MDL-002
 Chapter: 01
 Title: What Is A Principle?
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # What Is A Principle?
@@ -60,7 +60,7 @@ Should the interface become more expressive...
 
 ...or quieter?
 
-Should plugins create UI...
+Should modules create UI...
 
 ...or contribute information?
 
@@ -190,7 +190,7 @@ A principle should apply equally to:
 - frontend applications
 - mobile clients
 - television interfaces
-- plugins
+- modules
 - documentation
 
 The implementation may differ.

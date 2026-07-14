@@ -2,7 +2,7 @@
 File: docs/engineering/guides/meg-003-domain-driven-design/01-domain-philosophy.md
 Document: MEG-003
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Domain Philosophy
@@ -22,7 +22,7 @@ Within Mosaic, the business is not:
 - HTTP
 - PostgreSQL
 - Events
-- Extensions
+- Modules
 - Workers
 
 The business is:
@@ -137,7 +137,7 @@ Likewise:
 
 - APIs expose the domain.
 - Events describe the domain.
-- Extensions extend the domain.
+- Modules extend the domain.
 
 None of them create it.
 
@@ -208,7 +208,7 @@ The model should evolve as understanding grows.
 
 It should never be considered complete.
 
-Eric Evans describes Domain-Driven Design as an iterative process where the model and the ubiquitous language continuously evolve together.  [oai_citation:0‡Google Books](https://books.google.com/books/about/Domain_Driven_Design_Reference.html?id=ccRsBgAAQBAJ&utm_source=chatgpt.com)
+Eric Evans describes Domain-Driven Design as an iterative process where the model and the ubiquitous language continuously evolve together.  [Google Books](https://books.google.com/books/about/Domain_Driven_Design_Reference.html?id=ccRsBgAAQBAJ)
 
 ---
 

@@ -4,7 +4,7 @@ Document: MDL-003
 Chapter: 12
 Title: Architectural Decision Records
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Architectural Decision Records
@@ -15,7 +15,7 @@ Version: 0.1
 
 Architectural Decision Records (ADRs) preserve the reasoning behind the conceptual architecture established within MDL-003.
 
-Unlike implementation decisions, the concepts defined by the Mental Model are expected to influence every future engineering, design and extension decision made within Mosaic.
+Unlike implementation decisions, the concepts defined by the Mental Model are expected to influence every future engineering, design and module decision made within Mosaic.
 
 These ADRs explain **why** those concepts exist.
 
@@ -23,29 +23,11 @@ Future contributors should be able to understand the reasoning behind the Mental
 
 ---
 
-# ADR Format
+# Decision Format
 
-Every ADR within MDL follows the same structure.
+Decision format, lifecycle and review expectations are governed by **MDG-001 — Documentation Authority Guide**.
 
-```
-ADR Number
-
-Status
-
-Context
-
-Decision
-
-Consequences
-
-Alternatives Considered
-
-Related Specifications
-```
-
-One ADR should document one significant conceptual decision.
-
----
+This chapter records decisions specific to this specification and avoids redefining the shared ADR process.
 
 # ADR-049
 
@@ -121,13 +103,13 @@ Accepted
 
 ### Context
 
-Traditional extension systems generally contribute interface.
+Traditional module systems generally contribute interface.
 
 This tightly couples capability to presentation.
 
 ### Decision
 
-Plugins contribute Information.
+Modules contribute Information.
 
 The platform determines presentation.
 
@@ -140,7 +122,7 @@ Future interfaces become:
 - accessible
 - composition driven
 
-The extension ecosystem remains visually coherent.
+The module ecosystem remains visually coherent.
 
 ---
 
@@ -277,7 +259,7 @@ Accepted
 
 ### Context
 
-Engineering architecture naturally exposes concepts such as databases, plugins and APIs.
+Engineering architecture naturally exposes concepts such as databases, modules and APIs.
 
 These concepts unnecessarily complicate the user experience.
 

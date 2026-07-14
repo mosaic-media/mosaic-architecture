@@ -4,7 +4,7 @@ Document: MDL-004
 Chapter: 09
 Title: Interaction States
 Status: Draft
-Version: 0.1
+Version: 0.2
 -->
 
 # Interaction States
@@ -213,7 +213,7 @@ Administration.
 
 Examples include:
 
-- plugins
+- modules
 - users
 - libraries
 - storage
@@ -410,15 +410,15 @@ This hierarchy prevents competing behavioural priorities.
 
 ---
 
-# Plugins
+# Modules
 
-Plugins should never introduce entirely new primary Interaction States.
+Modules should never introduce entirely new primary Interaction States.
 
 Instead they should enrich existing states.
 
 Example.
 
-A Manga extension should strengthen:
+A Manga module should strengthen:
 
 ```
 Reading
