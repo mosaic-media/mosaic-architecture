@@ -2,7 +2,7 @@
 File: docs/engineering/guides/meg-002-event-driven-runtime/10-worker-lifecycle.md
 Document: MEG-002
 Status: Draft
-Version: 0.3
+Version: 0.4
 -->
 
 # Worker Lifecycle
@@ -64,40 +64,29 @@ Those responsibilities belong elsewhere within the runtime.
 
 ---
 
-# Worker Lifecycle
+# Worker Lifecycle States
 
 Every worker follows the same lifecycle.
 
-```
-Registered
+```mermaid
+flowchart TD
 
-↓
+N1["Registered"]
+N2["Initialised"]
+N3["Started"]
+N4["Waiting"]
+N5["Processing"]
+N6["Idle"]
+N7["Stopping"]
+N8["Stopped"]
 
-Initialised
-
-↓
-
-Started
-
-↓
-
-Waiting
-
-↓
-
-Processing
-
-↓
-
-Idle
-
-↓
-
-Stopping
-
-↓
-
-Stopped
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
+N5 --> N6
+N6 --> N7
+N7 --> N8
 ```
 
 The runtime manages every lifecycle transition.
@@ -110,28 +99,21 @@ Workers should never manage themselves.
 
 During runtime initialisation:
 
-```
-Runtime Starts
+```mermaid
+flowchart TD
 
-↓
+N1["Runtime Starts"]
+N2["Workers Created"]
+N3["Dependencies Injected"]
+N4["Subscriptions Registered"]
+N5["Workers Started"]
+N6["Ready"]
 
-Workers Created
-
-↓
-
-Dependencies Injected
-
-↓
-
-Subscriptions Registered
-
-↓
-
-Workers Started
-
-↓
-
-Ready
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
+N5 --> N6
 ```
 
 Workers should be fully initialised before accepting work.
@@ -144,20 +126,17 @@ A worker should never begin processing while partially configured.
 
 Workers spend most of their lifetime waiting.
 
-```
-Waiting
+```mermaid
+flowchart TD
 
-↓
+N1["Waiting"]
+N2["Task Arrives"]
+N3["Process"]
+N4["Waiting"]
 
-Task Arrives
-
-↓
-
-Process
-
-↓
-
-Waiting
+N1 --> N2
+N2 --> N3
+N3 --> N4
 ```
 
 Idle workers should consume minimal resources.
@@ -172,16 +151,15 @@ Workers should block efficiently until work becomes available.
 
 Workers receive work from the runtime.
 
-```
-Runtime
+```mermaid
+flowchart TD
 
-↓
+N1["Runtime"]
+N2["Queue"]
+N3["Worker"]
 
-Queue
-
-↓
-
-Worker
+N1 --> N2
+N2 --> N3
 ```
 
 Workers should never poll business capabilities directly.
@@ -196,20 +174,17 @@ This keeps execution infrastructure independent from business behaviour.
 
 Unless explicitly designed otherwise, a worker processes one task at a time.
 
-```
-Receive
+```mermaid
+flowchart TD
 
-↓
+N1["Receive"]
+N2["Process"]
+N3["Complete"]
+N4["Next Task"]
 
-Process
-
-↓
-
-Complete
-
-↓
-
-Next Task
+N1 --> N2
+N2 --> N3
+N3 --> N4
 ```
 
 Parallelism is achieved by increasing worker count.
@@ -222,24 +197,19 @@ Not by increasing complexity inside individual workers.
 
 Every worker MUST honour context cancellation.
 
-```
-Task Running
+```mermaid
+flowchart TD
 
-↓
+N1["Task Running"]
+N2["Shutdown Requested"]
+N3["Context Cancelled"]
+N4["Cleanup"]
+N5["Exit"]
 
-Shutdown Requested
-
-↓
-
-Context Cancelled
-
-↓
-
-Cleanup
-
-↓
-
-Exit
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
 ```
 
 Workers should terminate promptly.
@@ -258,24 +228,19 @@ Ignoring cancellation is prohibited.
 
 Shutdown should always be graceful.
 
-```
-Stop Accepting Work
+```mermaid
+flowchart TD
 
-↓
+N1["Stop Accepting Work"]
+N2["Finish Current Task"]
+N3["Acknowledge"]
+N4["Cleanup"]
+N5["Exit"]
 
-Finish Current Task
-
-↓
-
-Acknowledge
-
-↓
-
-Cleanup
-
-↓
-
-Exit
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
 ```
 
 Workers should never abandon partially completed business operations unless immediate termination is unavoidable.
@@ -290,16 +255,15 @@ Every worker has exactly one owner.
 
 Typically:
 
-```
-Runtime
+```mermaid
+flowchart TD
 
-↓
+N1["Runtime"]
+N2["Worker Pool"]
+N3["Worker"]
 
-Worker Pool
-
-↓
-
-Worker
+N1 --> N2
+N2 --> N3
 ```
 
 Ownership answers:
@@ -320,6 +284,7 @@ Every worker SHOULD have a unique runtime identifier.
 Example.
 
 ```
+
 Metadata Worker #3
 ```
 
@@ -340,24 +305,19 @@ Worker identity belongs to runtime infrastructure.
 
 Worker failure should affect only the current task.
 
-```
-Worker
+```mermaid
+flowchart TD
 
-↓
+N1["Worker"]
+N2["Task Failure"]
+N3["Report"]
+N4["Retry Scheduled"]
+N5["Continue Processing"]
 
-Task Failure
-
-↓
-
-Report
-
-↓
-
-Retry Scheduled
-
-↓
-
-Continue Processing
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
 ```
 
 The runtime should recover automatically wherever possible.
@@ -410,20 +370,17 @@ Worker concurrency should be controlled by the runtime.
 
 Example.
 
-```
-Queue
+```mermaid
+flowchart TD
 
-↓
+N1["Queue"]
+N2["Worker Pool"]
+N3["Workers"]
+N4["Results"]
 
-Worker Pool
-
-↓
-
-Workers
-
-↓
-
-Results
+N1 --> N2
+N2 --> N3
+N3 --> N4
 ```
 
 Capabilities should never create arbitrary worker pools independently.
@@ -485,22 +442,24 @@ Not by making workers more complex.
 
 Preferred.
 
-```
-1 Task
+```mermaid
+flowchart TD
 
-↓
+N1["1 Task"]
+N2["Many Simple Workers"]
 
-Many Simple Workers
+N1 --> N2
 ```
 
 Avoid.
 
-```
-1 Worker
+```mermaid
+flowchart TD
 
-↓
+N1["1 Worker"]
+N2["Complex Internal Scheduling"]
 
-Complex Internal Scheduling
+N1 --> N2
 ```
 
 Simple workers are easier to understand and easier to replace.
@@ -512,6 +471,7 @@ Simple workers are easier to understand and easier to replace.
 Every completed task ends in one of four states.
 
 ```
+
 Completed
 
 Failed
@@ -638,23 +598,3 @@ Business capabilities remain focused on business behaviour.
 The runtime remains focused on execution.
 
 That separation is one of the key architectural principles underpinning the Mosaic platform.
-
----
-
-# Review Status
-
-**Status**
-
-Draft
-
-**Owner**
-
-Lead Software Architect
-
-**Previous File**
-
-`09-subscribers.md`
-
-**Next File**
-
-`11-scheduling.md`

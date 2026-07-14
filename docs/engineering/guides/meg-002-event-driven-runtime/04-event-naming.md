@@ -2,7 +2,7 @@
 File: docs/engineering/guides/meg-002-event-driven-runtime/04-event-naming.md
 Document: MEG-002
 Status: Draft
-Version: 0.3
+Version: 0.4
 -->
 
 # Event Naming
@@ -13,7 +13,7 @@ Version: 0.3
 
 # Purpose
 
-MIP-001 defines the event naming protocol.
+[MIP-001](../../protocols/mip-001-event-protocol/index.md) defines the event naming protocol.
 
 This chapter explains how engineers should apply that protocol while building capabilities.
 
@@ -34,7 +34,7 @@ platform.module.installed
 
 Avoid names that describe handlers, transports, queues or implementation mechanics.
 
-Event names should be namespaced according to MIP-001.
+Event names should be namespaced according to [MIP-001](../../protocols/mip-001-event-protocol/index.md).
 
 The namespace should identify the event owner.
 
@@ -66,4 +66,4 @@ A new event name should be accepted only when it:
 
 Protocol authority is provided by:
 
-- MIP-001 — Event Protocol
+- [MIP-001 — Event Protocol](../../protocols/mip-001-event-protocol/index.md)

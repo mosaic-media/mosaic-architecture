@@ -2,7 +2,7 @@
 File: docs/engineering/guides/meg-002-event-driven-runtime/01-runtime-philosophy.md
 Document: MEG-002
 Status: Draft
-Version: 0.3
+Version: 0.4
 -->
 
 # Runtime Philosophy
@@ -73,6 +73,7 @@ A capability represents a self-contained piece of business functionality.
 Examples include:
 
 ```
+
 Metadata
 
 Playback
@@ -101,32 +102,23 @@ A capability should **never** become responsible for orchestrating the wider pla
 
 The runtime intentionally separates coordination from execution.
 
-```
-Capability
+```mermaid
+flowchart TD
 
-↓
+N1["Capability"]
+N2["Publishes Event"]
+N3["Runtime"]
+N4["Routes Event"]
+N5["Interested Capabilities"]
+N6["State Changes"]
+N7["New Events"]
 
-Publishes Event
-
-↓
-
-Runtime
-
-↓
-
-Routes Event
-
-↓
-
-Interested Capabilities
-
-↓
-
-State Changes
-
-↓
-
-New Events
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
+N5 --> N6
+N6 --> N7
 ```
 
 Notice that capabilities never communicate directly.
@@ -167,24 +159,29 @@ Not commands.
 Good:
 
 ```
+
 media.imported
 ```
 
 ```
+
 playback.started
 ```
 
 ```
+
 metadata.updated
 ```
 
 Poor:
 
 ```
+
 RefreshMetadata
 ```
 
 ```
+
 UpdateArtwork
 ```
 
@@ -227,24 +224,19 @@ Business capabilities should not concern themselves with:
 
 Instead:
 
-```
-Capability
+```mermaid
+flowchart TD
 
-↓
+N1["Capability"]
+N2["Publish Event"]
+N3["Runtime"]
+N4["Schedule Work"]
+N5["Deliver Event"]
 
-Publish Event
-
-↓
-
-Runtime
-
-↓
-
-Schedule Work
-
-↓
-
-Deliver Event
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
 ```
 
 Time is a runtime concern.
@@ -279,24 +271,19 @@ The Mosaic Runtime embraces eventual consistency.
 
 Immediately after an event is published:
 
-```
-Capability A
+```mermaid
+flowchart TD
 
-↓
+N1["Capability A"]
+N2["Event Published"]
+N3["Capability B"]
+N4["Capability C"]
+N5["Capability D"]
 
-Event Published
-
-↓
-
-Capability B
-
-↓
-
-Capability C
-
-↓
-
-Capability D
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
 ```
 
 Each capability progresses independently.
@@ -317,20 +304,17 @@ Installing a module should not require modifying existing capabilities.
 
 Instead:
 
-```
-Existing Runtime
+```mermaid
+flowchart TD
 
-↓
+N1["Existing Runtime"]
+N2["Install Module"]
+N3["Subscribe To Existing Events"]
+N4["Platform Gains New Behaviour"]
 
-Install Module
-
-↓
-
-Subscribe To Existing Events
-
-↓
-
-Platform Gains New Behaviour
+N1 --> N2
+N2 --> N3
+N3 --> N4
 ```
 
 No existing capability changes.
@@ -366,20 +350,17 @@ It does not own business state.
 
 Example:
 
-```
-Runtime
+```mermaid
+flowchart TD
 
-↓
+N1["Runtime"]
+N2["media.imported"]
+N3["Metadata Capability"]
+N4["Metadata Database"]
 
-media.imported
-
-↓
-
-Metadata Capability
-
-↓
-
-Metadata Database
+N1 --> N2
+N2 --> N3
+N3 --> N4
 ```
 
 The runtime transports the event.
@@ -394,28 +375,21 @@ This distinction is critical.
 
 Every runtime component follows the same lifecycle.
 
-```
-Registered
+```mermaid
+flowchart TD
 
-↓
+N1["Registered"]
+N2["Initialised"]
+N3["Started"]
+N4["Running"]
+N5["Stopping"]
+N6["Stopped"]
 
-Initialised
-
-↓
-
-Started
-
-↓
-
-Running
-
-↓
-
-Stopping
-
-↓
-
-Stopped
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
+N5 --> N6
 ```
 
 Capabilities should respond to lifecycle transitions.
@@ -478,23 +452,3 @@ It never becomes the business itself.
 When responsibilities remain clearly separated, new capabilities can be introduced without modifying existing ones.
 
 That is the defining property of an extensible platform.
-
----
-
-# Review Status
-
-**Status**
-
-Draft
-
-**Owner**
-
-Lead Software Architect
-
-**Previous File**
-
-`00-document-control.md`
-
-**Next File**
-
-`02-why-events.md`

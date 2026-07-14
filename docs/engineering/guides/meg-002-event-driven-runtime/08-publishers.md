@@ -2,7 +2,7 @@
 File: docs/engineering/guides/meg-002-event-driven-runtime/08-publishers.md
 Document: MEG-002
 Status: Draft
-Version: 0.3
+Version: 0.4
 -->
 
 # Publishers
@@ -72,28 +72,21 @@ Those concerns belong entirely to the Event Bus.
 
 Every event follows the same publishing lifecycle.
 
-```
-Business Operation
+```mermaid
+flowchart TD
 
-↓
+N1["Business Operation"]
+N2["State Changes"]
+N3["Transaction Commits"]
+N4["Create Event"]
+N5["Publish Event"]
+N6["Return"]
 
-State Changes
-
-↓
-
-Transaction Commits
-
-↓
-
-Create Event
-
-↓
-
-Publish Event
-
-↓
-
-Return
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
+N5 --> N6
 ```
 
 Publishing should occur only after the business operation has completed successfully.
@@ -106,30 +99,28 @@ Events MUST represent reality.
 
 Correct.
 
-```
-Persist Metadata
+```mermaid
+flowchart TD
 
-↓
+N1["Persist Metadata"]
+N2["Commit"]
+N3["MetadataImported"]
 
-Commit
-
-↓
-
-MetadataImported
+N1 --> N2
+N2 --> N3
 ```
 
 Incorrect.
 
-```
-MetadataImported
+```mermaid
+flowchart TD
 
-↓
+N1["MetadataImported"]
+N2["Attempt Persist"]
+N3["Failure"]
 
-Attempt Persist
-
-↓
-
-Failure
+N1 --> N2
+N2 --> N3
 ```
 
 The runtime must never observe events describing work that never actually happened.
@@ -142,12 +133,13 @@ Every event MUST have exactly one publisher.
 
 Example.
 
-```
-playback.started
+```mermaid
+flowchart TD
 
-↓
+N1["playback.started"]
+N2["Playback Capability"]
 
-Playback Capability
+N1 --> N2
 ```
 
 Only Playback owns this business fact.
@@ -166,28 +158,31 @@ A capability owns the events describing the state it owns.
 
 Examples.
 
-```
-Library
+```mermaid
+flowchart TD
 
-↓
+N1["Library"]
+N2["media.imported"]
 
-media.imported
-```
-
-```
-Metadata
-
-↓
-
-MetadataFetched
+N1 --> N2
 ```
 
+```mermaid
+flowchart TD
+
+N1["Metadata"]
+N2["MetadataFetched"]
+
+N1 --> N2
 ```
-Playback
 
-↓
+```mermaid
+flowchart TD
 
-PlaybackCompleted
+N1["Playback"]
+N2["PlaybackCompleted"]
+
+N1 --> N2
 ```
 
 Ownership should never cross bounded contexts.
@@ -211,16 +206,15 @@ The publisher MUST NOT:
 
 Example.
 
-```
-Library
+```mermaid
+flowchart TD
 
-↓
+N1["Library"]
+N2["Publish"]
+N3["Continue"]
 
-Publish
-
-↓
-
-Continue
+N1 --> N2
+N2 --> N3
 ```
 
 The runtime becomes responsible for reliable delivery.
@@ -232,24 +226,28 @@ The runtime becomes responsible for reliable delivery.
 Publishers communicate:
 
 ```
+
 What happened
 ```
 
 Never:
 
 ```
+
 What should happen
 ```
 
 Good.
 
 ```
+
 media.imported
 ```
 
 Poor.
 
 ```
+
 GenerateArtwork
 ```
 
@@ -296,20 +294,17 @@ Publishing should occur only after business state becomes durable.
 
 Recommended sequence.
 
-```
-Business Logic
+```mermaid
+flowchart TD
 
-↓
+N1["Business Logic"]
+N2["Persist State"]
+N3["Commit"]
+N4["Publish Event"]
 
-Persist State
-
-↓
-
-Commit
-
-↓
-
-Publish Event
+N1 --> N2
+N2 --> N3
+N3 --> N4
 ```
 
 This avoids publishing events describing rolled-back work.
@@ -324,16 +319,15 @@ A single operation may publish multiple events.
 
 Example.
 
-```
-Import Media
+```mermaid
+flowchart TD
 
-↓
+N1["Import Media"]
+N2["media.imported"]
+N3["LibraryUpdated"]
 
-media.imported
-
-↓
-
-LibraryUpdated
+N1 --> N2
+N2 --> N3
 ```
 
 Each event should represent a distinct business fact.
@@ -362,26 +356,26 @@ Publishers control business truth.
 
 Poor.
 
-```
-If Search Enabled
+```mermaid
+flowchart TD
 
-↓
+N1["If Search Enabled"]
+N2["Publish Search Event"]
 
-Publish Search Event
+N1 --> N2
 ```
 
 Better.
 
-```
-media.imported
+```mermaid
+flowchart TD
 
-↓
+N1["media.imported"]
+N2["Search Subscriber Exists?"]
+N3["Runtime Delivers"]
 
-Search Subscriber Exists?
-
-↓
-
-Runtime Delivers
+N1 --> N2
+N2 --> N3
 ```
 
 Capabilities should publish business facts regardless of platform configuration.
@@ -426,22 +420,24 @@ Example.
 
 Correct.
 
-```
-playback.started
+```mermaid
+flowchart TD
 
-↓
+N1["playback.started"]
+N2["PlaybackCompleted"]
 
-PlaybackCompleted
+N1 --> N2
 ```
 
 Incorrect.
 
-```
-PlaybackCompleted
+```mermaid
+flowchart TD
 
-↓
+N1["PlaybackCompleted"]
+N2["playback.started"]
 
-playback.started
+N1 --> N2
 ```
 
 The runtime does not infer chronology.
@@ -456,12 +452,13 @@ Publishers must never publish events belonging to another capability.
 
 Poor.
 
-```
-Metadata
+```mermaid
+flowchart TD
 
-↓
+N1["Metadata"]
+N2["PlaybackCompleted"]
 
-PlaybackCompleted
+N1 --> N2
 ```
 
 Only Playback owns playback.
@@ -476,16 +473,15 @@ Publishing code should remain simple.
 
 Example.
 
-```text
-Update State
+```mermaid
+flowchart TD
 
-↓
+N1["Update State"]
+N2["Create Event"]
+N3["Publish"]
 
-Create Event
-
-↓
-
-Publish
+N1 --> N2
+N2 --> N3
 ```
 
 Complex business logic should already have completed.
@@ -500,16 +496,15 @@ The following practices are prohibited.
 
 ## Waiting For Subscribers
 
-```
-Publish
+```mermaid
+flowchart TD
 
-↓
+N1["Publish"]
+N2["Wait"]
+N3["Continue"]
 
-Wait
-
-↓
-
-Continue
+N1 --> N2
+N2 --> N3
 ```
 
 Publishing should not become orchestration.
@@ -525,6 +520,7 @@ Publishing facts before durable state exists.
 ## Publishing Commands
 
 ```
+
 RefreshMetadata
 ```
 
@@ -580,23 +576,3 @@ They perform one task exceptionally well:
 By remaining unaware of downstream behaviour, publishers allow the Mosaic Runtime to grow indefinitely without increasing coupling between capabilities.
 
 This simplicity is one of the key architectural properties that enables Mosaic's module-first platform.
-
----
-
-# Review Status
-
-**Status**
-
-Draft
-
-**Owner**
-
-Lead Software Architect
-
-**Previous File**
-
-`07-event-bus.md`
-
-**Next File**
-
-`09-subscribers.md`

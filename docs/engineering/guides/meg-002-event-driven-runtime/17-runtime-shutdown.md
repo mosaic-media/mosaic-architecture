@@ -2,7 +2,7 @@
 File: docs/engineering/guides/meg-002-event-driven-runtime/17-runtime-shutdown.md
 Document: MEG-002
 Status: Draft
-Version: 0.3
+Version: 0.4
 -->
 
 # Runtime Shutdown
@@ -73,20 +73,17 @@ No component should define its own shutdown semantics.
 
 The runtime follows a predictable lifecycle.
 
-```
-Starting
+```mermaid
+flowchart TD
 
-↓
+N1["Starting"]
+N2["Running"]
+N3["Stopping"]
+N4["Stopped"]
 
-Running
-
-↓
-
-Stopping
-
-↓
-
-Stopped
+N1 --> N2
+N2 --> N3
+N3 --> N4
 ```
 
 Only the runtime transitions between lifecycle states.
@@ -101,36 +98,25 @@ They do not control them.
 
 Graceful shutdown follows the same sequence every time.
 
-```
-Shutdown Requested
+```mermaid
+flowchart TD
 
-↓
+N1["Shutdown Requested"]
+N2["Stop Accepting New Events"]
+N3["Cancel Scheduling"]
+N4["Drain Queues"]
+N5["Finish Active Work"]
+N6["Release Resources"]
+N7["Stop Workers"]
+N8["Runtime Stops"]
 
-Stop Accepting New Events
-
-↓
-
-Cancel Scheduling
-
-↓
-
-Drain Queues
-
-↓
-
-Finish Active Work
-
-↓
-
-Release Resources
-
-↓
-
-Stop Workers
-
-↓
-
-Runtime Stops
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
+N5 --> N6
+N6 --> N7
+N7 --> N8
 ```
 
 The order is deliberate.
@@ -154,6 +140,7 @@ Examples include:
 The runtime immediately transitions into:
 
 ```
+
 Stopping
 ```
 
@@ -182,16 +169,15 @@ New work does not begin.
 
 During shutdown the scheduler SHOULD:
 
-```
-Stop Scheduling
+```mermaid
+flowchart TD
 
-↓
+N1["Stop Scheduling"]
+N2["Cancel Future Timers"]
+N3["Persist Outstanding Schedules"]
 
-Cancel Future Timers
-
-↓
-
-Persist Outstanding Schedules
+N1 --> N2
+N2 --> N3
 ```
 
 Recurring schedules should not continue creating work once shutdown begins.
@@ -204,16 +190,15 @@ Long-lived schedules may be restored after restart.
 
 Existing queues should drain naturally.
 
-```
-Queue
+```mermaid
+flowchart TD
 
-↓
+N1["Queue"]
+N2["Workers Continue"]
+N3["Queue Empty"]
 
-Workers Continue
-
-↓
-
-Queue Empty
+N1 --> N2
+N2 --> N3
 ```
 
 Workers should continue processing available tasks until:
@@ -229,20 +214,17 @@ Queue draining reduces unnecessary retries after restart.
 
 Workers receive cancellation through context.
 
-```
-Runtime
+```mermaid
+flowchart TD
 
-↓
+N1["Runtime"]
+N2["Cancel Context"]
+N3["Worker Cleanup"]
+N4["Worker Exit"]
 
-Cancel Context
-
-↓
-
-Worker Cleanup
-
-↓
-
-Worker Exit
+N1 --> N2
+N2 --> N3
+N3 --> N4
 ```
 
 Workers should:
@@ -295,24 +277,19 @@ Pending retries SHOULD be persisted.
 
 Example.
 
-```
-Retry Scheduled
+```mermaid
+flowchart TD
 
-↓
+N1["Retry Scheduled"]
+N2["Shutdown"]
+N3["Persist"]
+N4["Restart"]
+N5["Retry Continues"]
 
-Shutdown
-
-↓
-
-Persist
-
-↓
-
-Restart
-
-↓
-
-Retry Continues
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
 ```
 
 Retries should survive controlled restarts.
@@ -327,20 +304,17 @@ Modules participate in runtime shutdown exactly like Platform capabilities.
 
 Lifecycle.
 
-```
-Runtime
+```mermaid
+flowchart TD
 
-↓
+N1["Runtime"]
+N2["Shutdown Notification"]
+N3["Module Cleanup"]
+N4["Module Stops"]
 
-Shutdown Notification
-
-↓
-
-Module Cleanup
-
-↓
-
-Module Stops
+N1 --> N2
+N2 --> N3
+N3 --> N4
 ```
 
 Modules should never require special shutdown handling.
@@ -374,20 +348,17 @@ Graceful shutdown should remain bounded.
 
 Example.
 
-```
-Shutdown
+```mermaid
+flowchart TD
 
-↓
+N1["Shutdown"]
+N2["30 Second Deadline"]
+N3["Graceful Completion"]
+N4["Forced Termination"]
 
-30 Second Deadline
-
-↓
-
-Graceful Completion
-
-↓
-
-Forced Termination
+N1 --> N2
+N2 --> N3
+N3 --> N4
 ```
 
 The runtime should not wait indefinitely.
@@ -402,12 +373,13 @@ The timeout should be configurable.
 
 If graceful shutdown exceeds its deadline:
 
-```
-Timeout
+```mermaid
+flowchart TD
 
-↓
+N1["Timeout"]
+N2["Force Termination"]
 
-Force Termination
+N1 --> N2
 ```
 
 Forced shutdown is a last resort.
@@ -429,22 +401,27 @@ Shutdown should be fully observable.
 Useful events include:
 
 ```
+
 RuntimeStopping
 ```
 
 ```
+
 QueueDrained
 ```
 
 ```
+
 WorkerStopped
 ```
 
 ```
+
 ModuleStopped
 ```
 
 ```
+
 RuntimeStopped
 ```
 
@@ -466,12 +443,14 @@ During graceful shutdown:
 Health should report:
 
 ```
+
 Not Ready
 ```
 
 before:
 
 ```
+
 Stopped
 ```
 
@@ -493,44 +472,34 @@ It simply stops accepting additional work.
 
 Startup and shutdown should mirror one another.
 
-```
-Startup
+```mermaid
+flowchart TD
 
-↓
+N1["Startup"]
+N2["Initialise"]
+N3["Register"]
+N4["Start"]
+N5["Ready"]
 
-Initialise
-
-↓
-
-Register
-
-↓
-
-Start
-
-↓
-
-Ready
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
 ```
 
-```
-Shutdown
+```mermaid
+flowchart TD
 
-↓
+N1["Shutdown"]
+N2["Stop Accepting"]
+N3["Drain"]
+N4["Cleanup"]
+N5["Stopped"]
 
-Stop Accepting
-
-↓
-
-Drain
-
-↓
-
-Cleanup
-
-↓
-
-Stopped
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
 ```
 
 Symmetrical lifecycle management simplifies reasoning about the runtime.
@@ -543,24 +512,19 @@ Unexpected crashes differ from graceful shutdown.
 
 After restart:
 
-```
-Recover Durable State
+```mermaid
+flowchart TD
 
-↓
+N1["Recover Durable State"]
+N2["Restore Schedules"]
+N3["Resume Queues"]
+N4["Restart Workers"]
+N5["Continue Processing"]
 
-Restore Schedules
-
-↓
-
-Resume Queues
-
-↓
-
-Restart Workers
-
-↓
-
-Continue Processing
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
 ```
 
 Business correctness should depend upon durability.
@@ -593,12 +557,13 @@ The following practices are prohibited.
 
 ## Immediate Process Exit
 
-```
-Shutdown
+```mermaid
+flowchart TD
 
-↓
+N1["Shutdown"]
+N2["os.Exit()"]
 
-os.Exit()
+N1 --> N2
 ```
 
 without cleanup.
@@ -613,12 +578,13 @@ Workers continuing indefinitely after shutdown begins.
 
 ## Accepting New Work During Shutdown
 
-```
-Shutdown
+```mermaid
+flowchart TD
 
-↓
+N1["Shutdown"]
+N2["Continue Accepting Events"]
 
-Continue Accepting Events
+N1 --> N2
 ```
 
 ---
@@ -706,23 +672,3 @@ A runtime that cannot stop predictably cannot be considered production ready.
 Graceful shutdown is therefore not merely an operational concern.
 
 It is a fundamental architectural property of the Mosaic Runtime.
-
----
-
-# Review Status
-
-**Status**
-
-Draft
-
-**Owner**
-
-Lead Software Architect
-
-**Previous File**
-
-`16-correlation-and-observability.md`
-
-**Next File**
-
-`18-adrs.md`

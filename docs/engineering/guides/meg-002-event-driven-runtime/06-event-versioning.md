@@ -2,7 +2,7 @@
 File: docs/engineering/guides/meg-002-event-driven-runtime/06-event-versioning.md
 Document: MEG-002
 Status: Draft
-Version: 0.3
+Version: 0.4
 -->
 
 # Event Versioning
@@ -13,7 +13,7 @@ Version: 0.3
 
 # Purpose
 
-MIP-001 defines event versioning responsibilities.
+[MIP-001](../../protocols/mip-001-event-protocol/index.md) defines event versioning responsibilities.
 
 This chapter explains the engineering expectations for publishers and subscribers.
 
@@ -45,4 +45,4 @@ The Runtime should expose version information to routing, diagnostics and observ
 
 Protocol authority is provided by:
 
-- MIP-001 — Event Protocol
+- [MIP-001 — Event Protocol](../../protocols/mip-001-event-protocol/index.md)

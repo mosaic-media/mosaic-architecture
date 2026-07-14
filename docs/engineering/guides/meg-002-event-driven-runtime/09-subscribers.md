@@ -2,7 +2,7 @@
 File: docs/engineering/guides/meg-002-event-driven-runtime/09-subscribers.md
 Document: MEG-002
 Status: Draft
-Version: 0.3
+Version: 0.4
 -->
 
 # Subscribers
@@ -69,16 +69,15 @@ Those responsibilities belong to the runtime.
 
 Subscribers explicitly declare interest.
 
-```
-Playback
+```mermaid
+flowchart TD
 
-↓
+N1["Playback"]
+N2["Subscribes To"]
+N3["media.imported"]
 
-Subscribes To
-
-↓
-
-media.imported
+N1 --> N2
+N2 --> N3
 ```
 
 The runtime records this relationship.
@@ -91,28 +90,21 @@ Publishers remain unaware.
 
 Every subscriber follows the same lifecycle.
 
-```
-Receive Event
+```mermaid
+flowchart TD
 
-↓
+N1["Receive Event"]
+N2["Validate"]
+N3["Execute Business Logic"]
+N4["Persist State"]
+N5["Publish New Events"]
+N6["Acknowledge"]
 
-Validate
-
-↓
-
-Execute Business Logic
-
-↓
-
-Persist State
-
-↓
-
-Publish New Events
-
-↓
-
-Acknowledge
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
+N5 --> N6
 ```
 
 This lifecycle remains consistent regardless of capability.
@@ -140,24 +132,19 @@ Subscribers should process events independently.
 
 Example.
 
-```
-media.imported
+```mermaid
+flowchart TD
 
-↓
+N1["media.imported"]
+N2["Metadata"]
+N3["Artwork"]
+N4["Search"]
+N5["Recommendations"]
 
-Metadata
-
-↓
-
-Artwork
-
-↓
-
-Search
-
-↓
-
-Recommendations
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
 ```
 
 Each subscriber owns its own behaviour.
@@ -172,16 +159,15 @@ Subscribers frequently become publishers.
 
 Example.
 
-```
-media.imported
+```mermaid
+flowchart TD
 
-↓
+N1["media.imported"]
+N2["Metadata Subscriber"]
+N3["MetadataFetched"]
 
-Metadata Subscriber
-
-↓
-
-MetadataFetched
+N1 --> N2
+N2 --> N3
 ```
 
 The subscriber reacts.
@@ -202,28 +188,30 @@ Each subscriber SHOULD own one business concern.
 
 Good.
 
-```
-Artwork Subscriber
+```mermaid
+flowchart TD
 
-↓
+N1["Artwork Subscriber"]
+N2["Downloads Artwork"]
 
-Downloads Artwork
+N1 --> N2
 ```
 
 Poor.
 
-```
-Artwork Subscriber
+```mermaid
+flowchart TD
 
-↓
+N1["Artwork Subscriber"]
+N2["Downloads Artwork"]
+N3["Indexes Search"]
+N4["Calculates Recommendations"]
+N5["Updates Analytics"]
 
-Downloads Artwork
-
-Indexes Search
-
-Calculates Recommendations
-
-Updates Analytics
+N1 --> N2
+N1 --> N3
+N1 --> N4
+N1 --> N5
 ```
 
 Subscribers should remain cohesive.
@@ -238,20 +226,17 @@ Receiving the same event multiple times must produce the same final state.
 
 Example.
 
-```
-media.imported
+```mermaid
+flowchart TD
 
-↓
+N1["media.imported"]
+N2["Receive Twice"]
+N3["Metadata Exists"]
+N4["No Duplicate State"]
 
-Receive Twice
-
-↓
-
-Metadata Exists
-
-↓
-
-No Duplicate State
+N1 --> N2
+N2 --> N3
+N3 --> N4
 ```
 
 At-least-once delivery makes idempotent subscribers a fundamental architectural requirement rather than an optimisation. The Idempotent Consumer pattern is widely recommended for this reason. ([microservices.io](https://microservices.io/post/microservices/patterns/2020/10/16/idempotent-consumer.html))
@@ -266,20 +251,17 @@ Subscriber failure must remain isolated.
 
 Example.
 
-```
-media.imported
+```mermaid
+flowchart TD
 
-↓
+N1["media.imported"]
+N2["Metadata ✓"]
+N3["Artwork ✗"]
+N4["Recommendations ✓"]
 
-Metadata ✓
-
-↓
-
-Artwork ✗
-
-↓
-
-Recommendations ✓
+N1 --> N2
+N2 --> N3
+N3 --> N4
 ```
 
 Artwork failure must never prevent Recommendations from processing.
@@ -315,12 +297,14 @@ Business behaviour must therefore tolerate:
 Subscribers should never assume:
 
 ```
+
 Receive Once
 ```
 
 They should assume:
 
 ```
+
 Receive One Or More Times
 ```
 
@@ -347,12 +331,13 @@ Subscribers should avoid partially completed work wherever practical.
 
 Subscribers MUST NOT assume:
 
-```
-playback.started
+```mermaid
+flowchart TD
 
-↓
+N1["playback.started"]
+N2["PlaybackCompleted"]
 
-PlaybackCompleted
+N1 --> N2
 ```
 
 always arrives in chronological order.
@@ -379,12 +364,13 @@ They should only modify their own.
 
 Example.
 
-```
-PlaybackCompleted
+```mermaid
+flowchart TD
 
-↓
+N1["PlaybackCompleted"]
+N2["Recommendations"]
 
-Recommendations
+N1 --> N2
 ```
 
 Recommendations may update recommendation state.
@@ -433,20 +419,17 @@ The runtime should remain responsive even when individual capabilities perform e
 
 Subscribers naturally create event chains.
 
-```
-media.imported
+```mermaid
+flowchart TD
 
-↓
+N1["media.imported"]
+N2["MetadataFetched"]
+N3["ArtworkDownloaded"]
+N4["LibraryIndexed"]
 
-MetadataFetched
-
-↓
-
-ArtworkDownloaded
-
-↓
-
-LibraryIndexed
+N1 --> N2
+N2 --> N3
+N3 --> N4
 ```
 
 Each subscriber owns one transition.
@@ -493,6 +476,7 @@ Subscribers SHOULD process replayed events identically to live events.
 Replay should require:
 
 ```
+
 No Code Changes
 ```
 
@@ -508,16 +492,15 @@ Subscribers SHOULD eventually give up.
 
 Permanent failures should result in:
 
-```
-Retry Exhausted
+```mermaid
+flowchart TD
 
-↓
+N1["Retry Exhausted"]
+N2["Dead Letter"]
+N3["Operator Investigation"]
 
-Dead Letter
-
-↓
-
-Operator Investigation
+N1 --> N2
+N2 --> N3
 ```
 
 Subscribers should not retry indefinitely.
@@ -532,12 +515,13 @@ The following practices are prohibited.
 
 ## Calling Other Subscribers
 
-```
-Metadata
+```mermaid
+flowchart TD
 
-↓
+N1["Metadata"]
+N2["Call Artwork"]
 
-Call Artwork
+N1 --> N2
 ```
 
 Publish an event instead.
@@ -609,23 +593,3 @@ New capabilities simply subscribe to existing facts.
 Existing capabilities remain unchanged.
 
 That property is one of the defining characteristics of a truly extensible platform.
-
----
-
-# Review Status
-
-**Status**
-
-Draft
-
-**Owner**
-
-Lead Software Architect
-
-**Previous File**
-
-`08-publishers.md`
-
-**Next File**
-
-`10-worker-lifecycle.md`

@@ -2,7 +2,7 @@
 File: docs/engineering/guides/meg-002-event-driven-runtime/13-retry-strategy.md
 Document: MEG-002
 Status: Draft
-Version: 0.3
+Version: 0.4
 -->
 
 # Retry Strategy
@@ -51,16 +51,15 @@ Instead they should:
 
 Consider:
 
-```
-MetadataDownloaded
+```mermaid
+flowchart TD
 
-↓
+N1["MetadataDownloaded"]
+N2["Store Metadata"]
+N3["Database Connection Lost"]
 
-Store Metadata
-
-↓
-
-Database Connection Lost
+N1 --> N2
+N2 --> N3
 ```
 
 The business operation has not failed permanently.
@@ -71,12 +70,13 @@ Retrying later is entirely reasonable.
 
 Now consider:
 
-```
-media.imported
+```mermaid
+flowchart TD
 
-↓
+N1["media.imported"]
+N2["Invalid Media Identifier"]
 
-Invalid Media Identifier
+N1 --> N2
 ```
 
 Retrying will never succeed.
@@ -91,20 +91,22 @@ Understanding this distinction is fundamental.
 
 Failures fall into two categories.
 
+```mermaid
+flowchart TD
+
+N1["Transient"]
+N2["Retry"]
+
+N1 --> N2
 ```
-Transient
 
-↓
+```mermaid
+flowchart TD
 
-Retry
-```
+N1["Permanent"]
+N2["Fail"]
 
-```
-Permanent
-
-↓
-
-Fail
+N1 --> N2
 ```
 
 The runtime should never blindly retry every failure.
@@ -150,36 +152,25 @@ These failures should be surfaced immediately.
 
 Every retry follows the same lifecycle.
 
-```
-Failure
+```mermaid
+flowchart TD
 
-↓
+N1["Failure"]
+N2["Retry Eligible?"]
+N3["Yes"]
+N4["Schedule Retry"]
+N5["Worker Executes"]
+N6["Success"]
+N7["Retry Again"]
+N8["Dead Letter"]
 
-Retry Eligible?
-
-↓
-
-Yes
-
-↓
-
-Schedule Retry
-
-↓
-
-Worker Executes
-
-↓
-
-Success
-
-or
-
-Retry Again
-
-or
-
-Dead Letter
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
+N5 --> N6
+N5 --> N7
+N5 --> N8
 ```
 
 Retry is therefore another form of scheduled work.
@@ -214,24 +205,19 @@ Retries SHOULD use exponential backoff.
 
 Example.
 
-```
-1 second
+```mermaid
+flowchart TD
 
-↓
+N1["1 second"]
+N2["2 seconds"]
+N3["4 seconds"]
+N4["8 seconds"]
+N5["16 seconds"]
 
-2 seconds
-
-↓
-
-4 seconds
-
-↓
-
-8 seconds
-
-↓
-
-16 seconds
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
 ```
 
 Exponential backoff reduces:
@@ -252,26 +238,26 @@ Retry timing SHOULD include random jitter.
 
 Without jitter:
 
-```
-10,000 retries
+```mermaid
+flowchart TD
 
-↓
+N1["10,000 retries"]
+N2["Exactly 30 seconds later"]
+N3["10,000 more requests"]
 
-Exactly 30 seconds later
-
-↓
-
-10,000 more requests
+N1 --> N2
+N2 --> N3
 ```
 
 With jitter:
 
-```
-10,000 retries
+```mermaid
+flowchart TD
 
-↓
+N1["10,000 retries"]
+N2["Distributed across time"]
 
-Distributed across time
+N1 --> N2
 ```
 
 This significantly reduces retry storms.
@@ -284,18 +270,19 @@ Retries MUST be bounded.
 
 Example.
 
-```
-Retry 1
+```mermaid
+flowchart TD
 
-Retry 2
+N1["Retry 1"]
+N2["Retry 2"]
+N3["Retry 3"]
+N4["Retry 4"]
+N5["Dead Letter"]
 
-Retry 3
-
-Retry 4
-
-↓
-
-Dead Letter
+N1 --> N5
+N2 --> N5
+N3 --> N5
+N4 --> N5
 ```
 
 Infinite retries are prohibited.
@@ -332,12 +319,13 @@ time.Sleep(30 * time.Second)
 
 Better.
 
-```
-Return Error
+```mermaid
+flowchart TD
 
-↓
+N1["Return Error"]
+N2["Runtime Schedules Retry"]
 
-Runtime Schedules Retry
+N1 --> N2
 ```
 
 Time remains a runtime concern.
@@ -352,22 +340,24 @@ Retries assume idempotent subscribers.
 
 Without idempotency:
 
-```
-Retry
+```mermaid
+flowchart TD
 
-↓
+N1["Retry"]
+N2["Duplicate Business State"]
 
-Duplicate Business State
+N1 --> N2
 ```
 
 With idempotency:
 
-```
-Retry
+```mermaid
+flowchart TD
 
-↓
+N1["Retry"]
+N2["Correct Final State"]
 
-Correct Final State
+N1 --> N2
 ```
 
 Retry safety depends entirely upon the previous chapter.
@@ -381,12 +371,14 @@ Errors SHOULD communicate retry intent.
 Conceptually.
 
 ```
+
 Retryable
 ```
 
 or
 
 ```
+
 Permanent
 ```
 
@@ -424,16 +416,15 @@ Retries should never become invisible.
 
 Retries should respect runtime shutdown.
 
-```
-Retry Scheduled
+```mermaid
+flowchart TD
 
-↓
+N1["Retry Scheduled"]
+N2["Shutdown Requested"]
+N3["Retry Cancelled"]
 
-Shutdown Requested
-
-↓
-
-Retry Cancelled
+N1 --> N2
+N2 --> N3
 ```
 
 The runtime should never execute retries after shutdown begins unless explicitly configured to resume them after restart.
@@ -446,20 +437,17 @@ Pending retries SHOULD survive runtime restarts.
 
 Example.
 
-```
-Retry Scheduled
+```mermaid
+flowchart TD
 
-↓
+N1["Retry Scheduled"]
+N2["Runtime Stops"]
+N3["Runtime Starts"]
+N4["Retry Resumed"]
 
-Runtime Stops
-
-↓
-
-Runtime Starts
-
-↓
-
-Retry Resumed
+N1 --> N2
+N2 --> N3
+N3 --> N4
 ```
 
 Retry scheduling should be durable wherever business correctness depends upon eventual completion.
@@ -470,16 +458,15 @@ Retry scheduling should be durable wherever business correctness depends upon ev
 
 Retries eventually terminate.
 
-```
-Retry Exhausted
+```mermaid
+flowchart TD
 
-↓
+N1["Retry Exhausted"]
+N2["Dead Letter"]
+N3["Operator Investigation"]
 
-Dead Letter
-
-↓
-
-Operator Investigation
+N1 --> N2
+N2 --> N3
 ```
 
 Retries are intended to recover temporary failures.
@@ -523,20 +510,17 @@ Each subscriber owns its own retry lifecycle.
 
 Example.
 
-```
-media.imported
+```mermaid
+flowchart TD
 
-↓
+N1["media.imported"]
+N2["Metadata Retry"]
+N3["Artwork Success"]
+N4["Search Success"]
 
-Metadata Retry
-
-↓
-
-Artwork Success
-
-↓
-
-Search Success
+N1 --> N2
+N2 --> N3
+N3 --> N4
 ```
 
 Subscriber retries should never block unrelated capabilities.
@@ -567,6 +551,7 @@ The following practices are prohibited.
 ## Infinite Retry Loops
 
 ```
+
 Retry Forever
 ```
 
@@ -655,23 +640,3 @@ Within Mosaic, retries are:
 - deterministic
 
 When combined with idempotent subscribers and immutable events, retries become a routine operational mechanism rather than a source of architectural complexity.
-
----
-
-# Review Status
-
-**Status**
-
-Draft
-
-**Owner**
-
-Lead Software Architect
-
-**Previous File**
-
-`12-idempotency.md`
-
-**Next File**
-
-`14-event-ordering.md`

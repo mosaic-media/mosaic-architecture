@@ -2,7 +2,7 @@
 File: docs/engineering/guides/meg-002-event-driven-runtime/02-why-events.md
 Document: MEG-002
 Status: Draft
-Version: 0.3
+Version: 0.4
 -->
 
 # Why Events?
@@ -33,24 +33,19 @@ It intentionally focuses on architectural reasoning rather than implementation d
 
 Traditional applications often communicate through direct service calls.
 
-```
-Library
+```mermaid
+flowchart TD
 
-↓
+N1["Library"]
+N2["Metadata"]
+N3["Artwork"]
+N4["Notifications"]
+N5["Analytics"]
 
-Metadata
-
-↓
-
-Artwork
-
-↓
-
-Notifications
-
-↓
-
-Analytics
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
 ```
 
 Each component becomes aware of every other component.
@@ -71,37 +66,29 @@ The architecture gradually evolves into a dependency graph rather than a platfor
 Consider a seemingly simple operation.
 
 ```
+
 Media Imported
 ```
 
 A traditional implementation might become:
 
-```
-Library
+```mermaid
+flowchart TD
 
-↓
+N1["Library"]
+N2["Metadata Service"]
+N3["Artwork Service"]
+N4["Search Service"]
+N5["Recommendation Service"]
+N6["Notification Service"]
+N7["Analytics Service"]
 
-Metadata Service
-
-↓
-
-Artwork Service
-
-↓
-
-Search Service
-
-↓
-
-Recommendation Service
-
-↓
-
-Notification Service
-
-↓
-
-Analytics Service
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
+N5 --> N6
+N6 --> N7
 ```
 
 The Library capability now knows about six unrelated systems.
@@ -116,30 +103,27 @@ This violates the Open/Closed Principle.
 
 The same behaviour using events becomes:
 
-```
-Library
+```mermaid
+flowchart TD
 
-↓
+N1["Library"]
+N2["media.imported"]
+N3["Runtime"]
+N4["Metadata"]
+N5["Artwork"]
+N6["Search"]
+N7["Recommendations"]
+N8["Analytics"]
+N9["Notifications"]
 
-media.imported
-
-↓
-
-Runtime
-
-↓
-
-Metadata
-
-Artwork
-
-Search
-
-Recommendations
-
-Analytics
-
-Notifications
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N3 --> N5
+N3 --> N6
+N3 --> N7
+N3 --> N8
+N3 --> N9
 ```
 
 Library publishes one fact.
@@ -159,18 +143,22 @@ Events describe something that **has already happened**.
 Examples include:
 
 ```
+
 media.imported
 ```
 
 ```
+
 playback.started
 ```
 
 ```
+
 UserAuthenticated
 ```
 
 ```
+
 LibraryScanned
 ```
 
@@ -187,14 +175,17 @@ They have already occurred.
 Commands tell another component what to do.
 
 ```
+
 GenerateArtwork
 ```
 
 ```
+
 RefreshMetadata
 ```
 
 ```
+
 IndexSearch
 ```
 
@@ -217,6 +208,7 @@ Publishing facts means future capabilities require no modifications to existing 
 Imagine adding:
 
 ```
+
 AI Recommendations
 ```
 
@@ -224,12 +216,13 @@ No existing capability changes.
 
 Instead:
 
-```
-media.imported
+```mermaid
+flowchart TD
 
-↓
+N1["media.imported"]
+N2["AI Recommendation Module"]
 
-AI Recommendation Module
+N1 --> N2
 ```
 
 The module simply subscribes.
@@ -262,32 +255,23 @@ Everything afterwards belongs to the runtime.
 
 Every event follows the same conceptual flow.
 
-```
-Business Behaviour
+```mermaid
+flowchart TD
 
-↓
+N1["Business Behaviour"]
+N2["State Changes"]
+N3["Event Published"]
+N4["Runtime"]
+N5["Interested Subscribers"]
+N6["Independent Behaviour"]
+N7["Further Events"]
 
-State Changes
-
-↓
-
-Event Published
-
-↓
-
-Runtime
-
-↓
-
-Interested Subscribers
-
-↓
-
-Independent Behaviour
-
-↓
-
-Further Events
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
+N5 --> N6
+N6 --> N7
 ```
 
 Notice that no capability explicitly invokes another capability.
@@ -322,38 +306,32 @@ Example.
 
 Without events:
 
-```
-Module
+```mermaid
+flowchart TD
 
-↓
+N1["Module"]
+N2["Modify Platform"]
+N3["Add Service Calls"]
+N4["Deploy"]
 
-Modify Platform
-
-↓
-
-Add Service Calls
-
-↓
-
-Deploy
+N1 --> N2
+N2 --> N3
+N3 --> N4
 ```
 
 With events:
 
-```
-Install Module
+```mermaid
+flowchart TD
 
-↓
+N1["Install Module"]
+N2["Subscribe"]
+N3["Receive Events"]
+N4["Platform Expanded"]
 
-Subscribe
-
-↓
-
-Receive Events
-
-↓
-
-Platform Expanded
+N1 --> N2
+N2 --> N3
+N3 --> N4
 ```
 
 The existing runtime remains unchanged.
@@ -367,6 +345,7 @@ This is one of the strongest arguments for an event-driven platform.
 Suppose:
 
 ```
+
 Artwork Generation
 ```
 
@@ -374,42 +353,34 @@ fails.
 
 With direct calls:
 
-```
-Library
+```mermaid
+flowchart TD
 
-↓
+N1["Library"]
+N2["Artwork"]
+N3["Failure"]
+N4["Import Fails"]
 
-Artwork
-
-↓
-
-Failure
-
-↓
-
-Import Fails
+N1 --> N2
+N2 --> N3
+N3 --> N4
 ```
 
 With events:
 
-```
-Library
+```mermaid
+flowchart TD
 
-↓
+N1["Library"]
+N2["media.imported"]
+N3["Artwork"]
+N4["Failure"]
+N5["Retry Later"]
 
-media.imported
-
-↓
-
-Artwork
-
-↓
-
-Failure
-
-↓
-
-Retry Later
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
 ```
 
 The import succeeds.
@@ -445,52 +416,45 @@ The runtime encourages capabilities to appear gradually.
 
 Initially:
 
-```
-Library
+```mermaid
+flowchart TD
 
-↓
+N1["Library"]
+N2["Metadata"]
 
-Metadata
+N1 --> N2
 ```
 
 Later:
 
-```
-Library
+```mermaid
+flowchart TD
 
-↓
+N1["Library"]
+N2["Metadata"]
+N3["Recommendations"]
 
-Metadata
-
-↓
-
-Recommendations
+N1 --> N2
+N2 --> N3
 ```
 
 Later still:
 
-```
-Library
+```mermaid
+flowchart TD
 
-↓
+N1["Library"]
+N2["Metadata"]
+N3["Recommendations"]
+N4["Collections"]
+N5["Machine Learning"]
+N6["Statistics"]
 
-Metadata
-
-↓
-
-Recommendations
-
-↓
-
-Collections
-
-↓
-
-Machine Learning
-
-↓
-
-Statistics
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
+N5 --> N6
 ```
 
 No earlier capability requires modification.
@@ -509,24 +473,19 @@ Every important state transition becomes visible.
 
 Example.
 
-```
-playback.started
+```mermaid
+flowchart TD
 
-↓
+N1["playback.started"]
+N2["PlaybackProgress"]
+N3["PlaybackPaused"]
+N4["PlaybackResumed"]
+N5["PlaybackCompleted"]
 
-PlaybackProgress
-
-↓
-
-PlaybackPaused
-
-↓
-
-PlaybackResumed
-
-↓
-
-PlaybackCompleted
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
 ```
 
 Operations become traceable.
@@ -541,28 +500,21 @@ Observability emerges naturally from the architecture.
 
 Complex workflows emerge from simple event chains.
 
-```
-media.imported
+```mermaid
+flowchart TD
 
-↓
+N1["media.imported"]
+N2["MetadataFetched"]
+N3["ArtworkDownloaded"]
+N4["MediaIndexed"]
+N5["LibraryUpdated"]
+N6["LibraryRendered"]
 
-MetadataFetched
-
-↓
-
-ArtworkDownloaded
-
-↓
-
-MediaIndexed
-
-↓
-
-LibraryUpdated
-
-↓
-
-LibraryRendered
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
+N5 --> N6
 ```
 
 Each capability owns one transition.
@@ -642,23 +594,3 @@ That single architectural decision enables:
 - long-term maintainability
 
 Everything else defined within MEG-002 builds upon this principle.
-
----
-
-# Review Status
-
-**Status**
-
-Draft
-
-**Owner**
-
-Lead Software Architect
-
-**Previous File**
-
-`01-runtime-philosophy.md`
-
-**Next File**
-
-`03-event-model.md`

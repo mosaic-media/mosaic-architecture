@@ -2,7 +2,7 @@
 File: docs/engineering/guides/meg-002-event-driven-runtime/05-event-schema.md
 Document: MEG-002
 Status: Draft
-Version: 0.3
+Version: 0.4
 -->
 
 # Event Schema
@@ -13,7 +13,7 @@ Version: 0.3
 
 # Purpose
 
-MIP-001 defines the canonical event envelope and payload boundary.
+[MIP-001](../../protocols/mip-001-event-protocol/index.md) defines the canonical event envelope and payload boundary.
 
 This chapter describes how engineering teams should implement that boundary.
 
@@ -44,4 +44,4 @@ Event implementation should make the following boundaries clear:
 
 Protocol authority is provided by:
 
-- MIP-001 — Event Protocol
+- [MIP-001 — Event Protocol](../../protocols/mip-001-event-protocol/index.md)

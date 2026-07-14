@@ -2,7 +2,7 @@
 File: docs/engineering/guides/meg-002-event-driven-runtime/19-contributor-guidance.md
 Document: MEG-002
 Status: Draft
-Version: 0.3
+Version: 0.4
 -->
 
 # Contributor Guidance
@@ -85,14 +85,17 @@ Runtime events describe platform behaviour.
 Examples include:
 
 ```
+
 WorkerStarted
 ```
 
 ```
+
 RetryScheduled
 ```
 
 ```
+
 BackpressureApplied
 ```
 
@@ -101,10 +104,12 @@ Business events describe domain behaviour.
 Examples include:
 
 ```
+
 playback.started
 ```
 
 ```
+
 media.imported
 ```
 
@@ -350,48 +355,31 @@ The runtime should be tested under failure as thoroughly as under success.
 
 New contributors SHOULD study MEG-002 in the following order.
 
-```
-Runtime Philosophy
+```mermaid
+flowchart TD
 
-↓
+N1["Runtime Philosophy"]
+N2["Event Model"]
+N3["Event Bus"]
+N4["Publishers"]
+N5["Subscribers"]
+N6["Workers"]
+N7["Scheduling"]
+N8["Idempotency"]
+N9["Retries"]
+N10["Shutdown"]
+N11["Observability"]
 
-Event Model
-
-↓
-
-Event Bus
-
-↓
-
-Publishers
-
-↓
-
-Subscribers
-
-↓
-
-Workers
-
-↓
-
-Scheduling
-
-↓
-
-Idempotency
-
-↓
-
-Retries
-
-↓
-
-Shutdown
-
-↓
-
-Observability
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
+N5 --> N6
+N6 --> N7
+N7 --> N8
+N8 --> N9
+N9 --> N10
+N10 --> N11
 ```
 
 Understanding the philosophy first makes implementation significantly easier to reason about.
@@ -467,23 +455,3 @@ Every contributor therefore shares responsibility for preserving its:
 The best runtime contribution is often not the one that adds the most functionality.
 
 It is the one that allows the platform to continue evolving without increasing architectural complexity.
-
----
-
-# Review Status
-
-**Status**
-
-Draft
-
-**Owner**
-
-Lead Software Architect
-
-**Previous File**
-
-`18-adrs.md`
-
-**Next File**
-
-`glossary.md`

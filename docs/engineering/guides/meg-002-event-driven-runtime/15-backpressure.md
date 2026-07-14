@@ -2,7 +2,7 @@
 File: docs/engineering/guides/meg-002-event-driven-runtime/15-backpressure.md
 Document: MEG-002
 Status: Draft
-Version: 0.3
+Version: 0.4
 -->
 
 # Backpressure
@@ -70,28 +70,21 @@ Backpressure is a fundamental concept in reactive systems because it allows prod
 
 Consider:
 
-```
-Library Scan
+```mermaid
+flowchart TD
 
-↓
+N1["Library Scan"]
+N2["50,000 media.imported Events"]
+N3["Metadata"]
+N4["Artwork"]
+N5["Search"]
+N6["Recommendations"]
 
-50,000 media.imported Events
-
-↓
-
-Metadata
-
-↓
-
-Artwork
-
-↓
-
-Search
-
-↓
-
-Recommendations
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
+N5 --> N6
 ```
 
 If every event immediately creates work:
@@ -113,20 +106,17 @@ Backpressure prevents this.
 
 The runtime continuously balances:
 
-```
-Incoming Work
+```mermaid
+flowchart TD
 
-↓
+N1["Incoming Work"]
+N2["Queues"]
+N3["Workers"]
+N4["Completed Work"]
 
-Queues
-
-↓
-
-Workers
-
-↓
-
-Completed Work
+N1 --> N2
+N2 --> N3
+N3 --> N4
 ```
 
 If workers cannot keep pace:
@@ -141,22 +131,24 @@ Eventually the runtime begins applying backpressure.
 
 The runtime should always prefer:
 
-```
-Slow Processing
+```mermaid
+flowchart TD
 
-↓
+N1["Slow Processing"]
+N2["Stable Runtime"]
 
-Stable Runtime
+N1 --> N2
 ```
 
 Rather than:
 
-```
-Unlimited Throughput
+```mermaid
+flowchart TD
 
-↓
+N1["Unlimited Throughput"]
+N2["Resource Exhaustion"]
 
-Resource Exhaustion
+N1 --> N2
 ```
 
 Graceful degradation is always preferable to catastrophic failure.
@@ -167,16 +159,15 @@ Graceful degradation is always preferable to catastrophic failure.
 
 Every runtime queue MUST have a maximum capacity.
 
-```
-Queue
+```mermaid
+flowchart TD
 
-↓
+N1["Queue"]
+N2["Maximum Size"]
+N3["Backpressure"]
 
-Maximum Size
-
-↓
-
-Backpressure
+N1 --> N2
+N2 --> N3
 ```
 
 Unbounded queues are prohibited.
@@ -194,6 +185,7 @@ Each capability owns its own work queue.
 Example.
 
 ```
+
 Metadata Queue
 
 Artwork Queue
@@ -213,12 +205,13 @@ Failure isolation remains intact.
 
 Suppose:
 
-```
-Metadata
+```mermaid
+flowchart TD
 
-↓
+N1["Metadata"]
+N2["All Workers Busy"]
 
-All Workers Busy
+N1 --> N2
 ```
 
 New work should queue.
@@ -254,36 +247,32 @@ Publishers should never attempt to bypass runtime backpressure.
 
 Poor.
 
-```
-Queue Full
+```mermaid
+flowchart TD
 
-↓
+N1["Queue Full"]
+N2["Retry Immediately"]
+N3["Queue Full"]
+N4["Retry Again"]
 
-Retry Immediately
-
-↓
-
-Queue Full
-
-↓
-
-Retry Again
+N1 --> N2
+N2 --> N3
+N3 --> N4
 ```
 
 This amplifies overload.
 
 Instead:
 
-```
-Runtime
+```mermaid
+flowchart TD
 
-↓
+N1["Runtime"]
+N2["Signals Backpressure"]
+N3["Retry Scheduled"]
 
-Signals Backpressure
-
-↓
-
-Retry Scheduled
+N1 --> N2
+N2 --> N3
 ```
 
 The runtime controls recovery.
@@ -296,28 +285,21 @@ Queue depth should remain observable.
 
 Typical lifecycle.
 
-```
-Empty
+```mermaid
+flowchart TD
 
-↓
+N1["Empty"]
+N2["Growing"]
+N3["Healthy"]
+N4["Near Capacity"]
+N5["Backpressure"]
+N6["Recovery"]
 
-Growing
-
-↓
-
-Healthy
-
-↓
-
-Near Capacity
-
-↓
-
-Backpressure
-
-↓
-
-Recovery
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
+N5 --> N6
 ```
 
 The runtime should begin protecting itself before queues become completely full.
@@ -378,46 +360,36 @@ Example.
 
 Poor.
 
-```
-LibraryUpdated
+```mermaid
+flowchart TD
 
-↓
+N1["LibraryUpdated"]
+N2["Refresh Cache"]
+N3["LibraryUpdated"]
+N4["Refresh Cache"]
+N5["LibraryUpdated"]
+N6["Refresh Cache"]
 
-Refresh Cache
-
-↓
-
-LibraryUpdated
-
-↓
-
-Refresh Cache
-
-↓
-
-LibraryUpdated
-
-↓
-
-Refresh Cache
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
+N5 --> N6
 ```
 
 Better.
 
-```
-LibraryUpdated
+```mermaid
+flowchart TD
 
-↓
+N1["LibraryUpdated"]
+N2["Queue Refresh"]
+N3["Additional Requests"]
+N4["Single Refresh"]
 
-Queue Refresh
-
-↓
-
-Additional Requests
-
-↓
-
-Single Refresh
+N1 --> N2
+N2 --> N3
+N3 --> N4
 ```
 
 The runtime should avoid redundant work whenever correctness permits.
@@ -447,12 +419,13 @@ Modules should never be capable of overwhelming the runtime.
 
 Suppose:
 
-```
-Third-Party Module
+```mermaid
+flowchart TD
 
-↓
+N1["Third-Party Module"]
+N2["Produces Millions Of Events"]
 
-Produces Millions Of Events
+N1 --> N2
 ```
 
 The runtime should:
@@ -469,20 +442,17 @@ Platform stability always takes precedence over module throughput.
 
 Backpressure should be temporary.
 
-```
-Load Spike
+```mermaid
+flowchart TD
 
-↓
+N1["Load Spike"]
+N2["Backpressure"]
+N3["Queues Drain"]
+N4["Normal Operation"]
 
-Backpressure
-
-↓
-
-Queues Drain
-
-↓
-
-Normal Operation
+N1 --> N2
+N2 --> N3
+N3 --> N4
 ```
 
 Recovery should occur automatically.
@@ -531,12 +501,14 @@ Backpressure integrates naturally with circuit breakers.
 Suppose:
 
 ```
+
 TMDB Offline
 ```
 
 Instead of:
 
 ```
+
 Retry
 
 Retry
@@ -548,16 +520,15 @@ Retry
 
 The runtime should:
 
-```
-Open Circuit
+```mermaid
+flowchart TD
 
-↓
+N1["Open Circuit"]
+N2["Reduce Requests"]
+N3["Recover Gradually"]
 
-Reduce Requests
-
-↓
-
-Recover Gradually
+N1 --> N2
+N2 --> N3
 ```
 
 This protects both the runtime and external dependencies.
@@ -586,6 +557,7 @@ The following practices are prohibited.
 ## Unlimited Queues
 
 ```
+
 Append Forever
 ```
 
@@ -593,16 +565,15 @@ Append Forever
 
 ## Unlimited Workers
 
-```
-Queue Full
+```mermaid
+flowchart TD
 
-↓
+N1["Queue Full"]
+N2["Create Worker"]
+N3["Repeat Forever"]
 
-Create Worker
-
-↓
-
-Repeat Forever
+N1 --> N2
+N2 --> N3
 ```
 
 ---
@@ -686,23 +657,3 @@ Within Mosaic, backpressure ensures:
 The runtime should always prefer temporary slowdown over permanent failure.
 
 That single principle keeps the platform healthy as it grows from a handful of capabilities to hundreds of independently developed modules.
-
----
-
-# Review Status
-
-**Status**
-
-Draft
-
-**Owner**
-
-Lead Software Architect
-
-**Previous File**
-
-`14-event-ordering.md`
-
-**Next File**
-
-`16-correlation-and-observability.md`

@@ -2,7 +2,7 @@
 File: docs/engineering/guides/meg-002-event-driven-runtime/14-event-ordering.md
 Document: MEG-002
 Status: Draft
-Version: 0.3
+Version: 0.4
 -->
 
 # Event Ordering
@@ -49,12 +49,13 @@ When ordering is required, it should be modelled explicitly rather than assumed 
 
 Consider two events.
 
-```
-playback.started
+```mermaid
+flowchart TD
 
-↓
+N1["playback.started"]
+N2["PlaybackCompleted"]
 
-PlaybackCompleted
+N1 --> N2
 ```
 
 Business chronology is obvious.
@@ -63,12 +64,13 @@ Runtime chronology is not.
 
 A temporary network delay may produce:
 
-```
-PlaybackCompleted
+```mermaid
+flowchart TD
 
-↓
+N1["PlaybackCompleted"]
+N2["playback.started"]
 
-playback.started
+N1 --> N2
 ```
 
 Both events are valid.
@@ -88,20 +90,22 @@ These are different concepts.
 
 Every event has two timelines.
 
+```mermaid
+flowchart TD
+
+N1["Business Timeline"]
+N2["Occurred"]
+
+N1 --> N2
 ```
-Business Timeline
 
-↓
+```mermaid
+flowchart TD
 
-Occurred
-```
+N1["Runtime Timeline"]
+N2["Delivered"]
 
-```
-Runtime Timeline
-
-↓
-
-Delivered
+N1 --> N2
 ```
 
 The runtime preserves occurrence metadata.
@@ -137,32 +141,30 @@ Ordering is meaningful only within a bounded business context.
 
 Example.
 
-```
-Playback
+```mermaid
+flowchart TD
 
-↓
+N1["Playback"]
+N2["playback.started"]
+N3["PlaybackPaused"]
+N4["PlaybackCompleted"]
 
-playback.started
-
-↓
-
-PlaybackPaused
-
-↓
-
-PlaybackCompleted
+N1 --> N2
+N2 --> N3
+N3 --> N4
 ```
 
 Ordering matters.
 
 However:
 
-```
-PlaybackCompleted
+```mermaid
+flowchart TD
 
-↓
+N1["PlaybackCompleted"]
+N2["MetadataFetched"]
 
-MetadataFetched
+N1 --> N2
 ```
 
 There is usually no meaningful ordering relationship.
@@ -177,16 +179,15 @@ Global ordering is prohibited.
 
 Example.
 
-```
-Every Event
+```mermaid
+flowchart TD
 
-↓
+N1["Every Event"]
+N2["Single Global Queue"]
+N3["One Worker"]
 
-Single Global Queue
-
-↓
-
-One Worker
+N1 --> N2
+N2 --> N3
 ```
 
 While simple, this approach:
@@ -208,20 +209,17 @@ Where ordering is required, it SHOULD generally be scoped to a business entity.
 
 Example.
 
-```
-Media
+```mermaid
+flowchart TD
 
-↓
+N1["Media"]
+N2["media.imported"]
+N3["MetadataFetched"]
+N4["ArtworkDownloaded"]
 
-media.imported
-
-↓
-
-MetadataFetched
-
-↓
-
-ArtworkDownloaded
+N1 --> N2
+N2 --> N3
+N3 --> N4
 ```
 
 Ordering exists because all events concern the same media item.
@@ -240,12 +238,13 @@ Subscribers MUST assume:
 
 Subscribers SHOULD NOT assume:
 
-```
-Receive
+```mermaid
+flowchart TD
 
-↓
+N1["Receive"]
+N2["Chronological"]
 
-Chronological
+N1 --> N2
 ```
 
 Instead they should validate current business state before performing work.
@@ -257,6 +256,7 @@ Instead they should validate current business state before performing work.
 Suppose:
 
 ```
+
 PlaybackCompleted
 ```
 
@@ -265,12 +265,14 @@ arrives first.
 The subscriber should ask:
 
 ```
+
 Current Playback State?
 ```
 
 Rather than:
 
 ```
+
 Did playback.started arrive?
 ```
 
@@ -286,20 +288,17 @@ Some event families benefit from sequence numbers.
 
 Example.
 
-```
-Playback
+```mermaid
+flowchart TD
 
-↓
+N1["Playback"]
+N2["Sequence 1"]
+N3["Sequence 2"]
+N4["Sequence 3"]
 
-Sequence 1
-
-↓
-
-Sequence 2
-
-↓
-
-Sequence 3
+N1 --> N2
+N2 --> N3
+N3 --> N4
 ```
 
 Sequence numbers allow subscribers to detect:
@@ -319,24 +318,28 @@ Most events do not require them.
 Do not confuse:
 
 ```
+
 Version
 ```
 
 with
 
 ```
+
 Sequence
 ```
 
 Version identifies:
 
 ```
+
 Schema
 ```
 
 Sequence identifies:
 
 ```
+
 Business chronology
 ```
 
@@ -350,26 +353,26 @@ Independent capabilities may legitimately publish events simultaneously.
 
 Example.
 
-```
-media.imported
+```mermaid
+flowchart TD
 
-↓
+N1["media.imported"]
+N2["MetadataFetched"]
+N3["ArtworkDownloaded"]
 
-MetadataFetched
-
-↓
-
-ArtworkDownloaded
+N1 --> N2
+N2 --> N3
 ```
 
 and
 
-```
-media.imported
+```mermaid
+flowchart TD
 
-↓
+N1["media.imported"]
+N2["SearchIndexed"]
 
-SearchIndexed
+N1 --> N2
 ```
 
 Neither workflow depends upon the other.
@@ -386,16 +389,15 @@ When business ordering genuinely exists, model it explicitly.
 
 Example.
 
-```
-MetadataFetched
+```mermaid
+flowchart TD
 
-↓
+N1["MetadataFetched"]
+N2["ArtworkRequested"]
+N3["ArtworkDownloaded"]
 
-ArtworkRequested
-
-↓
-
-ArtworkDownloaded
+N1 --> N2
+N2 --> N3
 ```
 
 Each event naturally establishes the next business step.
@@ -423,6 +425,7 @@ Business state remains authoritative.
 Subscribers SHOULD use:
 
 ```
+
 Occurred At
 ```
 
@@ -431,6 +434,7 @@ when chronological reasoning is required.
 Subscribers SHOULD NOT use:
 
 ```
+
 Received At
 ```
 
@@ -446,12 +450,13 @@ Subscribers should tolerate missing events gracefully.
 
 Example.
 
-```
-PlaybackCompleted
+```mermaid
+flowchart TD
 
-↓
+N1["PlaybackCompleted"]
+N2["playback.started Missing"]
 
-playback.started Missing
+N1 --> N2
 ```
 
 Possible responses include:
@@ -471,16 +476,15 @@ Events may become stale.
 
 Example.
 
-```
-MetadataFetched
+```mermaid
+flowchart TD
 
-↓
+N1["MetadataFetched"]
+N2["Several Hours Later"]
+N3["MetadataCorrected"]
 
-Several Hours Later
-
-↓
-
-MetadataCorrected
+N1 --> N2
+N2 --> N3
 ```
 
 Receiving the older event later should not overwrite newer business state.
@@ -534,16 +538,15 @@ The following practices are prohibited.
 
 ## Assuming FIFO Globally
 
-```
-Event A
+```mermaid
+flowchart TD
 
-↓
+N1["Event A"]
+N2["Event B"]
+N3["Always Delivered In Order"]
 
-Event B
-
-↓
-
-Always Delivered In Order
+N1 --> N2
+N2 --> N3
 ```
 
 ---
@@ -559,12 +562,14 @@ Assuming subscriber execution order has business meaning.
 Using:
 
 ```
+
 Received At
 ```
 
 instead of:
 
 ```
+
 Occurred At
 ```
 
@@ -580,16 +585,15 @@ Preventing independent capabilities from progressing while waiting for ordered p
 
 The runtime should never determine:
 
-```
-Playback
+```mermaid
+flowchart TD
 
-↓
+N1["Playback"]
+N2["Metadata"]
+N3["Search"]
 
-Metadata
-
-↓
-
-Search
+N1 --> N2
+N2 --> N3
 ```
 
 Business ordering belongs to capabilities.
@@ -640,23 +644,3 @@ Within Mosaic, the runtime delivers immutable business facts.
 Capabilities determine how those facts should influence business state.
 
 By treating ordering as a business concern rather than a runtime guarantee, the platform remains both highly concurrent and architecturally simple.
-
----
-
-# Review Status
-
-**Status**
-
-Draft
-
-**Owner**
-
-Lead Software Architect
-
-**Previous File**
-
-`13-retry-strategy.md`
-
-**Next File**
-
-`15-backpressure.md`

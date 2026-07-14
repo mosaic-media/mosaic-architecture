@@ -2,7 +2,7 @@
 File: docs/engineering/guides/meg-002-event-driven-runtime/07-event-bus.md
 Document: MEG-002
 Status: Draft
-Version: 0.3
+Version: 0.4
 -->
 
 # Event Bus
@@ -87,24 +87,23 @@ The Event Bus intentionally does **not** own:
 
 Every event follows the same runtime path.
 
-```
-Publisher
+```mermaid
+flowchart TD
 
-↓
+N1["Publisher"]
+N2["Event Bus"]
+N3["Subscriber A"]
+N4["Subscriber B"]
+N5["Subscriber C"]
+N6["Independent Processing"]
 
-Event Bus
-
-↓
-
-Subscriber A
-
-Subscriber B
-
-Subscriber C
-
-↓
-
-Independent Processing
+N1 --> N2
+N2 --> N3
+N2 --> N4
+N2 --> N5
+N3 --> N6
+N4 --> N6
+N5 --> N6
 ```
 
 Notice that publishers never communicate directly with subscribers.
@@ -140,16 +139,15 @@ Not publishers.
 
 Example.
 
-```
-Playback
+```mermaid
+flowchart TD
 
-↓
+N1["Playback"]
+N2["Subscribes"]
+N3["media.imported"]
 
-Subscribes
-
-↓
-
-media.imported
+N1 --> N2
+N2 --> N3
 ```
 
 The Library capability remains unaware that Playback exists.
@@ -162,16 +160,15 @@ Adding another subscriber never requires modifying the publisher.
 
 The Event Bus routes events using:
 
-```
-Event Name
+```mermaid
+flowchart TD
 
-↓
+N1["Event Name"]
+N2["Registered Subscribers"]
+N3["Delivery"]
 
-Registered Subscribers
-
-↓
-
-Delivery
+N1 --> N2
+N2 --> N3
 ```
 
 No routing logic should exist inside business capabilities.
@@ -194,20 +191,21 @@ The Event Bus delivers events independently.
 
 Example.
 
-```
-media.imported
+```mermaid
+flowchart TD
 
-↓
+N1["media.imported"]
+N2["Metadata"]
+N3["Artwork"]
+N4["Recommendations"]
+N5["Search"]
+N6["Analytics"]
 
-Metadata
-
-Artwork
-
-Recommendations
-
-Search
-
-Analytics
+N1 --> N2
+N1 --> N3
+N1 --> N4
+N1 --> N5
+N1 --> N6
 ```
 
 Each subscriber receives the event independently.
@@ -238,28 +236,21 @@ Future chapters define idempotency requirements.
 
 One event may have many subscribers.
 
-```
-PlaybackCompleted
+```mermaid
+flowchart TD
 
-↓
+N1["PlaybackCompleted"]
+N2["Statistics"]
+N3["Recommendations"]
+N4["History"]
+N5["Achievements"]
+N6["Analytics"]
 
-Statistics
-
-↓
-
-Recommendations
-
-↓
-
-History
-
-↓
-
-Achievements
-
-↓
-
-Analytics
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
+N5 --> N6
 ```
 
 The Event Bus performs the fan-out automatically.
@@ -274,17 +265,19 @@ Subscribers MUST be considered independent.
 
 The runtime makes **no guarantee** that:
 
-```
-Metadata
+```mermaid
+flowchart TD
 
-↓
+N1["Metadata"]
+N2["Artwork"]
 
-Artwork
+N1 --> N2
 ```
 
 will execute before:
 
 ```
+
 Recommendations
 ```
 
@@ -298,20 +291,17 @@ Never through subscriber registration order.
 
 Capabilities register subscriptions during startup.
 
-```
-Runtime
+```mermaid
+flowchart TD
 
-↓
+N1["Runtime"]
+N2["Capability"]
+N3["Register Subscription"]
+N4["Ready"]
 
-Capability
-
-↓
-
-Register Subscription
-
-↓
-
-Ready
+N1 --> N2
+N2 --> N3
+N3 --> N4
 ```
 
 Subscriptions should remain static throughout the application's lifetime unless explicitly designed otherwise.
@@ -322,16 +312,15 @@ Subscriptions should remain static throughout the application's lifetime unless 
 
 Modules register subscriptions exactly like Platform capabilities.
 
-```
-Module Loaded
+```mermaid
+flowchart TD
 
-↓
+N1["Module Loaded"]
+N2["Register Events"]
+N3["Begin Receiving"]
 
-Register Events
-
-↓
-
-Begin Receiving
+N1 --> N2
+N2 --> N3
 ```
 
 The Event Bus makes no distinction between:
@@ -348,18 +337,19 @@ Every capability participates equally.
 
 Suppose one subscriber fails.
 
-```
-media.imported
+```mermaid
+flowchart TD
 
-↓
+N1["media.imported"]
+N2["Metadata ✓"]
+N3["Artwork ✗"]
+N4["Recommendations ✓"]
+N5["Search ✓"]
 
-Metadata ✓
-
-Artwork ✗
-
-Recommendations ✓
-
-Search ✓
+N1 --> N2
+N1 --> N3
+N1 --> N4
+N1 --> N5
 ```
 
 The failure affects only Artwork.
@@ -376,16 +366,15 @@ Not the publisher.
 
 Subscribers acknowledge successful processing.
 
-```
-Receive
+```mermaid
+flowchart TD
 
-↓
+N1["Receive"]
+N2["Process"]
+N3["Acknowledge"]
 
-Process
-
-↓
-
-Acknowledge
+N1 --> N2
+N2 --> N3
 ```
 
 Only after acknowledgement is the event considered successfully processed for that subscriber.
@@ -400,22 +389,24 @@ Subscribers receive only events they have explicitly subscribed to.
 
 Poor.
 
-```
-Receive Everything
+```mermaid
+flowchart TD
 
-↓
+N1["Receive Everything"]
+N2["Filter Internally"]
 
-Filter Internally
+N1 --> N2
 ```
 
 Preferred.
 
-```
-Runtime
+```mermaid
+flowchart TD
 
-↓
+N1["Runtime"]
+N2["Deliver Relevant Events"]
 
-Deliver Relevant Events
+N1 --> N2
 ```
 
 The runtime performs routing.
@@ -464,16 +455,15 @@ Business capabilities should remain unaware.
 
 Replay follows the same delivery path as live events.
 
-```
-Historical Events
+```mermaid
+flowchart TD
 
-↓
+N1["Historical Events"]
+N2["Event Bus"]
+N3["Subscribers"]
 
-Event Bus
-
-↓
-
-Subscribers
+N1 --> N2
+N2 --> N3
 ```
 
 Subscribers should not need separate replay implementations.
@@ -524,12 +514,13 @@ The following practices are prohibited.
 
 ## Business Logic Inside The Event Bus
 
-```
-If PlaybackCompleted
+```mermaid
+flowchart TD
 
-↓
+N1["If PlaybackCompleted"]
+N2["Update Statistics"]
 
-Update Statistics
+N1 --> N2
 ```
 
 The Event Bus should never understand business events.
@@ -538,16 +529,15 @@ The Event Bus should never understand business events.
 
 ## Subscriber Discovery By Publishers
 
-```
-Publisher
+```mermaid
+flowchart TD
 
-↓
+N1["Publisher"]
+N2["Find Subscriber"]
+N3["Call Subscriber"]
 
-Find Subscriber
-
-↓
-
-Call Subscriber
+N1 --> N2
+N2 --> N3
 ```
 
 Publishers should never know subscribers exist.
@@ -609,23 +599,3 @@ It never owns business behaviour.
 Maintaining this separation allows the platform to grow from a handful of capabilities to hundreds without introducing direct dependencies between them.
 
 The Event Bus therefore remains one of the smallest yet most important components within the entire Mosaic architecture.
-
----
-
-# Review Status
-
-**Status**
-
-Draft
-
-**Owner**
-
-Lead Software Architect
-
-**Previous File**
-
-`06-event-versioning.md`
-
-**Next File**
-
-`08-publishers.md`

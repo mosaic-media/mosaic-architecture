@@ -2,7 +2,7 @@
 File: docs/engineering/guides/meg-002-event-driven-runtime/12-idempotency.md
 Document: MEG-002
 Status: Draft
-Version: 0.3
+Version: 0.4
 -->
 
 # Idempotency
@@ -47,16 +47,15 @@ Correctness must never depend upon receiving an event exactly once.
 
 Consider:
 
-```
-media.imported
+```mermaid
+flowchart TD
 
-↓
+N1["media.imported"]
+N2["Metadata Subscriber"]
+N3["Metadata Database"]
 
-Metadata Subscriber
-
-↓
-
-Metadata Database
+N1 --> N2
+N2 --> N3
 ```
 
 Suppose the subscriber:
@@ -69,20 +68,17 @@ The runtime retries.
 
 Without idempotency:
 
-```
-Download
+```mermaid
+flowchart TD
 
-↓
+N1["Download"]
+N2["Store"]
+N3["Download"]
+N4["Store"]
 
-Store
-
-↓
-
-Download
-
-↓
-
-Store
+N1 --> N2
+N2 --> N3
+N3 --> N4
 ```
 
 Duplicate work.
@@ -97,21 +93,21 @@ Idempotency prevents this.
 
 The Mosaic Runtime deliberately provides:
 
-```
-Publish
+```mermaid
+flowchart TD
 
-↓
+N1["Publish"]
+N2["One Or More Deliveries"]
+N3["Acknowledged"]
 
-One Or More Deliveries
-
-↓
-
-Acknowledged
+N1 --> N2
+N2 --> N3
 ```
 
 Not:
 
 ```
+
 Exactly Once
 ```
 
@@ -123,26 +119,26 @@ Exactly-once delivery generally requires distributed coordination between the ev
 
 An operation is idempotent when:
 
-```
-Execute
+```mermaid
+flowchart TD
 
-↓
+N1["Execute"]
+N2["State A"]
 
-State A
+N1 --> N2
 ```
 
 and
 
-```
-Execute
+```mermaid
+flowchart TD
 
-↓
+N1["Execute"]
+N2["Execute Again"]
+N3["State A"]
 
-Execute Again
-
-↓
-
-State A
+N1 --> N2
+N2 --> N3
 ```
 
 The final state remains identical.
@@ -160,12 +156,14 @@ Not implementation.
 Poor.
 
 ```
+
 Handler executed twice
 ```
 
 Good.
 
 ```
+
 Library contains one media item.
 ```
 
@@ -183,34 +181,30 @@ Subscribers SHOULD use this identifier when determining whether work has already
 
 Example.
 
-```
-Receive Event
+```mermaid
+flowchart TD
 
-↓
+N1["Receive Event"]
+N2["Event ID Seen?"]
+N3["Yes"]
+N4["Ignore"]
 
-Event ID Seen?
-
-↓
-
-Yes
-
-↓
-
-Ignore
+N1 --> N2
+N2 --> N3
+N3 --> N4
 ```
 
 or
 
-```
-No
+```mermaid
+flowchart TD
 
-↓
+N1["No"]
+N2["Process"]
+N3["Record Event ID"]
 
-Process
-
-↓
-
-Record Event ID
+N1 --> N2
+N2 --> N3
 ```
 
 The Event ID represents one occurrence of a business fact.
@@ -224,12 +218,14 @@ Some operations are naturally idempotent.
 Example.
 
 ```
+
 Set Status = Completed
 ```
 
 Running repeatedly produces:
 
 ```
+
 Completed
 ```
 
@@ -246,6 +242,7 @@ Other operations require explicit tracking.
 Example.
 
 ```
+
 Send Email
 ```
 
@@ -253,24 +250,19 @@ Running twice sends two emails.
 
 Instead.
 
-```
-Receive Event
+```mermaid
+flowchart TD
 
-↓
+N1["Receive Event"]
+N2["Already Sent?"]
+N3["No"]
+N4["Send"]
+N5["Record Completion"]
 
-Already Sent?
-
-↓
-
-No
-
-↓
-
-Send
-
-↓
-
-Record Completion
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
 ```
 
 Artificial idempotency introduces explicit duplicate detection.
@@ -283,26 +275,26 @@ Sometimes Event IDs are insufficient.
 
 Example.
 
-```
-Library
+```mermaid
+flowchart TD
 
-↓
+N1["Library"]
+N2["Media ID"]
 
-Media ID
+N1 --> N2
 ```
 
 If only one metadata record should ever exist per media item:
 
-```
-Media ID
+```mermaid
+flowchart TD
 
-↓
+N1["Media ID"]
+N2["Metadata Exists?"]
+N3["Skip"]
 
-Metadata Exists?
-
-↓
-
-Skip
+N1 --> N2
+N2 --> N3
 ```
 
 Business identifiers frequently provide stronger guarantees than event identifiers alone.
@@ -321,16 +313,15 @@ Examples include:
 
 Example.
 
-```
-INSERT
+```mermaid
+flowchart TD
 
-↓
+N1["INSERT"]
+N2["Conflict"]
+N3["Update"]
 
-Conflict
-
-↓
-
-Update
+N1 --> N2
+N2 --> N3
 ```
 
 Database constraints provide an additional layer of protection against duplicate processing.
@@ -344,21 +335,21 @@ Business correctness should not rely solely upon application code.
 Prefer:
 
 ```
+
 Insert Or Update
 ```
 
 Rather than:
 
-```
-Insert
+```mermaid
+flowchart TD
 
-↓
+N1["Insert"]
+N2["Duplicate"]
+N3["Failure"]
 
-Duplicate
-
-↓
-
-Failure
+N1 --> N2
+N2 --> N3
 ```
 
 Upserts naturally support idempotent behaviour.
@@ -373,20 +364,17 @@ Subscribers MAY maintain a processed-event store.
 
 Example.
 
-```
-Event ID
+```mermaid
+flowchart TD
 
-↓
+N1["Event ID"]
+N2["Processed?"]
+N3["Execute"]
+N4["Record"]
 
-Processed?
-
-↓
-
-Execute
-
-↓
-
-Record
+N1 --> N2
+N2 --> N3
+N3 --> N4
 ```
 
 This approach is particularly useful for side-effect-heavy operations.
@@ -424,16 +412,15 @@ Replay intentionally delivers historical events again.
 
 Replay should therefore produce:
 
-```
-Historical Event
+```mermaid
+flowchart TD
 
-↓
+N1["Historical Event"]
+N2["Subscriber"]
+N3["Current State Remains Correct"]
 
-Subscriber
-
-↓
-
-Current State Remains Correct
+N1 --> N2
+N2 --> N3
 ```
 
 Replay should never corrupt business state.
@@ -446,24 +433,19 @@ This property depends entirely upon idempotent subscribers.
 
 Retries become trivial when subscribers are idempotent.
 
-```
-Failure
+```mermaid
+flowchart TD
 
-↓
+N1["Failure"]
+N2["Retry"]
+N3["Failure"]
+N4["Retry"]
+N5["Success"]
 
-Retry
-
-↓
-
-Failure
-
-↓
-
-Retry
-
-↓
-
-Success
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
 ```
 
 Subscribers do not need to distinguish between:
@@ -483,12 +465,14 @@ Idempotency should not rely upon ordering.
 Suppose:
 
 ```
+
 PlaybackCompleted
 ```
 
 arrives before:
 
 ```
+
 playback.started
 ```
 
@@ -506,12 +490,13 @@ Business state should never be "rolled back" by replay.
 
 Instead:
 
-```
-MetadataImported
+```mermaid
+flowchart TD
 
-↓
+N1["MetadataImported"]
+N2["MetadataCorrected"]
 
-MetadataCorrected
+N1 --> N2
 ```
 
 New facts supersede previous facts.
@@ -559,16 +544,15 @@ The following practices are prohibited.
 
 ## Assuming Exactly Once
 
-```
-Receive
+```mermaid
+flowchart TD
 
-↓
+N1["Receive"]
+N2["Execute"]
+N3["Never Again"]
 
-Execute
-
-↓
-
-Never Again
+N1 --> N2
+N2 --> N3
 ```
 
 Subscribers must always assume duplicate delivery.
@@ -577,12 +561,13 @@ Subscribers must always assume duplicate delivery.
 
 ## Side Effects Before Validation
 
-```
-Send Email
+```mermaid
+flowchart TD
 
-↓
+N1["Send Email"]
+N2["Check Duplicate"]
 
-Check Duplicate
+N1 --> N2
 ```
 
 Validation should always precede external effects.
@@ -664,23 +649,3 @@ Within the Mosaic Runtime, correctness is achieved through:
 - explicit ownership
 
 When these principles are followed, retries, replay and recovery become natural properties of the platform rather than exceptional situations requiring special handling.
-
----
-
-# Review Status
-
-**Status**
-
-Draft
-
-**Owner**
-
-Lead Software Architect
-
-**Previous File**
-
-`11-scheduling.md`
-
-**Next File**
-
-`13-retry-strategy.md`

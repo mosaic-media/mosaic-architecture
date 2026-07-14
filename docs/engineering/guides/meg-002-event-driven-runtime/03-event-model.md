@@ -2,7 +2,7 @@
 File: docs/engineering/guides/meg-002-event-driven-runtime/03-event-model.md
 Document: MEG-002
 Status: Draft
-Version: 0.3
+Version: 0.4
 -->
 
 # Event Model
@@ -15,7 +15,7 @@ Version: 0.3
 
 MEG-002 explains how engineers build an event-driven Runtime.
 
-The authoritative event model is defined by **MIP-001 — Event Protocol**.
+The authoritative event model is defined by **[MIP-001 — Event Protocol](../../protocols/mip-001-event-protocol/index.md)**.
 
 This chapter describes the engineering implications of that protocol.
 
@@ -38,7 +38,7 @@ When a component needs to request work, model that request explicitly rather tha
 
 # Runtime Responsibility
 
-The Runtime should preserve the event lifecycle described by MIP-001.
+The Runtime should preserve the event lifecycle described by [MIP-001](../../protocols/mip-001-event-protocol/index.md).
 
 It should provide routing, delivery, tracing, replay and diagnostics without owning business meaning.
 
@@ -78,4 +78,4 @@ Subscribers should depend only on public Module events or Platform events.
 
 Protocol authority is provided by:
 
-- MIP-001 — Event Protocol
+- [MIP-001 — Event Protocol](../../protocols/mip-001-event-protocol/index.md)

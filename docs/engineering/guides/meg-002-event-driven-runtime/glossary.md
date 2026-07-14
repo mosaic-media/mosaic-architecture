@@ -2,7 +2,7 @@
 File: docs/engineering/guides/meg-002-event-driven-runtime/glossary.md
 Document: MEG-002
 Status: Draft
-Version: 0.3
+Version: 0.4
 -->
 
 # Glossary
@@ -77,10 +77,12 @@ An immutable fact describing a completed business state transition.
 Examples include:
 
 ```
+
 media.imported
 ```
 
 ```
+
 PlaybackCompleted
 ```
 
@@ -338,14 +340,17 @@ An event describing platform behaviour rather than business behaviour.
 Examples include:
 
 ```
+
 WorkerStarted
 ```
 
 ```
+
 RetryScheduled
 ```
 
 ```
+
 BackpressureApplied
 ```
 
@@ -467,23 +472,3 @@ Definitions should remain consistent across:
 - contributor documentation
 
 Where runtime terminology evolves, this glossary SHOULD be updated before introducing new terminology elsewhere.
-
----
-
-# Review Status
-
-**Status**
-
-Draft
-
-**Owner**
-
-Lead Software Architect
-
-**Previous File**
-
-`19-contributor-guidance.md`
-
-**Next File**
-
-`references.md`

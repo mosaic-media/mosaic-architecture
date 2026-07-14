@@ -2,7 +2,7 @@
 File: docs/engineering/guides/meg-002-event-driven-runtime/00-document-control.md
 Document: MEG-002
 Status: Draft
-Version: 0.3
+Version: 0.4
 -->
 
 # Document Control
@@ -17,8 +17,8 @@ Version: 0.3
 | Title | Event-Driven Runtime |
 | File | 00-document-control.md |
 | Status | Draft |
-| Version | 0.3 |
-| Owner | Lead Software Architect |
+| Version | 0.4 |
+| Owner | AdamNi-7080 |
 | Classification | Internal Architecture Specification |
 
 ---
@@ -27,7 +27,7 @@ Version: 0.3
 
 This document establishes the governance, authority and lifecycle of the Mosaic Event-Driven Runtime specification.
 
-Version 0.3 aligns implementation guidance with MIP-001 event ownership, namespaced events and public/private Module event contracts.
+Version 0.3 aligns implementation guidance with [MIP-001](../../protocols/mip-001-event-protocol/index.md) event ownership, namespaced events and public/private Module event contracts.
 
 MEG-002 defines the architectural standards governing how independently developed capabilities communicate and coordinate work within the Mosaic Runtime.
 
@@ -58,27 +58,24 @@ Every component participating in the Mosaic Runtime MUST comply with the standar
 
 MEG specifications intentionally build upon one another.
 
-```
-MDL
+```mermaid
+flowchart TD
 
-↓
+N1["MDL"]
+N2["MDS"]
+N3["MEG-001"]
+N4["MEG-002"]
 
-MDS
-
-↓
-
-MEG-001
-
-↓
-
-MEG-002
+N1 --> N2
+N2 --> N3
+N3 --> N4
 ```
 
 Specifically:
 
 - **MDL** defines product philosophy.
 - **MDS** defines presentation.
-- **MEG-001** defines engineering practices.
+- **[MEG-001](../meg-001-go-engineering-standards/index.md)** defines engineering practices.
 - **MEG-002** defines runtime behaviour.
 
 Later MEG specifications build upon the runtime model introduced here.
@@ -124,28 +121,21 @@ MEG specifications evolve alongside the platform.
 
 Each document progresses through the following lifecycle.
 
-```
-Draft
+```mermaid
+flowchart TD
 
-↓
+N1["Draft"]
+N2["Review"]
+N3["Accepted"]
+N4["Implemented"]
+N5["Maintained"]
+N6["Superseded (optional)"]
 
-Review
-
-↓
-
-Accepted
-
-↓
-
-Implemented
-
-↓
-
-Maintained
-
-↓
-
-Superseded (optional)
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
+N5 --> N6
 ```
 
 Accepted specifications become part of the canonical Mosaic architecture.
@@ -223,23 +213,3 @@ It does **not** define:
 Those concerns belong to other MEG specifications.
 
 This separation keeps runtime concerns independent from implementation concerns.
-
----
-
-# Review Status
-
-**Status**
-
-Draft
-
-**Owner**
-
-Lead Software Architect
-
-**Previous File**
-
-`README.md`
-
-**Next File**
-
-`01-runtime-philosophy.md`

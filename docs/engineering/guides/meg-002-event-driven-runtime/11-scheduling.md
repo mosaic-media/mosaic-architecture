@@ -2,7 +2,7 @@
 File: docs/engineering/guides/meg-002-event-driven-runtime/11-scheduling.md
 Document: MEG-002
 Status: Draft
-Version: 0.3
+Version: 0.4
 -->
 
 # Scheduling
@@ -78,32 +78,23 @@ They depend upon **time**, not user interaction.
 
 Every scheduled task follows the same lifecycle.
 
-```
-Capability
+```mermaid
+flowchart TD
 
-↓
+N1["Capability"]
+N2["Request Schedule"]
+N3["Runtime Scheduler"]
+N4["Execution Time"]
+N5["Worker"]
+N6["Business Behaviour"]
+N7["Events"]
 
-Request Schedule
-
-↓
-
-Runtime Scheduler
-
-↓
-
-Execution Time
-
-↓
-
-Worker
-
-↓
-
-Business Behaviour
-
-↓
-
-Events
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
+N5 --> N6
+N6 --> N7
 ```
 
 Notice that the capability never manages the timer itself.
@@ -141,26 +132,26 @@ Example.
 
 Good.
 
-```
-Metadata Capability
+```mermaid
+flowchart TD
 
-↓
+N1["Metadata Capability"]
+N2["Request Refresh In 24 Hours"]
 
-Request Refresh In 24 Hours
+N1 --> N2
 ```
 
 Poor.
 
-```
-Metadata Capability
+```mermaid
+flowchart TD
 
-↓
+N1["Metadata Capability"]
+N2["Sleep 24 Hours"]
+N3["Refresh"]
 
-Sleep 24 Hours
-
-↓
-
-Refresh
+N1 --> N2
+N2 --> N3
 ```
 
 Business logic should remain independent of time.
@@ -173,28 +164,31 @@ One-time tasks execute once.
 
 Examples include:
 
-```
-Refresh Metadata
+```mermaid
+flowchart TD
 
-↓
+N1["Refresh Metadata"]
+N2["Tomorrow"]
 
-Tomorrow
-```
-
-```
-Expire Invitation
-
-↓
-
-24 Hours
+N1 --> N2
 ```
 
+```mermaid
+flowchart TD
+
+N1["Expire Invitation"]
+N2["24 Hours"]
+
+N1 --> N2
 ```
-Retry Download
 
-↓
+```mermaid
+flowchart TD
 
-30 Seconds
+N1["Retry Download"]
+N2["30 Seconds"]
+
+N1 --> N2
 ```
 
 Once complete, the schedule is removed.
@@ -207,28 +201,31 @@ Recurring tasks execute repeatedly.
 
 Examples include:
 
-```
-Library Scan
+```mermaid
+flowchart TD
 
-↓
+N1["Library Scan"]
+N2["Every 6 Hours"]
 
-Every 6 Hours
-```
-
-```
-Health Check
-
-↓
-
-Every Minute
+N1 --> N2
 ```
 
+```mermaid
+flowchart TD
+
+N1["Health Check"]
+N2["Every Minute"]
+
+N1 --> N2
 ```
-Metrics Snapshot
 
-↓
+```mermaid
+flowchart TD
 
-Every 30 Seconds
+N1["Metrics Snapshot"]
+N2["Every 30 Seconds"]
+
+N1 --> N2
 ```
 
 Recurring schedules remain active until explicitly cancelled.
@@ -241,16 +238,15 @@ Some work should intentionally occur later.
 
 Example.
 
-```
-PlaybackStopped
+```mermaid
+flowchart TD
 
-↓
+N1["PlaybackStopped"]
+N2["Schedule History Sync"]
+N3["30 Seconds Later"]
 
-Schedule History Sync
-
-↓
-
-30 Seconds Later
+N1 --> N2
+N2 --> N3
 ```
 
 Delaying work can:
@@ -267,24 +263,19 @@ The runtime owns these decisions.
 
 Retries are simply scheduled work.
 
-```
-Failure
+```mermaid
+flowchart TD
 
-↓
+N1["Failure"]
+N2["Retry Requested"]
+N3["Scheduler"]
+N4["Worker"]
+N5["Retry"]
 
-Retry Requested
-
-↓
-
-Scheduler
-
-↓
-
-Worker
-
-↓
-
-Retry
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
 ```
 
 Subscribers should never implement retry loops.
@@ -301,30 +292,28 @@ Traditional cron jobs are discouraged.
 
 Poor.
 
-```
-Cron
+```mermaid
+flowchart TD
 
-↓
+N1["Cron"]
+N2["Poll Database"]
+N3["Look For Work"]
 
-Poll Database
-
-↓
-
-Look For Work
+N1 --> N2
+N2 --> N3
 ```
 
 Preferred.
 
-```
-Event
+```mermaid
+flowchart TD
 
-↓
+N1["Event"]
+N2["Schedule"]
+N3["Execute"]
 
-Schedule
-
-↓
-
-Execute
+N1 --> N2
+N2 --> N3
 ```
 
 The runtime should react to business events rather than continually polling for changes.
@@ -339,12 +328,13 @@ Every scheduled task has exactly one owner.
 
 Example.
 
-```
-Metadata Capability
+```mermaid
+flowchart TD
 
-↓
+N1["Metadata Capability"]
+N2["Metadata Refresh Schedule"]
 
-Metadata Refresh Schedule
+N1 --> N2
 ```
 
 Only the owning capability should create or cancel its schedules.
@@ -397,16 +387,15 @@ Schedules SHOULD be cancellable.
 
 Typical lifecycle.
 
-```
-Schedule
+```mermaid
+flowchart TD
 
-↓
+N1["Schedule"]
+N2["Waiting"]
+N3["Cancelled"]
 
-Waiting
-
-↓
-
-Cancelled
+N1 --> N2
+N2 --> N3
 ```
 
 Cancellation should:
@@ -426,18 +415,22 @@ The scheduler SHOULD publish runtime events.
 Examples include:
 
 ```
+
 TaskScheduled
 ```
 
 ```
+
 TaskExecuted
 ```
 
 ```
+
 TaskCancelled
 ```
 
 ```
+
 TaskExpired
 ```
 
@@ -488,16 +481,15 @@ Ownership must remain explicit.
 
 Following a restart:
 
-```
-Runtime
+```mermaid
+flowchart TD
 
-↓
+N1["Runtime"]
+N2["Restore Persistent Schedules"]
+N3["Resume Execution"]
 
-Restore Persistent Schedules
-
-↓
-
-Resume Execution
+N1 --> N2
+N2 --> N3
 ```
 
 Business capabilities should not need to recreate long-lived schedules manually.
@@ -527,16 +519,15 @@ Scheduling decisions should remain centralised.
 
 Execution should remain distributed.
 
-```
-Scheduler
+```mermaid
+flowchart TD
 
-↓
+N1["Scheduler"]
+N2["Workers"]
+N3["Capabilities"]
 
-Workers
-
-↓
-
-Capabilities
+N1 --> N2
+N2 --> N3
 ```
 
 The scheduler decides **when**.
@@ -566,6 +557,7 @@ Business capabilities should never delay themselves.
 ## Infinite Polling
 
 ```
+
 for {
 
     check()
@@ -607,6 +599,7 @@ The runtime should detect and prevent unnecessary duplication.
 The scheduler should never determine:
 
 ```
+
 Should Metadata Refresh?
 ```
 
@@ -649,23 +642,3 @@ By separating scheduling from business behaviour, the Mosaic Runtime gains:
 Time becomes another service provided by the platform.
 
 Capabilities remain focused entirely on business behaviour.
-
----
-
-# Review Status
-
-**Status**
-
-Draft
-
-**Owner**
-
-Lead Software Architect
-
-**Previous File**
-
-`10-worker-lifecycle.md`
-
-**Next File**
-
-`12-idempotency.md`

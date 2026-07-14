@@ -2,7 +2,7 @@
 File: docs/engineering/guides/meg-002-event-driven-runtime/18-adrs.md
 Document: MEG-002
 Status: Draft
-Version: 0.3
+Version: 0.4
 -->
 
 # Architectural Decision Guidance
@@ -15,7 +15,7 @@ Version: 0.3
 
 MEG-002 may require architecture decisions when changes alter long-lived engineering direction, compatibility expectations or responsibility boundaries.
 
-The decision process itself is governed by **MDG-001 — Documentation Authority Guide**.
+The decision process itself is governed by **[MDG-001 — Documentation Authority Guide](../../documentation/mdg-001-documentation-authority-guide/index.md)**.
 
 This chapter avoids repeating ADR process rules so the documentation library has one authoritative home for decision practice.
 
@@ -133,9 +133,9 @@ Manifests become the discovery and validation surface for published and subscrib
 
 ## Implementation Implications
 
-MIP-001 defines the event protocol.
+[MIP-001](../../protocols/mip-001-event-protocol/index.md) defines the event protocol.
 
-MIP-002 defines how Module manifests declare public/private event publications and subscriptions.
+[MIP-002](../../protocols/mip-002-module-manifest-protocol/index.md) defines how Module manifests declare public/private event publications and subscriptions.
 
 The Event Bus should route by namespaced event name and honour visibility metadata.
 
@@ -145,9 +145,9 @@ Subscribers should depend on public Module events or Platform events, not anothe
 
 ---
 
-# Relationship To MDG-001
+# Relationship To [MDG-001](../../documentation/mdg-001-documentation-authority-guide/index.md)
 
-MDG-001 defines ADR structure, review expectations, lifecycle and cross-reference rules.
+[MDG-001](../../documentation/mdg-001-documentation-authority-guide/index.md) defines ADR structure, review expectations, lifecycle and cross-reference rules.
 
 This guide should reference decisions that affect it, but should not redefine the decision process.
 

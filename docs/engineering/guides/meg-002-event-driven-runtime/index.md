@@ -2,7 +2,7 @@
 File: docs/engineering/guides/meg-002-event-driven-runtime/index.md
 Document: MEG-002
 Status: Draft
-Version: 0.3
+Version: 0.4
 -->
 
 # MEG-002 — Event-Driven Runtime
@@ -34,31 +34,24 @@ Unlike traditional request-driven architectures, the Mosaic Runtime treats event
 
 # Relationship to MEG
 
-```
-MEG-001
+```mermaid
+flowchart TD
 
-↓
+N1["MEG-001"]
+N2["Engineering Principles"]
+N3["MEG-002"]
+N4["Runtime Behaviour"]
+N5["Modules"]
+N6["Platform Features"]
 
-Engineering Principles
-
-↓
-
-MEG-002
-
-↓
-
-Runtime Behaviour
-
-↓
-
-Modules
-
-↓
-
-Platform Features
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
+N5 --> N6
 ```
 
-MEG-001 defines **how software is engineered.**
+[MEG-001](../meg-001-go-engineering-standards/index.md) defines **how software is engineered.**
 
 MEG-002 defines **how software behaves once it is running.**
 
@@ -130,32 +123,23 @@ This separation allows the platform to evolve without creating unnecessary coupl
 
 The Mosaic Runtime intentionally separates event processing into conceptual layers.
 
-```
-Capability
+```mermaid
+flowchart TD
 
-↓
+N1["Capability"]
+N2["Domain Event"]
+N3["Event Bus"]
+N4["Subscribers"]
+N5["Background Work"]
+N6["State Change"]
+N7["New Events"]
 
-Domain Event
-
-↓
-
-Event Bus
-
-↓
-
-Subscribers
-
-↓
-
-Background Work
-
-↓
-
-State Change
-
-↓
-
-New Events
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
+N5 --> N6
+N6 --> N7
 ```
 
 Every layer owns exactly one responsibility.
@@ -184,6 +168,7 @@ without discussing any individual business domain.
 # Repository Structure
 
 ```
+
 engineering/
 
 └── meg/
@@ -232,9 +217,9 @@ engineering/
 
         19-contributor-guidance.md
 
-        glossary.md
-
         references.md
+
+        glossary.md
 ```
 
 ---
@@ -243,16 +228,16 @@ engineering/
 
 Required reading:
 
-- MEG-001 Go Engineering Standards
-- MDL-002 Principles
-- MDL-003 Mental Model
+- [MEG-001 — Go Engineering Standards](../meg-001-go-engineering-standards/index.md)
+- [MDL-002 — Principles](../../../design/language/mdl-002-principles/index.md)
+- [MDL-003 — Mental Model](../../../design/language/mdl-003-mental-model/index.md)
 
 Future companion specifications:
 
-- MEG-003 Domain Driven Design
-- MEG-004 Hexagonal Architecture
-- MEG-005 Module Platform
-- MEG-006 Runtime Architecture
+- [MEG-003 — Domain-Driven Design](../meg-003-domain-driven-design/index.md)
+- [MEG-004 — Hexagonal Architecture](../meg-004-hexagonal-architecture/index.md)
+- [MEG-006 — Module Platform](../meg-006-module-platform/index.md)
+- [MEG-005 — Runtime Architecture](../meg-005-runtime-architecture/index.md)
 
 ---
 
@@ -271,19 +256,3 @@ The Event-Driven Runtime is intended to produce a platform that is:
 - Fault tolerant
 
 The runtime should encourage independent capability evolution while preserving architectural consistency across the entire Mosaic ecosystem.
-
----
-
-# Review Status
-
-**Status**
-
-Draft
-
-**Owner**
-
-Lead Software Architect
-
-**Next File**
-
-`00-document-control.md`

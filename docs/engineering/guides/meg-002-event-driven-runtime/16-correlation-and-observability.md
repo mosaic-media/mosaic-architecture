@@ -2,7 +2,7 @@
 File: docs/engineering/guides/meg-002-event-driven-runtime/16-correlation-and-observability.md
 Document: MEG-002
 Status: Draft
-Version: 0.3
+Version: 0.4
 -->
 
 # Correlation and Observability
@@ -17,28 +17,21 @@ As the Mosaic Runtime grows, individual business operations will span multiple c
 
 Consider a simple user action.
 
-```
-Play Media
+```mermaid
+flowchart TD
 
-↓
+N1["Play Media"]
+N2["Playback"]
+N3["Progress Tracking"]
+N4["Recommendations"]
+N5["Analytics"]
+N6["Notifications"]
 
-Playback
-
-↓
-
-Progress Tracking
-
-↓
-
-Recommendations
-
-↓
-
-Analytics
-
-↓
-
-Notifications
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
+N5 --> N6
 ```
 
 By the time the operation completes, dozens of events may have been published.
@@ -75,6 +68,7 @@ without modifying production code.
 The Mosaic Runtime adopts the three pillars of observability.
 
 ```
+
 Logs
 
 +
@@ -100,24 +94,19 @@ Correlation links related work together.
 
 Suppose a user imports media.
 
-```
-media.imported
+```mermaid
+flowchart TD
 
-↓
+N1["media.imported"]
+N2["MetadataFetched"]
+N3["ArtworkDownloaded"]
+N4["LibraryUpdated"]
+N5["RecommendationsGenerated"]
 
-MetadataFetched
-
-↓
-
-ArtworkDownloaded
-
-↓
-
-LibraryUpdated
-
-↓
-
-RecommendationsGenerated
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
 ```
 
 Although many capabilities participate, they all belong to one business operation.
@@ -132,20 +121,17 @@ Every workflow begins with a Correlation ID.
 
 Example.
 
-```
-HTTP Request
+```mermaid
+flowchart TD
 
-↓
+N1["HTTP Request"]
+N2["Correlation ID Created"]
+N3["Every Event"]
+N4["Same Correlation ID"]
 
-Correlation ID Created
-
-↓
-
-Every Event
-
-↓
-
-Same Correlation ID
+N1 --> N2
+N2 --> N3
+N3 --> N4
 ```
 
 The Correlation ID remains constant throughout the lifetime of the workflow.
@@ -163,39 +149,39 @@ Not one event.
 Correlation explains:
 
 ```
+
 What belongs together?
 ```
 
 Causation explains:
 
 ```
+
 What directly caused this event?
 ```
 
 Example.
 
+```mermaid
+flowchart TD
+
+N1["media.imported"]
+N2["MetadataFetched"]
+N3["ArtworkDownloaded"]
+
+N1 --> N2
+N2 --> N3
 ```
-media.imported
 
-↓
+```mermaid
+flowchart TD
 
-MetadataFetched
+N1["ArtworkDownloaded"]
+N2["Causation ID"]
+N3["MetadataFetched"]
 
-↓
-
-ArtworkDownloaded
-```
-
-```
-ArtworkDownloaded
-
-↓
-
-Causation ID
-
-↓
-
-MetadataFetched
+N1 --> N2
+N2 --> N3
 ```
 
 Each event identifies its immediate parent.
@@ -212,26 +198,21 @@ Causation creates dependency graphs.
 
 Combining Correlation and Causation naturally produces an event graph.
 
-```
-Import Library
+```mermaid
+flowchart TD
 
-↓
+N1["Import Library"]
+N2["media.imported"]
+N3["MetadataFetched"]
+N4["ArtworkDownloaded"]
+N5["SearchIndexed"]
+N6["RecommendationsGenerated"]
 
-media.imported
-
-├── MetadataFetched
-
-│
-
-├── ArtworkDownloaded
-
-│
-
-└── SearchIndexed
-
-↓
-
-RecommendationsGenerated
+N2 --> N3
+N2 --> N4
+N2 --> N5
+N1 --> N2
+N2 --> N6
 ```
 
 This graph allows operators to understand exactly how work propagated through the runtime.
@@ -265,28 +246,21 @@ OpenTelemetry provides a vendor-neutral standard for propagating tracing context
 
 The runtime SHOULD automatically propagate trace context.
 
-```
-HTTP
+```mermaid
+flowchart TD
 
-↓
+N1["HTTP"]
+N2["Library"]
+N3["Event Bus"]
+N4["Metadata"]
+N5["Artwork"]
+N6["Search"]
 
-Library
-
-↓
-
-Event Bus
-
-↓
-
-Metadata
-
-↓
-
-Artwork
-
-↓
-
-Search
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
+N5 --> N6
 ```
 
 Business capabilities should not manually manage trace propagation.
@@ -341,6 +315,7 @@ Logs should **not** describe routine successful execution.
 Poor.
 
 ```
+
 Processed Event
 ```
 
@@ -349,6 +324,7 @@ Processed Event
 Good.
 
 ```
+
 Retry exhausted.
 
 Moving event to dead letter queue.
@@ -391,28 +367,31 @@ Logs explain exceptional workflows.
 
 Each serves a different purpose.
 
-```
-Metrics
+```mermaid
+flowchart TD
 
-↓
+N1["Metrics"]
+N2["Platform Health"]
 
-Platform Health
-```
-
-```
-Traces
-
-↓
-
-Single Workflow
+N1 --> N2
 ```
 
+```mermaid
+flowchart TD
+
+N1["Traces"]
+N2["Single Workflow"]
+
+N1 --> N2
 ```
-Logs
 
-↓
+```mermaid
+flowchart TD
 
-Unexpected Behaviour
+N1["Logs"]
+N2["Unexpected Behaviour"]
+
+N1 --> N2
 ```
 
 Together they form complete observability.
@@ -426,26 +405,32 @@ The runtime itself should publish operational events.
 Examples include:
 
 ```
+
 WorkerStarted
 ```
 
 ```
+
 WorkerStopped
 ```
 
 ```
+
 RetryScheduled
 ```
 
 ```
+
 RetryExhausted
 ```
 
 ```
+
 BackpressureApplied
 ```
 
 ```
+
 ModuleLoaded
 ```
 
@@ -483,18 +468,21 @@ Examples.
 Healthy.
 
 ```
+
 Ready
 ```
 
 Degraded.
 
 ```
+
 External API unavailable
 ```
 
 Unhealthy.
 
 ```
+
 Database disconnected
 ```
 
@@ -510,20 +498,17 @@ Third-party modules participate exactly like Platform capabilities.
 
 Example.
 
-```
-media.imported
+```mermaid
+flowchart TD
 
-↓
+N1["media.imported"]
+N2["Platform Capability"]
+N3["Third-Party Module"]
+N4["Analytics Module"]
 
-Platform Capability
-
-↓
-
-Third-Party Module
-
-↓
-
-Analytics Module
+N1 --> N2
+N2 --> N3
+N3 --> N4
 ```
 
 Every event shares the same Correlation ID.
@@ -556,24 +541,19 @@ Observability should already contain the answer.
 
 A single Correlation ID should naturally produce a timeline.
 
-```
-media.imported
+```mermaid
+flowchart TD
 
-↓
+N1["media.imported"]
+N2["MetadataFetched"]
+N3["ArtworkRequested"]
+N4["ArtworkDownloaded"]
+N5["LibraryUpdated"]
 
-MetadataFetched
-
-↓
-
-ArtworkRequested
-
-↓
-
-ArtworkDownloaded
-
-↓
-
-LibraryUpdated
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
 ```
 
 Reading the timeline should explain the entire workflow.
@@ -622,6 +602,7 @@ The following practices are prohibited.
 ## Plain Text Logs
 
 ```
+
 Something happened...
 ```
 
@@ -726,23 +707,3 @@ Every module.
 Every workflow.
 
 The runtime should always be able to explain itself.
-
----
-
-# Review Status
-
-**Status**
-
-Draft
-
-**Owner**
-
-Lead Software Architect
-
-**Previous File**
-
-`15-backpressure.md`
-
-**Next File**
-
-`17-runtime-shutdown.md`
