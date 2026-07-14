@@ -15,7 +15,7 @@ Version: 0.8
 
 MEG-006 may require architecture decisions when changes alter long-lived engineering direction, compatibility expectations or responsibility boundaries.
 
-The decision process itself is governed by **MDG-001 — Documentation Authority Guide**.
+The decision process itself is governed by **[MDG-001 — Documentation Authority Guide](../../documentation/mdg-001-documentation-authority-guide/index.md)**.
 
 This chapter avoids repeating ADR process rules so the documentation library has one authoritative home for decision practice.
 
@@ -482,15 +482,15 @@ The Test Harness should provide deterministic baseline datasets and capability p
 
 The CLI may expose event and scenario controls only through declared Test Harness contracts.
 
-MIP-002 should define development-only Module eligibility before it becomes stable manifest metadata.
+[MIP-002](../../protocols/mip-002-module-manifest-protocol/index.md) should define development-only Module eligibility before it becomes stable manifest metadata.
 
 A future Scenario Profile protocol should define versioned datasets, provider state, personas, deterministic failures and event schedules.
 
 ---
 
-# Relationship To MDG-001
+# Relationship To [MDG-001](../../documentation/mdg-001-documentation-authority-guide/index.md)
 
-MDG-001 defines ADR structure, review expectations, lifecycle and cross-reference rules.
+[MDG-001](../../documentation/mdg-001-documentation-authority-guide/index.md) defines ADR structure, review expectations, lifecycle and cross-reference rules.
 
 This guide should reference decisions that affect it, but should not redefine the decision process.
 

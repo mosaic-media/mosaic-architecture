@@ -51,30 +51,25 @@ The Platform must not contain hidden branches that behave differently only becau
 
 The Test Harness runs inside the same statically composed Development Platform as the Local Module.
 
-```text
-Developer
+```mermaid
+flowchart TD
 
-↓
+N1["Developer"]
+N2["mosaic dev Or mosaic test"]
+N3["Development Supervisor"]
+N4["Development Platform Binary"]
+N5["Platform"]
+N6["Test Harness Modules"]
+N7["Local Module"]
+N8["Web Or Native Client Renderer"]
 
-mosaic dev Or mosaic test
-
-↓
-
-Development Supervisor
-
-↓
-
-Development Platform Binary
-
-├── Platform
-
-├── Test Harness Modules
-
-└── Local Module
-
-↓
-
-Web Or Native Client Renderer
+N4 --> N5
+N4 --> N6
+N4 --> N7
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N8
 ```
 
 Test Harness Modules and Local Modules are peers.
@@ -101,7 +96,7 @@ Test Harness Modules must be excluded from production composition by default.
 
 Their manifests should identify them as development-only inputs.
 
-The exact manifest field for development-only eligibility belongs in MIP-002 before it becomes a stable protocol requirement.
+The exact manifest field for development-only eligibility belongs in [MIP-002](../../protocols/mip-002-module-manifest-protocol/index.md) before it becomes a stable protocol requirement.
 
 ---
 
@@ -259,7 +254,7 @@ To simulate a public event owned by another Module, tooling should either:
 
 Arbitrary production-event impersonation is deferred until that protocol exists.
 
-MEG-002 and MIP-001 remain authoritative for event ownership and transport.
+[MEG-002](../meg-002-event-driven-runtime/index.md) and [MIP-001](../../protocols/mip-001-event-protocol/index.md) remain authoritative for event ownership and transport.
 
 ---
 
@@ -428,9 +423,9 @@ This chapter extends:
 
 - Chapter 14, which defines the Developer Platform and Development Supervisor.
 - Chapter 08, which defines SDK testing utilities.
-- MEG-002, which defines Event Bus behaviour and event ownership.
-- MIP-001, which defines Event Envelope and transport contracts.
-- MIP-002, which will define any future development-only Module eligibility metadata.
+- [MEG-002](../meg-002-event-driven-runtime/index.md), which defines Event Bus behaviour and event ownership.
+- [MIP-001](../../protocols/mip-001-event-protocol/index.md), which defines Event Envelope and transport contracts.
+- [MIP-002](../../protocols/mip-002-module-manifest-protocol/index.md), which will define any future development-only Module eligibility metadata.
 
 The governing decision is recorded in:
 
@@ -445,23 +440,3 @@ The Test Harness is Mosaic using its own Module architecture to provide a determ
 It replaces external capability implementations.
 
 It does not replace the Platform.
-
----
-
-# Review Status
-
-**Status**
-
-Draft
-
-**Owner**
-
-Lead Software Architect
-
-**Previous File**
-
-`14-developer-platform.md`
-
-**Next File**
-
-`16-adrs.md`

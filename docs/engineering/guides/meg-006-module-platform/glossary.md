@@ -350,14 +350,17 @@ An explicitly declared authority granted to a capability.
 Examples include:
 
 ```
+
 blob.read
 ```
 
 ```
+
 scheduler.use
 ```
 
 ```
+
 network.outbound
 ```
 
@@ -437,10 +440,6 @@ The Platform implements SDK contracts.
 
 Modules satisfy SDK contracts.
 
----
-
-# S
-
 ## Scenario Profile
 
 A proposed versioned selection of Test Harness datasets, personas, provider states, deterministic failures and event schedules.
@@ -507,23 +506,3 @@ Definitions should remain consistent across:
 - Architecture specifications
 
 Whenever platform terminology evolves, this glossary SHOULD be updated before introducing new terminology elsewhere.
-
----
-
-# Review Status
-
-**Status**
-
-Draft
-
-**Owner**
-
-Lead Software Architect
-
-**Previous File**
-
-`references.md`
-
-**Next File**
-
-**End of Specification**

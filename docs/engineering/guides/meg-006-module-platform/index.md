@@ -47,55 +47,36 @@ The Runtime is intentionally designed to grow through build-time Module composit
 
 # Relationship to MEG
 
-```
-MEG-001
+```mermaid
+flowchart TD
 
-↓
+N1["MEG-001"]
+N2["Engineering Standards"]
+N3["MEG-002"]
+N4["Reactive Runtime"]
+N5["MEG-003"]
+N6["Domain Model"]
+N7["MEG-004"]
+N8["Hexagonal Architecture"]
+N9["MEG-005"]
+N10["Capability Runtime"]
+N11["MEG-006"]
+N12["Module Platform"]
 
-Engineering Standards
-
-↓
-
-MEG-002
-
-↓
-
-Reactive Runtime
-
-↓
-
-MEG-003
-
-↓
-
-Domain Model
-
-↓
-
-MEG-004
-
-↓
-
-Hexagonal Architecture
-
-↓
-
-MEG-005
-
-↓
-
-Capability Runtime
-
-↓
-
-MEG-006
-
-↓
-
-Module Platform
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
+N5 --> N6
+N6 --> N7
+N7 --> N8
+N8 --> N9
+N9 --> N10
+N10 --> N11
+N11 --> N12
 ```
 
-MEG-005 defines:
+[MEG-005](../meg-005-runtime-architecture/index.md) defines:
 
 > **How the Runtime executes capabilities.**
 
@@ -183,32 +164,23 @@ The finished product is always one statically linked Go executable.
 
 Mosaic Module Architecture follows this shape.
 
-```text
-Developer
+```mermaid
+flowchart TD
 
-↓
+N1["Developer"]
+N2["Mosaic CLI"]
+N3["Mosaic SDK And Local Module"]
+N4["Development Supervisor Or Production Supervisor"]
+N5["Supervisor"]
+N6["Build Workspace"]
+N7["Mosaic Platform Binary"]
 
-Mosaic CLI
-
-↓
-
-Mosaic SDK And Local Module
-
-↓
-
-Development Supervisor Or Production Supervisor
-
-↓
-
-Supervisor
-
-↓
-
-Build Workspace
-
-↓
-
-Mosaic Platform Binary
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
+N5 --> N6
+N6 --> N7
 ```
 
 The Supervisor assembles the runtime from declarative manifests and Go modules.
@@ -223,36 +195,25 @@ The Platform discovers registered Modules through the SDK registry at startup.
 
 The Mosaic platform intentionally separates concerns into architectural layers.
 
-```
-Supervisor
+```mermaid
+flowchart TD
 
-↓
+N1["Supervisor"]
+N2["Generation"]
+N3["Platform Binary"]
+N4["Runtime Kernel"]
+N5["Runtime Services"]
+N6["Capability Managers"]
+N7["Module Capabilities"]
+N8["Business Behaviour"]
 
-Generation
-
-↓
-
-Platform Binary
-
-↓
-
-Runtime Kernel
-
-↓
-
-Runtime Services
-
-↓
-
-Capability Managers
-
-↓
-
-Module Capabilities
-
-↓
-
-Business Behaviour
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
+N5 --> N6
+N6 --> N7
+N7 --> N8
 ```
 
 Notice:
@@ -287,6 +248,7 @@ without modifying the Runtime itself.
 # Repository Structure
 
 ```
+
 engineering/
 
 └── meg/
@@ -342,17 +304,17 @@ engineering/
 
 Required reading:
 
-- MEG-001 Go Engineering Standards
-- MEG-002 Reactive Runtime
-- MEG-003 Domain-Driven Design
-- MEG-004 Hexagonal Architecture
-- MEG-005 Runtime Architecture
+- [MEG-001 — Go Engineering Standards](../meg-001-go-engineering-standards/index.md)
+- [MEG-002 — Event-Driven Runtime](../meg-002-event-driven-runtime/index.md)
+- [MEG-003 — Domain-Driven Design](../meg-003-domain-driven-design/index.md)
+- [MEG-004 — Hexagonal Architecture](../meg-004-hexagonal-architecture/index.md)
+- [MEG-005 — Runtime Architecture](../meg-005-runtime-architecture/index.md)
 
 Future companion specifications:
 
-- MEG-007 Storage Architecture
-- MEG-008 Observability
-- MEG-009 Security
+- [MEG-007 — Storage Architecture](../meg-007-storage-architecture/index.md)
+- [MEG-008 — Observability](../meg-008-observability/index.md)
+- [MEG-009 — Security Architecture](../meg-009-security-architecture/index.md)
 
 ---
 
@@ -372,19 +334,3 @@ The Module Platform is intended to produce a platform that is:
 Every module should feel like a natural part of the platform rather than an external add-on.
 
 Manifest-driven discovery and registration allow capabilities to be discovered and validated before a Platform package is produced.  [zylos.ai](https://zylos.ai/research/2026-02-21-ai-agent-plugin-extension-architecture/)
-
----
-
-# Review Status
-
-**Status**
-
-Draft
-
-**Owner**
-
-Lead Software Architect
-
-**Next File**
-
-`00-document-control.md`

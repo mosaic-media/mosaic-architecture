@@ -75,24 +75,19 @@ Consider adding support for:
 
 Traditional architecture.
 
-```
-Platform Capability
+```mermaid
+flowchart TD
 
-↓
+N1["Platform Capability"]
+N2["Books"]
+N3["Music"]
+N4["Podcasts"]
+N5["IPTV"]
 
-Books
-
-↓
-
-Music
-
-↓
-
-Podcasts
-
-↓
-
-IPTV
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
 ```
 
 Eventually:
@@ -101,24 +96,19 @@ The base application owns every business concept.
 
 Instead.
 
-```
-Runtime
+```mermaid
+flowchart TD
 
-↓
+N1["Runtime"]
+N2["Capability"]
+N3["Capability"]
+N4["Capability"]
+N5["Capability"]
 
-Capability
-
-↓
-
-Capability
-
-↓
-
-Capability
-
-↓
-
-Capability
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
 ```
 
 The Runtime remains unchanged.
@@ -140,12 +130,14 @@ Example.
 Poor.
 
 ```
+
 Add Podcast Feature
 ```
 
 Preferred.
 
 ```
+
 Podcast Capability
 ```
 
@@ -182,24 +174,19 @@ The composed Platform Binary changes.
 
 The composition flow is:
 
-```
-Capability
+```mermaid
+flowchart TD
 
-↓
+N1["Capability"]
+N2["Manifest"]
+N3["Build Pipeline"]
+N4["Generated Imports"]
+N5["Platform Binary"]
 
-Manifest
-
-↓
-
-Build Pipeline
-
-↓
-
-Generated Imports
-
-↓
-
-Platform Binary
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
 ```
 
 The Runtime should recognise statically registered capabilities at startup.
@@ -296,14 +283,17 @@ Platform capabilities should be treated exactly like module capabilities.
 Example.
 
 ```
+
 Playback
 ```
 
 ```
+
 Metadata
 ```
 
 ```
+
 Library
 ```
 
@@ -339,6 +329,7 @@ It should not know:
 It should know only:
 
 ```
+
 Capability
 ```
 
@@ -350,26 +341,26 @@ Everything else belongs to the capability itself.
 
 The preferred growth model is:
 
-```
-Runtime
+```mermaid
+flowchart TD
 
-↓
+N1["Runtime"]
+N2["New Capability"]
 
-New Capability
+N1 --> N2
 ```
 
 Not:
 
-```
-Runtime
+```mermaid
+flowchart TD
 
-↓
+N1["Runtime"]
+N2["Modify Runtime"]
+N3["Add Feature"]
 
-Modify Runtime
-
-↓
-
-Add Feature
+N1 --> N2
+N2 --> N3
 ```
 
 The platform grows by composition.
@@ -382,24 +373,19 @@ Not accumulation.
 
 One of the defining characteristics of the Module Platform is:
 
-```
-Discover
+```mermaid
+flowchart TD
 
-↓
+N1["Discover"]
+N2["Validate"]
+N3["Register"]
+N4["Activate"]
+N5["Execute"]
 
-Validate
-
-↓
-
-Register
-
-↓
-
-Activate
-
-↓
-
-Execute
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
 ```
 
 The Runtime should completely understand a capability before executing any of its code.
@@ -475,26 +461,26 @@ Capabilities should remain replaceable.
 
 Suppose:
 
-```
-Metadata Capability
+```mermaid
+flowchart TD
 
-↓
+N1["Metadata Capability"]
+N2["Version 2"]
 
-Version 2
+N1 --> N2
 ```
 
 The Runtime should require:
 
-```
-Manifest Validation
+```mermaid
+flowchart TD
 
-↓
+N1["Manifest Validation"]
+N2["Activation"]
+N3["Ready"]
 
-Activation
-
-↓
-
-Ready
+N1 --> N2
+N2 --> N3
 ```
 
 Nothing else.
@@ -509,22 +495,24 @@ Every capability should execute independently.
 
 Suppose:
 
-```
-Recommendation Capability
+```mermaid
+flowchart TD
 
-↓
+N1["Recommendation Capability"]
+N2["Failure"]
 
-Failure
+N1 --> N2
 ```
 
 The Runtime should ensure:
 
-```
-Playback Capability
+```mermaid
+flowchart TD
 
-↓
+N1["Playback Capability"]
+N2["Unaffected"]
 
-Unaffected
+N1 --> N2
 ```
 
 Capability failures should never destabilise the platform.
@@ -604,20 +592,17 @@ The Module Platform should remain conceptually simple.
 
 Everything reduces to one sentence.
 
-```
-Capability
+```mermaid
+flowchart TD
 
-↓
+N1["Capability"]
+N2["Manifest"]
+N3["Runtime"]
+N4["Execution"]
 
-Manifest
-
-↓
-
-Runtime
-
-↓
-
-Execution
+N1 --> N2
+N2 --> N3
+N3 --> N4
 ```
 
 Everything else is implementation.
@@ -643,7 +628,7 @@ These principles define the identity of the Module Platform.
 
 # Relationship to MEG
 
-MEG-005 defined:
+[MEG-005](../meg-005-runtime-architecture/index.md) defined:
 
 > **How the Runtime executes capabilities.**
 
@@ -666,23 +651,3 @@ The Runtime should become increasingly powerful by hosting more capabilities.
 Not by accumulating more business behaviour.
 
 That distinction is what transforms Mosaic from an application into a platform.
-
----
-
-# Review Status
-
-**Status**
-
-Draft
-
-**Owner**
-
-Lead Software Architect
-
-**Previous File**
-
-`00-document-control.md`
-
-**Next File**
-
-`02-module-manifest.md`

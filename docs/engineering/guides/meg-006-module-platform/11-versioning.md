@@ -132,12 +132,13 @@ The Runtime itself possesses its own version.
 
 Example.
 
-```
-Runtime
+```mermaid
+flowchart TD
 
-↓
+N1["Runtime"]
+N2["3.2.0"]
 
-3.2.0
+N1 --> N2
 ```
 
 Capabilities should not depend directly upon Runtime versions.
@@ -157,20 +158,22 @@ Individual Runtime contracts MAY evolve independently.
 
 Example.
 
+```mermaid
+flowchart TD
+
+N1["Scheduler"]
+N2["v2"]
+
+N1 --> N2
 ```
-Scheduler
 
-↓
+```mermaid
+flowchart TD
 
-v2
-```
+N1["BlobStore"]
+N2["v1"]
 
-```
-BlobStore
-
-↓
-
-v1
+N1 --> N2
 ```
 
 Breaking changes to one Runtime contract should not require versioning the entire Runtime.
@@ -186,33 +189,37 @@ This approach is increasingly used in extensible platforms to reduce unnecessary
 Capability versions SHOULD follow Semantic Versioning.
 
 ```
+
 MAJOR.MINOR.PATCH
 ```
 
 Meaning.
 
-```
-MAJOR
+```mermaid
+flowchart TD
 
-↓
+N1["MAJOR"]
+N2["Breaking Change"]
 
-Breaking Change
-```
-
-```
-MINOR
-
-↓
-
-Backward Compatible Feature
+N1 --> N2
 ```
 
+```mermaid
+flowchart TD
+
+N1["MINOR"]
+N2["Backward Compatible Feature"]
+
+N1 --> N2
 ```
-PATCH
 
-↓
+```mermaid
+flowchart TD
 
-Backward Compatible Fix
+N1["PATCH"]
+N2["Backward Compatible Fix"]
+
+N1 --> N2
 ```
 
 This provides predictable upgrade behaviour for module authors.
@@ -312,12 +319,13 @@ Manifest schemas SHOULD remain backwards compatible where practical.
 
 Example.
 
-```
-Manifest v2
+```mermaid
+flowchart TD
 
-↓
+N1["Manifest v2"]
+N2["Manifest v3"]
 
-Manifest v3
+N1 --> N2
 ```
 
 The Runtime MAY support multiple manifest versions simultaneously during migration.
@@ -332,20 +340,22 @@ The Runtime SHOULD support multiple SDK versions where practical.
 
 Example.
 
+```mermaid
+flowchart TD
+
+N1["SDK v2"]
+N2["Capability A"]
+
+N1 --> N2
 ```
-SDK v2
 
-↓
+```mermaid
+flowchart TD
 
-Capability A
-```
+N1["SDK v3"]
+N2["Capability B"]
 
-```
-SDK v3
-
-↓
-
-Capability B
+N1 --> N2
 ```
 
 The SDK compatibility matrix should remain explicit.
@@ -360,16 +370,15 @@ Features SHOULD be deprecated before removal.
 
 Lifecycle.
 
-```
-Supported
+```mermaid
+flowchart TD
 
-↓
+N1["Supported"]
+N2["Deprecated"]
+N3["Removed"]
 
-Deprecated
-
-↓
-
-Removed
+N1 --> N2
+N2 --> N3
 ```
 
 Deprecation warnings should appear:
@@ -388,24 +397,19 @@ Capability upgrades SHOULD remain predictable.
 
 Conceptually.
 
-```
-Capability
+```mermaid
+flowchart TD
 
-↓
+N1["Capability"]
+N2["New Version"]
+N3["Manifest Validation"]
+N4["Dependency Validation"]
+N5["Activation"]
 
-New Version
-
-↓
-
-Manifest Validation
-
-↓
-
-Dependency Validation
-
-↓
-
-Activation
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
 ```
 
 Upgrade should reuse the same Runtime lifecycle as installation.
@@ -545,23 +549,3 @@ Within Mosaic:
 - the Runtime validates compatibility
 
 By separating these concerns, the platform can evolve continuously without forcing unnecessary upgrades across the entire ecosystem.
-
----
-
-# Review Status
-
-**Status**
-
-Draft
-
-**Owner**
-
-Lead Software Architect
-
-**Previous File**
-
-`10-configuration.md`
-
-**Next File**
-
-`12-isolation.md`

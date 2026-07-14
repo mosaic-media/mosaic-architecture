@@ -52,48 +52,33 @@ They never initiate lifecycle transitions themselves.
 
 ---
 
-# Module Lifecycle
+# Module Lifecycle States
 
 Every module progresses through the same lifecycle.
 
-```
-Discovered
+```mermaid
+flowchart TD
 
-↓
+N1["Discovered"]
+N2["Registered"]
+N3["Resolved"]
+N4["Activated"]
+N5["Ready"]
+N6["Running"]
+N7["Suspended (optional)"]
+N8["Stopping"]
+N9["Deactivated"]
+N10["Removed"]
 
-Registered
-
-↓
-
-Resolved
-
-↓
-
-Activated
-
-↓
-
-Ready
-
-↓
-
-Running
-
-↓
-
-Suspended (optional)
-
-↓
-
-Stopping
-
-↓
-
-Deactivated
-
-↓
-
-Removed
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
+N5 --> N6
+N6 --> N7
+N7 --> N8
+N8 --> N9
+N9 --> N10
 ```
 
 Every stage has exactly one responsibility.
@@ -215,16 +200,15 @@ The Runtime MAY support suspension.
 
 Conceptually.
 
-```
-Running
+```mermaid
+flowchart TD
 
-↓
+N1["Running"]
+N2["Suspended"]
+N3["Running"]
 
-Suspended
-
-↓
-
-Running
+N1 --> N2
+N2 --> N3
 ```
 
 Suspension differs from deactivation.
@@ -253,12 +237,13 @@ Stopping begins graceful shutdown.
 
 The Runtime notifies the module that:
 
-```
-No New Work
+```mermaid
+flowchart TD
 
-↓
+N1["No New Work"]
+N2["Finish Existing Work"]
 
-Finish Existing Work
+N1 --> N2
 ```
 
 Modules should:
@@ -275,12 +260,13 @@ Business correctness should remain the highest priority.
 
 Once all work has completed:
 
-```
-Running
+```mermaid
+flowchart TD
 
-↓
+N1["Running"]
+N2["Deactivated"]
 
-Deactivated
+N1 --> N2
 ```
 
 The Runtime:
@@ -297,12 +283,13 @@ The module should no longer participate in execution.
 
 Removal occurs only after deactivation.
 
-```
-Deactivated
+```mermaid
+flowchart TD
 
-↓
+N1["Deactivated"]
+N2["Removed"]
 
-Removed
+N1 --> N2
 ```
 
 Removal deletes the module from the Runtime.
@@ -341,22 +328,27 @@ The Runtime MAY publish lifecycle events.
 Examples include:
 
 ```
+
 ModuleActivated
 ```
 
 ```
+
 ModuleReady
 ```
 
 ```
+
 ModuleSuspended
 ```
 
 ```
+
 ModuleStopped
 ```
 
 ```
+
 ModuleRemoved
 ```
 
@@ -388,12 +380,13 @@ Hidden lifecycle transitions complicate platform operations.
 
 Suppose activation fails.
 
-```
-Activation
+```mermaid
+flowchart TD
 
-↓
+N1["Activation"]
+N2["Failure"]
 
-Failure
+N1 --> N2
 ```
 
 The Runtime should:
@@ -411,24 +404,19 @@ Partial activation must never remain inside the Runtime.
 
 Following Runtime restart:
 
-```
-Discovery
+```mermaid
+flowchart TD
 
-↓
+N1["Discovery"]
+N2["Registration"]
+N3["Resolution"]
+N4["Activation"]
+N5["Ready"]
 
-Registration
-
-↓
-
-Resolution
-
-↓
-
-Activation
-
-↓
-
-Ready
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
 ```
 
 Modules should never assume:
@@ -445,40 +433,27 @@ Every Runtime start should produce a clean lifecycle.
 
 Capability upgrades should remain lifecycle driven.
 
-```
-Running
+```mermaid
+flowchart TD
 
-↓
+N1["Running"]
+N2["Stopping"]
+N3["Deactivated"]
+N4["Removed"]
+N5["Discovery"]
+N6["Registration"]
+N7["Resolution"]
+N8["Activation"]
+N9["Running"]
 
-Stopping
-
-↓
-
-Deactivated
-
-↓
-
-Removed
-
-↓
-
-Discovery
-
-↓
-
-Registration
-
-↓
-
-Resolution
-
-↓
-
-Activation
-
-↓
-
-Running
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
+N5 --> N6
+N6 --> N7
+N7 --> N8
+N8 --> N9
 ```
 
 The Runtime should never hot-swap executable capability code inside a running capability instance.
@@ -491,22 +466,24 @@ Replacing a capability should always occur through a controlled lifecycle transi
 
 Suppose:
 
-```
-Metadata Module
+```mermaid
+flowchart TD
 
-↓
+N1["Metadata Module"]
+N2["Failure"]
 
-Failure
+N1 --> N2
 ```
 
 The Runtime should ensure:
 
-```
-Playback
+```mermaid
+flowchart TD
 
-↓
+N1["Playback"]
+N2["Running"]
 
-Running
+N1 --> N2
 ```
 
 Module lifecycle failures should never destabilise unrelated capabilities.
@@ -636,23 +613,3 @@ It should become a recognised participant within the Runtime through a determini
 Within Mosaic, lifecycle consistency ensures that every capability, regardless of its origin, behaves predictably throughout installation, execution, upgrade and removal.
 
 That consistency is one of the defining characteristics of a mature capability platform.
-
----
-
-# Review Status
-
-**Status**
-
-Draft
-
-**Owner**
-
-Lead Software Architect
-
-**Previous File**
-
-`06-activation.md`
-
-**Next File**
-
-`08-module-sdk.md`

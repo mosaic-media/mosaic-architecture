@@ -49,32 +49,23 @@ Not during execution.
 
 Every Generation preparation follows the same dependency pipeline.
 
-```
-Selected Module Manifests
+```mermaid
+flowchart TD
 
-↓
+N1["Selected Module Manifests"]
+N2["Dependency Graph"]
+N3["Version Validation"]
+N4["Contract Resolution"]
+N5["Cycle Detection"]
+N6["Activation Order"]
+N7["Ready For Build Pipeline"]
 
-Dependency Graph
-
-↓
-
-Version Validation
-
-↓
-
-Contract Resolution
-
-↓
-
-Cycle Detection
-
-↓
-
-Activation Order
-
-↓
-
-Ready For Build Pipeline
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
+N5 --> N6
+N6 --> N7
 ```
 
 Executable Module code has still not run.
@@ -87,38 +78,39 @@ The Supervisor now knows whether the selected Module set is architecturally vali
 
 Suppose:
 
-```
-Recommendations
+```mermaid
+flowchart TD
 
-↓
+N1["Recommendations"]
+N2["Playback"]
+N3["Metadata"]
 
-Playback
-
-↓
-
-Metadata
+N1 --> N2
+N2 --> N3
 ```
 
 If:
 
-```
-Metadata
+```mermaid
+flowchart TD
 
-↓
+N1["Metadata"]
+N2["Missing"]
 
-Missing
+N1 --> N2
 ```
 
 The Runtime should reject the platform.
 
 Not:
 
-```
-Recommendations
+```mermaid
+flowchart TD
 
-↓
+N1["Recommendations"]
+N2["Runtime Failure"]
 
-Runtime Failure
+N1 --> N2
 ```
 
 Dependency failures should be detected during startup.
@@ -182,26 +174,26 @@ The Runtime MUST validate version compatibility.
 
 Example.
 
-```
-Metadata
+```mermaid
+flowchart TD
 
-↓
+N1["Metadata"]
+N2["Requires"]
+N3["Playback &gt;=2.0.0"]
 
-Requires
-
-↓
-
-Playback >=2.0.0
+N1 --> N2
+N2 --> N3
 ```
 
 If:
 
-```
-Playback
+```mermaid
+flowchart TD
 
-↓
+N1["Playback"]
+N2["1.8.0"]
 
-1.8.0
+N1 --> N2
 ```
 
 Activation fails.
@@ -244,20 +236,17 @@ Dependency Resolution constructs a Capability Graph.
 
 Example.
 
-```
-Library
+```mermaid
+flowchart TD
 
-↓
+N1["Library"]
+N2["Metadata"]
+N3["Playback"]
+N4["Recommendations"]
 
-Metadata
-
-↓
-
-Playback
-
-↓
-
-Recommendations
+N1 --> N2
+N2 --> N3
+N3 --> N4
 ```
 
 This graph becomes the authoritative model for:
@@ -267,7 +256,7 @@ This graph becomes the authoritative model for:
 - shutdown
 - diagnostics
 
-It is distinct from the Runtime Dependency Graph defined in MEG-005.
+It is distinct from the Runtime Dependency Graph defined in [MEG-005](../meg-005-runtime-architecture/index.md).
 
 The Runtime Graph describes Runtime Services.
 
@@ -281,30 +270,28 @@ The Capability Graph MUST remain acyclic.
 
 Valid.
 
-```
-Library
+```mermaid
+flowchart TD
 
-↓
+N1["Library"]
+N2["Metadata"]
+N3["Recommendations"]
 
-Metadata
-
-↓
-
-Recommendations
+N1 --> N2
+N2 --> N3
 ```
 
 Invalid.
 
-```
-Metadata
+```mermaid
+flowchart TD
 
-↓
+N1["Metadata"]
+N2["Recommendations"]
+N3["Metadata"]
 
-Recommendations
-
-↓
-
-Metadata
+N1 --> N2
+N2 --> N3
 ```
 
 Circular capability dependencies should prevent activation.
@@ -319,20 +306,17 @@ Once validated, the Runtime performs a topological sort.
 
 Example.
 
-```
-Library
+```mermaid
+flowchart TD
 
-↓
+N1["Library"]
+N2["Metadata"]
+N3["Playback"]
+N4["Recommendations"]
 
-Metadata
-
-↓
-
-Playback
-
-↓
-
-Recommendations
+N1 --> N2
+N2 --> N3
+N3 --> N4
 ```
 
 Activation should follow this ordering automatically.
@@ -348,34 +332,41 @@ The dependency graph is authoritative.
 Each dependency relationship should resolve to one of:
 
 ```
+
 Satisfied
 ```
 
 ```
+
 Optional Missing
 ```
 
 ```
+
 Missing
 ```
 
 ```
+
 Version Conflict
 ```
 
 ```
+
 Cycle Detected
 ```
 
 Only:
 
 ```
+
 Satisfied
 ```
 
 and
 
 ```
+
 Optional Missing
 ```
 
@@ -389,14 +380,17 @@ A contract MAY have multiple providers.
 
 Example.
 
-```
-MetadataProvider
+```mermaid
+flowchart TD
 
-├── TMDB
+N1["MetadataProvider"]
+N2["TMDB"]
+N3["AniList"]
+N4["Local Metadata"]
 
-├── AniList
-
-└── Local Metadata
+N1 --> N2
+N1 --> N3
+N1 --> N4
 ```
 
 Selection policy belongs to Runtime configuration.
@@ -433,14 +427,17 @@ The Runtime MAY support grouped capabilities.
 
 Example.
 
-```
-Metadata
+```mermaid
+flowchart TD
 
-├── TMDB
+N1["Metadata"]
+N2["TMDB"]
+N3["FanArt"]
+N4["Local Artwork"]
 
-├── FanArt
-
-└── Local Artwork
+N1 --> N2
+N1 --> N3
+N1 --> N4
 ```
 
 The group activates only if all required internal dependencies are satisfied.
@@ -457,20 +454,17 @@ The Runtime SHOULD support incremental dependency resolution.
 
 Example.
 
-```
-New Capability Installed
+```mermaid
+flowchart TD
 
-↓
+N1["New Capability Installed"]
+N2["Resolve New Dependencies"]
+N3["Validate Graph"]
+N4["Activate"]
 
-Resolve New Dependencies
-
-↓
-
-Validate Graph
-
-↓
-
-Activate
+N1 --> N2
+N2 --> N3
+N3 --> N4
 ```
 
 The Runtime should avoid rebuilding the entire platform graph unnecessarily.
@@ -487,22 +481,24 @@ Dependency failures should be explicit.
 
 Examples.
 
+```mermaid
+flowchart TD
+
+N1["Missing Dependency"]
+N2["metadata &gt;=2.0.0"]
+
+N1 --> N2
 ```
-Missing Dependency
 
-↓
+```mermaid
+flowchart TD
 
-metadata >=2.0.0
-```
+N1["Version Conflict"]
+N2["playback ^3.0.0"]
+N3["installed 2.7.0"]
 
-```
-Version Conflict
-
-↓
-
-playback ^3.0.0
-
-installed 2.7.0
+N1 --> N2
+N1 --> N3
 ```
 
 Operators should immediately understand:
@@ -643,23 +639,3 @@ It ensures that every capability entering execution does so within a platform th
 By validating the platform before executing it, the Mosaic Runtime avoids an entire class of operational failures and preserves one of its governing principles:
 
 > **The Runtime should understand the platform completely before it begins executing it.**
-
----
-
-# Review Status
-
-**Status**
-
-Draft
-
-**Owner**
-
-Lead Software Architect
-
-**Previous File**
-
-`04-registration.md`
-
-**Next File**
-
-`06-activation.md`

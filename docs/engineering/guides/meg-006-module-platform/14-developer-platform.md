@@ -48,32 +48,23 @@ Those concepts remain observable for diagnosis, but they should not be routine d
 
 The Developer Platform contains cooperating components with separate responsibilities.
 
-```text
-Developer
+```mermaid
+flowchart TD
 
-↓
+N1["Developer"]
+N2["Mosaic CLI"]
+N3["Mosaic SDK"]
+N4["Development Supervisor"]
+N5["Development Platform"]
+N6["Test Harness Modules"]
+N7["Local Module"]
 
-Mosaic CLI
-
-↓
-
-Mosaic SDK
-
-↓
-
-Development Supervisor
-
-↓
-
-Development Platform
-
-↓
-
-Test Harness Modules
-
-↓
-
-Local Module
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
+N5 --> N6
+N6 --> N7
 ```
 
 The SDK defines what a Module may depend on.
@@ -184,28 +175,21 @@ Generated projects should remain ordinary Go projects rather than proprietary pr
 
 Conceptually.
 
-```text
-mosaic dev
+```mermaid
+flowchart TD
 
-↓
+N1["mosaic dev"]
+N2["Development Supervisor"]
+N3["Development Platform"]
+N4["Test Harness Modules"]
+N5["Local Module"]
+N6["Client"]
 
-Development Supervisor
-
-↓
-
-Development Platform
-
-↓
-
-Test Harness Modules
-
-↓
-
-Local Module
-
-↓
-
-Client
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
+N5 --> N6
 ```
 
 The Local Module runs against a real Platform.
@@ -306,24 +290,19 @@ Local Module development should not require publication to a remote catalogue.
 
 Conceptually.
 
-```text
-Local Module
+```mermaid
+flowchart TD
 
-↓
+N1["Local Module"]
+N2["Development Supervisor"]
+N3["Build Pipeline"]
+N4["Isolated Build Workspace"]
+N5["Development Platform"]
 
-Development Supervisor
-
-↓
-
-Build Pipeline
-
-↓
-
-Isolated Build Workspace
-
-↓
-
-Development Platform
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
 ```
 
 The Development Supervisor supplies local Module paths as build inputs.
@@ -357,36 +336,25 @@ The Development Supervisor should monitor relevant inputs, including:
 
 Generated outputs should not trigger an unbounded rebuild loop.
 
-```text
-Save Source
+```mermaid
+flowchart TD
 
-↓
+N1["Save Source"]
+N2["Detect Change"]
+N3["Build Candidate Platform"]
+N4["Run Health Checks"]
+N5["Activate Development Platform"]
+N6["Notify Connected Clients"]
+N7["Reconnect Or Refresh Client"]
+N8["Continue"]
 
-Detect Change
-
-↓
-
-Build Candidate Platform
-
-↓
-
-Run Health Checks
-
-↓
-
-Activate Development Platform
-
-↓
-
-Notify Connected Clients
-
-↓
-
-Reconnect Or Refresh Client
-
-↓
-
-Continue
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
+N5 --> N6
+N6 --> N7
+N7 --> N8
 ```
 
 Failed builds should leave diagnostics available and must not be mistaken for successful activation.
@@ -403,14 +371,17 @@ The Development Supervisor should automatically request a composition containing
 
 Conceptually.
 
-```text
-Development Platform Binary
+```mermaid
+flowchart TD
 
-├── Platform
+N1["Development Platform Binary"]
+N2["Platform"]
+N3["Test Harness Modules"]
+N4["Local Module"]
 
-├── Test Harness Modules
-
-└── Local Module
+N1 --> N2
+N1 --> N3
+N1 --> N4
 ```
 
 Test Harness Modules and the Local Module are peers inside the composed Platform.
@@ -463,24 +434,19 @@ The Development Platform and Test Harness Modules support integration tests agai
 
 `mosaic test` may orchestrate:
 
-```text
-Start Development Supervisor
+```mermaid
+flowchart TD
 
-↓
+N1["Start Development Supervisor"]
+N2["Compose Development Platform"]
+N3["Install Test Harness Modules And Local Module"]
+N4["Execute Tests"]
+N5["Report Results And Diagnostics"]
 
-Compose Development Platform
-
-↓
-
-Install Test Harness Modules And Local Module
-
-↓
-
-Execute Tests
-
-↓
-
-Report Results And Diagnostics
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
 ```
 
 The CLI should remove manual environment setup from normal integration testing.
@@ -495,24 +461,19 @@ For Web development, `mosaic dev` should be able to complete the normal local st
 
 Conceptually.
 
-```text
-Start Development Supervisor
+```mermaid
+flowchart TD
 
-↓
+N1["Start Development Supervisor"]
+N2["Compose And Start Development Platform"]
+N3["Start Or Connect Shell"]
+N4["Launch Browser"]
+N5["Notify On Successful Rebuild"]
 
-Compose And Start Development Platform
-
-↓
-
-Start Or Connect Shell
-
-↓
-
-Launch Browser
-
-↓
-
-Notify On Successful Rebuild
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
 ```
 
 The developer should remain inside the running application while candidate builds are prepared.
@@ -597,7 +558,7 @@ The generated manifest is the declarative artefact consumed by the Supervisor an
 
 Generation should reduce duplicate maintenance without allowing executable source inspection during Supervisor discovery.
 
-Generated manifests must still pass MIP-002 validation.
+Generated manifests must still pass [MIP-002](../../protocols/mip-002-module-manifest-protocol/index.md) validation.
 
 ---
 
@@ -607,28 +568,21 @@ Generated manifests must still pass MIP-002 validation.
 
 Conceptually.
 
-```text
-Validate
+```mermaid
+flowchart TD
 
-↓
+N1["Validate"]
+N2["Generate Manifest"]
+N3["Run Tests"]
+N4["Package"]
+N5["Sign And Upload"]
+N6["Module Catalogue"]
 
-Generate Manifest
-
-↓
-
-Run Tests
-
-↓
-
-Package
-
-↓
-
-Sign And Upload
-
-↓
-
-Module Catalogue
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
+N5 --> N6
 ```
 
 Publication tooling should hide repository implementation details while preserving visible validation, package identity and provenance.
@@ -650,7 +604,7 @@ mosaic docs nav
 mosaic docs new
 ```
 
-These commands should invoke the documentation rules governed by MDG-001.
+These commands should invoke the documentation rules governed by [MDG-001](../../documentation/mdg-001-documentation-authority-guide/index.md).
 
 The CLI must not define a second documentation standard.
 
@@ -754,8 +708,8 @@ Within Mosaic:
 - SDK utilities SHOULD support isolated contract tests.
 - Development Platform tests SHOULD support real integration behaviour.
 - CLI validation MUST NOT replace Supervisor admission validation.
-- Manifest generation MUST produce a declarative artefact that conforms to MIP-002.
-- Documentation commands MUST follow MDG-001 rather than define separate rules.
+- Manifest generation MUST produce a declarative artefact that conforms to [MIP-002](../../protocols/mip-002-module-manifest-protocol/index.md).
+- Documentation commands MUST follow [MDG-001](../../documentation/mdg-001-documentation-authority-guide/index.md) rather than define separate rules.
 - Developer automation SHOULD expose sufficient diagnostics to explain failures.
 
 ---
@@ -766,9 +720,9 @@ This chapter extends:
 
 - Chapter 08, which defines the SDK contract boundary.
 - Chapter 13, which defines practical Module design guidance.
-- MEG-005, which defines Supervisor and Build Pipeline responsibilities.
-- MIP-002, which defines the generated Module Manifest contract.
-- MDG-001, which governs documentation tooling behaviour.
+- [MEG-005](../meg-005-runtime-architecture/index.md), which defines Supervisor and Build Pipeline responsibilities.
+- [MIP-002](../../protocols/mip-002-module-manifest-protocol/index.md), which defines the generated Module Manifest contract.
+- [MDG-001](../../documentation/mdg-001-documentation-authority-guide/index.md), which governs documentation tooling behaviour.
 
 The governing decision is recorded in:
 
@@ -782,16 +736,15 @@ The Developer Platform combines contracts, workflow, real Platform execution, de
 
 The intended path is:
 
-```text
-mosaic new module my-provider
+```mermaid
+flowchart TD
 
-↓
+N1["mosaic new module my-provider"]
+N2["mosaic dev"]
+N3["Running Development Platform"]
 
-mosaic dev
-
-↓
-
-Running Development Platform
+N1 --> N2
+N2 --> N3
 ```
 
 The SDK defines the contract.
@@ -799,23 +752,3 @@ The SDK defines the contract.
 The CLI provides the experience.
 
 The Development Supervisor and Build Pipeline preserve production-equivalent composition.
-
----
-
-# Review Status
-
-**Status**
-
-Draft
-
-**Owner**
-
-Lead Software Architect
-
-**Previous File**
-
-`13-platform-guidelines.md`
-
-**Next File**
-
-`15-test-harness.md`

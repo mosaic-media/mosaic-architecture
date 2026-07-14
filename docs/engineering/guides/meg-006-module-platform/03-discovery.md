@@ -55,28 +55,21 @@ A Module should be completely understood before the Build Pipeline is invoked.
 
 Every selected Module follows the same discovery pipeline.
 
-```
-Locate Manifest
+```mermaid
+flowchart TD
 
-↓
+N1["Locate Manifest"]
+N2["Read Manifest"]
+N3["Validate Manifest"]
+N4["Create Module Descriptor"]
+N5["Dependency Resolver"]
+N6["Ready For Build Workspace"]
 
-Read Manifest
-
-↓
-
-Validate Manifest
-
-↓
-
-Create Module Descriptor
-
-↓
-
-Dependency Resolver
-
-↓
-
-Ready For Build Workspace
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
+N5 --> N6
 ```
 
 Execution has not yet begun.
@@ -89,24 +82,19 @@ Only metadata has been processed.
 
 One of the most important Runtime guarantees is:
 
-```
-Discovery
+```mermaid
+flowchart TD
 
-↓
+N1["Discovery"]
+N2["Validation"]
+N3["Registration"]
+N4["Activation"]
+N5["Execution"]
 
-Validation
-
-↓
-
-Registration
-
-↓
-
-Activation
-
-↓
-
-Execution
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
 ```
 
 A capability should never execute simply because it exists on disk.
@@ -126,22 +114,27 @@ Modules MAY be discovered from multiple sources.
 Examples include:
 
 ```
+
 Platform Capability
 ```
 
 ```
+
 Modules Directory
 ```
 
 ```
+
 Marketplace Cache
 ```
 
 ```
+
 Enterprise Repository
 ```
 
 ```
+
 Development Workspace
 ```
 
@@ -158,6 +151,7 @@ The default discovery mechanism is manifest resolution from configured sources.
 Conceptually.
 
 ```
+
 module-index/
 
     anilist.yaml
@@ -239,6 +233,7 @@ Platform capabilities participate in discovery exactly like modules.
 Example.
 
 ```
+
 platform/
 
     playback/
@@ -264,16 +259,15 @@ Discovery operates entirely on manifests.
 
 Example.
 
-```
-Capability
+```mermaid
+flowchart TD
 
-↓
+N1["Capability"]
+N2["capability.yaml"]
+N3["Runtime"]
 
-capability.yaml
-
-↓
-
-Runtime
+N1 --> N2
+N2 --> N3
 ```
 
 No Go code should execute.
@@ -292,28 +286,21 @@ Following successful discovery, the Supervisor constructs a Module Descriptor.
 
 Conceptually.
 
-```
-Module Descriptor
+```mermaid
+flowchart TD
 
-↓
+N1["Module Descriptor"]
+N2["Identity"]
+N3["Version"]
+N4["Dependencies"]
+N5["Permissions"]
+N6["Contracts"]
 
-Identity
-
-↓
-
-Version
-
-↓
-
-Dependencies
-
-↓
-
-Permissions
-
-↓
-
-Contracts
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
+N5 --> N6
 ```
 
 The Descriptor becomes the Supervisor's internal representation of the Module during composition.
@@ -352,12 +339,13 @@ Discovery MUST detect duplicate capability identifiers.
 
 Poor.
 
-```
-metadata
+```mermaid
+flowchart TD
 
-↓
+N1["metadata"]
+N2["metadata"]
 
-metadata
+N1 --> N2
 ```
 
 The Runtime should reject ambiguous capability identities.
@@ -387,22 +375,24 @@ Discovery order should not matter.
 
 Suppose:
 
-```
-Playback
+```mermaid
+flowchart TD
 
-↓
+N1["Playback"]
+N2["Metadata"]
 
-Metadata
+N1 --> N2
 ```
 
 or
 
-```
-Metadata
+```mermaid
+flowchart TD
 
-↓
+N1["Metadata"]
+N2["Playback"]
 
-Playback
+N1 --> N2
 ```
 
 The resulting Capability Registry should be identical.
@@ -417,20 +407,17 @@ The Supervisor MAY support lazy manifest retrieval for specialised deployment mo
 
 Example.
 
-```
-Marketplace
+```mermaid
+flowchart TD
 
-↓
+N1["Marketplace"]
+N2["Discover Manifest"]
+N3["Download Capability"]
+N4["Register"]
 
-Discover Manifest
-
-↓
-
-Download Capability
-
-↓
-
-Register
+N1 --> N2
+N2 --> N3
+N3 --> N4
 ```
 
 However:
@@ -467,14 +454,17 @@ The Supervisor MAY record events describing discovery for diagnostics.
 Examples include:
 
 ```
+
 CapabilityDiscovered
 ```
 
 ```
+
 CapabilityRejected
 ```
 
 ```
+
 ManifestValidated
 ```
 
@@ -637,23 +627,3 @@ It should answer one question:
 Nothing more.
 
 By separating discovery from validation, activation and execution, the Mosaic Runtime remains predictable, observable and secure while allowing the platform to grow through independently developed capabilities.
-
----
-
-# Review Status
-
-**Status**
-
-Draft
-
-**Owner**
-
-Lead Software Architect
-
-**Previous File**
-
-`02-module-manifest.md`
-
-**Next File**
-
-`04-registration.md`

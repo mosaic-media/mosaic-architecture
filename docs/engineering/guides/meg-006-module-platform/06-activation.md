@@ -30,12 +30,14 @@ No executable capability has yet joined the Runtime.
 Activation is the controlled transition from:
 
 ```
+
 Registered Module Capability
 ```
 
 to:
 
 ```
+
 Operational Capability
 ```
 
@@ -64,36 +66,25 @@ Activation should never occur simply because Module code was statically linked.
 
 Every capability follows the same activation sequence.
 
-```
-SDK Registered
+```mermaid
+flowchart TD
 
-↓
+N1["SDK Registered"]
+N2["Dependencies Satisfied"]
+N3["Permissions Granted"]
+N4["Configuration Valid"]
+N5["Instantiate Capability"]
+N6["Register Runtime Contracts"]
+N7["Ready"]
+N8["Running"]
 
-Dependencies Satisfied
-
-↓
-
-Permissions Granted
-
-↓
-
-Configuration Valid
-
-↓
-
-Instantiate Capability
-
-↓
-
-Register Runtime Contracts
-
-↓
-
-Ready
-
-↓
-
-Running
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
+N5 --> N6
+N6 --> N7
+N7 --> N8
 ```
 
 Activation is the first stage where executable code participates.
@@ -106,12 +97,13 @@ Everything beforehand is metadata driven.
 
 Without activation:
 
-```
-Capability
+```mermaid
+flowchart TD
 
-↓
+N1["Capability"]
+N2["Execute Immediately"]
 
-Execute Immediately
+N1 --> N2
 ```
 
 The Runtime loses the opportunity to:
@@ -123,16 +115,15 @@ The Runtime loses the opportunity to:
 
 Instead.
 
-```
-Capability
+```mermaid
+flowchart TD
 
-↓
+N1["Capability"]
+N2["Activation"]
+N3["Operational Runtime"]
 
-Activation
-
-↓
-
-Operational Runtime
+N1 --> N2
+N2 --> N3
 ```
 
 The Runtime remains in control of platform composition.
@@ -155,16 +146,15 @@ func init() {
 
 Preferred.
 
-```
-Runtime
+```mermaid
+flowchart TD
 
-↓
+N1["Runtime"]
+N2["Activate Capability"]
+N3["Capability Ready"]
 
-Activate Capability
-
-↓
-
-Capability Ready
+N1 --> N2
+N2 --> N3
 ```
 
 Lifecycle ownership belongs entirely to the Runtime.
@@ -199,24 +189,19 @@ Activation is responsible for constructing the capability instance.
 
 Conceptually.
 
-```
-Runtime
+```mermaid
+flowchart TD
 
-↓
+N1["Runtime"]
+N2["Composition Root"]
+N3["Capability"]
+N4["Runtime Contracts"]
+N5["Ready"]
 
-Composition Root
-
-↓
-
-Capability
-
-↓
-
-Runtime Contracts
-
-↓
-
-Ready
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
 ```
 
 Construction should occur only once.
@@ -272,18 +257,21 @@ The capability simply prepares itself to execute.
 Activation should distinguish between:
 
 ```
+
 Initialised
 ```
 
 and
 
 ```
+
 Ready
 ```
 
 A capability becomes:
 
 ```
+
 Ready
 ```
 
@@ -305,31 +293,30 @@ Activation follows the validated Capability Graph.
 
 Example.
 
-```
-Library
+```mermaid
+flowchart TD
 
-↓
+N1["Library"]
+N2["Metadata"]
+N3["Playback"]
+N4["Recommendations"]
 
-Metadata
-
-↓
-
-Playback
-
-↓
-
-Recommendations
+N1 --> N2
+N2 --> N3
+N3 --> N4
 ```
 
 The Runtime should never activate:
 
 ```
+
 Recommendations
 ```
 
 before:
 
 ```
+
 Playback
 ```
 
@@ -344,12 +331,14 @@ Independent capabilities SHOULD activate concurrently.
 Example.
 
 ```
+
 Playback
 ```
 
 and
 
 ```
+
 Authentication
 ```
 
@@ -363,16 +352,15 @@ Parallel activation should never violate dependency ordering.
 
 Suppose activation fails.
 
-```
-Capability
+```mermaid
+flowchart TD
 
-↓
+N1["Capability"]
+N2["Activation"]
+N3["Failure"]
 
-Activation
-
-↓
-
-Failure
+N1 --> N2
+N2 --> N3
 ```
 
 The Runtime should:
@@ -392,12 +380,13 @@ The Runtime MAY continue operating when optional capabilities fail activation.
 
 Example.
 
-```
-Recommendation Capability
+```mermaid
+flowchart TD
 
-↓
+N1["Recommendation Capability"]
+N2["Activation Failure"]
 
-Activation Failure
+N1 --> N2
 ```
 
 The platform may continue providing:
@@ -419,14 +408,17 @@ The Runtime MAY publish Runtime Events.
 Examples include:
 
 ```
+
 CapabilityActivating
 ```
 
 ```
+
 CapabilityActivated
 ```
 
 ```
+
 CapabilityActivationFailed
 ```
 
@@ -457,24 +449,19 @@ The Runtime MAY support lazy activation.
 
 Example.
 
-```
-Capability Installed
+```mermaid
+flowchart TD
 
-↓
+N1["Capability Installed"]
+N2["Registered"]
+N3["Inactive"]
+N4["First Request"]
+N5["Activated"]
 
-Registered
-
-↓
-
-Inactive
-
-↓
-
-First Request
-
-↓
-
-Activated
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
 ```
 
 Lazy activation should remain an explicit Runtime policy.
@@ -487,20 +474,22 @@ Capabilities should not determine their own activation strategy.
 
 Built-in and third-party capabilities activate identically.
 
+```mermaid
+flowchart TD
+
+N1["Built-In Capability"]
+N2["Activation"]
+
+N1 --> N2
 ```
-Built-In Capability
 
-↓
+```mermaid
+flowchart TD
 
-Activation
-```
+N1["Module Capability"]
+N2["Activation"]
 
-```
-Module Capability
-
-↓
-
-Activation
+N1 --> N2
 ```
 
 The Runtime should not distinguish between them.
@@ -513,20 +502,17 @@ Architectural equality remains one of the defining principles of the platform.
 
 Activation always implies the possibility of deactivation.
 
-```
-Activated
+```mermaid
+flowchart TD
 
-↓
+N1["Activated"]
+N2["Running"]
+N3["Stopping"]
+N4["Disposed"]
 
-Running
-
-↓
-
-Stopping
-
-↓
-
-Disposed
+N1 --> N2
+N2 --> N3
+N3 --> N4
 ```
 
 Every activated capability should support a graceful lifecycle.
@@ -638,23 +624,3 @@ It transforms a validated capability into a live participant within the Runtime 
 Within Mosaic, activation should never be surprising.
 
 Every capability should become operational through the same deterministic, observable process regardless of whether it originated from the Platform distribution or from a third-party module.
-
----
-
-# Review Status
-
-**Status**
-
-Draft
-
-**Owner**
-
-Lead Software Architect
-
-**Previous File**
-
-`05-dependency-resolution.md`
-
-**Next File**
-
-`07-module-lifecycle.md`

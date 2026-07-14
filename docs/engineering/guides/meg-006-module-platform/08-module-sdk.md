@@ -76,16 +76,15 @@ The Module SDK is the public programming surface of the Mosaic platform.
 
 Conceptually.
 
-```
-Runtime
+```mermaid
+flowchart TD
 
-↓
+N1["Runtime"]
+N2["SDK"]
+N3["Module"]
 
-SDK
-
-↓
-
-Module
+N1 --> N2
+N2 --> N3
 ```
 
 The Platform owns implementation and orchestration.
@@ -118,16 +117,15 @@ Neither should depend directly on the other.
 
 Conceptually.
 
-```text
-Modules
+```mermaid
+flowchart TD
 
-↓
+N1["Modules"]
+N2["Mosaic SDK"]
+N3["Platform"]
 
-Mosaic SDK
-
-↓
-
-Platform
+N1 --> N2
+N2 --> N3
 ```
 
 The SDK is the shared contract surface.
@@ -140,12 +138,13 @@ It should not become an implementation bridge that leaks Platform internals.
 
 Without an SDK:
 
-```
-Module
+```mermaid
+flowchart TD
 
-↓
+N1["Module"]
+N2["Runtime Internals"]
 
-Runtime Internals
+N1 --> N2
 ```
 
 Every Runtime change becomes:
@@ -156,16 +155,15 @@ Every Runtime change becomes:
 
 Instead.
 
-```
-Module
+```mermaid
+flowchart TD
 
-↓
+N1["Module"]
+N2["SDK"]
+N3["Runtime"]
 
-SDK
-
-↓
-
-Runtime
+N1 --> N2
+N2 --> N3
 ```
 
 The Runtime evolves.
@@ -525,6 +523,7 @@ ctx.BlobStore()
 Without:
 
 ```
+
 blob.read
 ```
 
@@ -680,12 +679,13 @@ The SDK SHOULD be versioned independently.
 
 Example.
 
-```
-SDK 1.2
+```mermaid
+flowchart TD
 
-↓
+N1["SDK 1.2"]
+N2["Runtime 1.5"]
 
-Runtime 1.5
+N1 --> N2
 ```
 
 Compatibility should be explicit.
@@ -819,23 +819,3 @@ The Runtime evolves.
 The SDK endures.
 
 That separation allows the platform to grow without forcing module authors to continually chase internal architectural changes.
-
----
-
-# Review Status
-
-**Status**
-
-Draft
-
-**Owner**
-
-Lead Software Architect
-
-**Previous File**
-
-`07-module-lifecycle.md`
-
-**Next File**
-
-`09-permissions.md`

@@ -18,7 +18,7 @@ Version: 0.8
 | File | 00-document-control.md |
 | Status | Draft |
 | Version | 0.8 |
-| Owner | Lead Software Architect |
+| Owner | AdamNi-7080 |
 | Classification | Internal Architecture Specification |
 
 ---
@@ -70,45 +70,34 @@ Every capability intended to execute within the Mosaic Runtime SHOULD comply wit
 
 MEG specifications intentionally build upon one another.
 
-```
-MDL
+```mermaid
+flowchart TD
 
-↓
+N1["MDL"]
+N2["MDS"]
+N3["MEG-001"]
+N4["MEG-002"]
+N5["MEG-003"]
+N6["MEG-004"]
+N7["MEG-005"]
+N8["MEG-006"]
 
-MDS
-
-↓
-
-MEG-001
-
-↓
-
-MEG-002
-
-↓
-
-MEG-003
-
-↓
-
-MEG-004
-
-↓
-
-MEG-005
-
-↓
-
-MEG-006
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
+N5 --> N6
+N6 --> N7
+N7 --> N8
 ```
 
 Specifically:
 
-- **MEG-001** defines engineering.
-- **MEG-002** defines runtime behaviour.
-- **MEG-003** defines business modelling.
-- **MEG-004** defines architectural boundaries.
-- **MEG-005** defines the Capability Runtime.
+- **[MEG-001](../meg-001-go-engineering-standards/index.md)** defines engineering.
+- **[MEG-002](../meg-002-event-driven-runtime/index.md)** defines runtime behaviour.
+- **[MEG-003](../meg-003-domain-driven-design/index.md)** defines business modelling.
+- **[MEG-004](../meg-004-hexagonal-architecture/index.md)** defines architectural boundaries.
+- **[MEG-005](../meg-005-runtime-architecture/index.md)** defines the Capability Runtime.
 - **MEG-006** defines how capabilities join that Runtime.
 
 Together they establish the complete lifecycle of a Mosaic capability.
@@ -156,28 +145,21 @@ MEG specifications evolve alongside the platform.
 
 Each document progresses through the following lifecycle.
 
-```
-Draft
+```mermaid
+flowchart TD
 
-↓
+N1["Draft"]
+N2["Review"]
+N3["Accepted"]
+N4["Implemented"]
+N5["Maintained"]
+N6["Superseded (optional)"]
 
-Review
-
-↓
-
-Accepted
-
-↓
-
-Implemented
-
-↓
-
-Maintained
-
-↓
-
-Superseded (optional)
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
+N5 --> N6
 ```
 
 Accepted specifications become part of the canonical Mosaic architecture.
@@ -258,23 +240,3 @@ It does **not** define:
 Those concerns belong to other MEG specifications.
 
 Keeping module concerns separate from runtime concerns allows both to evolve independently.
-
----
-
-# Review Status
-
-**Status**
-
-Draft
-
-**Owner**
-
-Lead Software Architect
-
-**Previous File**
-
-`README.md`
-
-**Next File**
-
-`01-module-philosophy.md`

@@ -65,32 +65,23 @@ Implementation remains private.
 
 Capability isolation exists across several dimensions.
 
-```
-Lifecycle
+```mermaid
+flowchart TD
 
-↓
+N1["Lifecycle"]
+N2["Execution"]
+N3["Contracts"]
+N4["Dependencies"]
+N5["Configuration"]
+N6["Permissions"]
+N7["Failure"]
 
-Execution
-
-↓
-
-Contracts
-
-↓
-
-Dependencies
-
-↓
-
-Configuration
-
-↓
-
-Permissions
-
-↓
-
-Failure
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
+N5 --> N6
+N6 --> N7
 ```
 
 Each layer protects one aspect of platform independence.
@@ -103,22 +94,24 @@ Every capability owns its own lifecycle.
 
 Example.
 
-```
-Metadata
+```mermaid
+flowchart TD
 
-↓
+N1["Metadata"]
+N2["Activated"]
 
-Activated
+N1 --> N2
 ```
 
 does not imply:
 
-```
-Recommendations
+```mermaid
+flowchart TD
 
-↓
+N1["Recommendations"]
+N2["Activated"]
 
-Activated
+N1 --> N2
 ```
 
 The Runtime coordinates lifecycle.
@@ -135,20 +128,22 @@ Every capability executes independently.
 
 Example.
 
+```mermaid
+flowchart TD
+
+N1["Metadata"]
+N2["Worker A"]
+
+N1 --> N2
 ```
-Metadata
 
-↓
+```mermaid
+flowchart TD
 
-Worker A
-```
+N1["Playback"]
+N2["Worker B"]
 
-```
-Playback
-
-↓
-
-Worker B
+N1 --> N2
 ```
 
 Execution failure within one capability should not directly affect unrelated capability execution.
@@ -161,12 +156,13 @@ The Worker Manager and Execution Engine cooperate to preserve this separation.
 
 Suppose:
 
-```
-Metadata Capability
+```mermaid
+flowchart TD
 
-↓
+N1["Metadata Capability"]
+N2["Failure"]
 
-Failure
+N1 --> N2
 ```
 
 The Runtime should ensure:
@@ -214,27 +210,28 @@ Capabilities communicate through contracts.
 
 Example.
 
-```
-Metadata Capability
+```mermaid
+flowchart TD
 
-↓
+N1["Metadata Capability"]
+N2["MetadataProvider"]
+N3["Playback Capability"]
 
-MetadataProvider
-
-↓
-
-Playback Capability
+N1 --> N2
+N2 --> N3
 ```
 
 Playback depends upon:
 
 ```
+
 MetadataProvider
 ```
 
 It does not depend upon:
 
 ```
+
 TMDB Implementation
 ```
 
@@ -248,16 +245,15 @@ Events reinforce capability isolation.
 
 Example.
 
-```
-PlaybackCompleted
+```mermaid
+flowchart TD
 
-↓
+N1["PlaybackCompleted"]
+N2["Runtime"]
+N3["Recommendation Capability"]
 
-Runtime
-
-↓
-
-Recommendation Capability
+N1 --> N2
+N2 --> N3
 ```
 
 Playback does not know:
@@ -279,20 +275,22 @@ Each capability owns its own business state.
 
 Example.
 
+```mermaid
+flowchart TD
+
+N1["Playback"]
+N2["Watch Progress"]
+
+N1 --> N2
 ```
-Playback
 
-↓
+```mermaid
+flowchart TD
 
-Watch Progress
-```
+N1["Metadata"]
+N2["Artwork"]
 
-```
-Metadata
-
-↓
-
-Artwork
+N1 --> N2
 ```
 
 Playback should never modify Metadata storage directly.
@@ -304,7 +302,7 @@ Communication occurs through:
 
 Never shared persistence.
 
-This aligns with the ownership principles established in MEG-003.
+This aligns with the ownership principles established in [MEG-003](../meg-003-domain-driven-design/index.md).
 
 ---
 
@@ -314,26 +312,26 @@ Capabilities should not share persistence implementation.
 
 Poor.
 
-```
-Playback
+```mermaid
+flowchart TD
 
-↓
+N1["Playback"]
+N2["Update Metadata Table"]
 
-Update Metadata Table
+N1 --> N2
 ```
 
 Preferred.
 
-```
-PlaybackCompleted
+```mermaid
+flowchart TD
 
-↓
+N1["PlaybackCompleted"]
+N2["Runtime"]
+N3["Metadata Reacts"]
 
-Runtime
-
-↓
-
-Metadata Reacts
+N1 --> N2
+N2 --> N3
 ```
 
 Storage ownership follows capability ownership.
@@ -346,22 +344,24 @@ Capabilities consume only their own configuration.
 
 Poor.
 
-```
-Metadata
+```mermaid
+flowchart TD
 
-↓
+N1["Metadata"]
+N2["Reads Playback Configuration"]
 
-Reads Playback Configuration
+N1 --> N2
 ```
 
 Preferred.
 
-```
-Metadata
+```mermaid
+flowchart TD
 
-↓
+N1["Metadata"]
+N2["Own Configuration"]
 
-Own Configuration
+N1 --> N2
 ```
 
 Shared configuration creates hidden dependencies.
@@ -376,22 +376,24 @@ Permissions are capability specific.
 
 Example.
 
-```
-Metadata
+```mermaid
+flowchart TD
 
-↓
+N1["Metadata"]
+N2["blob.read"]
 
-blob.read
+N1 --> N2
 ```
 
 does not imply:
 
-```
-Playback
+```mermaid
+flowchart TD
 
-↓
+N1["Playback"]
+N2["blob.read"]
 
-blob.read
+N1 --> N2
 ```
 
 Authority should remain local to the capability requesting it.
@@ -462,22 +464,24 @@ Capabilities should upgrade independently.
 
 Example.
 
-```
-Metadata
+```mermaid
+flowchart TD
 
-↓
+N1["Metadata"]
+N2["Version 2.1"]
 
-Version 2.1
+N1 --> N2
 ```
 
 should not require:
 
-```
-Playback
+```mermaid
+flowchart TD
 
-↓
+N1["Playback"]
+N2["Upgrade"]
 
-Upgrade
+N1 --> N2
 ```
 
 unless an explicit dependency requires it.
@@ -498,16 +502,15 @@ Third-party modules should remain isolated from:
 
 Architecturally.
 
-```
-Runtime
+```mermaid
+flowchart TD
 
-↓
+N1["Runtime"]
+N2["SDK"]
+N3["Module"]
 
-SDK
-
-↓
-
-Module
+N1 --> N2
+N2 --> N3
 ```
 
 Modules communicate with the platform.
@@ -556,12 +559,14 @@ Marketplace installation should preserve isolation.
 Installing:
 
 ```
+
 Books Capability
 ```
 
 should not modify:
 
 ```
+
 Playback Capability
 ```
 
@@ -682,23 +687,3 @@ By isolating:
 - failures
 
 the Runtime becomes a stable platform rather than a tightly coupled application.
-
----
-
-# Review Status
-
-**Status**
-
-Draft
-
-**Owner**
-
-Lead Software Architect
-
-**Previous File**
-
-`11-versioning.md`
-
-**Next File**
-
-`13-platform-guidelines.md`

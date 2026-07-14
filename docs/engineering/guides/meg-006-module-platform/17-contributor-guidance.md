@@ -71,24 +71,29 @@ Every capability should answer one question.
 Examples.
 
 ```
+
 Metadata
 ```
 
 ```
+
 Playback
 ```
 
 ```
+
 Books
 ```
 
 Poor.
 
 ```
+
 Utilities
 ```
 
 ```
+
 PlatformHelpers
 ```
 
@@ -208,12 +213,14 @@ Completed business facts.
 Good.
 
 ```
+
 MetadataFetched
 ```
 
 Poor.
 
 ```
+
 FetchMetadataNow
 ```
 
@@ -221,7 +228,7 @@ Capabilities should publish facts.
 
 Not instructions.
 
-This reinforces the Event-Driven Runtime defined in MEG-002.
+This reinforces the Event-Driven Runtime defined in [MEG-002](../meg-002-event-driven-runtime/index.md).
 
 ---
 
@@ -511,23 +518,3 @@ Within Mosaic, every contribution should strengthen the ecosystem by making capa
 The Runtime provides the platform.
 
 Contributors determine how valuable that platform becomes.
-
----
-
-# Review Status
-
-**Status**
-
-Draft
-
-**Owner**
-
-Lead Software Architect
-
-**Previous File**
-
-`16-adrs.md`
-
-**Next File**
-
-`references.md`

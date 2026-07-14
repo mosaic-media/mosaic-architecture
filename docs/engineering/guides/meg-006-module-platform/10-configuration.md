@@ -59,24 +59,19 @@ This separation protects capabilities from deployment concerns.
 
 Configuration follows a simple lifecycle.
 
-```
-Capability Manifest
+```mermaid
+flowchart TD
 
-↓
+N1["Capability Manifest"]
+N2["Configuration Schema"]
+N3["Runtime Validation"]
+N4["Runtime Injection"]
+N5["Capability Execution"]
 
-Configuration Schema
-
-↓
-
-Runtime Validation
-
-↓
-
-Runtime Injection
-
-↓
-
-Capability Execution
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
 ```
 
 The capability never reads configuration directly from external sources.
@@ -87,24 +82,19 @@ The capability never reads configuration directly from external sources.
 
 Configuration must be validated before activation.
 
-```
-Discovery
+```mermaid
+flowchart TD
 
-↓
+N1["Discovery"]
+N2["Registration"]
+N3["Configuration"]
+N4["Activation"]
+N5["Execution"]
 
-Registration
-
-↓
-
-Configuration
-
-↓
-
-Activation
-
-↓
-
-Execution
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
 ```
 
 Capabilities should never begin execution with invalid configuration.
@@ -181,36 +171,42 @@ The Runtime MAY assemble configuration from multiple sources.
 Examples include:
 
 ```
+
 System Defaults
 ```
 
 ↓
 
 ```
+
 Capability Defaults
 ```
 
 ↓
 
 ```
+
 Configuration File
 ```
 
 ↓
 
 ```
+
 Environment Variables
 ```
 
 ↓
 
 ```
+
 Secrets Manager
 ```
 
 ↓
 
 ```
+
 Administrative Overrides
 ```
 
@@ -324,6 +320,7 @@ Examples include:
 Capabilities should receive:
 
 ```
+
 Secret Value
 ```
 
@@ -366,22 +363,24 @@ Configuration schemas SHOULD evolve alongside capabilities.
 
 Example.
 
-```
-Metadata 1.0
+```mermaid
+flowchart TD
 
-↓
+N1["Metadata 1.0"]
+N2["Schema V1"]
 
-Schema V1
+N1 --> N2
 ```
 
 Later.
 
-```
-Metadata 2.0
+```mermaid
+flowchart TD
 
-↓
+N1["Metadata 2.0"]
+N2["Schema V2"]
 
-Schema V2
+N1 --> N2
 ```
 
 The Runtime should understand which schema version belongs to which capability version.
@@ -396,20 +395,17 @@ The Runtime MAY support live configuration updates.
 
 Lifecycle.
 
-```
-Configuration Updated
+```mermaid
+flowchart TD
 
-↓
+N1["Configuration Updated"]
+N2["Validation"]
+N3["Capability Notification"]
+N4["Apply"]
 
-Validation
-
-↓
-
-Capability Notification
-
-↓
-
-Apply
+N1 --> N2
+N2 --> N3
+N3 --> N4
 ```
 
 Capabilities should decide:
@@ -441,18 +437,21 @@ Configuration exists at several scopes.
 Examples include:
 
 ```
+
 Platform
 ```
 
 ↓
 
 ```
+
 Capability
 ```
 
 ↓
 
 ```
+
 Instance
 ```
 
@@ -483,12 +482,13 @@ Marketplace tooling SHOULD expose configuration requirements before installation
 
 Example.
 
-```
-Metadata Capability
+```mermaid
+flowchart TD
 
-↓
+N1["Metadata Capability"]
+N2["Requires TMDB API Key"]
 
-Requires TMDB API Key
+N1 --> N2
 ```
 
 Operators should understand configuration requirements before activation.
@@ -608,23 +608,3 @@ The Runtime determines:
 - how they are delivered
 
 By separating configuration from configuration storage, the Mosaic platform allows capabilities to remain completely independent of deployment environments while preserving a consistent operational experience across every Runtime.
-
----
-
-# Review Status
-
-**Status**
-
-Draft
-
-**Owner**
-
-Lead Software Architect
-
-**Previous File**
-
-`09-permissions.md`
-
-**Next File**
-
-`11-versioning.md`

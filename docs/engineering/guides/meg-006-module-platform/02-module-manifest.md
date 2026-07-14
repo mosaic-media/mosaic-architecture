@@ -7,7 +7,7 @@ Version: 0.8
 
 # Module Manifest
 
-> *Module engineering begins with the manifest, but the protocol belongs to MIP-002.*
+> *Module engineering begins with the manifest, but the protocol belongs to [MIP-002](../../protocols/mip-002-module-manifest-protocol/index.md).*
 
 ---
 
@@ -15,7 +15,7 @@ Version: 0.8
 
 MEG-006 explains how engineers build the Module Platform.
 
-The authoritative manifest contract is defined by **MIP-002 — Module Manifest Protocol**.
+The authoritative manifest contract is defined by **[MIP-002 — Module Manifest Protocol](../../protocols/mip-002-module-manifest-protocol/index.md)**.
 
 This chapter describes the engineering implications of that protocol.
 
@@ -25,20 +25,23 @@ This chapter describes the engineering implications of that protocol.
 
 Module composition should always follow the same order:
 
-```text
-Download Manifest
-↓
-Validate Manifest
-↓
-Resolve Dependencies
-↓
-Prepare Build Workspace
-↓
-Generate Imports
-↓
-Build Platform Package
-↓
-Activate Generation
+```mermaid
+flowchart TD
+
+N1["Download Manifest"]
+N2["Validate Manifest"]
+N3["Resolve Dependencies"]
+N4["Prepare Build Workspace"]
+N5["Generate Imports"]
+N6["Build Platform Package"]
+N7["Activate Generation"]
+
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
+N5 --> N6
+N6 --> N7
 ```
 
 The Supervisor should not execute or analyse Go source to discover identity, dependencies, permissions or contracts.
@@ -101,4 +104,4 @@ Module Platform implementations should provide:
 
 Protocol authority is provided by:
 
-- MIP-002 — Module Manifest Protocol
+- [MIP-002 — Module Manifest Protocol](../../protocols/mip-002-module-manifest-protocol/index.md)

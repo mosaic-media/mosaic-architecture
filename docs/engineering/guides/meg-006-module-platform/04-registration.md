@@ -54,28 +54,21 @@ The Platform should complete registration before activating capability behaviour
 
 Every selected Module follows the same build-time admission pipeline.
 
-```
-Module Descriptor
+```mermaid
+flowchart TD
 
-↓
+N1["Module Descriptor"]
+N2["Identity Validation"]
+N3["Manifest Admission"]
+N4["Dependency Registration"]
+N5["Build Workspace Eligibility"]
+N6["Admitted"]
 
-Identity Validation
-
-↓
-
-Manifest Admission
-
-↓
-
-Dependency Registration
-
-↓
-
-Build Workspace Eligibility
-
-↓
-
-Admitted
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
+N5 --> N6
 ```
 
 Executable code has still not run.
@@ -172,24 +165,19 @@ All integration after registration should occur through SDK contracts and Platfo
 
 Registration intentionally precedes activation.
 
-```
-Discovery
+```mermaid
+flowchart TD
 
-↓
+N1["Discovery"]
+N2["Registration"]
+N3["Dependency Resolution"]
+N4["Activation"]
+N5["Execution"]
 
-Registration
-
-↓
-
-Dependency Resolution
-
-↓
-
-Activation
-
-↓
-
-Execution
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
 ```
 
 A registered Module may still fail:
@@ -208,16 +196,15 @@ Runtime registration admits the Module into the SDK registry.
 
 Conceptually.
 
-```
-Go init()
+```mermaid
+flowchart TD
 
-↓
+N1["Go init()"]
+N2["sdk.Register(...)"]
+N3["SDK Registry"]
 
-sdk.Register(...)
-
-↓
-
-SDK Registry
+N1 --> N2
+N2 --> N3
 ```
 
 Once registered, the Platform may reason about:
@@ -299,12 +286,13 @@ The Runtime MUST reject duplicate capability identifiers.
 
 Example.
 
-```
-metadata
+```mermaid
+flowchart TD
 
-↓
+N1["metadata"]
+N2["metadata"]
 
-metadata
+N1 --> N2
 ```
 
 Only one capability may own one identifier.
@@ -321,20 +309,17 @@ Once registered, the capability becomes visible to Runtime Services.
 
 Examples include:
 
-```
-Capability Registry
+```mermaid
+flowchart TD
 
-↓
+N1["Capability Registry"]
+N2["Execution Engine"]
+N3["Scheduler"]
+N4["Dependency Resolver"]
 
-Execution Engine
-
-↓
-
-Scheduler
-
-↓
-
-Dependency Resolver
+N1 --> N2
+N2 --> N3
+N3 --> N4
 ```
 
 Visibility does not imply availability.
@@ -347,20 +332,17 @@ Activation has not yet occurred.
 
 Every capability progresses through a registration lifecycle.
 
-```
-Discovered
+```mermaid
+flowchart TD
 
-↓
+N1["Discovered"]
+N2["Validated"]
+N3["Registered"]
+N4["Awaiting Activation"]
 
-Validated
-
-↓
-
-Registered
-
-↓
-
-Awaiting Activation
+N1 --> N2
+N2 --> N3
+N3 --> N4
 ```
 
 The Capability Registry should expose this state.
@@ -513,14 +495,17 @@ The Runtime MAY publish Runtime Events describing registration.
 Examples include:
 
 ```
+
 CapabilityRegistered
 ```
 
 ```
+
 CapabilityRejected
 ```
 
 ```
+
 CapabilityUpdated
 ```
 
@@ -690,23 +675,3 @@ By separating:
 - execution
 
 the Mosaic Runtime gains a predictable, observable and secure capability lifecycle that scales naturally as the platform grows.
-
----
-
-# Review Status
-
-**Status**
-
-Draft
-
-**Owner**
-
-Lead Software Architect
-
-**Previous File**
-
-`03-discovery.md`
-
-**Next File**
-
-`05-dependency-resolution.md`

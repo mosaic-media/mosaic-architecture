@@ -38,6 +38,7 @@ Within Mosaic:
 Capabilities should begin with:
 
 ```
+
 No Permissions
 ```
 
@@ -72,7 +73,7 @@ Authority belongs to the Runtime.
 
 ---
 
-# Capability Permissions
+# Capability Permission Declarations
 
 Every capability SHOULD declare its required permissions inside its manifest.
 
@@ -126,28 +127,21 @@ Requesting only the permissions required for functionality improves security and
 
 Permissions naturally fall into several categories.
 
-```
-Runtime
+```mermaid
+flowchart TD
 
-↓
+N1["Runtime"]
+N2["Platform"]
+N3["Storage"]
+N4["Network"]
+N5["Capability"]
+N6["Observability"]
 
-Platform
-
-↓
-
-Storage
-
-↓
-
-Network
-
-↓
-
-Capability
-
-↓
-
-Observability
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
+N5 --> N6
 ```
 
 Each category describes one class of Runtime authority.
@@ -268,7 +262,7 @@ Granular host-level permissions are increasingly regarded as a security best pra
 
 ---
 
-# Capability Permissions
+# Capability Contract Permissions
 
 Capabilities may expose contracts consumed by other capabilities.
 
@@ -327,16 +321,15 @@ Not automatic.
 
 The Runtime grants permissions during activation.
 
-```
-Manifest
+```mermaid
+flowchart TD
 
-↓
+N1["Manifest"]
+N2["Permission Validation"]
+N3["Capability Activated"]
 
-Permission Validation
-
-↓
-
-Capability Activated
+N1 --> N2
+N2 --> N3
 ```
 
 Capabilities should never request additional permissions dynamically unless the Runtime explicitly supports optional permission flows.
@@ -373,16 +366,15 @@ The Runtime owns enforcement.
 
 When permission is denied:
 
-```
-Capability
+```mermaid
+flowchart TD
 
-↓
+N1["Capability"]
+N2["SDK"]
+N3["Permission Denied"]
 
-SDK
-
-↓
-
-Permission Denied
+N1 --> N2
+N2 --> N3
 ```
 
 The Runtime should provide:
@@ -592,23 +584,3 @@ Within Mosaic:
 This separation preserves one of the platform's most important architectural guarantees:
 
 > **No capability should possess more authority than it explicitly requested and the Runtime explicitly granted.**
-
----
-
-# Review Status
-
-**Status**
-
-Draft
-
-**Owner**
-
-Lead Software Architect
-
-**Previous File**
-
-`08-module-sdk.md`
-
-**Next File**
-
-`10-configuration.md`

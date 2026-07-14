@@ -99,6 +99,7 @@ before understanding:
 Every capability begins with:
 
 ```
+
 capability.yaml
 ```
 
@@ -120,20 +121,24 @@ The design probably requires refinement.
 Good.
 
 ```
+
 Metadata
 ```
 
 ```
+
 Books
 ```
 
 ```
+
 Playback
 ```
 
 Poor.
 
 ```
+
 MediaEverythingCapability
 ```
 
@@ -187,26 +192,26 @@ Suppose one capability needs another.
 
 Poor.
 
-```
-Playback
+```mermaid
+flowchart TD
 
-↓
+N1["Playback"]
+N2["Recommendation Implementation"]
 
-Recommendation Implementation
+N1 --> N2
 ```
 
 Preferred.
 
-```
-PlaybackCompleted
+```mermaid
+flowchart TD
 
-↓
+N1["PlaybackCompleted"]
+N2["Runtime"]
+N3["Recommendations"]
 
-Runtime
-
-↓
-
-Recommendations
+N1 --> N2
+N2 --> N3
 ```
 
 Capabilities should collaborate through:
@@ -306,12 +311,14 @@ Ask:
 Examples.
 
 ```
+
 TMDB Metadata
 ```
 
 ↓
 
 ```
+
 AniList Metadata
 ```
 
@@ -453,6 +460,7 @@ Ask:
 The ideal answer is:
 
 ```
+
 Nothing
 ```
 
@@ -470,30 +478,28 @@ A genuinely new capability may require Platform and SDK evolution because the Pl
 
 Poor.
 
-```
-New Metadata Provider
+```mermaid
+flowchart TD
 
-↓
+N1["New Metadata Provider"]
+N2["Modify Runtime"]
 
-Modify Runtime
+N1 --> N2
 ```
 
 Preferred.
 
-```
-New Metadata Provider
+```mermaid
+flowchart TD
 
-↓
+N1["New Metadata Provider"]
+N2["Manifest"]
+N3["Runtime Discovers Existing Capability Contract"]
+N4["Runtime Executes"]
 
-Manifest
-
-↓
-
-Runtime Discovers Existing Capability Contract
-
-↓
-
-Runtime Executes
+N1 --> N2
+N2 --> N3
+N3 --> N4
 ```
 
 Provider growth should occur through Module addition.
@@ -585,7 +591,7 @@ The remaining documents describe:
 - terminology
 - references
 
-Together, MEG-001 through MEG-006 now define:
+Together, [MEG-001](../meg-001-go-engineering-standards/index.md) through MEG-006 now define:
 
 - engineering
 - execution
@@ -621,23 +627,3 @@ Only:
 Within Mosaic, the Runtime should remain stable for years while capabilities continue to evolve indefinitely.
 
 That is the defining characteristic of a true platform.
-
----
-
-# Review Status
-
-**Status**
-
-Draft
-
-**Owner**
-
-Lead Software Architect
-
-**Previous File**
-
-`12-isolation.md`
-
-**Next File**
-
-`14-developer-platform.md`
