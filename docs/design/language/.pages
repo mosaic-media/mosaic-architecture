@@ -1,0 +1,8 @@
+title: Language
+arrange:
+  - index.md
+  - mdl-001-vision
+  - mdl-002-principles
+  - mdl-003-mental-model
+  - mdl-004-interaction-model
+  - mdl-005-composition-model

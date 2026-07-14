@@ -1,0 +1,7 @@
+title: Guides
+arrange:
+  - index.md
+  - meg-001-go-engineering-standards
+  - meg-002-event-driven-runtime
+  - meg-003-domain-driven-design
+  - meg-004-hexagonal-architecture

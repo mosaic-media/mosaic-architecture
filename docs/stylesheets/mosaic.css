@@ -1,0 +1,78 @@
+/*
+ * Light Mosaic branding for Material for MkDocs.
+ * Keep this layer small: colors only, no layout or component replacements.
+ */
+
+:root {
+  --mosaic-indigo: #3f51b5;
+  --mosaic-indigo-dark: #303f9f;
+  --mosaic-cyan: #007c91;
+  --mosaic-cyan-bright: #00acc1;
+  --mosaic-search-highlight: rgba(0, 172, 193, 0.2);
+}
+
+[data-md-color-scheme="default"] {
+  --md-primary-fg-color: var(--mosaic-indigo);
+  --md-primary-fg-color--light: #5c6bc0;
+  --md-primary-fg-color--dark: var(--mosaic-indigo-dark);
+  --md-accent-fg-color: var(--mosaic-cyan);
+  --md-accent-fg-color--transparent: rgba(0, 124, 145, 0.12);
+  --md-typeset-a-color: var(--mosaic-cyan);
+}
+
+[data-md-color-scheme="slate"] {
+  --md-primary-fg-color: var(--mosaic-indigo);
+  --md-primary-fg-color--light: #7986cb;
+  --md-primary-fg-color--dark: var(--mosaic-indigo-dark);
+  --md-accent-fg-color: #80deea;
+  --md-accent-fg-color--transparent: rgba(128, 222, 234, 0.16);
+  --md-typeset-a-color: #80deea;
+  --mosaic-search-highlight: rgba(128, 222, 234, 0.24);
+}
+
+.md-tabs,
+.md-header {
+  background-color: var(--md-primary-fg-color);
+}
+
+.md-nav__item .md-nav__link--active,
+.md-nav__item .md-nav__link--active code,
+.md-tabs__link--active {
+  color: var(--md-accent-fg-color);
+}
+
+.md-typeset a:focus,
+.md-typeset a:hover,
+.md-nav__link:focus,
+.md-nav__link:hover,
+.md-tabs__link:focus,
+.md-tabs__link:hover {
+  color: var(--md-accent-fg-color);
+}
+
+.md-button {
+  border-color: var(--md-accent-fg-color);
+  color: var(--md-accent-fg-color);
+}
+
+.md-button:focus,
+.md-button:hover,
+.md-button--primary {
+  background-color: var(--md-accent-fg-color);
+  border-color: var(--md-accent-fg-color);
+  color: var(--md-primary-bg-color);
+}
+
+.md-search-result mark,
+.md-typeset mark {
+  background-color: var(--mosaic-search-highlight);
+  color: inherit;
+}
+
+.md-search__input:focus,
+.md-typeset a:focus-visible,
+.md-nav__link:focus-visible,
+.md-tabs__link:focus-visible {
+  outline: 2px solid var(--md-accent-fg-color);
+  outline-offset: 2px;
+}

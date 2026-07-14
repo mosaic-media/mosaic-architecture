@@ -2,65 +2,70 @@
 
 This repository holds internal Mosaic documentation: architecture notes, design specifications, decision records, and supporting reference material.
 
-It is intended to be the source of truth for how Mosaic is understood, designed, and evolved before implementation work is planned or built.
+It is the source of truth for how Mosaic is understood, designed, and evolved before implementation work is planned or built. The repository is also configured as a Material for MkDocs documentation portal published through GitHub Pages.
+
+## Documentation Website
+
+The generated site uses [Material for MkDocs](https://squidfunk.github.io/mkdocs-material/).
+
+Local development:
+
+```bash
+python -m pip install -r requirements.txt
+python scripts/validate_docs.py
+mkdocs serve
+```
+
+Production validation:
+
+```bash
+mkdocs build --strict
+```
+
+GitHub Actions builds and deploys the site to GitHub Pages on every push to `main`.
 
 ## Repository Structure
 
 ```text
-design/
-  mdl/  Mosaic Design Language
-  mds/  Mosaic Design System
-engineering/
-  meg/  Mosaic Engineering Guidelines
+docs/
+  design/
+    language/    Mosaic Design Language specifications
+    system/      Mosaic Design System specifications
+  engineering/
+    architecture/  Platform and system architecture specifications
+    guides/        Mosaic Engineering Guidelines specifications
+    protocols/     Integration and interoperability protocol specifications
+    operations/    Runtime, support, and operational specifications
 ```
 
-### Mosaic Design Language
+The current imported specification set lives in:
 
-`design/mdl` contains foundational product and design-language specifications.
+- `docs/design/language` for MDL documents
+- `docs/design/system` for MDS documents
+- `docs/engineering/guides` for MEG documents
 
-These documents describe:
+The remaining engineering sections are reserved for future document types.
 
-- why Mosaic exists
-- how design decisions are made
-- how Mosaic models the user's entertainment world
-- how interaction, behaviour, and composition should be understood
+## Document Types
 
-Start here when a decision affects product philosophy, user experience, interaction behaviour, or conceptual architecture.
+The structure is intended to support these document families without another major reorganisation:
 
-### Mosaic Design System
-
-`design/mds` contains implementation-facing design-system specifications.
-
-These documents describe:
-
-- design token architecture
-- colour, material, typography, and motion systems
-- runtime composition
-- tile and component architecture
-
-Start here when a decision affects visual systems, presentation primitives, runtime design infrastructure, or component behaviour.
-
-### Mosaic Engineering Guidelines
-
-`engineering/meg` contains engineering standards and implementation-facing architecture guidelines.
-
-These documents describe:
-
-- Go engineering standards
-- event-driven runtime behaviour
-- domain-driven design practices
-- hexagonal architecture boundaries
-
-Start here when a decision affects service structure, runtime behaviour, domain modelling, dependency direction, or engineering quality standards.
+- `MAC` — Mosaic Architecture
+- `MDP` — Mosaic Design Process
+- `MEG` — Mosaic Engineering Guidelines
+- `MIP` — Mosaic Integration Protocol
+- `MOP` — Mosaic Operations
+- `MDL` — Mosaic Design Language
+- `MDS` — Mosaic Design System
 
 ## Documentation Conventions
 
-Each specification is stored as a folder with one Markdown file per chapter.
+Each specification is stored as its own folder with one Markdown file per chapter.
 
 Most specification folders follow this shape:
 
 ```text
-README.md
+index.md
 00-document-control.md
 01-...
 02-...
@@ -68,6 +73,8 @@ README.md
 glossary.md
 references.md
 ```
+
+Folder names are URL-safe slugs such as `meg-001-go-engineering-standards`. The generated site uses `.pages` files so navigation presents human-readable titles such as `Go Engineering Standards` while the document ID remains visible on the page.
 
 Chapter-level files are preferred over large monolithic documents because they are easier to review, diff, discuss, and evolve independently.
 
@@ -77,12 +84,34 @@ Decision records live inside the relevant specification folder, usually in `*-ad
 
 Place decisions close to the system they govern:
 
-- MDL decisions belong under `design/mdl`
-- MDS decisions belong under `design/mds`
-- MEG decisions belong under `engineering/meg`
+- MDL decisions belong under `docs/design/language`
+- MDS decisions belong under `docs/design/system`
+- MEG decisions belong under `docs/engineering/guides`
 - cross-cutting decisions should reference the upstream specification they depend on
 
 When a decision changes the meaning of an existing specification, update both the ADR section and the affected chapter.
+
+## Website Features
+
+The MkDocs portal is configured with:
+
+- full-text search with suggestions and highlighting
+- dark and light theme toggle
+- Mermaid diagram rendering
+- admonitions
+- code copy buttons
+- previous and next navigation
+- table of contents
+- section index pages
+- GitHub repository and edit-page links
+
+Specification metadata comments are preserved in source files. A MkDocs hook renders Document ID, Status, and Version visibly in the generated site at build time.
+
+## Branding
+
+Light Mosaic branding is configured through `mkdocs.yml` and `docs/stylesheets/mosaic.css`.
+
+The temporary header logo is stored at `docs/assets/images/mosaic-logo-dark.jpg`. Keep this first branding layer intentionally small: Material for MkDocs remains responsible for typography, layout, navigation, and component styling.
 
 ## Working Guidelines
 

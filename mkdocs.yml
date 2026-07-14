@@ -1,0 +1,83 @@
+# Material for MkDocs configuration for the Mosaic architecture portal.
+site_name: Mosaic Architecture
+site_description: Internal Mosaic architecture, engineering, and design documentation.
+site_url: https://mosaic-media.github.io/mosaic-architecture/
+
+repo_name: mosaic-media/mosaic-architecture
+repo_url: https://github.com/mosaic-media/mosaic-architecture
+edit_uri: edit/main/
+
+# MkDocs requires documentation source to live below the config file.
+docs_dir: docs
+site_dir: site
+
+# Keep repository support files and generated artifacts out of the page tree.
+exclude_docs: |
+  output/**
+
+theme:
+  name: material
+  language: en
+  logo: assets/images/mosaic-logo-dark.jpg
+  icon:
+    repo: fontawesome/brands/github
+  features:
+    # Portal ergonomics.
+    - content.code.copy
+    - navigation.footer
+    - navigation.indexes
+    - navigation.instant
+    - navigation.sections
+    - navigation.tabs
+    - navigation.tabs.sticky
+    - navigation.top
+    - search.highlight
+    - search.suggest
+    - toc.follow
+  palette:
+    # Follow the user's OS preference while still exposing a manual toggle.
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: indigo
+      accent: cyan
+      toggle:
+        icon: material/weather-night
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: indigo
+      accent: cyan
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to light mode
+
+extra_css:
+  - stylesheets/mosaic.css
+
+plugins:
+  - search
+  # Reads .pages files so folders can keep URL-safe slugs while nav uses titles.
+  - awesome-pages
+  # Lets section index.md files behave as clickable section landing pages.
+  - section-index
+
+hooks:
+  # Renders preserved source metadata comments as visible page metadata.
+  - scripts/mkdocs_metadata.py
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - md_in_html
+  - tables
+  - toc:
+      permalink: true
+  - pymdownx.details
+  - pymdownx.highlight
+  - pymdownx.inlinehilite
+  # Enables Mermaid fences through Material for MkDocs.
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
