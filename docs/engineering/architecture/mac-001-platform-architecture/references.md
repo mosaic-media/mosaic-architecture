@@ -2,7 +2,7 @@
 File: docs/engineering/architecture/mac-001-platform-architecture/references.md
 Document: MAC-001
 Status: Draft
-Version: 0.1
+Version: 0.3
 -->
 
 # References
@@ -15,6 +15,7 @@ Version: 0.1
 - MEG-002 — Event-Driven Runtime
 - MEG-005 — Runtime Architecture
 - MEG-006 — Module Platform
+- MDS-008 — Component Library
 - MIP-001 — Event Protocol
 - MIP-002 — Module Manifest Protocol
 - MOP-001 — Observability Operations
@@ -27,3 +28,4 @@ Version: 0.1
 - Hexagonal Architecture
 - Event-driven architecture
 - Capability-oriented platform design
+- Server-driven UI architecture

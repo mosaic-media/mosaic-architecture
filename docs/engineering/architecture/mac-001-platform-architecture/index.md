@@ -2,12 +2,12 @@
 File: docs/engineering/architecture/mac-001-platform-architecture/index.md
 Document: MAC-001
 Status: Draft
-Version: 0.1
+Version: 0.3
 -->
 
 # MAC-001 — Platform Architecture
 
-> *Mosaic is a platform before it is an application. The Platform provides stable execution, composition and governance so product capabilities can evolve independently.*
+> *The Platform is the execution kernel of Mosaic. It provides the stable runtime in which capabilities execute while the Supervisor owns lifecycle and composition, and Modules provide business functionality.*
 
 ---
 
@@ -23,6 +23,8 @@ It establishes the architectural home for concepts that appear throughout the en
 - modules
 - contracts
 - operational boundaries
+- communication models
+- SDUI production boundaries
 
 Engineering guides explain how to realise this architecture. MAC-001 defines what the architecture is.
 
@@ -32,11 +34,42 @@ Engineering guides explain how to realise this architecture. MAC-001 defines wha
 
 Within Mosaic:
 
-> **The Platform owns execution, composition and governance. Capabilities own product behaviour.**
+> **The Platform is a runtime, not an application.**
+
+The Platform exists to answer one question:
+
+> **How do independently developed capabilities execute together as a single Mosaic system?**
+
+It does not answer:
+
+- how movies work,
+- how anime works,
+- how playback works,
+- how metadata should be interpreted.
+
+Those are Module and capability responsibilities.
 
 The Platform exists to keep Mosaic stable while allowing the product surface to grow.
 
 It should not accumulate business behaviour simply because the behaviour is important. Important behaviour still belongs in capabilities or modules unless it is required for the Platform itself to operate.
+
+Conceptually.
+
+```text
+Supervisor
+
+↓ invokes Build Pipeline and manages lifecycle
+
+Platform
+
+↓ coordinates capabilities
+
+Modules
+```
+
+The Platform owns orchestration.
+
+Modules own implementation.
 
 ---
 
@@ -52,6 +85,8 @@ It covers:
 - module participation
 - architectural boundaries
 - cross-document ownership
+- contract ownership
+- capability communication models
 
 It does not define:
 
@@ -78,5 +113,6 @@ Related implementation and protocol documents include:
 - MIP-001 — Event Protocol
 - MIP-002 — Module Manifest Protocol
 - MOP-001 — Observability Operations
+- MDS-008 — Component Library
 
 When these documents need to explain platform ownership, they should reference MAC-001 rather than redefining it.

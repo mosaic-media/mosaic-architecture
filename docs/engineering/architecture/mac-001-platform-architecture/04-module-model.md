@@ -2,7 +2,7 @@
 File: docs/engineering/architecture/mac-001-platform-architecture/04-module-model.md
 Document: MAC-001
 Status: Draft
-Version: 0.1
+Version: 0.3
 -->
 
 # 04 — Module Model
@@ -33,7 +33,11 @@ It may provide:
 - contracts
 - operational metadata
 
-The Platform admits modules through manifest-driven discovery and validation.
+The Platform admits modules through manifest-driven discovery and validation before activation.
+
+The initial runtime model statically links selected Go Modules into the Platform binary through a Supervisor-orchestrated Build Pipeline.
+
+The Platform does not scan arbitrary directories at runtime.
 
 ---
 
@@ -68,6 +72,79 @@ It decides whether a module can participate by validating:
 - lifecycle requirements
 
 A module is not trusted merely because it exists on disk.
+
+---
+
+# Discovery Model
+
+Module discovery follows the activated Platform package.
+
+Conceptually.
+
+```text
+Supervisor
+
+↓
+
+Build Pipeline
+
+↓
+
+imports.go
+
+↓
+
+Go init
+
+↓
+
+SDK Registry
+
+↓
+
+Platform Discovery
+```
+
+At runtime, the Platform asks the SDK Registry for registered Modules.
+
+Conceptually.
+
+```go
+sdk.Modules()
+```
+
+The Platform is unaware of compilation mechanics.
+
+Build mechanics belong to the Build Pipeline.
+
+---
+
+# Dependency Direction
+
+Dependencies always point toward Platform contracts.
+
+Conceptually.
+
+```text
+Modules
+
+↓
+
+SDK
+
+↓
+
+Platform Contracts
+```
+
+Modules must not reference each other directly.
+
+Module cooperation occurs through:
+
+- capabilities,
+- Capability Managers,
+- Event Bus messages,
+- published Platform contracts.
 
 ---
 
