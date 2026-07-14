@@ -4,7 +4,7 @@ Document: MDS-008
 Chapter: 08
 Title: Accessibility Contracts
 Status: Draft
-Version: 0.2
+Version: 0.4
 -->
 
 # Accessibility Contracts

@@ -2,7 +2,7 @@
 File: docs/design/system/mds-008-component-library/index.md
 Document: MDS-008
 Status: Draft
-Version: 0.2
+Version: 0.4
 -->
 
 # MDS-008 — Component Library
@@ -124,6 +124,7 @@ It produces:
 - Platform Components
 - Render Trees
 - Accessible UI
+- Client-specific renderers
 
 ---
 
@@ -137,6 +138,9 @@ This specification defines:
 - Component Lifecycle
 - Component Composition
 - Rendering Architecture
+- Client Renderers
+- Runtime SDUI
+- Recovery SDUI
 - Platform Components
 - Accessibility Contracts
 - Runtime Rendering
@@ -166,6 +170,8 @@ MDS-008 exists to answer one question.
 Not:
 
 > How should the application behave?
+
+For recovery and onboarding states, this specification also defines how clients render the deliberately smaller Recovery SDUI vocabulary emitted by the Supervisor.
 
 ---
 
@@ -217,6 +223,7 @@ After reading MDS-008 contributors should understand:
 - how rendering stays replaceable,
 - how accessibility integrates,
 - how runtime presentation becomes visible,
+- how Recovery SDUI becomes safe diagnostic presentation,
 
 without redefining behaviour or runtime architecture.
 
@@ -261,9 +268,9 @@ design/
 
         13-contributor-guidance.md
 
-        glossary.md
-
         references.md
+
+        glossary.md
 ```
 
 ---

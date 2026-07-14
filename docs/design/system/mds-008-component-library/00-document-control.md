@@ -3,7 +3,7 @@ File: docs/design/system/mds-008-component-library/00-document-control.md
 Document: MDS-008
 Title: Component Library
 Status: Draft
-Version: 0.2
+Version: 0.4
 -->
 
 # Document Control
@@ -18,7 +18,7 @@ Version: 0.2
 | Title | Mosaic Design System — Component Library |
 | Classification | Internal |
 | Status | Draft |
-| Version | 0.1 |
+| Version | 0.4 |
 | Owner | Lead UI Platform Architecture Team |
 | Parent Specifications | MDL-001 → MDL-005, MDS-001 → MDS-007 |
 | Repository | `/design/mds/MDS-008 Component Library/` |
@@ -62,6 +62,10 @@ MDS-008 governs:
 - Component lifecycle
 - Component composition
 - Rendering architecture
+- Client rendering
+- Runtime SDUI
+- Recovery SDUI
+- Platform-specific MDL libraries
 - Platform components
 - Accessibility contracts
 - Runtime rendering
@@ -182,15 +186,27 @@ The Component Library defines:
 - component contracts
 - rendering behaviour
 - platform implementation
+- platform-specific MDL library boundaries
 - accessibility implementation
 - runtime rendering
+- client rendering responsibilities
 - component optimisation
 
 It intentionally avoids implementation-specific frameworks becoming architectural concepts.
 
-Flutter, React, SwiftUI and Compose remain implementation targets.
+Web and native clients remain implementation targets.
+
+Native clients may include Flutter, Windows, macOS, Linux, Android TV or Apple TV.
 
 Not design abstractions.
+
+The Platform and Supervisor emit SDUI contracts.
+
+Clients implement those contracts as native presentation.
+
+The Component Library owns the rendering responsibility, not the upstream runtime decisions.
+
+Version 0.4 records the Presentation Architecture boundary between Platform semantic UI, client renderers and platform-specific MDL libraries.
 
 ---
 

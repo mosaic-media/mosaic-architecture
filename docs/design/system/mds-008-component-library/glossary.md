@@ -3,7 +3,7 @@ File: docs/design/system/mds-008-component-library/glossary.md
 Document: MDS-008
 Title: Glossary
 Status: Draft
-Version: 0.2
+Version: 0.4
 -->
 
 # Glossary
@@ -48,6 +48,24 @@ Components consume them.
 ---
 
 # C
+
+## Client Renderer
+
+A client-owned implementation layer that transforms Mosaic SDUI contracts into native presentation.
+
+Client Renderers may exist for:
+
+- Web
+- Flutter
+- Windows
+- macOS
+- TV
+
+Client Renderers implement presentation.
+
+They do not produce runtime behaviour.
+
+---
 
 ## Component
 
@@ -106,7 +124,88 @@ This lifecycle is intentionally separate from Tile lifecycle.
 
 ---
 
+# E
+
+## Embedded Recovery Renderer
+
+A self-contained Web fallback renderer served by the Supervisor when the Shell or normal Web Renderer cannot run.
+
+The Embedded Recovery Renderer renders Recovery SDUI using one HTML document with inline CSS and JavaScript only.
+
+It must not depend on external assets, bundles, fonts, images, frameworks or build pipeline output.
+
+---
+
+# F
+
+## Flutter Renderer
+
+A specific Native Client Renderer that transforms Runtime SDUI or Recovery SDUI into native Flutter presentation.
+
+The Flutter Renderer uses the Flutter MDL library rather than browser fallback rendering.
+
+It is an example native renderer, not the required native-client architecture.
+
+---
+
 # M
+
+## MDL Algorithm
+
+A platform-independent design-language calculation implemented by each platform-specific MDL library.
+
+Examples include:
+
+- light intensity,
+- refraction strength,
+- colour extraction,
+- elevation calculations,
+- motion curves.
+
+MDL Algorithms preserve design-language equivalence across different rendering technologies.
+
+---
+
+## MDL Library
+
+A platform-specific implementation of the Mosaic Design Language.
+
+Examples include:
+
+- `mdl-web`
+- `mdl-flutter`
+- future `mdl-windows`
+- future `mdl-macos`
+- future `mdl-linux`
+- future `mdl-android-tv`
+- future `mdl-apple-tv`
+- future `mdl-tv`
+
+MDL Libraries own presentation behaviour.
+
+They do not own Mosaic business logic.
+
+---
+
+## MDL Runtime
+
+A rejected architecture in which the Mosaic Design Language existed as a runtime presentation service between SDUI and client renderers.
+
+Mosaic does not use an MDL Runtime.
+
+MDL is implemented as platform-specific libraries linked into client renderers.
+
+---
+
+## MDL Specification
+
+The platform-independent source of truth for Mosaic visual language behaviour.
+
+The MDL Specification defines design-language concepts that platform-specific MDL libraries implement.
+
+It may be represented as a dedicated `mdl-spec` project.
+
+---
 
 ## Material Profile
 
@@ -118,7 +217,29 @@ Components execute them.
 
 ---
 
+## Native Client Renderer
+
+A non-Web client renderer that transforms Runtime SDUI or Recovery SDUI into native application presentation.
+
+Flutter is the clearest current example, but native clients may also include Windows, macOS, Linux, Android TV and Apple TV implementations.
+
+Native Client Renderers should not depend on the Web Shell, browser fallback rendering or CSS as their normal presentation contract.
+
+---
+
 # P
+
+## Presentation Architecture
+
+The architectural separation between semantic intent, design-language behaviour and native rendering implementation.
+
+Presentation Architecture separates:
+
+- Platform-owned Semantic UI,
+- MDL-owned presentation behaviour,
+- renderer-owned native implementation.
+
+---
 
 ## Platform Component
 
@@ -143,7 +264,39 @@ Presentation is the final architectural output of the Mosaic Design Language.
 
 ---
 
+## Product Identity
+
+The brand-specific assets and choices that identify Mosaic as a product.
+
+Product Identity includes:
+
+- logos,
+- product colours,
+- icons,
+- favicons,
+- brand imagery.
+
+Product Identity is separate from the Mosaic Design Language, which owns presentation behaviour.
+
+---
+
 # R
+
+## Recovery SDUI
+
+The deliberately small SDUI contract emitted by the Supervisor for Shell bootstrap status, onboarding, build progress, diagnostics, updates, maintenance and recovery states.
+
+Recovery SDUI supports only the recovery component vocabulary.
+
+Its purpose is to keep an intelligent interface available when the Platform does not exist, has failed or is being replaced.
+
+Recovery SDUI is owned by the Supervisor.
+
+MDL does not modify Recovery SDUI.
+
+Recovery SDUI also supports onboarding before the Platform exists; the Supervisor does not emit Runtime SDUI for that flow.
+
+---
 
 ## Rendering
 
@@ -167,6 +320,47 @@ Runtime Rendering performs:
 - accessibility integration.
 
 It does not perform behavioural reasoning.
+
+---
+
+## Runtime SDUI
+
+The SDUI contract emitted by the Platform for normal Mosaic presentation.
+
+Runtime SDUI may express the full Mosaic presentation model and is rendered by client renderers through Shell or native client implementations.
+
+Runtime SDUI is the normal Mosaic form of Semantic UI.
+
+Runtime SDUI is owned by the Platform.
+
+MDL does not modify Runtime SDUI.
+
+---
+
+# S
+
+## Semantic UI
+
+An SDUI contract that describes business intent and interface structure without visual implementation details.
+
+Semantic UI may describe:
+
+- business logic,
+- navigation structure,
+- component hierarchy,
+- actions,
+- state,
+- permissions.
+
+Semantic UI must not describe:
+
+- CSS,
+- colours,
+- spacing,
+- animation,
+- refraction,
+- layout coordinates,
+- native widget classes.
 
 ---
 
@@ -207,6 +401,16 @@ Behaviour remains identical.
 
 ---
 
+# W
+
+## Web Renderer
+
+The Web client renderer responsible for transforming Runtime SDUI or Recovery SDUI into browser presentation when the Shell is available.
+
+The Web Renderer is distinct from the Embedded Recovery Renderer.
+
+---
+
 # Cross References
 
 | Specification | Primary Concepts |
@@ -243,4 +447,4 @@ Draft
 
 **Next File**
 
-`references.md`
+End.

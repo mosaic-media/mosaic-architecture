@@ -4,7 +4,7 @@ Document: MDS-008
 Chapter: 12
 Title: Architectural Decision Records
 Status: Draft
-Version: 0.2
+Version: 0.4
 -->
 
 # Architectural Decision Records
@@ -261,6 +261,197 @@ Community modules automatically inherit future rendering improvements.
 
 ---
 
+# ADR-191
+
+## Title
+
+Clients Render SDUI; Recovery Uses The Richest Available Renderer
+
+### Status
+
+Accepted
+
+### Context
+
+Mosaic supports multiple presentation clients.
+
+The Platform emits Runtime SDUI for normal Mosaic presentation.
+
+The Supervisor emits Recovery SDUI for onboarding, diagnostics and recovery states that must remain available when the Platform is unavailable.
+
+If recovery presentation depends on one full client implementation, Mosaic can lose its diagnostic interface during exactly the failures that need diagnosis.
+
+### Decision
+
+Clients are responsible for rendering SDUI into native presentation.
+
+Runtime SDUI and Recovery SDUI are separate contracts.
+
+Runtime SDUI is produced by the Platform.
+
+Recovery SDUI is produced by the Supervisor.
+
+Recovery presentation should use the richest available renderer.
+
+Preferred order:
+
+1. Shell or native client renderer
+2. Embedded Web Recovery Renderer
+3. No UI only during catastrophic Supervisor failure
+
+The Supervisor never emits normal HTML presentation.
+
+The embedded Web Recovery Renderer is permitted only as a bootstrap and Shell-failure fallback.
+
+Onboarding uses Recovery SDUI rather than Runtime SDUI because it can occur before the Platform exists.
+
+During normal installation, the Supervisor bootstraps the Shell proactively and the Shell renders Recovery SDUI for onboarding and build progress.
+
+The embedded Web Recovery Renderer appears only if the browser arrives before the Shell is available or the Shell cannot run, and yields automatically when the Shell becomes available.
+
+Client renderers present recovery state but do not supervise or recover the Supervisor.
+
+### Consequences
+
+Normal presentation remains client-owned and replaceable.
+
+Recovery remains available even when the Platform has not been built, is failed or is being replaced.
+
+Native clients can provide native recovery interfaces without depending on Web implementation details.
+
+The embedded web fallback must remain deliberately small, self-contained and independent from the normal Shell build.
+
+---
+
+# ADR-192
+
+## Title
+
+MDL Is Implemented As Platform-Specific Libraries
+
+### Status
+
+Accepted
+
+### Context
+
+Mosaic separates business intent, design language and rendering.
+
+The Platform emits semantic UI.
+
+Clients render that semantic UI.
+
+One option was to make the Mosaic Design Language a runtime presentation service between Platform and clients.
+
+That would introduce another runtime layer and make presentation depend on a central service.
+
+### Decision
+
+MDL will be implemented as platform-specific libraries rather than as a runtime presentation service.
+
+Examples include:
+
+- `mdl-web`
+- `mdl-flutter`
+- future `mdl-windows`
+- future `mdl-macos`
+- future `mdl-linux`
+- future `mdl-android-tv`
+- future `mdl-apple-tv`
+- future `mdl-tv`
+
+Each client renderer links against its platform's MDL implementation.
+
+MDL owns presentation behaviour.
+
+Renderers own native implementation.
+
+The Platform owns semantic intent.
+
+### Consequences
+
+Clients remain platform idiomatic.
+
+The Web renderer is not the reference implementation.
+
+Every renderer is first class.
+
+Platform-independent MDL algorithms should remain equivalent across implementations.
+
+Rendering code may differ by platform as long as MDL semantics remain intact.
+
+Mosaic avoids a runtime presentation service while preserving one shared design language.
+
+---
+
+# ADR-193
+
+## Title
+
+MDL Runtime As Presentation Service
+
+### Status
+
+Rejected
+
+### Context
+
+An earlier presentation architecture placed an MDL Runtime between SDUI and client renderers.
+
+Conceptually.
+
+```text
+Platform
+
+↓
+
+SDUI
+
+↓
+
+MDL Runtime
+
+↓
+
+Renderer
+
+↓
+
+Native Presentation
+```
+
+The MDL Runtime would have enriched SDUI with presentation information before rendering.
+
+This made MDL behave like another backend service and tied presentation decisions into the runtime path.
+
+### Decision
+
+Mosaic rejects an MDL Runtime service.
+
+MDL is a client-side design-language implementation linked into each renderer.
+
+MDL does not modify Runtime SDUI or Recovery SDUI.
+
+Renderers combine semantic structure from SDUI with design rules from MDL and map the result to native graphics APIs.
+
+### Consequences
+
+The Platform remains the only runtime authority for normal Mosaic behaviour.
+
+The Supervisor remains the recovery authority.
+
+Presentation remains client-owned.
+
+MDL can still provide shared specifications, design definitions and platform-independent algorithms.
+
+Rendering implementations remain native and platform-specific.
+
+Mosaic avoids an unnecessary runtime layer while preserving a single design language.
+
+Flutter is one likely native-client implementation, not a required architectural dependency.
+
+---
+
 # ADR Relationships
 
 ```mermaid
@@ -284,6 +475,12 @@ ADR189["Rendering"]
 
 ADR190["Modules"]
 
+ADR191["SDUI Rendering"]
+
+ADR192["MDL Libraries"]
+
+ADR193["Rejected MDL Runtime"]
+
 ADR182 --> ADR183
 ADR183 --> ADR184
 ADR184 --> ADR188
@@ -292,6 +489,9 @@ ADR183 --> ADR186
 ADR186 --> ADR189
 ADR187 --> ADR189
 ADR189 --> ADR190
+ADR189 --> ADR191
+ADR191 --> ADR192
+ADR192 --> ADR193
 ```
 
 Together these decisions establish the Component Library as a thin implementation layer that faithfully renders the runtime architecture without altering it.
@@ -311,7 +511,7 @@ Future Component Library ADRs are expected to formalise:
 - Hardware Capability Profiles
 - Runtime Rendering Personas
 
-These intentionally remain outside the scope of MDS-008 Version 0.1.
+These intentionally remain outside the current scope of MDS-008.
 
 ---
 

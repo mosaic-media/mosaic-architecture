@@ -4,7 +4,7 @@ Document: MDS-008
 Chapter: 05
 Title: Component Composition
 Status: Draft
-Version: 0.2
+Version: 0.4
 -->
 
 # Component Composition

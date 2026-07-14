@@ -4,7 +4,7 @@ Document: MDS-008
 Chapter: 07
 Title: Platform Components
 Status: Draft
-Version: 0.2
+Version: 0.4
 -->
 
 # Platform Components

@@ -4,7 +4,7 @@ Document: MDS-008
 Chapter: 11
 Title: Component Library Governance
 Status: Draft
-Version: 0.2
+Version: 0.4
 -->
 
 # Component Library Governance

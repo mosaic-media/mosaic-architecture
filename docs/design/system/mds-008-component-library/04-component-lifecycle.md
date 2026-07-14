@@ -4,7 +4,7 @@ Document: MDS-008
 Chapter: 04
 Title: Component Lifecycle
 Status: Draft
-Version: 0.2
+Version: 0.4
 -->
 
 # Component Lifecycle

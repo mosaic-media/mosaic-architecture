@@ -4,7 +4,7 @@ Document: MDS-008
 Chapter: 01
 Title: Component Philosophy
 Status: Draft
-Version: 0.2
+Version: 0.4
 -->
 
 # Component Philosophy
