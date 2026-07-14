@@ -4,7 +4,7 @@ Document: MDL-004
 Chapter: 13
 Title: Contributor Guidance
 Status: Draft
-Version: 0.2
+Version: 0.4
 -->
 
 # Contributor Guidance
@@ -40,46 +40,36 @@ One of the most common mistakes in software development is implementing interact
 
 Poor process.
 
-```
-Button
+```mermaid
+flowchart TD
 
-↓
+N1["Button"]
+N2["Click"]
+N3["Animation"]
+N4["Done"]
 
-Click
-
-↓
-
-Animation
-
-↓
-
-Done
+N1 --> N2
+N2 --> N3
+N3 --> N4
 ```
 
 Preferred process.
 
-```
-User Intent
+```mermaid
+flowchart TD
 
-↓
+N1["User Intent"]
+N2["Behaviour"]
+N3["Composition"]
+N4["Expression"]
+N5["Presentation"]
+N6["Implementation"]
 
-Behaviour
-
-↓
-
-Composition
-
-↓
-
-Expression
-
-↓
-
-Presentation
-
-↓
-
-Implementation
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
+N5 --> N6
 ```
 
 Behaviour should always precede interface.
@@ -93,36 +83,42 @@ Avoid describing features using interface terminology.
 Poor.
 
 ```
+
 Open Details Page
 ```
 
 Better.
 
 ```
+
 Shift Focus
 ```
 
 Poor.
 
 ```
+
 Show Dialog
 ```
 
 Better.
 
 ```
+
 Request Confirmation
 ```
 
 Poor.
 
 ```
+
 Navigate Home
 ```
 
 Better.
 
 ```
+
 Return To Previous Context
 ```
 
@@ -369,15 +365,3 @@ They should instead think:
 If contributors consistently optimise for understanding rather than interface, Mosaic will gradually become easier to use without users ever consciously noticing why.
 
 That is the ultimate objective of the Interaction Model.
-
----
-
-# Review Status
-
-**Status**
-
-Draft
-
-**Next File**
-
-`glossary.md`

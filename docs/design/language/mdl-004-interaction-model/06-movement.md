@@ -4,7 +4,7 @@ Document: MDL-004
 Chapter: 06
 Title: Movement
 Status: Draft
-Version: 0.2
+Version: 0.4
 -->
 
 # Movement
@@ -71,26 +71,26 @@ Movement should always communicate behaviour that already exists.
 
 Incorrect process.
 
-```
-Animation
+```mermaid
+flowchart TD
 
-↓
+N1["Animation"]
+N2["Behaviour"]
 
-Behaviour
+N1 --> N2
 ```
 
 Correct process.
 
-```
-Behaviour
+```mermaid
+flowchart TD
 
-↓
+N1["Behaviour"]
+N2["Movement"]
+N3["Animation"]
 
-Movement
-
-↓
-
-Animation
+N1 --> N2
+N2 --> N3
 ```
 
 Animation implements movement.
@@ -137,28 +137,31 @@ Direction communicates relationship.
 
 Examples.
 
-```
-Focus
+```mermaid
+flowchart TD
 
-↓
+N1["Focus"]
+N2["Expands"]
 
-Expands
-```
-
-```
-Supporting Information
-
-↓
-
-Moves Aside
+N1 --> N2
 ```
 
+```mermaid
+flowchart TD
+
+N1["Supporting Information"]
+N2["Moves Aside"]
+
+N1 --> N2
 ```
-Completed Information
 
-↓
+```mermaid
+flowchart TD
 
-Leaves Composition
+N1["Completed Information"]
+N2["Leaves Composition"]
+
+N1 --> N2
 ```
 
 Direction provides meaning.
@@ -176,36 +179,42 @@ Examples.
 Question.
 
 ```
+
 Why did this move?
 ```
 
 Answer.
 
 ```
+
 Focus changed.
 ```
 
 Question.
 
 ```
+
 Why did this disappear?
 ```
 
 Answer.
 
 ```
+
 It is no longer relevant.
 ```
 
 Question.
 
 ```
+
 Why did this appear?
 ```
 
 Answer.
 
 ```
+
 New information became important.
 ```
 
@@ -221,12 +230,13 @@ Movement should reflect conceptual weight rather than visual distance.
 
 Example.
 
-```
-Episode 14
+```mermaid
+flowchart TD
 
-↓
+N1["Episode 14"]
+N2["Episode 15"]
 
-Episode 15
+N1 --> N2
 ```
 
 Small conceptual change.
@@ -237,12 +247,13 @@ Small movement.
 
 Example.
 
-```
-Anime
+```mermaid
+flowchart TD
 
-↓
+N1["Anime"]
+N2["Books"]
 
-Books
+N1 --> N2
 ```
 
 Large conceptual change.
@@ -253,12 +264,13 @@ Larger movement.
 
 Example.
 
-```
-Playback
+```mermaid
+flowchart TD
 
-↓
+N1["Playback"]
+N2["Administration"]
 
-Administration
+N1 --> N2
 ```
 
 Very large conceptual change.
@@ -273,26 +285,26 @@ Objects should preserve identity wherever practical.
 
 Users should recognise:
 
-```
-Current Progress
+```mermaid
+flowchart TD
 
-↓
+N1["Current Progress"]
+N2["Current Progress"]
 
-Current Progress
+N1 --> N2
 ```
 
 rather than
 
-```
-Old Progress
+```mermaid
+flowchart TD
 
-↓
+N1["Old Progress"]
+N2["Destroyed"]
+N3["New Progress"]
 
-Destroyed
-
-↓
-
-New Progress
+N1 --> N2
+N2 --> N3
 ```
 
 The object remains.
@@ -310,6 +322,7 @@ Movement should normally remain local.
 Changing:
 
 ```
+
 Progress
 ```
 
@@ -350,26 +363,26 @@ New information should arrive naturally.
 
 Poor.
 
-```
-Information
+```mermaid
+flowchart TD
 
-↓
+N1["Information"]
+N2["Instantly Appears"]
 
-Instantly Appears
+N1 --> N2
 ```
 
 Preferred.
 
-```
-Information Becomes Relevant
+```mermaid
+flowchart TD
 
-↓
+N1["Information Becomes Relevant"]
+N2["Composition Creates Space"]
+N3["Information Joins"]
 
-Composition Creates Space
-
-↓
-
-Information Joins
+N1 --> N2
+N2 --> N3
 ```
 
 Users should understand why something has entered their World.
@@ -384,26 +397,26 @@ Information should leave naturally.
 
 Poor.
 
-```
-Information
+```mermaid
+flowchart TD
 
-↓
+N1["Information"]
+N2["Disappears"]
 
-Disappears
+N1 --> N2
 ```
 
 Preferred.
 
-```
-Information Becomes Less Relevant
+```mermaid
+flowchart TD
 
-↓
+N1["Information Becomes Less Relevant"]
+N2["Priority Reduces"]
+N3["Leaves Composition"]
 
-Priority Reduces
-
-↓
-
-Leaves Composition
+N1 --> N2
+N2 --> N3
 ```
 
 Departure should feel like completion.
@@ -418,20 +431,17 @@ Movement should communicate temporal progression.
 
 Examples.
 
-```
-Watching
+```mermaid
+flowchart TD
 
-↓
+N1["Watching"]
+N2["Completed"]
+N3["Continue"]
+N4["Next Episode"]
 
-Completed
-
-↓
-
-Continue
-
-↓
-
-Next Episode
+N1 --> N2
+N2 --> N3
+N3 --> N4
 ```
 
 The interface should communicate that one experience has naturally progressed into another.
@@ -576,15 +586,3 @@ It communicates:
 Movement should never exist because animation is possible.
 
 It exists because users deserve to understand how their World has changed.
-
----
-
-# Review Status
-
-**Status**
-
-Draft
-
-**Next File**
-
-`07-user-flow.md`

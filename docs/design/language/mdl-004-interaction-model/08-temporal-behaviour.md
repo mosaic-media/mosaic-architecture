@@ -4,7 +4,7 @@ Document: MDL-004
 Chapter: 08
 Title: Temporal Behaviour
 Status: Draft
-Version: 0.2
+Version: 0.4
 -->
 
 # Temporal Behaviour
@@ -79,34 +79,30 @@ Example.
 
 Poor behaviour.
 
-```
-Episode Released
+```mermaid
+flowchart TD
 
-↓
+N1["Episode Released"]
+N2["Notification"]
+N3["Dismiss"]
 
-Notification
-
-↓
-
-Dismiss
+N1 --> N2
+N2 --> N3
 ```
 
 Preferred behaviour.
 
-```
-Episode Released
+```mermaid
+flowchart TD
 
-↓
+N1["Episode Released"]
+N2["Timeline Evolves"]
+N3["Continue Watching Gains Priority"]
+N4["World Updates"]
 
-Timeline Evolves
-
-↓
-
-Continue Watching Gains Priority
-
-↓
-
-World Updates
+N1 --> N2
+N2 --> N3
+N3 --> N4
 ```
 
 The user discovers the change naturally.
@@ -121,42 +117,34 @@ Every meaningful piece of Information exists within time.
 
 Examples include:
 
-```
-Future
+```mermaid
+flowchart TD
 
-↓
+N1["Future"]
+N2["Present"]
+N3["Past"]
 
-Present
-
-↓
-
-Past
+N1 --> N2
+N2 --> N3
 ```
 
 Example.
 
-```
-Episode
+```mermaid
+flowchart TD
 
-↓
+N1["Episode"]
+N2["Announced"]
+N3["Airing Tomorrow"]
+N4["Available"]
+N5["Watched"]
+N6["Completed"]
 
-Announced
-
-↓
-
-Airing Tomorrow
-
-↓
-
-Available
-
-↓
-
-Watched
-
-↓
-
-Completed
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
+N5 --> N6
 ```
 
 The Information remains identical.
@@ -171,12 +159,13 @@ Before something becomes available, Mosaic should reduce uncertainty.
 
 Example.
 
-```
-Next Episode
+```mermaid
+flowchart TD
 
-↓
+N1["Next Episode"]
+N2["Tomorrow"]
 
-Tomorrow
+N1 --> N2
 ```
 
 Questions naturally answered include:
@@ -214,34 +203,30 @@ Completion should never feel like termination.
 
 Poor.
 
-```
-Episode Ends
+```mermaid
+flowchart TD
 
-↓
+N1["Episode Ends"]
+N2["Finished"]
 
-Finished
+N1 --> N2
 ```
 
 Preferred.
 
-```
-Episode Ends
+```mermaid
+flowchart TD
 
-↓
+N1["Episode Ends"]
+N2["Progress Updates"]
+N3["Relationships Expand"]
+N4["Next Episode Gains Priority"]
+N5["World Continues"]
 
-Progress Updates
-
-↓
-
-Relationships Expand
-
-↓
-
-Next Episode Gains Priority
-
-↓
-
-World Continues
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
 ```
 
 Completion represents continuity.
@@ -337,24 +322,19 @@ Lower-confidence events should remain peripheral.
 
 The platform should develop a natural rhythm.
 
-```
-Preparation
+```mermaid
+flowchart TD
 
-↓
+N1["Preparation"]
+N2["Availability"]
+N3["Continuation"]
+N4["Completion"]
+N5["Preparation"]
 
-Availability
-
-↓
-
-Continuation
-
-↓
-
-Completion
-
-↓
-
-Preparation
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
 ```
 
 This rhythm should become recognisable across every entertainment domain.
@@ -381,32 +361,35 @@ Examples.
 
 Anime Module.
 
-```
-Episode
+```mermaid
+flowchart TD
 
-↓
+N1["Episode"]
+N2["Tomorrow"]
 
-Tomorrow
+N1 --> N2
 ```
 
 Music Module.
 
-```
-Concert
+```mermaid
+flowchart TD
 
-↓
+N1["Concert"]
+N2["Next Month"]
 
-Next Month
+N1 --> N2
 ```
 
 Book Module.
 
-```
-Next Volume
+```mermaid
+flowchart TD
 
-↓
+N1["Next Volume"]
+N2["Publishing Soon"]
 
-Publishing Soon
+N1 --> N2
 ```
 
 The module contributes temporal knowledge.
@@ -482,15 +465,3 @@ The platform should quietly evolve alongside the user's entertainment.
 Users should never feel they must constantly monitor the platform.
 
 Instead, they should trust that their World will naturally become richer with time.
-
----
-
-# Review Status
-
-**Status**
-
-Draft
-
-**Next File**
-
-`09-interaction-states.md`

@@ -3,7 +3,7 @@ File: docs/design/language/mdl-004-interaction-model/00-document-control.md
 Document: MDL-004
 Title: Interaction Model
 Status: Draft
-Version: 0.2
+Version: 0.4
 -->
 
 # Document Control
@@ -18,9 +18,9 @@ Version: 0.2
 | Title | Mosaic Design Language — Interaction Model |
 | Classification | Internal |
 | Status | Draft |
-| Version | 0.1 |
-| Owner | Lead Design Systems Architect |
-| Parent Specifications | MDL-001 Vision, MDL-002 Principles, MDL-003 Mental Model |
+| Version | 0.4 |
+| Owner | AdamNi-7080 |
+| Parent Specifications | [MDL-001 — Mosaic Design Language Vision](../mdl-001-vision/index.md), [MDL-002 — Principles](../mdl-002-principles/index.md), [MDL-003 — Mental Model](../mdl-003-mental-model/index.md) |
 | Repository | `/design/mdl/MDL-004 Interaction Model/` |
 
 ---
@@ -113,16 +113,15 @@ Traditional applications are built around navigation.
 
 Users move:
 
-```
-Page
+```mermaid
+flowchart TD
 
-↓
+N1["Page"]
+N2["Page"]
+N3["Page"]
 
-Page
-
-↓
-
-Page
+N1 --> N2
+N2 --> N3
 ```
 
 Mosaic intentionally rejects this model.
@@ -170,9 +169,9 @@ Before continuing, contributors should already understand:
 
 MDL-004 assumes familiarity with:
 
-- MDL-001
-- MDL-002
-- MDL-003
+- [MDL-001](../mdl-001-vision/index.md)
+- [MDL-002](../mdl-002-principles/index.md)
+- [MDL-003](../mdl-003-mental-model/index.md)
 
 This document does not redefine those concepts.
 
@@ -208,25 +207,3 @@ MDL-004 succeeds when:
 - contributors naturally describe behaviour using MDL terminology
 
 Interaction should become understandable before it becomes beautiful.
-
----
-
-# Review Status
-
-**Status**
-
-Draft
-
-**Dependencies**
-
-- MDL-001 Vision
-- MDL-002 Principles
-- MDL-003 Mental Model
-
-**Supersedes**
-
-None.
-
-**Next File**
-
-`01-what-is-an-interaction-model.md`

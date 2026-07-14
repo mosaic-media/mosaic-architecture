@@ -4,7 +4,7 @@ Document: MDL-004
 Chapter: 10
 Title: User Behaviour vs System Behaviour
 Status: Draft
-Version: 0.2
+Version: 0.4
 -->
 
 # User Behaviour vs System Behaviour
@@ -35,16 +35,15 @@ It does not expect users to adapt to system behaviour.
 
 Every interaction within Mosaic can be viewed from two perspectives.
 
-```text
-User Behaviour
+```mermaid
+flowchart TD
 
-↓
+N1["User Behaviour"]
+N2["System Behaviour"]
+N3["Visible Experience"]
 
-System Behaviour
-
-↓
-
-Visible Experience
+N1 --> N2
+N2 --> N3
 ```
 
 User behaviour describes intent.
@@ -67,6 +66,7 @@ User behaviour answers questions such as:
 Examples include:
 
 ```
+
 Continue watching.
 
 Continue reading.
@@ -150,30 +150,29 @@ Example.
 User Behaviour.
 
 ```
+
 Continue watching.
 ```
 
 System Behaviour.
 
-```
-Restore Focus.
+```mermaid
+flowchart TD
 
-↓
+N1["Restore Focus."]
+N2["Restore Context."]
+N3["Recalculate Composition."]
+N4["Resume Playback."]
 
-Restore Context.
-
-↓
-
-Recalculate Composition.
-
-↓
-
-Resume Playback.
+N1 --> N2
+N2 --> N3
+N3 --> N4
 ```
 
 Visible Experience.
 
 ```
+
 Episode resumes.
 ```
 
@@ -186,12 +185,14 @@ The user never sees the intermediate behaviour.
 User Behaviour.
 
 ```
+
 Continue watching.
 ```
 
 Visible Experience.
 
 ```
+
 Metadata refreshing...
 
 Provider synchronising...
@@ -217,26 +218,26 @@ A new episode releases overnight.
 
 System Behaviour.
 
-```
-Information Updates
+```mermaid
+flowchart TD
 
-↓
+N1["Information Updates"]
+N2["Relationships Update"]
+N3["Composition Updates"]
 
-Relationships Update
-
-↓
-
-Composition Updates
+N1 --> N2
+N2 --> N3
 ```
 
 User Behaviour.
 
-```
-Open Mosaic.
+```mermaid
+flowchart TD
 
-↓
+N1["Open Mosaic."]
+N2["Continue Watching."]
 
-Continue Watching.
+N1 --> N2
 ```
 
 The platform quietly prepared the experience.
@@ -273,7 +274,7 @@ System behaviour should interrupt the user only when:
 
 Everything else should remain in the background.
 
-This reflects the Companion philosophy established in MDL-001.
+This reflects the Companion philosophy established in [MDL-001](../mdl-001-vision/index.md).
 
 ---
 
@@ -284,18 +285,21 @@ Different implementations may perform very different internal work.
 Desktop.
 
 ```
+
 Local Database
 ```
 
 Television.
 
 ```
+
 Streaming API
 ```
 
 Mobile.
 
 ```
+
 Offline Cache
 ```
 
@@ -320,18 +324,21 @@ Anime Module.
 System Behaviour.
 
 ```
+
 Episode Released
 ```
 
 Platform Behaviour.
 
 ```
+
 Composition Updates
 ```
 
 User Behaviour.
 
 ```
+
 Continue Watching.
 ```
 
@@ -389,12 +396,14 @@ Examples.
 System wants:
 
 ```
+
 Refresh metadata.
 ```
 
 User wants:
 
 ```
+
 Continue reading.
 ```
 
@@ -445,15 +454,3 @@ while still supporting increasingly sophisticated engineering beneath the surfac
 Users should remember their entertainment.
 
 Not the behaviour of the software supporting it.
-
----
-
-# Review Status
-
-**Status**
-
-Draft
-
-**Next File**
-
-`11-governance.md`

@@ -4,7 +4,7 @@ Document: MDL-004
 Chapter: 03
 Title: Focus Transitions
 Status: Draft
-Version: 0.2
+Version: 0.4
 -->
 
 # Focus Transitions
@@ -41,26 +41,26 @@ It simply indicates that something else has become the centre of the user's curr
 
 Traditional applications frequently interpret every selection as navigation.
 
-```
-Select
+```mermaid
+flowchart TD
 
-↓
+N1["Select"]
+N2["New Page"]
 
-New Page
+N1 --> N2
 ```
 
 Mosaic instead interprets selection as changing importance.
 
-```
-Select
+```mermaid
+flowchart TD
 
-↓
+N1["Select"]
+N2["Focus Changes"]
+N3["World Reorganises"]
 
-Focus Changes
-
-↓
-
-World Reorganises
+N1 --> N2
+N2 --> N3
 ```
 
 The distinction is subtle.
@@ -91,28 +91,21 @@ Not merely update interface.
 
 Every Focus Transition should conceptually follow the same sequence.
 
-```text
-Current Focus
+```mermaid
+flowchart TD
 
-↓
+N1["Current Focus"]
+N2["User Intent"]
+N3["Focus Validation"]
+N4["Context Update"]
+N5["Composition Re-evaluation"]
+N6["Presentation Update"]
 
-User Intent
-
-↓
-
-Focus Validation
-
-↓
-
-Context Update
-
-↓
-
-Composition Re-evaluation
-
-↓
-
-Presentation Update
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
+N5 --> N6
 ```
 
 Every later interaction model builds upon this sequence.
@@ -159,20 +152,17 @@ Users frequently interrupt themselves.
 
 Examples include:
 
-```
-Watching
+```mermaid
+flowchart TD
 
-↓
+N1["Watching"]
+N2["Pause"]
+N3["Browse Cast"]
+N4["Resume Watching"]
 
-Pause
-
-↓
-
-Browse Cast
-
-↓
-
-Resume Watching
+N1 --> N2
+N2 --> N3
+N3 --> N4
 ```
 
 The Focus has not fundamentally changed.
@@ -191,16 +181,15 @@ Browsing does not necessarily indicate Focus.
 
 Example.
 
-```
-Watching Frieren
+```mermaid
+flowchart TD
 
-↓
+N1["Watching Frieren"]
+N2["Browse Breaking Bad"]
+N3["Return"]
 
-Browse Breaking Bad
-
-↓
-
-Return
+N1 --> N2
+N2 --> N3
 ```
 
 The platform should avoid assuming that simply opening another item permanently changes the user's Focus.
@@ -236,16 +225,15 @@ Changing Focus within the same Domain should feel evolutionary.
 
 Example.
 
-```
-Anime
+```mermaid
+flowchart TD
 
-↓
+N1["Anime"]
+N2["Frieren"]
+N3["Fire Force"]
 
-Frieren
-
-↓
-
-Fire Force
+N1 --> N2
+N2 --> N3
 ```
 
 Shared concepts remain.
@@ -267,12 +255,13 @@ Changing Focus between Domains represents a more significant conceptual shift.
 
 Example.
 
-```
-Anime
+```mermaid
+flowchart TD
 
-↓
+N1["Anime"]
+N2["Books"]
 
-Books
+N1 --> N2
 ```
 
 Different information becomes important.
@@ -333,12 +322,14 @@ The absence of Focus should never produce an empty experience.
 Current Focus
 
 ```
+
 Frieren
 ```
 
 User selects:
 
 ```
+
 Episode 15
 ```
 
@@ -353,12 +344,14 @@ Everything continues to relate to Frieren.
 Current Focus
 
 ```
+
 Reading Book
 ```
 
 User opens:
 
 ```
+
 Author Profile
 ```
 
@@ -375,6 +368,7 @@ Playback completes.
 The platform naturally transitions Focus towards:
 
 ```
+
 Next Episode
 ```
 
@@ -455,15 +449,3 @@ Users should always understand:
 - how it relates to what came before
 
 When Focus behaves consistently, the rest of Mosaic naturally becomes easier to understand.
-
----
-
-# Review Status
-
-**Status**
-
-Draft
-
-**Next File**
-
-`04-context-transitions.md`

@@ -4,7 +4,7 @@ Document: MDL-004
 Chapter: 11
 Title: Interaction Model Governance
 Status: Draft
-Version: 0.2
+Version: 0.4
 -->
 
 # Interaction Model Governance
@@ -237,22 +237,24 @@ Behaviour should evolve through refinement.
 
 Preferred.
 
-```
-Existing Behaviour
+```mermaid
+flowchart TD
 
-↓
+N1["Existing Behaviour"]
+N2["Refined Behaviour"]
 
-Refined Behaviour
+N1 --> N2
 ```
 
 Avoid.
 
-```
-Existing Behaviour
+```mermaid
+flowchart TD
 
-↓
+N1["Existing Behaviour"]
+N2["Replacement Behaviour"]
 
-Replacement Behaviour
+N1 --> N2
 ```
 
 unless there is compelling evidence that the original model no longer supports the Vision.
@@ -322,15 +324,3 @@ The strongest interaction model is one users eventually stop consciously noticin
 | ADR-039 | Behavioural consistency has higher priority than visual consistency. |
 | ADR-040 | Modules participate in platform behaviour rather than defining independent interaction models. |
 | ADR-041 | Behaviour should evolve through refinement rather than replacement. |
-
----
-
-# Review Status
-
-**Status**
-
-Draft
-
-**Next File**
-
-`12-adrs.md`

@@ -4,7 +4,7 @@ Document: MDL-004
 Chapter: 12
 Title: Architectural Decision Records
 Status: Draft
-Version: 0.2
+Version: 0.4
 -->
 
 # Architectural Decision Records
@@ -17,9 +17,9 @@ The Architectural Decision Records (ADRs) contained within MDL-004 document the 
 
 Unlike the ADRs contained within:
 
-- MDL-001 (Vision)
-- MDL-002 (Principles)
-- MDL-003 (Mental Model)
+- [MDL-001](../mdl-001-vision/index.md) (Vision)
+- [MDL-002](../mdl-002-principles/index.md) (Principles)
+- [MDL-003](../mdl-003-mental-model/index.md) (Mental Model)
 
 these decisions describe **behaviour**.
 
@@ -33,7 +33,7 @@ Architecture Decision Records are intended to capture significant architectural 
 
 # Decision Format
 
-Decision format, lifecycle and review expectations are governed by **MDG-001 — Documentation Authority Guide**.
+Decision format, lifecycle and review expectations are governed by **[MDG-001 — Documentation Authority Guide](../../../engineering/documentation/mdg-001-documentation-authority-guide/index.md)**.
 
 This chapter records decisions specific to this specification and avoids redefining the shared ADR process.
 
@@ -409,15 +409,3 @@ The ADRs contained within MDL-004 define the behavioural identity of Mosaic.
 Future implementations should treat these decisions as long-term behavioural constraints rather than implementation suggestions.
 
 Together they establish how the user's World evolves while preserving continuity, trust and understanding.
-
----
-
-# Review Status
-
-**Status**
-
-Draft
-
-**Next File**
-
-`13-contributor-guidance.md`

@@ -4,7 +4,7 @@ Document: MDL-004
 Chapter: 04
 Title: Context Transitions
 Status: Draft
-Version: 0.2
+Version: 0.4
 -->
 
 # Context Transitions
@@ -45,29 +45,25 @@ Entertainment is rarely a single activity.
 
 Consider the following sequence.
 
-```
-Watching Frieren
+```mermaid
+flowchart TD
 
-↓
+N1["Watching Frieren"]
+N2["Pause"]
+N3["Browse Characters"]
+N4["Read Episode Discussion"]
+N5["Resume Playback"]
 
-Pause
-
-↓
-
-Browse Characters
-
-↓
-
-Read Episode Discussion
-
-↓
-
-Resume Playback
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
 ```
 
 The Focus remains:
 
 ```
+
 Frieren
 ```
 
@@ -83,24 +79,19 @@ Instead, Mosaic understands that the user is simply exploring different aspects 
 
 Every Context Transition follows the same conceptual sequence.
 
-```text
-Current Context
+```mermaid
+flowchart TD
 
-↓
+N1["Current Context"]
+N2["User Intent"]
+N3["Relevant Information Changes"]
+N4["Composition Re-evaluates"]
+N5["Presentation Adapts"]
 
-User Intent
-
-↓
-
-Relevant Information Changes
-
-↓
-
-Composition Re-evaluates
-
-↓
-
-Presentation Adapts
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
 ```
 
 Notice that Focus remains unchanged.
@@ -113,28 +104,21 @@ Multiple Contexts may coexist.
 
 Example.
 
-```
-World
+```mermaid
+flowchart TD
 
-↓
+N1["World"]
+N2["Anime"]
+N3["Frieren"]
+N4["Episode 14"]
+N5["Watching"]
+N6["Paused"]
 
-Anime
-
-↓
-
-Frieren
-
-↓
-
-Episode 14
-
-↓
-
-Watching
-
-↓
-
-Paused
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
+N5 --> N6
 ```
 
 Each layer provides additional understanding.
@@ -149,24 +133,19 @@ Context naturally changes during interaction.
 
 Examples include:
 
-```
-Browsing
+```mermaid
+flowchart TD
 
-↓
+N1["Browsing"]
+N2["Watching"]
+N3["Paused"]
+N4["Watching"]
+N5["Completed"]
 
-Watching
-
-↓
-
-Paused
-
-↓
-
-Watching
-
-↓
-
-Completed
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
 ```
 
 No navigation is required.
@@ -219,6 +198,7 @@ Example.
 Current Context
 
 ```
+
 Watching
 ```
 
@@ -231,6 +211,7 @@ Priority becomes:
 Changing Context.
 
 ```
+
 Browsing Characters
 ```
 
@@ -255,30 +236,28 @@ One of the Platform foundation behavioural rules of Mosaic is:
 
 Poor behaviour.
 
-```
-Watching
+```mermaid
+flowchart TD
 
-↓
+N1["Watching"]
+N2["Character List"]
+N3["Completely New Interface"]
 
-Character List
-
-↓
-
-Completely New Interface
+N1 --> N2
+N2 --> N3
 ```
 
 Preferred behaviour.
 
-```
-Watching
+```mermaid
+flowchart TD
 
-↓
+N1["Watching"]
+N2["Characters Become Relevant"]
+N3["Composition Evolves"]
 
-Characters Become Relevant
-
-↓
-
-Composition Evolves
+N1 --> N2
+N2 --> N3
 ```
 
 The user remains oriented.
@@ -294,6 +273,7 @@ Example.
 Current Context.
 
 ```
+
 Reading Dune
 ```
 
@@ -316,30 +296,28 @@ Every Context possesses a natural lifetime.
 
 Examples.
 
-```
-Paused
+```mermaid
+flowchart TD
 
-↓
+N1["Paused"]
+N2["Expires"]
+N3["Watching"]
 
-Expires
-
-↓
-
-Watching
+N1 --> N2
+N2 --> N3
 ```
 
 or
 
-```
-Searching
+```mermaid
+flowchart TD
 
-↓
+N1["Searching"]
+N2["Search Complete"]
+N3["Previous Context Restored"]
 
-Search Complete
-
-↓
-
-Previous Context Restored
+N1 --> N2
+N2 --> N3
 ```
 
 Context should rarely linger longer than necessary.
@@ -354,20 +332,17 @@ Context should persist across platforms.
 
 Example.
 
-```
-Reading
+```mermaid
+flowchart TD
 
-↓
+N1["Reading"]
+N2["Tablet"]
+N3["Continue"]
+N4["Phone"]
 
-Tablet
-
-↓
-
-Continue
-
-↓
-
-Phone
+N1 --> N2
+N2 --> N3
+N3 --> N4
 ```
 
 The device changes.
@@ -385,12 +360,14 @@ Users should never need to manually reconstruct what they were doing.
 Current Context
 
 ```
+
 Watching Episode
 ```
 
 User opens:
 
 ```
+
 Subtitles
 ```
 
@@ -407,12 +384,14 @@ Closing subtitles naturally restores the previous Context.
 Current Context
 
 ```
+
 Reading Book
 ```
 
 User views:
 
 ```
+
 Character Glossary
 ```
 
@@ -427,6 +406,7 @@ The glossary enriches rather than replaces the experience.
 Current Context
 
 ```
+
 Series Overview
 ```
 
@@ -435,6 +415,7 @@ User begins playback.
 The Context naturally becomes:
 
 ```
+
 Watching Episode
 ```
 
@@ -531,15 +512,3 @@ The World remains.
 The Focus usually remains.
 
 Only understanding evolves.
-
----
-
-# Review Status
-
-**Status**
-
-Draft
-
-**Next File**
-
-`05-composition-evolution.md`

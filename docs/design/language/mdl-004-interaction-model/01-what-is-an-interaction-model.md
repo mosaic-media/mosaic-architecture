@@ -4,7 +4,7 @@ Document: MDL-004
 Chapter: 01
 Title: What Is An Interaction Model?
 Status: Draft
-Version: 0.2
+Version: 0.4
 -->
 
 # What Is An Interaction Model?
@@ -78,38 +78,32 @@ Example.
 
 Poor mental model.
 
-```
-Click Button
+```mermaid
+flowchart TD
 
-↓
+N1["Click Button"]
+N2["Animation"]
+N3["New Screen"]
 
-Animation
-
-↓
-
-New Screen
+N1 --> N2
+N2 --> N3
 ```
 
 Mosaic mental model.
 
-```
-Intent
+```mermaid
+flowchart TD
 
-↓
+N1["Intent"]
+N2["Focus Changes"]
+N3["Context Evolves"]
+N4["Composition Updates"]
+N5["Presentation Reflects"]
 
-Focus Changes
-
-↓
-
-Context Evolves
-
-↓
-
-Composition Updates
-
-↓
-
-Presentation Reflects
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
 ```
 
 Notice that interface appears only at the very end.
@@ -155,6 +149,7 @@ For example.
 Behaviour:
 
 ```
+
 Focus changes
 ```
 
@@ -178,44 +173,36 @@ This distinction allows Mosaic to evolve visually without changing how users und
 
 Traditional applications often behave like this.
 
-```
-Page
+```mermaid
+flowchart TD
 
-↓
+N1["Page"]
+N2["Page"]
+N3["Page"]
+N4["Page"]
 
-Page
-
-↓
-
-Page
-
-↓
-
-Page
+N1 --> N2
+N2 --> N3
+N3 --> N4
 ```
 
 Every action discards the previous state.
 
 Mosaic intentionally behaves differently.
 
-```
-World
+```mermaid
+flowchart TD
 
-↓
+N1["World"]
+N2["Focus"]
+N3["Context"]
+N4["Composition"]
+N5["Updated World"]
 
-Focus
-
-↓
-
-Context
-
-↓
-
-Composition
-
-↓
-
-Updated World
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
 ```
 
 Nothing is discarded.
@@ -271,16 +258,15 @@ Only its current state has evolved.
 
 Every interaction begins with a previous state.
 
-```
-Previous World
+```mermaid
+flowchart TD
 
-↓
+N1["Previous World"]
+N2["User Intent"]
+N3["Updated World"]
 
-User Intent
-
-↓
-
-Updated World
+N1 --> N2
+N2 --> N3
 ```
 
 The previous state should always influence the next.
@@ -299,30 +285,28 @@ User finishes an episode.
 
 Instead of:
 
-```
-Episode Ends
+```mermaid
+flowchart TD
 
-↓
+N1["Episode Ends"]
+N2["Homepage"]
 
-Homepage
+N1 --> N2
 ```
 
 Mosaic behaves:
 
-```
-Episode Ends
+```mermaid
+flowchart TD
 
-↓
+N1["Episode Ends"]
+N2["Progress Updates"]
+N3["Next Episode Gains Priority"]
+N4["Composition Evolves"]
 
-Progress Updates
-
-↓
-
-Next Episode Gains Priority
-
-↓
-
-Composition Evolves
+N1 --> N2
+N2 --> N3
+N3 --> N4
 ```
 
 The user never leaves their current World.
@@ -441,15 +425,3 @@ Instead it defines:
 The interface communicates those behaviours.
 
 It does not invent them.
-
----
-
-# Review Status
-
-**Status**
-
-Draft
-
-**Next File**
-
-`02-continuity.md`

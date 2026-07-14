@@ -4,7 +4,7 @@ Document: MDL-004
 Chapter: 09
 Title: Interaction States
 Status: Draft
-Version: 0.2
+Version: 0.4
 -->
 
 # Interaction States
@@ -54,40 +54,34 @@ Likewise, the same Interaction State may appear differently on different devices
 
 Traditional software frequently models state like this.
 
-```
-Home
+```mermaid
+flowchart TD
 
-↓
+N1["Home"]
+N2["Series Page"]
+N3["Episode Page"]
+N4["Player"]
 
-Series Page
-
-↓
-
-Episode Page
-
-↓
-
-Player
+N1 --> N2
+N2 --> N3
+N3 --> N4
 ```
 
 Each state corresponds directly to interface.
 
 Mosaic intentionally models behaviour instead.
 
-```
-Exploring
+```mermaid
+flowchart TD
 
-↓
+N1["Exploring"]
+N2["Watching"]
+N3["Paused"]
+N4["Continuing"]
 
-Watching
-
-↓
-
-Paused
-
-↓
-
-Continuing
+N1 --> N2
+N2 --> N3
+N3 --> N4
 ```
 
 The interface merely communicates those behavioural states.
@@ -252,21 +246,25 @@ Interaction States may contain additional states.
 
 Example.
 
-```
-Watching
+```mermaid
+flowchart TD
 
-├── Playing
+N1["Watching"]
+N2["Playing"]
+N3["Paused"]
+N4["Seeking"]
+N5["Completed"]
 
-├── Paused
-
-├── Seeking
-
-└── Completed
+N1 --> N2
+N1 --> N3
+N1 --> N4
+N1 --> N5
 ```
 
 The parent state remains:
 
 ```
+
 Watching
 ```
 
@@ -300,28 +298,21 @@ Interaction States should transition naturally.
 
 Example.
 
-```
-Exploring
+```mermaid
+flowchart TD
 
-↓
+N1["Exploring"]
+N2["Watching"]
+N3["Paused"]
+N4["Watching"]
+N5["Completed"]
+N6["Continuing"]
 
-Watching
-
-↓
-
-Paused
-
-↓
-
-Watching
-
-↓
-
-Completed
-
-↓
-
-Continuing
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
+N5 --> N6
 ```
 
 Every transition should reinforce continuity.
@@ -336,30 +327,28 @@ Some Interaction States should survive interruption.
 
 Examples include:
 
-```
-Watching
+```mermaid
+flowchart TD
 
-↓
+N1["Watching"]
+N2["Phone Call"]
+N3["Watching"]
 
-Phone Call
-
-↓
-
-Watching
+N1 --> N2
+N2 --> N3
 ```
 
 or
 
-```
-Reading
+```mermaid
+flowchart TD
 
-↓
+N1["Reading"]
+N2["Lock Screen"]
+N3["Reading"]
 
-Lock Screen
-
-↓
-
-Reading
+N1 --> N2
+N2 --> N3
 ```
 
 Temporary interruptions should not destroy the user's current journey.
@@ -392,17 +381,19 @@ Secondary states may exist beneath it.
 
 Example.
 
-```
-Watching
+```mermaid
+flowchart TD
 
-↓
+N1["Watching"]
+N2["Searching Subtitles"]
 
-Searching Subtitles
+N1 --> N2
 ```
 
 The dominant state remains:
 
 ```
+
 Watching
 ```
 
@@ -421,12 +412,14 @@ Example.
 A Manga module should strengthen:
 
 ```
+
 Reading
 ```
 
 rather than creating:
 
 ```
+
 Manga Mode
 ```
 
@@ -522,15 +515,3 @@ Not:
 The interface should continuously reinforce behavioural state while allowing implementation to evolve independently.
 
 Interaction States therefore become one of the primary mechanisms through which Mosaic preserves continuity.
-
----
-
-# Review Status
-
-**Status**
-
-Draft
-
-**Next File**
-
-`10-user-vs-system-behaviour.md`

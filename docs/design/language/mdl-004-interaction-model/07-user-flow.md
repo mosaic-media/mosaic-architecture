@@ -4,7 +4,7 @@ Document: MDL-004
 Chapter: 07
 Title: User Flow
 Status: Draft
-Version: 0.2
+Version: 0.4
 -->
 
 # User Flow
@@ -52,41 +52,39 @@ Not the application's structure.
 
 People rarely describe their evening like this.
 
-```
-Open Homepage
+```mermaid
+flowchart TD
 
-↓
+N1["Open Homepage"]
+N2["Navigate Library"]
+N3["Open Series"]
+N4["Open Season"]
+N5["Play Episode"]
 
-Navigate Library
-
-↓
-
-Open Series
-
-↓
-
-Open Season
-
-↓
-
-Play Episode
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
 ```
 
 Instead they describe it like this.
 
 ```
+
 Continue Frieren.
 ```
 
 or
 
 ```
+
 Read another chapter.
 ```
 
 or
 
 ```
+
 Listen to that soundtrack again.
 ```
 
@@ -123,32 +121,23 @@ Everything else exists to support that intent.
 
 Every interaction should conceptually follow the same behavioural flow.
 
-```text
-Intent
+```mermaid
+flowchart TD
 
-↓
+N1["Intent"]
+N2["World"]
+N3["Focus"]
+N4["Context"]
+N5["Composition"]
+N6["Understanding"]
+N7["Entertainment"]
 
-World
-
-↓
-
-Focus
-
-↓
-
-Context
-
-↓
-
-Composition
-
-↓
-
-Understanding
-
-↓
-
-Entertainment
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
+N5 --> N6
+N6 --> N7
 ```
 
 Notice that the user never "arrives" at a page.
@@ -245,20 +234,17 @@ A user should be capable of leaving a flow...
 
 Example.
 
-```
-Watching
+```mermaid
+flowchart TD
 
-↓
+N1["Watching"]
+N2["Pause"]
+N3["Browse Cast"]
+N4["Resume Watching"]
 
-Pause
-
-↓
-
-Browse Cast
-
-↓
-
-Resume Watching
+N1 --> N2
+N2 --> N3
+N3 --> N4
 ```
 
 The browsing flow should never destroy the playback flow.
@@ -296,32 +282,30 @@ Dead ends should be considered design failures.
 
 Example.
 
-```
-Open Actor
+```mermaid
+flowchart TD
 
-↓
+N1["Open Actor"]
+N2["Nothing Else"]
 
-Nothing Else
+N1 --> N2
 ```
 
 The user's journey stops.
 
 Instead:
 
-```
-Actor
+```mermaid
+flowchart TD
 
-↓
+N1["Actor"]
+N2["Other Films"]
+N3["Related Directors"]
+N4["Current Focus"]
 
-Other Films
-
-↓
-
-Related Directors
-
-↓
-
-Current Focus
+N1 --> N2
+N2 --> N3
+N3 --> N4
 ```
 
 Every flow should naturally lead somewhere meaningful.
@@ -369,7 +353,7 @@ When multiple flows are possible, they should normally be prioritised in the fol
 3. Discover
 4. Manage
 
-This ordering reflects the philosophy established in MDL-001.
+This ordering reflects the philosophy established in [MDL-001](../mdl-001-vision/index.md).
 
 Helping users continue what they already chose is generally more valuable than encouraging unrelated discovery.
 
@@ -379,16 +363,15 @@ Helping users continue what they already chose is generally more valuable than e
 
 ## Continue
 
-```
-Open Mosaic
+```mermaid
+flowchart TD
 
-↓
+N1["Open Mosaic"]
+N2["Continue Watching"]
+N3["Playback"]
 
-Continue Watching
-
-↓
-
-Playback
+N1 --> N2
+N2 --> N3
 ```
 
 Minimal friction.
@@ -397,20 +380,17 @@ Minimal friction.
 
 ## Explore
 
-```
-Current Episode
+```mermaid
+flowchart TD
 
-↓
+N1["Current Episode"]
+N2["Voice Actor"]
+N3["Other Roles"]
+N4["Return"]
 
-Voice Actor
-
-↓
-
-Other Roles
-
-↓
-
-Return
+N1 --> N2
+N2 --> N3
+N3 --> N4
 ```
 
 The exploration remains connected to the original experience.
@@ -419,16 +399,15 @@ The exploration remains connected to the original experience.
 
 ## Discover
 
-```
-Current Book
+```mermaid
+flowchart TD
 
-↓
+N1["Current Book"]
+N2["Related Author"]
+N3["Another Series"]
 
-Related Author
-
-↓
-
-Another Series
+N1 --> N2
+N2 --> N3
 ```
 
 Discovery grows naturally from existing interest.
@@ -491,15 +470,3 @@ When contributors discuss user flow, they should always begin by asking:
 Not:
 
 > **Which screen should they visit next?**
-
----
-
-# Review Status
-
-**Status**
-
-Draft
-
-**Next File**
-
-`08-temporal-behaviour.md`

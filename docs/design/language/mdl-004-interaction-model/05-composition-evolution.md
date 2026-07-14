@@ -4,7 +4,7 @@ Document: MDL-004
 Chapter: 05
 Title: Composition Evolution
 Status: Draft
-Version: 0.2
+Version: 0.4
 -->
 
 # Composition Evolution
@@ -67,28 +67,21 @@ Composition Evolution exists to balance these two extremes.
 
 Composition should evolve using the following sequence.
 
-```text
-World Changes
+```mermaid
+flowchart TD
 
-↓
+N1["World Changes"]
+N2["Information Changes"]
+N3["Relationship Importance Changes"]
+N4["Composition Re-evaluates"]
+N5["Expressions Re-evaluate"]
+N6["Presentation Updates"]
 
-Information Changes
-
-↓
-
-Relationship Importance Changes
-
-↓
-
-Composition Re-evaluates
-
-↓
-
-Expressions Re-evaluate
-
-↓
-
-Presentation Updates
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
+N5 --> N6
 ```
 
 Notice that Presentation remains the final concern.
@@ -103,34 +96,30 @@ Compositions should evolve gradually.
 
 Poor.
 
-```
-Old Composition
+```mermaid
+flowchart TD
 
-↓
+N1["Old Composition"]
+N2["New Composition"]
 
-New Composition
+N1 --> N2
 ```
 
 Preferred.
 
-```
-Old Composition
+```mermaid
+flowchart TD
 
-↓
+N1["Old Composition"]
+N2["Information Changes"]
+N3["Priority Changes"]
+N4["Composition Evolves"]
+N5["Understanding Preserved"]
 
-Information Changes
-
-↓
-
-Priority Changes
-
-↓
-
-Composition Evolves
-
-↓
-
-Understanding Preserved
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
 ```
 
 The user should rarely feel that an interface has been replaced.
@@ -169,38 +158,32 @@ Episode Ends.
 
 Instead of:
 
-```
-Player Closes
+```mermaid
+flowchart TD
 
-↓
+N1["Player Closes"]
+N2["Everything Changes"]
 
-Everything Changes
+N1 --> N2
 ```
 
 Prefer.
 
-```
-Playback Ends
+```mermaid
+flowchart TD
 
-↓
+N1["Playback Ends"]
+N2["Progress Completes"]
+N3["Timeline Expands"]
+N4["Next Episode Gains Priority"]
+N5["Playback Controls Reduce"]
+N6["Composition Settles"]
 
-Progress Completes
-
-↓
-
-Timeline Expands
-
-↓
-
-Next Episode Gains Priority
-
-↓
-
-Playback Controls Reduce
-
-↓
-
-Composition Settles
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
+N5 --> N6
 ```
 
 Each individual change is understandable.
@@ -254,22 +237,24 @@ Example.
 
 Watching.
 
-```
-Sparse
+```mermaid
+flowchart TD
 
-↓
+N1["Sparse"]
+N2["High Focus"]
 
-High Focus
+N1 --> N2
 ```
 
 Browsing.
 
-```
-Denser
+```mermaid
+flowchart TD
 
-↓
+N1["Denser"]
+N2["Exploration"]
 
-Exploration
+N1 --> N2
 ```
 
 The Composition should adapt according to user intent rather than arbitrary screen templates.
@@ -396,16 +381,15 @@ This preserves one coherent behavioural model regardless of installed modules.
 
 Airing Episode
 
-```
-Tomorrow
+```mermaid
+flowchart TD
 
-↓
+N1["Tomorrow"]
+N2["Today"]
+N3["Now Available"]
 
-Today
-
-↓
-
-Now Available
+N1 --> N2
+N2 --> N3
 ```
 
 The Timeline naturally gains priority.
@@ -505,15 +489,3 @@ The Composition reflects that evolution.
 Users should never feel that they are repeatedly entering new interfaces.
 
 Instead, they should feel that their entertainment World quietly reorganises itself around what now matters.
-
----
-
-# Review Status
-
-**Status**
-
-Draft
-
-**Next File**
-
-`06-movement.md`

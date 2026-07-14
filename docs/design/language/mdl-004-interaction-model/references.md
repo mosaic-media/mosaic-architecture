@@ -3,7 +3,7 @@ File: docs/design/language/mdl-004-interaction-model/references.md
 Document: MDL-004
 Title: References
 Status: Draft
-Version: 0.2
+Version: 0.4
 -->
 
 # References
@@ -40,7 +40,7 @@ The Mosaic Design Language always remains the authoritative source.
 
 # Internal References
 
-## MDL-001 — Vision
+## [MDL-001 — Mosaic Design Language Vision](../mdl-001-vision/index.md)
 
 Provides:
 
@@ -49,11 +49,11 @@ Provides:
 - Immersion
 - Long-term goals
 
-Every behavioural decision defined by MDL-004 should reinforce the vision established by MDL-001.
+Every behavioural decision defined by MDL-004 should reinforce the vision established by [MDL-001](../mdl-001-vision/index.md).
 
 ---
 
-## MDL-002 — Principles
+## [MDL-002 — Principles](../mdl-002-principles/index.md)
 
 Provides:
 
@@ -61,11 +61,11 @@ Provides:
 - Design governance
 - Principle hierarchy
 
-MDL-004 should be interpreted as the behavioural implementation of MDL-002.
+MDL-004 should be interpreted as the behavioural implementation of [MDL-002](../mdl-002-principles/index.md).
 
 ---
 
-## MDL-003 — Mental Model
+## [MDL-003 — Mental Model](../mdl-003-mental-model/index.md)
 
 Provides:
 
@@ -87,11 +87,11 @@ It defines how they evolve over time.
 
 The following specifications depend directly upon the Interaction Model.
 
-- MDL-005 Composition Model
-- MDS-003 Composition Engine
-- MDS-005 Motion System
-- MDS-007 Tile Framework
-- MDS-008 Component Library
+- [MDL-005 — Composition Model](../mdl-005-composition-model/index.md)
+- [MDS-006 — Composition Engine](../../system/mds-006-composition-engine/index.md)
+- [MDS-005 — Motion System](../../system/mds-005-motion-system/index.md)
+- [MDS-007 — Tile Framework](../../system/mds-007-tile-framework/index.md)
+- [MDS-008 — Component Library](../../system/mds-008-component-library/index.md)
 
 These specifications should extend behaviour rather than redefine it.
 
@@ -183,30 +183,28 @@ Future implementations should preserve these ideas regardless of technology.
 
 The Interaction Model intentionally separates:
 
-```
-Intent
+```mermaid
+flowchart TD
 
-↓
+N1["Intent"]
+N2["Behaviour"]
+N3["Presentation"]
 
-Behaviour
-
-↓
-
-Presentation
+N1 --> N2
+N2 --> N3
 ```
 
 rather than:
 
-```
-Input
+```mermaid
+flowchart TD
 
-↓
+N1["Input"]
+N2["Animation"]
+N3["Output"]
 
-Animation
-
-↓
-
-Output
+N1 --> N2
+N2 --> N3
 ```
 
 This distinction allows future client implementations to evolve independently while preserving a consistent behavioural language.
@@ -264,9 +262,9 @@ These discoveries distinguish the Mosaic Interaction Model from traditional page
 
 Required reading before implementing MDL-004.
 
-- MDL-001 Vision
-- MDL-002 Principles
-- MDL-003 Mental Model
+- [MDL-001 — Mosaic Design Language Vision](../mdl-001-vision/index.md)
+- [MDL-002 — Principles](../mdl-002-principles/index.md)
+- [MDL-003 — Mental Model](../mdl-003-mental-model/index.md)
 
 ---
 
@@ -274,10 +272,10 @@ Required reading before implementing MDL-004.
 
 Future contributors may also wish to review:
 
-- MDL-005 Composition Model
-- MDS-003 Composition Engine
-- MDS-005 Motion System
-- MDS-007 Tile Framework
+- [MDL-005 — Composition Model](../mdl-005-composition-model/index.md)
+- [MDS-006 — Composition Engine](../../system/mds-006-composition-engine/index.md)
+- [MDS-005 — Motion System](../../system/mds-005-motion-system/index.md)
+- [MDS-007 — Tile Framework](../../system/mds-007-tile-framework/index.md)
 
 These documents describe how the behavioural concepts established by MDL-004 become implementation.
 
@@ -304,11 +302,11 @@ This concludes **MDL-004 — Interaction Model**.
 
 The next specification in the Mosaic Design Language is:
 
-> **MDL-005 — Composition Model**
+> **[MDL-005 — Composition Model](../mdl-005-composition-model/index.md)**
 
-Where MDL-004 defines **how the user's World behaves**, MDL-005 defines **how that World is organised into meaningful, adaptive compositions**.
+Where MDL-004 defines **how the user's World behaves**, [MDL-005](../mdl-005-composition-model/index.md) defines **how that World is organised into meaningful, adaptive compositions**.
 
-MDL-005 formalises concepts including:
+[MDL-005](../mdl-005-composition-model/index.md) formalises concepts including:
 
 - hierarchy
 - adaptive composition

@@ -4,7 +4,7 @@ Document: MDL-004
 Chapter: 02
 Title: Continuity
 Status: Draft
-Version: 0.2
+Version: 0.4
 -->
 
 # Continuity
@@ -43,24 +43,19 @@ The interaction has succeeded.
 
 Traditional applications organise themselves around destinations.
 
-```
-Home
+```mermaid
+flowchart TD
 
-↓
+N1["Home"]
+N2["Series"]
+N3["Season"]
+N4["Episode"]
+N5["Player"]
 
-Series
-
-↓
-
-Season
-
-↓
-
-Episode
-
-↓
-
-Player
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
 ```
 
 Each destination discards the previous one.
@@ -71,20 +66,17 @@ Mosaic intentionally avoids this behaviour.
 
 Instead:
 
-```
-World
+```mermaid
+flowchart TD
 
-↓
+N1["World"]
+N2["World evolves"]
+N3["World evolves"]
+N4["World evolves"]
 
-World evolves
-
-↓
-
-World evolves
-
-↓
-
-World evolves
+N1 --> N2
+N2 --> N3
+N3 --> N4
 ```
 
 The user remains inside the same conceptual environment.
@@ -153,16 +145,15 @@ Minor changes should produce minor behavioural evolution.
 
 Examples include:
 
-```
-Episode Progress
+```mermaid
+flowchart TD
 
-↓
+N1["Episode Progress"]
+N2["Progress Updates"]
+N3["Next Episode Gains Importance"]
 
-Progress Updates
-
-↓
-
-Next Episode Gains Importance
+N1 --> N2
+N2 --> N3
 ```
 
 The World barely changes.
@@ -177,17 +168,19 @@ Changing Focus within the same Domain.
 
 Example.
 
-```
-Frieren
+```mermaid
+flowchart TD
 
-↓
+N1["Frieren"]
+N2["Fire Force"]
 
-Fire Force
+N1 --> N2
 ```
 
 The Domain remains:
 
 ```
+
 Anime
 ```
 
@@ -209,12 +202,13 @@ Changing Domains.
 
 Example.
 
-```
-Anime
+```mermaid
+flowchart TD
 
-↓
+N1["Anime"]
+N2["Books"]
 
-Books
+N1 --> N2
 ```
 
 Now:
@@ -262,34 +256,30 @@ Continuity should favour gradual evolution.
 
 Poor.
 
-```
-Everything changes.
+```mermaid
+flowchart TD
 
-↓
+N1["Everything changes."]
+N2["User understands nothing."]
 
-User understands nothing.
+N1 --> N2
 ```
 
 Better.
 
-```
-One thing changes.
+```mermaid
+flowchart TD
 
-↓
+N1["One thing changes."]
+N2["User understands."]
+N3["Next thing changes."]
+N4["User understands."]
+N5["World evolves."]
 
-User understands.
-
-↓
-
-Next thing changes.
-
-↓
-
-User understands.
-
-↓
-
-World evolves.
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
 ```
 
 The objective is preserving orientation throughout the interaction.
@@ -320,30 +310,28 @@ Playback Ends.
 
 Instead of:
 
-```
-Player closes.
+```mermaid
+flowchart TD
 
-↓
+N1["Player closes."]
+N2["Homepage."]
 
-Homepage.
+N1 --> N2
 ```
 
 Mosaic behaves:
 
-```
-Playback Ends.
+```mermaid
+flowchart TD
 
-↓
+N1["Playback Ends."]
+N2["Progress Updates."]
+N3["Next Episode Becomes Focus."]
+N4["Composition Evolves."]
 
-Progress Updates.
-
-↓
-
-Next Episode Becomes Focus.
-
-↓
-
-Composition Evolves.
+N1 --> N2
+N2 --> N3
+N3 --> N4
 ```
 
 The user never loses their place.
@@ -356,30 +344,28 @@ Reading Ends.
 
 Instead of:
 
-```
-Book closes.
+```mermaid
+flowchart TD
 
-↓
+N1["Book closes."]
+N2["Library."]
 
-Library.
+N1 --> N2
 ```
 
 Mosaic behaves:
 
-```
-Book Complete.
+```mermaid
+flowchart TD
 
-↓
+N1["Book Complete."]
+N2["Series Progress Updates."]
+N3["Next Book Gains Importance."]
+N4["Relationships Expand."]
 
-Series Progress Updates.
-
-↓
-
-Next Book Gains Importance.
-
-↓
-
-Relationships Expand.
+N1 --> N2
+N2 --> N3
+N3 --> N4
 ```
 
 Again...
@@ -430,17 +416,19 @@ Example.
 
 User begins:
 
-```
-Reading
+```mermaid
+flowchart TD
 
-↓
+N1["Reading"]
+N2["Tablet"]
 
-Tablet
+N1 --> N2
 ```
 
 Later continues:
 
 ```
+
 Phone
 ```
 
@@ -516,15 +504,3 @@ When continuity succeeds...
 Navigation becomes less important.
 
 Understanding becomes effortless.
-
----
-
-# Review Status
-
-**Status**
-
-Draft
-
-**Next File**
-
-`03-focus-transitions.md`

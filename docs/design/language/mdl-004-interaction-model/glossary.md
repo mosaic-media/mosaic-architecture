@@ -3,7 +3,7 @@ File: docs/design/language/mdl-004-interaction-model/glossary.md
 Document: MDL-004
 Title: Glossary
 Status: Draft
-Version: 0.2
+Version: 0.4
 -->
 
 # Glossary
@@ -14,7 +14,7 @@ Version: 0.2
 
 This glossary defines the behavioural terminology introduced by **MDL-004 — Interaction Model**.
 
-Unlike the glossary contained within **MDL-003**, which defines conceptual objects, this glossary defines behavioural concepts.
+Unlike the glossary contained within **[MDL-003](../mdl-003-mental-model/index.md)**, which defines conceptual objects, this glossary defines behavioural concepts.
 
 These terms should be used consistently throughout every future MDL and MDS specification.
 
@@ -58,22 +58,24 @@ Weight is determined by conceptual change rather than visual change.
 
 Example.
 
-```
-Episode
+```mermaid
+flowchart TD
 
-↓
+N1["Episode"]
+N2["Next Episode"]
 
-Next Episode
+N1 --> N2
 ```
 
 Low weight.
 
-```
-Anime
+```mermaid
+flowchart TD
 
-↓
+N1["Anime"]
+N2["Books"]
 
-Books
+N1 --> N2
 ```
 
 High weight.
@@ -261,10 +263,10 @@ System Behaviour should remain largely invisible.
 
 | Specification | Primary Concepts |
 |---------------|------------------|
-| MDL-001 Vision | Companion, Immersion |
-| MDL-002 Principles | Behavioural Decision Making |
-| MDL-003 Mental Model | World, Focus, Context |
-| MDL-005 Composition Model | Composition Behaviour |
+| [MDL-001 — Mosaic Design Language Vision](../mdl-001-vision/index.md) | Companion, Immersion |
+| [MDL-002 — Principles](../mdl-002-principles/index.md) | Behavioural Decision Making |
+| [MDL-003 — Mental Model](../mdl-003-mental-model/index.md) | World, Focus, Context |
+| [MDL-005 — Composition Model](../mdl-005-composition-model/index.md) | Composition Behaviour |
 | MDS Motion System | Behaviour Communication |
 
 ---
@@ -279,15 +281,3 @@ Future contributors should:
 - preserve behavioural consistency across specifications
 
 Interaction terminology should remain stable throughout the lifetime of the Mosaic Design Language.
-
----
-
-# Review Status
-
-**Status**
-
-Draft
-
-**Next File**
-
-`references.md`
