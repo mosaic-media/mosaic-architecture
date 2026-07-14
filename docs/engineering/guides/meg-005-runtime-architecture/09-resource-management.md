@@ -81,36 +81,40 @@ Every Runtime resource has exactly one owner.
 
 Examples.
 
-```
-Worker Manager
+```mermaid
+flowchart TD
 
-↓
+N1["Worker Manager"]
+N2["Workers"]
 
-Workers
-```
-
-```
-Scheduler
-
-↓
-
-Schedules
+N1 --> N2
 ```
 
+```mermaid
+flowchart TD
+
+N1["Scheduler"]
+N2["Schedules"]
+
+N1 --> N2
 ```
-Execution Engine
 
-↓
+```mermaid
+flowchart TD
 
-Execution State
+N1["Execution Engine"]
+N2["Execution State"]
+
+N1 --> N2
 ```
 
-```
-Capability Registry
+```mermaid
+flowchart TD
 
-↓
+N1["Capability Registry"]
+N2["Capability Metadata"]
 
-Capability Metadata
+N1 --> N2
 ```
 
 Ownership answers:
@@ -130,24 +134,19 @@ Resources should be allocated explicitly.
 
 Conceptually.
 
-```
-Capability
+```mermaid
+flowchart TD
 
-↓
+N1["Capability"]
+N2["Execution Request"]
+N3["Resource Manager"]
+N4["Allocate Resources"]
+N5["Execution Engine"]
 
-Execution Request
-
-↓
-
-Resource Manager
-
-↓
-
-Allocate Resources
-
-↓
-
-Execution Engine
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
 ```
 
 Capabilities should never allocate Runtime resources directly.
@@ -158,24 +157,19 @@ Capabilities should never allocate Runtime resources directly.
 
 Every resource follows the same conceptual lifecycle.
 
-```
-Created
+```mermaid
+flowchart TD
 
-↓
+N1["Created"]
+N2["Allocated"]
+N3["In Use"]
+N4["Released"]
+N5["Disposed"]
 
-Allocated
-
-↓
-
-In Use
-
-↓
-
-Released
-
-↓
-
-Disposed
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
 ```
 
 Resources should never remain allocated indefinitely.
@@ -191,18 +185,22 @@ Finite resources SHOULD generally be managed through pools.
 Examples include:
 
 ```
+
 Database Connections
 ```
 
 ```
+
 HTTP Clients
 ```
 
 ```
+
 Blob Clients
 ```
 
 ```
+
 Workers
 ```
 
@@ -223,18 +221,22 @@ Every managed resource SHOULD have explicit limits.
 Examples include:
 
 ```
+
 Maximum Workers
 ```
 
 ```
+
 Maximum Queue Size
 ```
 
 ```
+
 Maximum Connections
 ```
 
 ```
+
 Maximum Concurrent Imports
 ```
 
@@ -250,34 +252,30 @@ Before execution begins, the Runtime SHOULD determine whether sufficient resourc
 
 Conceptually.
 
-```
-Execution Requested
+```mermaid
+flowchart TD
 
-↓
+N1["Execution Requested"]
+N2["Resources Available?"]
+N3["Yes"]
+N4["Execute"]
 
-Resources Available?
-
-↓
-
-Yes
-
-↓
-
-Execute
+N1 --> N2
+N2 --> N3
+N3 --> N4
 ```
 
 or
 
-```
-No
+```mermaid
+flowchart TD
 
-↓
+N1["No"]
+N2["Wait"]
+N3["Reject"]
 
-Wait
-
-or
-
-Reject
+N1 --> N2
+N1 --> N3
 ```
 
 Admission control protects overall Runtime stability.
@@ -289,6 +287,7 @@ Admission control protects overall Runtime stability.
 Suppose:
 
 ```
+
 Worker Pool Full
 ```
 
@@ -354,12 +353,13 @@ Capabilities should never monopolise Runtime resources.
 
 Example.
 
-```
-Recommendation Capability
+```mermaid
+flowchart TD
 
-↓
+N1["Recommendation Capability"]
+N2["100% Worker Pool"]
 
-100% Worker Pool
+N1 --> N2
 ```
 
 The Runtime should ensure fair allocation across capabilities.
@@ -421,14 +421,17 @@ Every managed resource SHOULD expose health information.
 Examples include:
 
 ```
+
 Healthy
 ```
 
 ```
+
 Near Capacity
 ```
 
 ```
+
 Exhausted
 ```
 
@@ -572,23 +575,3 @@ Within Mosaic, business capabilities should never think about resource allocatio
 They should simply perform business behaviour.
 
 The Runtime exists to ensure the necessary resources are available to make that possible.
-
----
-
-# Review Status
-
-**Status**
-
-Draft
-
-**Owner**
-
-Lead Software Architect
-
-**Previous File**
-
-`08-scheduler-architecture.md`
-
-**Next File**
-
-`10-startup.md`

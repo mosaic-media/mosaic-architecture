@@ -76,48 +76,31 @@ No business capability should begin execution until these conditions have been s
 
 Every Runtime instance follows the same high-level sequence.
 
-```
-Bootstrap
+```mermaid
+flowchart TD
 
-↓
+N1["Bootstrap"]
+N2["Load Configuration"]
+N3["Construct Runtime Kernel"]
+N4["Create Runtime Services"]
+N5["Register Capabilities"]
+N6["Build Dependency Graph"]
+N7["Validate Dependencies"]
+N8["Initialise Runtime Services"]
+N9["Initialise Capabilities"]
+N10["Mark Ready"]
+N11["Begin Execution"]
 
-Load Configuration
-
-↓
-
-Construct Runtime Kernel
-
-↓
-
-Create Runtime Services
-
-↓
-
-Register Capabilities
-
-↓
-
-Build Dependency Graph
-
-↓
-
-Validate Dependencies
-
-↓
-
-Initialise Runtime Services
-
-↓
-
-Initialise Capabilities
-
-↓
-
-Mark Ready
-
-↓
-
-Begin Execution
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
+N5 --> N6
+N6 --> N7
+N7 --> N8
+N8 --> N9
+N9 --> N10
+N10 --> N11
 ```
 
 Every stage owns exactly one responsibility.
@@ -169,16 +152,15 @@ The Runtime Kernel is constructed.
 
 At this point:
 
-```
-Runtime Kernel
+```mermaid
+flowchart TD
 
-↓
+N1["Runtime Kernel"]
+N2["Exists"]
+N3["Nothing Else"]
 
-Exists
-
-↓
-
-Nothing Else
+N1 --> N2
+N2 --> N3
 ```
 
 The Kernel becomes responsible for coordinating every remaining startup stage.
@@ -194,22 +176,27 @@ Platform Runtime Services are constructed.
 Examples include:
 
 ```
+
 Capability Registry
 ```
 
 ```
+
 Execution Engine
 ```
 
 ```
+
 Worker Manager
 ```
 
 ```
+
 Scheduler
 ```
 
 ```
+
 Resource Manager
 ```
 
@@ -223,16 +210,15 @@ Heavy initialisation belongs later.
 
 Capabilities register themselves with the Runtime.
 
-```
-Capability
+```mermaid
+flowchart TD
 
-↓
+N1["Capability"]
+N2["Register"]
+N3["Capability Registry"]
 
-Register
-
-↓
-
-Capability Registry
+N1 --> N2
+N2 --> N3
 ```
 
 Registration should collect:
@@ -251,16 +237,15 @@ Capabilities should not begin execution yet.
 
 The Runtime constructs the dependency graph.
 
-```
-Capabilities
+```mermaid
+flowchart TD
 
-↓
+N1["Capabilities"]
+N2["Runtime Services"]
+N3["Dependency Graph"]
 
-Runtime Services
-
-↓
-
-Dependency Graph
+N1 --> N2
+N2 --> N3
 ```
 
 This graph becomes the authoritative startup model.
@@ -314,12 +299,13 @@ Every Runtime Service reports readiness.
 
 The Runtime Kernel waits until:
 
-```
-All Required Services
+```mermaid
+flowchart TD
 
-↓
+N1["All Required Services"]
+N2["Ready"]
 
-Ready
+N1 --> N2
 ```
 
 Only then may the Runtime become operational.
@@ -335,6 +321,7 @@ Never assumed.
 The Runtime enters:
 
 ```
+
 Running
 ```
 
@@ -357,20 +344,17 @@ Ordering should always be dependency driven.
 
 Example.
 
-```
-Capability Registry
+```mermaid
+flowchart TD
 
-↓
+N1["Capability Registry"]
+N2["Execution Engine"]
+N3["Scheduler"]
+N4["Workers"]
 
-Execution Engine
-
-↓
-
-Scheduler
-
-↓
-
-Workers
+N1 --> N2
+N2 --> N3
+N3 --> N4
 ```
 
 Not.
@@ -394,12 +378,14 @@ Independent components SHOULD initialise concurrently.
 Example.
 
 ```
+
 Observability
 ```
 
 and
 
 ```
+
 Blob Storage
 ```
 
@@ -415,16 +401,15 @@ Capabilities initialise after Runtime Services.
 
 Conceptually.
 
-```
-Runtime Ready
+```mermaid
+flowchart TD
 
-↓
+N1["Runtime Ready"]
+N2["Capability Initialisation"]
+N3["Capability Ready"]
 
-Capability Initialisation
-
-↓
-
-Capability Ready
+N1 --> N2
+N2 --> N3
 ```
 
 Capabilities should assume:
@@ -437,12 +422,13 @@ Every required Runtime Service already exists.
 
 Suppose:
 
-```
-Scheduler
+```mermaid
+flowchart TD
 
-↓
+N1["Scheduler"]
+N2["Failed Initialisation"]
 
-Failed Initialisation
+N1 --> N2
 ```
 
 The Runtime should:
@@ -479,18 +465,22 @@ Every stage SHOULD emit structured Runtime events.
 Examples include:
 
 ```
+
 RuntimeBootstrapping
 ```
 
 ```
+
 CapabilityRegistered
 ```
 
 ```
+
 DependencyGraphValidated
 ```
 
 ```
+
 RuntimeReady
 ```
 
@@ -614,23 +604,3 @@ A successful startup produces a Runtime that is:
 Every later Runtime behaviour depends upon startup having established a correct operational foundation.
 
 Within Mosaic, startup should feel less like launching an application and more like booting an operating system.
-
----
-
-# Review Status
-
-**Status**
-
-Draft
-
-**Owner**
-
-Lead Software Architect
-
-**Previous File**
-
-`09-resource-management.md`
-
-**Next File**
-
-`11-shutdown.md`

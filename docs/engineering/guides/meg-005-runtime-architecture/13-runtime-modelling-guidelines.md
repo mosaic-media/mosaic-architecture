@@ -75,6 +75,7 @@ A useful question is:
 If the answer is:
 
 ```
+
 Yes
 ```
 
@@ -89,6 +90,7 @@ Examples.
 If the answer is:
 
 ```
+
 No
 ```
 
@@ -113,30 +115,28 @@ Whenever new operational behaviour appears ask:
 
 Preferred.
 
-```
-Runtime Kernel
+```mermaid
+flowchart TD
 
-↓
+N1["Runtime Kernel"]
+N2["Scheduler"]
+N3["Execution Engine"]
+N4["Resource Manager"]
 
-Scheduler
-
-↓
-
-Execution Engine
-
-↓
-
-Resource Manager
+N1 --> N2
+N2 --> N3
+N3 --> N4
 ```
 
 Avoid.
 
-```
-Runtime Kernel
+```mermaid
+flowchart TD
 
-↓
+N1["Runtime Kernel"]
+N2["Everything"]
 
-Everything
+N1 --> N2
 ```
 
 The Kernel should coordinate.
@@ -171,26 +171,26 @@ It should never execute arbitrary business objects.
 
 Preferred.
 
-```
-Capability
+```mermaid
+flowchart TD
 
-↓
+N1["Capability"]
+N2["Operation"]
+N3["Execution Engine"]
 
-Operation
-
-↓
-
-Execution Engine
+N1 --> N2
+N2 --> N3
 ```
 
 Avoid.
 
-```
-Random Function
+```mermaid
+flowchart TD
 
-↓
+N1["Random Function"]
+N2["Runtime"]
 
-Runtime
+N1 --> N2
 ```
 
 Everything executable within Mosaic should ultimately belong to a registered capability.
@@ -221,36 +221,37 @@ Contracts should make Runtime relationships obvious.
 
 Suppose:
 
-```
-Scheduler
+```mermaid
+flowchart TD
 
-↓
+N1["Scheduler"]
+N2["Needs Worker"]
 
-Needs Worker
+N1 --> N2
 ```
 
 Poor.
 
-```
-Scheduler
+```mermaid
+flowchart TD
 
-↓
+N1["Scheduler"]
+N2["Worker Pool"]
 
-Worker Pool
+N1 --> N2
 ```
 
 Preferred.
 
-```
-Scheduler
+```mermaid
+flowchart TD
 
-↓
+N1["Scheduler"]
+N2["Execution Engine"]
+N3["Worker Manager"]
 
-Execution Engine
-
-↓
-
-Worker Manager
+N1 --> N2
+N2 --> N3
 ```
 
 The Runtime architecture should remain layered.
@@ -265,28 +266,31 @@ Every Runtime dependency should point towards the Runtime Kernel.
 
 Conceptually.
 
-```
-Worker Manager
+```mermaid
+flowchart TD
 
-↓
+N1["Worker Manager"]
+N2["Kernel"]
 
-Kernel
-```
-
-```
-Scheduler
-
-↓
-
-Kernel
+N1 --> N2
 ```
 
+```mermaid
+flowchart TD
+
+N1["Scheduler"]
+N2["Kernel"]
+
+N1 --> N2
 ```
-Execution Engine
 
-↓
+```mermaid
+flowchart TD
 
-Kernel
+N1["Execution Engine"]
+N2["Kernel"]
+
+N1 --> N2
 ```
 
 Runtime Services should not form complex dependency meshes.
@@ -335,20 +339,22 @@ Ask:
 
 Examples.
 
+```mermaid
+flowchart TD
+
+N1["Scheduler V1"]
+N2["Scheduler V2"]
+
+N1 --> N2
 ```
-Scheduler V1
 
-↓
+```mermaid
+flowchart TD
 
-Scheduler V2
-```
+N1["Worker Pool A"]
+N2["Worker Pool B"]
 
-```
-Worker Pool A
-
-↓
-
-Worker Pool B
+N1 --> N2
 ```
 
 If replacing the component requires changing the Runtime Kernel:
@@ -361,24 +367,19 @@ The abstraction probably needs refinement.
 
 The preferred Runtime growth pattern is:
 
-```
-Existing Runtime
+```mermaid
+flowchart TD
 
-↓
+N1["Existing Runtime"]
+N2["New Runtime Service"]
+N3["Register"]
+N4["Dependency Graph"]
+N5["Ready"]
 
-New Runtime Service
-
-↓
-
-Register
-
-↓
-
-Dependency Graph
-
-↓
-
-Ready
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
 ```
 
 Avoid modifying existing Runtime Services unnecessarily.
@@ -393,30 +394,28 @@ Not modification.
 
 Poor.
 
-```
-Scheduler
+```mermaid
+flowchart TD
 
-↓
+N1["Scheduler"]
+N2["Find Worker Manager"]
+N3["Execute"]
 
-Find Worker Manager
-
-↓
-
-Execute
+N1 --> N2
+N2 --> N3
 ```
 
 Preferred.
 
-```
-Scheduler
+```mermaid
+flowchart TD
 
-↓
+N1["Scheduler"]
+N2["Kernel Contract"]
+N3["Execution Engine"]
 
-Kernel Contract
-
-↓
-
-Execution Engine
+N1 --> N2
+N2 --> N3
 ```
 
 The Runtime should remain explicitly composed.
@@ -468,20 +467,17 @@ Draw it.
 
 Example.
 
-```
-Capability Registry
+```mermaid
+flowchart TD
 
-↓
+N1["Capability Registry"]
+N2["Dependency Graph"]
+N3["Execution Engine"]
+N4["Worker Manager"]
 
-Dependency Graph
-
-↓
-
-Execution Engine
-
-↓
-
-Worker Manager
+N1 --> N2
+N2 --> N3
+N3 --> N4
 ```
 
 Simple diagrams frequently reveal:
@@ -560,7 +556,7 @@ The remaining documents describe:
 - terminology
 - references
 
-The next specification, **MEG-006 – Module Platform**, will build directly upon this Runtime Architecture by defining how third-party capabilities integrate into the Runtime without modifying it.
+The next specification, **[MEG-006](../meg-006-module-platform/index.md) – Module Platform**, will build directly upon this Runtime Architecture by defining how third-party capabilities integrate into the Runtime without modifying it.
 
 ---
 
@@ -577,23 +573,3 @@ Within Mosaic, every Runtime component should make one thing easier:
 > **Building independently evolving capabilities.**
 
 When that remains the guiding principle, the Runtime grows into a platform rather than a framework.
-
----
-
-# Review Status
-
-**Status**
-
-Draft
-
-**Owner**
-
-Lead Software Architect
-
-**Previous File**
-
-`12-runtime-state.md`
-
-**Next File**
-
-`14-supervisor-model.md`

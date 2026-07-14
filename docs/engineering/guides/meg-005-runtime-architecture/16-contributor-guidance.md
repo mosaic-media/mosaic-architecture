@@ -75,14 +75,17 @@ Every Runtime Service should answer one question.
 Examples.
 
 ```
+
 Scheduler
 ```
 
 ```
+
 Worker Manager
 ```
 
 ```
+
 Capability Registry
 ```
 
@@ -150,30 +153,28 @@ Scheduling belongs only inside the Scheduler.
 
 Poor.
 
-```
-Worker Manager
+```mermaid
+flowchart TD
 
-↓
+N1["Worker Manager"]
+N2["Schedule Retry"]
 
-Schedule Retry
+N1 --> N2
 ```
 
 Preferred.
 
-```
-Worker Manager
+```mermaid
+flowchart TD
 
-↓
+N1["Worker Manager"]
+N2["Report Failure"]
+N3["Scheduler"]
+N4["Retry"]
 
-Report Failure
-
-↓
-
-Scheduler
-
-↓
-
-Retry
+N1 --> N2
+N2 --> N3
+N3 --> N4
 ```
 
 Responsibilities should remain clearly separated.
@@ -444,23 +445,3 @@ Within Mosaic, every Runtime contribution should strengthen that property by mak
 Capabilities create value.
 
 The Runtime quietly makes that value possible.
-
----
-
-# Review Status
-
-**Status**
-
-Draft
-
-**Owner**
-
-Lead Software Architect
-
-**Previous File**
-
-`15-adrs.md`
-
-**Next File**
-
-`17-references.md`

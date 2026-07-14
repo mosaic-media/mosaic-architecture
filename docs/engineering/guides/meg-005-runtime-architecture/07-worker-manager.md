@@ -70,20 +70,17 @@ A Worker is an isolated execution environment capable of executing one Work Unit
 
 Conceptually.
 
-```
-Execution Engine
+```mermaid
+flowchart TD
 
-↓
+N1["Execution Engine"]
+N2["Worker"]
+N3["Capability"]
+N4["Result"]
 
-Worker
-
-↓
-
-Capability
-
-↓
-
-Result
+N1 --> N2
+N2 --> N3
+N3 --> N4
 ```
 
 Workers understand:
@@ -107,36 +104,32 @@ Business meaning remains invisible.
 
 Without a Worker Manager:
 
-```
-Execution Engine
+```mermaid
+flowchart TD
 
-↓
+N1["Execution Engine"]
+N2["Create Worker"]
+N3["Manage Worker"]
+N4["Destroy Worker"]
 
-Create Worker
-
-↓
-
-Manage Worker
-
-↓
-
-Destroy Worker
+N1 --> N2
+N2 --> N3
+N3 --> N4
 ```
 
 Execution and resource management become tightly coupled.
 
 Instead.
 
-```
-Execution Engine
+```mermaid
+flowchart TD
 
-↓
+N1["Execution Engine"]
+N2["Worker Manager"]
+N3["Worker"]
 
-Worker Manager
-
-↓
-
-Worker
+N1 --> N2
+N2 --> N3
 ```
 
 Execution remains independent.
@@ -172,16 +165,19 @@ These concerns belong elsewhere.
 
 Workers exist within managed pools.
 
-```
-Worker Manager
+```mermaid
+flowchart TD
 
-├── Worker
+N1["Worker Manager"]
+N2["Worker"]
+N3["Worker"]
+N4["Worker"]
+N5["Worker"]
 
-├── Worker
-
-├── Worker
-
-└── Worker
+N1 --> N2
+N1 --> N3
+N1 --> N4
+N1 --> N5
 ```
 
 The Worker Manager should view workers as a pool of interchangeable execution resources.
@@ -196,32 +192,23 @@ Worker pools are a well-established concurrency pattern because they bound resou
 
 Every worker follows the same lifecycle.
 
-```
-Created
+```mermaid
+flowchart TD
 
-↓
+N1["Created"]
+N2["Idle"]
+N3["Allocated"]
+N4["Executing"]
+N5["Completed"]
+N6["Idle"]
+N7["Retired"]
 
-Idle
-
-↓
-
-Allocated
-
-↓
-
-Executing
-
-↓
-
-Completed
-
-↓
-
-Idle
-
-↓
-
-Retired
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
+N5 --> N6
+N6 --> N7
 ```
 
 The Worker Manager owns every transition.
@@ -234,24 +221,19 @@ Workers should never transition independently.
 
 When execution is requested:
 
-```
-Execution Engine
+```mermaid
+flowchart TD
 
-↓
+N1["Execution Engine"]
+N2["Worker Manager"]
+N3["Select Worker"]
+N4["Allocate"]
+N5["Execute"]
 
-Worker Manager
-
-↓
-
-Select Worker
-
-↓
-
-Allocate
-
-↓
-
-Execute
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
 ```
 
 Selection policies are implementation details.
@@ -264,16 +246,15 @@ The Execution Engine should simply request execution.
 
 Idle workers represent available capacity.
 
-```
-Worker
+```mermaid
+flowchart TD
 
-↓
+N1["Worker"]
+N2["Idle"]
+N3["Ready"]
 
-Idle
-
-↓
-
-Ready
+N1 --> N2
+N2 --> N3
 ```
 
 Idle workers should consume minimal resources while remaining immediately available for work.
@@ -286,16 +267,15 @@ Workers should never busy-wait.
 
 A busy worker owns one active Work Unit.
 
-```
-Worker
+```mermaid
+flowchart TD
 
-↓
+N1["Worker"]
+N2["Executing"]
+N3["Work Unit"]
 
-Executing
-
-↓
-
-Work Unit
+N1 --> N2
+N2 --> N3
 ```
 
 By default:
@@ -312,16 +292,15 @@ Not by increasing worker complexity.
 
 Every worker has exactly one owner.
 
-```
-Runtime Kernel
+```mermaid
+flowchart TD
 
-↓
+N1["Runtime Kernel"]
+N2["Worker Manager"]
+N3["Worker"]
 
-Worker Manager
-
-↓
-
-Worker
+N1 --> N2
+N2 --> N3
 ```
 
 Ownership answers:
@@ -342,6 +321,7 @@ Workers SHOULD possess Runtime identity.
 Example.
 
 ```
+
 Worker-17
 ```
 
@@ -380,12 +360,13 @@ Not business correctness.
 
 Suppose:
 
-```
-Worker
+```mermaid
+flowchart TD
 
-↓
+N1["Worker"]
+N2["Crash"]
 
-Crash
+N1 --> N2
 ```
 
 The Worker Manager should:
@@ -398,6 +379,7 @@ The Worker Manager should:
 The Execution Engine simply observes:
 
 ```
+
 Execution Failed
 ```
 
@@ -435,14 +417,17 @@ Worker pools SHOULD scale deliberately.
 Possible strategies include:
 
 ```
+
 Static
 ```
 
 ```
+
 Adaptive
 ```
 
 ```
+
 Configured
 ```
 
@@ -482,20 +467,17 @@ before disposal.
 
 Worker replacement should be automatic.
 
-```
-Worker Failure
+```mermaid
+flowchart TD
 
-↓
+N1["Worker Failure"]
+N2["Retire Worker"]
+N3["Create Worker"]
+N4["Return Capacity"]
 
-Retire Worker
-
-↓
-
-Create Worker
-
-↓
-
-Return Capacity
+N1 --> N2
+N2 --> N3
+N3 --> N4
 ```
 
 Capabilities should remain unaware that replacement occurred.
@@ -510,22 +492,24 @@ The Runtime SHOULD avoid unnecessary worker affinity.
 
 Poor.
 
-```
-Capability
+```mermaid
+flowchart TD
 
-↓
+N1["Capability"]
+N2["Always Worker 7"]
 
-Always Worker 7
+N1 --> N2
 ```
 
 Preferred.
 
-```
-Capability
+```mermaid
+flowchart TD
 
-↓
+N1["Capability"]
+N2["Available Worker"]
 
-Available Worker
+N1 --> N2
 ```
 
 Workers should remain interchangeable wherever practical.
@@ -687,23 +671,3 @@ By centralising worker management, the Mosaic Runtime gains:
 Workers remain simple.
 
 The Worker Manager makes them reliable.
-
----
-
-# Review Status
-
-**Status**
-
-Draft
-
-**Owner**
-
-Lead Software Architect
-
-**Previous File**
-
-`06-execution-engine.md`
-
-**Next File**
-
-`08-scheduler-architecture.md`

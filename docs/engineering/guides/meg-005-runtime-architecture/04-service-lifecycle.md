@@ -63,36 +63,25 @@ This consistency allows the Runtime Kernel to coordinate every service without s
 
 Every Runtime Service progresses through the following lifecycle.
 
-```
-Created
+```mermaid
+flowchart TD
 
-↓
+N1["Created"]
+N2["Initialised"]
+N3["Ready"]
+N4["Running"]
+N5["Cooldown"]
+N6["Draining"]
+N7["Stopping"]
+N8["Disposed"]
 
-Initialised
-
-↓
-
-Ready
-
-↓
-
-Running
-
-↓
-
-Cooldown
-
-↓
-
-Draining
-
-↓
-
-Stopping
-
-↓
-
-Disposed
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
+N5 --> N6
+N6 --> N7
+N7 --> N8
 ```
 
 Each state has exactly one responsibility.
@@ -146,28 +135,31 @@ It is now capable of accepting work.
 
 Examples include:
 
-```
-Scheduler
+```mermaid
+flowchart TD
 
-↓
+N1["Scheduler"]
+N2["Ready To Schedule"]
 
-Ready To Schedule
-```
-
-```
-Worker Manager
-
-↓
-
-Ready To Execute
+N1 --> N2
 ```
 
+```mermaid
+flowchart TD
+
+N1["Worker Manager"]
+N2["Ready To Execute"]
+
+N1 --> N2
 ```
-Capability Registry
 
-↓
+```mermaid
+flowchart TD
 
-Ready To Register
+N1["Capability Registry"]
+N2["Ready To Register"]
+
+N1 --> N2
 ```
 
 Readiness indicates operational capability.
@@ -206,28 +198,31 @@ Its purpose is simple.
 
 Examples.
 
-```
-Scheduler
+```mermaid
+flowchart TD
 
-↓
+N1["Scheduler"]
+N2["Stop Scheduling"]
 
-Stop Scheduling
-```
-
-```
-Execution Engine
-
-↓
-
-Reject New Tasks
+N1 --> N2
 ```
 
+```mermaid
+flowchart TD
+
+N1["Execution Engine"]
+N2["Reject New Tasks"]
+
+N1 --> N2
 ```
-Worker Manager
 
-↓
+```mermaid
+flowchart TD
 
-Stop Allocating Workers
+N1["Worker Manager"]
+N2["Stop Allocating Workers"]
+
+N1 --> N2
 ```
 
 Existing work continues.
@@ -248,20 +243,17 @@ Existing work completes.
 
 Example.
 
-```
-Worker Pool
+```mermaid
+flowchart TD
 
-↓
+N1["Worker Pool"]
+N2["Current Tasks"]
+N3["Complete"]
+N4["Empty"]
 
-Current Tasks
-
-↓
-
-Complete
-
-↓
-
-Empty
+N1 --> N2
+N2 --> N3
+N3 --> N4
 ```
 
 The Runtime should prefer graceful completion over abrupt cancellation wherever practical.
@@ -308,20 +300,17 @@ A new instance should be created instead.
 
 The Runtime Kernel owns lifecycle transitions.
 
-```
-Runtime Kernel
+```mermaid
+flowchart TD
 
-↓
+N1["Runtime Kernel"]
+N2["Scheduler"]
+N3["Worker Manager"]
+N4["Execution Engine"]
 
-Scheduler
-
-↓
-
-Worker Manager
-
-↓
-
-Execution Engine
+N1 --> N2
+N2 --> N3
+N3 --> N4
 ```
 
 Individual Runtime Services should never transition themselves independently.
@@ -336,38 +325,32 @@ Services should start in dependency order.
 
 Example.
 
-```
-Capability Registry
+```mermaid
+flowchart TD
 
-↓
+N1["Capability Registry"]
+N2["Execution Engine"]
+N3["Scheduler"]
+N4["Workers"]
 
-Execution Engine
-
-↓
-
-Scheduler
-
-↓
-
-Workers
+N1 --> N2
+N2 --> N3
+N3 --> N4
 ```
 
 Shutdown occurs in reverse.
 
-```
-Workers
+```mermaid
+flowchart TD
 
-↓
+N1["Workers"]
+N2["Scheduler"]
+N3["Execution Engine"]
+N4["Capability Registry"]
 
-Scheduler
-
-↓
-
-Execution Engine
-
-↓
-
-Capability Registry
+N1 --> N2
+N2 --> N3
+N3 --> N4
 ```
 
 This ordering prevents services depending upon components that have already stopped.
@@ -381,22 +364,27 @@ The Runtime MAY publish lifecycle events.
 Examples include:
 
 ```
+
 ServiceInitialised
 ```
 
 ```
+
 ServiceReady
 ```
 
 ```
+
 ServiceStarted
 ```
 
 ```
+
 ServiceStopping
 ```
 
 ```
+
 ServiceDisposed
 ```
 
@@ -416,22 +404,24 @@ They are not identical.
 
 Example.
 
-```
-Running
+```mermaid
+flowchart TD
 
-↓
+N1["Running"]
+N2["Healthy"]
 
-Healthy
+N1 --> N2
 ```
 
 or
 
-```
-Running
+```mermaid
+flowchart TD
 
-↓
+N1["Running"]
+N2["Degraded"]
 
-Degraded
+N1 --> N2
 ```
 
 A service may be operational while experiencing reduced capability.
@@ -448,24 +438,19 @@ Runtime Services SHOULD be restartable.
 
 Restarting should require:
 
-```
-Dispose
+```mermaid
+flowchart TD
 
-↓
+N1["Dispose"]
+N2["Create"]
+N3["Initialise"]
+N4["Ready"]
+N5["Running"]
 
-Create
-
-↓
-
-Initialise
-
-↓
-
-Ready
-
-↓
-
-Running
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
 ```
 
 Services should not depend upon previous process state.
@@ -478,16 +463,15 @@ Explicit lifecycles naturally support recovery after failure.
 
 Suppose initialisation fails.
 
-```
-Created
+```mermaid
+flowchart TD
 
-↓
+N1["Created"]
+N2["Initialised"]
+N3["Failure"]
 
-Initialised
-
-↓
-
-Failure
+N1 --> N2
+N2 --> N3
 ```
 
 The Runtime Kernel should:
@@ -504,12 +488,13 @@ Partial startup should not continue unless explicitly supported.
 
 Suppose a service fails while running.
 
-```
-Running
+```mermaid
+flowchart TD
 
-↓
+N1["Running"]
+N2["Failure"]
 
-Failure
+N1 --> N2
 ```
 
 The Runtime Kernel determines:
@@ -671,23 +656,3 @@ Nor should it simply:
 It should progress through a deliberate, observable lifecycle that makes startup predictable, execution reliable and shutdown graceful.
 
 Within Mosaic, every Runtime Service follows the same lifecycle so that the Runtime Kernel can coordinate the entire platform with consistency rather than special cases.
-
----
-
-# Review Status
-
-**Status**
-
-Draft
-
-**Owner**
-
-Lead Software Architect
-
-**Previous File**
-
-`03-capability-registry.md`
-
-**Next File**
-
-`05-dependency-graph.md`

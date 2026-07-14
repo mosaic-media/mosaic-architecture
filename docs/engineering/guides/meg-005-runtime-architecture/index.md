@@ -39,61 +39,42 @@ It is responsible for:
 
 This document defines the internal architecture of the Runtime itself.
 
-Unlike MEG-002, which describes **runtime behaviour**, MEG-005 describes **runtime structure**.
+Unlike [MEG-002](../meg-002-event-driven-runtime/index.md), which describes **runtime behaviour**, MEG-005 describes **runtime structure**.
 
 ---
 
 # Relationship to MEG
 
-```
-MEG-001
+```mermaid
+flowchart TD
 
-↓
+N1["MEG-001"]
+N2["Engineering Standards"]
+N3["MEG-002"]
+N4["Reactive Runtime"]
+N5["MEG-003"]
+N6["Domain Model"]
+N7["MEG-004"]
+N8["Hexagonal Architecture"]
+N9["MEG-005"]
+N10["Runtime Architecture"]
+N11["MEG-006"]
+N12["Module Platform"]
 
-Engineering Standards
-
-↓
-
-MEG-002
-
-↓
-
-Reactive Runtime
-
-↓
-
-MEG-003
-
-↓
-
-Domain Model
-
-↓
-
-MEG-004
-
-↓
-
-Hexagonal Architecture
-
-↓
-
-MEG-005
-
-↓
-
-Runtime Architecture
-
-↓
-
-MEG-006
-
-↓
-
-Module Platform
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
+N5 --> N6
+N6 --> N7
+N7 --> N8
+N8 --> N9
+N9 --> N10
+N10 --> N11
+N11 --> N12
 ```
 
-MEG-002 answers:
+[MEG-002](../meg-002-event-driven-runtime/index.md) answers:
 
 > **How should work execute?**
 
@@ -177,36 +158,25 @@ Execution belongs to the Runtime.
 
 The Runtime intentionally separates itself into architectural layers.
 
-```
-Bootstrap
+```mermaid
+flowchart TD
 
-↓
+N1["Bootstrap"]
+N2["Runtime Kernel"]
+N3["Capability Registry"]
+N4["Execution Engine"]
+N5["Schedulers"]
+N6["Workers"]
+N7["Capabilities"]
+N8["Business"]
 
-Runtime Kernel
-
-↓
-
-Capability Registry
-
-↓
-
-Execution Engine
-
-↓
-
-Schedulers
-
-↓
-
-Workers
-
-↓
-
-Capabilities
-
-↓
-
-Business
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
+N5 --> N6
+N6 --> N7
+N7 --> N8
 ```
 
 Each layer owns exactly one responsibility.
@@ -237,6 +207,7 @@ without discussing individual business capabilities.
 # Repository Structure
 
 ```
+
 engineering/
 
 └── meg/
@@ -290,16 +261,16 @@ engineering/
 
 Required reading:
 
-- MEG-001 Go Engineering Standards
-- MEG-002 Reactive Runtime
-- MEG-003 Domain-Driven Design
-- MEG-004 Hexagonal Architecture
+- [MEG-001 — Go Engineering Standards](../meg-001-go-engineering-standards/index.md)
+- [MEG-002 — Event-Driven Runtime](../meg-002-event-driven-runtime/index.md)
+- [MEG-003 — Domain-Driven Design](../meg-003-domain-driven-design/index.md)
+- [MEG-004 — Hexagonal Architecture](../meg-004-hexagonal-architecture/index.md)
 
 Future companion specifications:
 
-- MEG-006 Module Platform
-- MEG-007 Storage Architecture
-- MEG-008 Observability
+- [MEG-006 — Module Platform](../meg-006-module-platform/index.md)
+- [MEG-007 — Storage Architecture](../meg-007-storage-architecture/index.md)
+- [MEG-008 — Observability](../meg-008-observability/index.md)
 
 ---
 
@@ -319,19 +290,3 @@ The Runtime Architecture is intended to produce a platform that is:
 The Runtime should feel more like a lightweight operating system than a traditional backend application.
 
 Every new capability should integrate into the Runtime rather than modifying it.
-
----
-
-# Review Status
-
-**Status**
-
-Draft
-
-**Owner**
-
-Lead Software Architect
-
-**Next File**
-
-`00-document-control.md`

@@ -81,36 +81,25 @@ It is responsible for:
 
 Conceptually.
 
-```text
-Docker Compose
+```mermaid
+flowchart TD
 
-↓
+N1["Docker Compose"]
+N2["Mosaic Supervisor"]
+N3["Mosaic Shell"]
+N4["Onboarding"]
+N5["Selected Modules"]
+N6["Build Pipeline"]
+N7["Prepared Generation"]
+N8["Active Generation"]
 
-Mosaic Supervisor
-
-↓
-
-Mosaic Shell
-
-↓
-
-Onboarding
-
-↓
-
-Selected Modules
-
-↓
-
-Build Pipeline
-
-↓
-
-Prepared Generation
-
-↓
-
-Active Generation
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
+N5 --> N6
+N6 --> N7
+N7 --> N8
 ```
 
 The Supervisor is not a Runtime Service inside the Platform.
@@ -142,20 +131,17 @@ All user traffic should enter through the Supervisor.
 
 Conceptually.
 
-```text
-User
+```mermaid
+flowchart TD
 
-↓
+N1["User"]
+N2["Supervisor HTTP Entry Point"]
+N3["Shell"]
+N4["Platform"]
 
-Supervisor HTTP Entry Point
-
-↓
-
-Shell
-
-↓
-
-Platform
+N1 --> N2
+N2 --> N3
+N3 --> N4
 ```
 
 The Platform never serves UI directly.
@@ -188,20 +174,17 @@ The user should not lose their interface simply because the Platform is unavaila
 
 Mosaic recovery follows a strict hierarchy.
 
-```text
-Normal Runtime
+```mermaid
+flowchart TD
 
-↓
+N1["Normal Runtime"]
+N2["Supervisor Recovery Using Shell Or Native Client"]
+N3["Embedded Recovery Renderer For Web"]
+N4["No UI"]
 
-Supervisor Recovery Using Shell Or Native Client
-
-↓
-
-Embedded Recovery Renderer For Web
-
-↓
-
-No UI
+N1 --> N2
+N2 --> N3
+N3 --> N4
 ```
 
 The user should almost never see the final layer.
@@ -228,30 +211,28 @@ The Supervisor changes the Mosaic hierarchy.
 
 Preferred.
 
-```text
-Supervisor
+```mermaid
+flowchart TD
 
-↓
+N1["Supervisor"]
+N2["Generation"]
+N3["Platform"]
+N4["Modules"]
 
-Generation
-
-↓
-
-Platform
-
-↓
-
-Modules
+N1 --> N2
+N2 --> N3
+N3 --> N4
 ```
 
 Avoid.
 
-```text
-Platform
+```mermaid
+flowchart TD
 
-↓
+N1["Platform"]
+N2["Supervisor"]
 
-Supervisor
+N1 --> N2
 ```
 
 The thing responsible for recovery should not be the thing that needs recovering.
@@ -292,48 +273,31 @@ It must not wait for a browser connection or user action.
 
 Initial installation should follow this shape.
 
-```text
-Start Supervisor Container
+```mermaid
+flowchart TD
 
-↓
+N1["Start Supervisor Container"]
+N2["Download Shell"]
+N3["Verify Shell Signature"]
+N4["Install And Start Shell"]
+N5["Run Onboarding"]
+N6["Select Functionality"]
+N7["Create Build Specification"]
+N8["Resolve Modules And Dependencies"]
+N9["Invoke Build Pipeline"]
+N10["Validate Platform Package"]
+N11["Activate Generation"]
 
-Download Shell
-
-↓
-
-Verify Shell Signature
-
-↓
-
-Install And Start Shell
-
-↓
-
-Run Onboarding
-
-↓
-
-Select Functionality
-
-↓
-
-Create Build Specification
-
-↓
-
-Resolve Modules And Dependencies
-
-↓
-
-Invoke Build Pipeline
-
-↓
-
-Validate Platform Package
-
-↓
-
-Activate Generation
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
+N5 --> N6
+N6 --> N7
+N7 --> N8
+N8 --> N9
+N9 --> N10
+N10 --> N11
 ```
 
 The user should not manually assemble Platform packages.
@@ -366,16 +330,17 @@ The Platform does not present itself directly.
 
 The Shell presents the Platform.
 
-```text
-Supervisor
+```mermaid
+flowchart TD
 
-├── Recovery UI
+N1["Supervisor"]
+N2["Recovery UI"]
+N3["Shell"]
+N4["Platform"]
 
-└── Shell
-
-    ↓
-
-    Platform
+N1 --> N2
+N1 --> N3
+N1 --> N4
 ```
 
 The Shell is the operational facade over Mosaic.
@@ -416,34 +381,27 @@ When a Module appears in the Module Catalogue, its manifest metadata should make
 
 Final compatibility is established only during admission and dependency validation.
 
-MEG-006 defines Module Catalogue discovery.
+[MEG-006](../meg-006-module-platform/index.md) defines Module Catalogue discovery.
 
-MIP-002 defines the manifest metadata available to catalogue and onboarding clients.
+[MIP-002](../../protocols/mip-002-module-manifest-protocol/index.md) defines the manifest metadata available to catalogue and onboarding clients.
 
 The onboarding flow may be:
 
-```text
-Shell
+```mermaid
+flowchart TD
 
-↓
+N1["Shell"]
+N2["Supervisor"]
+N3["Recovery SDUI"]
+N4["Feature Selection"]
+N5["Build Specification"]
+N6["Build Platform"]
 
-Supervisor
-
-↓
-
-Recovery SDUI
-
-↓
-
-Feature Selection
-
-↓
-
-Build Specification
-
-↓
-
-Build Platform
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
+N5 --> N6
 ```
 
 After onboarding completes, the Supervisor builds and validates the Platform package, starts the Platform, and the Shell switches to Runtime SDUI.
@@ -499,9 +457,9 @@ The Supervisor should never know how to compile Modules.
 
 Build logic belongs to the Build Pipeline.
 
-MEG-006 defines how Modules participate in Mosaic.
+[MEG-006](../meg-006-module-platform/index.md) defines how Modules participate in Mosaic.
 
-MIP-002 defines how Module manifests describe identity, dependencies, permissions and compatibility.
+[MIP-002](../../protocols/mip-002-module-manifest-protocol/index.md) defines how Module manifests describe identity, dependencies, permissions and compatibility.
 
 ---
 
@@ -549,60 +507,37 @@ Every build occurs in an isolated workspace and produces a candidate Platform pa
 
 Conceptually.
 
-```text
-User Request
+```mermaid
+flowchart TD
 
-↓
+N1["User Request"]
+N2["Module Selection"]
+N3["Download Module Manifests"]
+N4["Resolve Dependency Graph"]
+N5["Validate SDK Compatibility"]
+N6["Create Build Workspace"]
+N7["Download Go Modules"]
+N8["Update go.mod"]
+N9["Generate imports.go"]
+N10["go mod tidy"]
+N11["go build"]
+N12["Health Checks"]
+N13["Atomic Runtime Swap"]
+N14["Platform Starts"]
 
-Module Selection
-
-↓
-
-Download Module Manifests
-
-↓
-
-Resolve Dependency Graph
-
-↓
-
-Validate SDK Compatibility
-
-↓
-
-Create Build Workspace
-
-↓
-
-Download Go Modules
-
-↓
-
-Update go.mod
-
-↓
-
-Generate imports.go
-
-↓
-
-go mod tidy
-
-↓
-
-go build
-
-↓
-
-Health Checks
-
-↓
-
-Atomic Runtime Swap
-
-↓
-
-Platform Starts
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
+N5 --> N6
+N6 --> N7
+N7 --> N8
+N8 --> N9
+N9 --> N10
+N10 --> N11
+N11 --> N12
+N12 --> N13
+N13 --> N14
 ```
 
 The pipeline is closer to a compiler toolchain than a traditional package manager.
@@ -742,7 +677,7 @@ Blank imports ensure every selected Module package's `init()` function executes 
 
 This is the only generated Go source required for Module discovery.
 
-MEG-006 governs the generated imports boundary.
+[MEG-006](../meg-006-module-platform/index.md) governs the generated imports boundary.
 
 ---
 
@@ -834,34 +769,30 @@ runtime/
 
 Activation follows this shape.
 
-```text
-Build
+```mermaid
+flowchart TD
 
-↓
+N1["Build"]
+N2["Health Check"]
+N3["Switch Runtime"]
+N4["Healthy?"]
+N5["Retain Previous"]
 
-Health Check
-
-↓
-
-Switch Runtime
-
-↓
-
-Healthy?
-
-↓
-
-Retain Previous
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
 ```
 
 If activation fails:
 
-```text
-Restore Previous
+```mermaid
+flowchart TD
 
-↓
+N1["Restore Previous"]
+N2["Continue Running"]
 
-Continue Running
+N1 --> N2
 ```
 
 Rollback means reactivating a previous known good Generation.
@@ -898,32 +829,23 @@ Development uses the same architecture as production.
 
 Conceptually.
 
-```text
-Development Supervisor
+```mermaid
+flowchart TD
 
-↓
+N1["Development Supervisor"]
+N2["Local Modules"]
+N3["Build Pipeline"]
+N4["Build Workspace"]
+N5["Compile"]
+N6["Launch Development Platform"]
+N7["Install Test Harness"]
 
-Local Modules
-
-↓
-
-Build Pipeline
-
-↓
-
-Build Workspace
-
-↓
-
-Compile
-
-↓
-
-Launch Development Platform
-
-↓
-
-Install Test Harness
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
+N5 --> N6
+N6 --> N7
 ```
 
 The Development Supervisor may optimise for feedback speed, but it must not introduce runtime plugin loading semantics.
@@ -934,7 +856,7 @@ The Development Supervisor owns file watching, local source mapping, rebuild req
 
 The Build Pipeline retains ownership of Build Workspace preparation, generated imports, Go dependency operations and compilation.
 
-MEG-006 defines the complete Developer Platform and Development Supervisor workflow.
+[MEG-006](../meg-006-module-platform/index.md) defines the complete Developer Platform and Development Supervisor workflow.
 
 ---
 
@@ -946,15 +868,23 @@ It contains the artefacts required to activate a coherent Mosaic installation.
 
 Conceptually.
 
-```text
-Generation 42
+```mermaid
+flowchart TD
 
-├── platform
-├── shell
-├── modules
-├── manifests
-├── assets
-└── signatures
+N1["Generation 42"]
+N2["platform"]
+N3["shell"]
+N4["modules"]
+N5["manifests"]
+N6["assets"]
+N7["signatures"]
+
+N1 --> N2
+N1 --> N3
+N1 --> N4
+N1 --> N5
+N1 --> N6
+N1 --> N7
 ```
 
 Only one Generation is active at a time.
@@ -981,18 +911,16 @@ The running Platform owns media execution, Module lifecycle, scheduling, workers
 
 This preserves a clear boundary.
 
-```text
-Supervisor
+```mermaid
+flowchart LR
 
-↓ owns
+N1["Supervisor"]
+N2["Install, Invoke Build Pipeline, Validate, Activate, Upgrade, Recover"]
+N3["Platform"]
+N4["Runtime, Capabilities, Media Execution"]
 
-Install, Invoke Build Pipeline, Validate, Activate, Upgrade, Recover
-
-Platform
-
-↓ owns
-
-Runtime, Capabilities, Media Execution
+N1 -->|owns| N2
+N3 -->|owns| N4
 ```
 
 ---
@@ -1019,36 +947,25 @@ The current Generation should continue serving until the new Generation is prepa
 
 Upgrade should feel like a safe replacement, not an in-place mutation.
 
-```text
-Generation 42 Active
+```mermaid
+flowchart TD
 
-↓
+N1["Generation 42 Active"]
+N2["Build Pipeline"]
+N3["Generation 43 Prepared"]
+N4["Health Checks"]
+N5["Atomic Switch"]
+N6["Generation 43 Active"]
+N7["Generation 42 Retained"]
+N8["Garbage Collect Later"]
 
-Build Pipeline
-
-↓
-
-Generation 43 Prepared
-
-↓
-
-Health Checks
-
-↓
-
-Atomic Switch
-
-↓
-
-Generation 43 Active
-
-↓
-
-Generation 42 Retained
-
-↓
-
-Garbage Collect Later
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
+N5 --> N6
+N6 --> N7
+N7 --> N8
 ```
 
 ---
@@ -1249,48 +1166,31 @@ The Supervisor should prefer preserving a known good system over repeatedly atte
 
 The Supervisor behaves as a state machine.
 
-```text
-Starting
+```mermaid
+flowchart TD
 
-↓
+N1["Starting"]
+N2["Installing Shell"]
+N3["Shell Ready"]
+N4["Onboarding"]
+N5["Building Platform"]
+N6["Starting Platform"]
+N7["Healthy"]
+N8["Updating"]
+N9["Rollback"]
+N10["Recovery"]
+N11["Maintenance"]
 
-Installing Shell
-
-↓
-
-Shell Ready
-
-↓
-
-Onboarding
-
-↓
-
-Building Platform
-
-↓
-
-Starting Platform
-
-↓
-
-Healthy
-
-↓
-
-Updating
-
-↓
-
-Rollback
-
-↓
-
-Recovery
-
-↓
-
-Maintenance
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
+N5 --> N6
+N6 --> N7
+N7 --> N8
+N8 --> N9
+N9 --> N10
+N10 --> N11
 ```
 
 The browser, Shell and native clients render whichever state the Supervisor currently owns.
@@ -1303,46 +1203,36 @@ The Supervisor begins Shell bootstrap as soon as its process starts.
 
 This work should normally complete before the user opens Mosaic.
 
-```text
-Container Starts
+```mermaid
+flowchart TD
 
-↓
+N1["Container Starts"]
+N2["Supervisor Starts"]
+N3["Download Shell"]
+N4["Verify Signature"]
+N5["Install And Start Shell"]
 
-Supervisor Starts
-
-↓
-
-Download Shell
-
-↓
-
-Verify Signature
-
-↓
-
-Install And Start Shell
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
 ```
 
 ## First Visit With Shell Ready
 
-```text
-Browser
+```mermaid
+flowchart TD
 
-↓
+N1["Browser"]
+N2["Web Renderer In Shell"]
+N3["Supervisor"]
+N4["Recovery SDUI"]
+N5["Onboarding"]
 
-Web Renderer In Shell
-
-↓
-
-Supervisor
-
-↓
-
-Recovery SDUI
-
-↓
-
-Onboarding
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
 ```
 
 The embedded recovery renderer should not appear.
@@ -1351,24 +1241,19 @@ The Shell renders Supervisor-owned Recovery SDUI until the Platform exists and c
 
 ## Shell Not Ready
 
-```text
-Browser
+```mermaid
+flowchart TD
 
-↓
+N1["Browser"]
+N2["Embedded Recovery Renderer"]
+N3["Preparing Mosaic"]
+N4["Downloading Shell"]
+N5["Shell Ready"]
 
-Embedded Recovery Renderer
-
-↓
-
-Preparing Mosaic
-
-↓
-
-Downloading Shell
-
-↓
-
-Shell Ready
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
 ```
 
 The Supervisor should transition into the Shell automatically when the Shell is ready.
@@ -1381,32 +1266,23 @@ Its purpose is to communicate bootstrap progress until the Shell can replace it 
 
 ## Onboarding And Build
 
-```text
-Shell
+```mermaid
+flowchart TD
 
-↓
+N1["Shell"]
+N2["Recovery SDUI From Supervisor"]
+N3["Catalogue-Driven Feature Selection"]
+N4["Build Specification"]
+N5["Dependency Resolution"]
+N6["Build Pipeline"]
+N7["Health Checks"]
 
-Recovery SDUI From Supervisor
-
-↓
-
-Catalogue-Driven Feature Selection
-
-↓
-
-Build Specification
-
-↓
-
-Dependency Resolution
-
-↓
-
-Build Pipeline
-
-↓
-
-Health Checks
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
+N5 --> N6
+N6 --> N7
 ```
 
 The Shell remains the active presentation layer throughout this flow.
@@ -1417,24 +1293,19 @@ Build failure must not cause a browser to fall back to the embedded recovery ren
 
 ## Initial Runtime Switch
 
-```text
-Platform Passes Health Checks
+```mermaid
+flowchart TD
 
-↓
+N1["Platform Passes Health Checks"]
+N2["Supervisor Marks Platform Ready"]
+N3["Shell Switches Backend"]
+N4["Runtime SDUI"]
+N5["Home Screen"]
 
-Supervisor Marks Platform Ready
-
-↓
-
-Shell Switches Backend
-
-↓
-
-Runtime SDUI
-
-↓
-
-Home Screen
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
 ```
 
 The Shell remains loaded during this handoff.
@@ -1445,20 +1316,17 @@ The transition should not require a page refresh or replacement of the Shell.
 
 ## Platform Failure
 
-```text
-Shell
+```mermaid
+flowchart TD
 
-↓
+N1["Shell"]
+N2["Platform Disconnects"]
+N3["Reconnects To Supervisor"]
+N4["Recovery SDUI"]
 
-Platform Disconnects
-
-↓
-
-Reconnects To Supervisor
-
-↓
-
-Recovery SDUI
+N1 --> N2
+N2 --> N3
+N3 --> N4
 ```
 
 The Shell should remain visible.
@@ -1467,20 +1335,17 @@ The user may see restart, rollback, progress and log state without losing their 
 
 ## Platform Recovery
 
-```text
-Supervisor
+```mermaid
+flowchart TD
 
-↓
+N1["Supervisor"]
+N2["Platform Ready"]
+N3["Shell Reconnects"]
+N4["Platform Resumes"]
 
-Platform Ready
-
-↓
-
-Shell Reconnects
-
-↓
-
-Platform Resumes
+N1 --> N2
+N2 --> N3
+N3 --> N4
 ```
 
 The transition should feel seamless.
@@ -1495,38 +1360,32 @@ Native clients continue to render Recovery SDUI with their own renderer and do n
 
 ## Atomic Upgrade Recovery
 
-```text
-Download
+```mermaid
+flowchart TD
 
-↓
+N1["Download"]
+N2["Build"]
+N3["Health Check"]
+N4["Switch"]
+N5["Retain Previous"]
 
-Build
-
-↓
-
-Health Check
-
-↓
-
-Switch
-
-↓
-
-Retain Previous
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
 ```
 
 If the Platform upgrade fails:
 
-```text
-Rollback
+```mermaid
+flowchart TD
 
-↓
+N1["Rollback"]
+N2["Reconnect Shell"]
+N3["Continue"]
 
-Reconnect Shell
-
-↓
-
-Continue
+N1 --> N2
+N2 --> N3
 ```
 
 The user should remain inside the Shell throughout.
@@ -1662,10 +1521,10 @@ This chapter extends MEG-005 by defining the host-level component responsible fo
 
 Related guidance is provided by:
 
-- MAC-001 — Platform Architecture, for the Platform, Runtime and Module boundaries.
-- MEG-006 — Module Platform, for Module participation in Mosaic.
-- MIP-002 — Module Manifest Protocol, for Module identity, dependencies, permissions and compatibility.
-- MOP-001 — Observability Operations, for operational health interpretation.
+- [MAC-001 — Platform Architecture](../../architecture/mac-001-platform-architecture/index.md), for the Platform, Runtime and Module boundaries.
+- [MEG-006 — Module Platform](../meg-006-module-platform/index.md), for Module participation in Mosaic.
+- [MIP-002 — Module Manifest Protocol](../../protocols/mip-002-module-manifest-protocol/index.md), for Module identity, dependencies, permissions and compatibility.
+- [MOP-001 — Observability Operations](../../operations/mop-001-observability-operations/index.md), for operational health interpretation.
 
 The governing decision is recorded in:
 
@@ -1688,23 +1547,3 @@ When upgrades arrive, the Supervisor prepares a new Generation in the background
 When activation fails, the Supervisor rolls back by activating the previous known good Generation.
 
 When everything else is unavailable, the Supervisor still exposes the recovery UI.
-
----
-
-# Review Status
-
-**Status**
-
-Draft
-
-**Owner**
-
-Lead Software Architect
-
-**Previous File**
-
-`13-runtime-modelling-guidelines.md`
-
-**Next File**
-
-`15-adrs.md`

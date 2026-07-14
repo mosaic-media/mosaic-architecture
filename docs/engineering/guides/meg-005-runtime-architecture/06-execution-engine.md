@@ -60,24 +60,19 @@ The Execution Engine is the Runtime component responsible for coordinating execu
 
 Conceptually.
 
-```
-Scheduler
+```mermaid
+flowchart TD
 
-↓
+N1["Scheduler"]
+N2["Execution Engine"]
+N3["Worker Manager"]
+N4["Workers"]
+N5["Capability"]
 
-Execution Engine
-
-↓
-
-Worker Manager
-
-↓
-
-Workers
-
-↓
-
-Capability
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
 ```
 
 It acts as the bridge between:
@@ -136,28 +131,21 @@ Business meaning remains invisible.
 
 Every Work Unit follows the same pipeline.
 
-```
-Work Created
+```mermaid
+flowchart TD
 
-↓
+N1["Work Created"]
+N2["Execution Engine"]
+N3["Worker Selected"]
+N4["Worker Executes"]
+N5["Completion Reported"]
+N6["Execution Finished"]
 
-Execution Engine
-
-↓
-
-Worker Selected
-
-↓
-
-Worker Executes
-
-↓
-
-Completion Reported
-
-↓
-
-Execution Finished
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
+N5 --> N6
 ```
 
 The pipeline should remain deterministic.
@@ -194,16 +182,15 @@ The Execution Engine simply coordinates.
 
 The Execution Engine delegates worker selection.
 
-```
-Execution Engine
+```mermaid
+flowchart TD
 
-↓
+N1["Execution Engine"]
+N2["Worker Manager"]
+N3["Worker"]
 
-Worker Manager
-
-↓
-
-Worker
+N1 --> N2
+N2 --> N3
 ```
 
 The Execution Engine should never understand:
@@ -222,16 +209,15 @@ The Worker Manager fulfils that request.
 
 The Scheduler produces executable work.
 
-```
-Scheduler
+```mermaid
+flowchart TD
 
-↓
+N1["Scheduler"]
+N2["Work Unit"]
+N3["Execution Engine"]
 
-Work Unit
-
-↓
-
-Execution Engine
+N1 --> N2
+N2 --> N3
 ```
 
 The Scheduler does not execute.
@@ -250,24 +236,19 @@ It does **not** execute business logic directly.
 
 Conceptually.
 
-```
-Execution Engine
+```mermaid
+flowchart TD
 
-↓
+N1["Execution Engine"]
+N2["Capability"]
+N3["Driving Port"]
+N4["Application Service"]
+N5["Domain"]
 
-Capability
-
-↓
-
-Driving Port
-
-↓
-
-Application Service
-
-↓
-
-Domain
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
 ```
 
 The Execution Engine remains unaware of:
@@ -286,28 +267,26 @@ Independent Work Units SHOULD execute concurrently.
 
 Example.
 
+```mermaid
+flowchart TD
+
+N1["Metadata Refresh"]
+N2["Execution Engine"]
+N3["Worker A"]
+
+N1 --> N2
+N2 --> N3
 ```
-Metadata Refresh
 
-↓
+```mermaid
+flowchart TD
 
-Execution Engine
+N1["Artwork Download"]
+N2["Execution Engine"]
+N3["Worker B"]
 
-↓
-
-Worker A
-```
-
-```
-Artwork Download
-
-↓
-
-Execution Engine
-
-↓
-
-Worker B
+N1 --> N2
+N2 --> N3
 ```
 
 Concurrency should emerge naturally.
@@ -322,28 +301,21 @@ Modern execution engines typically coordinate worker pools rather than executing
 
 Every Work Unit progresses through the same execution lifecycle.
 
-```
-Queued
+```mermaid
+flowchart TD
 
-↓
+N1["Queued"]
+N2["Assigned"]
+N3["Running"]
+N4["Completed"]
+N5["Cancelled"]
+N6["Failed"]
 
-Assigned
-
-↓
-
-Running
-
-↓
-
-Completed
-
-or
-
-Cancelled
-
-or
-
-Failed
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N3 --> N5
+N3 --> N6
 ```
 
 The Execution Engine owns this execution state.
@@ -356,20 +328,17 @@ Business state remains elsewhere.
 
 The Execution Engine coordinates cancellation.
 
-```
-Cancellation Requested
+```mermaid
+flowchart TD
 
-↓
+N1["Cancellation Requested"]
+N2["Worker"]
+N3["Execution Ends"]
+N4["Completion Reported"]
 
-Worker
-
-↓
-
-Execution Ends
-
-↓
-
-Completion Reported
+N1 --> N2
+N2 --> N3
+N3 --> N4
 ```
 
 Business logic determines how to leave business state consistent.
@@ -384,16 +353,15 @@ Execution failure does not imply business failure.
 
 Example.
 
-```
-Worker Crash
+```mermaid
+flowchart TD
 
-↓
+N1["Worker Crash"]
+N2["Execution Failed"]
+N3["Runtime Retry"]
 
-Execution Failed
-
-↓
-
-Runtime Retry
+N1 --> N2
+N2 --> N3
 ```
 
 The Execution Engine reports failure.
@@ -414,22 +382,24 @@ Every capability executes independently.
 
 Suppose.
 
-```
-Metadata
+```mermaid
+flowchart TD
 
-↓
+N1["Metadata"]
+N2["Failure"]
 
-Failure
+N1 --> N2
 ```
 
 The Execution Engine should ensure:
 
-```
-Playback
+```mermaid
+flowchart TD
 
-↓
+N1["Playback"]
+N2["Unaffected"]
 
-Unaffected
+N1 --> N2
 ```
 
 Execution isolation is one of the Runtime's primary responsibilities.
@@ -510,12 +480,14 @@ The Execution Engine should remain independent from:
 Changing:
 
 ```
+
 Worker Pool
 ```
 
 should not require changing:
 
 ```
+
 Execution Engine
 ```
 
@@ -625,23 +597,3 @@ It does not:
 Instead it transforms abstract Work Units into running execution by coordinating the Runtime components responsible for carrying out that work.
 
 By keeping execution separate from scheduling, worker management and business logic, the Mosaic Runtime remains modular, scalable and remarkably easy to reason about.
-
----
-
-# Review Status
-
-**Status**
-
-Draft
-
-**Owner**
-
-Lead Software Architect
-
-**Previous File**
-
-`05-dependency-graph.md`
-
-**Next File**
-
-`07-worker-manager.md`

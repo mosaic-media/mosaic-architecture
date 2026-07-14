@@ -64,22 +64,25 @@ The Runtime Kernel is the root object of the Mosaic Runtime.
 
 Conceptually.
 
-```
-Runtime Kernel
+```mermaid
+flowchart TD
 
-├── Capability Registry
+N1["Runtime Kernel"]
+N2["Capability Registry"]
+N3["Execution Engine"]
+N4["Scheduler"]
+N5["Worker Manager"]
+N6["Resource Manager"]
+N7["Lifecycle Manager"]
+N8["Observability"]
 
-├── Execution Engine
-
-├── Scheduler
-
-├── Worker Manager
-
-├── Resource Manager
-
-├── Lifecycle Manager
-
-└── Observability
+N1 --> N2
+N1 --> N3
+N1 --> N4
+N1 --> N5
+N1 --> N6
+N1 --> N7
+N1 --> N8
 ```
 
 The Kernel owns these components.
@@ -92,24 +95,19 @@ Those components do not own one another.
 
 Without a Runtime Kernel:
 
-```
-Scheduler
+```mermaid
+flowchart TD
 
-↓
+N1["Scheduler"]
+N2["Worker Manager"]
+N3["Capability Registry"]
+N4["Execution Engine"]
+N5["Everyone Knows Everyone"]
 
-Worker Manager
-
-↓
-
-Capability Registry
-
-↓
-
-Execution Engine
-
-↓
-
-Everyone Knows Everyone
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
 ```
 
 Eventually:
@@ -120,16 +118,15 @@ Eventually:
 
 Instead.
 
-```
-Runtime Kernel
+```mermaid
+flowchart TD
 
-↓
+N1["Runtime Kernel"]
+N2["Coordinates"]
+N3["Runtime Services"]
 
-Coordinates
-
-↓
-
-Runtime Services
+N1 --> N2
+N2 --> N3
 ```
 
 Dependencies remain explicit.
@@ -166,20 +163,17 @@ These belong to dedicated Runtime Services.
 
 Every Runtime Service is composed through the Kernel.
 
-```
-Bootstrap
+```mermaid
+flowchart TD
 
-↓
+N1["Bootstrap"]
+N2["Runtime Kernel"]
+N3["Runtime Services"]
+N4["Capabilities"]
 
-Runtime Kernel
-
-↓
-
-Runtime Services
-
-↓
-
-Capabilities
+N1 --> N2
+N2 --> N3
+N3 --> N4
 ```
 
 The Kernel becomes the root of the Runtime object graph.
@@ -192,20 +186,17 @@ The Kernel maintains a registry of Runtime Services.
 
 Conceptually.
 
-```
-Runtime Kernel
+```mermaid
+flowchart TD
 
-↓
+N1["Runtime Kernel"]
+N2["Register Scheduler"]
+N3["Register Worker Manager"]
+N4["Register Resource Manager"]
 
-Register Scheduler
-
-↓
-
-Register Worker Manager
-
-↓
-
-Register Resource Manager
+N1 --> N2
+N2 --> N3
+N3 --> N4
 ```
 
 This registry exists solely for Runtime coordination.
@@ -220,24 +211,19 @@ Runtime Services should still receive explicit dependencies through construction
 
 The Runtime Kernel owns lifecycle transitions.
 
-```
-Initialise
+```mermaid
+flowchart TD
 
-↓
+N1["Initialise"]
+N2["Start"]
+N3["Running"]
+N4["Stopping"]
+N5["Shutdown"]
 
-Start
-
-↓
-
-Running
-
-↓
-
-Stopping
-
-↓
-
-Shutdown
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
 ```
 
 Every Runtime Service participates.
@@ -271,14 +257,17 @@ Runtime Services interact with the Kernel through contracts.
 Examples include:
 
 ```
+
 LifecycleService
 ```
 
 ```
+
 CapabilityRegistry
 ```
 
 ```
+
 ExecutionEngine
 ```
 
@@ -310,22 +299,24 @@ Not accumulate functionality.
 
 The Runtime should resemble:
 
-```
-Kernel
+```mermaid
+flowchart TD
 
-↓
+N1["Kernel"]
+N2["Small Services"]
 
-Small Services
+N1 --> N2
 ```
 
 Not:
 
-```
-Kernel
+```mermaid
+flowchart TD
 
-↓
+N1["Kernel"]
+N2["Large Internal Modules"]
 
-Large Internal Modules
+N1 --> N2
 ```
 
 Small Runtime Services provide:
@@ -345,16 +336,15 @@ Capabilities should never communicate directly with the Kernel.
 
 Instead.
 
-```
-Capability
+```mermaid
+flowchart TD
 
-↓
+N1["Capability"]
+N2["Runtime Service"]
+N3["Kernel"]
 
-Runtime Service
-
-↓
-
-Kernel
+N1 --> N2
+N2 --> N3
 ```
 
 The Kernel remains an internal Runtime concern.
@@ -367,12 +357,13 @@ Capabilities should interact only with published Runtime contracts.
 
 Suppose:
 
-```
-Scheduler
+```mermaid
+flowchart TD
 
-↓
+N1["Scheduler"]
+N2["Failure"]
 
-Failure
+N1 --> N2
 ```
 
 The Runtime Kernel should:
@@ -393,34 +384,30 @@ Runtime Services should remain unaware of one another wherever practical.
 
 Poor.
 
-```
-Scheduler
+```mermaid
+flowchart TD
 
-↓
+N1["Scheduler"]
+N2["Worker Manager"]
+N3["Capability Registry"]
+N4["Execution Engine"]
 
-Worker Manager
-
-↓
-
-Capability Registry
-
-↓
-
-Execution Engine
+N1 --> N2
+N2 --> N3
+N3 --> N4
 ```
 
 Preferred.
 
-```
-Scheduler
+```mermaid
+flowchart TD
 
-↓
+N1["Scheduler"]
+N2["Kernel"]
+N3["Worker Manager"]
 
-Kernel
-
-↓
-
-Worker Manager
+N1 --> N2
+N2 --> N3
 ```
 
 The Kernel coordinates communication.
@@ -437,42 +424,34 @@ Example.
 
 Initially.
 
-```
-Kernel
+```mermaid
+flowchart TD
 
-↓
+N1["Kernel"]
+N2["Workers"]
+N3["Scheduler"]
 
-Workers
-
-↓
-
-Scheduler
+N1 --> N2
+N2 --> N3
 ```
 
 Later.
 
-```
-Kernel
+```mermaid
+flowchart TD
 
-↓
+N1["Kernel"]
+N2["Workers"]
+N3["Scheduler"]
+N4["Metrics"]
+N5["Health"]
+N6["Capability Discovery"]
 
-Workers
-
-↓
-
-Scheduler
-
-↓
-
-Metrics
-
-↓
-
-Health
-
-↓
-
-Capability Discovery
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
+N5 --> N6
 ```
 
 The Kernel should grow through composition.
@@ -485,28 +464,21 @@ Not through increasing internal complexity.
 
 During startup.
 
-```
-Bootstrap
+```mermaid
+flowchart TD
 
-↓
+N1["Bootstrap"]
+N2["Kernel Created"]
+N3["Services Registered"]
+N4["Services Started"]
+N5["Capabilities Started"]
+N6["Runtime Ready"]
 
-Kernel Created
-
-↓
-
-Services Registered
-
-↓
-
-Services Started
-
-↓
-
-Capabilities Started
-
-↓
-
-Runtime Ready
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
+N5 --> N6
 ```
 
 The Kernel owns this sequence.
@@ -519,28 +491,21 @@ Startup order should never be implicit.
 
 Likewise.
 
-```
-Shutdown Requested
+```mermaid
+flowchart TD
 
-↓
+N1["Shutdown Requested"]
+N2["Kernel"]
+N3["Stop Capabilities"]
+N4["Stop Services"]
+N5["Release Resources"]
+N6["Exit"]
 
-Kernel
-
-↓
-
-Stop Capabilities
-
-↓
-
-Stop Services
-
-↓
-
-Release Resources
-
-↓
-
-Exit
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
+N5 --> N6
 ```
 
 Every Runtime Service follows the same lifecycle.
@@ -656,23 +621,3 @@ It intentionally avoids owning:
 - persistence
 
 By remaining small, explicit and stable, the Kernel allows the Runtime to continue evolving through independently replaceable services rather than accumulating complexity at its centre.
-
----
-
-# Review Status
-
-**Status**
-
-Draft
-
-**Owner**
-
-Lead Software Architect
-
-**Previous File**
-
-`01-runtime-philosophy.md`
-
-**Next File**
-
-`03-capability-registry.md`

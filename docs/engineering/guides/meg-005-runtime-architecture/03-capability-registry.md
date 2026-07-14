@@ -42,6 +42,7 @@ Within Mosaic:
 The Runtime should never contain hard-coded knowledge such as:
 
 ```
+
 if playbackEnabled {
 
     ...
@@ -51,16 +52,15 @@ if playbackEnabled {
 
 Instead:
 
-```
-Capability Registered
+```mermaid
+flowchart TD
 
-↓
+N1["Capability Registered"]
+N2["Runtime Discovers Capability"]
+N3["Runtime Integrates Capability"]
 
-Runtime Discovers Capability
-
-↓
-
-Runtime Integrates Capability
+N1 --> N2
+N2 --> N3
 ```
 
 The Runtime grows through discovery.
@@ -76,22 +76,27 @@ Within Mosaic, a capability is a self-contained unit of business functionality.
 Examples include:
 
 ```
+
 Playback
 ```
 
 ```
+
 Metadata
 ```
 
 ```
+
 Library
 ```
 
 ```
+
 Recommendations
 ```
 
 ```
+
 Authentication
 ```
 
@@ -111,22 +116,23 @@ The Capability Registry is the Runtime's catalogue of available capabilities.
 
 Conceptually.
 
-```
-Runtime
+```mermaid
+flowchart TD
 
-↓
+N1["Runtime"]
+N2["Capability Registry"]
+N3["Playback"]
+N4["Metadata"]
+N5["Library"]
+N6["Recommendations"]
+N7["Modules"]
 
-Capability Registry
-
-├── Playback
-
-├── Metadata
-
-├── Library
-
-├── Recommendations
-
-└── Modules
+N2 --> N3
+N2 --> N4
+N2 --> N5
+N2 --> N6
+N2 --> N7
+N1 --> N2
 ```
 
 Every Runtime service discovers capabilities through the Registry.
@@ -139,24 +145,19 @@ No Runtime component should maintain its own capability list.
 
 Without a Registry:
 
-```
-Runtime
+```mermaid
+flowchart TD
 
-↓
+N1["Runtime"]
+N2["Playback"]
+N3["Metadata"]
+N4["Library"]
+N5["Recommendations"]
 
-Playback
-
-↓
-
-Metadata
-
-↓
-
-Library
-
-↓
-
-Recommendations
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
 ```
 
 The Runtime becomes tightly coupled to every capability.
@@ -165,20 +166,17 @@ Every new capability requires Runtime modification.
 
 Instead.
 
-```
-Capability
+```mermaid
+flowchart TD
 
-↓
+N1["Capability"]
+N2["Register"]
+N3["Capability Registry"]
+N4["Runtime Discovers"]
 
-Register
-
-↓
-
-Capability Registry
-
-↓
-
-Runtime Discovers
+N1 --> N2
+N2 --> N3
+N3 --> N4
 ```
 
 The Runtime becomes open for module while remaining closed for modification.
@@ -208,20 +206,17 @@ Capabilities register during startup.
 
 Conceptually.
 
-```
-Capability Created
+```mermaid
+flowchart TD
 
-↓
+N1["Capability Created"]
+N2["Register"]
+N3["Capability Registry"]
+N4["Runtime Ready"]
 
-Register
-
-↓
-
-Capability Registry
-
-↓
-
-Runtime Ready
+N1 --> N2
+N2 --> N3
+N3 --> N4
 ```
 
 Registration should occur before capability execution begins.
@@ -236,30 +231,28 @@ Runtime Services discover capabilities through the Registry.
 
 Example.
 
-```
-Scheduler
+```mermaid
+flowchart TD
 
-↓
+N1["Scheduler"]
+N2["Capability Registry"]
+N3["Scheduled Capability"]
 
-Capability Registry
-
-↓
-
-Scheduled Capability
+N1 --> N2
+N2 --> N3
 ```
 
 Likewise.
 
-```
-Runtime Events
+```mermaid
+flowchart TD
 
-↓
+N1["Runtime Events"]
+N2["Capability Registry"]
+N3["Subscribers"]
 
-Capability Registry
-
-↓
-
-Subscribers
+N1 --> N2
+N2 --> N3
 ```
 
 Discovery should always remain explicit.
@@ -296,14 +289,17 @@ Every capability MUST possess a globally unique identifier.
 Examples.
 
 ```
+
 playback
 ```
 
 ```
+
 metadata
 ```
 
 ```
+
 library
 ```
 
@@ -323,28 +319,21 @@ The Registry tracks lifecycle.
 
 Example.
 
-```
-Discovered
+```mermaid
+flowchart TD
 
-↓
+N1["Discovered"]
+N2["Registered"]
+N3["Initialised"]
+N4["Running"]
+N5["Stopping"]
+N6["Stopped"]
 
-Registered
-
-↓
-
-Initialised
-
-↓
-
-Running
-
-↓
-
-Stopping
-
-↓
-
-Stopped
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
+N5 --> N6
 ```
 
 The Registry records lifecycle.
@@ -361,20 +350,17 @@ Capabilities may depend upon other capabilities.
 
 Example.
 
-```
-Recommendations
+```mermaid
+flowchart TD
 
-↓
+N1["Recommendations"]
+N2["Requires"]
+N3["Playback"]
+N4["Metadata"]
 
-Requires
-
-↓
-
-Playback
-
-↓
-
-Metadata
+N1 --> N2
+N2 --> N3
+N3 --> N4
 ```
 
 The Registry owns this dependency graph.
@@ -394,18 +380,22 @@ The Registry maintains operational state.
 Examples include:
 
 ```
+
 Running
 ```
 
 ```
+
 Disabled
 ```
 
 ```
+
 Failed
 ```
 
 ```
+
 Waiting
 ```
 
@@ -422,14 +412,17 @@ Capabilities SHOULD publish health information.
 Example.
 
 ```
+
 Healthy
 ```
 
 ```
+
 Degraded
 ```
 
 ```
+
 Unavailable
 ```
 
@@ -445,34 +438,35 @@ Business capabilities should never query the Registry.
 
 Poor.
 
-```
-Playback
+```mermaid
+flowchart TD
 
-↓
+N1["Playback"]
+N2["Find Metadata Capability"]
 
-Find Metadata Capability
+N1 --> N2
 ```
 
 Preferred.
 
+```mermaid
+flowchart TD
+
+N1["Playback"]
+N2["Raise Domain Event"]
+
+N1 --> N2
 ```
-Playback
 
-↓
+```mermaid
+flowchart TD
 
-Raise Domain Event
-```
+N1["Runtime"]
+N2["Registry"]
+N3["Metadata Capability"]
 
-```
-Runtime
-
-↓
-
-Registry
-
-↓
-
-Metadata Capability
+N1 --> N2
+N2 --> N3
 ```
 
 The Registry exists for Runtime coordination.
@@ -487,27 +481,30 @@ The Runtime should treat capabilities as interchangeable.
 
 Example.
 
-```
-Metadata
+```mermaid
+flowchart TD
 
-↓
+N1["Metadata"]
+N2["Local Provider"]
 
-Local Provider
+N1 --> N2
 ```
 
 Later.
 
-```
-Metadata
+```mermaid
+flowchart TD
 
-↓
+N1["Metadata"]
+N2["Cloud Provider"]
 
-Cloud Provider
+N1 --> N2
 ```
 
 The Registry records:
 
 ```
+
 Metadata Capability
 ```
 
@@ -519,20 +516,17 @@ The Runtime remains unaware of implementation differences.
 
 Modules register exactly like Platform capabilities.
 
-```
-Module Loaded
+```mermaid
+flowchart TD
 
-↓
+N1["Module Loaded"]
+N2["Register Capability"]
+N3["Capability Registry"]
+N4["Runtime Discovers"]
 
-Register Capability
-
-↓
-
-Capability Registry
-
-↓
-
-Runtime Discovers
+N1 --> N2
+N2 --> N3
+N3 --> N4
 ```
 
 The Registry should make no distinction between:
@@ -568,20 +562,17 @@ This distinction is critical.
 
 Poor.
 
-```
-Capability
+```mermaid
+flowchart TD
 
-↓
+N1["Capability"]
+N2["Registry"]
+N3["Resolve Service"]
+N4["Execute"]
 
-Registry
-
-↓
-
-Resolve Service
-
-↓
-
-Execute
+N1 --> N2
+N2 --> N3
+N3 --> N4
 ```
 
 The Registry should not provide arbitrary object lookup.
@@ -623,6 +614,7 @@ The following practices are prohibited.
 ## Hard-Coded Capabilities
 
 ```
+
 if playback {
 
 }
@@ -704,23 +696,3 @@ It knows:
 It intentionally knows nothing about the business those capabilities perform.
 
 That separation allows the Runtime to remain generic while enabling the platform to grow indefinitely through independently developed capabilities.
-
----
-
-# Review Status
-
-**Status**
-
-Draft
-
-**Owner**
-
-Lead Software Architect
-
-**Previous File**
-
-`02-runtime-kernel.md`
-
-**Next File**
-
-`04-service-lifecycle.md`

@@ -54,7 +54,7 @@ It protects source repositories and the active Generation from mutation during b
 
 ## Build Pipeline
 
-The process responsible for producing Platform packages from the Platform foundation, selected Modules, SDK contracts and validated configuration.
+The Platform packaging process defined by the [MEG-006 Build Pipeline](../meg-006-module-platform/glossary.md#build-pipeline).
 
 The Supervisor invokes the Build Pipeline.
 
@@ -187,14 +187,17 @@ The operational readiness of a Runtime component.
 Examples include:
 
 ```
+
 Healthy
 ```
 
 ```
+
 Degraded
 ```
 
 ```
+
 Unavailable
 ```
 
@@ -588,23 +591,3 @@ Definitions should remain consistent across:
 - Architecture Specifications
 
 Whenever Runtime terminology evolves, this glossary SHOULD be updated before introducing new terminology elsewhere.
-
----
-
-# Review Status
-
-**Status**
-
-Draft
-
-**Owner**
-
-Lead Software Architect
-
-**Previous File**
-
-`17-references.md`
-
-**Next File**
-
-**End of Specification**

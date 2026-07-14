@@ -15,7 +15,7 @@ Version: 0.4
 
 MEG-005 may require architecture decisions when changes alter long-lived engineering direction, compatibility expectations or responsibility boundaries.
 
-The decision process itself is governed by **MDG-001 — Documentation Authority Guide**.
+The decision process itself is governed by **[MDG-001 — Documentation Authority Guide](../../documentation/mdg-001-documentation-authority-guide/index.md)**.
 
 This chapter avoids repeating ADR process rules so the documentation library has one authoritative home for decision practice.
 
@@ -138,20 +138,17 @@ It must also avoid accumulating build logic.
 
 The architectural hierarchy becomes:
 
-```text
-Supervisor
+```mermaid
+flowchart TD
 
-↓
+N1["Supervisor"]
+N2["Generation"]
+N3["Platform"]
+N4["Modules"]
 
-Generation
-
-↓
-
-Platform
-
-↓
-
-Modules
+N1 --> N2
+N2 --> N3
+N3 --> N4
 ```
 
 The recovery layer remains below the layers it may need to recover.
@@ -179,7 +176,7 @@ The Shell should support onboarding and normal administration, but recovery must
 
 The Recovery UI should expose installed Generations, logs, health, configuration, storage, network diagnostics and recovery actions without depending solely on the Shell or Platform.
 
-Module selection and compatibility should align with MEG-006 and MIP-002.
+Module selection and compatibility should align with [MEG-006](../meg-006-module-platform/index.md) and [MIP-002](../../protocols/mip-002-module-manifest-protocol/index.md).
 
 ---
 
@@ -219,20 +216,17 @@ The Platform never serves UI directly.
 
 The Supervisor guarantees an intelligent interface by using the richest available presentation layer:
 
-```text
-Normal Runtime
+```mermaid
+flowchart TD
 
-↓
+N1["Normal Runtime"]
+N2["Supervisor Recovery Using Shell Or Native Client"]
+N3["Embedded Recovery Renderer For Web"]
+N4["No UI"]
 
-Supervisor Recovery Using Shell Or Native Client
-
-↓
-
-Embedded Recovery Renderer For Web
-
-↓
-
-No UI
+N1 --> N2
+N2 --> N3
+N3 --> N4
 ```
 
 The Supervisor emits Recovery SDUI rather than HTML.
@@ -264,7 +258,7 @@ The Shell switches from Supervisor-owned Recovery SDUI to Platform-owned Runtime
 | Manual `Build Mosaic` bootstrap action | Rejected | Bootstrap should begin automatically and onboarding should lead directly into build orchestration. |
 | Blank or log-only failure page | Rejected | Users should see confidence, progress and actionable recovery state. |
 | Presentation Layer supervises or recovers the Supervisor | Rejected | Clients present Supervisor state but do not own Supervisor lifecycle or recovery. |
-| Dedicated MAC-008 Recovery Architecture now | Deferred | MEG-005 owns recovery lifecycle and MDS-008 owns recovery presentation; a Canon is justified only when broader cross-specification invariants require a new authoritative home. |
+| Establish MAC-008 Recovery Architecture now *(deferred; not yet published)* | Deferred | MEG-005 owns recovery lifecycle and [MDS-008](../../../design/system/mds-008-component-library/index.md) owns recovery presentation; a Canon is justified only when broader cross-specification invariants require a new authoritative home. |
 
 ---
 
@@ -429,9 +423,9 @@ Previous known good runtimes should be retained until explicit garbage collectio
 
 ---
 
-# Relationship To MDG-001
+# Relationship To [MDG-001](../../documentation/mdg-001-documentation-authority-guide/index.md)
 
-MDG-001 defines ADR structure, review expectations, lifecycle and cross-reference rules.
+[MDG-001](../../documentation/mdg-001-documentation-authority-guide/index.md) defines ADR structure, review expectations, lifecycle and cross-reference rules.
 
 This guide should reference decisions that affect it, but should not redefine the decision process.
 

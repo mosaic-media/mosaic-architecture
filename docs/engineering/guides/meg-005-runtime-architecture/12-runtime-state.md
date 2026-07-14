@@ -84,28 +84,21 @@ It does not describe:
 
 Runtime State naturally separates into several categories.
 
-```
-Lifecycle
+```mermaid
+flowchart TD
 
-↓
+N1["Lifecycle"]
+N2["Execution"]
+N3["Resources"]
+N4["Capabilities"]
+N5["Health"]
+N6["Observability"]
 
-Execution
-
-↓
-
-Resources
-
-↓
-
-Capabilities
-
-↓
-
-Health
-
-↓
-
-Observability
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
+N5 --> N6
 ```
 
 Each category represents one operational concern.
@@ -121,22 +114,27 @@ Lifecycle State records where Runtime components currently exist within their li
 Examples include:
 
 ```
+
 Created
 ```
 
 ```
+
 Ready
 ```
 
 ```
+
 Running
 ```
 
 ```
+
 Stopping
 ```
 
 ```
+
 Disposed
 ```
 
@@ -182,33 +180,37 @@ Examples include:
 This state describes:
 
 ```
+
 Capability Availability
 ```
 
 Not:
 
 ```
+
 Capability Business State
 ```
 
 For example.
 
-```
-Playback
+```mermaid
+flowchart TD
 
-↓
+N1["Playback"]
+N2["Healthy"]
 
-Healthy
+N1 --> N2
 ```
 
 is Runtime State.
 
-```
-Playback Progress
+```mermaid
+flowchart TD
 
-↓
+N1["Playback Progress"]
+N2["37 Minutes"]
 
-37 Minutes
+N1 --> N2
 ```
 
 is business state.
@@ -259,14 +261,17 @@ Health represents operational readiness.
 Examples include:
 
 ```
+
 Healthy
 ```
 
 ```
+
 Degraded
 ```
 
 ```
+
 Unavailable
 ```
 
@@ -306,36 +311,40 @@ Every category of Runtime State has exactly one owner.
 
 Examples.
 
-```
-Worker Manager
+```mermaid
+flowchart TD
 
-↓
+N1["Worker Manager"]
+N2["Worker State"]
 
-Worker State
-```
-
-```
-Scheduler
-
-↓
-
-Schedule State
+N1 --> N2
 ```
 
+```mermaid
+flowchart TD
+
+N1["Scheduler"]
+N2["Schedule State"]
+
+N1 --> N2
 ```
-Execution Engine
 
-↓
+```mermaid
+flowchart TD
 
-Execution State
+N1["Execution Engine"]
+N2["Execution State"]
+
+N1 --> N2
 ```
 
-```
-Capability Registry
+```mermaid
+flowchart TD
 
-↓
+N1["Capability Registry"]
+N2["Capability State"]
 
-Capability State
+N1 --> N2
 ```
 
 Shared ownership is prohibited.
@@ -355,14 +364,17 @@ Most Runtime State is temporary.
 Examples include:
 
 ```
+
 Queue Depth
 ```
 
 ```
+
 Worker Allocation
 ```
 
 ```
+
 Active Execution
 ```
 
@@ -400,18 +412,22 @@ Business State belongs exclusively to capabilities.
 Examples include:
 
 ```
+
 Playback Progress
 ```
 
 ```
+
 Metadata
 ```
 
 ```
+
 Library Contents
 ```
 
 ```
+
 Collection Membership
 ```
 
@@ -433,24 +449,19 @@ Runtime State changes frequently.
 
 Example.
 
-```
-Worker
+```mermaid
+flowchart TD
 
-↓
+N1["Worker"]
+N2["Idle"]
+N3["Allocated"]
+N4["Executing"]
+N5["Idle"]
 
-Idle
-
-↓
-
-Allocated
-
-↓
-
-Executing
-
-↓
-
-Idle
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
 ```
 
 These transitions should remain:
@@ -469,24 +480,19 @@ The Runtime MAY expose snapshots of operational state.
 
 Examples include:
 
-```
-Runtime Snapshot
+```mermaid
+flowchart TD
 
-↓
+N1["Runtime Snapshot"]
+N2["Capabilities"]
+N3["Workers"]
+N4["Queues"]
+N5["Resources"]
 
-Capabilities
-
-↓
-
-Workers
-
-↓
-
-Queues
-
-↓
-
-Resources
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
 ```
 
 Snapshots assist:
@@ -529,6 +535,7 @@ Likewise.
 Runtime State is not:
 
 ```
+
 Business Cache
 ```
 
@@ -544,20 +551,17 @@ The two should never be conflated.
 
 Following restart:
 
-```
-Runtime Configuration
+```mermaid
+flowchart TD
 
-↓
+N1["Runtime Configuration"]
+N2["Durable Runtime State"]
+N3["Reconstruct Runtime"]
+N4["Running"]
 
-Durable Runtime State
-
-↓
-
-Reconstruct Runtime
-
-↓
-
-Running
+N1 --> N2
+N2 --> N3
+N3 --> N4
 ```
 
 Temporary Runtime State should not be restored unnecessarily.
@@ -588,12 +592,13 @@ The following practices are prohibited.
 
 ## Business State Inside Runtime
 
-```
-Playback Progress
+```mermaid
+flowchart TD
 
-↓
+N1["Playback Progress"]
+N2["Runtime"]
 
-Runtime
+N1 --> N2
 ```
 
 ---
@@ -687,23 +692,3 @@ Capabilities describe:
 Maintaining this separation is one of the most important architectural decisions within Mosaic.
 
 It allows the Runtime to evolve operationally without ever becoming responsible for the business itself.  [Wikipedia](https://en.wikipedia.org/wiki/Architectural_state)
-
----
-
-# Review Status
-
-**Status**
-
-Draft
-
-**Owner**
-
-Lead Software Architect
-
-**Previous File**
-
-`11-shutdown.md`
-
-**Next File**
-
-`13-runtime-modelling-guidelines.md`

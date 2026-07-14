@@ -63,20 +63,17 @@ The Dependency Graph is a directed graph describing relationships between Runtim
 
 Conceptually.
 
-```
-Capability Registry
+```mermaid
+flowchart TD
 
-↓
+N1["Capability Registry"]
+N2["Execution Engine"]
+N3["Scheduler"]
+N4["Worker Manager"]
 
-Execution Engine
-
-↓
-
-Scheduler
-
-↓
-
-Worker Manager
+N1 --> N2
+N2 --> N3
+N3 --> N4
 ```
 
 Every node represents a Runtime component.
@@ -113,26 +110,26 @@ Every Runtime component SHOULD explicitly declare its dependencies.
 
 Example.
 
-```
-Scheduler
+```mermaid
+flowchart TD
 
-↓
+N1["Scheduler"]
+N2["Execution Engine"]
 
-Execution Engine
+N1 --> N2
 ```
 
 Rather than:
 
-```
-Scheduler
+```mermaid
+flowchart TD
 
-↓
+N1["Scheduler"]
+N2["Calls Execution Engine"]
+N3["Dependency Hidden"]
 
-Calls Execution Engine
-
-↓
-
-Dependency Hidden
+N1 --> N2
+N2 --> N3
 ```
 
 Dependencies should be visible before execution begins.
@@ -143,12 +140,13 @@ Dependencies should be visible before execution begins.
 
 Dependencies are directional.
 
-```
-Scheduler
+```mermaid
+flowchart TD
 
-↓
+N1["Scheduler"]
+N2["Execution Engine"]
 
-Execution Engine
+N1 --> N2
 ```
 
 means:
@@ -167,34 +165,30 @@ Never execution.
 
 The Runtime Dependency Graph MUST remain acyclic.
 
-```
-Capability Registry
+```mermaid
+flowchart TD
 
-↓
+N1["Capability Registry"]
+N2["Execution Engine"]
+N3["Scheduler"]
+N4["Worker Manager"]
 
-Execution Engine
-
-↓
-
-Scheduler
-
-↓
-
-Worker Manager
+N1 --> N2
+N2 --> N3
+N3 --> N4
 ```
 
 is valid.
 
-```
-Scheduler
+```mermaid
+flowchart TD
 
-↓
+N1["Scheduler"]
+N2["Worker Manager"]
+N3["Scheduler"]
 
-Worker Manager
-
-↓
-
-Scheduler
+N1 --> N2
+N2 --> N3
 ```
 
 is prohibited.
@@ -211,16 +205,15 @@ Startup order should be derived automatically.
 
 Conceptually.
 
-```
-Dependency Graph
+```mermaid
+flowchart TD
 
-↓
+N1["Dependency Graph"]
+N2["Topological Sort"]
+N3["Startup Order"]
 
-Topological Sort
-
-↓
-
-Startup Order
+N1 --> N2
+N2 --> N3
 ```
 
 The Runtime should never rely upon manually maintained startup sequences.
@@ -235,17 +228,19 @@ Independent components SHOULD start in parallel.
 
 Example.
 
-```
-Capability Registry
+```mermaid
+flowchart TD
 
-↓
+N1["Capability Registry"]
+N2["Execution Engine"]
 
-Execution Engine
+N1 --> N2
 ```
 
 and
 
 ```
+
 Observability
 ```
 
@@ -265,30 +260,28 @@ Example.
 
 Startup.
 
-```
-Capability Registry
+```mermaid
+flowchart TD
 
-↓
+N1["Capability Registry"]
+N2["Execution Engine"]
+N3["Scheduler"]
 
-Execution Engine
-
-↓
-
-Scheduler
+N1 --> N2
+N2 --> N3
 ```
 
 Shutdown.
 
-```
-Scheduler
+```mermaid
+flowchart TD
 
-↓
+N1["Scheduler"]
+N2["Execution Engine"]
+N3["Capability Registry"]
 
-Execution Engine
-
-↓
-
-Capability Registry
+N1 --> N2
+N2 --> N3
 ```
 
 Components should never outlive their dependencies.
@@ -301,16 +294,15 @@ Capabilities participate in the same graph.
 
 Example.
 
-```
-Recommendations
+```mermaid
+flowchart TD
 
-↓
+N1["Recommendations"]
+N2["Playback"]
+N3["Metadata"]
 
-Playback
-
-↓
-
-Metadata
+N1 --> N2
+N2 --> N3
 ```
 
 The Runtime should validate capability dependencies before activation.
@@ -327,20 +319,22 @@ Runtime Services also participate.
 
 Example.
 
+```mermaid
+flowchart TD
+
+N1["Worker Manager"]
+N2["Execution Engine"]
+
+N1 --> N2
 ```
-Worker Manager
 
-↓
+```mermaid
+flowchart TD
 
-Execution Engine
-```
+N1["Execution Engine"]
+N2["Capability Registry"]
 
-```
-Execution Engine
-
-↓
-
-Capability Registry
+N1 --> N2
 ```
 
 The graph contains both:
@@ -375,14 +369,13 @@ Some dependencies may be optional.
 
 Example.
 
-```
-Recommendations
+```mermaid
+flowchart TD
 
-↓
+N1["Recommendations"]
+N2["Machine Learning Module<br/>(Optional)"]
 
-Machine Learning Module
-
-(Optional)
+N1 --> N2
 ```
 
 If unavailable:
@@ -454,16 +447,15 @@ The Runtime should expose the Dependency Graph through diagnostics.
 
 Example.
 
-```
-Runtime
+```mermaid
+flowchart TD
 
-↓
+N1["Runtime"]
+N2["Dependency Graph"]
+N3["Visualisation"]
 
-Dependency Graph
-
-↓
-
-Visualisation
+N1 --> N2
+N2 --> N3
 ```
 
 This greatly simplifies:
@@ -483,12 +475,13 @@ Every component owns only its outgoing dependencies.
 
 Example.
 
-```
-Scheduler
+```mermaid
+flowchart TD
 
-↓
+N1["Scheduler"]
+N2["Execution Engine"]
 
-Execution Engine
+N1 --> N2
 ```
 
 The Scheduler declares the dependency.
@@ -507,24 +500,19 @@ The Runtime Kernel resolves dependencies before startup.
 
 Conceptually.
 
-```
-Register Components
+```mermaid
+flowchart TD
 
-↓
+N1["Register Components"]
+N2["Build Graph"]
+N3["Validate Graph"]
+N4["Topological Order"]
+N5["Start Runtime"]
 
-Build Graph
-
-↓
-
-Validate Graph
-
-↓
-
-Topological Order
-
-↓
-
-Start Runtime
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
 ```
 
 Resolution occurs once.
@@ -632,23 +620,3 @@ the Runtime becomes easier to:
 - extend
 
 Most importantly, startup order becomes a property of the architecture itself rather than an implementation detail hidden inside bootstrap code.
-
----
-
-# Review Status
-
-**Status**
-
-Draft
-
-**Owner**
-
-Lead Software Architect
-
-**Previous File**
-
-`04-service-lifecycle.md`
-
-**Next File**
-
-`06-execution-engine.md`

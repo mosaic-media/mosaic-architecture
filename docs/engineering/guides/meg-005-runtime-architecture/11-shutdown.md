@@ -69,36 +69,25 @@ No Runtime component should disappear without first participating in the shutdow
 
 Every Runtime follows the same shutdown sequence.
 
-```
-Shutdown Requested
+```mermaid
+flowchart TD
 
-↓
+N1["Shutdown Requested"]
+N2["Cooldown"]
+N3["Capability Drain"]
+N4["Worker Drain"]
+N5["Runtime Services Stop"]
+N6["Resource Release"]
+N7["Kernel Shutdown"]
+N8["Process Exit"]
 
-Cooldown
-
-↓
-
-Capability Drain
-
-↓
-
-Worker Drain
-
-↓
-
-Runtime Services Stop
-
-↓
-
-Resource Release
-
-↓
-
-Kernel Shutdown
-
-↓
-
-Process Exit
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
+N5 --> N6
+N6 --> N7
+N7 --> N8
 ```
 
 Each stage owns exactly one responsibility.
@@ -122,6 +111,7 @@ Shutdown begins when the Runtime receives:
 The Runtime immediately transitions into:
 
 ```
+
 Stopping
 ```
 
@@ -166,6 +156,7 @@ Examples include:
 Capabilities should receive:
 
 ```
+
 Cancellation Requested
 ```
 
@@ -181,20 +172,17 @@ The Runtime never decides business correctness.
 
 Workers continue executing remaining Work Units.
 
-```
-Worker Pool
+```mermaid
+flowchart TD
 
-↓
+N1["Worker Pool"]
+N2["Running Tasks"]
+N3["Complete"]
+N4["Idle"]
 
-Running Tasks
-
-↓
-
-Complete
-
-↓
-
-Idle
+N1 --> N2
+N2 --> N3
+N3 --> N4
 ```
 
 Workers should not begin executing newly admitted work.
@@ -211,20 +199,17 @@ Runtime Services begin stopping.
 
 Typical order.
 
-```
-Scheduler
+```mermaid
+flowchart TD
 
-↓
+N1["Scheduler"]
+N2["Execution Engine"]
+N3["Worker Manager"]
+N4["Capability Registry"]
 
-Execution Engine
-
-↓
-
-Worker Manager
-
-↓
-
-Capability Registry
+N1 --> N2
+N2 --> N3
+N3 --> N4
 ```
 
 Services stop according to the reverse dependency graph.
@@ -256,12 +241,13 @@ Ownership determines cleanup responsibility.
 
 Once every Runtime Service has terminated:
 
-```
-Runtime Kernel
+```mermaid
+flowchart TD
 
-↓
+N1["Runtime Kernel"]
+N2["Shutdown Complete"]
 
-Shutdown Complete
+N1 --> N2
 ```
 
 The Kernel records final Runtime state before process termination.
@@ -277,23 +263,26 @@ The Runtime no longer exists.
 The Runtime should distinguish between:
 
 ```
+
 External Work
 ```
 
 and
 
 ```
+
 Internal Continuations
 ```
 
 Example.
 
-```
-PlaybackCompleted
+```mermaid
+flowchart TD
 
-↓
+N1["PlaybackCompleted"]
+N2["RecommendationGenerated"]
 
-RecommendationGenerated
+N1 --> N2
 ```
 
 This follow-up work may still execute during draining because it belongs to an already admitted workflow.
@@ -310,20 +299,17 @@ Graceful shutdown SHOULD remain bounded.
 
 Example.
 
-```
-Shutdown
+```mermaid
+flowchart TD
 
-↓
+N1["Shutdown"]
+N2["60 Second Budget"]
+N3["Graceful Completion"]
+N4["Forced Termination"]
 
-60 Second Budget
-
-↓
-
-Graceful Completion
-
-↓
-
-Forced Termination
+N1 --> N2
+N2 --> N3
+N3 --> N4
 ```
 
 The timeout should remain configurable.
@@ -336,12 +322,13 @@ Infinite shutdown is prohibited.
 
 If graceful shutdown cannot complete within the configured deadline:
 
-```
-Timeout
+```mermaid
+flowchart TD
 
-↓
+N1["Timeout"]
+N2["Forced Stop"]
 
-Forced Stop
+N1 --> N2
 ```
 
 Forced shutdown should remain exceptional.
@@ -415,12 +402,13 @@ The Capability Registry should remain available until every capability has compl
 
 Only then should:
 
-```
-Capability Registry
+```mermaid
+flowchart TD
 
-↓
+N1["Capability Registry"]
+N2["Disposed"]
 
-Disposed
+N1 --> N2
 ```
 
 Dependency information may still be required during shutdown coordination.
@@ -431,20 +419,17 @@ Dependency information may still be required during shutdown coordination.
 
 Following restart:
 
-```
-Startup
+```mermaid
+flowchart TD
 
-↓
+N1["Startup"]
+N2["Recover Durable Runtime State"]
+N3["Resume Scheduling"]
+N4["Resume Execution"]
 
-Recover Durable Runtime State
-
-↓
-
-Resume Scheduling
-
-↓
-
-Resume Execution
+N1 --> N2
+N2 --> N3
+N3 --> N4
 ```
 
 Recovery should depend upon persisted Runtime state.
@@ -460,18 +445,22 @@ Shutdown SHOULD produce Runtime Events.
 Examples include:
 
 ```
+
 RuntimeStopping
 ```
 
 ```
+
 CooldownStarted
 ```
 
 ```
+
 WorkerDraining
 ```
 
 ```
+
 RuntimeStopped
 ```
 
@@ -492,20 +481,17 @@ During shutdown:
 
 Health should transition:
 
-```
-Healthy
+```mermaid
+flowchart TD
 
-↓
+N1["Healthy"]
+N2["Not Ready"]
+N3["Stopping"]
+N4["Stopped"]
 
-Not Ready
-
-↓
-
-Stopping
-
-↓
-
-Stopped
+N1 --> N2
+N2 --> N3
+N3 --> N4
 ```
 
 The Runtime should become unavailable before terminating.
@@ -624,23 +610,3 @@ Within Mosaic, shutdown is:
 The Runtime should leave the platform in a predictable state regardless of whether shutdown occurs because of deployment, maintenance or failure.
 
 That predictability is one of the defining characteristics of a reliable platform.
-
----
-
-# Review Status
-
-**Status**
-
-Draft
-
-**Owner**
-
-Lead Software Architect
-
-**Previous File**
-
-`10-startup.md`
-
-**Next File**
-
-`12-runtime-state.md`

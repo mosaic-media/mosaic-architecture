@@ -70,16 +70,15 @@ Each layer owns one concern.
 
 An important distinction exists.
 
-```
-Platform
+```mermaid
+flowchart TD
 
-↓
+N1["Platform"]
+N2["Runtime"]
+N3["Capabilities"]
 
-Runtime
-
-↓
-
-Capabilities
+N1 --> N2
+N2 --> N3
 ```
 
 The Runtime enables the platform.
@@ -109,38 +108,32 @@ Nothing more.
 
 The closest architectural analogy is a modern operating system.
 
-```
-Operating System
+```mermaid
+flowchart TD
 
-↓
+N1["Operating System"]
+N2["Kernel"]
+N3["Processes"]
+N4["Applications"]
 
-Kernel
-
-↓
-
-Processes
-
-↓
-
-Applications
+N1 --> N2
+N2 --> N3
+N3 --> N4
 ```
 
 Within Mosaic.
 
-```
-Platform
+```mermaid
+flowchart TD
 
-↓
+N1["Platform"]
+N2["Runtime Kernel"]
+N3["Capabilities"]
+N4["Business Behaviour"]
 
-Runtime Kernel
-
-↓
-
-Capabilities
-
-↓
-
-Business Behaviour
+N1 --> N2
+N2 --> N3
+N3 --> N4
 ```
 
 Capabilities should not concern themselves with:
@@ -220,28 +213,21 @@ At the centre of the Runtime sits the Runtime Kernel.
 
 Conceptually.
 
-```
-Runtime Kernel
+```mermaid
+flowchart TD
 
-↓
+N1["Runtime Kernel"]
+N2["Capability Registry"]
+N3["Execution Engine"]
+N4["Scheduler"]
+N5["Worker Manager"]
+N6["Resource Manager"]
 
-Capability Registry
-
-↓
-
-Execution Engine
-
-↓
-
-Scheduler
-
-↓
-
-Worker Manager
-
-↓
-
-Resource Manager
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
+N5 --> N6
 ```
 
 Every other Runtime component builds upon this foundation.
@@ -257,18 +243,22 @@ The Runtime exposes platform services.
 Examples include:
 
 ```
+
 Scheduler
 ```
 
 ```
+
 Worker Manager
 ```
 
 ```
+
 Resource Manager
 ```
 
 ```
+
 Capability Registry
 ```
 
@@ -289,24 +279,28 @@ The Runtime should never understand business terminology.
 Poor.
 
 ```
+
 Playback Queue
 ```
 
 Preferred.
 
 ```
+
 Task Queue
 ```
 
 Poor.
 
 ```
+
 Metadata Worker
 ```
 
 Preferred.
 
 ```
+
 Worker
 ```
 
@@ -347,24 +341,19 @@ Business state belongs to capabilities.
 
 The Runtime itself follows a lifecycle.
 
-```
-Bootstrap
+```mermaid
+flowchart TD
 
-↓
+N1["Bootstrap"]
+N2["Initialisation"]
+N3["Running"]
+N4["Stopping"]
+N5["Shutdown"]
 
-Initialisation
-
-↓
-
-Running
-
-↓
-
-Stopping
-
-↓
-
-Shutdown
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
 ```
 
 Capabilities participate in this lifecycle.
@@ -399,6 +388,7 @@ The Runtime should evolve independently from capabilities.
 Suppose:
 
 ```
+
 Scheduler Rewritten
 ```
 
@@ -407,6 +397,7 @@ Capabilities should remain unchanged.
 Likewise.
 
 ```
+
 Worker Manager Optimised
 ```
 
@@ -443,12 +434,13 @@ Failures should remain isolated.
 
 Example.
 
-```
-Recommendation Capability
+```mermaid
+flowchart TD
 
-↓
+N1["Recommendation Capability"]
+N2["Failure"]
 
-Failure
+N1 --> N2
 ```
 
 The Runtime should ensure:
@@ -469,38 +461,41 @@ The Runtime should support growth without architectural change.
 
 Initially.
 
-```
-Runtime
+```mermaid
+flowchart TD
 
-↓
+N1["Runtime"]
+N2["Library"]
 
-Library
+N1 --> N2
 ```
 
 Later.
 
-```
-Runtime
+```mermaid
+flowchart TD
 
-↓
+N1["Runtime"]
+N2["Library"]
+N3["Playback"]
+N4["Metadata"]
+N5["Recommendations"]
 
-Library
-
-Playback
-
-Metadata
-
-Recommendations
+N1 --> N2
+N1 --> N3
+N1 --> N4
+N1 --> N5
 ```
 
 Later still.
 
-```
-Runtime
+```mermaid
+flowchart TD
 
-↓
+N1["Runtime"]
+N2["Hundreds Of Capabilities"]
 
-Hundreds Of Capabilities
+N1 --> N2
 ```
 
 The Runtime should scale through composition.
@@ -515,30 +510,28 @@ Perhaps the greatest long-term risk is allowing business behaviour to migrate in
 
 Poor.
 
-```
-Runtime
+```mermaid
+flowchart TD
 
-↓
+N1["Runtime"]
+N2["If PlaybackCompleted"]
+N3["Generate Recommendations"]
 
-If PlaybackCompleted
-
-↓
-
-Generate Recommendations
+N1 --> N2
+N2 --> N3
 ```
 
 Preferred.
 
-```
-PlaybackCompleted
+```mermaid
+flowchart TD
 
-↓
+N1["PlaybackCompleted"]
+N2["Runtime Delivers"]
+N3["Recommendation Capability"]
 
-Runtime Delivers
-
-↓
-
-Recommendation Capability
+N1 --> N2
+N2 --> N3
 ```
 
 The Runtime coordinates.
@@ -568,7 +561,7 @@ These principles define the architectural identity of the Mosaic Runtime.
 
 # Relationship to MEG
 
-MEG-002 defined:
+[MEG-002](../meg-002-event-driven-runtime/index.md) defined:
 
 > **How the Runtime behaves.**
 
@@ -593,23 +586,3 @@ Provide a stable, observable and resilient execution environment in which indepe
 The Runtime exists to make business possible.
 
 It should never become the business itself.
-
----
-
-# Review Status
-
-**Status**
-
-Draft
-
-**Owner**
-
-Lead Software Architect
-
-**Previous File**
-
-`00-document-control.md`
-
-**Next File**
-
-`02-runtime-kernel.md`

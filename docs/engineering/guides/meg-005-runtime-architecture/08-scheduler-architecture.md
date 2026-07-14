@@ -54,12 +54,14 @@ The Scheduler should remain intentionally small.
 Its purpose is to transform:
 
 ```
+
 Future Work
 ```
 
 into:
 
 ```
+
 Executable Work
 ```
 
@@ -73,28 +75,21 @@ The Scheduler is a Runtime Service responsible for managing temporal execution.
 
 Conceptually.
 
-```
-Capability
+```mermaid
+flowchart TD
 
-↓
+N1["Capability"]
+N2["Schedule Request"]
+N3["Scheduler"]
+N4["Execution Engine"]
+N5["Worker Manager"]
+N6["Worker"]
 
-Schedule Request
-
-↓
-
-Scheduler
-
-↓
-
-Execution Engine
-
-↓
-
-Worker Manager
-
-↓
-
-Worker
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
+N5 --> N6
 ```
 
 Notice:
@@ -134,28 +129,21 @@ These concerns remain elsewhere.
 
 Every scheduled operation follows the same lifecycle.
 
-```
-Schedule Created
+```mermaid
+flowchart TD
 
-↓
+N1["Schedule Created"]
+N2["Waiting"]
+N3["Due"]
+N4["Execution Engine"]
+N5["Worker"]
+N6["Complete"]
 
-Waiting
-
-↓
-
-Due
-
-↓
-
-Execution Engine
-
-↓
-
-Worker
-
-↓
-
-Complete
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
+N5 --> N6
 ```
 
 Once a schedule becomes due:
@@ -168,12 +156,13 @@ The Scheduler's responsibility ends.
 
 One of the defining principles of the Runtime is:
 
-```
-Time
+```mermaid
+flowchart TD
 
-↓
+N1["Time"]
+N2["Scheduler"]
 
-Scheduler
+N1 --> N2
 ```
 
 Business capabilities should never determine execution timing.
@@ -190,16 +179,15 @@ inside a capability.
 
 Preferred.
 
-```
-Capability
+```mermaid
+flowchart TD
 
-↓
+N1["Capability"]
+N2["Schedule Request"]
+N3["Scheduler"]
 
-Schedule Request
-
-↓
-
-Scheduler
+N1 --> N2
+N2 --> N3
 ```
 
 The Runtime owns time.
@@ -214,12 +202,13 @@ The Scheduler supports delayed execution.
 
 Example.
 
-```
-Retry Metadata
+```mermaid
+flowchart TD
 
-↓
+N1["Retry Metadata"]
+N2["30 Seconds Later"]
 
-30 Seconds Later
+N1 --> N2
 ```
 
 The delay belongs to the Scheduler.
@@ -234,28 +223,31 @@ Recurring work is treated as a first-class Runtime concept.
 
 Examples include:
 
-```
-Library Scan
+```mermaid
+flowchart TD
 
-↓
+N1["Library Scan"]
+N2["Every 6 Hours"]
 
-Every 6 Hours
-```
-
-```
-Module Health Check
-
-↓
-
-Every Minute
+N1 --> N2
 ```
 
+```mermaid
+flowchart TD
+
+N1["Module Health Check"]
+N2["Every Minute"]
+
+N1 --> N2
 ```
-Metrics Snapshot
 
-↓
+```mermaid
+flowchart TD
 
-Every 30 Seconds
+N1["Metrics Snapshot"]
+N2["Every 30 Seconds"]
+
+N1 --> N2
 ```
 
 Recurring schedules should produce new executable Work Units.
@@ -268,20 +260,17 @@ Not execute work directly.
 
 When work becomes due:
 
-```
-Scheduler
+```mermaid
+flowchart TD
 
-↓
+N1["Scheduler"]
+N2["Execution Engine"]
+N3["Worker Manager"]
+N4["Worker"]
 
-Execution Engine
-
-↓
-
-Worker Manager
-
-↓
-
-Worker
+N1 --> N2
+N2 --> N3
+N3 --> N4
 ```
 
 The Scheduler should not know:
@@ -329,6 +318,7 @@ Every schedule SHOULD possess a unique Runtime identifier.
 Example.
 
 ```
+
 schedule-42
 ```
 
@@ -351,12 +341,13 @@ Every schedule has exactly one owner.
 
 Example.
 
-```
-Metadata Capability
+```mermaid
+flowchart TD
 
-↓
+N1["Metadata Capability"]
+N2["Refresh Schedule"]
 
-Refresh Schedule
+N1 --> N2
 ```
 
 The owning capability requests the schedule.
@@ -406,16 +397,15 @@ Schedules SHOULD remain cancellable.
 
 Lifecycle.
 
-```
-Waiting
+```mermaid
+flowchart TD
 
-↓
+N1["Waiting"]
+N2["Cancelled"]
+N3["Removed"]
 
-Cancelled
-
-↓
-
-Removed
+N1 --> N2
+N2 --> N3
 ```
 
 Cancelled schedules should never reach the Execution Engine.
@@ -430,16 +420,15 @@ The Scheduler SHOULD respect Runtime state.
 
 Example.
 
-```
-Capability Disabled
+```mermaid
+flowchart TD
 
-↓
+N1["Capability Disabled"]
+N2["Scheduled Work"]
+N3["Do Not Dispatch"]
 
-Scheduled Work
-
-↓
-
-Do Not Dispatch
+N1 --> N2
+N2 --> N3
 ```
 
 The Scheduler should consult the Capability Registry before dispatching work.
@@ -452,17 +441,19 @@ It should never execute work for unavailable capabilities.
 
 The Scheduler should answer only two questions.
 
-```
-Is this work due?
+```mermaid
+flowchart TD
 
-↓
+N1["Is this work due?"]
+N2["Can this work execute?"]
 
-Can this work execute?
+N1 --> N2
 ```
 
 It should never answer:
 
 ```
+
 Should this business behaviour happen?
 ```
 
@@ -496,20 +487,17 @@ This separation is widely used in distributed schedulers because it keeps schedu
 
 Suppose the Scheduler fails.
 
-```
-Scheduler Restart
+```mermaid
+flowchart TD
 
-↓
+N1["Scheduler Restart"]
+N2["Recover Schedules"]
+N3["Resume Waiting"]
+N4["Dispatch Normally"]
 
-Recover Schedules
-
-↓
-
-Resume Waiting
-
-↓
-
-Dispatch Normally
+N1 --> N2
+N2 --> N3
+N3 --> N4
 ```
 
 Schedules should survive failure.
@@ -549,12 +537,14 @@ The Scheduler should remain independent from:
 Changing:
 
 ```
+
 Execution Engine
 ```
 
 should not require changing:
 
 ```
+
 Scheduler
 ```
 
@@ -656,23 +646,3 @@ Time belongs to the Scheduler.
 Execution belongs to the Runtime.
 
 Business belongs to capabilities.
-
----
-
-# Review Status
-
-**Status**
-
-Draft
-
-**Owner**
-
-Lead Software Architect
-
-**Previous File**
-
-`07-worker-manager.md`
-
-**Next File**
-
-`09-resource-management.md`
