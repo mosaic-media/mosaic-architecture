@@ -2,7 +2,7 @@
 File: docs/engineering/guides/meg-009-security-architecture/08-module-trust.md
 Document: MEG-009
 Status: Draft
-Version: 0.2
+Version: 0.4
 -->
 
 # Module Trust
@@ -55,32 +55,23 @@ Trust is earned through:
 
 Every module follows the same trust lifecycle.
 
-```text
-Discovered
+```mermaid
+flowchart TD
 
-↓
+N1["Discovered"]
+N2["Verified"]
+N3["Validated"]
+N4["Registered"]
+N5["Permissions Approved"]
+N6["Activated"]
+N7["Executing"]
 
-Verified
-
-↓
-
-Validated
-
-↓
-
-Registered
-
-↓
-
-Permissions Approved
-
-↓
-
-Activated
-
-↓
-
-Executing
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
+N5 --> N6
+N6 --> N7
 ```
 
 Every stage increases confidence.
@@ -209,24 +200,19 @@ Trust.
 
 Before activation:
 
-```text
-Module
+```mermaid
+flowchart TD
 
-↓
+N1["Module"]
+N2["Signature Verification"]
+N3["Manifest Validation"]
+N4["Dependency Validation"]
+N5["Activation"]
 
-Signature Verification
-
-↓
-
-Manifest Validation
-
-↓
-
-Dependency Validation
-
-↓
-
-Activation
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
 ```
 
 Every stage contributes to trust.
@@ -395,20 +381,17 @@ Examples include:
 
 Revocation flow.
 
-```text
-Trust Revoked
+```mermaid
+flowchart TD
 
-↓
+N1["Trust Revoked"]
+N2["Capability Disabled"]
+N3["Permissions Removed"]
+N4["Execution Stops"]
 
-Capability Disabled
-
-↓
-
-Permissions Removed
-
-↓
-
-Execution Stops
+N1 --> N2
+N2 --> N3
+N3 --> N4
 ```
 
 Trust should never become permanent.
@@ -617,23 +600,3 @@ through a deterministic sequence of:
 Within Mosaic, trust is never assumed.
 
 The Runtime earns confidence in every capability before allowing it to execute, and even then, that capability continues operating inside strict architectural boundaries enforced by the Runtime itself.
-
----
-
-# Review Status
-
-**Status**
-
-Draft
-
-**Owner**
-
-Lead Software Architect
-
-**Previous File**
-
-`07-data-protection.md`
-
-**Next File**
-
-`09-network-security.md`

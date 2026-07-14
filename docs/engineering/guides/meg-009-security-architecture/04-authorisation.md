@@ -2,7 +2,7 @@
 File: docs/engineering/guides/meg-009-security-architecture/04-authorisation.md
 Document: MEG-009
 Status: Draft
-Version: 0.2
+Version: 0.4
 -->
 
 # Authorisation
@@ -60,20 +60,17 @@ Every permission should be explainable.
 
 Every protected operation follows the same sequence.
 
-```text
-Identity
+```mermaid
+flowchart TD
 
-↓
+N1["Identity"]
+N2["Authentication"]
+N3["Authorisation"]
+N4["Execution"]
 
-Authentication
-
-↓
-
-Authorisation
-
-↓
-
-Execution
+N1 --> N2
+N2 --> N3
+N3 --> N4
 ```
 
 Capabilities should never receive requests that have not already passed authorisation.
@@ -132,12 +129,13 @@ View Library
 
 Poor.
 
-```text
-Administrator
+```mermaid
+flowchart TD
 
-↓
+N1["Administrator"]
+N2["Everything"]
 
-Everything
+N1 --> N2
 ```
 
 The platform should continually minimise authority.
@@ -150,20 +148,17 @@ Not maximise convenience.
 
 Authorisation evaluates:
 
-```text
-Identity
+```mermaid
+flowchart TD
 
-↓
+N1["Identity"]
+N2["Role"]
+N3["Permissions"]
+N4["Operation"]
 
-Role
-
-↓
-
-Permissions
-
-↓
-
-Operation
+N1 --> N2
+N2 --> N3
+N3 --> N4
 ```
 
 Every successful operation should be traceable back to one explicit permission.
@@ -204,28 +199,21 @@ Permissions remain the true source of authority.
 
 Every protected request follows the same process.
 
-```text
-Authenticate
+```mermaid
+flowchart TD
 
-↓
+N1["Authenticate"]
+N2["Resolve Identity"]
+N3["Resolve Permissions"]
+N4["Evaluate Operation"]
+N5["Allow"]
+N6["Deny"]
 
-Resolve Identity
-
-↓
-
-Resolve Permissions
-
-↓
-
-Evaluate Operation
-
-↓
-
-Allow
-
-or
-
-Deny
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
+N4 --> N6
 ```
 
 Permission evaluation should remain deterministic.
@@ -282,28 +270,26 @@ Business ownership may influence authorisation.
 
 Example.
 
-```text
-User
+```mermaid
+flowchart TD
 
-↓
+N1["User"]
+N2["Own Collection"]
+N3["Allowed"]
 
-Own Collection
-
-↓
-
-Allowed
+N1 --> N2
+N2 --> N3
 ```
 
-```text
-Other User
+```mermaid
+flowchart TD
 
-↓
+N1["Other User"]
+N2["Same Collection"]
+N3["Denied"]
 
-Same Collection
-
-↓
-
-Denied
+N1 --> N2
+N2 --> N3
 ```
 
 Ownership remains a business concept.
@@ -348,16 +334,15 @@ Capabilities themselves also operate under permissions.
 
 Example.
 
-```text
-Capability
+```mermaid
+flowchart TD
 
-↓
+N1["Capability"]
+N2["blob.read"]
+N3["scheduler.use"]
 
-blob.read
-
-↓
-
-scheduler.use
+N1 --> N2
+N2 --> N3
 ```
 
 User permissions and capability permissions remain independent.
@@ -374,20 +359,17 @@ Repositories should never bypass Runtime authorisation.
 
 Flow.
 
-```text
-User
+```mermaid
+flowchart TD
 
-↓
+N1["User"]
+N2["Runtime"]
+N3["Repository"]
+N4["Storage"]
 
-Runtime
-
-↓
-
-Repository
-
-↓
-
-Storage
+N1 --> N2
+N2 --> N3
+N3 --> N4
 ```
 
 Storage systems should trust the Runtime.
@@ -421,12 +403,13 @@ The Runtime MUST deny it.
 
 Example.
 
-```text
-Unknown Permission
+```mermaid
+flowchart TD
 
-↓
+N1["Unknown Permission"]
+N2["Denied"]
 
-Denied
+N1 --> N2
 ```
 
 Explicit denial is considerably safer than implicit access.
@@ -626,23 +609,3 @@ into one deterministic outcome:
 Within Mosaic, every successful operation should be explainable by one explicit authorisation decision.
 
 If the Runtime cannot explain why access was granted, then access should not have been granted at all.
-
----
-
-# Review Status
-
-**Status**
-
-Draft
-
-**Owner**
-
-Lead Software Architect
-
-**Previous File**
-
-`03-authentication.md`
-
-**Next File**
-
-`05-capability-permissions.md`

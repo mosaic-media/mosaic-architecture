@@ -2,7 +2,7 @@
 File: docs/engineering/guides/meg-009-security-architecture/12-security-guidelines.md
 Document: MEG-009
 Status: Draft
-Version: 0.2
+Version: 0.4
 -->
 
 # Security Guidelines
@@ -416,36 +416,25 @@ Not by adding controls.
 
 New contributors SHOULD study MEG-009 in the following order.
 
-```text
-Security Philosophy
+```mermaid
+flowchart TD
 
-↓
+N1["Security Philosophy"]
+N2["Trust Model"]
+N3["Authentication"]
+N4["Authorisation"]
+N5["Capability Permissions"]
+N6["Secrets"]
+N7["Data Protection"]
+N8["Module Trust"]
 
-Trust Model
-
-↓
-
-Authentication
-
-↓
-
-Authorisation
-
-↓
-
-Capability Permissions
-
-↓
-
-Secrets
-
-↓
-
-Data Protection
-
-↓
-
-Module Trust
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
+N5 --> N6
+N6 --> N7
+N7 --> N8
 ```
 
 Understanding trust first makes every later security mechanism significantly easier to understand.
@@ -515,23 +504,3 @@ rather than weakening them.
 A secure platform is not one with the most security features.
 
 It is the one where every permission, every trust decision and every security boundary is obvious, deliberate and explainable.
-
----
-
-# Review Status
-
-**Status**
-
-Draft
-
-**Owner**
-
-Lead Software Architect
-
-**Previous File**
-
-`11-security-observability.md`
-
-**Next File**
-
-`13-adrs.md`

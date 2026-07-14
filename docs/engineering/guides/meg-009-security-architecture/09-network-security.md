@@ -2,7 +2,7 @@
 File: docs/engineering/guides/meg-009-security-architecture/09-network-security.md
 Document: MEG-009
 Status: Draft
-Version: 0.2
+Version: 0.4
 -->
 
 # Network Security
@@ -60,20 +60,17 @@ have succeeded.
 
 Every incoming or outgoing connection crosses a trust boundary.
 
-```text
-Remote System
+```mermaid
+flowchart TD
 
-↓
+N1["Remote System"]
+N2["Network"]
+N3["Runtime"]
+N4["Capability"]
 
-Network
-
-↓
-
-Runtime
-
-↓
-
-Capability
+N1 --> N2
+N2 --> N3
+N3 --> N4
 ```
 
 The Runtime owns this boundary.
@@ -144,28 +141,21 @@ Every Runtime API SHOULD be treated as untrusted until validated.
 
 Typical lifecycle.
 
-```text
-Request
+```mermaid
+flowchart TD
 
-↓
+N1["Request"]
+N2["TLS"]
+N3["Authentication"]
+N4["Authorisation"]
+N5["Validation"]
+N6["Capability"]
 
-TLS
-
-↓
-
-Authentication
-
-↓
-
-Authorisation
-
-↓
-
-Validation
-
-↓
-
-Capability
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
+N5 --> N6
 ```
 
 Capabilities should never receive unvalidated requests.
@@ -310,16 +300,15 @@ The Runtime SHOULD support host allow lists.
 
 Example.
 
-```text
-Metadata Capability
+```mermaid
+flowchart TD
 
-↓
+N1["Metadata Capability"]
+N2["TMDB"]
+N3["AniList"]
 
-TMDB
-
-↓
-
-AniList
+N1 --> N2
+N2 --> N3
 ```
 
 ↓
@@ -442,16 +431,15 @@ Network failures SHOULD remain isolated.
 
 Example.
 
-```text
-TMDB Offline
+```mermaid
+flowchart TD
 
-↓
+N1["TMDB Offline"]
+N2["Metadata Capability"]
+N3["Degraded"]
 
-Metadata Capability
-
-↓
-
-Degraded
+N1 --> N2
+N2 --> N3
 ```
 
 ↓
@@ -622,23 +610,3 @@ Only after these architectural boundaries have been satisfied should a capabilit
 The Runtime protects the network.
 
 Capabilities simply perform their business responsibilities.
-
----
-
-# Review Status
-
-**Status**
-
-Draft
-
-**Owner**
-
-Lead Software Architect
-
-**Previous File**
-
-`08-module-trust.md`
-
-**Next File**
-
-`10-cryptography.md`

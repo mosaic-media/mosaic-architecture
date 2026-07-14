@@ -2,7 +2,7 @@
 File: docs/engineering/guides/meg-009-security-architecture/11-security-observability.md
 Document: MEG-009
 Status: Draft
-Version: 0.2
+Version: 0.4
 -->
 
 # Security Observability
@@ -65,28 +65,21 @@ Not secrets.
 
 Security telemetry follows the Runtime Architecture.
 
-```text
-Identity
+```mermaid
+flowchart TD
 
-↓
+N1["Identity"]
+N2["Authentication"]
+N3["Authorisation"]
+N4["Capabilities"]
+N5["Storage"]
+N6["Runtime"]
 
-Authentication
-
-↓
-
-Authorisation
-
-↓
-
-Capabilities
-
-↓
-
-Storage
-
-↓
-
-Runtime
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
+N5 --> N6
 ```
 
 Each layer exposes:
@@ -320,24 +313,19 @@ Security operations SHOULD participate in distributed traces.
 
 Example.
 
-```text
-Request
+```mermaid
+flowchart TD
 
-↓
+N1["Request"]
+N2["Authentication"]
+N3["Authorisation"]
+N4["Capability"]
+N5["Repository"]
 
-Authentication
-
-↓
-
-Authorisation
-
-↓
-
-Capability
-
-↓
-
-Repository
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
 ```
 
 The trace should explain:
@@ -397,20 +385,17 @@ Security telemetry SHOULD correlate naturally.
 
 Example.
 
-```text
-Authentication Failure
+```mermaid
+flowchart TD
 
-↓
+N1["Authentication Failure"]
+N2["Authorisation Denied"]
+N3["Trace"]
+N4["Audit Event"]
 
-Authorisation Denied
-
-↓
-
-Trace
-
-↓
-
-Audit Event
+N1 --> N2
+N2 --> N3
+N3 --> N4
 ```
 
 Operators should investigate one incident.
@@ -433,7 +418,7 @@ Security alerts SHOULD focus upon:
 
 Routine security events SHOULD remain observable without necessarily becoming alerts.
 
-Alerting should continue following MEG-008 principles.
+Alerting should continue following [MEG-008](../meg-008-observability/index.md) principles.
 
 ---
 
@@ -600,23 +585,3 @@ while ensuring the confidential information being protected never becomes part o
 A secure platform should not only protect itself.
 
 It should continuously demonstrate that protection through clear, explainable and auditable behaviour.
-
----
-
-# Review Status
-
-**Status**
-
-Draft
-
-**Owner**
-
-Lead Software Architect
-
-**Previous File**
-
-`10-cryptography.md`
-
-**Next File**
-
-`12-security-guidelines.md`

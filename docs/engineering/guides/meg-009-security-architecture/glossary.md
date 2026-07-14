@@ -2,7 +2,7 @@
 File: docs/engineering/guides/meg-009-security-architecture/glossary.md
 Document: MEG-009
 Status: Draft
-Version: 0.2
+Version: 0.4
 -->
 
 # Glossary
@@ -450,23 +450,3 @@ Definitions should remain consistent across:
 - Operational guidance
 
 Whenever security terminology evolves, this glossary SHOULD be updated before introducing new terminology elsewhere.
-
----
-
-# Review Status
-
-**Status**
-
-Draft
-
-**Owner**
-
-Lead Software Architect
-
-**Previous File**
-
-`14-contributor-guidance.md`
-
-**Next File**
-
-`references.md`

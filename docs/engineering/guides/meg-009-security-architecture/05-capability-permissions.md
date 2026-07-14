@@ -2,7 +2,7 @@
 File: docs/engineering/guides/meg-009-security-architecture/05-capability-permissions.md
 Document: MEG-009
 Status: Draft
-Version: 0.2
+Version: 0.4
 -->
 
 # Capability Permissions
@@ -70,28 +70,21 @@ Authority is granted only because:
 
 Capability permissions follow a simple lifecycle.
 
-```text
-Manifest
+```mermaid
+flowchart TD
 
-↓
+N1["Manifest"]
+N2["Validation"]
+N3["Approval"]
+N4["Activation"]
+N5["Enforcement"]
+N6["Revocation"]
 
-Validation
-
-↓
-
-Approval
-
-↓
-
-Activation
-
-↓
-
-Enforcement
-
-↓
-
-Revocation
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
+N5 --> N6
 ```
 
 Every stage owns one security responsibility.
@@ -104,12 +97,13 @@ Permissions always belong to one capability.
 
 Example.
 
-```text
-Metadata
+```mermaid
+flowchart TD
 
-↓
+N1["Metadata"]
+N2["blob.read"]
 
-blob.read
+N1 --> N2
 ```
 
 Permissions never belong to:
@@ -195,28 +189,21 @@ Smaller permission surfaces reduce:
 
 Capability permissions naturally group into several categories.
 
-```text
-Runtime
+```mermaid
+flowchart TD
 
-↓
+N1["Runtime"]
+N2["Storage"]
+N3["Network"]
+N4["Observability"]
+N5["Capability"]
+N6["Administrative"]
 
-Storage
-
-↓
-
-Network
-
-↓
-
-Observability
-
-↓
-
-Capability
-
-↓
-
-Administrative
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
+N5 --> N6
 ```
 
 Each category protects one architectural responsibility.
@@ -301,7 +288,7 @@ Capabilities should never receive unrestricted outbound access unless explicitly
 
 ---
 
-# Capability Permissions
+# Capability Contract Permissions
 
 Capabilities may consume contracts exposed by other capabilities.
 
@@ -379,24 +366,19 @@ Most capabilities should never require them.
 
 Permission granting occurs during activation.
 
-```text
-Manifest
+```mermaid
+flowchart TD
 
-↓
+N1["Manifest"]
+N2["Validate"]
+N3["Approve"]
+N4["Inject Runtime Contracts"]
+N5["Capability Ready"]
 
-Validate
-
-↓
-
-Approve
-
-↓
-
-Inject Runtime Contracts
-
-↓
-
-Capability Ready
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
 ```
 
 The Runtime injects only the services authorised by the granted permissions.
@@ -469,20 +451,17 @@ Permissions SHOULD remain revocable.
 
 Example.
 
-```text
-Capability Disabled
+```mermaid
+flowchart TD
 
-↓
+N1["Capability Disabled"]
+N2["Permissions Revoked"]
+N3["Contracts Removed"]
+N4["Execution Stops"]
 
-Permissions Revoked
-
-↓
-
-Contracts Removed
-
-↓
-
-Execution Stops
+N1 --> N2
+N2 --> N3
+N3 --> N4
 ```
 
 Revocation should occur without Runtime restart wherever practical.
@@ -689,23 +668,3 @@ Rather than allowing capabilities unrestricted access to platform services, the 
 Within Mosaic, the safest capability is one that cannot even see functionality it has not been authorised to use.
 
 Security is strongest when unavailable authority simply does not exist.
-
----
-
-# Review Status
-
-**Status**
-
-Draft
-
-**Owner**
-
-Lead Software Architect
-
-**Previous File**
-
-`04-authorisation.md`
-
-**Next File**
-
-`06-secrets-management.md`

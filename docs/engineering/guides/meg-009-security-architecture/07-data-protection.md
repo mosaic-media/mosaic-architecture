@@ -2,7 +2,7 @@
 File: docs/engineering/guides/meg-009-security-architecture/07-data-protection.md
 Document: MEG-009
 Status: Draft
-Version: 0.2
+Version: 0.4
 -->
 
 # Data Protection
@@ -366,28 +366,26 @@ The Runtime SHOULD verify integrity whenever information crosses trust boundarie
 
 Examples include:
 
-```text
-MOS Import
+```mermaid
+flowchart TD
 
-↓
+N1["MOS Import"]
+N2["Checksum"]
+N3["Import"]
 
-Checksum
-
-↓
-
-Import
+N1 --> N2
+N2 --> N3
 ```
 
-```text
-Marketplace Download
+```mermaid
+flowchart TD
 
-↓
+N1["Marketplace Download"]
+N2["Signature Verification"]
+N3["Activation"]
 
-Signature Verification
-
-↓
-
-Activation
+N1 --> N2
+N2 --> N3
 ```
 
 Validation should occur before information becomes trusted.
@@ -593,23 +591,3 @@ rather than:
 - convenience
 
 By making information protection an architectural property rather than a collection of isolated security features, the platform preserves both security and long-term maintainability.
-
----
-
-# Review Status
-
-**Status**
-
-Draft
-
-**Owner**
-
-Lead Software Architect
-
-**Previous File**
-
-`06-secrets-management.md`
-
-**Next File**
-
-`08-module-trust.md`

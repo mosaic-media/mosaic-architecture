@@ -2,7 +2,7 @@
 File: docs/engineering/guides/meg-009-security-architecture/14-contributor-guidance.md
 Document: MEG-009
 Status: Draft
-Version: 0.2
+Version: 0.4
 -->
 
 # Contributor Guidance
@@ -426,36 +426,25 @@ Architecture almost always precedes implementation.
 
 New contributors SHOULD study MEG-009 in the following order.
 
-```text
-Security Philosophy
+```mermaid
+flowchart TD
 
-↓
+N1["Security Philosophy"]
+N2["Trust Model"]
+N3["Authentication"]
+N4["Authorisation"]
+N5["Capability Permissions"]
+N6["Secrets"]
+N7["Module Trust"]
+N8["Security Observability"]
 
-Trust Model
-
-↓
-
-Authentication
-
-↓
-
-Authorisation
-
-↓
-
-Capability Permissions
-
-↓
-
-Secrets
-
-↓
-
-Module Trust
-
-↓
-
-Security Observability
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
+N5 --> N6
+N6 --> N7
+N7 --> N8
 ```
 
 Understanding trust first makes every later security concept significantly easier.
@@ -528,23 +517,3 @@ because every engineering decision ultimately becomes a security decision.
 The most secure platforms are rarely the most complicated.
 
 They are the ones whose trust model remains consistently simple, explicit and enforceable.
-
----
-
-# Review Status
-
-**Status**
-
-Draft
-
-**Owner**
-
-Lead Software Architect
-
-**Previous File**
-
-`13-adrs.md`
-
-**Next File**
-
-`glossary.md`

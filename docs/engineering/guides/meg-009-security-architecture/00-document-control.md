@@ -2,7 +2,7 @@
 File: docs/engineering/guides/meg-009-security-architecture/00-document-control.md
 Document: MEG-009
 Status: Draft
-Version: 0.2
+Version: 0.4
 -->
 
 # Document Control
@@ -17,8 +17,8 @@ Version: 0.2
 | Title | Security Architecture |
 | File | 00-document-control.md |
 | Status | Draft |
-| Version | 0.1 |
-| Owner | Lead Software Architect |
+| Version | 0.4 |
+| Owner | AdamNi-7080 |
 | Classification | Internal Architecture Specification |
 
 ---
@@ -69,60 +69,43 @@ Every architectural component SHOULD conform to the trust model defined within t
 
 MEG specifications intentionally build upon one another.
 
-```text
-MDL
+```mermaid
+flowchart TD
 
-↓
+N1["MDL"]
+N2["MDS"]
+N3["MEG-001"]
+N4["MEG-002"]
+N5["MEG-003"]
+N6["MEG-004"]
+N7["MEG-005"]
+N8["MEG-006"]
+N9["MEG-007"]
+N10["MEG-008"]
+N11["MEG-009"]
 
-MDS
-
-↓
-
-MEG-001
-
-↓
-
-MEG-002
-
-↓
-
-MEG-003
-
-↓
-
-MEG-004
-
-↓
-
-MEG-005
-
-↓
-
-MEG-006
-
-↓
-
-MEG-007
-
-↓
-
-MEG-008
-
-↓
-
-MEG-009
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
+N5 --> N6
+N6 --> N7
+N7 --> N8
+N8 --> N9
+N9 --> N10
+N10 --> N11
 ```
 
 Specifically:
 
-- **MEG-001** defines engineering.
-- **MEG-002** defines Runtime behaviour.
-- **MEG-003** defines business modelling.
-- **MEG-004** defines architectural boundaries.
-- **MEG-005** defines Runtime Architecture.
-- **MEG-006** defines the Module Platform.
-- **MEG-007** defines Storage Architecture.
-- **MEG-008** defines Observability.
+- **[MEG-001](../meg-001-go-engineering-standards/index.md)** defines engineering.
+- **[MEG-002](../meg-002-event-driven-runtime/index.md)** defines Runtime behaviour.
+- **[MEG-003](../meg-003-domain-driven-design/index.md)** defines business modelling.
+- **[MEG-004](../meg-004-hexagonal-architecture/index.md)** defines architectural boundaries.
+- **[MEG-005](../meg-005-runtime-architecture/index.md)** defines Runtime Architecture.
+- **[MEG-006](../meg-006-module-platform/index.md)** defines the Module Platform.
+- **[MEG-007](../meg-007-storage-architecture/index.md)** defines Storage Architecture.
+- **[MEG-008](../meg-008-observability/index.md)** defines Observability.
 - **MEG-009** defines trust, authority and protection.
 
 Together they establish not only how the platform operates, but how it protects that operation.
@@ -169,28 +152,21 @@ MEG specifications evolve alongside the platform.
 
 Each document progresses through the following lifecycle.
 
-```text
-Draft
+```mermaid
+flowchart TD
 
-↓
+N1["Draft"]
+N2["Review"]
+N3["Accepted"]
+N4["Implemented"]
+N5["Maintained"]
+N6["Superseded (optional)"]
 
-Review
-
-↓
-
-Accepted
-
-↓
-
-Implemented
-
-↓
-
-Maintained
-
-↓
-
-Superseded (optional)
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
+N5 --> N6
 ```
 
 Accepted specifications become part of the canonical Mosaic architecture.
@@ -276,23 +252,3 @@ Those concerns belong to other engineering specifications.
 Security protects those systems.
 
 It does not replace them.
-
----
-
-# Review Status
-
-**Status**
-
-Draft
-
-**Owner**
-
-Lead Software Architect
-
-**Previous File**
-
-`README.md`
-
-**Next File**
-
-`01-security-philosophy.md`

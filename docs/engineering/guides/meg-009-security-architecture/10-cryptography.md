@@ -2,7 +2,7 @@
 File: docs/engineering/guides/meg-009-security-architecture/10-cryptography.md
 Document: MEG-009
 Status: Draft
-Version: 0.2
+Version: 0.4
 -->
 
 # Cryptography
@@ -76,24 +76,19 @@ Those remain architectural concerns.
 
 Cryptographic operations naturally align with the platform.
 
-```text
-Identity
+```mermaid
+flowchart TD
 
-↓
+N1["Identity"]
+N2["Integrity"]
+N3["Confidentiality"]
+N4["Authenticity"]
+N5["Non-Repudiation"]
 
-Integrity
-
-↓
-
-Confidentiality
-
-↓
-
-Authenticity
-
-↓
-
-Non-Repudiation
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
 ```
 
 Each layer reinforces platform trust.
@@ -323,20 +318,17 @@ Blob Storage SHOULD support integrity verification.
 
 Typical lifecycle.
 
-```text
-Blob Stored
+```mermaid
+flowchart TD
 
-↓
+N1["Blob Stored"]
+N2["Hash Recorded"]
+N3["Blob Retrieved"]
+N4["Integrity Verified"]
 
-Hash Recorded
-
-↓
-
-Blob Retrieved
-
-↓
-
-Integrity Verified
+N1 --> N2
+N2 --> N3
+N3 --> N4
 ```
 
 Corrupted blobs should never silently enter the Runtime.
@@ -399,6 +391,7 @@ Secret values SHOULD never become cryptographic keys automatically.
 Examples include:
 
 ```
+
 API Key
 
 ≠
@@ -550,23 +543,3 @@ The architecture decides:
 > **What must be protected.**
 
 Cryptography provides the mechanisms that make those decisions enforceable.
-
----
-
-# Review Status
-
-**Status**
-
-Draft
-
-**Owner**
-
-Lead Software Architect
-
-**Previous File**
-
-`09-network-security.md`
-
-**Next File**
-
-`11-security-observability.md`

@@ -2,7 +2,7 @@
 File: docs/engineering/guides/meg-009-security-architecture/02-trust-model.md
 Document: MEG-009
 Status: Draft
-Version: 0.2
+Version: 0.4
 -->
 
 # Trust Model
@@ -58,16 +58,15 @@ Trust must always be:
 
 The platform intentionally classifies components into trust tiers.
 
-```text
-Trusted
+```mermaid
+flowchart TD
 
-↓
+N1["Trusted"]
+N2["Conditionally Trusted"]
+N3["Untrusted"]
 
-Conditionally Trusted
-
-↓
-
-Untrusted
+N1 --> N2
+N2 --> N3
 ```
 
 Every architectural component belongs to exactly one trust tier.
@@ -156,28 +155,21 @@ Validation always precedes trust.
 
 The platform contains explicit trust boundaries.
 
-```text
-Operator
+```mermaid
+flowchart TD
 
-↓
+N1["Operator"]
+N2["Authentication"]
+N3["Runtime"]
+N4["SDK"]
+N5["Capability"]
+N6["External World"]
 
-Authentication
-
-↓
-
-Runtime
-
-↓
-
-SDK
-
-↓
-
-Capability
-
-↓
-
-External World
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
+N5 --> N6
 ```
 
 Every transition between trust levels requires:
@@ -235,24 +227,19 @@ Third-party modules should always begin as untrusted.
 
 Lifecycle.
 
-```text
-Downloaded
+```mermaid
+flowchart TD
 
-↓
+N1["Downloaded"]
+N2["Verified"]
+N3["Validated"]
+N4["Registered"]
+N5["Activated"]
 
-Verified
-
-↓
-
-Validated
-
-↓
-
-Registered
-
-↓
-
-Activated
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
 ```
 
 Trust increases progressively.
@@ -312,12 +299,13 @@ They are not trusted to define business meaning.
 
 Examples.
 
-```text
-PostgreSQL
+```mermaid
+flowchart TD
 
-↓
+N1["PostgreSQL"]
+N2["Stores Truth"]
 
-Stores Truth
+N1 --> N2
 ```
 
 Not.
@@ -375,28 +363,21 @@ Marketplace trust is progressive.
 
 Example.
 
-```text
-Downloaded
+```mermaid
+flowchart TD
 
-↓
+N1["Downloaded"]
+N2["Publisher Verified"]
+N3["Signature Verified"]
+N4["Manifest Validated"]
+N5["Compatible"]
+N6["Activated"]
 
-Publisher Verified
-
-↓
-
-Signature Verified
-
-↓
-
-Manifest Validated
-
-↓
-
-Compatible
-
-↓
-
-Activated
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
+N5 --> N6
 ```
 
 The marketplace distributes capabilities.
@@ -446,26 +427,26 @@ Trust should not propagate automatically.
 
 Poor.
 
-```text
-Capability Trusted
+```mermaid
+flowchart TD
 
-↓
+N1["Capability Trusted"]
+N2["Everything Trusted"]
 
-Everything Trusted
+N1 --> N2
 ```
 
 Preferred.
 
-```text
-Capability Trusted
+```mermaid
+flowchart TD
 
-↓
+N1["Capability Trusted"]
+N2["Permission Checked"]
+N3["Operation Allowed"]
 
-Permission Checked
-
-↓
-
-Operation Allowed
+N1 --> N2
+N2 --> N3
 ```
 
 Every operation should continue respecting trust boundaries.
@@ -601,23 +582,3 @@ All ultimately answer one question:
 > **Should the Runtime trust this component right now?**
 
 By making trust explicit rather than assumed, Mosaic transforms security from a collection of defensive techniques into a coherent architectural property shared by every layer of the platform.
-
----
-
-# Review Status
-
-**Status**
-
-Draft
-
-**Owner**
-
-Lead Software Architect
-
-**Previous File**
-
-`01-security-philosophy.md`
-
-**Next File**
-
-`03-authentication.md`

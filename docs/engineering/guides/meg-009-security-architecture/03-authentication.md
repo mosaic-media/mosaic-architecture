@@ -2,7 +2,7 @@
 File: docs/engineering/guides/meg-009-security-architecture/03-authentication.md
 Document: MEG-009
 Status: Draft
-Version: 0.2
+Version: 0.4
 -->
 
 # Authentication
@@ -46,12 +46,14 @@ Within Mosaic:
 A successfully authenticated identity possesses:
 
 ```
+
 Identity
 ```
 
 It does **not** automatically possess:
 
 ```
+
 Permissions
 ```
 
@@ -63,24 +65,19 @@ Authentication and authorisation remain independent architectural responsibiliti
 
 Authentication occurs before every protected Runtime interaction.
 
-```text
-Identity
+```mermaid
+flowchart TD
 
-↓
+N1["Identity"]
+N2["Authentication"]
+N3["Authorisation"]
+N4["Capability"]
+N5["Execution"]
 
-Authentication
-
-↓
-
-Authorisation
-
-↓
-
-Capability
-
-↓
-
-Execution
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
 ```
 
 Each stage owns exactly one concern.
@@ -206,16 +203,15 @@ Business capabilities should remain unaware of federation details.
 
 Following successful authentication:
 
-```text
-Authenticate
+```mermaid
+flowchart TD
 
-↓
+N1["Authenticate"]
+N2["Session Created"]
+N3["Identity Established"]
 
-Session Created
-
-↓
-
-Identity Established
+N1 --> N2
+N2 --> N3
 ```
 
 The session represents:
@@ -234,20 +230,17 @@ Sessions SHOULD possess explicit lifetimes.
 
 Typical stages include:
 
-```text
-Created
+```mermaid
+flowchart TD
 
-↓
+N1["Created"]
+N2["Active"]
+N3["Expired"]
+N4["Revoked"]
 
-Active
-
-↓
-
-Expired
-
-↓
-
-Revoked
+N1 --> N2
+N2 --> N3
+N3 --> N4
 ```
 
 Sessions should never remain valid indefinitely.
@@ -413,24 +406,19 @@ Authentication SHOULD participate in distributed tracing.
 
 Typical flow.
 
-```text
-Request
+```mermaid
+flowchart TD
 
-↓
+N1["Request"]
+N2["Authentication"]
+N3["Authorisation"]
+N4["Capability"]
+N5["Response"]
 
-Authentication
-
-↓
-
-Authorisation
-
-↓
-
-Capability
-
-↓
-
-Response
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
 ```
 
 Authentication spans should describe:
@@ -449,12 +437,13 @@ Authentication failure SHOULD terminate request processing immediately.
 
 Example.
 
-```text
-Authentication Failed
+```mermaid
+flowchart TD
 
-↓
+N1["Authentication Failed"]
+N2["Reject Request"]
 
-Reject Request
+N1 --> N2
 ```
 
 Authorisation should never execute.
@@ -575,23 +564,3 @@ It simply allows the Runtime to answer one architectural question with confidenc
 > **Who is requesting this operation?**
 
 Only after that question has been answered can the platform safely decide what should happen next.
-
----
-
-# Review Status
-
-**Status**
-
-Draft
-
-**Owner**
-
-Lead Software Architect
-
-**Previous File**
-
-`02-trust-model.md`
-
-**Next File**
-
-`04-authorisation.md`

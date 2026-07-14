@@ -2,7 +2,7 @@
 File: docs/engineering/guides/meg-009-security-architecture/01-security-philosophy.md
 Document: MEG-009
 Status: Draft
-Version: 0.2
+Version: 0.4
 -->
 
 # Security Philosophy
@@ -50,6 +50,7 @@ Within Mosaic:
 Every architectural component begins with:
 
 ```
+
 No Trust
 ```
 
@@ -80,44 +81,49 @@ Every previous MEG already contributes to security.
 
 Examples.
 
-```text
-MEG-003
+```mermaid
+flowchart TD
 
-↓
+N1["MEG-003"]
+N2["Business Ownership"]
 
-Business Ownership
+N1 --> N2
 ```
 
-```text
-MEG-004
+```mermaid
+flowchart TD
 
-↓
+N1["MEG-004"]
+N2["Architectural Boundaries"]
 
-Architectural Boundaries
+N1 --> N2
 ```
 
-```text
-MEG-005
+```mermaid
+flowchart TD
 
-↓
+N1["MEG-005"]
+N2["Runtime Isolation"]
 
-Runtime Isolation
+N1 --> N2
 ```
 
-```text
-MEG-006
+```mermaid
+flowchart TD
 
-↓
+N1["MEG-006"]
+N2["Capability Permissions"]
 
-Capability Permissions
+N1 --> N2
 ```
 
-```text
-MEG-007
+```mermaid
+flowchart TD
 
-↓
+N1["MEG-007"]
+N2["Storage Ownership"]
 
-Storage Ownership
+N1 --> N2
 ```
 
 Security reinforces these architectural boundaries.
@@ -166,6 +172,7 @@ The platform should never confuse these concepts.
 Example.
 
 ```
+
 Authenticated
 
 ≠
@@ -185,22 +192,24 @@ Every component should possess only the authority required for its responsibilit
 
 Examples include:
 
-```
-Capability
+```mermaid
+flowchart TD
 
-↓
+N1["Capability"]
+N2["blob.read"]
 
-blob.read
+N1 --> N2
 ```
 
 Not:
 
-```
-Capability
+```mermaid
+flowchart TD
 
-↓
+N1["Capability"]
+N2["blob.*"]
 
-blob.*
+N1 --> N2
 ```
 
 The Runtime should continually minimise authority.
@@ -217,26 +226,26 @@ Trust should always be explicit.
 
 Good.
 
-```text
-Capability
+```mermaid
+flowchart TD
 
-↓
+N1["Capability"]
+N2["Permission"]
+N3["Granted"]
 
-Permission
-
-↓
-
-Granted
+N1 --> N2
+N2 --> N3
 ```
 
 Poor.
 
-```text
-Capability
+```mermaid
+flowchart TD
 
-↓
+N1["Capability"]
+N2["Probably Needs It"]
 
-Probably Needs It
+N1 --> N2
 ```
 
 Implicit trust inevitably becomes invisible.
@@ -251,28 +260,21 @@ Security should never depend upon one mechanism.
 
 Example.
 
-```text
-Authentication
+```mermaid
+flowchart TD
 
-↓
+N1["Authentication"]
+N2["Authorisation"]
+N3["Permissions"]
+N4["Runtime Isolation"]
+N5["Storage Protection"]
+N6["Observability"]
 
-Authorisation
-
-↓
-
-Permissions
-
-↓
-
-Runtime Isolation
-
-↓
-
-Storage Protection
-
-↓
-
-Observability
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
+N5 --> N6
 ```
 
 Each layer reinforces the others.
@@ -357,6 +359,7 @@ Examples include:
 The safest behaviour is generally:
 
 ```
+
 Do Not Execute
 ```
 
@@ -411,12 +414,13 @@ The platform should never require guessing why authority was denied.
 
 Security is not:
 
-```
-Login
+```mermaid
+flowchart TD
 
-↓
+N1["Login"]
+N2["Finished"]
 
-Finished
+N1 --> N2
 ```
 
 Security continues throughout Runtime execution.
@@ -558,23 +562,3 @@ Within Mosaic, every permission, every capability and every Runtime interaction 
 > **Trust should always be explicit, limited and explainable.**
 
 That principle becomes the foundation upon which every remaining security mechanism is built.
-
----
-
-# Review Status
-
-**Status**
-
-Draft
-
-**Owner**
-
-Lead Software Architect
-
-**Previous File**
-
-`00-document-control.md`
-
-**Next File**
-
-`02-trust-model.md`

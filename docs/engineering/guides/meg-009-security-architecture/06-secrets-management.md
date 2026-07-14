@@ -2,7 +2,7 @@
 File: docs/engineering/guides/meg-009-security-architecture/06-secrets-management.md
 Document: MEG-009
 Status: Draft
-Version: 0.2
+Version: 0.4
 -->
 
 # Secrets Management
@@ -58,36 +58,25 @@ Ownership always remains with the Runtime.
 
 Every secret follows the same lifecycle.
 
-```text
-Created
+```mermaid
+flowchart TD
 
-↓
+N1["Created"]
+N2["Stored"]
+N3["Validated"]
+N4["Injected"]
+N5["Used"]
+N6["Rotated"]
+N7["Revoked"]
+N8["Destroyed"]
 
-Stored
-
-↓
-
-Validated
-
-↓
-
-Injected
-
-↓
-
-Used
-
-↓
-
-Rotated
-
-↓
-
-Revoked
-
-↓
-
-Destroyed
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
+N5 --> N6
+N6 --> N7
+N7 --> N8
 ```
 
 Every stage has one responsibility.
@@ -128,30 +117,28 @@ Configuration and secrets are intentionally different.
 
 Configuration.
 
-```text
-Refresh Interval
+```mermaid
+flowchart TD
 
-↓
+N1["Refresh Interval"]
+N2["Provider Selection"]
+N3["Language"]
 
-Provider Selection
-
-↓
-
-Language
+N1 --> N2
+N2 --> N3
 ```
 
 Secrets.
 
-```text
-TMDB API Key
+```mermaid
+flowchart TD
 
-↓
+N1["TMDB API Key"]
+N2["OAuth Client Secret"]
+N3["Signing Key"]
 
-OAuth Client Secret
-
-↓
-
-Signing Key
+N1 --> N2
+N2 --> N3
 ```
 
 Configuration may be visible.
@@ -186,24 +173,19 @@ Secrets SHOULD be injected during capability activation.
 
 Typical flow.
 
-```text
-Capability Activated
+```mermaid
+flowchart TD
 
-↓
+N1["Capability Activated"]
+N2["Permission Validated"]
+N3["Secret Resolved"]
+N4["SDK Injection"]
+N5["Capability Ready"]
 
-Permission Validated
-
-↓
-
-Secret Resolved
-
-↓
-
-SDK Injection
-
-↓
-
-Capability Ready
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
 ```
 
 Capabilities should never resolve secrets dynamically.
@@ -273,24 +255,19 @@ Secrets SHOULD support rotation without Runtime restart where practical.
 
 Typical flow.
 
-```text
-New Secret
+```mermaid
+flowchart TD
 
-↓
+N1["New Secret"]
+N2["Runtime Validation"]
+N3["Replace Secret"]
+N4["Invalidate Old Secret"]
+N5["Continue Execution"]
 
-Runtime Validation
-
-↓
-
-Replace Secret
-
-↓
-
-Invalidate Old Secret
-
-↓
-
-Continue Execution
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
 ```
 
 Capabilities should remain unaware that rotation occurred.
@@ -321,12 +298,13 @@ Capabilities SHOULD retain secrets only for the minimum time required.
 
 Preferred.
 
-```text
-Use
+```mermaid
+flowchart TD
 
-↓
+N1["Use"]
+N2["Discard"]
 
-Discard
+N1 --> N2
 ```
 
 Avoid:
@@ -448,20 +426,17 @@ Capabilities frequently use external services.
 
 Example.
 
-```text
-TMDB
+```mermaid
+flowchart TD
 
-↓
+N1["TMDB"]
+N2["Secret"]
+N3["SDK"]
+N4["Capability"]
 
-Secret
-
-↓
-
-SDK
-
-↓
-
-Capability
+N1 --> N2
+N2 --> N3
+N3 --> N4
 ```
 
 The capability should receive:
@@ -495,12 +470,14 @@ Dedicated Runtime services should perform cryptographic operations on their beha
 Capabilities request:
 
 ```
+
 Sign This
 ```
 
 Not:
 
 ```
+
 Give Me The Private Key
 ```
 
@@ -655,23 +632,3 @@ The Runtime resolves:
 - revocation
 
 This architecture dramatically reduces the trusted computing surface while ensuring that capabilities receive exactly the confidential information they require, and nothing more.
-
----
-
-# Review Status
-
-**Status**
-
-Draft
-
-**Owner**
-
-Lead Software Architect
-
-**Previous File**
-
-`05-capability-permissions.md`
-
-**Next File**
-
-`07-data-protection.md`
