@@ -2,7 +2,7 @@
 File: docs/engineering/guides/meg-010-performance-engineering/02-runtime-performance.md
 Document: MEG-010
 Status: Draft
-Version: 0.2
+Version: 0.4
 -->
 
 # Runtime Performance
@@ -252,7 +252,7 @@ The Runtime should expose metrics including:
 - rejected work
 - execution failures
 
-These metrics should integrate with the observability platform defined in MEG-008.
+These metrics should integrate with the observability platform defined in [MEG-008](../meg-008-observability/index.md).
 
 Performance that cannot be observed cannot be managed.
 
@@ -312,9 +312,3 @@ After reading this chapter contributors should understand:
 A well-designed Runtime should disappear into the background.
 
 If contributors spend their time thinking about business capabilities instead of fighting execution behaviour, the Runtime is doing its job.
-
----
-
-# Next File
-
-`03-capability-performance.md`

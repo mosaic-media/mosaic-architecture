@@ -2,7 +2,7 @@
 File: docs/engineering/guides/meg-010-performance-engineering/13-performance-guidelines.md
 Document: MEG-010
 Status: Draft
-Version: 0.2
+Version: 0.4
 -->
 
 # Performance Guidelines
@@ -292,9 +292,3 @@ After reading this chapter contributors should understand:
 - how architectural consistency protects long-term performance
 
 Performance should become a natural consequence of good engineering practice rather than a specialised activity performed only when something becomes painfully slow.
-
----
-
-# Next File
-
-`14-adrs.md`

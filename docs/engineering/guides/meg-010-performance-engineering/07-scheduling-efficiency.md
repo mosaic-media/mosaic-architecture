@@ -2,7 +2,7 @@
 File: docs/engineering/guides/meg-010-performance-engineering/07-scheduling-efficiency.md
 Document: MEG-010
 Status: Draft
-Version: 0.2
+Version: 0.4
 -->
 
 # Scheduling Efficiency
@@ -218,7 +218,7 @@ Scheduling behaviour should expose metrics including:
 - rejected work
 - deferred work
 
-These metrics should integrate with the observability standards defined in MEG-008.
+These metrics should integrate with the observability standards defined in [MEG-008](../meg-008-observability/index.md).
 
 Scheduling behaviour should always be measurable.
 
@@ -272,9 +272,3 @@ After reading this chapter contributors should understand:
 A well-designed scheduler is rarely noticed.
 
 It quietly ensures that the right work happens at the right time, allowing contributors to focus on business behaviour instead of negotiating peace treaties between goroutines.
-
----
-
-# Next File
-
-`08-memory-ownership.md`

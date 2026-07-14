@@ -2,7 +2,7 @@
 File: docs/engineering/guides/meg-010-performance-engineering/15-contributor-guidance.md
 Document: MEG-010
 Status: Draft
-Version: 0.2
+Version: 0.4
 -->
 
 # Contributor Guidance
@@ -227,9 +227,3 @@ Before completing significant work, contributors should consider the following c
 Not every item will apply to every change.
 
 Each should, however, be considered deliberately.
-
----
-
-# Next File
-
-`glossary.md`

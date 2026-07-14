@@ -2,7 +2,7 @@
 File: docs/engineering/guides/meg-010-performance-engineering/06-event-throughput.md
 Document: MEG-010
 Status: Draft
-Version: 0.2
+Version: 0.4
 -->
 
 # Event Throughput
@@ -13,7 +13,7 @@ Version: 0.2
 
 This chapter defines how event throughput should be managed throughout the Mosaic platform.
 
-Events form the communication backbone of the Reactive Runtime defined in MEG-002.
+Events form the communication backbone of the Reactive Runtime defined in [MEG-002](../meg-002-event-driven-runtime/index.md).
 
 As the platform grows, event volume will naturally increase.
 
@@ -255,7 +255,7 @@ The event system should expose metrics including:
 - failed events
 - dropped events
 
-These metrics should integrate with the observability standards defined in MEG-008.
+These metrics should integrate with the observability standards defined in [MEG-008](../meg-008-observability/index.md).
 
 Throughput improvements should always be validated with measurement.
 
@@ -307,9 +307,3 @@ After reading this chapter contributors should understand:
 - how throughput should be measured
 
 A healthy event system moves business information efficiently through the platform without becoming the platform itself.
-
----
-
-# Next File
-
-`07-scheduling-efficiency.md`

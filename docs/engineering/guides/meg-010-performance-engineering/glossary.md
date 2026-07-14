@@ -2,7 +2,7 @@
 File: docs/engineering/guides/meg-010-performance-engineering/glossary.md
 Document: MEG-010
 Status: Draft
-Version: 0.2
+Version: 0.4
 -->
 
 # Glossary
@@ -53,7 +53,7 @@ Caches are optimisation mechanisms rather than sources of truth.
 
 A self-contained unit of business behaviour executed by the Mosaic Runtime.
 
-Defined in MEG-005.
+Defined in [MEG-005](../meg-005-runtime-architecture/index.md).
 
 ---
 
@@ -123,7 +123,7 @@ The process of measuring how execution time, memory and Runtime resources are ac
 
 The architectural boundary responsible for translating between the Domain and storage systems.
 
-Defined in MEG-004.
+Defined in [MEG-004](../meg-004-hexagonal-architecture/index.md).
 
 ---
 
@@ -131,7 +131,7 @@ Defined in MEG-004.
 
 The Mosaic execution engine responsible for scheduling, coordination and execution of work.
 
-Defined in MEG-002.
+Defined in [MEG-002](../meg-002-event-driven-runtime/index.md).
 
 ---
 
@@ -154,9 +154,3 @@ Usually measured as operations or events per second.
 A collection of operations executed by the platform over a period of time.
 
 Representative workloads should resemble real production behaviour.
-
----
-
-# Next File
-
-`refrences.md`

@@ -2,7 +2,7 @@
 File: docs/engineering/guides/meg-010-performance-engineering/10-back-pressure.md
 Document: MEG-010
 Status: Draft
-Version: 0.2
+Version: 0.4
 -->
 
 # Back-Pressure
@@ -238,7 +238,7 @@ The platform should expose metrics including:
 - processing delay
 - overload duration
 
-These metrics should integrate with the observability standards defined in MEG-008.
+These metrics should integrate with the observability standards defined in [MEG-008](../meg-008-observability/index.md).
 
 Back-pressure should never become an invisible Runtime behaviour.
 
@@ -292,9 +292,3 @@ After reading this chapter contributors should understand:
 A resilient platform is not one that never experiences pressure.
 
 It is one that knows when to stop accepting more work before everything catches fire.
-
----
-
-# Next File
-
-`11-benchmarking.md`

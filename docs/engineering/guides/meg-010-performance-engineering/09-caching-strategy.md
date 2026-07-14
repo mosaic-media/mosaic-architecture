@@ -2,7 +2,7 @@
 File: docs/engineering/guides/meg-010-performance-engineering/09-caching-strategy.md
 Document: MEG-010
 Status: Draft
-Version: 0.2
+Version: 0.4
 -->
 
 # Caching Strategy
@@ -235,7 +235,7 @@ Caching systems should expose metrics including:
 - lookup latency
 - population duration
 
-These metrics should integrate with the observability standards defined in MEG-008.
+These metrics should integrate with the observability standards defined in [MEG-008](../meg-008-observability/index.md).
 
 A cache that cannot be measured cannot be evaluated.
 
@@ -289,9 +289,3 @@ After reading this chapter contributors should understand:
 A good cache quietly removes unnecessary work.
 
 A bad cache quietly creates unnecessary bugs.
-
----
-
-# Next File
-
-`10-back-pressure.md`

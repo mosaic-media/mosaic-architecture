@@ -2,7 +2,7 @@
 File: docs/engineering/guides/meg-010-performance-engineering/01-performance-philosophy.md
 Document: MEG-010
 Status: Draft
-Version: 0.2
+Version: 0.4
 -->
 
 # Performance Philosophy
@@ -253,32 +253,23 @@ A predictable system with acceptable latency and throughput is often the best op
 
 When performance work is required, the preferred order of investigation is:
 
-```text
-Architecture
+```mermaid
+flowchart TD
 
-↓
+N1["Architecture"]
+N2["Algorithms"]
+N3["Data movement"]
+N4["Concurrency"]
+N5["Storage"]
+N6["Memory"]
+N7["Micro-optimisation"]
 
-Algorithms
-
-↓
-
-Data movement
-
-↓
-
-Concurrency
-
-↓
-
-Storage
-
-↓
-
-Memory
-
-↓
-
-Micro-optimisation
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
+N5 --> N6
+N6 --> N7
 ```
 
 The higher levels should be addressed first because they often produce the largest gains with the least complexity.
@@ -369,9 +360,3 @@ After reading this chapter, contributors should understand that performance in M
 and that the platform should be improved by reducing waste before increasing complexity.
 
 That is the whole trick, really. A maddeningly sensible one.
-
----
-
-# Next File
-
-`02-runtime-performance.md`

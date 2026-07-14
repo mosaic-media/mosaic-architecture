@@ -2,7 +2,7 @@
 File: docs/engineering/guides/meg-010-performance-engineering/03-capability-performance.md
 Document: MEG-010
 Status: Draft
-Version: 0.2
+Version: 0.4
 -->
 
 # Capability Performance
@@ -289,9 +289,3 @@ After reading this chapter contributors should understand:
 A performant capability is not one filled with clever code.
 
 It is one that performs exactly the work the business requires, no more and no less.
-
----
-
-# Next File
-
-`04-repository-performance.md`

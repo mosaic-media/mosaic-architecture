@@ -2,7 +2,7 @@
 File: docs/engineering/guides/meg-010-performance-engineering/08-memory-ownership.md
 Document: MEG-010
 Status: Draft
-Version: 0.2
+Version: 0.4
 -->
 
 # Memory Ownership
@@ -237,7 +237,7 @@ Memory behaviour should expose metrics including:
 - peak memory usage
 - allocation hotspots
 
-These metrics should integrate with the observability standards defined in MEG-008.
+These metrics should integrate with the observability standards defined in [MEG-008](../meg-008-observability/index.md).
 
 Memory optimisation should always be evidence-driven.
 
@@ -291,9 +291,3 @@ After reading this chapter contributors should understand:
 Good memory management is rarely about clever tricks.
 
 It is about ensuring every allocation has a clear owner, a clear purpose and a clear end.
-
----
-
-# Next File
-
-`09-caching-strategy.md`

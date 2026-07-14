@@ -2,7 +2,7 @@
 File: docs/engineering/guides/meg-010-performance-engineering/05-storage-performance.md
 Document: MEG-010
 Status: Draft
-Version: 0.2
+Version: 0.4
 -->
 
 # Storage Performance
@@ -234,7 +234,7 @@ Storage systems should expose metrics including:
 - retry rates
 - storage capacity
 
-These metrics should integrate with the observability standards defined in MEG-008.
+These metrics should integrate with the observability standards defined in [MEG-008](../meg-008-observability/index.md).
 
 Storage performance should never rely upon assumptions.
 
@@ -287,9 +287,3 @@ After reading this chapter contributors should understand:
 Good storage performance is achieved by asking storage systems to perform only the work that genuinely needs to be durable.
 
 Everything else belongs elsewhere in the architecture.
-
----
-
-# Next File
-
-`06-event-throughput.md`

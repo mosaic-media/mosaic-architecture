@@ -2,7 +2,7 @@
 File: docs/engineering/guides/meg-010-performance-engineering/11-benchmarking.md
 Document: MEG-010
 Status: Draft
-Version: 0.2
+Version: 0.4
 -->
 
 # Benchmarking
@@ -269,9 +269,3 @@ After reading this chapter contributors should understand:
 Good benchmarks answer meaningful engineering questions.
 
 Great benchmarks prevent contributors from confidently optimising the wrong thing.
-
----
-
-# Next File
-
-`12-profiling.md`

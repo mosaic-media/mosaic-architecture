@@ -2,7 +2,7 @@
 File: docs/engineering/guides/meg-010-performance-engineering/references.md
 Document: MEG-010
 Status: Draft
-Version: 0.2
+Version: 0.4
 -->
 
 # References
@@ -19,55 +19,55 @@ The intention is not to mandate specific technologies or implementations, but to
 
 # Internal References
 
-## MEG-001 — Go Engineering Standards
+## [MEG-001 — Go Engineering Standards](../meg-001-go-engineering-standards/index.md)
 
 Defines engineering practices and coding standards used throughout the platform.
 
 ---
 
-## MEG-002 — Reactive Runtime
+## [MEG-002](../meg-002-event-driven-runtime/index.md) — Reactive Runtime
 
 Defines the Runtime execution model, scheduling philosophy and event-driven architecture.
 
 ---
 
-## MEG-003 — Domain-Driven Design
+## [MEG-003 — Domain-Driven Design](../meg-003-domain-driven-design/index.md)
 
 Defines Domain boundaries, aggregates and business ownership.
 
 ---
 
-## MEG-004 — Hexagonal Architecture
+## [MEG-004 — Hexagonal Architecture](../meg-004-hexagonal-architecture/index.md)
 
 Defines architectural boundaries, repositories and dependency direction.
 
 ---
 
-## MEG-005 — Capability Runtime
+## [MEG-005](../meg-005-runtime-architecture/index.md) — Capability Runtime
 
 Defines capabilities as the primary unit of business execution.
 
 ---
 
-## MEG-006 — Module Platform
+## [MEG-006 — Module Platform](../meg-006-module-platform/index.md)
 
 Defines module execution, lifecycle and Runtime integration.
 
 ---
 
-## MEG-007 — Storage Architecture
+## [MEG-007 — Storage Architecture](../meg-007-storage-architecture/index.md)
 
 Defines storage responsibilities, repository interaction and persistence strategy.
 
 ---
 
-## MEG-008 — Observability
+## [MEG-008 — Observability](../meg-008-observability/index.md)
 
 Defines logging, metrics, tracing and operational monitoring.
 
 ---
 
-## MEG-009 — Security Architecture
+## [MEG-009 — Security Architecture](../meg-009-security-architecture/index.md)
 
 Defines platform security principles that performance optimisations must preserve.
 

@@ -2,7 +2,7 @@
 File: docs/engineering/guides/meg-010-performance-engineering/04-repository-performance.md
 Document: MEG-010
 Status: Draft
-Version: 0.2
+Version: 0.4
 -->
 
 # Repository Performance
@@ -229,7 +229,7 @@ Repository performance should expose metrics including:
 - retry count
 - connection utilisation
 
-These metrics should integrate with the observability standards defined in MEG-008.
+These metrics should integrate with the observability standards defined in [MEG-008](../meg-008-observability/index.md).
 
 Repositories should never become invisible performance bottlenecks.
 
@@ -283,9 +283,3 @@ After reading this chapter contributors should understand:
 A good repository performs the smallest amount of storage work necessary to satisfy the Domain.
 
 Anything more is simply making the database work overtime for no business benefit.
-
----
-
-# Next File
-
-`05-storage-performance.md`

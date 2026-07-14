@@ -2,7 +2,7 @@
 File: docs/engineering/guides/meg-010-performance-engineering/00-document-control.md
 Document: MEG-010
 Status: Draft
-Version: 0.2
+Version: 0.4
 -->
 
 # Document Control
@@ -26,8 +26,8 @@ If performance is going to shape the platform, then the document defining it mus
 | Document | MEG-010 |
 | Title | Performance Engineering |
 | Status | Draft |
-| Version | 0.1 |
-| Owner | Lead Software Architect |
+| Version | 0.4 |
+| Owner | AdamNi-7080 |
 | Audience | Contributors, reviewers, maintainers |
 | Classification | Engineering specification |
 | Scope | Cross-cutting platform performance guidance |
@@ -75,7 +75,7 @@ This document should be consulted when:
 - evaluating performance regressions
 - reviewing performance-sensitive pull requests
 
-A contributor should not wait for a formal incident before reading the performance specification. That would be a very human approach and, as ever, deeply expensive.
+Contributors should become familiar with the performance specification before responding to a formal incident.
 
 ---
 
@@ -84,6 +84,7 @@ A contributor should not wait for a formal incident before reading the performan
 | Version | Status | Notes |
 |---------|--------|-------|
 | 0.1 | Draft | Initial structure and performance architecture outline |
+| 0.4 | Draft | Editorial, structural and cross-reference review completed |
 
 Future revisions should record:
 
@@ -118,21 +119,21 @@ It means the roadmap for making it fast is sane.
 
 ## Required Reading
 
-- MEG-001 Go Engineering Standards
-- MEG-002 Reactive Runtime
-- MEG-003 Domain-Driven Design
-- MEG-004 Hexagonal Architecture
-- MEG-005 Capability Runtime
-- MEG-006 Module Platform
-- MEG-007 Storage Architecture
-- MEG-008 Observability
-- MEG-009 Security Architecture
+- [MEG-001 — Go Engineering Standards](../meg-001-go-engineering-standards/index.md)
+- [MEG-002 — Event-Driven Runtime](../meg-002-event-driven-runtime/index.md)
+- [MEG-003 — Domain-Driven Design](../meg-003-domain-driven-design/index.md)
+- [MEG-004 — Hexagonal Architecture](../meg-004-hexagonal-architecture/index.md)
+- [MEG-005 — Runtime Architecture](../meg-005-runtime-architecture/index.md)
+- [MEG-006 — Module Platform](../meg-006-module-platform/index.md)
+- [MEG-007 — Storage Architecture](../meg-007-storage-architecture/index.md)
+- [MEG-008 — Observability](../meg-008-observability/index.md)
+- [MEG-009 — Security Architecture](../meg-009-security-architecture/index.md)
 
 ## Companion Reading
 
-- MEG-011 Deployment Architecture
-- MEG-012 API Architecture
-- MEG-013 Event Architecture
+- MEG-011 Deployment Architecture *(planned; not yet published)*
+- MEG-012 API Architecture *(planned; not yet published)*
+- MEG-013 Event Architecture *(planned; not yet published)*
 
 ## Internal Files
 
@@ -151,8 +152,8 @@ It means the roadmap for making it fast is sane.
 - 13-performance-guidelines.md
 - 14-adrs.md
 - 15-contributor-guidance.md
-- glossary.md
 - references.md
+- glossary.md
 
 ---
 
@@ -170,9 +171,3 @@ The document owner is responsible for ensuring that:
 Changes should be made deliberately.
 
 Performance guidance that shifts too often becomes noise.
-
----
-
-# Next File
-
-`01-performance-philosophy.md`

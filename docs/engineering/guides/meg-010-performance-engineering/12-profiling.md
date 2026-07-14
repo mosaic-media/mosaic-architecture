@@ -2,7 +2,7 @@
 File: docs/engineering/guides/meg-010-performance-engineering/12-profiling.md
 Document: MEG-010
 Status: Draft
-Version: 0.2
+Version: 0.4
 -->
 
 # Profiling
@@ -288,9 +288,3 @@ After reading this chapter contributors should understand:
 Profiling turns performance from opinion into evidence.
 
 Evidence, unlike intuition, has the useful habit of being measurable.
-
----
-
-# Next File
-
-`13-performance-guidelines.md`
