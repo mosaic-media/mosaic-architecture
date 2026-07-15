@@ -94,6 +94,8 @@ This specification defines:
 - Material Hierarchy
 - Canvas
 - Acrylic
+- Fixed Three-Layer Acrylic Optical Model
+- Tint-Only Authored Acrylic Control
 - Hero Material
 - Overlay Material
 - Refraction
@@ -185,6 +187,8 @@ No layer duplicates another.
 After reading MDS-003 contributors should understand:
 
 - why Mosaic uses Acrylic
+- why one fixed Acrylic profile resolves through Rear Optical Plane, Acrylic Volume and Front Surface responsibilities
+- why tint is the only authored Acrylic Material control
 - how Runtime Atmosphere interacts with materials
 - how Refraction works
 - how artwork-space UV light fields enter the three-dimensional Composition

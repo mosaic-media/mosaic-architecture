@@ -53,6 +53,8 @@ MDS-003 governs:
 - Material hierarchy
 - Surface behaviour
 - Acrylic
+- fixed three-layer Acrylic optical model
+- tint-only authored Acrylic control
 - Canvas
 - Hero materials
 - Overlay materials
@@ -216,10 +218,13 @@ Material behaviour should remain recognisably Mosaic.
 MDS-003 succeeds when:
 
 - materials feel physically believable
+- Acrylic preserves one fixed apparent-thickness profile through Rear Optical Plane, Acrylic Volume and Front Surface responsibilities
+- tint remains the only authored Acrylic Material parameter
 - runtime atmosphere subtly influences surfaces
 - refraction strengthens immersion without distraction
 - hierarchy remains immediately understandable
 - artwork-derived light appears to travel through Acrylic without making the artwork visibly emissive
+- source-facing contour light carries incident hue inward without becoming a thick bezel, detached stroke or frosted-glass panel
 - Material quality adapts without visible instability
 - Refraction never causes a video presentation deadline miss
 - static artwork and video share one standard artwork-light model

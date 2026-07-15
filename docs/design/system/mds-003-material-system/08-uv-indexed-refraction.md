@@ -427,6 +427,12 @@ Artwork sources use the standardised `UVLightFrame` path.
 
 Static Brand Illumination Pairs may generate an equivalent stable runtime field locally without entering the interchange protocol.
 
+For artwork-free Authored Layout, a Static Brand Emitter positions that procedural field in the Composition Space parent.
+
+The field may be generated once in memory or pre-baked with the client and reused while scrolling or Focus changes move Acrylic sampling windows across it.
+
+No `.mos` cache file is required.
+
 Acrylic may then redistribute remaining light to other spatially related Acrylic.
 
 This creates:

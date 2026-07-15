@@ -166,7 +166,7 @@ Components should remain unaware of its implementation.
 
 # Respect The Hero
 
-The Hero Material should receive the richest physical behaviour.
+The Hero Material should receive the highest compositional and rendering priority while retaining the same fixed Acrylic behaviour.
 
 However...
 

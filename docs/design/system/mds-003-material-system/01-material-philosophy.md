@@ -337,21 +337,13 @@ Not introduce independent visual effects.
 
 # Materials Across Themes
 
-Light and Dark themes should alter material behaviour.
+Light and Dark themes should alter environmental lighting and governed tint resolution.
 
-Not material identity.
+They should not alter Material identity or the fixed Acrylic profile.
 
-Light Theme.
+Light Theme presents the fixed profile within a lighter environment.
 
-- softer diffusion
-- brighter scattering
-- lighter acrylic
-
-Dark Theme.
-
-- deeper diffusion
-- richer reflections
-- stronger perceived depth
+Dark Theme presents the fixed profile within a darker environment.
 
 Users should recognise the same materials in every theme.
 

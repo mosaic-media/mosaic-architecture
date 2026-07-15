@@ -243,7 +243,7 @@ Source selection follows this priority:
 
 1. artwork associated with current Focus
 2. Hero artwork
-3. approved Mosaic or partner Brand Illumination Pair
+3. approved Mosaic or resolved co-brand Brand Illumination Pair
 4. default Mosaic Brand Illumination Pair
 
 ```mermaid
@@ -273,9 +273,44 @@ The source-selection rule remains Platform-owned and must not be reinterpreted i
 
 ---
 
+# Static Brand Emitter
+
+Artwork-free Authored Layout may define one **Static Brand Emitter** for its Composition Space parent.
+
+The emitter combines:
+
+| Input | Authority |
+|-------|-----------|
+| Approved Brand Illumination Pair | Platform theme or governed partner configuration |
+| Normalised `x` and `y` position | Page-level Composition input |
+| Bounded logical `z` depth | Page-level Composition input constrained by the Material profile |
+| Falloff, energy, diffusion and transition behaviour | Platform Material System |
+
+Emitter position is not a Design Token and does not redefine Acrylic physics.
+
+The client deterministically generates a low-resolution procedural light map and active `UVLightField` from these inputs.
+
+The field may remain entirely in memory or be pre-baked into an application bundle.
+
+It does not require artwork analysis, a `.mos` cache file or interchange through [MIP-003 — UVLightFrame Protocol](../../../engineering/protocols/mip-003-uv-light-frame-protocol/index.md).
+
+The field remains anchored to the Composition Space parent.
+
+Scrolling content and Focus transitions move Acrylic receivers and their sampling windows relative to that stable field.
+
+They update receiver projection, Refraction, edge response and optical parallax without regenerating the source map.
+
+The client should regenerate the procedural field only when its governing pair, emitter configuration, appearance or Composition-space dimensions materially change.
+
+---
+
 # Backdrop Participation
 
-Acrylic should distort and diffuse the actual Presentation rendered behind its two-dimensional bounds and mask.
+Acrylic should sample and displace the actual Presentation rendered behind its two-dimensional bounds and mask through the Rear Optical Plane.
+
+The sample should remain sufficiently structured to communicate optical displacement.
+
+Uniform full-face blur must not become the primary Acrylic cue because it makes the Material appear frosted.
 
 This local backdrop sample is distinct from the hidden artwork-derived `UVLightField`.
 
@@ -287,6 +322,35 @@ This local backdrop sample is distinct from the hidden artwork-derived `UVLightF
 The renderer combines both inputs inside Acrylic without making backdrop content or visible artwork an additional global light source.
 
 Semantic foreground content must remain outside destructive distortion when readability requires it.
+
+---
+
+# Layered Refraction Resolution
+
+Refraction resolves through the [three-layer Acrylic optical model](04-acrylic.md#three-layer-optical-model).
+
+| Layer | Refraction responsibility |
+|-------|---------------------------|
+| Rear Optical Plane | Applies fixed bounded displacement to the world-anchored backdrop sampling window. |
+| Acrylic Volume | Transforms incident `UVLightField` colour and energy through tint, absorption, scattering and directional inward falloff. |
+| Front Surface Response | Expresses a thin contour-bound Fresnel and specular response without duplicating Volume pigmentation. |
+
+For one receiver-local point, source-facing edge energy is conceptually:
+
+```text
+edgeEnergy =
+    incidentEnergy
+    × max(0, dot(edgeNormal, lightDirection))
+    × visibility
+```
+
+The exact response curve and exponent remain Material Profile calibration data.
+
+Edge energy should remain attached to the actual contour, wrap naturally around curved corners and pigment the Acrylic Volume inward.
+
+It must not be rendered as a detached stroke or uniform perimeter glow.
+
+Tint filters this incident colour rather than replacing it.
 
 ---
 
@@ -478,11 +542,9 @@ This creates a moving edge-emission response that remains spatially related to:
 - the position and orientation of the Acrylic,
 - the Acrylic boundary through which light exits.
 
-Edge emission should remain subtle.
+Edge emission may become prominent where concentrated source energy, geometry and visibility support it.
 
-Users should feel depth.
-
-Not notice glowing borders.
+It should remain directional, energy-bounded and attached to the actual contour rather than becoming a uniform decorative border.
 
 Edge emission belongs to Acrylic.
 
@@ -492,16 +554,13 @@ It is never a glow applied around the artwork.
 
 # Hero Refraction
 
-Hero Material receives the highest quality refraction.
+Hero Material uses the same fixed Refraction and Acrylic profile as every other Acrylic receiver.
 
-Examples include:
+Render scheduling may prioritise Hero updates and preserve optional refinement there longer under pressure.
 
-- richer colour transport
-- deeper diffusion
-- stronger perceived volume
-- smoother temporal blending
+That priority must not produce richer colour transport, deeper diffusion, greater apparent thickness or another semantic Material variant.
 
-Hero Refraction should remain emotionally expressive without becoming visually dominant.
+Hero Refraction should remain emotionally expressive through its Composition and source relationship without becoming visually dominant.
 
 The artwork always remains sharper and more detailed than the surrounding material.
 

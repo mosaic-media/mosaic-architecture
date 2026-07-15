@@ -54,11 +54,27 @@ It possesses substance.
 
 ---
 
+## Acrylic Assembly
+
+A group of rigid Acrylic Tiles that may share layout, rendering work and transported light while preserving distinct material boundaries and precision seams.
+
+An Acrylic Assembly is not a fused or liquid surface.
+
+---
+
 ## Acrylic-To-Acrylic Transport
 
 The bounded redistribution of artwork-derived light from one Acrylic object to another according to their relative relationship within the three-dimensional Composition.
 
 Acrylic redirects existing energy rather than creating a new primary source.
+
+---
+
+## Acrylic Volume
+
+The middle layer of the three-layer Acrylic optical model.
+
+It filters incident artwork light through governed tint transmission, absorption and scattering; carries directional contour ingress inward as pigmentation; and supplies restrained internal optical parallax.
 
 ---
 
@@ -84,7 +100,7 @@ Backdrop Participation remains separate from the hidden artwork-derived `UVLight
 
 ## Brand Illumination Pair
 
-Two approved Mosaic or partner colours resolved into a stable synthetic Material-light field when no focused or Hero artwork is available.
+The default Mosaic Indigo and Cyan pair, or a resolved co-brand pair containing Mosaic Indigo and one normalised registered partner accent, resolved into a stable synthetic Material-light field when no focused or Hero artwork is available.
 
 The pair supplies Acrylic illumination without recolouring components or replacing Mosaic Material behaviour.
 
@@ -199,13 +215,21 @@ Hero artwork becomes the source when Focus is not associated with artwork.
 
 ---
 
+## Front Surface Response
+
+The polished outer layer of the three-layer Acrylic optical model.
+
+It supplies thin contour definition, restrained Fresnel response, reflection and specular behaviour without becoming a thick bezel or uniform glowing outline.
+
+---
+
 # H
 
 ## Hero Material
 
 The material representing the highest-priority concept within the current Composition.
 
-Hero Material receives the strongest Runtime Atmosphere and Refraction while preserving the dominance of entertainment artwork.
+Hero Material receives the highest compositional and rendering priority while preserving the same fixed Acrylic profile and the dominance of entertainment artwork.
 
 ---
 
@@ -363,6 +387,14 @@ It is selected from focused artwork, Hero artwork, an approved Brand Illuminatio
 
 # R
 
+## Rear Optical Plane
+
+The rear layer of the three-layer Acrylic optical model.
+
+It samples visible Presentation behind Acrylic using fixed bounded displacement and safe overscan while remaining relatively sharp rather than uniformly frosted.
+
+---
+
 ## Relative Radiance
 
 The spatial relationship between artwork colour and emitted light intensity without asserting an absolute physical luminance or requiring HDR source artwork.
@@ -419,6 +451,14 @@ Secondary transport depends upon relative position, distance, orientation, surfa
 
 ---
 
+## Static Brand Emitter
+
+A page-level artwork-free source definition that positions a governed Brand Illumination Pair in the Composition Space parent using normalised `x`, `y` and bounded logical `z` coordinates.
+
+The client generates a stable procedural `UVLightField` without requiring artwork analysis or `.mos` serialisation.
+
+---
+
 ## Static Material-Light Source
 
 A stable synthetic light field derived from a Brand Illumination Pair and used where meaningful artwork is absent.
@@ -452,7 +492,7 @@ The reference Mosaic Acrylic behaves conceptually like a polished sheet approxim
 
 Thickness is an optical Material parameter rather than geometric extrusion.
 
-Runtime implementations may adapt apparent thickness while preserving diffusion, displacement, edge response and optical parallax.
+Runtime implementations preserve one fixed apparent-thickness profile while adapting renderer technique, sampling resolution and optional refinement.
 
 ---
 

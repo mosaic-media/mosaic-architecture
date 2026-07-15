@@ -283,17 +283,15 @@ It should never interrupt reading rhythm unnecessarily.
 
 # Edge Behaviour
 
-Overlay Materials should possess stronger edge definition than ordinary Acrylic.
+Overlay Materials should preserve the same fixed Acrylic contour response as ordinary Acrylic.
 
-This improves:
+Separation should instead come from:
 
-- separation
-- focus
-- readability
+- Composition and occlusion
+- foreground contrast
+- accessibility constraints
 
-The effect should remain subtle.
-
-Users should perceive confidence rather than borders.
+Overlay status must not create a stronger custom edge profile.
 
 ---
 

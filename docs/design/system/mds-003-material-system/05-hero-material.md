@@ -98,9 +98,11 @@ The user's attention immediately knows where to begin.
 
 ---
 
-# Hero Owns Atmosphere
+# Hero Owns Atmospheric Priority
 
-The Hero Material receives the strongest atmospheric influence of any material.
+The Hero Material receives the highest scheduling and compositional priority for resolving atmospheric influence.
+
+It does not receive a thicker, stronger or independently tuned Acrylic profile.
 
 Conceptually.
 
@@ -180,20 +182,13 @@ Not a source.
 
 ---
 
-# Hero Owns Depth
+# Hero Owns Presence
 
-The Hero Material should possess the greatest perceived physical depth.
+The Hero should possess the greatest compositional presence while using the same fixed Acrylic profile as every Acrylic surface.
 
-Characteristics include:
+Its scale, placement, content hierarchy and relationship to the active light field may make the Material response easier to perceive.
 
-- strongest acrylic thickness,
-- richest internal diffusion,
-- deepest perceived volume,
-- most convincing edge illumination.
-
-Depth should be communicated through material behaviour.
-
-Not exaggerated shadows.
+Hero status must not change thickness, diffusion, displacement, contour response or other Acrylic mechanics.
 
 ---
 
@@ -314,17 +309,13 @@ Light Theme.
 
 Hero Material behaves like:
 
-- softly illuminated acrylic,
-- gentle diffusion,
-- subtle edge light.
+- the fixed Acrylic profile under a light appearance environment.
 
 Dark Theme.
 
 Hero Material behaves like:
 
-- deeper acrylic,
-- richer internal glow,
-- stronger environmental lighting.
+- the same fixed Acrylic profile under a dark appearance environment.
 
 The material remains recognisably the same.
 

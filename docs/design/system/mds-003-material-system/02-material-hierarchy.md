@@ -188,7 +188,7 @@ Purpose.
 
 Communicate current importance.
 
-Hero Materials receive the strongest influence from:
+Hero Materials receive the highest compositional and scheduling priority for:
 
 - Runtime Atmosphere
 - Artwork
@@ -201,6 +201,8 @@ Hero Materials should feel:
 - emotionally connected
 
 without becoming visually dominant.
+
+Priority does not alter the fixed Acrylic profile.
 
 The entertainment remains the emotional centre.
 

@@ -122,7 +122,9 @@ This establishes a stable physical character for:
 - face transmission,
 - edge emission.
 
-Runtime Material Resolution may adapt apparent thickness to device and Composition scale while preserving this reference behaviour.
+Runtime Material Resolution preserves one fixed apparent-thickness profile across devices, Composition scales and semantic roles.
+
+Renderers may adapt technique and sampling resolution, but they must not reinterpret the Material as thinner or thicker.
 
 ---
 
@@ -341,11 +343,11 @@ Receivers interpret the global artwork source and any incoming secondary Acrylic
 
 This provides one coherent energy origin without requiring independent or identical visible results.
 
-Hero Acrylic may resolve the richest transport.
+Hero Acrylic may receive higher scheduling priority and preserve optional transport refinement longer under pressure.
 
-Supporting Acrylic should remain restrained.
+Supporting and Overlay Acrylic use the same fixed transport profile.
 
-Overlay Acrylic should prioritise readability.
+Their different visible results arise from source relationship, geometry, occlusion, foreground separation and accessibility rather than semantic Material strength.
 
 ---
 

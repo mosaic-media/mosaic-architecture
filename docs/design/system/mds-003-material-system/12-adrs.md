@@ -582,7 +582,7 @@ Settings, administration and dashboard experiences may have no focused or Hero a
 
 ### Decision
 
-Primary source priority is focused artwork, Hero artwork, approved Mosaic or partner Brand Illumination Pair, then the default Mosaic pair.
+Primary source priority is focused artwork, Hero artwork, a resolved co-brand Brand Illumination Pair, then the default Mosaic pair.
 
 The pair resolves into one stable synthetic Material-light field using Platform-owned placement, intensity and transition rules.
 
@@ -621,6 +621,140 @@ Accessibility, capability, current budget and Presentation deadlines may reduce 
 ### Consequences
 
 Users can select a stable lower-refinement experience without controlling individual Refraction mechanics.
+
+---
+
+# ADR-129
+
+## Title
+
+Derive Rigid Acrylic Edges From Resolved Geometry
+
+### Status
+
+Amended by ADR-131
+
+### Context
+
+Exposed radius choices would fragment Mosaic geometry, while automatically fusing neighbouring Tiles would make Acrylic behave like liquid glass.
+
+Several Tiles may still need shared layout and renderer work without losing their rigid material identity.
+
+### Decision
+
+The Material System derives corner curvature and edge-band width continuously from the shortest resolved Tile side.
+
+The provisional alpha profile uses:
+
+```text
+cornerRadius = clamp(s × 0.045, 8, 32)
+edgeBand     = clamp(s × 0.022, 4, 12)
+seam         = clamp(s × 0.006, 2, 4)
+```
+
+An Acrylic Assembly may share layout, rendering and transported light while preserving visible precision seams and distinct rigid panels.
+
+Proximity never causes material fusion.
+
+One continuous Acrylic surface exists only when Composition creates one Tile.
+
+### Consequences
+
+Mosaic gains continuous geometry and efficient compositing without adopting liquid, blob-like behaviour.
+
+The alpha Design System must validate the numerical coefficients before they become a stable Material profile.
+
+---
+
+# ADR-130
+
+## Title
+
+Generate A Composition-Anchored Static Brand Field Without MOS
+
+### Status
+
+Accepted
+
+### Context
+
+Documentation, administration and dashboard experiences may have no artwork but still require positioned Brand illumination and live Acrylic response during scroll and Focus changes.
+
+Requiring artwork analysis or a serialised MOS cache for a deterministic colour-pair source would add unnecessary work and coupling.
+
+### Decision
+
+Artwork-free Authored Layout may define one Static Brand Emitter using normalised `x`, `y` and bounded logical `z` coordinates in its Composition Space parent.
+
+The client generates or pre-bakes one deterministic low-resolution procedural `UVLightField` from the approved Brand Illumination Pair and governed Material profile.
+
+The field remains fixed while Acrylic receivers move across it during scrolling and Focus transitions.
+
+Receiver projection updates do not regenerate the source field.
+
+The procedural source does not require `.mos` serialisation or [MIP-003 — UVLightFrame Protocol](../../../engineering/protocols/mip-003-uv-light-frame-protocol/index.md) interchange.
+
+### Consequences
+
+Conventional Mosaic pages receive positioned, coherent Refraction at low continuous cost.
+
+Page authors control source placement while Mosaic retains energy, falloff, diffusion, accessibility and degradation authority.
+
+---
+
+# ADR-131
+
+## Title
+
+Compose One Fixed Acrylic Material From Three Optical Layers
+
+### Status
+
+Accepted
+
+### Context
+
+Representing apparent thickness as a visibly wide edge band makes Acrylic resemble a thick bezel.
+
+Collapsing backdrop sampling, pigmentation and surface reflection into one translucent layer instead makes the Material resemble glass or uniform frost.
+
+The one-centimetre reference needs to govern optical transport while every Acrylic surface retains one stable Material identity.
+
+### Decision
+
+Mosaic Acrylic uses three conceptual two-dimensional layers sharing one surface mask:
+
+1. Rear Optical Plane
+2. Acrylic Volume
+3. Front Surface Response
+
+The Rear Optical Plane provides relatively sharp, world-anchored and safely overscanned backdrop sampling with fixed bounded displacement.
+
+The Acrylic Volume transforms incident artwork light through tint, absorption and scattering; receives directional contour ingress; and carries source hue inward as pigmentation.
+
+The Front Surface provides only the polished Fresnel, reflection, specular and thin contour response.
+
+The one-centimetre reference defines one fixed apparent-thickness profile across surface size, semantic role and renderer.
+
+Tint is the only authored Acrylic Material parameter.
+
+Artwork or a Static Brand Emitter remains an environmental input rather than a Material control.
+
+The provisional `edgeBand` width in ADR-129 is superseded.
+
+Corner-radius and Assembly-seam decisions in ADR-129 remain active.
+
+Renderer fidelity may consolidate, pre-compose or omit optional refinement while preserving the same resolved three-layer meaning.
+
+### Consequences
+
+Acrylic thickness is communicated through optical displacement, internal pigmentation, parallax and contour response rather than a physical-looking bezel.
+
+Modules and components cannot create custom glass, frost or stronger Hero Acrylic variants.
+
+Alpha implementation must calibrate private displacement, transmission, scattering, contour, Fresnel, parallax, overscan and peak-energy relationships before technical review.
+
+Those values remain private Material Profile data rather than public tokens or SDUI fields.
 
 ---
 
@@ -664,6 +798,12 @@ ADR126["Local Backdrop Participation"]
 ADR127["Static Brand Illumination"]
 
 ADR128["User Fidelity Maximum"]
+
+ADR129["Rigid Derived Edges"]
+
+ADR130["Static Brand Emitter"]
+
+ADR131["Three-Layer Fixed Acrylic"]
 
 ADR111 --> ADR112
 
@@ -713,6 +853,22 @@ ADR121 --> ADR128
 
 ADR128 --> ADR116
 
+ADR112 --> ADR129
+
+ADR129 --> ADR116
+
+ADR127 --> ADR130
+
+ADR130 --> ADR116
+
+ADR112 --> ADR131
+
+ADR126 --> ADR131
+
+ADR129 --> ADR131
+
+ADR131 --> ADR116
+
 ADR118 --> ADR116
 
 ADR117 --> ADR116
@@ -730,7 +886,6 @@ Future Material ADRs are expected to formalise:
 
 - Spectral Refraction
 - HDR Material Response
-- Dynamic Edge Illumination
 
 These intentionally remain outside the scope of MDS-003 Version 0.4.
 
