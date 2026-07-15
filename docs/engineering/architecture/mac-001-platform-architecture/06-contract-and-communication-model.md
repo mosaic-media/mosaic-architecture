@@ -158,6 +158,12 @@ The Platform does not know:
 
 Client renderers consume Runtime SDUI and apply Mosaic presentation locally.
 
+Runtime SDUI may reach a client as a Refreshable Compiled SDUI snapshot, ordered semantic transactions or Live State Binding updates.
+
+The Platform remains the semantic contract owner regardless of whether a snapshot was produced during a build or an active session.
+
+Connected presentation should evolve through semantic transactions rather than require full-page replacement for ordinary navigation or content updates.
+
 [MDS-008](../../../design/system/mds-008-component-library/index.md) defines rendering responsibilities for client presentation.
 
 ---
