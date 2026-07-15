@@ -19,7 +19,7 @@ Their behaviour is entirely determined by the runtime.
 
 Component Contracts define the interface between:
 
-- Runtime Tile Resolution
+- semantic Tile resolution
 - Platform Components
 
 A Component Contract describes everything a Component needs to render correctly.
@@ -34,7 +34,7 @@ Nothing less.
 
 Within MDS, a **Component Contract** is defined as:
 
-> **The complete, immutable description of a Component's runtime behaviour, presentation and interaction supplied by the Tile Framework.**
+> **The complete, immutable description of a Component's runtime behaviour, presentation and interaction supplied by the semantic structure resolver.**
 
 Components consume contracts.
 

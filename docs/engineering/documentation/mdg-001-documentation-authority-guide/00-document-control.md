@@ -62,6 +62,7 @@ This includes, but is not limited to:
 
 - Mosaic Architecture Canon (MAC)
 - Mosaic Design Proposal (MDP)
+- Mosaic Roadmap (MRM)
 - Mosaic Architecture Decision (MAD)
 - Mosaic Engineering Guide (MEG)
 - Mosaic Integration Protocol (MIP)

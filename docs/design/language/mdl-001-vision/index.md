@@ -88,7 +88,7 @@ MDL001 --> MDL005["MDL-005 Composition Model"]
 
 MDL001 --> MDS001["MDS-001 Design Token Architecture"]
 MDL001 --> MDS002["MDS-003 Material System"]
-MDL001 --> MDS003["MDS-006 Composition Engine"]
+MDL001 --> MDS003["MDP-001 — Adaptive Composition Runtime"]
 ```
 
 ---

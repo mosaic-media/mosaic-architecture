@@ -53,7 +53,7 @@ Ordinary consumers request Semantic Tokens rather than Primitive Tokens.
 
 The former architecture treated Composition roles as an independent token layer.
 
-Composition roles are now governed resolver inputs owned by [MDS-006 — Composition Engine](../mds-006-composition-engine/index.md).
+Composition roles are now governed resolver inputs owned by [MDP-001 — Adaptive Composition Runtime](../../../engineering/architecture/mdp-001-adaptive-composition-runtime/index.md).
 
 ---
 

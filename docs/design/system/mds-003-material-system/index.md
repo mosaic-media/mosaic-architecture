@@ -265,6 +265,6 @@ Downstream specifications:
 
 - [MDS-004 — Typography System](../mds-004-typography-system/index.md)
 - [MDS-005 — Motion System](../mds-005-motion-system/index.md)
-- [MDS-006 — Composition Engine](../mds-006-composition-engine/index.md)
-- [MDS-007 — Tile Framework](../mds-007-tile-framework/index.md)
+- [MDP-001 — Adaptive Composition Runtime](../../../engineering/architecture/mdp-001-adaptive-composition-runtime/index.md)
+- [MDP-001 — Adaptive Composition Runtime](../../../engineering/architecture/mdp-001-adaptive-composition-runtime/14-adaptive-tile-model.md)
 - [MDS-008 — Component Library](../mds-008-component-library/index.md)

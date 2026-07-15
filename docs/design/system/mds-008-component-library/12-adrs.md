@@ -535,6 +535,90 @@ The exact key encoding, namespace governance, lifetime and collision policy rema
 
 ---
 
+# ADR-204
+
+## Title
+
+Ship Mosaic v1 As A Client-Side Component Library Driven By Semantic SDUI
+
+### Status
+
+Accepted
+
+### Context
+
+The mathematical Adaptive Composition Runtime requires visual calibration and implementation research that should not block a useful first Mosaic release.
+
+Static sites, documentation, administration, dashboards and media interfaces can share one governed component library while still receiving structure and content from SDUI where required.
+
+Making HTML fragments the canonical contract would bind the Platform to Web rendering and weaken future native-client compatibility.
+
+### Decision
+
+Mosaic v1 implements the Design Language as a client-side Web component library using HTML, CSS and TypeScript.
+
+Static experiences may author the governed components directly. Connected experiences use a client SDUI Driver that maps semantic structure, content, actions and stable identity into the same components.
+
+SDUI selects governed semantic structural components but does not provide CSS, arbitrary classes, pixel geometry, raw Design Token values, Material effects or animation values.
+
+HTMX may be used as a Web transport or progressive-enhancement adapter. It is not the canonical cross-client SDUI contract.
+
+Refraction remains part of v1 and retains the mathematics required to render Acrylic correctly.
+
+The Adaptive Composition Solver and its layout, depth and motion mathematics remain documented for a post-v1 release.
+
+### Consequences
+
+Mosaic can produce testable interfaces before the adaptive solver is calibrated.
+
+Static and SDUI-connected experiences share one component implementation and one Design Language.
+
+The semantic SDUI boundary remains compatible with future native renderers.
+
+Curated v1 layouts provide evidence and golden references for later Adaptive Composition work.
+
+---
+
+# ADR-205
+
+## Title
+
+Defer The Adaptive Composition Runtime Until After Mosaic v1
+
+### Status
+
+Accepted
+
+### Context
+
+The Composition Solver, normalised spatial model, behavioural weighting and dynamic depth system require calibration against real Mosaic interfaces.
+
+Making that research a v1 dependency would delay a usable Design Language implementation and encourage untested coefficients to become accidental standards.
+
+The component and SDUI architecture can deliver static and connected Mosaic interfaces without requiring search-based Composition.
+
+### Decision
+
+Mosaic v1 uses the client-side component architecture recorded by ADR-204.
+
+[MDP-001 — Adaptive Composition Runtime](../../../engineering/architecture/mdp-001-adaptive-composition-runtime/index.md) preserves the post-v1 proposal with a Deferred disposition.
+
+Its layout scoring, bounded search, normalised coordinates, Airspace solving, dynamic depth and related mathematical contracts are not v1 conformance requirements.
+
+Production v1 interfaces become the evidence, golden references and benchmark fixtures used to calibrate the future runtime.
+
+Refraction is unaffected. Its renderer mathematics remain required wherever v1 Acrylic is presented.
+
+### Consequences
+
+Mosaic v1 can focus on a coherent component library, semantic SDUI and physical Material implementation.
+
+The future solver retains a defined architectural direction without forcing premature runtime complexity.
+
+SDUI remains semantic, allowing selected v1 structural resolution to become adaptive later without redesigning the backend contract.
+
+---
+
 # ADR Relationships
 
 ```mermaid
@@ -568,6 +652,10 @@ ADR194["Refreshable SDUI Stream"]
 
 ADR199["Domain Continuity Keys"]
 
+ADR204["v1 Web Component Library"]
+
+ADR205["Deferred Adaptive Composition"]
+
 ADR182 --> ADR183
 ADR183 --> ADR184
 ADR184 --> ADR188
@@ -582,6 +670,10 @@ ADR192 --> ADR193
 ADR191 --> ADR194
 ADR184 --> ADR199
 ADR194 --> ADR199
+ADR191 --> ADR204
+ADR194 --> ADR204
+ADR199 --> ADR204
+ADR204 --> ADR205
 ```
 
 Together these decisions establish the Component Library as a thin implementation layer that faithfully renders the runtime architecture without altering it.

@@ -118,7 +118,7 @@ The following concepts influence resolution but do not form token layers:
 
 | Input | Owning authority |
 |-------|------------------|
-| Composition role and hierarchy | [MDS-006 — Composition Engine](../mds-006-composition-engine/index.md) |
+| Composition role and hierarchy | [MDP-001 — Adaptive Composition Runtime](../../../engineering/architecture/mdp-001-adaptive-composition-runtime/index.md) |
 | Module domain intent | Module contract governed by MDS-001 |
 | Component responsibility | [MDS-008 — Component Library](../mds-008-component-library/index.md) |
 | Focus and current Context | Runtime Composition state |

@@ -37,6 +37,7 @@ flowchart TD
 N1["Idea"]
 N2["MDP<br/>(Mosaic Design Proposal)"]
 N3["Architecture Review"]
+N3D["Deferred"]
 N4["Accepted"]
 N5["MAD<br/>(Mosaic Architecture Decision)"]
 N6["MAC Updated"]
@@ -56,6 +57,8 @@ N7 --> N12
 N1 --> N2
 N2 --> N3
 N3 --> N4
+N3 --> N3D
+N3D --> N3
 N4 --> N5
 N5 --> N6
 N6 --> N7
@@ -102,6 +105,18 @@ During this stage:
 An MDP remains non-authoritative until formally accepted.
 
 Rejected proposals should remain archived for historical reference.
+
+A proposal may instead become **Deferred** when its research remains valuable but it is not scheduled for delivery or ready to become current architecture.
+
+Deferred proposals:
+
+- remain non-authoritative
+- retain their research and unresolved questions
+- must declare `Disposition: Deferred`
+- must not establish implementation requirements
+- may return to Active review when evidence or Roadmap priorities change
+
+Deferral does not imply rejection, acceptance or future commitment.
 
 ---
 
@@ -164,6 +179,22 @@ Engineering work should implement the accepted architecture rather than define i
 Where implementation reveals architectural shortcomings, the lifecycle begins again with a new Design Proposal.
 
 Implementation should not silently redefine accepted architecture.
+
+---
+
+# Roadmap Lifecycle
+
+MRM documents evolve alongside delivery planning rather than architectural maturity.
+
+An MRM should:
+
+1. identify release outcomes and their owning documents
+2. distinguish committed delivery from candidate and research horizons
+3. update progress only from verifiable evidence
+4. mark completed outcomes without becoming their permanent specification
+5. remove or reclassify outcomes when priorities change
+
+Changing an MRM does not accept, reject or supersede architecture. Any architectural change discovered through planning must re-enter the MDP lifecycle.
 
 ---
 

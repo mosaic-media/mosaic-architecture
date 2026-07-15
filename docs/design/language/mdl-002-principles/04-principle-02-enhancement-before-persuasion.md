@@ -337,7 +337,7 @@ Not:
 - [MDL-001 — Mosaic Design Language Vision](../mdl-001-vision/index.md)
 - [MDL-003 — Mental Model](../mdl-003-mental-model/index.md)
 - [MDL-005 — Composition Model](../mdl-005-composition-model/index.md)
-- [MDS-006 — Composition Engine](../../system/mds-006-composition-engine/index.md)
+- [MDP-001 — Adaptive Composition Runtime](../../../engineering/architecture/mdp-001-adaptive-composition-runtime/index.md)
 
 ---
 

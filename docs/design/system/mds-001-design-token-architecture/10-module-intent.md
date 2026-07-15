@@ -114,7 +114,7 @@ When the Platform lacks a required layout, a Module may provide a layout extensi
 
 The contract declares domain invariants, valid presentation modes, adaptation permissions, priority rules and overflow behaviour.
 
-The [MDS-006 — Composition Engine](../mds-006-composition-engine/index.md) remains responsible for selecting a valid mode and calculating Tile location and size.
+The [MDP-001 — Adaptive Composition Runtime](../../../engineering/architecture/mdp-001-adaptive-composition-runtime/index.md) remains responsible for selecting a valid mode and calculating Tile location and size.
 
 The extension does not create shape or geometry tokens.
 

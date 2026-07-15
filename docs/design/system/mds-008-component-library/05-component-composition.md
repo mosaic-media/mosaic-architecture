@@ -24,7 +24,7 @@ A Hero Tile may require:
 
 Component Composition defines how these implementation primitives combine to faithfully render one resolved Tile.
 
-Unlike the Tile Framework, Component Composition is **not** concerned with behavioural grouping.
+Unlike the semantic structure resolver, Component Composition is **not** concerned with behavioural grouping.
 
 That work has already been completed.
 
@@ -502,7 +502,7 @@ Modules contribute:
 - behaviour,
 - Expressions.
 
-The Tile Framework resolves presentation.
+The semantic structure resolver resolves presentation.
 
 Platform implementations compose Components.
 
@@ -624,7 +624,7 @@ Action --> Rendering
 Indicator --> Rendering
 ```
 
-Resolved Tiles determine composition.
+Resolved Tile Intents determine composition.
 
 Components faithfully implement it.
 

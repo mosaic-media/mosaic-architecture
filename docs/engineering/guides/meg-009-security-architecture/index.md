@@ -36,6 +36,7 @@ Unlike traditional applications, Mosaic executes:
 - user configuration
 - external APIs
 - remote media providers
+- registered devices and revocable sessions
 
 Security therefore cannot be treated as an implementation detail.
 

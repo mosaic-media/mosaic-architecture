@@ -9,6 +9,8 @@ Version: 0.4
 
 > *Motion is not animation. Motion is the visible expression of understanding changing over time.*
 
+> **Release applicability:** Mosaic v1 uses governed component transitions and Motion Tokens. Behavioural Cost, critical damping and Composition-wide mathematical resolution are preserved for the post-v1 Adaptive Composition Runtime. Refraction Motion remains governed separately and is not deferred.
+
 ---
 
 # Purpose
@@ -91,9 +93,7 @@ This specification defines:
 - Refraction Motion
 - Temporal Continuity
 - Motion Curves
-- Behavioural Cost
 - Continuity-Key Matching
-- Critically Damped Spatial Motion
 - Motion Accessibility
 - Runtime Motion Resolution
 - Platform Motion
@@ -106,6 +106,8 @@ This specification intentionally does **not** define:
 - Interaction Behaviour
 
 Those systems drive motion.
+
+Behavioural Cost, critical damping and Composition-wide mathematical resolution are preserved as deferred research in [MDP-001 — Adaptive Composition Runtime](../../../engineering/architecture/mdp-001-adaptive-composition-runtime/15-motion-model.md).
 
 They do not define it.
 
@@ -238,6 +240,6 @@ Required reading:
 
 Downstream specifications:
 
-- [MDS-006 — Composition Engine](../mds-006-composition-engine/index.md)
-- [MDS-007 — Tile Framework](../mds-007-tile-framework/index.md)
+- [MDP-001 — Adaptive Composition Runtime](../../../engineering/architecture/mdp-001-adaptive-composition-runtime/index.md)
+- [MDP-001 — Adaptive Composition Runtime](../../../engineering/architecture/mdp-001-adaptive-composition-runtime/14-adaptive-tile-model.md)
 - [MDS-008 — Component Library](../mds-008-component-library/index.md)

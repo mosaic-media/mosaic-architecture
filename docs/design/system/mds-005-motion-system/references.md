@@ -181,8 +181,8 @@ Typography should remain readable throughout every behavioural transition.
 
 The following specifications directly depend upon MDS-005.
 
-- [MDS-006 — Composition Engine](../mds-006-composition-engine/index.md)
-- [MDS-007 — Tile Framework](../mds-007-tile-framework/index.md)
+- [MDP-001 — Adaptive Composition Runtime](../../../engineering/architecture/mdp-001-adaptive-composition-runtime/index.md)
+- [MDP-001 — Adaptive Composition Runtime](../../../engineering/architecture/mdp-001-adaptive-composition-runtime/14-adaptive-tile-model.md)
 - [MDS-008 — Component Library](../mds-008-component-library/index.md)
 
 These specifications consume Motion.
@@ -391,8 +391,8 @@ Together these specifications define the conceptual foundation of the Motion Sys
 
 Future contributors may also wish to review:
 
-- [MDS-006 — Composition Engine](../mds-006-composition-engine/index.md)
-- [MDS-007 — Tile Framework](../mds-007-tile-framework/index.md)
+- [MDP-001 — Adaptive Composition Runtime](../../../engineering/architecture/mdp-001-adaptive-composition-runtime/index.md)
+- [MDP-001 — Adaptive Composition Runtime](../../../engineering/architecture/mdp-001-adaptive-composition-runtime/14-adaptive-tile-model.md)
 - [MDS-008 — Component Library](../mds-008-component-library/index.md)
 
 These specifications describe how behavioural motion becomes runtime interaction throughout the Mosaic platform.
@@ -420,9 +420,9 @@ This concludes **MDS-005 — Motion System**.
 
 The next specification in the Mosaic Design System is:
 
-> **[MDS-006 — Composition Engine](../mds-006-composition-engine/index.md)**
+> **[MDP-001 — Adaptive Composition Runtime](../../../engineering/architecture/mdp-001-adaptive-composition-runtime/index.md)**
 
-Where MDS-005 defines **how the world moves**, [MDS-006](../mds-006-composition-engine/index.md) defines **how the world is assembled at runtime**.
+Where MDS-005 defines **how the world moves**, [MDP-001 — Adaptive Composition Runtime](../../../engineering/architecture/mdp-001-adaptive-composition-runtime/index.md) defines **how the world is assembled at runtime**.
 
 It formalises:
 
@@ -436,4 +436,4 @@ It formalises:
 - Multi-device rendering
 - Expression pipelines
 
-[MDS-006](../mds-006-composition-engine/index.md) is expected to become the architectural heart of Mosaic, where every concept introduced by the MDL and earlier MDS specifications converges into one runtime system capable of constructing the user's World dynamically.
+[MDP-001 — Adaptive Composition Runtime](../../../engineering/architecture/mdp-001-adaptive-composition-runtime/index.md) is expected to become the architectural heart of Mosaic, where every concept introduced by the MDL and earlier MDS specifications converges into one runtime system capable of constructing the user's World dynamically.

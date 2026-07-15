@@ -101,6 +101,8 @@ Design Proposals are discussion documents.
 
 Accepted proposals normally result in one or more Architecture Decisions.
 
+Every MDP declares an Active, Deferred, Accepted, Rejected or Superseded disposition independently from its document Status and Version.
+
 ---
 
 # Design System (MDS)
@@ -199,6 +201,14 @@ The Platform does not own application-specific behaviour.
 
 ---
 
+# Mosaic Roadmap (MRM)
+
+A planning document that defines release outcomes, delivery sequence, dependencies and completion evidence by reference to owning specifications and active proposals.
+
+An MRM does not define architecture, Design Language, reusable assets, protocols or implementation requirements.
+
+---
+
 # Mosaic SDK
 
 The public contract between the Platform and Modules.
@@ -246,6 +256,14 @@ Examples include:
 - Artwork Provider
 
 Multiple providers may satisfy the same capability depending upon Platform policy.
+
+---
+
+# Proposal Disposition
+
+The lifecycle classification applied to an MDP independently from document Status and Version.
+
+Valid dispositions are Active, Deferred, Accepted, Rejected and Superseded.
 
 ---
 

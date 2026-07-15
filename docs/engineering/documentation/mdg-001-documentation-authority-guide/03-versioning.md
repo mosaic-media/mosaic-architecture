@@ -22,6 +22,8 @@ Documentation versions allow readers to understand:
 
 Documentation version numbers are therefore independent of software release versions.
 
+This distinction is especially important for MRM documents: an MRM document version communicates review maturity, while its contents describe Mosaic software release horizons.
+
 ---
 
 # Guiding Principles
@@ -218,6 +220,8 @@ For example:
 | Approved | 1.x |
 | Superseded | Any |
 | Archived | Any |
+
+MDP disposition is separate from both Status and Version. For example, a technically mature proposal may remain `Status: Draft`, `Version: 0.5`, `Disposition: Deferred` because it is preserved research rather than accepted authority.
 
 Changing status does not automatically require a version increment.
 

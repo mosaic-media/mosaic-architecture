@@ -296,6 +296,10 @@ Authors should use normative language consistently.
 
 These terms should only be used where normative intent is required.
 
+MRM documents must distinguish committed outcomes from candidate or research horizons explicitly. Planning language must not make a deferred MDP or unapproved architecture appear mandatory.
+
+MDP documents must state their disposition without using normative language to imply that Active or Deferred proposals are current requirements.
+
 ---
 
 # Markdown

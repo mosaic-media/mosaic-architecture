@@ -284,6 +284,14 @@ Examples include:
 
 # R
 
+## Registered Device
+
+A durable user-associated security record that groups recognisable device metadata with revocable session or credential associations.
+
+Registered-device compatibility metadata is advisory and does not establish identity, authorisation or Presentation geometry.
+
+---
+
 ## Revocation
 
 The process of removing previously granted authority.

@@ -50,11 +50,11 @@ The Composition Engine produces:
 
 - Expressions
 
-The Tile Framework produces:
+The semantic structure resolver produces:
 
 - Tiles
 
-The Runtime Tile Resolver produces:
+The SDUI Driver produces:
 
 - fully resolved presentation.
 
@@ -332,7 +332,7 @@ State belongs to:
 
 - Runtime World,
 - Composition Engine,
-- Tile Framework.
+- semantic structure resolver.
 
 Components render current presentation.
 
@@ -342,7 +342,7 @@ Nothing more.
 
 # Components Are Predictable
 
-Given identical Resolved Tiles...
+Given identical Resolved Tile Intents...
 
 Components should always produce identical presentation.
 
@@ -424,7 +424,7 @@ Modules contribute:
 - Expressions,
 - information.
 
-The Tile Framework resolves presentation.
+The semantic structure resolver resolves presentation.
 
 Platform implementations provide Components.
 

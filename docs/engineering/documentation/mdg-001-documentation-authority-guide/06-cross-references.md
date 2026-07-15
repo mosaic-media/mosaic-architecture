@@ -119,6 +119,24 @@ Accepted proposals should normally be replaced by references to:
 
 Rejected proposals may continue to exist for historical context but should not be referenced as authoritative guidance.
 
+Deferred proposals may be referenced only when the reference explicitly identifies them as deferred and non-authoritative. They must not be used to establish current implementation requirements.
+
+---
+
+# Roadmap References
+
+Roadmaps must reference the documents that own each scheduled outcome.
+
+An MRM may link to:
+
+- authoritative MDL, MDS, MAC, MEG, MIP and MOP documents
+- active MDP documents when delivery still depends upon proposal review
+- MAD documents when a sequencing decision requires historical context
+
+Authoritative specifications should not depend upon an MRM for their meaning. A Roadmap may change delivery order without changing architecture or design authority.
+
+Deferred MDP documents should not appear as committed Roadmap outcomes. An MRM may list them only within an explicitly non-committed research horizon.
+
 ---
 
 # Engineering Guide References
@@ -283,6 +301,19 @@ N1 --> N2
 N2 --> N3
 N3 --> N4
 N4 --> N5
+```
+
+Roadmap traceability follows a separate planning direction:
+
+```mermaid
+flowchart LR
+
+N1["MRM Delivery Outcome"]
+N2["Owning Specification Or Active MDP"]
+N3["Completion Evidence"]
+
+N1 --> N2
+N2 --> N3
 ```
 
 Likewise:

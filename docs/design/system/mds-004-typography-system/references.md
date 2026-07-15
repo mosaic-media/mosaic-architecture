@@ -162,8 +162,8 @@ Its rhythm should feel physically related to them.
 The following specifications directly depend upon MDS-004.
 
 - [MDS-005 — Motion System](../mds-005-motion-system/index.md)
-- [MDS-006 — Composition Engine](../mds-006-composition-engine/index.md)
-- [MDS-007 — Tile Framework](../mds-007-tile-framework/index.md)
+- [MDP-001 — Adaptive Composition Runtime](../../../engineering/architecture/mdp-001-adaptive-composition-runtime/index.md)
+- [MDP-001 — Adaptive Composition Runtime](../../../engineering/architecture/mdp-001-adaptive-composition-runtime/14-adaptive-tile-model.md)
 - [MDS-008 — Component Library](../mds-008-component-library/index.md)
 
 These specifications should consume Typography.
@@ -343,8 +343,8 @@ Future contributors may also wish to review:
 - [Mona Sans](https://github.com/github/mona-sans)
 - [SIL Open Font License 1.1](https://openfontlicense.org/)
 - [MDS-005 — Motion System](../mds-005-motion-system/index.md)
-- [MDS-006 — Composition Engine](../mds-006-composition-engine/index.md)
-- [MDS-007 — Tile Framework](../mds-007-tile-framework/index.md)
+- [MDP-001 — Adaptive Composition Runtime](../../../engineering/architecture/mdp-001-adaptive-composition-runtime/index.md)
+- [MDP-001 — Adaptive Composition Runtime](../../../engineering/architecture/mdp-001-adaptive-composition-runtime/14-adaptive-tile-model.md)
 - [MDS-008 — Component Library](../mds-008-component-library/index.md)
 
 These specifications describe how typography participates in interaction, composition and presentation.

@@ -43,10 +43,8 @@ Contributors should approach references in the following order.
 4. Material System
 5. Typography System
 6. Motion System
-7. Composition Engine
-8. Tile Framework
-9. Component Library
-10. Platform Implementations
+7. Component Library
+8. Platform Implementations
 
 The Mosaic Design Language remains the architectural authority.
 
@@ -197,32 +195,28 @@ Behavioural sequencing remains runtime owned.
 
 ---
 
-## [MDS-006 — Composition Engine](../mds-006-composition-engine/index.md)
+## [MDP-001 — Adaptive Composition Runtime](../../../engineering/architecture/mdp-001-adaptive-composition-runtime/index.md)
 
-Provides:
+Preserves a deferred proposal for:
 
 - Runtime World
 - Expressions
 - Runtime Hierarchy
 - Presentation Models
 
-Components never consume runtime behaviour directly.
-
-They consume only resolved presentation.
+MDS-008 does not depend on this proposal for v1 conformance. A future adaptive runtime may supply resolved presentation to the same component contracts.
 
 ---
 
-## [MDS-007 — Tile Framework](../mds-007-tile-framework/index.md)
+## [MDP-001 — Adaptive Composition Runtime](../../../engineering/architecture/mdp-001-adaptive-composition-runtime/14-adaptive-tile-model.md)
 
-Provides:
+Preserves proposed post-v1 research for:
 
 - Tile Philosophy
-- Runtime Tile Resolution
+- semantic Tile resolution
 - Tile Contracts
 
-The Component Library exists solely because Tiles require physical implementation.
-
-Without Tiles, Components possess no architectural meaning.
+Mosaic v1 Tiles are structural components owned by MDS-008. The linked adaptive Tile model is non-authoritative and does not define the v1 component contract.
 
 ---
 
@@ -449,8 +443,8 @@ Required reading before contributing to MDS-008.
 - [MDS-003 — Material System](../mds-003-material-system/index.md)
 - [MDS-004 — Typography System](../mds-004-typography-system/index.md)
 - [MDS-005 — Motion System](../mds-005-motion-system/index.md)
-- [MDS-006 — Composition Engine](../mds-006-composition-engine/index.md)
-- [MDS-007 — Tile Framework](../mds-007-tile-framework/index.md)
+- [MDP-001 — Adaptive Composition Runtime](../../../engineering/architecture/mdp-001-adaptive-composition-runtime/index.md)
+- [MDP-001 — Adaptive Composition Runtime](../../../engineering/architecture/mdp-001-adaptive-composition-runtime/14-adaptive-tile-model.md)
 
 Together these specifications define the complete architectural foundation of the Component Library.
 

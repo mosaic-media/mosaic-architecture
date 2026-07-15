@@ -366,7 +366,7 @@ Its role is to ensure that innovation strengthens the product rather than gradua
 
 - [MDL-001 — Mosaic Design Language Vision](../mdl-001-vision/index.md)
 - [MDL-005 — Composition Model](../mdl-005-composition-model/index.md)
-- [MDS-006 — Composition Engine](../../system/mds-006-composition-engine/index.md)
+- [MDP-001 — Adaptive Composition Runtime](../../../engineering/architecture/mdp-001-adaptive-composition-runtime/index.md)
 - MDS-011 Module Design Specification *(planned; not yet published)*
 
 ---

@@ -92,17 +92,52 @@ The engine should consider two Acrylic surfaces related when:
 - opaque masks do not block the transport path
 - the contributing Acrylic retains meaningful energy
 
-A practical bounded approximation is:
+A practical bounded contribution from Acrylic \(i\) into Acrylic \(j\) is:
 
-```text
-proximity = clamp(1 - projectedGap / influenceRadius, 0, 1)
-depth     = clamp(1 - abs(sourceZ - receiverZ) / depthRadius, 0, 1)
-coupling  = proximity * depth * visibility * remainingEnergy
-```
+\[
+I_{ij}
+=
+V_{ij}P_{ij}A_{ij}
+e^{-k_d d_{ij}}
+e^{-k_z|z_i-z_j|}
+E_i
+\]
+
+where:
+
+| Term | Meaning |
+|------|---------|
+| \(V_{ij}\) | Projected path visibility after coarse occlusion. |
+| \(P_{ij}\) | Governed proximity response. |
+| \(A_{ij}\) | Directional alignment response. |
+| \(d_{ij}\) | Projected boundary distance. |
+| \(|z_i-z_j|\) | Composition-plane separation. |
+| \(k_d,k_z\) | Governed spatial attenuation coefficients. |
+| \(E_i\) | Remaining eligible energy from the contributing Acrylic. |
+
+The runtime relationship graph must remain bounded:
+
+- direct artwork or Brand Emitter response always has priority
+- each receiver accepts only the strongest governed number of secondary contributors
+- the alpha permits one secondary bounce and no cyclic feedback
+- contributions below the active energy threshold are discarded
+- the graph is rebuilt after relevant Composition changes rather than through all-pairs per-frame evaluation
+
+Total secondary response remains a small governed fraction of primary response:
+
+\[
+E_{\mathrm{secondary}}
+\le
+\alpha E_{\mathrm{primary}},
+\qquad
+0<\alpha\ll1
+\]
+
+Secondary energy should influence edge response and surface tint before backdrop distortion or blur.
 
 The Material profile owns the radii and maximum coupling strength.
 
-The engine should discard contributions below its active energy threshold.
+The contributor limit, attenuation coefficients, threshold and \(\alpha\) remain alpha-calibration data.
 
 ---
 

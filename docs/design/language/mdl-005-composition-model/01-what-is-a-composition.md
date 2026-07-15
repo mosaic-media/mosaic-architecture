@@ -168,53 +168,17 @@ The same layout may communicate many different Compositions depending upon hiera
 
 ---
 
-# Composition Is Spatially Layered
+# Composition Is Breathable And Scrollable
 
-Composition Space contains persistent depth as well as projected position.
+The main Composition is not required to compress every relevant Expression into the current viewport.
 
-An Expression may remain behind, alongside or above another Expression as part of the settled Composition rather than only while a transition is running.
+Composition Space may extend beyond the viewport along one governed primary vertical scroll direction.
 
-Every depth plane owns an independent projected field.
+When additional relevant Expressions cannot fit without losing Breathing Space, the Composition should extend vertically rather than compress components, reduce readability or create a crowded viewport.
 
-Expressions on the same plane share that plane's available space.
+The Canvas has no general horizontal pan. Individual components may expose horizontally scrollable content while the primary Composition remains vertically oriented.
 
-Expressions on different planes may overlap in projection while retaining distinct hierarchy, occlusion and parallax relationships.
-
-For two ordinary projected footprints \(F_i\) and \(F_j\), same-plane occupancy requires:
-
-\[
-z_i = z_j
-\quad\Longrightarrow\quad
-F_i \cap F_j = \varnothing
-\]
-
-Cross-plane overlap remains valid:
-
-\[
-z_i \ne z_j
-\quad\Longrightarrow\quad
-F_i \cap F_j \text{ may be non-empty}
-\]
-
-This is a conceptual three-dimensional Composition of two-dimensional surfaces.
-
-It does not require meshes, extruded objects or a simulated three-dimensional scene.
-
----
-
-# Composition Evolves Like A Spatial Puzzle
-
-Adaptive Composition should feel like a layered spatial puzzle rather than a responsive page reflow.
-
-Expressions preserve identity while claiming, retaining and releasing space on their resolved depth planes.
-
-When one Expression gains capacity, related Expressions on that plane move into the newly solved arrangement.
-
-Expressions on other planes retain their independent projected occupancy.
-
-A lower-plane Expression may also preserve important visible regions through an Airspace Reserve.
-
-Higher-plane Expressions may travel through that projected reserve during motion, but the settled Composition should not leave them obscuring protected subjects, marks or editorial regions.
+Normalised depth, plane occupancy, Airspace Reserves and mathematical layout solving are preserved as deferred research in [MDP-001 — Adaptive Composition Runtime](../../../engineering/architecture/mdp-001-adaptive-composition-runtime/index.md).
 
 ---
 

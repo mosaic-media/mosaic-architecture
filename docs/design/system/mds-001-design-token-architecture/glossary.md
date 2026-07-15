@@ -168,7 +168,7 @@ The deterministic client-owned process that evaluates Semantic Tokens against a 
 | [MDL-005 — Composition Model](../../language/mdl-005-composition-model/index.md) | Composition and hierarchy |
 | [MDS-002 — Colour System](../mds-002-colour-system/index.md) | Colour semantics and runtime atmosphere |
 | [MDS-003 — Material System](../mds-003-material-system/index.md) | Material profiles and capability-driven fidelity |
-| [MDS-006 — Composition Engine](../mds-006-composition-engine/index.md) | Composition inputs and domain layout selection |
+| [MDP-001 — Adaptive Composition Runtime](../../../engineering/architecture/mdp-001-adaptive-composition-runtime/index.md) | Composition inputs and domain layout selection |
 | [MDS-008 — Component Library](../mds-008-component-library/index.md) | Resolved-value consumption |
 
 ---

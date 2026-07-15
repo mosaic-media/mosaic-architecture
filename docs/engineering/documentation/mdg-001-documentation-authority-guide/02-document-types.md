@@ -33,6 +33,7 @@ The Mosaic documentation system currently defines the following document types.
 | Prefix | Name | Primary Responsibility |
 |---------|------|------------------------|
 | MDP | Mosaic Design Proposal | Propose architectural change |
+| MRM | Mosaic Roadmap | Define delivery sequence and release outcomes |
 | MAD | Mosaic Architecture Decision | Record accepted decisions |
 | MAC | Mosaic Architecture Canon | Define accepted architecture |
 | MEG | Mosaic Engineering Guide | Explain implementation practices |
@@ -83,6 +84,56 @@ An MDP should not:
 - define accepted architecture
 - provide implementation guidance
 - become permanent reference documentation
+
+## Proposal Disposition
+
+Every MDP must declare one disposition independently from document maturity:
+
+| Disposition | Meaning |
+|-------------|---------|
+| Active | The proposal is currently being developed or reviewed. |
+| Deferred | The proposal is preserved but unscheduled and non-authoritative. |
+| Accepted | The proposal has completed review and should resolve into decisions and authoritative specifications. |
+| Rejected | The proposal will not proceed under its recorded assumptions. |
+| Superseded | A newer proposal replaces this proposal. |
+
+A deferred MDP may retain substantial research, equations, prototypes and unresolved design work. It must not be presented as current architecture or appear as a committed Roadmap outcome.
+
+---
+
+# MRM — Mosaic Roadmap
+
+## Responsibility
+
+A Mosaic Roadmap defines committed or candidate delivery sequence without redefining the documents that own product, design and architecture.
+
+An MRM answers:
+
+> **What outcomes are expected in each release horizon, and what evidence establishes completion?**
+
+## Typical Contents
+
+An MRM should normally contain:
+
+- release outcomes
+- scope and non-goals
+- delivery horizons
+- dependencies
+- entry and exit criteria
+- completion evidence
+- links to authoritative specifications and active proposals
+
+## Should Not Contain
+
+An MRM should not:
+
+- define or approve architecture
+- duplicate MDL, MDS, MAC, MEG, MIP or MOP requirements
+- contain detailed implementation tasks
+- present deferred proposals as committed work
+- use target dates as a substitute for scope and completion criteria
+
+Roadmaps are planning authority only. The referenced specifications remain authoritative for what must be built.
 
 ---
 
@@ -312,6 +363,7 @@ When creating new documentation, authors should first determine the primary ques
 | Question | Document Type |
 |-----------|---------------|
 | What should we build? | MDP |
+| What are we delivering and in what sequence? | MRM |
 | Why was this decision made? | MAD |
 | What is the accepted architecture? | MAC |
 | How should engineers implement it? | MEG |

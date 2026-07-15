@@ -9,6 +9,8 @@ Version: 0.4
 
 > *Interaction explains how the world changes. Composition explains how the world is understood.*
 
+> **Release applicability:** Mosaic v1 expresses these principles through governed client-side components. The mathematical spatial-puzzle model is preserved for the post-v1 Adaptive Composition Runtime.
+
 ---
 
 # Purpose
@@ -84,9 +86,8 @@ This specification defines:
 - Breathing Space
 - Composition Solving
 - Adaptive Composition
-- Persistent Composition Planes
-- Plane-Local Spatial Occupancy
-- Airspace Reserves
+- Breathable Vertical Canvas
+- Nested Horizontal Tile Content
 
 This specification intentionally does **not** define:
 
@@ -99,6 +100,8 @@ This specification intentionally does **not** define:
 - Tokens
 
 Those belong to MDS.
+
+Post-v1 normalised spatial Composition, Airspace and solver mathematics are preserved in the deferred [MDP-001 — Adaptive Composition Runtime](../../../engineering/architecture/mdp-001-adaptive-composition-runtime/index.md).
 
 ---
 
@@ -232,7 +235,7 @@ Required reading:
 
 Downstream specifications:
 
-- [MDS-006 — Composition Engine](../../system/mds-006-composition-engine/index.md)
+- [MDP-001 — Adaptive Composition Runtime](../../../engineering/architecture/mdp-001-adaptive-composition-runtime/index.md)
 - [MDS-005 — Motion System](../../system/mds-005-motion-system/index.md)
-- [MDS-007 — Tile Framework](../../system/mds-007-tile-framework/index.md)
+- [MDP-001 — Adaptive Composition Runtime](../../../engineering/architecture/mdp-001-adaptive-composition-runtime/14-adaptive-tile-model.md)
 - [MDS-008 — Component Library](../../system/mds-008-component-library/index.md)

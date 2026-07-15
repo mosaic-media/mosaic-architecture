@@ -34,6 +34,7 @@ The following documents govern or are governed by this specification.
 | MDS Series | Should conform to this guide. |
 | MAD Series | Should conform to this guide. |
 | MDP Series | Should conform to this guide. |
+| MRM Series | Should conform to this guide. |
 
 ---
 

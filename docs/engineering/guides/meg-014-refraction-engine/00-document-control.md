@@ -33,6 +33,7 @@ MEG-014 owns implementation guidance for:
 - coordinate and projection mathematics
 - resolved Acrylic state
 - three-layer Acrylic processing
+- bounded secondary Acrylic interaction
 - fixed apparent-thickness preservation
 - renderer-independent processing
 - renderer profiles

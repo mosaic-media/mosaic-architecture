@@ -55,9 +55,7 @@ MDS-005 governs:
 - Refraction movement
 - Temporal continuity
 - Motion hierarchy
-- Behavioural Cost
-- Identity-Preserving Transition Resolution
-- Critically Damped Spatial Motion
+- Identity-Preserving Component Transitions
 - Runtime motion resolution
 - Motion accessibility
 - Platform motion

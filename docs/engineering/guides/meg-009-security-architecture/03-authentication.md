@@ -224,6 +224,32 @@ Session lifecycle remains independent from capability execution.
 
 ---
 
+# Registered Devices And Session Revocation
+
+Successful device registration or first sign-in SHOULD establish a durable Registered Device record associated with the authenticated user.
+
+The record SHOULD provide:
+
+- stable device identity
+- display name and platform metadata suitable for user recognition
+- application version
+- creation and last-seen timestamps
+- revocation state
+- associations to active revocable sessions
+- optional last-reported compatibility capabilities
+
+One registered device MAY own several sessions. One physical device MAY also present several simultaneous windows or displays with different live Presentation constraints.
+
+Remote sign-out MUST revoke the selected sessions or device credential. Deleting cached capability metadata or Presentation state is not sufficient revocation.
+
+A device-level sign-out SHOULD prevent session refresh for that registered device and terminate or reject its associated sessions according to the active revocation policy.
+
+Compatibility metadata is advisory and MUST NOT become trusted identity evidence, an authorisation grant or final UI geometry.
+
+Live Presentation resolution is governed by [MDP-001 — Adaptive Composition Runtime](../../architecture/mdp-001-adaptive-composition-runtime/10-multi-device-composition.md).
+
+---
+
 # Session Lifetime
 
 Sessions SHOULD possess explicit lifetimes.

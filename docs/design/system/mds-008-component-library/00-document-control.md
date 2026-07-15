@@ -20,7 +20,7 @@ Version: 0.4
 | Status | Draft |
 | Version | 0.4 |
 | Owner | AdamNi-7080 |
-| Parent Specifications | [MDL-001](../../language/mdl-001-vision/index.md) → [MDL-005](../../language/mdl-005-composition-model/index.md), [MDS-001](../mds-001-design-token-architecture/index.md) → [MDS-007](../mds-007-tile-framework/index.md) |
+| Parent Specifications | [MDL-001](../../language/mdl-001-vision/index.md) → [MDL-005](../../language/mdl-005-composition-model/index.md), [MDS-001](../mds-001-design-token-architecture/index.md) → [MDS-005](../mds-005-motion-system/index.md) |
 | Repository | `/design/mds/MDS-008 Component Library/` |
 
 ---
@@ -61,9 +61,13 @@ MDS-008 governs:
 - Component contracts
 - Component lifecycle
 - Component composition
+- Tile structural components
 - Rendering architecture
 - Client rendering
 - Runtime SDUI
+- Mosaic v1 Web Component Library
+- SDUI Structural Component Vocabulary
+- Optional HTMX Web Adapter
 - Refreshable Compiled SDUI
 - SDUI Patch Stream
 - Continuity Keys
@@ -80,10 +84,11 @@ This specification intentionally does **not** govern:
 - Runtime World
 - Composition
 - Expressions
-- Tiles
 - Design Tokens
 
-Those systems already solved runtime understanding.
+The deferred adaptive Tile solver belongs to [MDP-001 — Adaptive Composition Runtime](../../../engineering/architecture/mdp-001-adaptive-composition-runtime/index.md).
+
+The Design Language and semantic structure already establish runtime understanding.
 
 Components simply render it.
 
@@ -143,7 +148,7 @@ flowchart TD
 
 N1["Behaviour"]
 N2["Composition"]
-N3["Tiles"]
+N3["Semantic Structure"]
 N4["Components"]
 N5["Rendering"]
 
@@ -166,7 +171,7 @@ Before reading this specification contributors should already understand:
 - [MDL-003 — Mental Model](../../language/mdl-003-mental-model/index.md)
 - [MDL-004 — Interaction Model](../../language/mdl-004-interaction-model/index.md)
 - [MDL-005 — Composition Model](../../language/mdl-005-composition-model/index.md)
-- [MDS-001](../mds-001-design-token-architecture/index.md) → [MDS-007](../mds-007-tile-framework/index.md)
+- [MDS-001 — Design Token Architecture](../mds-001-design-token-architecture/index.md) through [MDS-005 — Motion System](../mds-005-motion-system/index.md)
 
 MDS-008 assumes every architectural decision has already been made.
 

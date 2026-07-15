@@ -59,6 +59,7 @@ This specification applies to:
 - Storage Systems
 - SDK
 - Administrative APIs
+- Registered Devices And Revocable Sessions
 - Marketplace Integration
 
 Every architectural component SHOULD conform to the trust model defined within this specification.

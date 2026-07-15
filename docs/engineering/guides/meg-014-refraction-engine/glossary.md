@@ -9,6 +9,14 @@ Version: 0.1
 
 ---
 
+# Acrylic Interaction Graph
+
+A bounded directed graph describing eligible secondary light transport between spatially related Acrylic receivers.
+
+The graph limits bounce depth and contributing neighbours so direct artwork response remains dominant and runtime cost cannot grow through unbounded feedback.
+
+---
+
 # Acrylic Volume
 
 The middle logical optical layer that filters incident source light through tint, absorption and scattering and carries directional contour energy inward as pigmentation.

@@ -260,7 +260,7 @@ The following documents provide additional context.
 
 - [MDS-001 — Design Token Architecture](../../system/mds-001-design-token-architecture/index.md)
 - [MDS-003 — Material System](../../system/mds-003-material-system/index.md)
-- [MDS-006 — Composition Engine](../../system/mds-006-composition-engine/index.md)
+- [MDP-001 — Adaptive Composition Runtime](../../../engineering/architecture/mdp-001-adaptive-composition-runtime/index.md)
 - Future ADRs
 - Engineering RFCs
 

@@ -29,10 +29,11 @@ docs/
     system/    Mosaic Design System specifications
   engineering/
     documentation/  Mosaic Documentation Guides
-    architecture/   Mosaic Architecture Canon specifications
+    architecture/   Mosaic Architecture Canon, decisions and proposals
     guides/    Mosaic Engineering Guidelines specifications
     protocols/      Mosaic Integration Protocol specifications
     operations/     Mosaic Operations Playbooks
+  roadmaps/         Mosaic Roadmaps
 ```
 
 Each specification belongs in its own folder and should be split into focused Markdown chapters:
@@ -49,7 +50,7 @@ glossary.md
 
 ## Documentation Rules
 
-- Follow the existing `MDP-*`, `MAD-*`, `MAC-*`, `MEG-*`, `MIP-*`, `MOP-*`, `MDL-*`, `MDS-*`, and `MDG-*` folder naming conventions.
+- Follow the existing `MDP-*`, `MAD-*`, `MAC-*`, `MEG-*`, `MIP-*`, `MOP-*`, `MDL-*`, `MDS-*`, `MDG-*`, and `MRM-*` folder naming conventions.
 - Use URL-safe lowercase folder slugs in the MkDocs tree, such as `meg-005-runtime-architecture`.
 - Choose the correct document type before adding content. Do not put Canon material in MEGs, protocol contracts outside MIPs, operational procedures outside MOPs, or ADR process rules outside MDG.
 - Keep one authoritative home for each architectural concept. Summarise only when necessary and use references instead of duplicating explanations.
@@ -76,7 +77,7 @@ The README should remain a current orientation guide for:
 
 - what this repo is for
 - how the documentation is organised
-- where MDP, MAD, MAC, MEG, MIP, MOP, MDL, MDS, and MDG material lives
+- where MDP, MAD, MAC, MEG, MIP, MOP, MDL, MDS, MDG, and MRM material lives
 - how decisions and references should be maintained
 
 Do not let the README drift behind the repository structure.

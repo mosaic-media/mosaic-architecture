@@ -37,6 +37,8 @@ design/
 product/
 
 community/
+
+roadmaps/
 ```
 
 This allows readers to locate documentation according to subject matter rather than documentation taxonomy.
@@ -208,6 +210,8 @@ Metadata provides:
 - publication status
 - version information
 
+MDP Document Control must additionally declare `Disposition`. MRM Document Control should declare its release horizon and planning owner without placing those values in the metadata comment.
+
 Metadata should remain synchronised with the document.
 
 Repository and section landing pages use the same fields. For those pages, `Document` contains the page identity rather than a specification identifier.
@@ -258,6 +262,12 @@ docs/
     system/
 
         mds-001-design-token-architecture/
+
+  roadmaps/
+
+    index.md
+
+    mrm-001-example-roadmap/
 ```
 
 Future disciplines may be introduced without affecting existing documentation.

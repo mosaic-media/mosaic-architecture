@@ -308,11 +308,11 @@ Future Material Systems and Layout Engines should preserve conceptual rhythm bef
 
 ---
 
-# ADR-195
+# ADR-200
 
 ## Title
 
-Compose Persistent Depth Planes As One Spatial World
+Preserve Breathability Through A Vertically Extensible Canvas
 
 ### Status
 
@@ -320,27 +320,25 @@ Accepted
 
 ### Context
 
-Flat page and responsive-card metaphors cannot express artwork, information and supporting content occupying overlapping projected regions with stable depth relationships.
+Compressing every relevant Expression into the current viewport produces crowded layouts, weakens hierarchy and makes directional navigation feel claustrophobic.
 
-Treating depth only as a transition effect would also remove those relationships once motion settles.
+Mosaic Composition Space is not limited to the visible viewport and can preserve additional relevant content beyond it.
 
 ### Decision
 
-Composition Space contains persistent logical \(x\), \(y\) and \(z\) relationships between two-dimensional Expressions.
+The main Composition uses one primary vertical scroll direction and may extend beyond the viewport to preserve governed Breathing Space.
 
-Each governed depth plane owns independent projected occupancy.
+The Composition must not reduce Tile readability or violate minimum semantic clearance merely to avoid scrolling.
 
-Expressions on the same plane share available space, while Expressions on different planes may overlap in \(x,y\).
-
-Adaptive Composition should evolve like a layered spatial puzzle in which Expressions preserve identity while claiming and releasing plane-local capacity.
-
-Lower-plane Expressions may establish Airspace Reserves that constrain settled cross-plane occlusion without prohibiting transit motion.
+The Canvas does not provide general horizontal panning. Individual Tiles may expose horizontal content within the vertical Composition.
 
 ### Consequences
 
-Artwork may occupy a complete lower plane while Information and episode Expressions solve shared space above it.
+Relevant content remains available without making the viewport crowded.
 
-Depth remains meaningful after transitions and can drive occlusion, parallax, interaction priority and Material relationships without requiring mesh geometry.
+The primary spatial direction remains predictable across touch, pointer, keyboard, remote and controller input.
+
+The Design System must govern nested horizontal Tile interaction without allowing it to compete with vertical Canvas navigation.
 
 ---
 
@@ -366,7 +364,7 @@ ADR077["Modules"]
 ADR078["Device Independence"]
 
 ADR079["Breathing Space"]
-ADR195["Persistent Depth Planes"]
+ADR200["Breathable Vertical Canvas"]
 
 ADR071 --> ADR072
 
@@ -383,8 +381,7 @@ ADR074 --> ADR076
 ADR076 --> ADR077
 
 ADR076 --> ADR078
-ADR074 --> ADR195
-ADR076 --> ADR195
+ADR079 --> ADR200
 ```
 
 Every compositional decision reinforces the same objective.

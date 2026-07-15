@@ -118,6 +118,59 @@ It must not describe:
 
 ---
 
+# Mosaic v1 Web Component Library
+
+Mosaic v1 implements the Design Language as a client-side Web component library using HTML, CSS and TypeScript.
+
+The library supports two equivalent entry paths:
+
+| Entry path | Responsibility |
+|------------|----------------|
+| Authored HTML | Static and conventional sites compose Mosaic components directly. |
+| Runtime SDUI | The client SDUI Driver maps semantic structure and content into the same registered components. |
+
+The v1 library owns:
+
+- component registration and lifecycle
+- responsive CSS layout
+- public Semantic Token consumption
+- Typography and Material application
+- Refraction integration
+- accessibility semantics and interaction behaviour
+- client-side state binding and incremental DOM updates
+
+The v1 release does not require the mathematical Adaptive Composition Solver defined by [MDP-001 — Adaptive Composition Runtime](../../../engineering/architecture/mdp-001-adaptive-composition-runtime/index.md).
+
+An HTMX integration may provide requests, fragment delivery or progressive enhancement for Web deployments. HTMX is an adapter rather than the canonical SDUI contract; server-returned fragments must resolve into the same governed Mosaic components and cannot redefine Design Language values.
+
+---
+
+# v1 Structural Component Vocabulary
+
+SDUI determines v1 structure and content through a governed semantic component vocabulary.
+
+The initial vocabulary may include:
+
+- Page
+- Section
+- Stack
+- Cluster
+- Split
+- Grid
+- Horizontal Rail
+- Hero
+- Tile
+- Navigation
+- Form
+- Table
+- Dashboard Region
+
+Structural components express relationships rather than raw measurements. Their spacing, sizing, breakpoints, typography, Materials and Refraction remain client-library responsibilities.
+
+SDUI must not supply CSS, arbitrary class names, pixel coordinates, raw gaps, radii, blur values or animation curves.
+
+---
+
 # Semantic UI
 
 Runtime SDUI is semantic UI.
@@ -296,13 +349,12 @@ Conceptually.
 ```mermaid
 flowchart LR
 
-S["Semantic SDUI"] --> A["Client Adaptive Layout"]
-P["Private Platform Primitives"] --> A
-C["Capability And Preferences"] --> A
-A --> G["Resolved Composition Geometry"]
-G --> M["Material Resolution"]
-M --> R["Refraction And Native Renderer"]
-R --> N["Native Presentation"]
+S["Semantic SDUI"] --> C["Client Component Resolver"]
+L["Mosaic Component Library"] --> C
+C --> H["HTML Structure And CSS Layout"]
+H --> M["Material Resolution"]
+M --> R["Refraction And Web Renderer"]
+R --> N["Accessible Presentation"]
 ```
 
 This preserves a clean boundary.
@@ -311,13 +363,9 @@ SDUI describes structure and intent.
 
 MDL describes how Mosaic should feel.
 
-For media-led interfaces, the client Adaptive Layout implementation resolves concrete coordinates, dimensions, padding, spacing, density and typography.
+Mosaic v1 resolves every interface through governed components, responsive CSS or equivalent native layout primitives and the public Semantic Tokens defined by [MDS-001 — Design Token Architecture](../mds-001-design-token-architecture/index.md).
 
-Documentation, administration, dashboard and conventional application pages may instead use Authored Layout through CSS or native layout systems.
-
-Authored Layout consumes the public Semantic Tokens defined by [MDS-001 — Design Token Architecture](../mds-001-design-token-architecture/index.md), while Adaptive Layout consumes private Platform primitives.
-
-Both modes remain client-owned and apply the same Mosaic typography, spacing, sizing, Material, accessibility and Refraction contracts defined by [MDS-006 — Composition Engine](../mds-006-composition-engine/06-adaptive-layout.md).
+The post-v1 Adaptive Composition Runtime may later replace selected structural resolution with private mathematical solving without changing the semantic SDUI boundary.
 
 Runtime SDUI still communicates semantic structure and intent rather than measurements in either mode.
 

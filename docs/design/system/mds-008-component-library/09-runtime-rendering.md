@@ -128,6 +128,33 @@ Recovery SDUI remains Supervisor-produced.
 
 ---
 
+# Mosaic v1 Runtime Scope
+
+Mosaic v1 renders semantic SDUI through the client-side Web component library.
+
+SDUI determines:
+
+- structural component hierarchy
+- content and semantic roles
+- actions and state bindings
+- accessibility and localisation metadata
+- stable content identity
+
+The client library determines:
+
+- DOM implementation
+- responsive CSS layout
+- spacing, sizing and typography
+- Materials and Refraction
+- interaction presentation
+- transitions and update scheduling
+
+Static sites may author the same component hierarchy directly in semantic HTML without connecting to an SDUI backend.
+
+The mathematical Adaptive Composition Runtime is post-v1 and is not required to render a conforming v1 SDUI document.
+
+---
+
 # SDUI Delivery Layers
 
 Normal Mosaic presentation uses one semantic SDUI model through three complementary delivery layers.
@@ -231,14 +258,15 @@ The SDUI Driver must preserve the same Continuity Key while an object remains th
 - repositioned
 - resized
 - reparented
-- moved permanently between Composition planes
 - represented by a different component implementation
 
 A key must not be reused for a different domain entity merely to manufacture a visual transition.
 
-The renderer compares the previous and pending semantic trees by Continuity Key, then classifies each object as persistent, repositioned, resized, reparented, moved between planes, entering or exiting. That classification becomes input to the [MDS-005 Motion System](../mds-005-motion-system/09-runtime-motion-resolution.md), not a server-authored animation instruction.
+The v1 renderer compares the previous and pending semantic trees by Continuity Key so it can preserve DOM identity and apply governed component transitions rather than replacing the entire page.
 
-SDUI supplies semantic roles, relationships and stable identity. It must not supply final coordinates, plane assignments, Behavioural Cost, curves, durations or spring values.
+The post-v1 Adaptive Composition Runtime may additionally classify repositioning, resizing, reparenting and Composition-plane movement through [MDS-005 — Motion System](../mds-005-motion-system/09-runtime-motion-resolution.md).
+
+SDUI supplies semantic roles, relationships and stable identity. It must not supply final coordinates, raw spacing, Design Token values, curves, durations or spring values.
 
 Exact key encoding, namespace governance, lifetime and collision handling require a future integration protocol.
 
@@ -254,7 +282,7 @@ flowchart LR
 N1["Receive And Validate"]
 N2["Preload Required Content"]
 N3["Apply To Pending Semantic Tree"]
-N4["Resolve Next Composition"]
+N4["Resolve Next Component Tree"]
 N5["Match Continuity Keys"]
 N6["Animate Current State Into Next State"]
 N7["Commit And Acknowledge"]
@@ -271,13 +299,13 @@ Every visible frame must represent either the previous complete state or the nex
 
 The renderer must not expose a partially applied transaction.
 
-Continuity Keys allow the client to recognise movement, resizing, hierarchy change and permanent plane movement as the continuation of an existing object.
+Continuity Keys allow the client to recognise structural and content updates as the continuation of an existing object.
 
 Component implementation identities remain disposable and must not be used for behavioural continuity.
 
 The Platform supplies meaning and identity.
 
-The client resolves geometry and performs governed Motion without receiving animation values from SDUI.
+The v1 component library resolves responsive layout and governed transitions without receiving Presentation values from SDUI.
 
 ---
 
@@ -289,7 +317,7 @@ On Web, the renderer should update browser history and the canonical route witho
 
 Back, forward and deep-link behaviour must remain intact.
 
-The renderer should preload required content, resolve the pending Composition and transition shared identities before committing the new route state.
+The v1 renderer should preload required content, resolve the pending component tree and transition shared identities before committing the new route state.
 
 A direct URL load, manual refresh or recovery event may load the latest compiled snapshot.
 

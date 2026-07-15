@@ -80,6 +80,8 @@ Benchmarks should measure:
 - Flutter composite and fragment cost
 - two-dimensional shader crossover points
 - Acrylic receiver and proximity-relationship scaling
+- active Acrylic interaction-edge count and contributor pruning
+- interaction-graph rebuild cost after Composition changes
 - static and video update cadence
 - profile-switch hysteresis
 - Enhanced, Balanced and Essential fidelity residency

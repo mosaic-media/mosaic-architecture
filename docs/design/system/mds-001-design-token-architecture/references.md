@@ -113,8 +113,8 @@ The following specifications depend directly upon MDS-001.
 - [MDS-003 — Material System](../mds-003-material-system/index.md)
 - [MDS-004 — Typography System](../mds-004-typography-system/index.md)
 - [MDS-005 — Motion System](../mds-005-motion-system/index.md)
-- [MDS-006 — Composition Engine](../mds-006-composition-engine/index.md)
-- [MDS-007 — Tile Framework](../mds-007-tile-framework/index.md)
+- [MDP-001 — Adaptive Composition Runtime](../../../engineering/architecture/mdp-001-adaptive-composition-runtime/index.md)
+- [MDP-001 — Adaptive Composition Runtime](../../../engineering/architecture/mdp-001-adaptive-composition-runtime/14-adaptive-tile-model.md)
 - [MDS-008 — Component Library](../mds-008-component-library/index.md)
 
 These specifications should consume the architecture defined here rather than redefining it.
@@ -266,7 +266,7 @@ Future contributors may also wish to review:
 
 - [MDS-002 — Colour System](../mds-002-colour-system/index.md)
 - [MDS-003 — Material System](../mds-003-material-system/index.md)
-- [MDS-006 — Composition Engine](../mds-006-composition-engine/index.md)
+- [MDP-001 — Adaptive Composition Runtime](../../../engineering/architecture/mdp-001-adaptive-composition-runtime/index.md)
 - [MDS-008 — Component Library](../mds-008-component-library/index.md)
 
 These specifications implement the token architecture defined within MDS-001.

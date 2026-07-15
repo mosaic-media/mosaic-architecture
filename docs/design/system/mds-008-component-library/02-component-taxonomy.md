@@ -13,7 +13,7 @@ Version: 0.4
 
 # Purpose
 
-The Tile Framework defines the behavioural vocabulary of Mosaic.
+The semantic structure resolver defines the behavioural vocabulary of Mosaic.
 
 The Component Library defines the implementation vocabulary.
 
@@ -38,7 +38,7 @@ Nothing more.
 
 Within MDS, **Component Taxonomy** is defined as:
 
-> **The canonical classification of implementation primitives responsible for rendering resolved Tiles.**
+> **The canonical classification of implementation primitives responsible for rendering resolved Tile intents.**
 
 Components communicate implementation.
 
@@ -99,6 +99,18 @@ Every Component belongs to exactly one primary family.
 
 ---
 
+# Tile As A Structural Component
+
+In Mosaic v1, a **Tile** is a governed Container Component that presents one coherent unit of content, action or navigation.
+
+A Tile may be authored directly in static HTML or selected semantically by SDUI. In both cases MDS-008 owns its implementation, accessibility, internal responsive behaviour and Material assembly.
+
+The author or SDUI payload may select a supported Tile role and provide content intent. It must not provide arbitrary geometry, Acrylic optical values, spacing internals or animation coefficients.
+
+Tile variants may reveal or omit governed internal regions according to available space. That bounded component behaviour is distinct from the deferred cross-Canvas solver, depth-plane allocation and search mathematics preserved by [MDP-001 — Adaptive Composition Runtime](../../../engineering/architecture/mdp-001-adaptive-composition-runtime/14-adaptive-tile-model.md).
+
+---
+
 # Container Components
 
 Purpose.
@@ -115,7 +127,7 @@ Examples include:
 
 Container Components never determine hierarchy.
 
-They simply implement the structure already resolved by the Tile Framework.
+They simply implement the structure already resolved by the semantic structure resolver.
 
 ---
 

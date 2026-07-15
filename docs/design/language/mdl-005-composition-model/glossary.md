@@ -16,19 +16,11 @@ This glossary defines the compositional terminology introduced by **MDL-005 — 
 
 Unlike previous glossaries, this document focuses specifically on how understanding is organised before it becomes presentation.
 
-The terms defined here should be considered normative throughout all future Composition Engine, Tile Framework and Design System specifications.
+The terms defined here are normative for the active Composition Model. Deferred spatial-runtime terminology is owned by [MDP-001 — Adaptive Composition Runtime](../../../engineering/architecture/mdp-001-adaptive-composition-runtime/glossary.md).
 
 ---
 
 # A
-
-## Airspace Reserve
-
-A projected region above an Expression that protects important visible content from settled cross-plane occlusion.
-
-Other Expressions may transit through the region during motion but should not remain there when the Composition settles.
-
----
 
 ## Adaptive Composition
 
@@ -65,6 +57,12 @@ Examples include:
 ---
 
 # B
+
+## Breathable Canvas
+
+A vertically extensible Composition whose viewport preserves governed Breathing Space instead of compressing every relevant Expression into one visible extent.
+
+---
 
 ## Breathing Space
 
@@ -103,14 +101,6 @@ It communicates meaning rather than geometry.
 The continuous refinement of a Composition as the user's World evolves.
 
 Composition Evolution preserves continuity while allowing understanding to change naturally.
-
----
-
-## Composition Plane
-
-A governed logical \(z\)-level with its own projected \(x,y\) occupancy.
-
-Expressions on different Composition Planes may overlap in projection while retaining distinct hierarchy and depth relationships.
 
 ---
 
@@ -255,12 +245,6 @@ Sparse Compositions prioritise:
 - immersion
 - clarity
 - continuation
-
----
-
-## Spatial Puzzle
-
-The Mosaic Composition metaphor in which persistent Expressions claim, retain and release capacity across multiple Composition Planes while preserving identity and continuity.
 
 ---
 

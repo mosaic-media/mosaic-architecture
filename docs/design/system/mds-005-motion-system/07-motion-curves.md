@@ -247,52 +247,11 @@ Not playful.
 
 ---
 
-# Critically Damped Spatial Motion
+# Deferred Spatial Motion Research
 
-Rigid Tile and Acrylic geometry should use a governed critically damped response as the default spatial-motion character.
+Mosaic v1 uses governed component transition primitives from this Motion System.
 
-For resolved position or extent \(x\) and target \(x_t\):
-
-\[
-\ddot{x}
-+ 2\zeta\omega\dot{x}
-+ \omega^2\left(x-x_t\right)
-= 0,
-\qquad
-\zeta = 1
-\]
-
-The damping ratio prevents bounce and overshoot while the natural frequency \(\omega\) controls settlement.
-
-For constant target and displacement \(y=x-x_t\), the exact critically damped response is:
-
-\[
-y(t)
-=
-\left[
-y_0 + \left(\dot{y}_0 + \omega y_0\right)t
-\right]
-e^{-\omega t}
-\]
-
-Renderers should evaluate a stable analytical or equivalently stable time-correct solution rather than allowing frame cadence to redefine the curve.
-
-Behavioural Cost may govern natural frequency within calibrated bounds:
-
-\[
-\omega(C_b)
-=
-\operatorname{clamp}
-\left(
-\omega_0-k_cC_b,
-\omega_{\min},
-\omega_{\max}
-\right)
-\]
-
-This relationship allows higher-cost transitions to settle more deliberately without delaying their initial response.
-
-Exact frequencies and coefficients remain alpha-calibration data.
+The critically damped spatial model and its proposed relationship to Behavioural Cost are preserved for calibration in [MDP-001 — Adaptive Composition Runtime](../../../engineering/architecture/mdp-001-adaptive-composition-runtime/15-motion-model.md).
 
 ---
 

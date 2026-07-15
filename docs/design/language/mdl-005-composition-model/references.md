@@ -102,9 +102,9 @@ The following specifications directly depend upon MDL-005.
 
 - [MDS-001 — Design Token Architecture](../../system/mds-001-design-token-architecture/index.md)
 - [MDS-003 — Material System](../../system/mds-003-material-system/index.md)
-- [MDS-006 — Composition Engine](../../system/mds-006-composition-engine/index.md)
+- [MDP-001 — Adaptive Composition Runtime](../../../engineering/architecture/mdp-001-adaptive-composition-runtime/index.md)
 - [MDS-002 — Colour System](../../system/mds-002-colour-system/index.md)
-- [MDS-007 — Tile Framework](../../system/mds-007-tile-framework/index.md)
+- [MDP-001 — Adaptive Composition Runtime](../../../engineering/architecture/mdp-001-adaptive-composition-runtime/14-adaptive-tile-model.md)
 - [MDS-008 — Component Library](../../system/mds-008-component-library/index.md)
 
 These specifications should implement the Composition Model rather than reinterpret it.
@@ -261,8 +261,8 @@ Required reading before contributing to MDL-005.
 
 Future contributors may also wish to review:
 
-- [MDS-006 — Composition Engine](../../system/mds-006-composition-engine/index.md)
-- [MDS-007 — Tile Framework](../../system/mds-007-tile-framework/index.md)
+- [MDP-001 — Adaptive Composition Runtime](../../../engineering/architecture/mdp-001-adaptive-composition-runtime/index.md)
+- [MDP-001 — Adaptive Composition Runtime](../../../engineering/architecture/mdp-001-adaptive-composition-runtime/14-adaptive-tile-model.md)
 - [MDS-008 — Component Library](../../system/mds-008-component-library/index.md)
 - [MDS-005 — Motion System](../../system/mds-005-motion-system/index.md)
 

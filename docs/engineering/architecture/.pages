@@ -2,3 +2,4 @@ title: Architecture
 arrange:
   - index.md
   - mac-001-platform-architecture
+  - mdp-001-adaptive-composition-runtime

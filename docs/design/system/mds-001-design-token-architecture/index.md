@@ -232,5 +232,5 @@ Downstream specifications:
 - [MDS-003 — Material System](../mds-003-material-system/index.md)
 - [MDS-004 — Typography System](../mds-004-typography-system/index.md)
 - [MDS-005](../mds-005-motion-system/index.md) Motion
-- [MDS-006 — Composition Engine](../mds-006-composition-engine/index.md)
+- [MDP-001 — Adaptive Composition Runtime](../../../engineering/architecture/mdp-001-adaptive-composition-runtime/index.md)
 - [MDS-008 — Component Library](../mds-008-component-library/index.md)

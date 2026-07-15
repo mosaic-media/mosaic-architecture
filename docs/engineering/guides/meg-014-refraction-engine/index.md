@@ -39,6 +39,7 @@ This guide covers:
 - local backdrop participation
 - two-dimensional Composition surfaces
 - direct and secondary Acrylic response
+- bounded Acrylic interaction graphs
 - Rear Optical Plane, Acrylic Volume and Front Surface resolution
 - fixed apparent-thickness and tint-authority invariants
 - bounded optical parallax

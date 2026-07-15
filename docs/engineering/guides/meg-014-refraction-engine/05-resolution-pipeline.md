@@ -113,6 +113,8 @@ Secondary transport should aggregate only visible, spatially related contributio
 
 Each pass should reduce remaining energy.
 
-The engine should stop by energy threshold, depth limit or both.
+The alpha should use one secondary bounce, no cyclic feedback and a governed maximum contributor count per receiver.
+
+The engine should stop by energy threshold, bounce limit, contributor limit or available frame budget.
 
 Direct artwork response must retain priority over secondary refinement.

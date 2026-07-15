@@ -13,7 +13,7 @@ Version: 0.4
 
 # Purpose
 
-The Tile Framework defines the behavioural lifecycle.
+The semantic structure resolver defines the behavioural lifecycle.
 
 The Component Library defines the implementation lifecycle.
 
@@ -635,7 +635,7 @@ Component Lifecycle explains:
 
 Component Composition explains:
 
-> **How Components combine to faithfully implement resolved Tiles while preserving the behavioural architecture established throughout Mosaic.**
+> **How Components combine to faithfully implement resolved Tile intents while preserving the behavioural architecture established throughout Mosaic.**
 
 Together they complete the implementation lifecycle of the Component Library.
 

@@ -49,6 +49,7 @@ docs/
     guides/        Mosaic Engineering Guidelines specifications
     protocols/     Integration and interoperability protocol specifications
     operations/    Runtime, support, and operational specifications
+  roadmaps/        Cross-disciplinary Mosaic Roadmaps
 ```
 
 The current imported specification set lives in:
@@ -56,10 +57,11 @@ The current imported specification set lives in:
 - `docs/design/language` for MDL documents
 - `docs/design/system` for MDS documents
 - `docs/engineering/documentation` for MDG documents
-- `docs/engineering/architecture` for MAC documents
+- `docs/engineering/architecture` for MAC, MAD and MDP documents
 - `docs/engineering/guides` for MEG documents
 - `docs/engineering/protocols` for MIP documents
 - `docs/engineering/operations` for MOP documents
+- `docs/roadmaps` for MRM documents
 
 [MEG-006](docs/engineering/guides/meg-006-module-platform/index.md) contains the Module Platform and its integrated Developer Platform guidance, including SDK, CLI, local development, deterministic Test Harness Modules and publication workflow boundaries.
 
@@ -80,6 +82,7 @@ The structure is intended to support these document families without another maj
 - `MDL` — Mosaic Design Language
 - `MDS` — Mosaic Design System
 - `MDG` — Mosaic Documentation Guide
+- `MRM` — Mosaic Roadmap
 
 ## Documentation Conventions
 
@@ -122,6 +125,7 @@ Place decisions close to the system they govern:
 - MAC decisions belong under `docs/engineering/architecture`
 - MIP decisions belong under `docs/engineering/protocols`
 - MOP decisions belong under `docs/engineering/operations`
+- MRM documents reference decisions and owning specifications but do not own architectural decisions
 - cross-cutting decisions should reference the upstream specification they depend on
 
 When a decision changes the meaning of an existing specification, update both the ADR section and the affected chapter.

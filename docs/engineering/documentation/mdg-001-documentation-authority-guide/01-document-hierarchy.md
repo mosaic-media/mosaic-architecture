@@ -29,7 +29,7 @@ Every document created within the Mosaic Architecture repository shall belong to
 
 # Documentation Layers
 
-Mosaic documentation is organised into four primary disciplines.
+Mosaic documentation is organised into five primary disciplines.
 
 ```mermaid
 flowchart TD
@@ -46,6 +46,8 @@ N9["Product"]
 N10["(Future)"]
 N11["Community"]
 N12["(Future)"]
+N13["Roadmaps"]
+N14["Delivery Sequencing"]
 
 N1 --> N2
 N1 --> N3
@@ -55,6 +57,7 @@ N6 --> N7
 N6 --> N8
 N9 --> N10
 N11 --> N12
+N13 --> N14
 ```
 
 Within these disciplines, document types provide progressively greater levels of detail.
@@ -93,6 +96,18 @@ Its purpose is to define principles rather than platform-specific implementation
 
 ---
 
+# Roadmaps
+
+Roadmap documentation describes delivery sequence and release outcomes across Engineering and Design.
+
+It contains:
+
+- Mosaic Roadmaps (MRM)
+
+Roadmaps consume authoritative specifications and proposals. They do not define architecture, Design Language, reusable assets, protocols or implementation practice.
+
+---
+
 # Documentation Progression
 
 Architectural knowledge matures through several stages.
@@ -112,6 +127,7 @@ flowchart TD
 
 N1["Idea"]
 N2["MDP<br/>(Mosaic Design Proposal)"]
+N2D["Deferred"]
 N3["Accepted"]
 N4["MAD<br/>(Mosaic Architecture Decision)"]
 N5["MAC<br/>(Mosaic Architecture Canon)"]
@@ -120,6 +136,8 @@ N7["Implementation"]
 
 N1 --> N2
 N2 --> N3
+N2 --> N2D
+N2D --> N2
 N3 --> N4
 N4 --> N5
 N5 --> N6
@@ -220,6 +238,7 @@ Generally:
 | MOP | Medium |
 | MDL | Medium |
 | MDS | Medium |
+| MRM | Highly Iterative |
 
 Understanding this distinction is essential.
 
@@ -275,6 +294,10 @@ design/
     system/
 
         MDS-001
+
+roadmaps/
+
+    MRM-001
 ```
 
 Repository organisation should remain intuitive to contributors while allowing the documentation taxonomy to evolve independently.

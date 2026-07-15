@@ -154,7 +154,7 @@ Mosaic uses weight to reinforce hierarchy and not as decoration.
 | [MDS-001 — Design Token Architecture](../mds-001-design-token-architecture/index.md) | Primitive type resources and runtime resolution |
 | [MDS-003 — Material System](../mds-003-material-system/index.md) | Acrylic information planes |
 | [MDS-005 — Motion System](../mds-005-motion-system/index.md) | Reflow continuity |
-| [MDS-006 — Composition Engine](../mds-006-composition-engine/index.md) | Artwork-title selection and Adaptive Layout |
+| [MDP-001 — Adaptive Composition Runtime](../../../engineering/architecture/mdp-001-adaptive-composition-runtime/index.md) | Artwork-title selection and Adaptive Layout |
 
 ---
 

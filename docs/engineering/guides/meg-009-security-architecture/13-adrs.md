@@ -33,6 +33,7 @@ Create or update a decision record when a change affects:
 - Network Trust Boundaries
 - Cryptographic Strategy
 - Authentication Architecture
+- Registered Device And Session Revocation Architecture
 
 ---
 

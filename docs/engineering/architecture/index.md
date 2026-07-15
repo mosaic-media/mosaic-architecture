@@ -7,9 +7,9 @@ Version: 0.2
 
 # Architecture
 
-Architecture Canon specifications define accepted Mosaic platform structure, boundaries and long-lived architectural responsibility.
+Architecture documentation contains accepted Mosaic platform structure and clearly separated proposals for architecture that is not yet authoritative.
 
-This section contains MAC documents. Engineering guides, protocols and operations documents should reference Architecture Canon documents rather than redefining the architecture they implement.
+MAC documents are authoritative Architecture Canon. MDP documents preserve proposals and must be read according to their recorded Disposition.
 
 ## Architecture Canon in Brief
 
@@ -17,6 +17,12 @@ This section contains MAC documents. Engineering guides, protocols and operation
 |---------------|-----------------|
 | [MAC-001 — Platform Architecture](mac-001-platform-architecture/index.md) | Defines the accepted Platform structure, its responsibilities and the boundaries between the Platform, Supervisor, capabilities and Modules. |
 
+## Deferred Proposals
+
+| Proposal | Disposition | In one sentence |
+|----------|-------------|-----------------|
+| [MDP-001 — Adaptive Composition Runtime](mdp-001-adaptive-composition-runtime/index.md) | Deferred | Preserves the post-v1 mathematical composition solver, adaptive Tile model and calibration questions without making them current architecture. |
+
 Begin here when you need to understand what Mosaic is. Continue to [Engineering Guides](../guides/index.md) for implementation practice, [Protocols](../protocols/index.md) for interoperability contracts and [Operations](../operations/index.md) for operational expectations.
 
-The Architecture Canon is authoritative; this catalogue provides orientation only.
+The Architecture Canon is authoritative. Deferred proposals are non-authoritative and unscheduled until a later decision changes their Disposition. This catalogue provides orientation only.

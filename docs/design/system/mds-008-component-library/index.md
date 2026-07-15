@@ -30,12 +30,16 @@ The MDS established:
 - Materials
 - Typography
 - Motion
-- Composition Engine
-- Tile Framework
 
 MDS-008 defines the final architectural layer.
 
-The Component Library is responsible for physically implementing the behavioural presentation described by resolved Tiles.
+For Mosaic v1, it is also the primary Presentation implementation authority. The first release ships a client-side Web component library driven either by authored semantic HTML or by Platform SDUI.
+
+The Component Library is responsible for physically implementing governed Mosaic presentation.
+
+In v1, its client resolver consumes authored semantic HTML or Platform SDUI structure and content. It resolves those inputs into governed components, including Tile structural components.
+
+In a later release, the deferred [MDP-001 — Adaptive Composition Runtime](../../../engineering/architecture/mdp-001-adaptive-composition-runtime/index.md) may supply adaptive placement decisions without changing the component contract.
 
 Unlike traditional UI frameworks, Components possess almost no behavioural responsibility.
 
@@ -47,7 +51,7 @@ By the time a Component is created:
 - Typography has been solved.
 - Motion has been solved.
 - Interaction has been solved.
-- Tiles have been solved.
+- Structural component intent has been resolved.
 
 Components simply render.
 
@@ -68,10 +72,9 @@ N7["Colour"]
 N8["Materials"]
 N9["Typography"]
 N10["Motion"]
-N11["Composition Engine"]
-N12["Tile Framework"]
-N13["Component Library"]
-N14["Rendering"]
+N11["Semantic Structure"]
+N12["Component Library"]
+N13["Rendering"]
 
 N1 --> N2
 N2 --> N3
@@ -85,12 +88,13 @@ N9 --> N10
 N10 --> N11
 N11 --> N12
 N12 --> N13
-N13 --> N14
 ```
 
 The Component Library consumes:
 
-- Resolved Tiles
+- Semantic SDUI structure and content
+- Authored semantic HTML
+- Resolved semantic component intents
 - Material Profiles
 - Typography Profiles
 - Motion Profiles
@@ -114,9 +118,13 @@ This specification defines:
 - Component Contracts
 - Component Lifecycle
 - Component Composition
+- Tile Structural Components
 - Rendering Architecture
 - Client Renderers
 - Runtime SDUI
+- Mosaic v1 Web Component Library
+- SDUI Structural Component Vocabulary
+- Optional HTMX Web Adapter
 - Refreshable Compiled SDUI
 - SDUI Patch Stream
 - Continuity Keys
@@ -132,10 +140,11 @@ This specification intentionally does **not** define:
 - Hierarchy
 - Runtime World
 - Expressions
-- Tiles
 - Design Tokens
 
-Those systems already solved the problem.
+Adaptive Tile solving is deferred to [MDP-001 — Adaptive Composition Runtime](../../../engineering/architecture/mdp-001-adaptive-composition-runtime/index.md).
+
+The Design Language and semantic structure already establish the problem to render.
 
 The Component Library simply implements their decisions.
 
@@ -145,7 +154,7 @@ The Component Library simply implements their decisions.
 
 MDS-008 exists to answer one question.
 
-> **How should resolved Tiles become concrete user interface implementations?**
+> **How should semantic structure become concrete Mosaic interface implementations?**
 
 Not:
 
@@ -255,7 +264,7 @@ design/
 Required reading:
 
 - [MDL-001](../../language/mdl-001-vision/index.md) → [MDL-005](../../language/mdl-005-composition-model/index.md)
-- [MDS-001](../mds-001-design-token-architecture/index.md) → [MDS-007](../mds-007-tile-framework/index.md)
+- [MDS-001 — Design Token Architecture](../mds-001-design-token-architecture/index.md) through [MDS-005 — Motion System](../mds-005-motion-system/index.md)
 
 Downstream specifications:
 

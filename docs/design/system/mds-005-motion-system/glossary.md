@@ -45,14 +45,6 @@ Not because animation exists.
 
 ---
 
-## Behavioural Cost
-
-A normalised runtime measure of conceptual transition significance derived from Focus change, Domain boundaries, Composition topology and continuity credit.
-
-Behavioural Cost governs choreography and settlement without delaying initial response.
-
----
-
 # C
 
 ## Continuity
@@ -71,21 +63,7 @@ Not restart.
 
 A stable semantic identifier representing domain identity across Tile, component, layout and SDUI lifetimes.
 
-The Runtime Motion Resolver uses Continuity Keys to match previous and next Composition states.
-
----
-
-## Critically Damped Motion
-
-A governed second-order response with damping ratio \(\zeta=1\), producing the fastest return to equilibrium without bounce or overshoot.
-
----
-
-# D
-
-## Domain Boundary Cost
-
-The Behavioural Cost contribution introduced when a transition crosses conceptual Domains and changes the relevant information model.
+The v1 client renderer uses Continuity Keys to match previous and next semantic component states.
 
 ---
 

@@ -159,7 +159,7 @@ If placement is unsafe, Typography renders the Mona Sans semantic title on an Ac
 
 Portrait poster artwork remains unobstructed and places title and metadata below the image.
 
-The authoritative selection contract is defined by [MDS-006 — Composition Engine](../mds-006-composition-engine/06-adaptive-layout.md#artwork-title-treatment).
+The authoritative selection contract is defined by [MDP-001 — Adaptive Composition Runtime](../../../engineering/architecture/mdp-001-adaptive-composition-runtime/06-adaptive-layout.md#artwork-title-treatment).
 
 ---
 

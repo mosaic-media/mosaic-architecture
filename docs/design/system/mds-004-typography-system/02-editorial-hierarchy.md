@@ -87,7 +87,7 @@ Typography provides orientation and understanding.
 
 Typography must not become the primary focal point of a media Composition.
 
-The Composition-owned HD ClearLogo and portrait-poster rules are defined in [MDS-006 — Composition Engine](../mds-006-composition-engine/06-adaptive-layout.md#artwork-title-treatment).
+The Composition-owned HD ClearLogo and portrait-poster rules are defined in [MDP-001 — Adaptive Composition Runtime](../../../engineering/architecture/mdp-001-adaptive-composition-runtime/06-adaptive-layout.md#artwork-title-treatment).
 
 When Composition selects a ClearLogo, the semantic title remains present for accessibility and non-visual output even though Hero or Title typography is not visibly rendered.
 

@@ -55,11 +55,13 @@ The Composition Model governs:
 - Visual Priority
 - Structural Relationships
 - Spatial Organisation
-- Persistent Depth Relationships
-- Cross-Plane Visibility
+- Breathable Scrollable Composition
+- Primary Canvas Direction
 - Adaptive Density
 - Composition Behaviour
 - Layout Intent
+
+Normalised depth, plane occupancy and solver mathematics are deferred to [MDP-001 — Adaptive Composition Runtime](../../../engineering/architecture/mdp-001-adaptive-composition-runtime/index.md).
 
 The Composition Model intentionally does **not** govern:
 

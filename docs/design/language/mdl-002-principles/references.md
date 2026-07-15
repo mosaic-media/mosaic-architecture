@@ -74,7 +74,7 @@ The following engineering specifications are expected to implement MDL-002.
 
 - [MDS-001 — Design Token Architecture](../../system/mds-001-design-token-architecture/index.md)
 - [MDS-003 — Material System](../../system/mds-003-material-system/index.md)
-- [MDS-006 — Composition Engine](../../system/mds-006-composition-engine/index.md)
+- [MDP-001 — Adaptive Composition Runtime](../../../engineering/architecture/mdp-001-adaptive-composition-runtime/index.md)
 - [MDS-005 — Motion System](../../system/mds-005-motion-system/index.md)
 - [MDS-008 — Component Library](../../system/mds-008-component-library/index.md)
 

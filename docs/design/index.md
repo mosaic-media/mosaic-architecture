@@ -38,7 +38,8 @@ N5 --> N6
 ## Recommended Reading Paths
 
 - For product and design intent, begin with [MDL-001 — Mosaic Design Language Vision](language/mdl-001-vision/index.md), then follow the Design Language in order.
-- For interface implementation, understand [MDL-003 — Mental Model](language/mdl-003-mental-model/index.md) and [MDL-005 — Composition Model](language/mdl-005-composition-model/index.md) before entering the [Design System](system/index.md).
-- For reusable UI infrastructure, begin with [MDS-001 — Design Token Architecture](system/mds-001-design-token-architecture/index.md) and follow the Design System sequence.
+- For Mosaic v1 interface implementation, understand [MDL-003 — Mental Model](language/mdl-003-mental-model/index.md), then use [MDS-008 — Component Library](system/mds-008-component-library/index.md) with the supporting Token, Material, Typography and Motion specifications.
+- For reusable v1 UI infrastructure, begin with [MDS-001 — Design Token Architecture](system/mds-001-design-token-architecture/index.md) and continue through [MDS-005 — Motion System](system/mds-005-motion-system/index.md) before implementing [MDS-008 — Component Library](system/mds-008-component-library/index.md).
+- For post-v1 Adaptive Composition research, use [MDP-001 — Adaptive Composition Runtime](../engineering/architecture/mdp-001-adaptive-composition-runtime/index.md). It preserves the deferred mathematical solver and adaptive Tile model without making them v1 Design System requirements.
 
 These summaries provide orientation. The linked MDL and MDS specifications remain authoritative.

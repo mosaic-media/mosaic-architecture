@@ -156,6 +156,16 @@ It is an example native renderer, not the required native-client architecture.
 
 ---
 
+# H
+
+## HTMX Web Adapter
+
+An optional Web integration that uses HTMX for transport or progressive enhancement while resolving responses through the governed Mosaic component library.
+
+HTMX is not the canonical Runtime SDUI contract.
+
+---
+
 # L
 
 ## Live State Binding
@@ -410,7 +420,7 @@ Semantic UI must not describe:
 
 ## Tile
 
-A behavioural presentation primitive defined by the Tile Framework.
+A behavioural presentation primitive defined by the semantic structure resolver.
 
 Components render Tiles indirectly through Component Contracts.
 
@@ -445,6 +455,12 @@ Behaviour remains identical.
 
 # W
 
+## Web Component Library
+
+The Mosaic v1 client-side implementation of governed semantic components using HTML, CSS and TypeScript for authored and SDUI-driven Web experiences.
+
+---
+
 ## Web Renderer
 
 The Web client renderer responsible for transforming Runtime SDUI or Recovery SDUI into browser presentation when the Shell is available.
@@ -462,8 +478,8 @@ The Web Renderer is distinct from the Embedded Recovery Renderer.
 | [MDL-003 — Mental Model](../../language/mdl-003-mental-model/index.md) | World |
 | [MDL-004 — Interaction Model](../../language/mdl-004-interaction-model/index.md) | Behaviour |
 | [MDL-005 — Composition Model](../../language/mdl-005-composition-model/index.md) | Hierarchy |
-| [MDS-006 — Composition Engine](../mds-006-composition-engine/index.md) | Expressions, Presentation Model |
-| [MDS-007 — Tile Framework](../mds-007-tile-framework/index.md) | Tiles, Runtime Tile Resolution |
+| [MDP-001 — Adaptive Composition Runtime](../../../engineering/architecture/mdp-001-adaptive-composition-runtime/index.md) | Expressions, Presentation Model |
+| [MDP-001 — Adaptive Composition Runtime](../../../engineering/architecture/mdp-001-adaptive-composition-runtime/14-adaptive-tile-model.md) | Tiles, semantic Tile resolution |
 
 ---
 

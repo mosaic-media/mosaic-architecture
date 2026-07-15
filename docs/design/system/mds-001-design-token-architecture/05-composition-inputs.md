@@ -21,7 +21,7 @@ Those decisions influence token resolution but are not Design Tokens.
 
 # Authority
 
-[MDS-006 — Composition Engine](../mds-006-composition-engine/index.md) owns Composition roles such as Hero, Anchor, Supporting, Peripheral, Overlay and Navigation.
+[MDP-001 — Adaptive Composition Runtime](../../../engineering/architecture/mdp-001-adaptive-composition-runtime/index.md) owns Composition roles such as Hero, Anchor, Supporting, Peripheral, Overlay and Navigation.
 
 MDS-001 owns only how those roles may influence token resolution.
 

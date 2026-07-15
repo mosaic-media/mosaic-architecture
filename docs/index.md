@@ -11,10 +11,11 @@ Mosaic brings product experience, platform architecture, engineering practice an
 
 ## Mosaic at a Glance
 
-The documentation follows two complementary paths:
+The documentation follows three complementary paths:
 
 - [Design](design/index.md) defines why Mosaic exists, how it should feel and behave, and how that intent becomes reusable design infrastructure.
 - [Engineering](engineering/index.md) defines the accepted Platform architecture, implementation guidance, integration contracts, operational practices and documentation governance.
+- [Roadmaps](roadmaps/index.md) will define delivery sequence and release outcomes without replacing the specifications that own them.
 
 ```mermaid
 flowchart LR
@@ -48,6 +49,7 @@ N5 --> N6
 | Build or integrate a Module | [MEG-006 — Module Platform](engineering/guides/meg-006-module-platform/index.md) | [Integration Protocols](engineering/protocols/index.md) |
 | Operate or diagnose Mosaic | [MEG-008 — Observability](engineering/guides/meg-008-observability/index.md) | [Operations](engineering/operations/index.md) |
 | Author or maintain documentation | [MDG-001 — Documentation Authority Guide](engineering/documentation/mdg-001-documentation-authority-guide/index.md) | [Documentation](engineering/documentation/index.md) |
+| Follow Mosaic delivery planning | [Roadmaps](roadmaps/index.md) | Owning Design or Engineering specifications linked from each roadmap |
 
 ## How to Use This Site
 

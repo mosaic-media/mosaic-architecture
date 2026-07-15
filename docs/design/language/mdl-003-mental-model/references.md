@@ -90,8 +90,8 @@ They should extend them rather than redefine them.
 The following MDS specifications are expected to implement the Mental Model.
 
 - [MDS-001 — Design Token Architecture](../../system/mds-001-design-token-architecture/index.md)
-- [MDS-006 — Composition Engine](../../system/mds-006-composition-engine/index.md)
-- [MDS-007 — Tile Framework](../../system/mds-007-tile-framework/index.md)
+- [MDP-001 — Adaptive Composition Runtime](../../../engineering/architecture/mdp-001-adaptive-composition-runtime/index.md)
+- [MDP-001 — Adaptive Composition Runtime](../../../engineering/architecture/mdp-001-adaptive-composition-runtime/14-adaptive-tile-model.md)
 - [MDS-008 — Component Library](../../system/mds-008-component-library/index.md)
 - MDS-011 Module Design Specification *(planned; not yet published)*
 
@@ -284,8 +284,8 @@ Future specifications should reference MDL-003 rather than redefining its concep
 
 Future contributors may also wish to review:
 
-- [MDS-006 — Composition Engine](../../system/mds-006-composition-engine/index.md)
-- [MDS-007 — Tile Framework](../../system/mds-007-tile-framework/index.md)
+- [MDP-001 — Adaptive Composition Runtime](../../../engineering/architecture/mdp-001-adaptive-composition-runtime/index.md)
+- [MDP-001 — Adaptive Composition Runtime](../../../engineering/architecture/mdp-001-adaptive-composition-runtime/14-adaptive-tile-model.md)
 - MDS-011 Module Design Specification *(planned; not yet published)*
 
 These documents provide implementation guidance for the conceptual architecture established here.

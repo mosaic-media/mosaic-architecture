@@ -13,7 +13,7 @@ Version: 0.1
 
 - [MDS-003 — Material System](../../../design/system/mds-003-material-system/index.md)
 - [MIP-003 — UVLightFrame Protocol](../../protocols/mip-003-uv-light-frame-protocol/index.md)
-- [MDS-006 — Composition Engine](../../../design/system/mds-006-composition-engine/index.md)
+- [MDP-001 — Adaptive Composition Runtime](../../architecture/mdp-001-adaptive-composition-runtime/index.md)
 - [MDS-008 — Component Library](../../../design/system/mds-008-component-library/index.md)
 - [MEG-010 — Performance Engineering](../meg-010-performance-engineering/index.md)
 
