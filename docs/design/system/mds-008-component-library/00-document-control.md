@@ -64,6 +64,8 @@ MDS-008 governs:
 - Rendering architecture
 - Client rendering
 - Runtime SDUI
+- Refreshable Compiled SDUI
+- SDUI Patch Stream
 - Recovery SDUI
 - Platform-specific MDL libraries
 - Platform components

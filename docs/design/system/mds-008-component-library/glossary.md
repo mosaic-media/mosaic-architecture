@@ -148,6 +148,16 @@ It is an example native renderer, not the required native-client architecture.
 
 ---
 
+# L
+
+## Live State Binding
+
+A semantic relationship between a stable SDUI node and changing Platform data.
+
+The binding communicates meaning and freshness intent without prescribing endpoint, transport, polling or renderer implementation.
+
+---
+
 # M
 
 ## MDL Algorithm
@@ -298,6 +308,14 @@ Recovery SDUI also supports onboarding before the Platform exists; the Superviso
 
 ---
 
+## Refreshable Compiled SDUI
+
+An immutable, versioned SDUI snapshot produced before or independently of a live presentation session.
+
+The active site may refresh by atomically adopting a newer bundle, while live values may update separately through Live State Bindings.
+
+---
+
 ## Rendering
 
 The implementation process that transforms Platform Components into visible presentation.
@@ -338,6 +356,22 @@ MDL does not modify Runtime SDUI.
 ---
 
 # S
+
+## SDUI Driver
+
+The Platform-owned producer that supplies initial Runtime SDUI state, ordered semantic transactions and Live State Binding updates to a Client Renderer.
+
+The SDUI Driver owns semantic intent and never supplies client presentation values.
+
+---
+
+## SDUI Patch Stream
+
+The ordered stream of atomic semantic transactions used to update Runtime SDUI during a connected session without replacing the document or application root.
+
+The stream is renderer-independent and does not make HTML fragments its canonical payload.
+
+---
 
 ## Semantic UI
 

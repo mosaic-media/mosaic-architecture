@@ -128,6 +128,167 @@ Recovery SDUI remains Supervisor-produced.
 
 ---
 
+# SDUI Delivery Layers
+
+Normal Mosaic presentation uses one semantic SDUI model through three complementary delivery layers.
+
+| Layer | Responsibility |
+|-------|----------------|
+| Refreshable Compiled SDUI | Supplies an independently loadable page snapshot for initial rendering, deep links, recovery and cache replacement. |
+| SDUI Patch Stream | Applies navigation, content and structural changes as ordered semantic transactions during a connected session. |
+| Live State Bindings | Update frequently changing values without replacing the page definition or recomputing unrelated Composition. |
+
+These layers do not define separate component languages.
+
+Web, Flutter and other native renderers consume the same semantic contract.
+
+---
+
+# Refreshable Compiled SDUI
+
+A compiled SDUI bundle is an immutable, versioned snapshot produced by a Platform-owned compiler or build pipeline.
+
+The site remains refreshable by publishing a new bundle and atomically updating the active version.
+
+A bundle may contain:
+
+- semantic page structure and content
+- routes and navigation metadata
+- Authored Layout intent
+- accessibility and localisation metadata
+- actions and capability references
+- optional Static Brand Emitter configuration
+- contract version and content identity
+
+It must not contain CSS, native widget definitions, raw spacing, final coordinates, Material effect values or pre-rendered Refraction state.
+
+Web clients may pre-render the same semantics as accessible HTML for first load and indexing.
+
+That HTML is an adapter output rather than the canonical cross-client contract.
+
+Each route should remain independently loadable even though ordinary in-session navigation does not reload the page.
+
+---
+
+# Live State Bindings
+
+Stable semantic nodes may bind to Platform data for metrics, status, progress, tables and other changing values.
+
+A binding may communicate one of these freshness requirements:
+
+| Freshness | Meaning |
+|-----------|---------|
+| Snapshot | The bundled value is sufficient until a newer bundle is loaded. |
+| Refreshable | The value may update on explicit or lifecycle-driven refresh. |
+| Near-live | Brief bounded delay is acceptable. |
+| Live | Continuous updates are expected while transport and capability permit. |
+
+SDUI communicates freshness intent and semantic capability references.
+
+It must not prescribe URLs, WebSocket implementation, polling intervals or client scheduling mechanics.
+
+Renderers should provide governed loading, stale, unavailable and error presentation for every binding.
+
+A binding update should invalidate only the affected semantic state and Presentation region.
+
+Routine metric changes must not rebuild the page definition, the whole Composition or the Refraction light field.
+
+---
+
+# SDUI Patch Stream
+
+During an active session, the renderer should maintain a persistent ordered connection to the Platform SDUI Driver.
+
+A full-duplex transport such as WebSocket is the preferred interactive path because it supports navigation transactions, live state and acknowledgements over one continuous session.
+
+The canonical payload is a semantic SDUI transaction rather than an HTML fragment.
+
+Web implementations may use HTML-fragment tooling as an adapter or progressive fallback, but native and Web renderers must remain contract-equivalent.
+
+A transaction may insert, remove, move or update semantic nodes.
+
+It should contain:
+
+- transaction identity
+- monotonic sequence
+- base-state identity
+- ordered semantic operations
+- required content references
+- continuity identities
+
+Exact encoding, authentication, transport negotiation, size limits and backpressure thresholds require a future integration protocol.
+
+---
+
+# Atomic Transition Pipeline
+
+The renderer should process each structural transaction through one continuity-preserving pipeline.
+
+```mermaid
+flowchart LR
+
+N1["Receive And Validate"]
+N2["Preload Required Content"]
+N3["Apply To Pending Semantic Tree"]
+N4["Resolve Next Composition"]
+N5["Match Stable Identities"]
+N6["Animate Current State Into Next State"]
+N7["Commit And Acknowledge"]
+
+N1 --> N2
+N2 --> N3
+N3 --> N4
+N4 --> N5
+N5 --> N6
+N6 --> N7
+```
+
+Every visible frame must represent either the previous complete state or the next complete state.
+
+The renderer must not expose a partially applied transaction.
+
+Stable semantic and Tile identities allow the client to recognise movement, resizing and hierarchy change as the continuation of an existing object.
+
+Component implementation identities remain disposable and must not be used for behavioural continuity.
+
+The Platform supplies meaning and identity.
+
+The client resolves geometry and performs governed Motion without receiving animation values from SDUI.
+
+---
+
+# Continuous Navigation
+
+Ordinary navigation should update the current Composition rather than replace the document or application root.
+
+On Web, the renderer should update browser history and the canonical route without triggering a page reload.
+
+Back, forward and deep-link behaviour must remain intact.
+
+The renderer should preload required content, resolve the pending Composition and transition shared identities before committing the new route state.
+
+A direct URL load, manual refresh or recovery event may load the latest compiled snapshot.
+
+That recovery path must not become the normal navigation mechanism.
+
+---
+
+# Stream Recovery
+
+The Patch Stream should support:
+
+- monotonic sequence validation
+- idempotent transaction replay
+- acknowledgement after atomic commit
+- resume from the last committed cursor
+- snapshot recovery after an unrecoverable gap
+- coalescing when updates arrive faster than useful Presentation
+- continuation from the last stable state during temporary disconnection
+
+When continuity cannot be proven, the renderer should retain its last stable state until it can obtain and atomically present a valid snapshot.
+
+---
+
 # Platform Boundary
 
 The Platform owns:

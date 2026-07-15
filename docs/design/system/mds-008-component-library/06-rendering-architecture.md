@@ -311,7 +311,15 @@ SDUI describes structure and intent.
 
 MDL describes how Mosaic should feel.
 
-The client Adaptive Layout implementation resolves concrete coordinates, dimensions, padding, spacing, density and typography.
+For media-led interfaces, the client Adaptive Layout implementation resolves concrete coordinates, dimensions, padding, spacing, density and typography.
+
+Documentation, administration, dashboard and conventional application pages may instead use Authored Layout through CSS or native layout systems.
+
+Authored Layout consumes the public Semantic Tokens defined by [MDS-001 — Design Token Architecture](../mds-001-design-token-architecture/index.md), while Adaptive Layout consumes private Platform primitives.
+
+Both modes remain client-owned and apply the same Mosaic typography, spacing, sizing, Material, accessibility and Refraction contracts defined by [MDS-006 — Composition Engine](../mds-006-composition-engine/06-adaptive-layout.md).
+
+Runtime SDUI still communicates semantic structure and intent rather than measurements in either mode.
 
 Material Resolution consumes that completed geometry, and Refraction decorates it without changing layout.
 

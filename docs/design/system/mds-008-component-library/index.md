@@ -117,6 +117,8 @@ This specification defines:
 - Rendering Architecture
 - Client Renderers
 - Runtime SDUI
+- Refreshable Compiled SDUI
+- SDUI Patch Stream
 - Recovery SDUI
 - Platform Components
 - Accessibility Contracts

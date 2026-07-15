@@ -447,6 +447,54 @@ Flutter is one likely native-client implementation, not a required architectural
 
 ---
 
+# ADR-194
+
+## Title
+
+Deliver Runtime SDUI Through Refreshable Snapshots And A Continuous Patch Stream
+
+### Status
+
+Accepted
+
+### Context
+
+Documentation and other compiled experiences require independently loadable routes and cacheable content.
+
+Dashboards and normal Mosaic interaction also require live values, structural updates and navigation without full-page refreshes that break perceptual continuity.
+
+Making HTML fragments canonical would bind SDUI to Web and prevent native clients from using the same contract.
+
+### Decision
+
+Mosaic uses one semantic SDUI model through Refreshable Compiled SDUI, an SDUI Patch Stream and Live State Bindings.
+
+Each compiled bundle is immutable and versioned, while the active site may refresh by atomically adopting a newer bundle.
+
+Connected clients should receive ordered semantic transactions through a persistent full-duplex connection such as WebSocket.
+
+Transactions update semantic nodes rather than transporting canonical HTML fragments or presentation values.
+
+Stable semantic and Tile identities provide continuity across structural changes.
+
+The client validates and stages each transaction, resolves the pending Composition, transitions shared identities and commits atomically.
+
+Routes remain directly loadable and Web history remains functional without making document reload the normal navigation path.
+
+### Consequences
+
+Static and authored experiences can refresh content without requiring a permanently generated page response.
+
+Dashboards can update live values without replacing their semantic definition.
+
+Navigation appears as continuous Composition movement rather than page teleportation.
+
+Web and native clients remain equivalent because HTML-fragment tooling is an adapter, not the SDUI contract.
+
+The exact wire encoding, authentication, transport negotiation, resource limits and backpressure policy remain future protocol work.
+
+---
+
 # ADR Relationships
 
 ```mermaid
@@ -476,6 +524,8 @@ ADR192["MDL Libraries"]
 
 ADR193["Rejected MDL Runtime"]
 
+ADR194["Refreshable SDUI Stream"]
+
 ADR182 --> ADR183
 ADR183 --> ADR184
 ADR184 --> ADR188
@@ -487,6 +537,7 @@ ADR189 --> ADR190
 ADR189 --> ADR191
 ADR191 --> ADR192
 ADR192 --> ADR193
+ADR191 --> ADR194
 ```
 
 Together these decisions establish the Component Library as a thin implementation layer that faithfully renders the runtime architecture without altering it.
@@ -498,8 +549,6 @@ Together these decisions establish the Component Library as a thin implementatio
 Future Component Library ADRs are expected to formalise:
 
 - GPU-driven Component Rendering
-- Streaming Component Trees
-- Server-assisted Rendering
 - Spatial UI Components
 - Adaptive Rendering Pipelines
 - AI-assisted Rendering Optimisation
