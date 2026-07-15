@@ -18,9 +18,9 @@ N1["Select Focused Or Hero Artwork"]
 N2["Reconstruct Active UVLightField"]
 N3["Collect Acrylic Surfaces"]
 N4["Resolve Artwork Projection"]
-N5["Resolve Local Backdrop"]
-N6["Resolve Direct Acrylic Response"]
-N7["Resolve Edge And Parallax"]
+N5["Resolve Rear Optical Plane"]
+N6["Resolve Acrylic Volume"]
+N7["Resolve Front Surface And Parallax"]
 N8["Resolve Bounded Secondary Transport"]
 N9["Apply Atmosphere And Accessibility"]
 N10["Apply Capability And Budget"]
@@ -55,6 +55,32 @@ The selected Material profile constrains final intensity and saturation.
 
 ---
 
+# Three-Layer Resolution
+
+Every receiver should resolve the same fixed three-layer Material meaning.
+
+## Rear Optical Plane
+
+The engine should resolve a world-anchored backdrop sampling window, fixed bounded displacement and sufficient overscan.
+
+The sample should preserve structured backdrop detail so displacement remains perceptible.
+
+Uniform full-face blur is not a substitute for the Rear Optical Plane.
+
+## Acrylic Volume
+
+The engine should transform incident `UVLightField` colour and energy through the governed tint transmission, absorption and scattering profile.
+
+Directional source-facing contour energy should spread inward with the fixed Material falloff rather than appear as a flat tint overlay.
+
+## Front Surface Response
+
+The engine should resolve restrained Fresnel, reflection and specular values plus a thin contour-bound response.
+
+It should not create a detached highlight stroke, thick bezel or uniform glowing perimeter.
+
+---
+
 # Backdrop Response
 
 Backdrop distortion should remain local and bounded.
@@ -72,6 +98,12 @@ Edge emission should be derived after artwork projection so its position moves w
 The engine may resolve boundary segments or a smaller renderer-specific representation.
 
 It should retain directional asymmetry rather than applying one uniform glowing border.
+
+Renderer geometry should clip the response to the actual contour so illuminated energy follows straight boundaries and wraps continuously around curved corners.
+
+Most incident hue should be transported inward by the Acrylic Volume.
+
+The Front Surface contour response remains narrower than the Volume pigmentation region.
 
 ---
 

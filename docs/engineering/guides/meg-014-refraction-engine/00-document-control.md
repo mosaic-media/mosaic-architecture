@@ -32,6 +32,8 @@ MEG-014 owns implementation guidance for:
 - source and Composition inputs
 - coordinate and projection mathematics
 - resolved Acrylic state
+- three-layer Acrylic processing
+- fixed apparent-thickness preservation
 - renderer-independent processing
 - renderer profiles
 - fidelity degradation and overdraw governance

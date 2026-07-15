@@ -118,7 +118,15 @@ The approximately one-centimetre Acrylic reference defines perceptual intent.
 
 MEG-014 does not prescribe its final refractive index, physical-to-pixel conversion or platform scaling.
 
-A future Material-profile revision may refine those values without changing the coordinate contract.
+A future Material-profile revision may refine those private values without changing the coordinate contract.
+
+The profile represents one fixed Material across receiver size, semantic role and renderer.
+
+Platform scaling maps that fixed profile safely into Presentation; it must not reinterpret apparent thickness.
+
+The Rear Optical Plane, Acrylic Volume and Front Surface Response may apply different bounded offsets from the same profile.
+
+Their relative ratios require alpha calibration and must remain renderer-equivalent once standardised.
 
 ---
 

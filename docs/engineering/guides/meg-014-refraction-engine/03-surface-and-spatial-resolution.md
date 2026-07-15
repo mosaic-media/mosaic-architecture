@@ -43,6 +43,29 @@ The engine should sample a lower `UVLightFrame` mip when the projected receiver 
 
 ---
 
+# Static Brand Field Projection
+
+When meaningful artwork is absent, the engine should generate a procedural field from the active Brand Illumination Pair and Static Brand Emitter.
+
+The field remains anchored to the Composition Space parent rather than to artwork UV space.
+
+An Acrylic receiver acts as a moving sampling window over that stable field as the page scrolls, Focus changes or Composition elements move.
+
+Receiver movement must not regenerate or reposition the field.
+
+The engine should invalidate and rebuild the cached field only when one of these inputs changes:
+
+- Brand Illumination Pair
+- Static Brand Emitter position
+- appearance mode
+- Composition Space parent dimensions
+
+The generated field is a client-internal runtime resource.
+
+It does not become a `.mos` resource or a [MIP-003 — UVLightFrame Protocol](../../protocols/mip-003-uv-light-frame-protocol/index.md) interchange payload.
+
+---
+
 # Occlusion
 
 Opaque surfaces should occlude hidden artwork transport according to projected bounds, masks and z-order.

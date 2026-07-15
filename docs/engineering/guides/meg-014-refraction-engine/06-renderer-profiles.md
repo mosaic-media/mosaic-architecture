@@ -58,6 +58,25 @@ Peak luminance must not accidentally become visual transparency.
 
 ---
 
+# Three-Layer Adaptation
+
+Renderer profiles implement one logical Rear Optical Plane, Acrylic Volume and Front Surface Response.
+
+They do not have to allocate three physical render passes.
+
+| Renderer path | Expected adaptation |
+|---------------|---------------------|
+| Basic CSS | Pre-composed rear approximation, governed Volume gradient and thin directional contour response. |
+| CSS Composite | Shared mask with stacked rear sample, Volume pigmentation and surface pseudo-elements. |
+| Flutter Composite | `Stack` or `CustomPainter` with shared clipping and bounded transforms. |
+| Two-Dimensional Shader or Flutter Fragment | One consolidated fragment pass retaining logically separate layer inputs. |
+
+Layer consolidation must not turn the Material into backdrop blur plus a border.
+
+Fidelity reduction should simplify sampling and temporal refinement before changing the fixed apparent-thickness relationship.
+
+---
+
 # Profile Switching
 
 The engine should preserve `ResolvedAcrylicState` semantics when switching profiles.

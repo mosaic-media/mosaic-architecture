@@ -9,6 +9,12 @@ Version: 0.1
 
 ---
 
+# Acrylic Volume
+
+The middle logical optical layer that filters incident source light through tint, absorption and scattering and carries directional contour energy inward as pigmentation.
+
+---
+
 # Backdrop Participation
 
 Receiver-local sampling, distortion and diffusion of actual Presentation behind Acrylic.
@@ -17,7 +23,7 @@ Receiver-local sampling, distortion and diffusion of actual Presentation behind 
 
 # Brand Illumination Pair
 
-Two approved Mosaic or partner colours used to generate a stable synthetic Material-light field when focused and Hero artwork are absent.
+The default Mosaic Indigo and Cyan pair, or a resolved co-brand pair containing Mosaic Indigo and one normalised registered partner accent, used to generate a stable synthetic Material-light field when focused and Hero artwork are absent.
 
 ---
 
@@ -49,9 +55,21 @@ Artwork associated with current Focus and selected before Hero artwork as the pr
 
 ---
 
+# Front Surface Response
+
+The polished logical optical layer supplying thin contour-bound Fresnel, reflection and specular behaviour.
+
+---
+
 # Optical Parallax
 
 Bounded movement of internal Acrylic composite layers relative to a stable outer mask.
+
+---
+
+# Rear Optical Plane
+
+The logical optical layer that samples structured visible Presentation behind Acrylic using fixed bounded displacement and safe overscan.
 
 ---
 
@@ -78,6 +96,14 @@ Moving an Acrylic receiver moves this window over the `UVLightField`; it does no
 # Stable State
 
 The most recent complete and valid resolved Material snapshot safe for continued Presentation.
+
+---
+
+# Static Brand Emitter
+
+A page-level artwork-free source definition containing normalised `x`, `y` and bounded logical `z` coordinates in the Composition Space parent.
+
+The client combines it with an approved Brand Illumination Pair to generate a stable procedural field without artwork analysis or `.mos` serialisation.
 
 ---
 
