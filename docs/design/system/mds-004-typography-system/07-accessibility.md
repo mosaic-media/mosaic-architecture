@@ -340,37 +340,20 @@ Accessibility should adapt according to the user's current activity rather than 
 
 ---
 
-# Television
+# Viewing Context
 
-Television typography should account for:
+Accessible typography should account for:
 
-- viewing distance,
-- lower visual acuity,
-- remote interaction.
+- viewing distance
+- available extent
+- visual acuity
+- input method
+- interruptions
+- environmental lighting
 
 Larger text alone is insufficient.
 
-Future implementations should also consider:
-
-- stronger hierarchy,
-- simplified layouts,
-- generous spacing.
-
----
-
-# Mobile
-
-Mobile typography should account for:
-
-- small displays,
-- interruptions,
-- varying lighting conditions.
-
-The system should prioritise:
-
-- short reading paths,
-- comfortable tap targets,
-- stable rhythm.
+The client may strengthen hierarchy, simplify layout, increase spacing, shorten reading paths or change disclosure while preserving meaning.
 
 Reading should remain effortless despite environmental variability.
 

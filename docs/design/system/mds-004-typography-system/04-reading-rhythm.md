@@ -216,7 +216,7 @@ N1["Heading"]
 N2["Space"]
 N3["Body"]
 N4["Space"]
-N5["Supporting"]
+N5["Metadata"]
 
 N1 --> N2
 N2 --> N3
@@ -357,33 +357,19 @@ The editorial language should remain recognisably Mosaic.
 
 ---
 
-# Rhythm Across Devices
+# Rhythm Across Viewing Contexts
 
-Desktop.
+Reading Rhythm adapts from:
 
-↓
+- available extent
+- viewing distance
+- content density
+- reading duration
+- accessibility
 
-Longer visual rhythm.
+Greater distance may require larger pauses and physical scale.
 
-Tablet.
-
-↓
-
-Editorial rhythm.
-
-Phone.
-
-↓
-
-Shorter but equivalent rhythm.
-
-Television.
-
-↓
-
-Larger pauses.
-
-Greater viewing distance.
+Constrained extent may require shorter reading paths and progressive disclosure.
 
 The physical implementation changes.
 

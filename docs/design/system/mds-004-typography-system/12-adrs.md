@@ -95,7 +95,7 @@ Separate Editorial Roles From Font Sizes
 
 ### Status
 
-Accepted
+Amended by ADR-134
 
 ### Context
 
@@ -128,7 +128,7 @@ Runtime Typography Owns Adaptation
 
 ### Status
 
-Accepted
+Amended by ADR-136
 
 ### Context
 
@@ -180,7 +180,7 @@ Hero Typography Introduces Rather Than Advertises
 
 ### Status
 
-Accepted
+Amended by ADR-135
 
 ### Context
 
@@ -279,6 +279,94 @@ Community modules inherit future typography improvements automatically.
 
 ---
 
+# ADR-134
+
+## Title
+
+Use Mona Sans And Six Semantic Typography Roles
+
+### Status
+
+Accepted
+
+### Context
+
+Mosaic requires one recognisable voice across cinematic media, dense administration and future clients without fragmenting hierarchy through multiple font families.
+
+### Decision
+
+Mona Sans becomes the provisional Platform typeface.
+
+Mosaic defines Hero, Title, Heading, Body, Label and Metadata roles.
+
+Hierarchy uses size, weight, line height, spacing and Composition rather than additional typefaces.
+
+Normal product typography uses weights `400`, `500`, `600` and exceptional `700`, with the default width and automatic optical sizing where supported.
+
+### Consequences
+
+One family supports expressive and utility contexts while semantic roles remain independent from physical values.
+
+The alpha Design System must validate language coverage, font metrics, loading and renderer parity before the typeface dependency becomes final.
+
+---
+
+# ADR-135
+
+## Title
+
+Keep Typography Subordinate To Media Artwork
+
+### Status
+
+Accepted
+
+### Context
+
+Media artwork should remain the primary emotional and visual focus.
+
+### Decision
+
+Hero typography uses restrained scale and weight.
+
+Composition may replace the visible title with an HD ClearLogo in verified landscape negative space.
+
+Unsafe ClearLogo placement falls back to Mona Sans on Acrylic, while portrait poster titles appear below unobstructed artwork.
+
+### Consequences
+
+Media identity remains legible without turning Mosaic into a promotional poster layout or obscuring artwork.
+
+---
+
+# ADR-136
+
+## Title
+
+Resolve Typography From Reading Conditions Rather Than Device Class
+
+### Status
+
+Accepted
+
+### Context
+
+Browser, native application and television labels do not reliably describe viewing distance, accessibility, available extent or renderer behaviour.
+
+### Decision
+
+The client resolves physical typography from semantic role, viewing distance, available extent, content density, accessibility and renderer capability.
+
+Text follows governed alignment, wrapping, truncation and reflow rules.
+
+Automatic marquees and arbitrary fit-to-box shrinking are prohibited.
+
+### Consequences
+
+Equivalent reading conditions produce equivalent hierarchy across clients, and accessibility may reflow Composition without preserving a device-specific template.
+
+---
+
 # ADR Relationships
 
 ```mermaid
@@ -302,6 +390,12 @@ ADR132["Variable Fonts"]
 
 ADR133["Modules"]
 
+ADR134["Mona Sans And Roles"]
+
+ADR135["Artwork Authority"]
+
+ADR136["Capability Resolution"]
+
 ADR125 --> ADR126
 ADR126 --> ADR127
 ADR127 --> ADR128
@@ -310,6 +404,10 @@ ADR129 --> ADR127
 ADR130 --> ADR126
 ADR131 --> ADR128
 ADR128 --> ADR133
+ADR127 --> ADR134
+ADR130 --> ADR135
+ADR128 --> ADR136
+ADR134 --> ADR136
 ```
 
 Together these decisions establish typography as the editorial voice of the Mosaic Companion.
@@ -325,7 +423,7 @@ Future Typography ADRs are expected to formalise:
 - Cross-Language Editorial Behaviour
 - Dynamic Optical Scaling
 - Immersive Reading Mode
-- Television Typography Profiles
+- Long-Distance Typography Validation
 - Accessibility Reading Personas
 - Editorial Voice Localisation
 

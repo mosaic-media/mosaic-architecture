@@ -10,30 +10,13 @@ Version: 0.4
 
 ---
 
-# Purpose
-
-This glossary defines the terminology introduced by **MDS-004 — Typography System**.
-
-Unlike previous glossaries, these definitions describe the architectural language of typography rather than implementation details.
-
-These definitions should remain stable regardless of:
-
-- rendering technology,
-- font family,
-- platform,
-- device.
-
-Future specifications should reuse these terms consistently.
-
----
-
 # A
 
 ## Accessibility Typography
 
-Typography resolved according to user accessibility requirements while preserving editorial hierarchy and reading rhythm.
+Typography resolved according to user accessibility requirements while preserving semantic hierarchy and reading rhythm.
 
-Accessibility Typography strengthens readability without introducing a different editorial language.
+Accessibility may reflow Composition and relax preferred line limits.
 
 ---
 
@@ -41,49 +24,9 @@ Accessibility Typography strengthens readability without introducing a different
 
 ## Body
 
-The primary editorial role for sustained reading.
+The semantic typography role for descriptions, biographies, reviews and sustained reading.
 
-Body typography is intended for:
-
-- descriptions,
-- reviews,
-- biographies,
-- long-form editorial content.
-
-Body represents the default reading voice of the Companion.
-
----
-
-# C
-
-## Caption
-
-The quietest editorial role.
-
-Captions communicate:
-
-- technical metadata,
-- timestamps,
-- diagnostics,
-- secondary context.
-
-Caption should remain readable while avoiding unnecessary visual emphasis.
-
----
-
-# D
-
-## Display
-
-The highest editorial role.
-
-Display typography is reserved for rare moments such as:
-
-- Hero titles,
-- onboarding,
-- major transitions.
-
-Display should communicate calm confidence rather than spectacle.
+Body establishes the reference size for the provisional Type Scale.
 
 ---
 
@@ -91,28 +34,15 @@ Display should communicate calm confidence rather than spectacle.
 
 ## Editorial Hierarchy
 
-The ordered organisation of written language according to conceptual importance.
+The ordered relationship between semantic typography roles derived from Composition.
 
-Editorial Hierarchy is derived from Composition.
-
-Typography expresses it.
-
----
+Typography expresses Editorial Hierarchy but does not create conceptual importance.
 
 ## Editorial Role
 
-A semantic typography role independent from physical implementation.
+A semantic typography responsibility independent from physical implementation.
 
-Examples include:
-
-- Display
-- Heading
-- Section
-- Body
-- Supporting
-- Caption
-
-Applications should consume editorial roles rather than font sizes.
+Mosaic defines Hero, Title, Heading, Body, Label and Metadata.
 
 ---
 
@@ -120,24 +50,37 @@ Applications should consume editorial roles rather than font sizes.
 
 ## Heading
 
-The editorial role responsible for introducing major concepts.
+The semantic typography role that organises a section or conceptual group.
 
-Examples include:
+## Hero
 
-- film titles,
-- book titles,
-- artist names,
-- collection titles.
-
-Headings establish orientation rather than decoration.
-
----
+The highest semantic typography role, used with restraint to introduce the current Focus when Composition requires a visible typographic title.
 
 ## Hero Typography
 
-The editorial expression of the current Hero.
+The editorial expression of the current Hero while preserving the emotional dominance of entertainment artwork.
 
-Hero Typography introduces the user's current Focus while preserving the emotional dominance of entertainment artwork.
+---
+
+# L
+
+## Label
+
+The semantic typography role for navigation, controls, actions and compact field identification.
+
+---
+
+# M
+
+## Metadata
+
+The subordinate semantic typography role for facts such as runtime, year, rating, timestamp or technical context.
+
+## Mona Sans
+
+The provisional single Platform typeface used across Mosaic semantic typography roles.
+
+Script-specific compatibility fallbacks do not become additional brand typefaces.
 
 ---
 
@@ -145,40 +88,9 @@ Hero Typography introduces the user's current Focus while preserving the emotion
 
 ## Optical Size
 
-A variable font axis used to improve readability at different rendered sizes.
+A variable-font axis that adapts glyph construction for rendered size.
 
-Optical Size is determined by the Typography Resolver.
-
-Applications should never manipulate it directly.
-
----
-
-# P
-
-## Paragraph Rhythm
-
-The pacing created by:
-
-- paragraph spacing,
-- line spacing,
-- editorial hierarchy.
-
-Paragraph Rhythm contributes significantly to long-form reading comfort.
-
----
-
-## Platform Typography
-
-The platform-specific implementation of the Mosaic Typography System.
-
-Platform Typography preserves editorial meaning while adapting rendering for:
-
-- Web,
-- Flutter,
-- SwiftUI,
-- Compose,
-- Television,
-- future clients.
+Mosaic resolves Optical Size automatically where supported.
 
 ---
 
@@ -186,82 +98,31 @@ Platform Typography preserves editorial meaning while adapting rendering for:
 
 ## Reading Rhythm
 
-The deliberate pacing of typography and spacing that guides readers naturally through a Composition.
-
-Reading Rhythm transforms information into a comfortable reading experience.
-
----
+The deliberate pacing created by type scale, line height, measure, paragraph spacing and hierarchy.
 
 ## Responsive Typography
 
-Typography that adapts to different viewing environments while preserving editorial hierarchy.
+The capability-driven client resolution of semantic typography roles into readable physical values.
 
-Responsive Typography changes implementation.
-
-It does not change meaning.
-
----
+Responsive Typography does not use a permanent device class.
 
 ## Runtime Typography Resolver
 
-The runtime subsystem responsible for converting editorial roles into concrete typographic implementation.
-
-Applications consume resolved typography rather than implementing typography themselves.
-
----
-
-# S
-
-## Section
-
-The editorial role responsible for organising major conceptual groups.
-
-Examples include:
-
-- Continue Watching,
-- Cast,
-- Chapters,
-- Related Works.
-
-Section typography structures understanding.
-
----
-
-## Supporting
-
-The editorial role used for secondary information.
-
-Examples include:
-
-- runtime,
-- author,
-- release year,
-- language.
-
-Supporting typography remains readable while remaining visually quieter than Body.
+The client-owned subsystem that combines editorial role, viewing context, accessibility, content pressure and renderer capability into concrete typography.
 
 ---
 
 # T
 
+## Title
+
+The semantic typography role that identifies the primary page, collection or object.
+
 ## Type Scale
 
-The ordered system of editorial typography roles.
+The ordered ratio system through which semantic typography hierarchy becomes physically readable.
 
-The Type Scale expresses hierarchy.
-
-It does not define hierarchy.
-
----
-
-## Typography Resolver
-
-The conceptual runtime process that transforms editorial roles into resolved typography according to:
-
-- accessibility,
-- responsive rules,
-- platform,
-- viewing environment.
+The current values are provisional alpha baselines.
 
 ---
 
@@ -269,16 +130,9 @@ The conceptual runtime process that transforms editorial roles into resolved typ
 
 ## Variable Font
 
-A font capable of continuously adapting properties such as:
+A font resource that can continuously adapt supported axes such as weight and optical size.
 
-- weight,
-- width,
-- optical size,
-- grade.
-
-Within Mosaic, Variable Fonts remain an implementation technique.
-
-Editorial meaning remains unchanged.
+Variable-font behaviour remains behind the Typography Resolver.
 
 ---
 
@@ -288,36 +142,24 @@ Editorial meaning remains unchanged.
 
 The perceived visual strength of typography.
 
-Weight communicates hierarchy.
-
-It should never become decorative.
-
-Within Mosaic, Weight is resolved by the Typography Resolver rather than selected manually.
+Mosaic uses weight to reinforce hierarchy and not as decoration.
 
 ---
 
 # Cross References
 
-| Specification | Primary Concepts |
+| Specification | Primary concepts |
 |---------------|------------------|
-| [MDL-001 — Mosaic Design Language Vision](../../language/mdl-001-vision/index.md) | Companion, Immersion |
-| [MDL-002 — Principles](../../language/mdl-002-principles/index.md) | Calm Interfaces |
-| [MDL-003 — Mental Model](../../language/mdl-003-mental-model/index.md) | World, Focus |
-| [MDL-004 — Interaction Model](../../language/mdl-004-interaction-model/index.md) | Reading Behaviour |
-| [MDL-005 — Composition Model](../../language/mdl-005-composition-model/index.md) | Hero, Hierarchy |
-| [MDS-001 — Design Token Architecture](../mds-001-design-token-architecture/index.md) | Semantic Roles |
-| [MDS-003 — Material System](../mds-003-material-system/index.md) | Hero Material, Canvas |
+| [MDL-005 — Composition Model](../../language/mdl-005-composition-model/index.md) | Hero and hierarchy |
+| [MDS-001 — Design Token Architecture](../mds-001-design-token-architecture/index.md) | Primitive type resources and runtime resolution |
+| [MDS-003 — Material System](../mds-003-material-system/index.md) | Acrylic information planes |
+| [MDS-005 — Motion System](../mds-005-motion-system/index.md) | Reflow continuity |
+| [MDS-006 — Composition Engine](../mds-006-composition-engine/index.md) | Artwork-title selection and Adaptive Layout |
 
 ---
 
 # Terminology Rules
 
-Future contributors should:
+Use Hero, Title, Heading, Body, Label and Metadata for current semantic typography roles.
 
-- describe editorial roles before font sizes,
-- describe reading before rendering,
-- distinguish hierarchy from typography,
-- distinguish editorial language from implementation,
-- avoid platform-specific terminology inside architectural specifications.
-
-Typography terminology should remain independent from rendering technology.
+Describe roles before values and reading conditions before client categories.

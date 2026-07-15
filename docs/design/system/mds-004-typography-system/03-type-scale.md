@@ -13,24 +13,9 @@ Version: 0.4
 
 # Purpose
 
-Editorial Hierarchy defines **what deserves emphasis**.
+The Type Scale defines the provisional physical relationship between Mosaic's semantic typography roles.
 
-The Type Scale defines **how that emphasis is physically communicated**.
-
-Unlike many design systems, the Mosaic Type Scale is **not** a mathematical ladder of font sizes.
-
-It is a reading system.
-
-Every step exists to support:
-
-- understanding,
-- rhythm,
-- hierarchy,
-- companionship.
-
-Typography should encourage reading.
-
-Not simply display information.
+It does not expose fixed sizes to SDUI, Modules or ordinary components.
 
 ---
 
@@ -38,613 +23,106 @@ Not simply display information.
 
 Within MDS, the **Type Scale** is defined as:
 
-> **The ordered system of typographic roles through which editorial hierarchy becomes physically readable.**
+> **The ordered ratio system through which semantic typography hierarchy becomes physically readable.**
 
-The Type Scale expresses hierarchy.
+The client resolves one reference Body size for the current viewing context.
 
-It does not create it.
-
-Hierarchy already exists within the Composition.
+Every other role derives from that reference.
 
 ---
 
-# Philosophy
+# Provisional Alpha Scale
 
-Many interfaces define typography like this.
+| Role | Scale | Weight | Line height |
+|------|------:|-------:|------------:|
+| Hero | `2.50×` | `600` | `1.05` |
+| Title | `1.75×` | `600` | `1.10` |
+| Heading | `1.25×` | `600` | `1.20` |
+| Body | `1.00×` | `400` | `1.45` |
+| Label | `0.875×` | `500` | `1.20` |
+| Metadata | `0.75×` | `400` or `500` | `1.30` |
 
-```text
-12
+These values are a provisional alpha baseline.
 
-14
-
-16
-
-18
-
-20
-
-24
-
-32
-
-48
-```
-
-These are numbers.
-
-They communicate almost nothing.
-
-Mosaic instead thinks in reading roles.
-
-```mermaid
-flowchart TD
-
-N1["Display"]
-N2["Heading"]
-N3["Section"]
-N4["Body"]
-N5["Supporting"]
-N6["Caption"]
-
-N1 --> N2
-N2 --> N3
-N3 --> N4
-N4 --> N5
-N5 --> N6
-```
-
-Values exist only to support those roles.
+They become authoritative only after reference compositions validate reading distance, dense layouts, long titles, localisation, accessibility scaling and cross-renderer output.
 
 ---
 
-# Scale Before Size
+# Weight Discipline
 
-Typography should always be selected by role.
+Mosaic permits four normal product weights:
 
-Not measurement.
+| Weight | Responsibility |
+|-------:|----------------|
+| `400` | Body and ordinary metadata |
+| `500` | Labels, controls and emphasised metadata |
+| `600` | Hero, Title and Heading |
+| `700` | Exceptional emphasis only |
 
-Incorrect.
+Weights `800` and `900` are excluded from normal product presentation.
 
-```text
-Use 24px
-```
-
-Correct.
-
-```text
-Use Heading
-```
-
-The Design System determines the correct implementation.
-
-Applications should never depend upon physical measurements.
+Large typography gains presence through scale and Composition rather than excessive weight.
 
 ---
 
-# Scale Hierarchy
+# Client Resolution
 
-The Mosaic Type Scale contains six primary levels.
+The client determines the Body reference from:
 
-```mermaid
-flowchart TD
-
-N1["Display"]
-N2["Heading"]
-N3["Section"]
-N4["Body"]
-N5["Supporting"]
-N6["Caption"]
-
-N1 --> N2
-N2 --> N3
-N3 --> N4
-N4 --> N5
-N5 --> N6
-```
-
-Each level exists because it communicates a different editorial responsibility.
-
----
-
-# Display
-
-Purpose.
-
-Communicate major emotional moments.
-
-Examples include:
-
-- Hero title
-- onboarding
-- welcome
-- major transitions
-
-Display typography should remain rare.
-
-Overuse weakens emphasis.
-
----
-
-# Heading
-
-Purpose.
-
-Establish orientation.
-
-Examples.
-
-- film title
-- book title
-- artist
-- collection
-
-Headings should communicate confidence.
-
-Not visual drama.
-
----
-
-# Section
-
-Purpose.
-
-Organise the Composition.
-
-Examples.
-
-- Continue Watching
-- Related Works
-- Recently Added
-- Chapters
-
-Sections divide understanding into meaningful editorial groups.
-
----
-
-# Body
-
-Purpose.
-
-Support sustained reading.
-
-Body typography represents the majority of reading throughout Mosaic.
-
-Examples.
-
-- synopsis
-- descriptions
-- reviews
-- biographies
-
-Comfort should always have higher priority than compactness.
-
----
-
-# Supporting
-
-Purpose.
-
-Communicate secondary understanding.
-
-Examples.
-
-- runtime
-- release year
-- author
-- subtitle language
-- resolution
-
-Supporting typography should remain easy to read while remaining visually quieter than Body text.
-
----
-
-# Caption
-
-Purpose.
-
-Communicate peripheral detail.
-
-Examples.
-
-- timestamps
-- codec
-- bitrate
-- diagnostics
-- technical metadata
-
-Caption typography should never become unreadable.
-
-Quiet does not mean small.
-
-It means lower editorial importance.
-
----
-
-# Scale Relationships
-
-Each level should feel related to the levels around it.
-
-Example.
-
-```mermaid
-flowchart TD
-
-N1["Heading"]
-N2["Section"]
-N3["Body"]
-
-N1 --> N2
-N2 --> N3
-```
-
-The transition should feel gradual.
-
-Not abrupt.
-
-Readers should naturally move through the hierarchy without consciously noticing changes in scale.
-
----
-
-# Optical Rhythm
-
-Typography should create rhythm rather than mathematical progression.
-
-Poor.
-
-```text
-16
-
-18
-
-20
-
-22
-
-24
-```
-
-Preferred.
-
-```mermaid
-flowchart TD
-
-N1["Display"]
-N2["Heading"]
-N3["Section"]
-N4["Body"]
-
-N1 --> N2
-N2 --> N3
-N3 --> N4
-```
-
-Readers perceive rhythm.
-
-Not pixel values.
-
-The scale should therefore optimise perception.
-
-Not arithmetic.
-
----
-
-# Reading Distance
-
-Different contexts require different perceived scale.
-
-Examples.
-
-Television.
-
-↓
-
-Greater viewing distance.
-
-↓
-
-Larger physical implementation.
-
-Phone.
-
-↓
-
-Closer viewing distance.
-
-↓
-
-Smaller physical implementation.
-
-The editorial role remains identical.
-
-Only implementation changes.
-
----
-
-# Hero Scale
-
-Hero Typography should possess the greatest physical presence.
-
-However...
-
-It should never dominate through size alone.
-
-Hero emphasis should emerge through:
-
-- hierarchy
-- composition
-- spacing
-- materials
-- typography
-
-Working together.
-
-Typography should never carry hierarchy independently.
-
----
-
-# Long-Form Reading
-
-Books.
-
-Reviews.
-
-Descriptions.
-
-Editorial content.
-
-These experiences should optimise:
-
-- line length
-- rhythm
-- paragraph spacing
-- eye movement
-
-The Body role therefore becomes one of the most carefully tuned parts of the entire Typography System.
-
-Comfort should remain the primary objective.
-
----
-
-# Runtime Adaptation
-
-The Type Scale may adapt according to:
-
-- accessibility
 - viewing distance
-- platform
-- display density
+- available extent
+- typography metrics
+- accessibility preferences
+- content density
+- renderer capability
 
-It should never adapt because:
+It must not select the reference from a permanent device category.
 
-- artwork changed
-- atmosphere changed
-
-Atmosphere influences Materials.
-
-Typography remains comparatively stable.
+The relative role hierarchy remains stable when physical values change.
 
 ---
 
-# Variable Fonts
+# Scale Constraints
 
-Future implementations may use variable font technology.
+The resolver must not:
 
-The Type Scale should express:
+- shrink text arbitrarily to fit a fixed box
+- flatten role relationships to display more content
+- use weight as decoration
+- expose measurements through SDUI
+- allow Modules to select a scale stop
 
-- weight
-- width
-- optical size
-
-through semantic roles.
-
-Applications should never manipulate these values directly.
-
-The Variable Font System is defined later within this specification.
+When content does not fit, Composition must reflow, disclose progressively or reduce lower-priority information before typography becomes uncomfortable.
 
 ---
 
-# Accessibility
+# Optical Size
 
-The Type Scale should remain recognisable regardless of:
+Mona Sans optical sizing should resolve automatically where supported.
 
-- increased text size
-- reduced vision
-- high contrast
-- platform scaling
+Clients without optical-size support approximate the same editorial result through validated static instances.
 
-Increasing text size should preserve hierarchy.
-
-Not flatten it.
-
-Every editorial role should remain identifiable.
+Applications and Modules cannot manipulate optical size.
 
 ---
 
-# Good Examples
-
-## Film
-
-Display.
-
-↓
-
-Film Title.
-
-Heading.
-
-↓
-
-Continue Watching.
-
-Section.
-
-↓
-
-Cast.
-
-Body.
-
-↓
-
-Synopsis.
-
-Supporting.
-
-↓
-
-Runtime.
-
-Caption.
-
-↓
-
-HDR.
-
-Readers instinctively understand importance.
-
----
-
-## Reading
-
-Heading.
-
-↓
-
-Book Title.
-
-Section.
-
-↓
-
-Current Chapter.
-
-Body.
-
-↓
-
-Content.
-
-Supporting.
-
-↓
-
-Progress.
-
-Caption.
-
-↓
-
-Page Count.
-
-Long-form reading remains comfortable.
-
----
-
-## Administration
-
-Heading.
-
-↓
-
-Users.
-
-Section.
-
-↓
-
-Permissions.
-
-Body.
-
-↓
-
-Configuration.
-
-Caption.
-
-↓
-
-Diagnostics.
-
-Editorial consistency remains intact despite higher information density.
-
----
-
-# Anti-patterns
-
-## Pixel Thinking
-
-Selecting typography by measurement.
-
----
-
-## Decorative Scale
-
-Large text used purely because space exists.
-
----
-
-## Tiny Metadata
-
-Caption becoming unreadable.
-
----
-
-## Equal Scale
-
-Every editorial role appearing visually identical.
-
-Hierarchy disappears.
-
----
-
-# Type Scale Model
-
-```mermaid
-flowchart TD
-
-EditorialHierarchy
-EditorialHierarchy --> TypeScale
-TypeScale --> ResponsiveScaling
-ResponsiveScaling --> Presentation
-```
-
-Editorial intent determines the role.
-
-The Type Scale determines the physical expression.
-
----
-
-# Relationship To Future Chapters
-
-The next chapter defines **Reading Rhythm**.
-
-The Type Scale answers:
-
-> **How large should each editorial role feel?**
-
-Reading Rhythm answers:
-
-> **How should those roles work together over time?**
-
-Together they create typography that feels read rather than scanned.
+# Validation Backlog
+
+The alpha Design System must test:
+
+- Hero and Title restraint beside artwork
+- portrait poster labels below artwork
+- long and localised media titles
+- television viewing distance
+- mobile and windowed reading
+- dense calendar and administration layouts
+- accessibility text scaling and reflow
+- Web and native font metric parity
 
 ---
 
 # Summary
 
-The Type Scale is not a collection of font sizes.
+The Type Scale establishes stable ratios rather than device-specific pixels.
 
-It is a reading hierarchy.
-
-Every level should encourage effortless movement through the user's current World.
-
-Users should naturally know:
-
-- where to begin,
-- what deserves attention,
-- what supports understanding,
-
-without consciously analysing typography.
-
-That effortless progression is the defining objective of the Mosaic Type Scale.
+It preserves one hierarchy while allowing each client to produce readable physical typography.

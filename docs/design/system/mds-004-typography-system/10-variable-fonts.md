@@ -158,31 +158,19 @@ Weight should communicate confidence rather than heaviness.
 
 Avoid dramatic weight differences unless editorially justified.
 
+Mosaic uses `400`, `500`, `600` and exceptional `700` output for normal product presentation.
+
+Weights `800` and `900` are excluded from ordinary product UI.
+
 ---
 
 # Width
 
-Purpose.
+Mosaic uses the Mona Sans default width.
 
-Optimise reading comfort.
+Width is not a hierarchy tool, a Module control or a device-profile variation.
 
-Examples.
-
-Phone.
-
-↓
-
-Slightly wider characters.
-
-Television.
-
-↓
-
-Slightly narrower measure.
-
-Width should improve reading.
-
-Not create stylistic variation.
+Any future width-axis use requires Typography governance and evidence that it improves accessibility without changing the brand voice.
 
 ---
 
@@ -280,35 +268,9 @@ Users should perceive one consistent editorial voice.
 
 # Responsive Behaviour
 
-Future implementations may use Variable Fonts to preserve reading rhythm.
+Future implementations may use Variable Fonts to preserve reading rhythm from measured viewing conditions, resolved size, accessibility and renderer capability.
 
-Example.
-
-Desktop.
-
-↓
-
-Default optical size.
-
-Phone.
-
-↓
-
-Closer viewing distance.
-
-↓
-
-Adjusted optical size.
-
-Television.
-
-↓
-
-Greater distance.
-
-↓
-
-Adjusted weight.
+Optical size should follow the resolved physical typography automatically.
 
 The editorial hierarchy remains identical.
 
@@ -451,7 +413,7 @@ Every module therefore inherits future typography improvements automatically.
 
 # Good Examples
 
-## Phone
+## Near Viewing Context
 
 Heading.
 
@@ -467,7 +429,7 @@ The reader notices comfort rather than typography.
 
 ---
 
-## Television
+## Distant Viewing Context
 
 Body.
 

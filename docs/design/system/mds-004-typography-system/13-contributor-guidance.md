@@ -179,7 +179,7 @@ or
 
 ```
 
-Supporting
+Metadata
 ```
 
 The Typography Resolver owns physical implementation.

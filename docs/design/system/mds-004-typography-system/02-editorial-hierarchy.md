@@ -13,22 +13,11 @@ Version: 0.4
 
 # Purpose
 
-Typography communicates more than language.
+Editorial Hierarchy determines how Mosaic communicates importance through written language.
 
-It communicates:
+Composition establishes conceptual importance.
 
-- importance,
-- confidence,
-- rhythm,
-- intent.
-
-Within Mosaic this communication is intentionally modelled after editorial design rather than dashboard software.
-
-Editorial Hierarchy defines how typography guides attention through a Composition.
-
-It answers one question.
-
-> **"What should the reader understand first?"**
+Typography expresses it without competing with artwork or Material hierarchy.
 
 ---
 
@@ -36,143 +25,44 @@ It answers one question.
 
 Within MDS, **Editorial Hierarchy** is defined as:
 
-> **The intentional organisation of written language into a reading experience that mirrors the conceptual hierarchy established by the Composition Model.**
+> **The ordered relationship between semantic typography roles through which a solved Composition becomes readable.**
 
-Editorial Hierarchy should never create hierarchy independently.
+Editorial Hierarchy is stable across clients.
 
-It reinforces hierarchy that already exists.
-
----
-
-# Why Editorial?
-
-Entertainment is consumed.
-
-Not managed.
-
-People naturally expect:
-
-- stories,
-- books,
-- magazines,
-- albums,
-- films
-
-to present information editorially.
-
-Traditional software instead presents information transactionally.
-
-Examples.
-
-```
-
-Runtime
-
-Genre
-
-Rating
-
-Studio
-
-Release
-```
-
-Everything receives identical emphasis.
-
-Editorial Hierarchy instead tells a story.
-
-```mermaid
-flowchart TD
-
-N1["Current Focus"]
-N2["Current Progress"]
-N3["Supporting Information"]
-N4["Additional Context"]
-
-N1 --> N2
-N2 --> N3
-N3 --> N4
-```
-
-The user reads naturally.
-
-Rather than scanning mechanically.
+Its physical implementation adapts.
 
 ---
 
-# Composition Leads
+# Primary Roles
 
-Typography should always follow Composition.
+Mosaic defines six semantic typography roles.
 
-Never the reverse.
+| Role | Responsibility | Typical content |
+|------|----------------|-----------------|
+| Hero | Introduce the current Focus with restrained presence | Hero fallback title, rare major moment |
+| Title | Identify the primary page, collection or object | Media title, page title, collection title |
+| Heading | Organise a section or conceptual group | Continue Watching, Cast, Chapters |
+| Body | Support sustained reading | Synopsis, description, biography |
+| Label | Identify actions, navigation and compact controls | Play, Search, Save, field label |
+| Metadata | Provide subordinate facts and context | Runtime, year, rating, timestamp |
 
-Conceptually.
+SDUI and Platform components request these roles by meaning.
 
-```mermaid
-flowchart TD
-
-N1["Composition"]
-N2["Editorial Hierarchy"]
-N3["Typography"]
-N4["Presentation"]
-
-N1 --> N2
-N2 --> N3
-N3 --> N4
-```
-
-The Composition determines:
-
-- what matters.
-
-Typography determines:
-
-- how that importance is communicated.
+They do not request a font size, weight or line height.
 
 ---
 
-# Reading Order
-
-Every Composition should establish one natural reading path.
-
-Typical order.
+# Hierarchy Order
 
 ```mermaid
 flowchart TD
 
 N1["Hero"]
-N2["Primary Action"]
-N3["Supporting Information"]
-N4["Context"]
-N5["Relationships"]
-N6["Peripheral Information"]
-
-N1 --> N2
-N2 --> N3
-N3 --> N4
-N4 --> N5
-N5 --> N6
-```
-
-Readers should never consciously search for the next piece of information.
-
-Editorial Hierarchy should quietly guide them.
-
----
-
-# Hierarchy Levels
-
-The Typography System defines six editorial levels.
-
-```mermaid
-flowchart TD
-
-N1["Display"]
-N2["Heading"]
-N3["Section"]
+N2["Title"]
+N3["Heading"]
 N4["Body"]
-N5["Supporting"]
-N6["Caption"]
+N5["Label"]
+N6["Metadata"]
 
 N1 --> N2
 N2 --> N3
@@ -181,485 +71,79 @@ N4 --> N5
 N5 --> N6
 ```
 
-Each level exists for one purpose.
+The order describes expected emphasis rather than a mandatory document structure.
 
-None should duplicate another.
+A Composition may omit any role that is not required.
 
----
-
-# Display
-
-Purpose.
-
-Communicate the Hero.
-
-Display typography should appear rarely.
-
-Normally only:
-
-- Hero titles,
-- onboarding,
-- major transitions,
-- immersive artwork.
-
-Display typography should never become routine.
-
-Its rarity preserves its impact.
+Hero must remain rare.
 
 ---
 
-# Heading
+# Artwork Authority
 
-Purpose.
+Artwork carries media emotion and identity.
 
-Introduce major concepts.
+Typography provides orientation and understanding.
 
-Examples.
+Typography must not become the primary focal point of a media Composition.
 
-- Film title
-- Book title
-- Artist
-- Collection
+The Composition-owned HD ClearLogo and portrait-poster rules are defined in [MDS-006 — Composition Engine](../mds-006-composition-engine/06-adaptive-layout.md#artwork-title-treatment).
 
-Headings establish orientation.
-
-Not decoration.
+When Composition selects a ClearLogo, the semantic title remains present for accessibility and non-visual output even though Hero or Title typography is not visibly rendered.
 
 ---
 
-# Section
+# One Typeface Voice
 
-Purpose.
+Every role uses the Platform typeface defined by this specification.
 
-Organise understanding.
+Hierarchy is created through:
 
-Examples.
+- size
+- weight
+- line height
+- spacing
+- placement
 
-- Continue Watching
-- Related Works
-- Chapters
-- Cast
-
-Section typography should quietly structure the Composition.
-
----
-
-# Body
-
-Purpose.
-
-Communicate primary reading content.
-
-Examples.
-
-- descriptions
-- metadata
-- reviews
-- summaries
-
-Body typography should prioritise:
-
-- comfort,
-- rhythm,
-- clarity.
-
-Body text represents the majority of reading within Mosaic.
+It is not created by switching font families.
 
 ---
 
-# Supporting
+# Reading Priority
 
-Purpose.
+Typography should guide the reader through:
 
-Communicate secondary understanding.
+1. current Focus
+2. primary identity
+3. section structure
+4. explanatory content
+5. available actions
+6. supporting facts
 
-Examples.
-
-- runtime,
-- publication date,
-- codec,
-- subtitle language,
-- metadata.
-
-Supporting typography should remain readable without competing with primary information.
+The order may adapt spatially but must remain understandable.
 
 ---
 
-# Caption
+# Module Boundary
 
-Purpose.
+Modules provide content, domain intent and relationships.
 
-Communicate quiet context.
+They cannot:
 
-Examples.
+- create typography roles
+- choose font families
+- select physical font values
+- manipulate variable font axes
+- override accessibility behaviour
 
-- timestamps,
-- file size,
-- diagnostics,
-- technical metadata.
-
-Caption typography should remain present without drawing unnecessary attention.
-
----
-
-# Hierarchy Is Relative
-
-Editorial Hierarchy depends upon Context.
-
-Example.
-
-Current Context.
-
-```
-
-Watching
-```
-
-Episode title becomes:
-
-Heading.
-
-Runtime becomes:
-
-Supporting.
-
-Later.
-
-```
-
-Browsing Reviews
-```
-
-Review title becomes:
-
-Heading.
-
-Episode runtime becomes:
-
-Caption.
-
-Typography adapts because understanding changes.
-
----
-
-# Hierarchy And Space
-
-Editorial Hierarchy should work together with Breathing Space.
-
-Example.
-
-```mermaid
-flowchart TD
-
-N1["Heading"]
-N2["Space"]
-N3["Body"]
-N4["Space"]
-N5["Supporting"]
-
-N1 --> N2
-N2 --> N3
-N3 --> N4
-N4 --> N5
-```
-
-Whitespace communicates editorial rhythm.
-
-Typography alone should never carry the full burden of hierarchy.
-
----
-
-# Hero Typography
-
-The Hero should receive the strongest editorial treatment.
-
-However...
-
-It should not become theatrical.
-
-Avoid:
-
-- oversized typography,
-- excessive weight,
-- unnecessary visual effects.
-
-The Hero should communicate quiet confidence.
-
-Not spectacle.
-
----
-
-# Editorial Consistency
-
-Every Domain should reuse the same editorial hierarchy.
-
-Television.
-
-↓
-
-Episode title.
-
-Books.
-
-↓
-
-Chapter title.
-
-Music.
-
-↓
-
-Track title.
-
-Different content.
-
-Identical editorial language.
-
-Users should never learn multiple typographic systems.
-
----
-
-# Runtime Adaptation
-
-Editorial Hierarchy remains conceptually stable.
-
-Runtime may adapt:
-
-- scale,
-- spacing,
-- weight,
-- contrast.
-
-Meaning remains unchanged.
-
-The same Heading should remain a Heading regardless of:
-
-- Light Mode,
-- Dark Mode,
-- Television,
-- Mobile.
-
----
-
-# Accessibility
-
-Editorial Hierarchy should survive:
-
-- reduced colour,
-- reduced motion,
-- high contrast,
-- enlarged text.
-
-If hierarchy disappears when colour is removed...
-
-Typography has failed.
-
----
-
-# Materials
-
-Typography should respond to surrounding materials.
-
-Hero Material.
-
-↓
-
-More generous spacing.
-
-Overlay Material.
-
-↓
-
-Higher clarity.
-
-Canvas.
-
-↓
-
-Editorial calmness.
-
-Materials influence typography subtly.
-
-They never redefine hierarchy.
-
----
-
-# Good Examples
-
-## Film
-
-Display.
-
-↓
-
-Film title.
-
-Heading.
-
-↓
-
-Continue Watching.
-
-Body.
-
-↓
-
-Synopsis.
-
-Supporting.
-
-↓
-
-Runtime.
-
-Caption.
-
-↓
-
-Codec.
-
-The reader instinctively understands where to begin.
-
----
-
-## Reading
-
-Heading.
-
-↓
-
-Book title.
-
-Section.
-
-↓
-
-Current Chapter.
-
-Body.
-
-↓
-
-Summary.
-
-Supporting.
-
-↓
-
-Progress.
-
-The hierarchy quietly encourages continued reading.
-
----
-
-## Administration
-
-Heading.
-
-↓
-
-Users.
-
-Section.
-
-↓
-
-Permissions.
-
-Body.
-
-↓
-
-Configuration.
-
-Caption.
-
-↓
-
-Diagnostics.
-
-Editorial rhythm remains recognisably Mosaic despite increased information density.
-
----
-
-# Anti-patterns
-
-## Equal Typography
-
-Every piece of text appears identical.
-
-Users construct hierarchy themselves.
-
----
-
-## Decorative Hierarchy
-
-Hierarchy depends upon colour or animation.
-
-Typography should remain understandable independently.
-
----
-
-## Oversized Headlines
-
-Every heading competes for attention.
-
-The interface begins shouting.
-
----
-
-## Dense Metadata
-
-Supporting information visually overwhelms primary content.
-
-The Composition weakens.
-
----
-
-# Editorial Hierarchy Model
-
-```mermaid
-flowchart TD
-
-Composition
-Composition --> EditorialHierarchy
-EditorialHierarchy --> TypographyScale
-TypographyScale --> ReadingRhythm
-ReadingRhythm --> Presentation
-```
-
-Editorial Hierarchy transforms conceptual importance into readable structure.
-
----
-
-# Relationship To Future Chapters
-
-The next chapter defines the **Type Scale**.
-
-Editorial Hierarchy answers:
-
-> **What should be emphasised?**
-
-The Type Scale answers:
-
-> **How should that emphasis be physically expressed?**
-
-Together they establish the typographic language of Mosaic.
+New cross-Platform editorial meaning requires Design System governance.
 
 ---
 
 # Summary
 
-Editorial Hierarchy is the bridge between Composition and Typography.
+Mosaic uses six semantic roles to preserve one editorial voice across media, utility and administrative experiences.
 
-It allows users to instinctively understand:
+Composition determines importance.
 
-- what matters,
-- what supports it,
-- what can wait.
-
-Typography should therefore feel less like interface chrome...
-
-...and more like a carefully edited publication.
-
-That editorial quality is one of the defining characteristics of the Mosaic Design System.
+Typography makes that importance readable.

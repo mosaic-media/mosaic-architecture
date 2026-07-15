@@ -122,11 +122,11 @@ flowchart TD
 
 N1["Editorial Role"]
 N2["Current Context"]
-N3["Device Class"]
-N4["Viewing Distance"]
-N5["Accessibility"]
-N6["User Preferences"]
-N7["Platform Capability"]
+N3["Available Extent"]
+N4["Viewing And Input Context"]
+N5["Typography And Accessibility"]
+N6["Content Density"]
+N7["Renderer Capability"]
 
 N1 --> N2
 N2 --> N3
@@ -230,23 +230,9 @@ The same editorial role may therefore resolve differently while remaining concep
 
 Viewing distance is considered a runtime input.
 
-Television.
+Greater distance may require greater physical size and separation.
 
-↓
-
-Greater physical size.
-
-Phone.
-
-↓
-
-Smaller physical size.
-
-Desktop.
-
-↓
-
-Balanced implementation.
+Near viewing may permit a smaller physical implementation while preserving the same perceived hierarchy.
 
 The user should perceive equivalent readability regardless of hardware.
 
@@ -337,8 +323,8 @@ flowchart TD
 
 N1["Accessibility Changes"]
 N2["Body"]
-N3["Supporting"]
-N4["Caption"]
+N3["Label"]
+N4["Metadata"]
 
 N1 --> N2
 N2 --> N3

@@ -91,6 +91,8 @@ This specification defines:
 - Accessibility
 - Typography Resolution
 - Runtime Typography
+- Mona Sans Platform typeface
+- capability-driven text behaviour
 
 This specification intentionally does **not** define:
 
@@ -112,7 +114,11 @@ MDS-004 exists to answer one question.
 
 Not:
 
-> Which font should we use?
+> Which font size should this screen use?
+
+Mona Sans is the selected provisional Platform typeface.
+
+The guiding question prevents consumers from bypassing semantic roles; it does not prevent this specification from governing the shared typeface resource.
 
 ---
 

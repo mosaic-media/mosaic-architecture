@@ -158,6 +158,22 @@ Rendering quality should strengthen that communication.
 
 ---
 
+# Primary Typeface
+
+Mona Sans is the Mosaic Platform typeface.
+
+It provides one variable family for Hero, Title, Heading, Body, Label and Metadata roles.
+
+Mosaic uses the default width and creates hierarchy through size, weight, line height, spacing and Composition.
+
+The normal product weight range is `400` to `700`.
+
+Optical sizing resolves automatically where supported.
+
+The typeface remains a provisional alpha dependency until language coverage, font loading, renderer metrics and licensing packaging have been verified.
+
+---
+
 # Font Metrics
 
 Different rendering engines interpret font metrics differently.
@@ -185,9 +201,9 @@ Conceptually.
 ```mermaid
 flowchart TD
 
-N1["Primary Typeface"]
-N2["Platform Fallback"]
-N3["System Typeface"]
+N1["Mona Sans"]
+N2["Script-Specific Fallback"]
+N3["System Sans Serif"]
 
 N1 --> N2
 N2 --> N3
@@ -200,6 +216,14 @@ Fallbacks should preserve:
 - readability
 
 Editorial identity should remain recognisable even when the preferred font is unavailable.
+
+Script-specific fallbacks are permitted only when Mona Sans lacks required glyph coverage.
+
+They are compatibility resources rather than additional Mosaic brand typefaces.
+
+A monospace family is permitted only for genuinely technical content such as logs or code.
+
+Ordinary administration interfaces continue to use Mona Sans.
 
 ---
 
@@ -268,43 +292,15 @@ The perceived reading comfort should remain stable.
 
 ---
 
-# Television
+# Viewing Conditions
 
-Television typography should optimise for:
+Platform implementations combine current viewing distance, extent, input context, operating-system scaling and accessibility.
 
-- distance
-- larger viewing angles
-- remote interaction
+Distant viewing should favour clarity over compactness.
 
-Rendering should favour clarity over compactness.
+Constrained extent should preserve rhythm through reflow and disclosure rather than arbitrary type reduction.
 
-Long reading passages should remain comfortable despite increased viewing distance.
-
----
-
-# Mobile
-
-Mobile typography should optimise for:
-
-- close viewing
-- interruption
-- one-handed interaction
-
-Editorial rhythm should remain intact despite constrained space.
-
----
-
-# Desktop
-
-Desktop typography should take advantage of:
-
-- additional space
-- longer reading sessions
-- precise rendering
-
-Extra space should improve rhythm.
-
-It should not increase visual complexity.
+Additional space should improve reading measure and breathing room rather than increase visual complexity.
 
 ---
 
@@ -369,7 +365,7 @@ Identical editorial behaviour.
 
 ---
 
-## Television
+## Distant Viewing
 
 Larger physical typography.
 

@@ -153,6 +153,14 @@ Nor should artwork reduce typographic clarity.
 
 Both systems should feel deliberately balanced.
 
+Composition may replace the visible Hero title with an HD ClearLogo when landscape or backdrop artwork contains verified negative space.
+
+If placement is unsafe, Typography renders the Mona Sans semantic title on an Acrylic information plane.
+
+Portrait poster artwork remains unobstructed and places title and metadata below the image.
+
+The authoritative selection contract is defined by [MDS-006 — Composition Engine](../mds-006-composition-engine/06-adaptive-layout.md#artwork-title-treatment).
+
 ---
 
 # Hero Rhythm
@@ -356,33 +364,13 @@ Only environmental interpretation changes.
 
 ---
 
-# Hero Across Devices
+# Hero Across Viewing Contexts
 
-Desktop.
+Hero Typography adapts from available extent, artwork placement, viewing distance, accessibility and current content pressure.
 
-↓
+The client may expand or compact physical scale without changing Hero meaning.
 
-Expanded hierarchy.
-
-Tablet.
-
-↓
-
-Editorial hierarchy.
-
-Phone.
-
-↓
-
-Compact hierarchy.
-
-Television.
-
-↓
-
-Greater physical scale.
-
-Greater viewing distance.
+Greater viewing distance may require greater physical size without increasing typographic loudness.
 
 The Hero should remain immediately recognisable regardless of implementation.
 

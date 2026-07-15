@@ -340,6 +340,8 @@ Together these specifications define the conceptual foundation of the Typography
 
 Future contributors may also wish to review:
 
+- [Mona Sans](https://github.com/github/mona-sans)
+- [SIL Open Font License 1.1](https://openfontlicense.org/)
 - [MDS-005 — Motion System](../mds-005-motion-system/index.md)
 - [MDS-006 — Composition Engine](../mds-006-composition-engine/index.md)
 - [MDS-007 — Tile Framework](../mds-007-tile-framework/index.md)
