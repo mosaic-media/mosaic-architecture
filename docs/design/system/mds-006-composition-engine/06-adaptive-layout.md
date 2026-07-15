@@ -137,6 +137,25 @@ Only layout.
 
 ---
 
+# Layout Modes
+
+Mosaic supports two client layout modes.
+
+| Mode | Use |
+|------|-----|
+| Adaptive Composition | Media-driven experiences where the client mathematically resolves Tile geometry from Composition, artwork, Focus, content and current constraints. |
+| Authored Layout | Documentation, administration, dashboards and conventional application pages built with CSS or native layout using public Semantic Tokens. |
+
+Both modes use the same typography, spacing, sizing, Material, accessibility and Refraction systems.
+
+Authored Layout does not require the Composition Engine to replace CSS Grid, Flexbox or native layout primitives.
+
+Adaptive Composition does not require authors to select spacing or geometry values manually.
+
+One client may combine both modes while preserving one Mosaic design language.
+
+---
+
 # Layout Inputs
 
 Adaptive Layout evaluates:
@@ -249,6 +268,26 @@ Dense administration and calendar expressions may reduce internal separation wit
 Accessibility may increase separation or restructure the Composition.
 
 It must not solve pressure by squeezing content below readable or operable limits.
+
+---
+
+# Acrylic Topology
+
+Composition determines material topology before the Material System resolves Acrylic edges.
+
+One Tile represents one continuous Acrylic surface even when it contains several internal content regions.
+
+An Acrylic Assembly represents several rigid Tiles that share a governed group relationship while retaining distinct material boundaries.
+
+Adaptive Layout may align and move Assembly members together and the renderer may composite them in one pass.
+
+It must not fuse separate Tile silhouettes because their projected bounds touch or become close.
+
+Modules express content relationships and valid domain layout modes.
+
+They do not select continuous-surface, seam, radius or edge-band values directly.
+
+The visual and optical Assembly behaviour is owned by [MDS-003 — Material System](../mds-003-material-system/04-acrylic.md#acrylic-assemblies).
 
 ---
 
@@ -544,7 +583,9 @@ Not behavioural meaning.
 
 Modules contribute Expressions and may declare governed domain layout constraints or valid presentation modes.
 
-Modules do not provide final Presentation coordinates, spacing, padding, radius, density or typography values.
+Modules do not provide final Presentation coordinates, Material radius values or arbitrary Primitive values.
+
+A Module implementing Authored Layout may consume the public Semantic Tokens defined by [MDS-001 — Design Token Architecture](../mds-001-design-token-architecture/04-semantic-tokens.md).
 
 Adaptive Layout remains Platform-owned and chooses how the Module contract is projected through Mosaic primitives.
 

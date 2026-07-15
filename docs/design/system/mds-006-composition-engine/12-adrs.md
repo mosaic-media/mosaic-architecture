@@ -328,6 +328,68 @@ Media identity adapts to the asset rather than a device category, and title pres
 
 ---
 
+# ADR-165
+
+## Title
+
+Distinguish Acrylic Assembly From Material Fusion
+
+### Status
+
+Accepted
+
+### Context
+
+Composition may need to group several Tiles and render them efficiently without making rigid Acrylic behave like proximity-driven liquid glass.
+
+### Decision
+
+One Tile defines one continuous Acrylic surface.
+
+An Acrylic Assembly groups separate rigid Tiles for coordinated layout, movement and optional renderer compositing while preserving their material boundaries.
+
+Touching or nearby Tile bounds do not fuse.
+
+Modules cannot select material topology or edge values directly.
+
+### Consequences
+
+Composition retains grouping flexibility and performance options while the Material System preserves rigid Acrylic identity.
+
+---
+
+# ADR-166
+
+## Title
+
+Support Adaptive Composition And Authored Layout
+
+### Status
+
+Accepted
+
+### Context
+
+Media browsing benefits from mathematically resolved Composition, while documentation, administration and dashboard experiences require conventional CSS or native layout authoring.
+
+Treating either mode as universal would make Mosaic impractical for the other.
+
+### Decision
+
+Mosaic supports Adaptive Composition and Authored Layout as peer client consumption modes.
+
+Adaptive Composition resolves geometry automatically.
+
+Authored Layout uses public Semantic Tokens with conventional layout primitives.
+
+Both modes share the same Design Language, Material, typography, accessibility and runtime resolution contracts.
+
+### Consequences
+
+Mosaic can support cinematic media experiences and standard application surfaces without maintaining separate design systems or exposing private Primitive values.
+
+---
+
 # ADR Relationships
 
 ```mermaid
@@ -355,6 +417,10 @@ ADR163["Client Geometry Resolution"]
 
 ADR164["Media Title Treatment"]
 
+ADR165["Acrylic Assembly"]
+
+ADR166["Two Layout Modes"]
+
 ADR154 --> ADR155
 ADR155 --> ADR156
 ADR156 --> ADR157
@@ -367,6 +433,8 @@ ADR160 --> ADR163
 ADR162 --> ADR163
 ADR160 --> ADR164
 ADR163 --> ADR164
+ADR163 --> ADR165
+ADR163 --> ADR166
 ```
 
 Together these decisions establish the Composition Engine as a behavioural runtime architecture rather than a rendering framework.

@@ -29,6 +29,14 @@ Future specifications should reuse these definitions consistently.
 
 # A
 
+## Acrylic Assembly
+
+A Composition grouping of separate rigid Acrylic Tiles that may coordinate layout, movement and renderer compositing while retaining distinct Material boundaries.
+
+One Tile, rather than one Assembly, defines a continuous Acrylic surface.
+
+---
+
 ## Adaptive Layout
 
 The client-side runtime process that projects one solved Composition into different presentation environments using current constraints and private Platform primitives.
@@ -44,6 +52,14 @@ It never changes:
 - behaviour,
 - hierarchy,
 - understanding.
+
+---
+
+## Authored Layout
+
+A client layout mode for documentation, administration, dashboards and conventional application pages built with CSS or native layout using public Mosaic Semantic Tokens.
+
+Authored Layout complements rather than replaces Adaptive Composition.
 
 ---
 
