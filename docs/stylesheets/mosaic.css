@@ -76,3 +76,8 @@
   outline: 2px solid var(--md-accent-fg-color);
   outline-offset: 2px;
 }
+
+.mosaic-pdf-download {
+  float: right;
+  margin: 0 0 1rem 1rem;
+}

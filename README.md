@@ -22,6 +22,18 @@ Production validation:
 mkdocs build --strict
 ```
 
+Build the portal with one combined PDF per specification:
+
+```bash
+python -m playwright install chromium
+ENABLE_PDF_DOWNLOADS=true mkdocs build --strict
+python scripts/build_pdfs.py
+```
+
+The PDF build discovers specification folders automatically and follows each
+folder's `.pages` chapter order. Generated files are written to
+`site/downloads/`; authored Markdown remains the source of truth.
+
 GitHub Actions builds and deploys the site to GitHub Pages on every push to `main`.
 
 ## Repository Structure
@@ -126,6 +138,7 @@ The MkDocs portal is configured with:
 - previous and next navigation
 - table of contents
 - section index pages
+- one-click, whole-specification PDF downloads
 - GitHub repository and edit-page links
 
 Metadata comments are preserved in source files. A MkDocs hook renders the document identity, Status, and Version visibly in the generated site at build time.

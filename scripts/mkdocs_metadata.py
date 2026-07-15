@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+import os
+import posixpath
 import re
 from pathlib import Path
 from pathlib import PurePosixPath
@@ -12,6 +14,9 @@ FIELD_RE = re.compile(r"^(?P<key>Document|Specification|Status|Version):\s*(?P<v
 HEADING_RE = re.compile(r"^#\s+(?P<heading>.+)$", re.MULTILINE)
 ID_RE = re.compile(r"\b(?P<id>(?:MDP|MAD|MAC|MEG|MIP|MOP|MDL|MDS|MDG)-\d{3})\b", re.IGNORECASE)
 TITLE_ID_PREFIX_RE = re.compile(r"^(?:MDP|MAD|MAC|MEG|MIP|MOP|MDL|MDS|MDG)-\d{3}\s+[—-]\s+(.+)$", re.IGNORECASE)
+SPECIFICATION_FOLDER_RE = re.compile(
+    r"^(?P<id>(?:mdp|mad|mac|meg|mip|mop|mdl|mds|mdg)-\d{3})-(?P<title>.+)$"
+)
 
 
 def on_nav(nav, config, files):
@@ -50,6 +55,26 @@ def on_page_markdown(markdown: str, page, config, files) -> str:
     ]
 
     return markdown[: match.end()] + "\n".join(table) + "\n" + markdown[match.end() :]
+
+
+def on_page_content(html: str, page, config, files) -> str:
+    """Add a specification-level PDF download to published pages."""
+    if os.environ.get("ENABLE_PDF_DOWNLOADS", "").lower() not in {"1", "true", "yes"}:
+        return html
+
+    specification = _specification_from_path(page.file.src_uri)
+    if not specification:
+        return html
+
+    document_id, folder = specification
+    start = PurePosixPath(page.url)
+    href = posixpath.relpath(f"downloads/{_pdf_name(folder)}", start=str(start))
+    button = (
+        '<a class="md-button mosaic-pdf-download" '
+        f'href="{href}" download title="Download {document_id} as a single PDF">'
+        f'Download {document_id} PDF</a>'
+    )
+    return button + html
 
 
 def _iter_pages(items):
@@ -115,3 +140,17 @@ def _document_id_from_path(src_uri: str) -> str | None:
             return match.group("id")
 
     return None
+
+
+def _specification_from_path(src_uri: str) -> tuple[str, str] | None:
+    for part in PurePosixPath(src_uri).parts:
+        match = SPECIFICATION_FOLDER_RE.fullmatch(part)
+        if match:
+            return match.group("id").upper(), part
+
+    return None
+
+
+def _pdf_name(folder: str) -> str:
+    family, number, title = folder.split("-", 2)
+    return f"{family.upper()}-{number}-{title}.pdf"
