@@ -220,6 +220,30 @@ Exact encoding, authentication, transport negotiation, size limits and backpress
 
 ---
 
+# Continuity Keys
+
+Every semantic object that may persist across snapshots, patches or route changes should carry a stable **Continuity Key**.
+
+The key identifies domain continuity. It does not identify a component instance, render-tree node or transport operation.
+
+The SDUI Driver must preserve the same Continuity Key while an object remains the same domain entity, including when that object is:
+
+- repositioned
+- resized
+- reparented
+- moved permanently between Composition planes
+- represented by a different component implementation
+
+A key must not be reused for a different domain entity merely to manufacture a visual transition.
+
+The renderer compares the previous and pending semantic trees by Continuity Key, then classifies each object as persistent, repositioned, resized, reparented, moved between planes, entering or exiting. That classification becomes input to the [MDS-005 Motion System](../mds-005-motion-system/09-runtime-motion-resolution.md), not a server-authored animation instruction.
+
+SDUI supplies semantic roles, relationships and stable identity. It must not supply final coordinates, plane assignments, Behavioural Cost, curves, durations or spring values.
+
+Exact key encoding, namespace governance, lifetime and collision handling require a future integration protocol.
+
+---
+
 # Atomic Transition Pipeline
 
 The renderer should process each structural transaction through one continuity-preserving pipeline.
@@ -231,7 +255,7 @@ N1["Receive And Validate"]
 N2["Preload Required Content"]
 N3["Apply To Pending Semantic Tree"]
 N4["Resolve Next Composition"]
-N5["Match Stable Identities"]
+N5["Match Continuity Keys"]
 N6["Animate Current State Into Next State"]
 N7["Commit And Acknowledge"]
 
@@ -247,7 +271,7 @@ Every visible frame must represent either the previous complete state or the nex
 
 The renderer must not expose a partially applied transaction.
 
-Stable semantic and Tile identities allow the client to recognise movement, resizing and hierarchy change as the continuation of an existing object.
+Continuity Keys allow the client to recognise movement, resizing, hierarchy change and permanent plane movement as the continuation of an existing object.
 
 Component implementation identities remain disposable and must not be used for behavioural continuity.
 

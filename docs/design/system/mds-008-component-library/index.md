@@ -119,6 +119,7 @@ This specification defines:
 - Runtime SDUI
 - Refreshable Compiled SDUI
 - SDUI Patch Stream
+- Continuity Keys
 - Recovery SDUI
 - Platform Components
 - Accessibility Contracts

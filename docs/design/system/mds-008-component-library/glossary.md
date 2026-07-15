@@ -124,6 +124,14 @@ This lifecycle is intentionally separate from Tile lifecycle.
 
 ---
 
+## Continuity Key
+
+A stable domain identity carried by Runtime SDUI so a Client Renderer can recognise one semantic object across snapshots, patches, route changes, resizing, reparenting and Composition-plane movement.
+
+A Continuity Key is independent from component-instance, render-tree and transaction identities.
+
+---
+
 # E
 
 ## Embedded Recovery Renderer

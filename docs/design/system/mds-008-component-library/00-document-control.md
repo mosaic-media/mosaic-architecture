@@ -66,6 +66,7 @@ MDS-008 governs:
 - Runtime SDUI
 - Refreshable Compiled SDUI
 - SDUI Patch Stream
+- Continuity Keys
 - Recovery SDUI
 - Platform-specific MDL libraries
 - Platform components
@@ -232,6 +233,7 @@ MDS-008 succeeds when:
 - rendering remains deterministic
 - contributors naturally think in Tiles rather than Components
 - the runtime architecture remains invisible beneath implementation
+- semantic objects retain perceptual identity across snapshots, patches and route changes
 
 Users should never perceive Components.
 

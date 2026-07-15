@@ -495,6 +495,46 @@ The exact wire encoding, authentication, transport negotiation, resource limits 
 
 ---
 
+# ADR-199
+
+## Title
+
+Carry Stable Domain Continuity Keys Through Runtime SDUI
+
+### Status
+
+Accepted
+
+### Context
+
+Atomic SDUI updates can preserve perceptual continuity only when the client can determine which objects in the previous and pending semantic trees represent the same domain entity.
+
+Component instances, render-tree nodes and transaction identities are implementation details with lifetimes that do not reliably match domain identity.
+
+Allowing SDUI to prescribe final geometry or animation values would transfer Composition and Motion ownership from the client to the server.
+
+### Decision
+
+Semantic objects that may persist across snapshots, patches or route changes carry a stable Continuity Key representing domain identity.
+
+The SDUI Driver preserves the key across repositioning, resizing, reparenting, permanent Composition-plane movement and component replacement while the domain entity remains the same.
+
+The client compares previous and pending semantic trees by Continuity Key, classifies the transition and resolves Composition and Motion locally.
+
+SDUI does not supply final coordinates, plane assignments, Behavioural Cost, curves, durations or spring values.
+
+Keys must not be reused across unrelated domain entities to manufacture transitions.
+
+### Consequences
+
+Refreshable snapshots and streamed transactions can produce the same identity-preserving behaviour.
+
+Web and native renderers can replace component implementations without breaking perceptual continuity.
+
+The exact key encoding, namespace governance, lifetime and collision policy remain future integration-protocol work.
+
+---
+
 # ADR Relationships
 
 ```mermaid
@@ -526,6 +566,8 @@ ADR193["Rejected MDL Runtime"]
 
 ADR194["Refreshable SDUI Stream"]
 
+ADR199["Domain Continuity Keys"]
+
 ADR182 --> ADR183
 ADR183 --> ADR184
 ADR184 --> ADR188
@@ -538,6 +580,8 @@ ADR189 --> ADR191
 ADR191 --> ADR192
 ADR192 --> ADR193
 ADR191 --> ADR194
+ADR184 --> ADR199
+ADR194 --> ADR199
 ```
 
 Together these decisions establish the Component Library as a thin implementation layer that faithfully renders the runtime architecture without altering it.
