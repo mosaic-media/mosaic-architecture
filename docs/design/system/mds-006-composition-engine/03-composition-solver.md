@@ -154,6 +154,7 @@ N4["Priority"]
 N5["Grouping"]
 N6["Behavioural Intent"]
 N7["Presentation Model"]
+N8["Depth And Visibility Intent"]
 
 N1 --> N2
 N2 --> N3
@@ -161,9 +162,14 @@ N3 --> N4
 N4 --> N5
 N5 --> N6
 N6 --> N7
+N7 --> N8
 ```
 
 Every downstream runtime system consumes these outputs.
+
+Depth And Visibility Intent describes semantic plane relationships, protected subjects and permitted cross-plane overlap.
+
+It does not contain final coordinates or renderer-specific stacking values.
 
 ---
 

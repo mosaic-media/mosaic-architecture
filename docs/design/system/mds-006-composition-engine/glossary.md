@@ -29,6 +29,14 @@ Future specifications should reuse these definitions consistently.
 
 # A
 
+## Airspace Reserve
+
+A projected hard or soft settlement constraint extending through a governed range of Composition Planes above a lower-plane Expression.
+
+Tiles may transit through the reserve but must resolve to a valid settled footprint outside hard exclusions and within the permitted soft occlusion budget.
+
+---
+
 ## Acrylic Assembly
 
 A Composition grouping of separate rigid Acrylic Tiles that may coordinate layout, movement and renderer compositing while retaining distinct Material boundaries.
@@ -101,6 +109,14 @@ Composition exists independently from:
 - layouts,
 - components,
 - rendering.
+
+---
+
+## Composition Plane
+
+A governed permanent logical \(z\)-level with an independent two-dimensional occupancy solution.
+
+Tiles on separate Composition Planes may overlap in projected \(x,y\) space.
 
 ---
 
@@ -236,6 +252,12 @@ Snapshots improve:
 ---
 
 # S
+
+## Saliency Mask
+
+A normalised low-resolution importance field derived from focal subjects, faces, identity marks or editorial safe regions and used to resolve Airspace Reserve cost.
+
+---
 
 ## Solver
 

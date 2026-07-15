@@ -239,6 +239,111 @@ Not implementation.
 
 ---
 
+# Composition-Plane Occupancy
+
+Adaptive Layout projects semantic depth intent into governed permanent Composition Planes.
+
+Each plane owns an independent two-dimensional occupancy solution.
+
+For ordinary Tile footprints \(F_i\) and \(F_j\):
+
+\[
+z_i=z_j
+\quad\Longrightarrow\quad
+F_i\cap F_j=\varnothing
+\]
+
+Tiles on different planes may overlap in projected space:
+
+\[
+z_i\ne z_j
+\quad\Longrightarrow\quad
+F_i\cap F_j\text{ may be non-empty}
+\]
+
+When a Tile gains or releases capacity, the solver should first move related Tiles on the same plane.
+
+Other planes retain their independent occupancy, although occlusion, parallax, interaction priority and Material relationships may update.
+
+A Tile may move permanently between governed planes when its semantic hierarchy changes.
+
+SDUI and Modules provide roles and relationships rather than final \(z\) coordinates.
+
+---
+
+# Airspace Reserve Resolution
+
+A lower-plane Expression may provide or derive a normalised importance mask \(M_a(x,y)\in[0,1]\) and a governed protected depth interval.
+
+The mask may represent:
+
+- focal subjects
+- recognised faces
+- identity marks
+- editorial safe regions
+- weighted visual saliency
+
+For candidate footprint \(F\) settling on plane \(z\), the normalised occlusion cost is:
+
+\[
+O(F,z)
+=
+w_z(z)
+\frac{
+\displaystyle\iint_F M_a(x,y)\,\mathrm{d}x\,\mathrm{d}y
+}{
+\operatorname{area}(F)
+}
+\]
+
+The plane weighting function \(w_z(z)\) determines how strongly the reserve applies across governed depth.
+
+A hard-reserve mask invalidates a settled footprint when:
+
+\[
+\operatorname{area}\left(F\cap H_a\right)>0
+\]
+
+A soft reserve contributes to placement cost:
+
+\[
+C_p
+=
+C_m
++ \lambda_o O(F,z)
++ C_h
++ C_c
+\]
+
+| Term | Meaning |
+|------|---------|
+| \(C_p\) | Total candidate placement cost. |
+| \(C_m\) | Movement and continuity cost. |
+| \(\lambda_o\) | Governed occlusion weight. |
+| \(C_h\) | Hierarchy cost. |
+| \(C_c\) | Same-plane collision and capacity cost. |
+
+Airspace Reserve constraints apply to settled placement rather than transit.
+
+Motion paths may cross the reserve, but interruption handling must still continue toward a valid settled footprint.
+
+The client may evaluate rectangular footprints from a low-resolution summed-area table \(P\):
+
+\[
+\Sigma_F
+=
+P(x_2,y_2)
+-P(x_1,y_2)
+-P(x_2,y_1)
++P(x_1,y_1)
+\]
+
+This makes candidate evaluation independent from the number of source pixels inside the footprint.
+
+Exact mask resolution, thresholds, depth weighting and cost coefficients remain alpha-calibration data.
+
+---
+
 # Density
 
 Adaptive Layout resolves density continuously from available extent, viewing distance, input context, typography, accessibility and current content pressure.

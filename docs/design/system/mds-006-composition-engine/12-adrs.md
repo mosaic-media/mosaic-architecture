@@ -390,6 +390,44 @@ Mosaic can support cinematic media experiences and standard application surfaces
 
 ---
 
+# ADR-197
+
+## Title
+
+Resolve Permanent Composition Planes And Airspace Reserves Client-Side
+
+### Status
+
+Accepted
+
+### Context
+
+Layered Mosaic compositions require artwork, information and episode Tiles to occupy overlapping projected regions without competing for one flat layout.
+
+Important artwork subjects also require protection from settled occlusion without preventing Tiles from moving through the same projected region.
+
+### Decision
+
+The Composition Solver produces semantic depth and visibility intent.
+
+Client-side Adaptive Layout assigns governed permanent Composition Planes and solves independent \(x,y\) occupancy on each plane.
+
+Same-plane Tiles compete for capacity while cross-plane projected overlap is permitted.
+
+Airspace Reserves use hard exclusion masks and soft occlusion costs to constrain settled placement above lower-plane content.
+
+Transit motion may cross a reserve, but every interrupted or completed transition must continue toward a valid settled footprint.
+
+SDUI and Modules do not provide final \(x,y,z\) coordinates, saliency thresholds or placement weights.
+
+### Consequences
+
+The client can construct layered spatial-puzzle compositions deterministically from semantic intent.
+
+Low-resolution masks and summed-area evaluation keep candidate placement inexpensive while preserving focal artwork and editorial safe regions.
+
+---
+
 # ADR Relationships
 
 ```mermaid
@@ -420,6 +458,7 @@ ADR164["Media Title Treatment"]
 ADR165["Acrylic Assembly"]
 
 ADR166["Two Layout Modes"]
+ADR197["Planes And Airspace"]
 
 ADR154 --> ADR155
 ADR155 --> ADR156
@@ -435,6 +474,9 @@ ADR160 --> ADR164
 ADR163 --> ADR164
 ADR163 --> ADR165
 ADR163 --> ADR166
+ADR155 --> ADR197
+ADR160 --> ADR197
+ADR163 --> ADR197
 ```
 
 Together these decisions establish the Composition Engine as a behavioural runtime architecture rather than a rendering framework.

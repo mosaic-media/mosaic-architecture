@@ -60,6 +60,8 @@ MDS-006 governs:
 - Runtime Hierarchy
 - Behaviour Orchestration
 - Adaptive Layout Resolution
+- Composition-Plane Occupancy
+- Airspace Reserve Resolution
 - Composition Pipelines
 - Runtime Caching
 - Multi-device Composition
@@ -218,6 +220,8 @@ MDS-006 succeeds when:
 - modules integrate naturally
 - rendering frameworks remain replaceable
 - contributors think in runtime worlds rather than interface trees
+- permanent depth and cross-plane visibility remain deterministic
+- artwork protection and plane-local capacity resolve without continuous image analysis
 
 Users should never feel that screens are loading.
 

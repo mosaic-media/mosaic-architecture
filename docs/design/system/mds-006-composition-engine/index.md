@@ -99,6 +99,8 @@ This specification defines:
 - Expression Resolution
 - Hierarchy Resolution
 - Adaptive Layout Resolution
+- Permanent Composition-Plane Occupancy
+- Airspace Reserve Resolution
 - Behaviour Orchestration
 - Runtime Graph Processing
 - Multi-Device Composition
@@ -178,6 +180,7 @@ After reading MDS-006 contributors should understand:
 - how multiple devices share one runtime model,
 - how behavioural changes propagate,
 - how presentation remains implementation independent,
+- how layered projected occupancy and protected artwork regions are solved,
 
 without discussing specific UI frameworks.
 
