@@ -1,0 +1,10 @@
+title: Mosaic Platform Foundation
+arrange:
+  - index.md
+  - 00-document-control.md
+  - 01-release-outcomes.md
+  - 02-delivery-horizons.md
+  - 03-dependency-sequence.md
+  - 04-completion-evidence.md
+  - references.md
+  - glossary.md

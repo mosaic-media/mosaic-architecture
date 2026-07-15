@@ -22,11 +22,12 @@ BOOK_ROOTS = [
     DOCS_ROOT / "engineering" / "operations",
     DOCS_ROOT / "design" / "language",
     DOCS_ROOT / "design" / "system",
+    DOCS_ROOT / "roadmaps",
 ]
 SLUG_RE = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
 METADATA_RE = re.compile(r"\A<!--\n(?P<body>.*?)\n-->", re.DOTALL)
 REQUIRED_FIELDS = ("File", "Document", "Status", "Version")
-DOCUMENT_ID_RE = re.compile(r"\b(?:MDP|MAD|MAC|MEG|MIP|MOP|MDL|MDS|MDG)-\d{3}\b")
+DOCUMENT_ID_RE = re.compile(r"\b(?:MDP|MAD|MAC|MEG|MIP|MOP|MDL|MDS|MDG|MRM)-\d{3}\b")
 VERSION_RE = re.compile(r"^\d+\.\d+(?:\.\d+)?$")
 H1_RE = re.compile(r"^#\s+(?P<title>.+?)\s*$", re.MULTILINE)
 LINK_RE = re.compile(r"!?\[[^\]]*\]\((?P<target>[^)]+)\)")
@@ -42,7 +43,7 @@ FILE_TREE_ENTRY_RE = re.compile(
     re.IGNORECASE,
 )
 NAMED_DOCUMENT_RE = re.compile(
-    r"^(?P<id>(?:MDP|MAD|MAC|MEG|MIP|MOP|MDL|MDS|MDG)-\d{3})\s+—\s+(?P<title>.+)$"
+    r"^(?P<id>(?:MDP|MAD|MAC|MEG|MIP|MOP|MDL|MDS|MDG|MRM)-\d{3})\s+—\s+(?P<title>.+)$"
 )
 UNAVAILABLE_MARKERS = ("planned; not yet published", "deferred; not yet published")
 MANUAL_NAV_RE = re.compile(
