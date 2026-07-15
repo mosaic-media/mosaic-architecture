@@ -40,8 +40,10 @@ This guide covers:
 - two-dimensional Composition surfaces
 - direct and secondary Acrylic response
 - bounded optical parallax
+- coordinate, projection and highlight-rotation mathematics
 - resolved Acrylic state
 - renderer profiles
+- capability-driven fidelity levels and overdraw governance
 - temporal scheduling
 - playback protection
 - resilience, telemetry and validation

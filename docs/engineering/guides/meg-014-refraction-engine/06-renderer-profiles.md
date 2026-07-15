@@ -68,6 +68,53 @@ Quality should reduce quickly under pressure and recover only after sustained he
 
 ---
 
+# Fidelity Levels
+
+Renderer technique and fidelity are separate decisions.
+
+A CSS, Flutter or shader renderer may operate at any fidelity level it can implement safely.
+
+| Fidelity level | Required behaviour | Optional refinement |
+|----------------|--------------------|---------------------|
+| Enhanced | Artwork-field sampling, directional edge response, bounded optical parallax and readable foreground content. | Local backdrop distortion and bounded secondary transport. |
+| Balanced | Artwork-derived colour, directional edge response, restrained parallax and readable foreground content. | Reduced local backdrop refinement. |
+| Essential | Stable flat or gently graded Acrylic derived from a cached artwork field. | Static edge emphasis. |
+
+Essential fidelity should continue using precomputed artwork-light data when it is available.
+
+It reduces continuous sampling, backdrop work, parallax and secondary transport rather than discarding the artwork relationship.
+
+Neutral or brand-lit Acrylic is the final fallback only when valid artwork-light data is unavailable.
+
+Fidelity levels must be selected from measured cost and current frame headroom rather than device category.
+
+---
+
+# Backdrop And Overdraw Governance
+
+Backdrop filtering may allocate intermediate surfaces and amplify compositor work across every covered pixel.
+
+Renderer adapters should therefore:
+
+- avoid nested or recursively compounded backdrop filters
+- consolidate compatible Acrylic backdrop work where the renderer supports it
+- bound filtered pixel area, blur radius, layer count and backdrop-pass count
+- flatten decorative Acrylic sublayers into one logical backdrop operation
+- reuse an eligible captured backdrop within one Composition resolution cycle
+- disable backdrop refinement before threatening a Presentation deadline
+
+One `ResolvedAcrylicState` should request no more than one logical backdrop operation for one receiver.
+
+An adapter may fulfil several compatible requests through one shared pass.
+
+When nested Acrylic cannot be consolidated safely, the deeper receiver should use artwork-derived tint and edge response without another backdrop filter.
+
+Overdraw pressure should move fidelity from Enhanced to Balanced and then Essential.
+
+It must not be compensated for by unbounded main-thread painting or repeated offscreen capture.
+
+---
+
 # Unsupported Features
 
 When a technique is unavailable or too expensive, the renderer should omit it explicitly rather than emulate it with unbounded main-thread work.

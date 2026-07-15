@@ -22,6 +22,11 @@ Engine tests should verify:
 - energy decreases through secondary transport
 - parallax reacts to Composition movement, scrolling and Focus transitions
 - pointer, gyro and device tilt do not drive parallax
+- highlight rotation follows the canonical quadrant and angle convention
+- receiver motion changes its artwork-UV sampling window without invalidating the source frame
+- optical displacement never reveals an empty or uncaptured area inside the Acrylic mask
+- Essential fidelity retains cached artwork-derived colour when source data is available
+- nested Acrylic does not create unbounded backdrop-filter stacking
 - invalid frames preserve the last stable state
 - video presentation never waits for Refraction work
 
@@ -55,11 +60,13 @@ Benchmarks should measure:
 - binary16 and alternative runtime precision
 - unsupercompressed and Zstandard cache payloads
 - CSS layer and backdrop-filter cost
+- filtered pixel area and backdrop nesting depth
 - Flutter composite and fragment cost
 - two-dimensional shader crossover points
 - Acrylic receiver and proximity-relationship scaling
 - static and video update cadence
 - profile-switch hysteresis
+- Enhanced, Balanced and Essential fidelity residency
 - memory and upload pressure
 
 ---

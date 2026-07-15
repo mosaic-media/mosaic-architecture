@@ -39,6 +39,7 @@ The client should expose diagnostics for:
 - direct and secondary relationship counts
 - analysis and resolution duration
 - GPU or compositor duration where measurable
+- filtered pixel area and maximum backdrop nesting depth
 - skipped updates and reasons
 - fallback transitions
 - rejected-frame reasons
@@ -58,6 +59,8 @@ Useful metrics include:
 | Source-frame age | Detect stale analysis. |
 | Secondary relationship count | Bound coupled-work growth. |
 | Backdrop-pass count | Detect compositor amplification. |
+| Filtered pixel area | Detect expensive large-surface effects. |
+| Fidelity-level residency | Understand time spent at Enhanced, Balanced and Essential fidelity. |
 
 Telemetry should describe renderer behaviour without capturing artwork pixels or user-viewing content.
 

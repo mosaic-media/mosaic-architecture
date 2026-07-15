@@ -30,9 +30,11 @@ MEG-014 owns implementation guidance for:
 
 - Refraction Engine boundaries
 - source and Composition inputs
+- coordinate and projection mathematics
 - resolved Acrylic state
 - renderer-independent processing
 - renderer profiles
+- fidelity degradation and overdraw governance
 - scheduling and degradation
 - engine diagnostics and testing
 

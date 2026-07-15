@@ -29,6 +29,12 @@ Each Acrylic receiver should expose:
 
 The engine should derive a two-dimensional mapping from receiver coordinates to artwork UV coordinates using the artwork and receiver transforms.
 
+The `UVLightFrame` remains anchored in normalised artwork UV space.
+
+An Acrylic receiver acts as a moving sampling window over that stable field as its Composition transform changes.
+
+Moving or scrolling Acrylic must not regenerate or reposition the source frame solely to preserve visual alignment.
+
 The mapping may be affine for ordinary surfaces.
 
 Perspective-aware renderers may use a projective mapping when Composition projection requires it.
@@ -81,6 +87,10 @@ The engine should discard contributions below its active energy threshold.
 
 The engine should derive internal parallax from Composition movement, scrolling and Focus transitions only.
 
+It should consume a governed `ApparentThicknessProfile` supplied by the Material System.
+
+MEG-014 does not hard-code a physical thickness, refractive index or universal thickness-to-pixel conversion.
+
 A practical approximation is:
 
 ```text
@@ -91,5 +101,7 @@ internalOffset = clamp(
 ```
 
 The renderer applies this offset inside a stable Acrylic mask.
+
+It must constrain the offset to the available expanded sampling region so displacement cannot expose an empty or uncaptured area inside that mask.
 
 Pointer position, device tilt and gyroscope input must not affect the result.
