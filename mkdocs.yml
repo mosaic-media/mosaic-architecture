@@ -54,6 +54,10 @@ theme:
 extra_css:
   - stylesheets/mosaic.css
 
+extra_javascript:
+  - javascripts/mathjax.js
+  - https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js
+
 plugins:
   - search
   # Reads .pages files so folders can keep URL-safe slugs while nav uses titles.
@@ -75,6 +79,8 @@ markdown_extensions:
   - pymdownx.details
   - pymdownx.highlight
   - pymdownx.inlinehilite
+  - pymdownx.arithmatex:
+      generic: true
   # Enables Mermaid fences through Material for MkDocs.
   - pymdownx.superfences:
       custom_fences:
