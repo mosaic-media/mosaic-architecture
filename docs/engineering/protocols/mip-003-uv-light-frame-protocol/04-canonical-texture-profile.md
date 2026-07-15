@@ -62,6 +62,10 @@ The `A` component is named **peak luminance** by this protocol.
 
 It is not transparency and RGB values are not premultiplied by it.
 
+Runtime representations MAY expose this semantic component as `E` or `peakEnergy` when that avoids confusion with alpha.
+
+Such naming does not change its normative peak-luminance meaning and MUST NOT convert it into invented absolute HDR energy.
+
 Relative luminance MUST be calculated from linear BT.2020 values:
 
 ```text
@@ -77,6 +81,8 @@ Before binary16 quantisation, peak luminance MUST be greater than or equal to th
 Validators SHOULD permit one binary16 unit in the last place when checking that relationship.
 
 Peak luminance is a highlight-distribution hint.
+
+The relationship between mean RGB luminance and peak luminance allows a renderer to distinguish broad ambient brightness from a concentrated highlight response.
 
 A consumer MUST NOT interpret it as additional integrated energy beyond the mean RGB contribution represented by the texel.
 

@@ -31,6 +31,8 @@ The maximum coverage-weighted relative luminance found within one represented so
 
 It preserves evidence of concentrated highlights without adding integrated energy.
 
+Runtime layouts may call this component `E` or `peakEnergy`, but its protocol meaning remains relative peak luminance rather than absolute HDR energy.
+
 ---
 
 # Relative Radiance
