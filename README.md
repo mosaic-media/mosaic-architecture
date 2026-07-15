@@ -51,6 +51,10 @@ The current imported specification set lives in:
 
 [MEG-006](docs/engineering/guides/meg-006-module-platform/index.md) contains the Module Platform and its integrated Developer Platform guidance, including SDK, CLI, local development, deterministic Test Harness Modules and publication workflow boundaries.
 
+[MIP-003](docs/engineering/protocols/mip-003-uv-light-frame-protocol/index.md) defines the canonical artwork-light frame exchanged between artwork analysis, MOS Cache and client renderers.
+
+[MEG-014](docs/engineering/guides/meg-014-refraction-engine/index.md) defines how CSS, Flutter and two-dimensional shader clients resolve that source into stable Acrylic rendering without mesh geometry.
+
 ## Document Types
 
 The structure is intended to support these document families without another major reorganisation:

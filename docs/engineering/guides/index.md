@@ -2,7 +2,7 @@
 File: docs/engineering/guides/index.md
 Document: Guides
 Status: Draft
-Version: 0.2
+Version: 0.3
 -->
 
 # Guides
@@ -25,7 +25,14 @@ The guides form a deliberate progression from code-level foundations to cross-cu
 | [MEG-008 — Observability](meg-008-observability/index.md) | Defines how the running Platform explains its behaviour through telemetry and diagnostics. |
 | [MEG-009 — Security Architecture](meg-009-security-architecture/index.md) | Defines how trust, authority and protection are designed into an extensible Platform. |
 | [MEG-010 — Performance Engineering](meg-010-performance-engineering/index.md) | Defines how performance is designed, measured and protected as an architectural property. |
+| [MEG-014 — Refraction Engine](meg-014-refraction-engine/index.md) | Explains how clients resolve artwork light, local backdrop and two-dimensional Composition state into stable Acrylic rendering. |
 
 New readers should follow the guides in numerical order. Readers solving a focused problem may start with the owning guide, but should follow its references back to [MAC-001 — Platform Architecture](../architecture/mac-001-platform-architecture/index.md) and preceding guides.
+
+The following identifiers remain reserved:
+
+- MEG-011 — Deployment Architecture *(planned; not yet published)*
+- MEG-012 — API Architecture *(planned; not yet published)*
+- MEG-013 — Event Architecture *(planned; not yet published)*
 
 The linked MEG specifications own the implementation guidance; this page is a catalogue and reading path.

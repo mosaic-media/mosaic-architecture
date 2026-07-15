@@ -3,3 +3,4 @@ arrange:
   - index.md
   - mip-001-event-protocol
   - mip-002-module-manifest-protocol
+  - mip-003-uv-light-frame-protocol
