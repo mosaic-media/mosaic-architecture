@@ -40,6 +40,7 @@ The pipeline should:
 The engine should resolve incrementally when one of these changes:
 
 - focused or Hero artwork identity
+- approved or default Brand Illumination Pair
 - `UVLightField` epoch or sequence
 - Acrylic transform, bounds or mask
 - Composition movement or scroll position
@@ -47,6 +48,7 @@ The engine should resolve incrementally when one of these changes:
 - accessibility constraints
 - Renderer Capability Profile
 - Dynamic Material Budget
+- User Fidelity Maximum or local-override selection
 
 Pointer movement, gyroscope data and device tilt are not Refraction update triggers.
 

@@ -15,11 +15,17 @@ Receiver-local sampling, distortion and diffusion of actual Presentation behind 
 
 ---
 
+# Brand Illumination Pair
+
+Two approved Mosaic or partner colours used to generate a stable synthetic Material-light field when focused and Hero artwork are absent.
+
+---
+
 # Essential Fidelity
 
 The minimum stable Refraction presentation using cached artwork-derived flat or gently graded Acrylic without continuous backdrop, parallax or secondary-transport refinement.
 
-Neutral or brand-lit Acrylic is used only when valid artwork-light data is unavailable.
+It uses cached artwork-light data, an approved Brand Illumination Pair or the default Mosaic pair without requiring continuous refinement.
 
 ---
 
@@ -28,6 +34,12 @@ Neutral or brand-lit Acrylic is used only when valid artwork-light data is unava
 A capability-driven selection of Refraction refinement identified as Enhanced, Balanced or Essential.
 
 Fidelity Level is independent from renderer technology and device category.
+
+---
+
+# Fidelity Maximum
+
+The highest Refraction fidelity allowed by user preference before accessibility, capability and budget constraints are applied.
 
 ---
 

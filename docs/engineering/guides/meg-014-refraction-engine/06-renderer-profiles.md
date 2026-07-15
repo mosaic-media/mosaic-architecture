@@ -84,9 +84,15 @@ Essential fidelity should continue using precomputed artwork-light data when it 
 
 It reduces continuous sampling, backdrop work, parallax and secondary transport rather than discarding the artwork relationship.
 
-Neutral or brand-lit Acrylic is the final fallback only when valid artwork-light data is unavailable.
+When artwork is absent, Essential fidelity should use the approved Brand Illumination Pair or the default Mosaic pair as a stable synthetic source.
+
+Neutral Acrylic is reserved for invalid or unavailable artwork and brand source data.
 
 Fidelity levels must be selected from measured cost and current frame headroom rather than device category.
+
+Automatic permits selection up to Enhanced, Balanced caps selection at Balanced and Essential caps selection at Essential.
+
+Accessibility, capability and budget may always reduce below the user's maximum.
 
 ---
 

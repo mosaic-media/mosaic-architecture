@@ -15,6 +15,8 @@ Engine tests should verify:
 
 - focused artwork overrides Hero artwork
 - Hero artwork is used when Focus has no artwork
+- an approved Brand Illumination Pair is used when focused and Hero artwork are absent
+- the default Mosaic pair is used when no approved pair exists
 - source transitions do not flash or reset Acrylic
 - backdrop pixels remain receiver-local
 - non-overlapping nearby Acrylic may couple
@@ -26,6 +28,7 @@ Engine tests should verify:
 - receiver motion changes its artwork-UV sampling window without invalidating the source frame
 - optical displacement never reveals an empty or uncaptured area inside the Acrylic mask
 - Essential fidelity retains cached artwork-derived colour when source data is available
+- user fidelity preference acts as a maximum and never forces work above safe budget
 - nested Acrylic does not create unbounded backdrop-filter stacking
 - invalid frames preserve the last stable state
 - video presentation never waits for Refraction work

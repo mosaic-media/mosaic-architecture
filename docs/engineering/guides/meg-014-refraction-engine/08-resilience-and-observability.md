@@ -15,7 +15,8 @@ Refraction is presentation refinement and must fail safely.
 
 | Failure | Required response |
 |---------|-------------------|
-| Missing source artwork | Resolve neutral Acrylic. |
+| Missing source artwork | Use the approved Brand Illumination Pair or default Mosaic pair. |
+| Invalid artwork and brand source data | Resolve neutral Acrylic. |
 | Invalid `UVLightFrame` | Reject it and retain the last stable field. |
 | Cache miss | Regenerate asynchronously or continue without source refinement. |
 | Unsupported compression | Request or generate an unsupercompressed frame. |

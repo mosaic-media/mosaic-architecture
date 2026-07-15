@@ -11,16 +11,22 @@ Version: 0.1
 
 # Primary Source Selection
 
-The engine should select exactly one logical primary artwork source.
+The engine should select exactly one logical primary Material-light source.
 
 ```text
 if Focus references artwork:
     source = focused artwork
-else:
+else if Hero references artwork:
     source = Hero artwork
+else if an approved Mosaic or partner illumination pair exists:
+    source = static field from approved pair
+else:
+    source = static field from default Mosaic pair
 ```
 
-When neither source exists, the engine should resolve neutral Acrylic without an artwork-light contribution.
+Static pairs should use Platform-owned placement, intensity and transition rules.
+
+They may remain entirely client-generated and do not require a serialised `UVLightFrame`.
 
 A Focus transition should blend from the previous stable field to the new field rather than clear Acrylic state immediately.
 
@@ -35,6 +41,7 @@ The blend remains a transition between sources, not a permanent multi-source lig
 | Material identity | Selects the governed Acrylic profile. |
 | Focus and Hero state | Selects the primary artwork source. |
 | `UVLightField` | Supplies temporally reconstructed relative radiance. |
+| Brand Illumination Pair | Supplies a stable synthetic field when focused and Hero artwork are absent. |
 | Surface transform | Supplies `x`, `y`, `z`, scale and orientation. |
 | Surface bounds and mask | Defines the two-dimensional Acrylic region. |
 | Z-order and opaque masks | Defines local backdrop and occlusion relationships. |
@@ -43,6 +50,7 @@ The blend remains a transition between sources, not a permanent multi-source lig
 | Accessibility | Constrains motion, translucency, contrast and distortion. |
 | Renderer Capability Profile | Describes available techniques and measured cost. |
 | Dynamic Material Budget | Limits work safe for the current frame. |
+| User Fidelity Maximum | Caps Refraction at Automatic, Balanced or Essential before runtime degradation. |
 
 ---
 
