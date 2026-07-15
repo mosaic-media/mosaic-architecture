@@ -287,21 +287,22 @@ The renderer combines:
 
 - semantic structure from SDUI,
 - design rules from MDL,
-- platform capabilities from the client runtime.
+- private Platform primitives and typography resources,
+- accessibility and user preferences,
+- available space and platform capabilities from the client runtime.
 
 Conceptually.
 
 ```mermaid
-flowchart TD
+flowchart LR
 
-N1["Semantic SDUI"]
-N2["Renderer"]
-N3["MDL Library"]
-N4["Native Presentation"]
-
-N1 --> N2
-N2 --> N3
-N3 --> N4
+S["Semantic SDUI"] --> A["Client Adaptive Layout"]
+P["Private Platform Primitives"] --> A
+C["Capability And Preferences"] --> A
+A --> G["Resolved Composition Geometry"]
+G --> M["Material Resolution"]
+M --> R["Refraction And Native Renderer"]
+R --> N["Native Presentation"]
 ```
 
 This preserves a clean boundary.
@@ -310,9 +311,17 @@ SDUI describes structure and intent.
 
 MDL describes how Mosaic should feel.
 
-The renderer decides how to realise MDL on a specific platform.
+The client Adaptive Layout implementation resolves concrete coordinates, dimensions, padding, spacing, density and typography.
+
+Material Resolution consumes that completed geometry, and Refraction decorates it without changing layout.
+
+The renderer decides how to realise the resolved Mosaic Presentation on a specific platform.
 
 The graphics API draws pixels.
+
+This processing may be packaged as one Mosaic design library or separated into client subsystems.
+
+The packaging does not change ownership: the Platform sends semantic intent, while the client owns Presentation resolution and rendering.
 
 ---
 

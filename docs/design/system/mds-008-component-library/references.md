@@ -133,7 +133,7 @@ Component trees should always reflect solved Composition rather than invent thei
 
 Provides:
 
-- Runtime Tokens
+- Resolved Tokens
 - Resolution
 - Semantic contracts
 
