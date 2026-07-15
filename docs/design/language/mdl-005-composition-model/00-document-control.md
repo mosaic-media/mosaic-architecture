@@ -55,6 +55,8 @@ The Composition Model governs:
 - Visual Priority
 - Structural Relationships
 - Spatial Organisation
+- Persistent Depth Relationships
+- Cross-Plane Visibility
 - Adaptive Density
 - Composition Behaviour
 - Layout Intent
@@ -205,6 +207,7 @@ MDL-005 succeeds when:
 - compositions adapt without becoming confusing
 - modules integrate without disrupting understanding
 - different clients express the same composition consistently
+- layered compositions remain spatially coherent when their projected regions overlap
 
 Composition should become invisible.
 

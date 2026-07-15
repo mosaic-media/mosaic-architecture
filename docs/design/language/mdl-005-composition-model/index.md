@@ -84,6 +84,9 @@ This specification defines:
 - Breathing Space
 - Composition Solving
 - Adaptive Composition
+- Persistent Composition Planes
+- Plane-Local Spatial Occupancy
+- Airspace Reserves
 
 This specification intentionally does **not** define:
 
@@ -164,6 +167,7 @@ After reading MDL-005 contributors should understand:
 - how adaptive layouts work
 - how modules participate
 - how compositions evolve
+- how overlapping Expressions retain permanent depth relationships
 - how future layout engines should reason
 
 without discussing implementation.

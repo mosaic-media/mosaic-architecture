@@ -22,6 +22,14 @@ The terms defined here should be considered normative throughout all future Comp
 
 # A
 
+## Airspace Reserve
+
+A projected region above an Expression that protects important visible content from settled cross-plane occlusion.
+
+Other Expressions may transit through the region during motion but should not remain there when the Composition settles.
+
+---
+
 ## Adaptive Composition
 
 A Composition capable of reorganising itself in response to changes in:
@@ -95,6 +103,14 @@ It communicates meaning rather than geometry.
 The continuous refinement of a Composition as the user's World evolves.
 
 Composition Evolution preserves continuity while allowing understanding to change naturally.
+
+---
+
+## Composition Plane
+
+A governed logical \(z\)-level with its own projected \(x,y\) occupancy.
+
+Expressions on different Composition Planes may overlap in projection while retaining distinct hierarchy and depth relationships.
 
 ---
 
@@ -239,6 +255,12 @@ Sparse Compositions prioritise:
 - immersion
 - clarity
 - continuation
+
+---
+
+## Spatial Puzzle
+
+The Mosaic Composition metaphor in which persistent Expressions claim, retain and release capacity across multiple Composition Planes while preserving identity and continuity.
 
 ---
 

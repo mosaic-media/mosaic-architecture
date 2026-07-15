@@ -308,6 +308,42 @@ Future Material Systems and Layout Engines should preserve conceptual rhythm bef
 
 ---
 
+# ADR-195
+
+## Title
+
+Compose Persistent Depth Planes As One Spatial World
+
+### Status
+
+Accepted
+
+### Context
+
+Flat page and responsive-card metaphors cannot express artwork, information and supporting content occupying overlapping projected regions with stable depth relationships.
+
+Treating depth only as a transition effect would also remove those relationships once motion settles.
+
+### Decision
+
+Composition Space contains persistent logical \(x\), \(y\) and \(z\) relationships between two-dimensional Expressions.
+
+Each governed depth plane owns independent projected occupancy.
+
+Expressions on the same plane share available space, while Expressions on different planes may overlap in \(x,y\).
+
+Adaptive Composition should evolve like a layered spatial puzzle in which Expressions preserve identity while claiming and releasing plane-local capacity.
+
+Lower-plane Expressions may establish Airspace Reserves that constrain settled cross-plane occlusion without prohibiting transit motion.
+
+### Consequences
+
+Artwork may occupy a complete lower plane while Information and episode Expressions solve shared space above it.
+
+Depth remains meaningful after transitions and can drive occlusion, parallax, interaction priority and Material relationships without requiring mesh geometry.
+
+---
+
 # ADR Relationships
 
 ```mermaid
@@ -330,6 +366,7 @@ ADR077["Modules"]
 ADR078["Device Independence"]
 
 ADR079["Breathing Space"]
+ADR195["Persistent Depth Planes"]
 
 ADR071 --> ADR072
 
@@ -346,6 +383,8 @@ ADR074 --> ADR076
 ADR076 --> ADR077
 
 ADR076 --> ADR078
+ADR074 --> ADR195
+ADR076 --> ADR195
 ```
 
 Every compositional decision reinforces the same objective.

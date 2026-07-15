@@ -168,6 +168,56 @@ The same layout may communicate many different Compositions depending upon hiera
 
 ---
 
+# Composition Is Spatially Layered
+
+Composition Space contains persistent depth as well as projected position.
+
+An Expression may remain behind, alongside or above another Expression as part of the settled Composition rather than only while a transition is running.
+
+Every depth plane owns an independent projected field.
+
+Expressions on the same plane share that plane's available space.
+
+Expressions on different planes may overlap in projection while retaining distinct hierarchy, occlusion and parallax relationships.
+
+For two ordinary projected footprints \(F_i\) and \(F_j\), same-plane occupancy requires:
+
+\[
+z_i = z_j
+\quad\Longrightarrow\quad
+F_i \cap F_j = \varnothing
+\]
+
+Cross-plane overlap remains valid:
+
+\[
+z_i \ne z_j
+\quad\Longrightarrow\quad
+F_i \cap F_j \text{ may be non-empty}
+\]
+
+This is a conceptual three-dimensional Composition of two-dimensional surfaces.
+
+It does not require meshes, extruded objects or a simulated three-dimensional scene.
+
+---
+
+# Composition Evolves Like A Spatial Puzzle
+
+Adaptive Composition should feel like a layered spatial puzzle rather than a responsive page reflow.
+
+Expressions preserve identity while claiming, retaining and releasing space on their resolved depth planes.
+
+When one Expression gains capacity, related Expressions on that plane move into the newly solved arrangement.
+
+Expressions on other planes retain their independent projected occupancy.
+
+A lower-plane Expression may also preserve important visible regions through an Airspace Reserve.
+
+Higher-plane Expressions may travel through that projected reserve during motion, but the settled Composition should not leave them obscuring protected subjects, marks or editorial regions.
+
+---
+
 # Composition Is Behaviour
 
 Composition should be viewed as behaviour rather than geometry.

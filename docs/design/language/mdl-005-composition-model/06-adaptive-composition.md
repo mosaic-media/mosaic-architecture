@@ -234,6 +234,18 @@ Compression should always be preferred over disappearance.
 
 ---
 
+## Rule Six
+
+Preserve internal topology before rearranging content.
+
+Additional capacity should reveal more of the same ordered Expression before it changes the Expression's orientation or information model.
+
+A release schedule may reveal more episode rows as vertical capacity grows.
+
+It should not shrink rows, reorder episodes or turn the schedule into an unrelated horizontal presentation merely because its bounds changed.
+
+---
+
 # Adaptation Strategies
 
 Adaptive Composition possesses several conceptual strategies.
