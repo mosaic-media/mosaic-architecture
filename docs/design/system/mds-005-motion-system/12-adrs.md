@@ -313,6 +313,42 @@ Community modules automatically inherit future Motion System improvements.
 
 ---
 
+# ADR-196
+
+## Title
+
+Resolve Identity-Preserving Motion Through Behavioural Cost And Critical Damping
+
+### Status
+
+Accepted
+
+### Context
+
+Fixed durations and generic easing cannot consistently express conceptual distance, permanent depth changes, interrupted transitions and shared identity across SDUI updates.
+
+Delaying the start of heavier motion also makes Mosaic feel unresponsive.
+
+### Decision
+
+The Runtime Motion Resolver derives normalised Behavioural Cost from Focus significance, Domain Boundary Cost, Composition topology change and continuity credit.
+
+Stable Continuity Keys classify identities as persistent, repositioned, resized, reparented, moved between Composition Planes, entering or exiting.
+
+Rigid spatial geometry uses a governed critically damped response with immediate initial acknowledgement, no bounce and no overshoot.
+
+Behavioural Cost governs the scale of participating choreography and bounded settlement character rather than authoring a delay.
+
+Geometry leads while internal optical parallax, Refraction and environmental light settle through governed following responses.
+
+### Consequences
+
+Mosaic preserves one evolving World across navigation, resizing, depth changes and live SDUI patches.
+
+Renderers may use different native animation APIs while producing time-correct, interruptible and perceptually equivalent motion.
+
+---
+
 # ADR Relationships
 
 ```mermaid
@@ -337,6 +373,7 @@ ADR146["Accessibility"]
 ADR147["Platforms"]
 
 ADR148["Modules"]
+ADR196["Mathematical Motion"]
 
 ADR139 --> ADR140
 ADR140 --> ADR141
@@ -347,6 +384,9 @@ ADR144 --> ADR145
 ADR145 --> ADR146
 ADR145 --> ADR147
 ADR147 --> ADR148
+ADR139 --> ADR196
+ADR144 --> ADR196
+ADR145 --> ADR196
 ```
 
 Together these decisions establish one coherent behavioural language for movement throughout the Mosaic platform.

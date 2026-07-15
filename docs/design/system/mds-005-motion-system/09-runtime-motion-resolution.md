@@ -140,6 +140,41 @@ No individual input should override behavioural intent.
 
 Behaviour remains the highest authority.
 
+The resolver also compares previous and next Composition snapshots using stable Continuity Keys.
+
+This comparison supplies the continuity credit, topology change and Domain Boundary Cost used by Behavioural Cost resolution.
+
+---
+
+# Identity-Preserving Resolution
+
+Runtime Motion Resolution should proceed from semantic identity rather than component lifetime.
+
+```mermaid
+flowchart TD
+
+N1["Previous Semantic Composition"]
+N2["Next Semantic Composition"]
+N3["Match Continuity Keys"]
+N4["Classify Persistent And Changing Identities"]
+N5["Resolve Behavioural Cost"]
+N6["Solve Spatial Paths And Settlement"]
+N7["Publish Resolved Motion"]
+
+N1 --> N3
+N2 --> N3
+N3 --> N4
+N4 --> N5
+N5 --> N6
+N6 --> N7
+```
+
+Whole-screen crossfades and page-like replacement must not substitute for this matching process.
+
+When a transition is interrupted, the current resolved position and velocity become the initial state for the next valid target.
+
+The renderer should continue toward a valid settled Composition rather than teleport, restart or leave an identity inside a settlement-exclusion region.
+
 ---
 
 # Resolution Order

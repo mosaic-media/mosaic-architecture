@@ -91,6 +91,9 @@ This specification defines:
 - Refraction Motion
 - Temporal Continuity
 - Motion Curves
+- Behavioural Cost
+- Continuity-Key Matching
+- Critically Damped Spatial Motion
 - Motion Accessibility
 - Runtime Motion Resolution
 - Platform Motion
@@ -171,6 +174,7 @@ After reading MDS-005 contributors should understand:
 - how continuity is preserved,
 - how accessibility affects motion,
 - how runtime motion is resolved,
+- how conceptual distance and shared identity determine transition scale,
 
 without discussing rendering technologies or animation frameworks.
 

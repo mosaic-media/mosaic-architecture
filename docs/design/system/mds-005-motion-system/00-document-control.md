@@ -55,6 +55,9 @@ MDS-005 governs:
 - Refraction movement
 - Temporal continuity
 - Motion hierarchy
+- Behavioural Cost
+- Identity-Preserving Transition Resolution
+- Critically Damped Spatial Motion
 - Runtime motion resolution
 - Motion accessibility
 - Platform motion
@@ -199,6 +202,8 @@ MDS-005 succeeds when:
 - typography remains readable during transitions
 - accessibility remains uncompromised
 - motion quietly reinforces understanding rather than demanding attention
+- every interaction responds immediately while heavier change settles more deliberately
+- shared identity survives movement, resizing, reparenting and depth changes
 
 Users should rarely notice animation.
 

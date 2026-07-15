@@ -351,6 +351,64 @@ Strong Motion.
 
 Motion intensity should reflect behavioural significance rather than visual distance.
 
+Behavioural Weight is resolved through a normalised **Behavioural Cost** rather than authored animation values.
+
+Conceptually:
+
+\[
+C_b = \operatorname{clamp}
+\left(
+w_f F + w_d D + w_t T - w_a A,
+0,
+1
+\right)
+\]
+
+| Term | Meaning |
+|------|---------|
+| \(F\) | Significance of the Focus change. |
+| \(D\) | Domain Boundary Cost introduced by crossing conceptual Domains. |
+| \(T\) | Topological change across hierarchy, grouping and Composition Planes. |
+| \(A\) | Continuity credit supplied by shared identities and Anchors. |
+| \(w_f,w_d,w_t,w_a\) | Governed calibration weights. |
+
+The Runtime Motion Resolver derives these inputs from the previous and next semantic states.
+
+SDUI, Modules and components must not author \(C_b\), its weights, durations or curves.
+
+Higher Behavioural Cost means:
+
+- more of the Composition may participate
+- more continuity relationships must be preserved
+- spatial reorganisation may be broader
+- settlement may be more deliberate
+
+It must not delay acknowledgement of user intent.
+
+Every transition begins responding immediately.
+
+---
+
+# Identity Classification
+
+Before motion begins, the Runtime Motion Resolver should compare the previous and next semantic Composition states and classify each identity as:
+
+- persistent
+- repositioned
+- resized
+- reparented
+- moved between Composition Planes
+- entering
+- exiting
+
+A stable Continuity Key represents domain identity rather than a component instance.
+
+The same media entity may therefore remain continuous when a Poster Tile becomes Hero, changes component implementation or moves permanently in \(z\).
+
+Persistent identities move and evolve.
+
+They must not be destroyed and recreated merely because their presentation role changed.
+
 ---
 
 # Behavioural Persistence
