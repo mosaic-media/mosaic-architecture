@@ -46,6 +46,20 @@ Every event should carry:
 
 ---
 
+# Redaction Classes
+
+`redaction_class` takes one of three values:
+
+| Class | Meaning |
+|-------|---------|
+| `none` | Payload carries no personal data or secrets; safe to include verbatim in a support bundle. |
+| `sensitive` | Payload carries personal or identifying data (usernames, session identifiers, and similar); must be redacted from support bundles. This is the default when a producer does not classify its event. |
+| `secret` | Payload carries credential or secret material; must never appear in diagnostics or support bundles under any circumstance. |
+
+Producers should classify explicitly. An unclassified event must default to `sensitive` rather than `none` — the redaction rule is safe by default, per [09 — GraphQL and Diagnostics](09-graphql-and-diagnostics.md)'s requirement that support bundles be fully anonymised. `secret` exists as an explicit guard: audit and diagnostic events should never carry credential material in the first place, per [07 — Identity, Policy and Sessions](07-identity-policy-and-sessions.md)'s Audit Events section, so an event legitimately needing this class is itself worth reviewing.
+
+---
+
 # Delivery Semantics
 
 The first implementation should provide at-least-once local delivery.

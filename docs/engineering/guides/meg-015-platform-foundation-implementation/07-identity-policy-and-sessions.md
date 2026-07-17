@@ -43,8 +43,9 @@ Each session should include:
 | `expires_at` | Expiration boundary |
 | `auth_strength` | Password, passkey or recovery flow strength |
 | `capabilities` | Session-level capability constraints |
+| `revoked_at` | Revocation time, unset while the session is active |
 
-Remote sign-out should revoke server-side session records, not rely on clients deleting tokens.
+Remote sign-out should revoke server-side session records, not rely on clients deleting tokens. `revoked_at` is the field that revocation writes to: a session is active only while it is unset, and once set it must never be cleared — revocation is one-directional.
 
 ---
 

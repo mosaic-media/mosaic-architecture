@@ -55,7 +55,9 @@ MEG-015 does not own:
 
 Version 0.1 defines the first implementation-grade Platform guide. It is sufficient for repository scaffolding, first port implementation, adapter contract tests and the initial Supervisor handoff.
 
-It still requires implementation feedback before technical review, especially around package naming, generated SDK extraction, migration tooling and production-grade operational defaults.
+It still requires implementation feedback before technical review, especially around generated SDK extraction and production-grade operational defaults.
+
+Implementation feedback from `mosaic-platform` through the Transactional outbox slice has been incorporated: the repository layout is now the three-tier Core Platform / built-in module / external module model ([02 — Repository Layout](02-repository-layout.md)); the first contract set gained `CredentialStore` ([03 — Platform Contracts](03-platform-contracts.md)); the event envelope's `redaction_class` is now enumerated ([06 — Event Backbone](06-event-backbone.md)); and the session model gained `revoked_at` ([07 — Identity, Policy and Sessions](07-identity-policy-and-sessions.md)). Migration tooling remains an open question — the first implementation used an in-house deterministic migrator rather than an existing tool; this guide does not yet mandate one either way.
 
 ---
 

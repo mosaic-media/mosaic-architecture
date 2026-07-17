@@ -24,6 +24,7 @@ The first contracts should be small and biased toward behaviour rather than data
 | `UnitOfWork` | Transaction boundary for application services | PostgreSQL |
 | `UserStore` | Local user persistence and lookup | PostgreSQL |
 | `SessionStore` | Session persistence and revocation | PostgreSQL |
+| `CredentialStore` | Password, passkey and recovery-factor persistence and lookup | PostgreSQL |
 | `PermissionStore` | Role, grant and attribute lookup | PostgreSQL |
 | `ConfigStore` | Configuration version persistence | PostgreSQL |
 | `EventOutbox` | Commit-time event persistence | PostgreSQL |
@@ -32,6 +33,8 @@ The first contracts should be small and biased toward behaviour rather than data
 | `Clock` | Deterministic time boundary | Runtime clock |
 | `IDGenerator` | Stable identity creation | Runtime generator |
 | `HealthProbe` | Component readiness and degradation | Adapter-specific |
+
+The first contract set is a starting point, not a ceiling. A later slice may reveal a genuine external dependency the original set did not anticipate; when that happens, add the contract rather than forcing the dependency through an existing one, and record why in this table. `CredentialStore` was added this way: the Identity, sessions and policy slice needed durable password, passkey and recovery-factor persistence per [07 — Identity, Policy and Sessions](07-identity-policy-and-sessions.md)'s Local Identity Scope, and no existing contract's purpose covered it.
 
 ---
 
@@ -49,6 +52,7 @@ type UnitOfWork interface {
 type Tx interface {
     Users() UserStore
     Sessions() SessionStore
+    Credentials() CredentialStore
     Permissions() PermissionStore
     Config() ConfigStore
     Outbox() EventOutbox
