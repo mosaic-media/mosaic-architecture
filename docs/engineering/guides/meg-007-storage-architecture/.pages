@@ -3,7 +3,5 @@ arrange:
   - index.md
   - 00-document-control.md
   - ...
-  - 15-v2-storage-architecture.md
-  - 16-object-model.md
   - references.md
   - glossary.md
