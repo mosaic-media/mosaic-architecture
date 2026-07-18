@@ -1,0 +1,109 @@
+name: Propose a documentation change
+description: Propose a change to Mosaic architecture, design or engineering documentation.
+title: "[Proposal] "
+labels: ["documentation", "needs-triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this for anything that changes **meaning**. Typos, broken links and stale paths do
+        not need an issue — open a pull request directly.
+
+        The lifecycle is MDP → MAD → MAC: architecture changes through an accepted proposal and a
+        recorded decision, never by editing the Canon directly. See
+        [CONTRIBUTING.md](../blob/main/CONTRIBUTING.md).
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: The problem
+      description: >
+        What is wrong, missing or contradictory today? State the problem without presupposing the
+        solution — a reader should be able to disagree with your fix and still accept the problem.
+      placeholder: Today the Canon says X, but the protocol assumes Y, so a Module author cannot tell which governs.
+    validations:
+      required: true
+
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidence
+      description: >
+        What demonstrates this is real? Link the specific documents and chapters. Quote the
+        conflicting passages if there are any.
+    validations:
+      required: true
+
+  - type: dropdown
+    id: kind
+    attributes:
+      label: Kind of change
+      description: If you are unsure between editorial and architectural, choose architectural.
+      options:
+        - Editorial — wording or clarity, meaning unchanged
+        - Structural — naming, ordering, or where something lives
+        - Architectural — changes what Mosaic accepts
+        - New specification needed
+        - Not sure
+    validations:
+      required: true
+
+  - type: dropdown
+    id: doctype
+    attributes:
+      label: Which document type does this affect?
+      description: >
+        Chapter 02 of MDG-001 has a selection table keyed on the question being answered.
+      options:
+        - MAC — Architecture Canon (what Mosaic is)
+        - MEG — Engineering Guide (how to build it)
+        - MIP — Integration Protocol (a contract between components)
+        - MOP — Operations Playbook (how to run it)
+        - MDL — Design Language (how it should look and behave)
+        - MDS — Design System (reusable design assets)
+        - MAD — Architecture Decision (why something was decided)
+        - MDP — Design Proposal (something not yet accepted)
+        - MRM — Roadmap (delivery sequence)
+        - MDG — Documentation Guide (how documentation is written)
+        - Not sure
+    validations:
+      required: true
+
+  - type: textarea
+    id: affected
+    attributes:
+      label: Affected specifications
+      description: List the documents you believe would change, by identifier.
+      placeholder: |
+        - MAC-001 — Platform Architecture, chapter 03
+        - MEG-006 — Module Platform, chapter 13
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed direction
+      description: >
+        Optional. If you already have a direction in mind, describe it — and say what you
+        considered and rejected. A proposal is allowed to be undecided.
+
+  - type: textarea
+    id: questions
+    attributes:
+      label: Open questions
+      description: >
+        What do you not know yet, and what evidence would settle it? Recording uncertainty is
+        more useful than resolving it prematurely.
+
+  - type: checkboxes
+    id: confirms
+    attributes:
+      label: Before submitting
+      options:
+        - label: I have read the relevant chapters of MDG-001.
+          required: true
+        - label: I have checked that another specification does not already own this material.
+          required: true
+        - label: I understand that an accepted architectural change needs a decision record, not just an edit.
+          required: true

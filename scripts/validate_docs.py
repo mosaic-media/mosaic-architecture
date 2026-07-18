@@ -209,7 +209,7 @@ def load_chapter_registry() -> dict[str, set[int]]:
 
 
 def authored_markdown_files() -> list[Path]:
-    root_pages = [ROOT / name for name in ("README.md", "AGENTS.md", "CLAUDE.md")]
+    root_pages = [ROOT / name for name in ("README.md", "AGENTS.md", "CLAUDE.md", "CONTRIBUTING.md")]
     docs_pages = sorted(
         path for path in DOCS_ROOT.rglob("*.md") if "output" not in path.relative_to(DOCS_ROOT).parts
     )

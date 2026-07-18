@@ -1,0 +1,61 @@
+name: Report a documentation defect
+description: Something is broken, contradictory or stale — but you are not proposing a new direction.
+title: "[Defect] "
+labels: ["documentation", "defect"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this when the documentation fails on its own terms: a broken reference, a
+        contradiction between two specifications, a rule the linter should have caught, or
+        material that has drifted from what the platform actually does.
+
+        For a one-line fix you are willing to make yourself, just open a pull request.
+
+  - type: dropdown
+    id: kind
+    attributes:
+      label: What kind of defect?
+      options:
+        - Contradiction between two specifications
+        - Content is stale or no longer matches reality
+        - Broken or wrong cross-reference
+        - Material is in the wrong document type
+        - Duplicated concept with no single owner
+        - Tooling gap — this should have been caught automatically
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: where
+    attributes:
+      label: Where
+      description: Document identifier, chapter and line where possible.
+      placeholder: MEG-001 — Go Engineering Standards, chapter 03, line 125
+    validations:
+      required: true
+
+  - type: textarea
+    id: what
+    attributes:
+      label: What is wrong
+      description: >
+        Quote the passage. If two documents disagree, quote both and say which you believe should
+        govern.
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: What it should say
+      description: Optional. Leave blank if you are reporting rather than proposing.
+
+  - type: checkboxes
+    id: confirms
+    attributes:
+      label: Before submitting
+      options:
+        - label: This is a defect in the documentation rather than a proposal for a new direction.
+          required: true

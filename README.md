@@ -4,6 +4,14 @@ This repository holds internal Mosaic documentation: architecture notes, design 
 
 It is the source of truth for how Mosaic is understood, designed, and evolved before implementation work is planned or built. The repository is also configured as a Material for MkDocs documentation portal published through GitHub Pages.
 
+## Contributing
+
+Read [CONTRIBUTING.md](CONTRIBUTING.md) before making a change. It covers the proposal lifecycle, scaffolding a new document, the Status model, the review process and the checks that run in CI.
+
+The short version: architecture changes through an accepted proposal and a recorded decision, never by editing the Canon directly; new specifications are scaffolded from `templates/` rather than copied; and `python3 scripts/validate_docs.py` must pass before you open a pull request.
+
+Each document's `Owner` in Document Control is its steward, and `.github/CODEOWNERS` is generated from that field by `scripts/generate_codeowners.py`, so the right reviewer is requested automatically.
+
 ## Documentation Website
 
 The generated site uses [Material for MkDocs](https://squidfunk.github.io/mkdocs-material/).
@@ -90,6 +98,8 @@ The structure is intended to support these document families without another maj
 - `MRM` — Mosaic Roadmap
 
 Each type has an authoritative template under [`templates/`](templates/README.md). The templates are the machine-readable form of [MDG-001](docs/engineering/documentation/mdg-001-documentation-authority-guide/02-document-types.md): their chapter skeletons match the type definitions one-to-one, so structure alone keeps the types apart.
+
+Each type is a branded profile of an established open standard rather than an invention: decisions follow ADR and MADR, proposals follow the RFC and PEP process, the MAC/MEG/MOP split follows Diátaxis modes, normative language follows RFC 2119, protocol contracts use major compatibility versioning, and revision histories follow Keep a Changelog. The mapping and every deliberate deviation are recorded in [10 — Standards Mapping](docs/engineering/documentation/mdg-001-documentation-authority-guide/10-standards-mapping.md).
 
 ## Creating a New Document
 
@@ -224,6 +234,6 @@ The temporary header logo is stored at `docs/assets/images/mosaic-logo-dark.jpg`
 
 ## Current Status
 
-The current documentation set is draft material.
+Most of the library is `Status: Draft`. [MDG-001 — Documentation Authority Guide](docs/engineering/documentation/mdg-001-documentation-authority-guide/index.md) is `Active` and governs the rest. [MDP-001](docs/engineering/architecture/mdp-001-adaptive-composition-runtime/index.md) and [MDP-002](docs/engineering/architecture/mdp-002-tile-framework/index.md) are `Deferred` research, and [MDS-006](docs/design/system/mds-006-composition-engine/index.md) and [MDS-007](docs/design/system/mds-007-tile-framework/index.md) are `Superseded` records at retired identifiers.
 
 Draft does not mean disposable. Treat these documents as evolving architecture: changes should be intentional, reviewed, and traceable.
