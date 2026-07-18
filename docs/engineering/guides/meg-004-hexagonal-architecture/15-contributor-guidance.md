@@ -16,14 +16,7 @@ The Hexagonal Architecture protects the most valuable part of the Mosaic platfor
 
 > **The Domain Model.**
 
-Every contributor therefore shares responsibility for preserving:
-
-- dependency direction
-- technology independence
-- architectural boundaries
-- replaceable infrastructure
-
-This document provides practical guidance for engineers implementing new capabilities within the Hexagonal Architecture.
+Every contributor therefore shares responsibility for preserving dependency direction, technology independence, architectural boundaries and replaceable infrastructure. This document provides practical guidance for engineers implementing new capabilities within the Hexagonal Architecture.
 
 ---
 
@@ -33,66 +26,35 @@ Within Mosaic:
 
 > **Protect the Domain before adding infrastructure.**
 
-Business behaviour should remain stable.
-
-Infrastructure should remain replaceable.
-
-Whenever these goals conflict:
-
-The Domain wins.
-
-Always.
+Business behaviour should remain stable and infrastructure should remain replaceable. Whenever those two goals conflict, the Domain wins — always.
 
 ---
 
 # Before Writing Code
 
-Before implementing a new feature ask:
+Before implementing a new feature, ask which Bounded Context owns this, which Aggregate owns the behaviour, whether the Domain already models this concept, and whether infrastructure is influencing the design.
 
-- Which Bounded Context owns this?
-- Which Aggregate owns the behaviour?
-- Does the Domain already model this concept?
-- Is infrastructure influencing the design?
-
-If implementation discussions begin before business modelling:
-
-Return to [MEG-003](../meg-003-domain-driven-design/index.md).
-
-The Domain should always lead implementation.
+If implementation discussions begin before business modelling, return to [MEG-003](../meg-003-domain-driven-design/index.md). The Domain should always lead implementation.
 
 ---
 
 # Before Creating A Port
 
-Ask:
-
-- Does the Domain genuinely require this capability?
-- Is this describing business behaviour?
-- Could an existing Port already satisfy this requirement?
+Ask whether the Domain genuinely requires this capability, whether it describes business behaviour, and whether an existing Port could already satisfy the requirement.
 
 Avoid introducing Ports simply because:
 
 > "We might need another implementation."
 
-Ports should emerge from business requirements.
-
-Not speculation.
+Ports should emerge from business requirements, not speculation.
 
 ---
 
 # Before Creating An Adapter
 
-Ask:
+Ask which technology you are isolating, whether the Adapter performs translation, and whether any business behaviour has appeared in it.
 
-- Which technology am I isolating?
-- Does this Adapter perform translation?
-- Does any business behaviour appear here?
-
-If the Adapter contains business rules:
-
-The architecture has already begun drifting.
-
-Business behaviour belongs inside the Domain.
+If the Adapter contains business rules, the architecture has already begun drifting: business behaviour belongs inside the Domain.
 
 ---
 
@@ -102,23 +64,13 @@ Ask one question.
 
 > **Does this dependency point inward?**
 
-If yes:
-
-Proceed.
-
-If no:
-
-Reconsider the design.
-
-Dependency direction is one of the strongest architectural indicators available.
+If it does, proceed. If it does not, reconsider the design. Dependency direction is one of the strongest architectural indicators available.
 
 ---
 
 # Before Importing A Package
 
-Every import should reinforce the Hexagon.
-
-Allowed.
+Every import should reinforce the Hexagon. Allowed.
 
 ```mermaid
 flowchart TD
@@ -142,104 +94,43 @@ N2["Infrastructure"]
 N1 --> N2
 ```
 
-The compiler should naturally reinforce the architecture.
-
-Imports should tell the same architectural story as the documentation.
+The compiler should naturally reinforce the architecture, and imports should tell the same architectural story as the documentation.
 
 ---
 
 # Before Adding Infrastructure
 
-Ask:
+Ask whether the Domain already exposes a Port, whether infrastructure should implement that Port, and whether the Domain actually requires this capability.
 
-- Does the Domain already expose a Port?
-- Should infrastructure implement that Port?
-- Does the Domain actually require this capability?
-
-Infrastructure should adapt itself to existing Ports whenever practical.
-
-Avoid changing the Domain solely because a new technology has been introduced.
+Infrastructure should adapt itself to existing Ports whenever practical. Avoid changing the Domain solely because a new technology has been introduced.
 
 ---
 
 # Before Modifying A Port
 
-Ports are long-lived contracts.
+Ports are long-lived contracts, and changing one affects the Domain, every Adapter, every test and every module.
 
-Changing one affects:
-
-- the Domain
-- every Adapter
-- every test
-- every module
-
-Before modifying a Port ask:
-
-- Is the business changing?
-- Or only the infrastructure?
-
-If only infrastructure changes:
-
-The Port probably should not.
+Before modifying a Port, ask whether the business is changing or only the infrastructure. If only infrastructure changes, the Port probably should not.
 
 ---
 
 # Before Modifying An Adapter
 
-Adapters should evolve freely.
-
-Examples include:
-
-- SQL optimisation
-- API version upgrades
-- SDK replacement
-- protocol changes
-
-These changes should rarely affect the Domain.
-
-If they do:
-
-Review the architectural boundary.
+Adapters should evolve freely — SQL optimisation, API version upgrades, SDK replacement and protocol changes are all expected. These changes should rarely affect the Domain, and if they do, review the architectural boundary.
 
 ---
 
 # Before Creating An Application Service
 
-Application Services should coordinate.
+Application Services should coordinate, not decide. Ask whether you are loading an Aggregate, invoking business behaviour or persisting changes.
 
-Not decide.
-
-Ask:
-
-- Am I loading an Aggregate?
-- Am I invoking business behaviour?
-- Am I persisting changes?
-
-If additional business logic appears:
-
-Move it into:
-
-- Aggregate
-- Entity
-- Value Object
-- Domain Service
-
-The Application layer should remain intentionally thin.
+If additional business logic appears, move it into an Aggregate, Entity, Value Object or Domain Service. The Application layer should remain intentionally thin.
 
 ---
 
 # Before Introducing Runtime Behaviour
 
-The Reactive Runtime is infrastructure.
-
-Ask:
-
-- Does the Domain need to know this?
-- Or should an Adapter translate it?
-
-Examples.
-
-Poor.
+The Reactive Runtime is infrastructure, so ask whether the Domain needs to know something or whether an Adapter should translate it. Poor.
 
 ```mermaid
 flowchart TD
@@ -265,15 +156,13 @@ N2 --> N3
 N3 --> N4
 ```
 
-[MEG-002](../meg-002-event-driven-runtime/index.md) and MEG-004 should reinforce one another.
-
-Never compete.
+[MEG-002](../meg-002-event-driven-runtime/index.md) and MEG-004 should reinforce one another, never compete.
 
 ---
 
 # Before Merging
 
-Every architectural contribution SHOULD satisfy the following checklist.
+Every architectural contribution should satisfy the following checklist.
 
 ## Domain
 
@@ -281,15 +170,11 @@ Every architectural contribution SHOULD satisfy the following checklist.
 - No infrastructure packages imported.
 - Ubiquitous Language remains consistent.
 
----
-
 ## Ports
 
 - Ports describe business capabilities.
 - Ports remain technology independent.
 - Ports remain focused.
-
----
 
 ## Adapters
 
@@ -297,23 +182,17 @@ Every architectural contribution SHOULD satisfy the following checklist.
 - Translation only.
 - No business rules.
 
----
-
 ## Dependencies
 
 - Dependencies point inward.
 - No circular imports.
 - Infrastructure remains replaceable.
 
----
-
 ## Runtime
 
 - Runtime remains outside the Domain.
 - Domain Events remain infrastructure independent.
 - Runtime integration occurs through Adapters.
-
----
 
 ## Documentation
 
@@ -337,45 +216,25 @@ The following symptoms usually indicate the Hexagon is weakening.
 - Business logic inside Adapters.
 - Infrastructure exceptions leaking into the Domain.
 
-Architectural drift should be corrected early.
-
-Small violations accumulate quickly.
+Correct architectural drift early, because small violations accumulate quickly.
 
 ---
 
 # Refactoring Towards The Hexagon
 
-When improving existing code ask:
-
-- Can this dependency move outward?
-- Can this translation move into an Adapter?
-- Can this business rule move into an Aggregate?
-- Can this Port become smaller?
-- Can this technology disappear behind a Port?
-
-Refactoring should make boundaries more explicit.
-
-Not blur them.
+When improving existing code, ask whether this dependency can move outward, whether this translation can move into an Adapter, whether this business rule can move into an Aggregate, whether this Port can become smaller, and whether this technology can disappear behind a Port. Refactoring should make boundaries more explicit, not blur them.
 
 ---
 
 # Review Mindset
 
-Architecture reviews should ask:
-
-- Does this strengthen dependency direction?
-- Does this improve replaceability?
-- Does this reduce coupling?
-- Does the Domain remain pure?
-- Would replacing this technology require Domain changes?
-
-These questions are generally more valuable than debating implementation style.
+Architecture reviews should ask whether a change strengthens dependency direction, improves replaceability and reduces coupling, whether the Domain remains pure, and whether replacing the technology involved would require Domain changes. These questions are generally more valuable than debating implementation style.
 
 ---
 
 # Learning The Architecture
 
-New contributors SHOULD study MEG-004 in the following order.
+New contributors should study MEG-004 in the following order.
 
 ```mermaid
 flowchart TD
@@ -402,18 +261,7 @@ Understanding dependency direction first makes every later concept significantly
 
 # Engineering Culture
 
-Contributors should strive to:
-
-- simplify dependencies
-- reduce coupling
-- improve naming
-- remove technology leakage
-- preserve Domain purity
-- question unnecessary abstraction
-
-The architecture should become more obvious over time.
-
-Not more clever.
+Contributors should strive to simplify dependencies, reduce coupling, improve naming, remove technology leakage, preserve Domain purity and question unnecessary abstraction. The architecture should become more obvious over time, not more clever.
 
 ---
 
@@ -435,35 +283,14 @@ Before requesting review, confirm:
 
 # Relationship to MEG
 
-This document explains how contributors should evolve the Hexagonal Architecture established throughout MEG-004.
+This document explains how contributors should evolve the Hexagonal Architecture established throughout MEG-004. Where the previous chapters define **how the architecture should be structured**, this chapter defines **how engineers should preserve that structure over time.**
 
-The previous chapters define:
-
-> **How the architecture should be structured.**
-
-This chapter defines:
-
-> **How engineers should preserve that structure over time.**
-
-Architecture survives not because diagrams exist.
-
-It survives because contributors consistently reinforce its principles.
+Architecture survives not because diagrams exist, but because contributors consistently reinforce its principles.
 
 ---
 
 # Summary
 
-Hexagonal Architecture is not maintained through frameworks.
+Hexagonal Architecture is not maintained through frameworks; it is maintained through engineering discipline. Every contributor influences whether the Domain remains independent, testable, replaceable and understandable.
 
-It is maintained through engineering discipline.
-
-Every contributor influences whether the Domain remains:
-
-- independent
-- testable
-- replaceable
-- understandable
-
-Within Mosaic, every change should strengthen the architectural boundary between the business and technology.
-
-Because once that boundary begins to erode, the cost of every future change begins to increase with it.
+Within Mosaic, every change should strengthen the architectural boundary between the business and technology, because once that boundary begins to erode, the cost of every future change begins to increase with it.

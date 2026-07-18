@@ -12,23 +12,7 @@ Status: Draft
 
 # Purpose
 
-Software inevitably changes.
-
-Databases are replaced.
-
-Protocols evolve.
-
-Frameworks become obsolete.
-
-Programming languages change.
-
-The business, however, generally changes far more slowly.
-
-Hexagonal Architecture exists to ensure that technological change does not force unnecessary business change.
-
-Within Mosaic, the Domain Model should remain the most stable part of the entire platform.
-
-Everything else exists to support it.
+Software changes constantly. Databases are replaced, protocols evolve, frameworks become obsolete and even programming languages change. The business those systems serve generally changes far more slowly, and Hexagonal Architecture exists to ensure that technological change does not force unnecessary business change. Within Mosaic the Domain Model should remain the most stable part of the entire platform, and everything else exists to support it.
 
 ---
 
@@ -38,21 +22,7 @@ Within Mosaic:
 
 > **The Domain should know nothing about how it is used or how it is persisted.**
 
-The Domain should not know:
-
-- HTTP
-- PostgreSQL
-- DuckDB
-- Blob Storage
-- Event Bus
-- Docker
-- TMDB
-- Jellyfin
-- Stremio
-
-Instead, those technologies adapt themselves to the Domain.
-
-Never the reverse.
+The Domain should not know about HTTP, PostgreSQL, DuckDB, Blob Storage, the Event Bus, Docker, TMDB, Jellyfin or Stremio. Those technologies adapt themselves to the Domain, never the reverse.
 
 ---
 
@@ -75,45 +45,13 @@ N3 --> N4
 N4 --> N5
 ```
 
-Over time the business becomes increasingly coupled to infrastructure.
-
-Examples include:
-
-- SQL exceptions inside business logic
-- HTTP concepts inside entities
-- framework annotations inside the domain
-- persistence models becoming business models
-
-Eventually:
-
-Changing infrastructure requires changing business behaviour.
-
-This is precisely what Hexagonal Architecture seeks to prevent.
+Over time the business becomes increasingly coupled to infrastructure: SQL exceptions inside business logic, HTTP concepts inside entities, framework annotations inside the domain, and persistence models quietly becoming business models. Eventually, changing infrastructure requires changing business behaviour — precisely what Hexagonal Architecture seeks to prevent.
 
 ---
 
 # The Guiding Principle
 
-Everything revolves around one idea.
-
-```
-
-Dependencies Always Point Inward
-```
-
-Not outward.
-
-The Domain owns:
-
-- business rules
-- business language
-- business behaviour
-
-Infrastructure depends upon those concepts.
-
-The Domain depends upon nothing external.
-
-This inversion of dependency direction is the defining characteristic of Ports and Adapters architecture. ([alistair.cockburn.us](https://alistair.cockburn.us/hexagonal-architecture))
+Everything revolves around one idea: **dependencies always point inward**, not outward. The Domain owns the business rules, the business language and the business behaviour, and infrastructure depends upon those concepts. The Domain itself depends upon nothing external. This inversion of dependency direction is the defining characteristic of Ports and Adapters architecture. ([alistair.cockburn.us](https://alistair.cockburn.us/hexagonal-architecture))
 
 ---
 
@@ -136,106 +74,23 @@ N1 --- N4
 N1 --- N5
 ```
 
-The shape itself is symbolic.
+The shape itself is symbolic, and it communicates one important idea: there is no "top" or "bottom". Every external system is simply another adapter, so HTTP is not special and neither is the database.
 
-It communicates one important idea.
+Inside the hexagon there are only business concepts — Entities, Value Objects, Aggregates, Domain Services and Domain Events — and the Domain should be understandable without mentioning any technology. If infrastructure terminology appears inside the Domain, the architectural boundary has already been breached.
 
-There is no "top" or "bottom."
-
-Every external system is simply another adapter.
-
-HTTP is not special.
-
-Neither is the database.
-
----
-
-# Inside The Hexagon
-
-The inside contains only business concepts.
-
-Examples include:
-
-- Entities
-- Value Objects
-- Aggregates
-- Domain Services
-- Domain Events
-
-The Domain should be understandable without mentioning any technology.
-
-If infrastructure terminology appears inside the Domain:
-
-The architectural boundary has already been breached.
-
----
-
-# Outside The Hexagon
-
-Everything external becomes infrastructure.
-
-Examples include:
-
-- HTTP
-- REST
-- GraphQL
-- PostgreSQL
-- DuckDB
-- Redis
-- Blob Storage
-- Event Bus
-- Docker
-- CLI
-- Mobile Applications
-
-These technologies change frequently.
-
-The Domain should remain unaffected.
+Everything external becomes infrastructure: HTTP, REST, GraphQL, PostgreSQL, DuckDB, Redis, Blob Storage, the Event Bus, Docker, the CLI and mobile applications. These technologies change frequently, and the Domain should remain unaffected.
 
 ---
 
 # The Domain Is The Product
 
-One of the central principles of Mosaic is:
-
-```mermaid
-flowchart TD
-
-N1["Business"]
-N2["Technology"]
-
-N1 --> N2
-```
-
-Not:
-
-```mermaid
-flowchart TD
-
-N1["Technology"]
-N2["Business"]
-
-N1 --> N2
-```
-
-The platform exists because of:
-
-- Libraries
-- Playback
-- Metadata
-- Users
-
-Not because of PostgreSQL.
-
-Infrastructure should therefore remain replaceable.
+One of the central principles of Mosaic is that the business drives the technology, not the technology the business. The platform exists because of Libraries, Playback, Metadata and Users — not because of PostgreSQL — and infrastructure should therefore remain replaceable.
 
 ---
 
 # Replaceability
 
-Suppose PostgreSQL becomes unsuitable.
-
-Without Hexagonal Architecture.
+Suppose PostgreSQL becomes unsuitable. Without Hexagonal Architecture, the change cascades.
 
 ```mermaid
 flowchart TD
@@ -252,7 +107,7 @@ N3 --> N4
 N4 --> N5
 ```
 
-With Hexagonal Architecture.
+With Hexagonal Architecture, it stops at the boundary.
 
 ```mermaid
 flowchart TD
@@ -267,117 +122,25 @@ N2 --> N3
 N3 --> N4
 ```
 
-Only infrastructure changes.
-
-The business remains stable.
+Only infrastructure changes, and the business remains stable.
 
 ---
 
 # Runtime Independence
 
-Likewise:
-
-The Domain should not know the Reactive Runtime exists.
-
-Poor.
-
-```mermaid
-flowchart TD
-
-N1["Playback"]
-N2["Publish Event"]
-N3["Event Bus"]
-
-N1 --> N2
-N2 --> N3
-```
-
-Preferred.
-
-```mermaid
-flowchart TD
-
-N1["Playback"]
-N2["Raise Domain Event"]
-
-N1 --> N2
-```
-
-Later.
-
-```mermaid
-flowchart TD
-
-N1["Runtime Adapter"]
-N2["Runtime Event"]
-N3["Event Bus"]
-
-N1 --> N2
-N2 --> N3
-```
-
-The Domain records business facts.
-
-The Runtime communicates them.
-
-The separation established in [MEG-002](../meg-002-event-driven-runtime/index.md) remains intact.
+Likewise, the Domain should not know the Reactive Runtime exists. It is poor practice for Playback to publish an event onto the Event Bus; Playback should instead raise a Domain Event, and later a Runtime Adapter translates that into a Runtime Event on the Event Bus. The Domain records business facts and the Runtime communicates them, so the separation established in [MEG-002](../meg-002-event-driven-runtime/index.md) remains intact.
 
 ---
 
 # Technology Independence
 
-The Domain should remain capable of operating without:
-
-- databases
-- networks
-- filesystems
-- messaging
-- containers
-
-If a Domain Model cannot be unit tested without PostgreSQL:
-
-The architecture has failed.
+The Domain should remain capable of operating without databases, networks, filesystems, messaging or containers. If a Domain Model cannot be unit tested without PostgreSQL, the architecture has failed.
 
 ---
 
 # The Cost Of Coupling
 
-Infrastructure changes frequently.
-
-Examples include:
-
-```mermaid
-flowchart TD
-
-N1["TMDB API"]
-N2["New Version"]
-
-N1 --> N2
-```
-
-```mermaid
-flowchart TD
-
-N1["Storage Engine"]
-N2["Migration"]
-
-N1 --> N2
-```
-
-```mermaid
-flowchart TD
-
-N1["Docker"]
-N2["New Runtime"]
-
-N1 --> N2
-```
-
-These changes should affect adapters.
-
-Not business behaviour.
-
-Every dependency from the Domain to infrastructure increases future maintenance cost.
+Infrastructure changes frequently: the TMDB API ships a new version, a storage engine demands a migration, Docker gives way to a new runtime. These changes should affect adapters, not business behaviour, because every dependency from the Domain to infrastructure increases future maintenance cost.
 
 ---
 
@@ -397,111 +160,19 @@ The second question should never influence the answer to the first.
 
 # Every Technology Is Equal
 
-One subtle but important property of the Hexagon:
-
-```
-
-HTTP
-
-=
-
-CLI
-
-=
-
-Worker
-
-=
-
-Scheduler
-
-=
-
-Event Bus
-
-=
-
-Tests
-```
-
-All are simply mechanisms for interacting with the Domain.
-
-No technology occupies a privileged position.
-
-The Domain remains the centre.
+One subtle but important property of the Hexagon is that HTTP, the CLI, a Worker, a Scheduler, the Event Bus and Tests are all equivalent. Each is simply a mechanism for interacting with the Domain, no technology occupies a privileged position, and the Domain remains the centre.
 
 ---
 
 # Infrastructure Is Temporary
 
-History demonstrates that infrastructure changes.
-
-Examples.
-
-```mermaid
-flowchart TD
-
-N1["REST"]
-N2["GraphQL"]
-
-N1 --> N2
-```
-
-```mermaid
-flowchart TD
-
-N1["Docker"]
-N2["Containerd"]
-
-N1 --> N2
-```
-
-```mermaid
-flowchart TD
-
-N1["PostgreSQL"]
-N2["Something Else"]
-
-N1 --> N2
-```
-
-Business concepts such as:
-
-```
-
-Library
-
-Playback
-
-Collection
-```
-
-rarely disappear.
-
-Architecture should therefore optimise for the longer-lived concepts.
+History demonstrates that infrastructure changes: REST gave way to GraphQL, Docker to containerd, and PostgreSQL will eventually give way to something else. Business concepts such as Library, Playback and Collection rarely disappear, so architecture should optimise for the longer-lived concepts.
 
 ---
 
 # Ports Before Adapters
 
-One of the defining ideas of Hexagonal Architecture is:
-
-The Domain defines contracts.
-
-Infrastructure satisfies them.
-
-Never:
-
-```mermaid
-flowchart TD
-
-N1["Database"]
-N2["Business"]
-
-N1 --> N2
-```
-
-Instead.
+One of the defining ideas of Hexagonal Architecture is that the Domain defines contracts and infrastructure satisfies them. The database must never dictate terms to the business. Instead:
 
 ```mermaid
 flowchart TD
@@ -522,19 +193,7 @@ This inversion keeps the Domain in control.
 
 # Simplicity
 
-Hexagonal Architecture should simplify software.
-
-It should not introduce unnecessary abstraction.
-
-If a Port exists:
-
-It should represent genuine business interaction.
-
-Not hypothetical future flexibility.
-
-[MEG-001](../meg-001-go-engineering-standards/index.md)'s principles still apply.
-
-Concrete solutions remain preferable until abstraction becomes necessary.
+Hexagonal Architecture should simplify software, not introduce unnecessary abstraction. If a Port exists it should represent genuine business interaction rather than hypothetical future flexibility. [MEG-001](../meg-001-go-engineering-standards/index.md)'s principles still apply, and concrete solutions remain preferable until abstraction becomes necessary.
 
 ---
 
@@ -558,32 +217,14 @@ These principles define the architectural identity of the platform.
 
 # Relationship to MEG
 
-[MEG-003](../meg-003-domain-driven-design/index.md) established:
-
-> **What the business is.**
-
-MEG-004 begins answering:
-
-> **How do we protect it?**
-
-The remaining chapters explain the mechanisms through which Hexagonal Architecture preserves Domain independence.
-
-The first of those mechanisms is the **Port**.
+[MEG-003](../meg-003-domain-driven-design/index.md) established **what the business is**; MEG-004 begins answering **how do we protect it?** The remaining chapters explain the mechanisms through which Hexagonal Architecture preserves Domain independence, the first of which is the **Port**.
 
 ---
 
 # Summary
 
-Hexagonal Architecture is often misunderstood as a folder structure.
-
-It is not.
-
-It is a dependency philosophy.
-
-Within Mosaic it exists for one reason:
+Hexagonal Architecture is often misunderstood as a folder structure. It is not — it is a dependency philosophy, and within Mosaic it exists for one reason:
 
 > **To ensure the Domain remains the most stable, valuable and protected part of the entire platform.**
 
-Everything else is expected to change.
-
-The Domain should not.
+Everything else is expected to change. The Domain should not.

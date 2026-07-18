@@ -12,22 +12,7 @@ Status: Draft
 
 # Purpose
 
-The Domain frequently requires capabilities that only infrastructure can provide.
-
-Examples include:
-
-- persisting Aggregates
-- retrieving metadata
-- storing artwork
-- publishing runtime events
-- generating identifiers
-- obtaining the current time
-
-The Domain expresses these requirements through Driven Ports.
-
-Driven Adapters satisfy those requirements by implementing the corresponding Port using specific infrastructure technologies.
-
-They form the boundary between the Domain and the external world.
+The Domain frequently requires capabilities that only infrastructure can provide: persisting Aggregates, retrieving metadata, storing artwork, publishing runtime events, generating identifiers and obtaining the current time. It expresses these requirements through Driven Ports, and Driven Adapters satisfy them by implementing the corresponding Port using specific infrastructure technologies. They form the boundary between the Domain and the external world.
 
 ---
 
@@ -37,19 +22,13 @@ Within Mosaic:
 
 > **Driven Adapters implement capabilities. They never define them.**
 
-The Domain owns the contract.
-
-The Driven Adapter owns the implementation.
-
-This distinction allows infrastructure to evolve without requiring changes to the Domain Model.
+The Domain owns the contract and the Driven Adapter owns the implementation. This distinction allows infrastructure to evolve without requiring changes to the Domain Model.
 
 ---
 
 # What Is A Driven Adapter?
 
-A Driven Adapter is an infrastructure implementation of a Driven Port.
-
-Conceptually.
+A Driven Adapter is an infrastructure implementation of a Driven Port. Conceptually:
 
 ```mermaid
 flowchart TD
@@ -64,15 +43,13 @@ N2 --> N3
 N3 --> N4
 ```
 
-The Domain depends only upon the Port.
-
-The Adapter depends upon the technology.
+The Domain depends only upon the Port; the Adapter depends upon the technology.
 
 ---
 
 # Why Driven Adapters Exist
 
-Without Driven Adapters:
+Without Driven Adapters, business behaviour becomes tightly coupled to persistence:
 
 ```mermaid
 flowchart TD
@@ -85,9 +62,7 @@ N1 --> N2
 N2 --> N3
 ```
 
-Business behaviour becomes tightly coupled to persistence.
-
-Instead.
+With one in place, the dependency stops at a contract:
 
 ```mermaid
 flowchart TD
@@ -102,125 +77,37 @@ N2 --> N3
 N3 --> N4
 ```
 
-Only the Adapter understands SQL.
-
-The Domain remains completely independent.
+Only the Adapter understands SQL, and the Domain remains completely independent.
 
 ---
 
 # One Port
 
-Every Driven Adapter implements one or more Driven Ports.
-
-Example.
-
-```mermaid
-flowchart TD
-
-N1["MetadataProvider"]
-N2["TMDB Adapter"]
-
-N1 --> N2
-```
-
-Later.
-
-```mermaid
-flowchart TD
-
-N1["MetadataProvider"]
-N2["AniList Adapter"]
-
-N1 --> N2
-```
-
-The Domain remains unchanged.
-
-Only the Adapter changes.
+Every Driven Adapter implements one or more Driven Ports. A `MetadataProvider` may be implemented today by a TMDB Adapter and later by an AniList Adapter; the Domain remains unchanged, and only the Adapter changes.
 
 ---
 
 # Infrastructure Ownership
 
-Driven Adapters own every technology-specific concern.
-
-Examples include:
-
-- SQL
-- HTTP clients
-- SDKs
-- authentication tokens
-- connection pools
-- file systems
-- blob storage
-- serialization
-
-None of these concepts belong inside the Domain.
+Driven Adapters own every technology-specific concern, including SQL, HTTP clients, SDKs, authentication tokens, connection pools, file systems, blob storage and serialization. None of these concepts belong inside the Domain.
 
 ---
 
 # Repository Adapters
 
-Repository implementations are Driven Adapters.
-
-Example.
-
-```mermaid
-flowchart TD
-
-N1["PlaybackRepository"]
-N2["PostgreSQL Adapter"]
-
-N1 --> N2
-```
-
-Responsibilities include:
-
-- SQL generation
-- transaction management
-- persistence mapping
-- Aggregate reconstruction
-
-Business behaviour remains inside the Aggregate.
-
-Persistence behaviour remains inside the Adapter.
+Repository implementations are Driven Adapters, such as the PostgreSQL Adapter behind `PlaybackRepository`. Their responsibilities are SQL generation, transaction management, persistence mapping and Aggregate reconstruction. Business behaviour remains inside the Aggregate; persistence behaviour remains inside the Adapter.
 
 ---
 
 # External Service Adapters
 
-External services should always terminate at a Driven Adapter.
-
-Example.
-
-```mermaid
-flowchart TD
-
-N1["MetadataProvider"]
-N2["TMDB Adapter"]
-N3["TMDB API"]
-
-N1 --> N2
-N2 --> N3
-```
-
-The Adapter performs:
-
-- authentication
-- request construction
-- retries (where appropriate)
-- response mapping
-- error translation
-
-The Domain receives only business concepts.
+External services should always terminate at a Driven Adapter, so that the TMDB API is reached only through a TMDB Adapter implementing `MetadataProvider`. The Adapter performs authentication, request construction, retries where appropriate, response mapping and error translation, so the Domain receives only business concepts.
 
 ---
 
 # Runtime Adapters
 
-The Reactive Runtime is also infrastructure.
-
-Example.
+The Reactive Runtime is also infrastructure:
 
 ```mermaid
 flowchart TD
@@ -235,201 +122,45 @@ N2 --> N3
 N3 --> N4
 ```
 
-The Domain remains unaware of:
-
-- workers
-- queues
-- subscribers
-- delivery guarantees
-
-Those concepts belong entirely to the runtime.
+The Domain remains unaware of workers, queues, subscribers and delivery guarantees; those concepts belong entirely to the runtime.
 
 ---
 
-# Translation
+# Translation And Mapping
 
-Driven Adapters translate:
+Driven Adapters translate business requests into infrastructure requests, and later infrastructure responses back into business results. Translation occurs entirely within the Adapter: neither the Domain nor the infrastructure should understand one another's models directly.
 
-```mermaid
-flowchart TD
-
-N1["Business Request"]
-N2["Infrastructure Request"]
-
-N1 --> N2
-```
-
-and later:
-
-```mermaid
-flowchart TD
-
-N1["Infrastructure Response"]
-N2["Business Result"]
-
-N1 --> N2
-```
-
-Translation occurs entirely within the Adapter.
-
-Neither the Domain nor the infrastructure should understand one another's models directly.
-
----
-
-# Mapping
-
-Driven Adapters frequently perform mapping.
-
-Examples include:
-
-```mermaid
-flowchart TD
-
-N1["Aggregate"]
-N2["Database Row"]
-
-N1 --> N2
-```
-
-```mermaid
-flowchart TD
-
-N1["Database Row"]
-N2["Aggregate"]
-
-N1 --> N2
-```
-
-```mermaid
-flowchart TD
-
-N1["TMDB Response"]
-N2["Metadata Value Object"]
-
-N1 --> N2
-```
-
-Mapping should remain symmetrical wherever practical.
-
-Business models should never become persistence models.
+Much of that work is mapping — an Aggregate into a database row, a database row back into an Aggregate, a TMDB response into a Metadata Value Object. Mapping should remain symmetrical wherever practical, and business models should never become persistence models.
 
 ---
 
 # Error Translation
 
-Infrastructure errors should never escape the Adapter.
-
-Poor.
-
-```mermaid
-flowchart TD
-
-N1["SQL Error"]
-N2["Domain"]
-
-N1 --> N2
-```
-
-Preferred.
-
-```mermaid
-flowchart TD
-
-N1["SQL Error"]
-N2["Adapter"]
-N3["MediaNotFound"]
-
-N1 --> N2
-N2 --> N3
-```
-
-Likewise.
-
-```mermaid
-flowchart TD
-
-N1["HTTP Timeout"]
-N2["Adapter"]
-N3["MetadataUnavailable"]
-
-N1 --> N2
-N2 --> N3
-```
-
-The Domain should reason about business failures.
-
-Never infrastructure failures.
+Infrastructure errors should never escape the Adapter. A SQL error reaching the Domain unchanged is poor; the Adapter should translate it into `MediaNotFound`, just as it should translate an HTTP timeout into `MetadataUnavailable`. The Domain should reason about business failures, never infrastructure failures.
 
 ---
 
 # Configuration
 
-Configuration belongs to infrastructure.
-
-Example.
-
-```mermaid
-flowchart TD
-
-N1["TMDB API Key"]
-N2["Adapter"]
-
-N1 --> N2
-```
-
-The Domain should never receive:
-
-- API keys
-- connection strings
-- endpoint URLs
-
-Configuration remains an implementation concern.
+Configuration belongs to infrastructure, so a TMDB API key is supplied to the Adapter and goes no further. The Domain should never receive API keys, connection strings or endpoint URLs; configuration remains an implementation concern.
 
 ---
 
 # Retry Behaviour
 
-Driven Adapters may implement infrastructure retries when interacting with unreliable external systems.
-
-Examples include:
-
-- TMDB
-- AniList
-- Blob Storage
-
-These retries differ from runtime event retries defined in [MEG-002](../meg-002-event-driven-runtime/index.md).
-
-Infrastructure retries protect one operation.
-
-Runtime retries protect business workflows.
-
-The two should remain distinct.
+Driven Adapters may implement infrastructure retries when interacting with unreliable external systems such as TMDB, AniList and Blob Storage. These retries differ from the runtime event retries defined in [MEG-002](../meg-002-event-driven-runtime/index.md): infrastructure retries protect one operation, whereas runtime retries protect business workflows. The two should remain distinct.
 
 ---
 
 # Resource Ownership
 
-Driven Adapters own infrastructure resources.
-
-Examples include:
-
-- database connections
-- HTTP clients
-- blob clients
-- caches
-- SDK instances
-
-The Domain should never manage resource lifecycles.
-
-Construction and disposal belong to infrastructure.
+Driven Adapters own infrastructure resources such as database connections, HTTP clients, blob clients, caches and SDK instances. The Domain should never manage resource lifecycles; construction and disposal belong to infrastructure.
 
 ---
 
 # Composition Root
 
-Driven Adapters are constructed within the Composition Root.
-
-Example.
+Driven Adapters are constructed within the Composition Root:
 
 ```mermaid
 flowchart TD
@@ -452,63 +183,19 @@ The Domain should never instantiate its own Adapters.
 
 # Testing
 
-Driven Adapters should be tested independently from the Domain.
-
-Typical tests verify:
-
-- SQL mapping
-- HTTP translation
-- serialization
-- authentication
-- protocol compatibility
-
-Domain tests should replace Adapters with simple test implementations.
-
-This separation keeps business tests fast while still validating infrastructure behaviour.
+Driven Adapters should be tested independently from the Domain, with tests typically verifying SQL mapping, HTTP translation, serialization, authentication and protocol compatibility. Domain tests should replace Adapters with simple test implementations. This separation keeps business tests fast while still validating infrastructure behaviour.
 
 ---
 
 # Technology Replacement
 
-Replacing infrastructure should require replacing only the Adapter.
-
-Example.
-
-```mermaid
-flowchart TD
-
-N1["PostgreSQL"]
-N2["CockroachDB"]
-
-N1 --> N2
-```
-
-or
-
-```mermaid
-flowchart TD
-
-N1["TMDB"]
-N2["AniList"]
-
-N1 --> N2
-```
-
-The Port remains unchanged.
-
-The Domain remains unchanged.
-
-Only the Adapter evolves.
-
-This is one of the primary reasons Hexagonal Architecture scales well over time.
+Replacing infrastructure should require replacing only the Adapter, whether moving from PostgreSQL to CockroachDB or from TMDB to AniList. The Port remains unchanged, the Domain remains unchanged, and only the Adapter evolves. This is one of the primary reasons Hexagonal Architecture scales well over time.
 
 ---
 
 # Multiple Adapters
 
-One Port may have multiple implementations simultaneously.
-
-Example.
+One Port may have multiple implementations simultaneously:
 
 ```mermaid
 flowchart TD
@@ -525,82 +212,19 @@ N1 --> N4
 N1 --> N5
 ```
 
-Selecting the implementation becomes a Composition Root decision.
-
-Not a Domain decision.
+Selecting the implementation becomes a Composition Root decision, not a Domain decision.
 
 ---
 
 # Anti-Corruption Layers
 
-Every integration with an external system SHOULD terminate inside a Driven Adapter.
-
-Example.
-
-```mermaid
-flowchart TD
-
-N1["Jellyfin"]
-N2["Jellyfin Adapter"]
-N3["LibraryRepository"]
-
-N1 --> N2
-N2 --> N3
-```
-
-The Adapter translates:
-
-- terminology
-- identifiers
-- lifecycle
-- business concepts
-
-External models should never leak into the Domain.
+Every integration with an external system should terminate inside a Driven Adapter, so that Jellyfin reaches `LibraryRepository` only through a Jellyfin Adapter. That Adapter translates terminology, identifiers, lifecycle and business concepts, ensuring external models never leak into the Domain.
 
 ---
 
 # Examples Within Mosaic
 
-Examples of Driven Adapters include:
-
-```
-
-PostgreSQL Playback Repository
-```
-
-```
-
-DuckDB Analytics Repository
-```
-
-```
-
-TMDB Metadata Provider
-```
-
-```
-
-AniList Metadata Provider
-```
-
-```
-
-Blob Artwork Store
-```
-
-```
-
-Filesystem Artwork Store
-```
-
-```
-
-Runtime Event Publisher
-```
-
-Every Adapter owns implementation.
-
-None own business behaviour.
+Driven Adapters within Mosaic include the PostgreSQL Playback Repository, DuckDB Analytics Repository, TMDB Metadata Provider, AniList Metadata Provider, Blob Artwork Store, Filesystem Artwork Store and Runtime Event Publisher. Every one owns implementation; none own business behaviour.
 
 ---
 
@@ -634,13 +258,7 @@ One Adapter implementing unrelated Ports.
 
 ## Framework Dependencies
 
-Importing:
-
-- HTTP
-- SQL
-- Docker
-
-into Domain objects.
+Importing HTTP, SQL or Docker into Domain objects.
 
 ---
 
@@ -654,24 +272,20 @@ Repositories making business decisions rather than simply persisting Aggregates.
 
 Within Mosaic:
 
-- Driven Adapters MUST implement Driven Ports.
-- Driven Adapters MUST own technology-specific code.
-- Driven Adapters MUST translate infrastructure models into business models.
-- Infrastructure errors MUST be translated into business concepts.
-- Configuration MUST remain inside infrastructure.
-- Domain objects MUST remain infrastructure independent.
-- Driven Adapters SHOULD remain independently replaceable.
-- Infrastructure changes SHOULD affect only Driven Adapters.
+- Driven Adapters must implement Driven Ports.
+- Driven Adapters must own technology-specific code.
+- Driven Adapters must translate infrastructure models into business models.
+- Infrastructure errors must be translated into business concepts.
+- Configuration must remain inside infrastructure.
+- Domain objects must remain infrastructure independent.
+- Driven Adapters should remain independently replaceable.
+- Infrastructure changes should affect only Driven Adapters.
 
 ---
 
 # Relationship to MEG
 
-Driving Adapters bring business requests into the Domain.
-
-Driven Adapters fulfil the Domain's external requirements.
-
-Together they complete the Hexagonal Architecture.
+Driving Adapters bring business requests into the Domain and Driven Adapters fulfil the Domain's external requirements. Together they complete the Hexagonal Architecture:
 
 ```mermaid
 flowchart TD
@@ -694,26 +308,12 @@ N6 --> N7
 N7 --> N8
 ```
 
-Every dependency crossing the architectural boundary now passes through an explicit Port and Adapter.
-
-Nothing crosses the boundary accidentally.
+Every dependency crossing the architectural boundary now passes through an explicit Port and Adapter. Nothing crosses the boundary accidentally.
 
 ---
 
 # Summary
 
-Driven Adapters are where technology finally appears.
+Driven Adapters are where technology finally appears. They isolate databases, APIs, storage, runtimes and external services from the Domain by translating business concepts into infrastructure operations and back again.
 
-They isolate:
-
-- databases
-- APIs
-- storage
-- runtimes
-- external services
-
-from the Domain by translating business concepts into infrastructure operations and back again.
-
-Within Mosaic, replacing an infrastructure technology should almost always mean replacing only a Driven Adapter.
-
-If changing a database requires changing an Aggregate, the architectural boundary has been violated.
+Within Mosaic, replacing an infrastructure technology should almost always mean replacing only a Driven Adapter. If changing a database requires changing an Aggregate, the architectural boundary has been violated.

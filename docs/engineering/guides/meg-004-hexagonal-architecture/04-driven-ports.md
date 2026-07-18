@@ -12,24 +12,7 @@ Status: Draft
 
 # Purpose
 
-Business behaviour frequently depends upon external capabilities.
-
-Examples include:
-
-- loading Aggregates
-- persisting changes
-- retrieving metadata
-- storing artwork
-- generating identifiers
-- obtaining the current time
-
-The Domain requires these capabilities.
-
-It should not know how they are fulfilled.
-
-Driven Ports define these requirements.
-
-They represent the contracts through which the Domain requests services from infrastructure while remaining completely independent of implementation.
+Business behaviour frequently depends upon external capabilities: loading Aggregates, persisting changes, retrieving metadata, storing artwork, generating identifiers and obtaining the current time. The Domain requires these capabilities but should not know how they are fulfilled. Driven Ports define those requirements — the contracts through which the Domain requests services from infrastructure while remaining completely independent of implementation.
 
 ---
 
@@ -39,58 +22,19 @@ Within Mosaic:
 
 > **The Domain expresses needs. Infrastructure fulfils them.**
 
-A Driven Port answers one question.
-
-> **What capability does the Domain require?**
-
-It never answers:
-
-> **Which technology provides it?**
-
-Implementation remains outside the Domain.
+A Driven Port answers one question — **what capability does the Domain require?** — and never **which technology provides it?** Implementation remains outside the Domain.
 
 ---
 
 # What Is A Driven Port?
 
-A Driven Port is an interface representing a capability required by the Domain.
-
-Examples include:
-
-```
-
-LibraryRepository
-```
-
-```
-
-MetadataProvider
-```
-
-```
-
-ArtworkStore
-```
-
-```
-
-Clock
-```
-
-```
-
-IdentityGenerator
-```
-
-Each describes behaviour.
-
-None describe technology.
+A Driven Port is an interface representing a capability required by the Domain, such as `LibraryRepository`, `MetadataProvider`, `ArtworkStore`, `Clock` or `IdentityGenerator`. Each describes behaviour; none describe technology.
 
 ---
 
 # Why Driven Ports Exist
 
-Without Driven Ports:
+Without Driven Ports, persistence reaches back into the business.
 
 ```mermaid
 flowchart TD
@@ -105,9 +49,7 @@ N2 --> N3
 N3 --> N4
 ```
 
-The Domain now understands infrastructure.
-
-Instead.
+The Domain now understands infrastructure. Instead:
 
 ```mermaid
 flowchart TD
@@ -120,88 +62,25 @@ N1 --> N2
 N2 --> N3
 ```
 
-Only the Adapter knows PostgreSQL exists.
-
-The Domain remains infrastructure independent.
+Only the Adapter knows PostgreSQL exists, and the Domain remains infrastructure independent.
 
 ---
 
 # Dependency Inversion
 
-Driven Ports are the mechanism through which Dependency Inversion is achieved.
-
-```mermaid
-flowchart TD
-
-N1["Domain"]
-N2["Interface"]
-N3["Infrastructure"]
-
-N1 --> N2
-N2 --> N3
-```
-
-Not:
-
-```mermaid
-flowchart TD
-
-N1["Infrastructure"]
-N2["Interface"]
-N3["Domain"]
-
-N1 --> N2
-N2 --> N3
-```
-
-The Domain owns every dependency it requires.
-
-Infrastructure adapts itself to satisfy those contracts.
+Driven Ports are the mechanism through which Dependency Inversion is achieved: the Domain declares the interface and infrastructure implements it, never the other way round. The Domain owns every dependency it requires, and infrastructure adapts itself to satisfy those contracts.
 
 ---
 
 # The Domain Defines Requirements
 
-A Driven Port expresses a business requirement.
-
-Example.
-
-```
-
-PlaybackRepository
-```
-
-The Domain requires:
-
-```
-
-Load Playback
-
-Save Playback
-```
-
-It does **not** require:
-
-```
-
-SQL
-
-Transactions
-
-Indexes
-
-Connection Pools
-```
-
-Those concerns belong entirely to infrastructure.
+A Driven Port expresses a business requirement. `PlaybackRepository`, for example, expresses that the Domain requires the ability to load Playback and save Playback. It does not require SQL, transactions, indexes or connection pools; those concerns belong entirely to infrastructure.
 
 ---
 
 # Ports Describe Behaviour
 
-Driven Ports should describe business behaviour.
-
-Good.
+Driven Ports should describe business behaviour. Good:
 
 ```go
 type MetadataProvider interface {
@@ -210,7 +89,7 @@ type MetadataProvider interface {
 }
 ```
 
-Poor.
+Poor:
 
 ```go
 type TMDBClient interface {
@@ -219,59 +98,19 @@ type TMDBClient interface {
 }
 ```
 
-The first describes business intent.
-
-The second exposes infrastructure.
+The first describes business intent; the second exposes infrastructure.
 
 ---
 
 # Business Language
 
-Driven Ports should reinforce the ubiquitous language.
-
-Good.
-
-```
-
-ArtworkStore
-```
-
-```
-
-IdentityGenerator
-```
-
-```
-
-RecommendationRepository
-```
-
-Poor.
-
-```
-
-BlobClient
-```
-
-```
-
-DatabaseAccess
-```
-
-```
-
-RedisCache
-```
-
-Technology names should never appear within the Domain.
+Driven Ports should reinforce the ubiquitous language. `ArtworkStore`, `IdentityGenerator` and `RecommendationRepository` are good; `BlobClient`, `DatabaseAccess` and `RedisCache` are poor. Technology names should never appear within the Domain.
 
 ---
 
 # Multiple Implementations
 
 One Driven Port may have many implementations.
-
-Example.
 
 ```mermaid
 flowchart TD
@@ -288,287 +127,73 @@ N1 --> N4
 N1 --> N5
 ```
 
-The Domain remains unchanged.
-
-Adapters become interchangeable.
-
-This flexibility is one of the primary architectural benefits of Hexagonal Architecture.
+The Domain remains unchanged and Adapters become interchangeable. This flexibility is one of the primary architectural benefits of Hexagonal Architecture.
 
 ---
 
 # Repositories
 
-Repositories are among the most common Driven Ports.
-
-Example.
-
-```mermaid
-flowchart TD
-
-N1["Playback Domain"]
-N2["PlaybackRepository"]
-N3["PostgreSQL"]
-
-N1 --> N2
-N2 --> N3
-```
-
-The Domain depends upon:
-
-```
-
-PlaybackRepository
-```
-
-Only.
-
-Persistence remains completely replaceable.
+Repositories are among the most common Driven Ports. The Playback Domain depends upon `PlaybackRepository` only, and the Adapter behind it reaches PostgreSQL, so persistence remains completely replaceable.
 
 ---
 
 # External Providers
 
-External services should always appear behind Driven Ports.
-
-Example.
-
-```mermaid
-flowchart TD
-
-N1["Metadata Domain"]
-N2["MetadataProvider"]
-N3["TMDB"]
-
-N1 --> N2
-N2 --> N3
-```
-
-Later.
-
-```mermaid
-flowchart TD
-
-N1["MetadataProvider"]
-N2["AniList"]
-
-N1 --> N2
-```
-
-The Domain does not change.
-
-Only the Adapter changes.
+External services should always appear behind Driven Ports. The Metadata Domain depends upon `MetadataProvider`, whose Adapter today calls TMDB and tomorrow may call AniList instead. The Domain does not change; only the Adapter changes.
 
 ---
 
 # Time
 
-Time is infrastructure.
-
-Poor.
+Time is infrastructure, so calling
 
 ```go
 time.Now()
 ```
 
-inside the Domain.
-
-Preferred.
-
-```mermaid
-flowchart TD
-
-N1["Clock"]
-N2["Current Time"]
-
-N1 --> N2
-```
-
-The Domain requests:
-
-```
-
-Current Time
-```
-
-The infrastructure determines how that time is obtained.
-
-This improves both testing and determinism.
+inside the Domain is poor practice. The Domain should instead request the current time through a `Clock` Port and let infrastructure determine how that time is obtained, which improves both testing and determinism.
 
 ---
 
 # Identity Generation
 
-Identity generation should also occur through a Driven Port.
-
-Example.
-
-```mermaid
-flowchart TD
-
-N1["IdentityGenerator"]
-N2["Generate LibraryID"]
-
-N1 --> N2
-```
-
-The Domain requires:
-
-```
-
-Unique Identity
-```
-
-It does not require:
-
-- UUID
-- ULID
-- Snowflake
-- Database Sequence
-
-Those are implementation choices.
+Identity generation should also occur through a Driven Port: an `IdentityGenerator` generates a `LibraryID` on the Domain's behalf. The Domain requires a unique identity; it does not require a UUID, a ULID, a Snowflake or a database sequence, all of which are implementation choices.
 
 ---
 
 # Storage
 
-Storage technologies should never appear within the Domain.
-
-Poor.
-
-```
-
-Blob Storage
-```
-
-Preferred.
-
-```
-
-ArtworkStore
-```
-
-The business requires artwork storage.
-
-It does not care whether artwork is stored in:
-
-- Blob Storage
-- Filesystem
-- Cloud Storage
-
-The Adapter owns that decision.
+Storage technologies should never appear within the Domain, so a Port named for Blob Storage is poor where `ArtworkStore` is preferred. The business requires artwork storage and does not care whether artwork is stored in Blob Storage, the filesystem or cloud storage. The Adapter owns that decision.
 
 ---
 
 # Ports Should Be Small
 
-Driven Ports should remain narrowly focused.
-
-Good.
-
-```
-
-ArtworkStore
-```
-
-Poor.
-
-```
-
-InfrastructureProvider
-```
-
-Each Port should represent one business capability.
-
-Nothing more.
+Driven Ports should remain narrowly focused: `ArtworkStore` is good, `InfrastructureProvider` is poor. Each Port should represent one business capability, nothing more.
 
 ---
 
 # Ports Are Stable
 
-Infrastructure changes frequently.
-
-Driven Ports should remain relatively stable.
-
-Changing a Port forces changes throughout:
-
-- Domain
-- Adapters
-- Tests
-
-Changing an Adapter affects only infrastructure.
-
-Stable Ports protect the Domain from implementation churn.
+Infrastructure changes frequently, but Driven Ports should remain relatively stable. Changing a Port forces changes throughout the Domain, the Adapters and the tests, whereas changing an Adapter affects only infrastructure. Stable Ports protect the Domain from implementation churn.
 
 ---
 
 # Error Semantics
 
-Driven Ports should communicate business failures.
-
-Poor.
-
-```
-
-SQL Error
-```
-
-Preferred.
-
-```
-
-Media Not Found
-```
-
-The Adapter translates infrastructure failures.
-
-The Domain receives business concepts.
-
-This mirrors the repository guidance established in [MEG-003](../meg-003-domain-driven-design/index.md).
+Driven Ports should communicate business failures: the Domain should receive "media not found" rather than an SQL error. The Adapter translates infrastructure failures so that the Domain receives business concepts, mirroring the repository guidance established in [MEG-003](../meg-003-domain-driven-design/index.md).
 
 ---
 
 # Testing
 
-Driven Ports make infrastructure easy to replace.
-
-Example.
-
-```mermaid
-flowchart TD
-
-N1["PlaybackRepository"]
-N2["InMemoryRepository"]
-
-N1 --> N2
-```
-
-```mermaid
-flowchart TD
-
-N1["Clock"]
-N2["FixedClock"]
-
-N1 --> N2
-```
-
-```mermaid
-flowchart TD
-
-N1["MetadataProvider"]
-N2["FakeProvider"]
-
-N1 --> N2
-```
-
-The Domain can now be tested without external dependencies.
+Driven Ports make infrastructure easy to replace. A test can satisfy `PlaybackRepository` with `InMemoryRepository`, `Clock` with `FixedClock`, and `MetadataProvider` with `FakeProvider`, so the Domain can be tested without external dependencies.
 
 ---
 
 # Runtime Integration
 
 The Reactive Runtime itself may satisfy Driven Ports.
-
-Example.
 
 ```mermaid
 flowchart TD
@@ -583,21 +208,13 @@ N2 --> N3
 N3 --> N4
 ```
 
-Notice:
-
-The Domain depends only upon the Port.
-
-The Runtime implements it.
-
-[MEG-002](../meg-002-event-driven-runtime/index.md) and MEG-004 therefore complement one another naturally.
+Notice that the Domain depends only upon the Port while the Runtime implements it, so [MEG-002](../meg-002-event-driven-runtime/index.md) and MEG-004 complement one another naturally.
 
 ---
 
 # Anti-Corruption Layers
 
 Driven Ports frequently terminate at Anti-Corruption Layers.
-
-Example.
 
 ```mermaid
 flowchart TD
@@ -610,56 +227,13 @@ N1 --> N2
 N2 --> N3
 ```
 
-Translation occurs entirely inside the Adapter.
-
-The Domain never understands external terminology.
-
-This preserves the purity of the Domain Model established in [MEG-003](../meg-003-domain-driven-design/index.md).
+Translation occurs entirely inside the Adapter and the Domain never understands external terminology, which preserves the purity of the Domain Model established in [MEG-003](../meg-003-domain-driven-design/index.md).
 
 ---
 
 # Examples Within Mosaic
 
-Examples of Driven Ports include:
-
-```
-
-LibraryRepository
-```
-
-```
-
-PlaybackRepository
-```
-
-```
-
-MetadataProvider
-```
-
-```
-
-ArtworkStore
-```
-
-```
-
-Clock
-```
-
-```
-
-IdentityGenerator
-```
-
-```
-
-BlobStore
-```
-
-Every Port expresses a business dependency.
-
-None expose implementation.
+Driven Ports within Mosaic include `LibraryRepository`, `PlaybackRepository`, `MetadataProvider`, `ArtworkStore`, `Clock`, `IdentityGenerator` and `BlobStore`. Every one expresses a business dependency; none expose implementation.
 
 ---
 
@@ -669,53 +243,23 @@ The following practices are prohibited.
 
 ## Infrastructure Interfaces
 
-```
-
-TMDBClient
-```
-
-```
-
-PostgresRepository
-```
-
-inside the Domain.
-
----
+Interfaces such as `TMDBClient` or `PostgresRepository` inside the Domain.
 
 ## Framework Dependencies
 
-Ports importing:
-
-- SQL
-- HTTP
-- Redis
-- Docker
-
----
+Ports importing SQL, HTTP, Redis or Docker.
 
 ## Technology Language
 
 Using implementation terminology rather than business terminology.
 
----
-
 ## Generic Infrastructure Ports
 
-```
-
-StorageProvider
-```
-
-without business meaning.
-
----
+Ports such as `StorageProvider` without business meaning.
 
 ## Shared Infrastructure Contracts
 
-Allowing infrastructure to define interfaces consumed by the Domain.
-
-The Domain always owns its own contracts.
+Allowing infrastructure to define interfaces consumed by the Domain. The Domain always owns its own contracts.
 
 ---
 
@@ -723,46 +267,23 @@ The Domain always owns its own contracts.
 
 Within Mosaic:
 
-- Driven Ports MUST belong to the Domain.
-- Driven Ports MUST express business requirements.
-- Driven Ports MUST remain technology independent.
-- Infrastructure MUST implement Driven Ports.
-- Ports SHOULD remain focused and cohesive.
-- External systems MUST be hidden behind Adapters.
-- Error semantics SHOULD remain business oriented.
-- Driven Ports SHOULD evolve more slowly than infrastructure.
+- Driven Ports must belong to the Domain.
+- Driven Ports must express business requirements.
+- Driven Ports must remain technology independent.
+- Infrastructure must implement Driven Ports.
+- Ports should remain focused and cohesive.
+- External systems must be hidden behind Adapters.
+- Error semantics should remain business oriented.
+- Driven Ports should evolve more slowly than infrastructure.
 
 ---
 
 # Relationship to MEG
 
-Driving Ports answer:
-
-> **How does the outside world invoke the Domain?**
-
-Driven Ports answer:
-
-> **How does the Domain obtain capabilities from the outside world?**
-
-Together they define every dependency crossing the boundary of the Hexagon.
-
-The next chapter introduces **Adapters**, the infrastructure components that implement these contracts while keeping the Domain completely insulated from technology.
+Driving Ports answer **how does the outside world invoke the Domain?** and Driven Ports answer **how does the Domain obtain capabilities from the outside world?** Together they define every dependency crossing the boundary of the Hexagon. The next chapter introduces **Adapters**, the infrastructure components that implement these contracts while keeping the Domain completely insulated from technology.
 
 ---
 
 # Summary
 
-Driven Ports are the Domain's expression of dependency.
-
-They communicate:
-
-- what the business requires
-- not how it is implemented
-
-By ensuring every external dependency passes through a Domain-owned contract, Mosaic protects its most valuable asset:
-
-The business model itself.
-
-Infrastructure remains free to evolve.
-
-The Domain remains free to ignore it.
+Driven Ports are the Domain's expression of dependency: they communicate what the business requires, not how it is implemented. By ensuring every external dependency passes through a Domain-owned contract, Mosaic protects its most valuable asset — the business model itself. Infrastructure remains free to evolve, and the Domain remains free to ignore it.

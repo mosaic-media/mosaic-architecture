@@ -23,30 +23,15 @@ Status: Draft
 
 # Purpose
 
-This document establishes the governance, authority and lifecycle of the Mosaic Hexagonal Architecture specification.
+This document establishes the governance, authority and lifecycle of the Mosaic Hexagonal Architecture specification. MEG-004 defines the architectural rules governing how the Domain Model interacts with infrastructure.
 
-MEG-004 defines the architectural rules governing how the Domain Model interacts with infrastructure.
-
-Unlike implementation documentation, this specification defines **dependency boundaries**, not implementation details.
-
-Its primary purpose is to ensure that the Domain remains independent of technology for the lifetime of the Mosaic platform.
+Unlike implementation documentation, this specification defines **dependency boundaries**, not implementation details. Its primary purpose is to ensure that the Domain remains independent of technology for the lifetime of the Mosaic platform.
 
 ---
 
 # Authority
 
-MEG-004 is the authoritative specification governing architectural boundaries throughout the Mosaic ecosystem.
-
-This specification applies to:
-
-- Mosaic Platform
-- First-party Modules
-- Third-party Modules
-- Runtime Capabilities
-- SDKs
-- Infrastructure Components
-
-Every capability developed within the Mosaic platform SHOULD comply with the dependency rules established by this specification.
+MEG-004 is the authoritative specification governing architectural boundaries throughout the Mosaic ecosystem. It applies to the Mosaic Platform, first-party Modules, third-party Modules, Runtime Capabilities, SDKs and Infrastructure Components. Every capability developed within the Mosaic platform should comply with the dependency rules established here.
 
 ---
 
@@ -102,26 +87,13 @@ Examples and diagrams are informative unless explicitly identified as normative.
 
 # Architectural Principles
 
-The Mosaic Hexagonal Architecture is built upon several foundational principles.
-
-- The Domain owns business behaviour.
-- Dependencies flow towards the Domain.
-- Infrastructure adapts to the Domain.
-- Ports define contracts.
-- Adapters implement contracts.
-- Technology remains replaceable.
-- Business logic remains isolated.
-- The Domain never imports infrastructure.
-
-Every subsequent chapter expands one or more of these principles.
+The Mosaic Hexagonal Architecture is built upon several foundational principles. The Domain owns business behaviour and never imports infrastructure; dependencies flow towards the Domain and infrastructure adapts to it; Ports define contracts and Adapters implement them; technology remains replaceable and business logic remains isolated. Every subsequent chapter expands one or more of these principles.
 
 ---
 
 # Document Lifecycle
 
-MEG specifications evolve alongside the platform.
-
-Each document progresses through the following lifecycle.
+MEG specifications evolve alongside the platform, and each document progresses through the following lifecycle.
 
 ```mermaid
 flowchart TD
@@ -140,69 +112,27 @@ N4 --> N5
 N5 --> N6
 ```
 
-Accepted specifications become part of the canonical Mosaic architecture.
-
-Historical versions SHOULD remain available for future reference.
+Accepted specifications become part of the canonical Mosaic architecture, and historical versions should remain available for future reference.
 
 ---
 
 # Architectural Evolution
 
-Hexagonal Architecture is intentionally stable.
-
-Changes affecting:
-
-- dependency direction
-- port definitions
-- adapter responsibilities
-- application services
-- runtime integration
-- infrastructure boundaries
-
-SHOULD be accompanied by an Architectural Decision Record (ADR).
-
-Architectural consistency should remain more important than implementation convenience.
+Hexagonal Architecture is intentionally stable. Changes affecting dependency direction, port definitions, adapter responsibilities, application services, runtime integration or infrastructure boundaries should be accompanied by an Architectural Decision Record (ADR), because architectural consistency should remain more important than implementation convenience.
 
 ---
 
 # Compliance
 
-All repositories implementing Mosaic capabilities SHOULD comply with MEG-004.
+All repositories implementing Mosaic capabilities should comply with MEG-004. Where deviation becomes necessary, the repository should document the reason, the affected boundaries, the architectural impact and the migration strategy.
 
-Where deviation becomes necessary, the repository SHOULD document:
-
-- the reason
-- affected boundaries
-- architectural impact
-- migration strategy
-
-Temporary deviations should eventually be removed.
-
-Permanent deviations should generally result in updates to this specification.
+Temporary deviations should eventually be removed. Permanent deviations should generally result in updates to this specification.
 
 ---
 
 # Design Philosophy
 
-MEG-004 intentionally favours:
-
-- explicit dependencies
-- replaceable infrastructure
-- domain independence
-- clear ownership
-- technology isolation
-- long-term maintainability
-
-The architecture should continue functioning even if:
-
-- databases change
-- frameworks change
-- transports change
-- infrastructure changes
-
-Only the adapters should require modification.
-
-The Domain should remain unchanged.
+MEG-004 intentionally favours explicit dependencies, replaceable infrastructure, domain independence, clear ownership, technology isolation and long-term maintainability. The architecture should continue functioning even if databases, frameworks, transports or infrastructure change: only the adapters should require modification, and the Domain should remain unchanged.
 
 Hexagonal Architecture exists precisely to achieve this separation between business logic and infrastructure by ensuring dependencies point inward towards the application core. ([alistair.cockburn.us](https://alistair.cockburn.us/hexagonal-architecture))
 
@@ -210,16 +140,4 @@ Hexagonal Architecture exists precisely to achieve this separation between busin
 
 # Scope of Authority
 
-MEG-004 governs architectural boundaries.
-
-It does **not** define:
-
-- business behaviour
-- runtime execution
-- storage technologies
-- deployment topology
-- user interface design
-
-Those concerns belong to other MEG specifications.
-
-Keeping these concerns separate allows each architectural layer to evolve independently.
+MEG-004 governs architectural boundaries. It does **not** define business behaviour, runtime execution, storage technologies, deployment topology or user interface design; those concerns belong to other MEG specifications. Keeping them separate allows each architectural layer to evolve independently.

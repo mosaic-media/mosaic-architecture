@@ -12,24 +12,7 @@ Status: Draft
 
 # Purpose
 
-The Domain cannot receive requests directly.
-
-Every interaction with the outside world must first pass through an Adapter.
-
-Examples include:
-
-- HTTP requests
-- CLI commands
-- Scheduled tasks
-- Runtime events
-- Module calls
-- Test harnesses
-
-These external interactions differ technologically.
-
-They should not differ architecturally.
-
-Driving Adapters translate these external requests into calls against Driving Ports.
+The Domain cannot receive requests directly, so every interaction with the outside world must first pass through an Adapter — HTTP requests, CLI commands, scheduled tasks, runtime events, Module calls and test harnesses alike. These external interactions differ technologically; they should not differ architecturally. Driving Adapters translate them into calls against Driving Ports.
 
 ---
 
@@ -39,11 +22,11 @@ Within Mosaic:
 
 > **Driving Adapters understand technology. Driving Ports understand the business.**
 
-Driving Adapters should answer one question.
+A Driving Adapter should answer one question:
 
 > **How does this external system communicate with the Domain?**
 
-They should never answer:
+It should never answer:
 
 > **What should the business do?**
 
@@ -53,9 +36,7 @@ That responsibility belongs entirely to the Domain.
 
 # What Is A Driving Adapter?
 
-A Driving Adapter is an infrastructure component that invokes a Driving Port.
-
-Conceptually:
+A Driving Adapter is an infrastructure component that invokes a Driving Port. Conceptually:
 
 ```mermaid
 flowchart TD
@@ -72,52 +53,19 @@ N3 --> N4
 N4 --> N5
 ```
 
-The Driving Adapter is responsible for translation.
-
-Nothing more.
+The Driving Adapter is responsible for translation, and nothing more.
 
 ---
 
 # External Actors
 
-Many different systems may invoke the same business capability.
-
-Examples include:
-
-```
-
-HTTP
-```
-
-```
-
-CLI
-```
-
-```
-
-Scheduler
-```
-
-```
-
-Runtime Subscriber
-```
-
-```
-
-Module
-```
-
-Every one becomes a Driving Adapter.
-
-No transport receives special treatment.
+Many different systems may invoke the same business capability: HTTP, the CLI, a scheduler, a runtime subscriber or a Module. Every one of them becomes a Driving Adapter, and no transport receives special treatment.
 
 ---
 
 # Why Driving Adapters Exist
 
-Without Driving Adapters:
+Without Driving Adapters the Domain ends up understanding HTTP:
 
 ```mermaid
 flowchart TD
@@ -130,9 +78,7 @@ N1 --> N2
 N2 --> N3
 ```
 
-The Domain now understands HTTP.
-
-Instead:
+With one in place, the transport stops at the boundary:
 
 ```mermaid
 flowchart TD
@@ -147,17 +93,13 @@ N2 --> N3
 N3 --> N4
 ```
 
-Only the Adapter understands HTTP.
-
-The Domain remains completely transport independent.
+Only the Adapter understands HTTP, and the Domain remains completely transport independent.
 
 ---
 
 # One Driving Port
 
-Multiple Driving Adapters may invoke the same Driving Port.
-
-Example.
+Multiple Driving Adapters may invoke the same Driving Port:
 
 ```mermaid
 flowchart TD
@@ -176,17 +118,13 @@ N1 --> N5
 N1 --> N6
 ```
 
-The business implementation remains identical.
-
-Only the entry mechanism changes.
+The business implementation remains identical; only the entry mechanism changes.
 
 ---
 
 # Translation
 
-Driving Adapters translate external representations into business requests.
-
-Example.
+Driving Adapters translate external representations into business requests:
 
 ```mermaid
 flowchart TD
@@ -203,136 +141,27 @@ N3 --> N4
 N4 --> N5
 ```
 
-Or:
-
-```mermaid
-flowchart TD
-
-N1["CLI Arguments"]
-N2["Business Request"]
-N3["Driving Port"]
-
-N1 --> N2
-N2 --> N3
-```
-
-Translation ends at the Port boundary.
+A CLI Adapter does the same work in fewer steps, turning CLI arguments into a Business Request before invoking the Driving Port. In both cases translation ends at the Port boundary.
 
 ---
 
 # Validation
 
-Driving Adapters perform transport validation.
-
-Examples include:
-
-- malformed JSON
-- missing HTTP headers
-- invalid CLI syntax
-- protobuf decoding
-- authentication tokens
-
-Business validation belongs to the Domain.
-
-The two should never be confused.
-
-Example.
-
-Transport validation.
-
-```
-
-Required JSON Field Missing
-```
-
-Business validation.
-
-```
-
-Collection Already Exists
-```
-
-Different layers.
-
-Different responsibilities.
+Driving Adapters perform transport validation: malformed JSON, missing HTTP headers, invalid CLI syntax, protobuf decoding and authentication tokens. Business validation belongs to the Domain, and the two should never be confused. `Required JSON Field Missing` is transport validation; `Collection Already Exists` is business validation. Different layers, different responsibilities.
 
 ---
 
-# Authentication
+# Authentication And Authorisation
 
-Authentication belongs to the Driving Adapter layer.
+Authentication belongs to the Driving Adapter layer, which authenticates the caller before invoking the Driving Port. The Domain should receive an `Authenticated User`, never a JWT, bearer token or OAuth header: security mechanisms remain infrastructure concerns while business identity remains a domain concern.
 
-Example.
-
-```mermaid
-flowchart TD
-
-N1["HTTP"]
-N2["Authenticate User"]
-N3["Driving Port"]
-
-N1 --> N2
-N2 --> N3
-```
-
-The Domain should receive:
-
-```
-
-Authenticated User
-```
-
-Not:
-
-```mermaid
-flowchart TD
-
-N1["JWT"]
-N2["Bearer Token"]
-N3["OAuth Header"]
-
-N1 --> N2
-N2 --> N3
-```
-
-Security mechanisms remain infrastructure concerns.
-
-Business identity remains a domain concern.
-
----
-
-# Authorisation
-
-Likewise:
-
-Authorisation decisions should generally occur before entering the Domain.
-
-Example.
-
-```mermaid
-flowchart TD
-
-N1["HTTP"]
-N2["Permission Check"]
-N3["Driving Port"]
-
-N1 --> N2
-N2 --> N3
-```
-
-The Domain assumes:
-
-The caller has already been authorised to invoke the requested business behaviour.
-
-Business rules remain separate from access control.
+Authorisation decisions should likewise generally occur before entering the Domain, with the Adapter performing the permission check ahead of the Driving Port call. The Domain assumes the caller has already been authorised to invoke the requested business behaviour, keeping business rules separate from access control.
 
 ---
 
 # Error Translation
 
-Driving Adapters translate Domain errors into transport errors.
-
-Example.
+Driving Adapters translate Domain errors into transport errors:
 
 ```mermaid
 flowchart TD
@@ -347,32 +176,13 @@ N2 --> N3
 N3 --> N4
 ```
 
-Or:
-
-```mermaid
-flowchart TD
-
-N1["CLI Adapter"]
-N2["Exit Code"]
-
-N1 --> N2
-```
-
-The Domain should never return:
-
-- HTTP status codes
-- CLI exit codes
-- GraphQL errors
-
-Adapters perform the translation.
+A CLI Adapter performs the equivalent translation into an exit code. The Domain should never return HTTP status codes, CLI exit codes or GraphQL errors; Adapters perform the translation.
 
 ---
 
 # Runtime Events
 
-Within the Reactive Runtime, subscribers become Driving Adapters.
-
-Example.
+Within the Reactive Runtime, subscribers become Driving Adapters:
 
 ```mermaid
 flowchart TD
@@ -387,19 +197,13 @@ N2 --> N3
 N3 --> N4
 ```
 
-The Domain remains unaware that an Event Bus exists.
-
-Subscribers simply translate runtime events into business requests.
-
-This is one of the key integration points between [MEG-002](../meg-002-event-driven-runtime/index.md) and MEG-004.
+Subscribers simply translate runtime events into business requests, and the Domain remains unaware that an Event Bus exists. This is one of the key integration points between [MEG-002](../meg-002-event-driven-runtime/index.md) and MEG-004.
 
 ---
 
 # Scheduled Work
 
-Scheduled tasks also become Driving Adapters.
-
-Example.
+Scheduled tasks also become Driving Adapters:
 
 ```mermaid
 flowchart TD
@@ -414,21 +218,13 @@ N2 --> N3
 N3 --> N4
 ```
 
-The Domain should never understand:
-
-- timers
-- cron
-- scheduling
-
-The scheduler invokes the business through the same contract as every other caller.
+The Domain should never understand timers, cron or scheduling. The scheduler invokes the business through the same contract as every other caller.
 
 ---
 
 # Modules
 
-Modules invoke the Domain through Driving Adapters.
-
-Example.
+Modules invoke the Domain through Driving Adapters:
 
 ```mermaid
 flowchart TD
@@ -443,125 +239,27 @@ N2 --> N3
 N3 --> N4
 ```
 
-The Domain remains unaware whether the caller is:
-
-- Platform capabilities
-- Module
-- Test
-- CLI
-
-All callers appear identical.
+The Domain remains unaware whether the caller is Platform capabilities, a Module, a test or the CLI. All callers appear identical.
 
 ---
 
 # Tests
 
-Tests become Driving Adapters.
-
-Example.
-
-```mermaid
-flowchart TD
-
-N1["Test"]
-N2["Driving Port"]
-N3["Domain"]
-
-N1 --> N2
-N2 --> N3
-```
-
-No HTTP.
-
-No runtime.
-
-No infrastructure.
-
-The business remains directly testable.
-
-This is one of the greatest practical benefits of Hexagonal Architecture.
+Tests become Driving Adapters too, invoking the Driving Port directly with no HTTP, no runtime and no infrastructure in between. The business remains directly testable, which is one of the greatest practical benefits of Hexagonal Architecture.
 
 ---
 
-# Thin Adapters
+# Thin And Stateless
 
-Driving Adapters SHOULD remain thin.
+Driving Adapters should remain thin. Their typical responsibilities are parsing, authentication, transport validation, mapping and error translation; they should not contain business rules, Aggregate manipulation, orchestration or persistence, because business behaviour belongs beyond the Port.
 
-Typical responsibilities include:
-
-- parsing
-- authentication
-- transport validation
-- mapping
-- error translation
-
-They SHOULD NOT contain:
-
-- business rules
-- Aggregate manipulation
-- orchestration
-- persistence
-
-Business behaviour belongs beyond the Port.
-
----
-
-# Stateless
-
-Driving Adapters SHOULD remain stateless.
-
-They simply translate one request into another.
-
-State belongs to:
-
-- Aggregates
-- Repositories
-- Runtime
-
-Not the Adapter itself.
+They should also remain stateless, since they simply translate one request into another. State belongs to Aggregates, Repositories and the Runtime, not the Adapter itself.
 
 ---
 
 # Examples Within Mosaic
 
-Examples of Driving Adapters include:
-
-```
-
-REST API
-```
-
-```
-
-GraphQL API
-```
-
-```
-
-CLI
-```
-
-```
-
-Worker Subscriber
-```
-
-```
-
-Scheduler
-```
-
-```
-
-Module Runtime
-```
-
-```
-
-Integration Tests
-```
-
-Each invokes exactly the same business behaviour.
+Driving Adapters within Mosaic include the REST API, GraphQL API, CLI, Worker Subscriber, Scheduler, Module Runtime and integration tests. Each invokes exactly the same business behaviour.
 
 ---
 
@@ -583,33 +281,19 @@ Executing SQL directly from Driving Adapters.
 
 ## Runtime Logic
 
-Managing retries.
-
-Managing scheduling.
-
-Managing workers.
-
-These belong to the runtime.
+Managing retries, scheduling or workers. These belong to the runtime.
 
 ---
 
 ## Aggregate Mutation
 
-Changing Aggregate state directly.
-
-All business behaviour must enter through the Driving Port.
+Changing Aggregate state directly. All business behaviour must enter through the Driving Port.
 
 ---
 
 ## Technology Leakage
 
-Passing:
-
-- HTTP requests
-- protobuf messages
-- JSON documents
-
-directly into the Domain.
+Passing HTTP requests, protobuf messages or JSON documents directly into the Domain.
 
 ---
 
@@ -617,14 +301,14 @@ directly into the Domain.
 
 Within Mosaic:
 
-- Driving Adapters MUST invoke Driving Ports.
-- Driving Adapters MUST remain transport specific.
-- Driving Adapters MUST perform translation.
-- Driving Adapters MUST perform transport validation.
-- Business validation MUST remain inside the Domain.
-- Driving Adapters MUST translate Domain errors into transport-specific responses.
-- Driving Adapters SHOULD remain stateless.
-- Every external caller SHOULD interact through a Driving Adapter.
+- Driving Adapters must invoke Driving Ports.
+- Driving Adapters must remain transport specific.
+- Driving Adapters must perform translation.
+- Driving Adapters must perform transport validation.
+- Business validation must remain inside the Domain.
+- Driving Adapters must translate Domain errors into transport-specific responses.
+- Driving Adapters should remain stateless.
+- Every external caller should interact through a Driving Adapter.
 
 ---
 
@@ -638,24 +322,12 @@ Driving Adapters define:
 
 > **How external systems invoke that behaviour.**
 
-The next chapter introduces **Driven Adapters**, which perform the opposite role by implementing the capabilities requested by the Domain through Driven Ports.
-
-Together they complete the two halves of the Hexagonal Architecture.
+The next chapter introduces **Driven Adapters**, which perform the opposite role by implementing the capabilities requested by the Domain through Driven Ports. Together they complete the two halves of the Hexagonal Architecture.
 
 ---
 
 # Summary
 
-Driving Adapters isolate the Domain from every external interaction.
-
-Whether requests originate from:
-
-- HTTP
-- CLI
-- Runtime Events
-- Modules
-- Tests
-
-the Domain always receives the same business request through the same Driving Port.
+Driving Adapters isolate the Domain from every external interaction. Whether requests originate from HTTP, the CLI, runtime events, Modules or tests, the Domain always receives the same business request through the same Driving Port.
 
 That consistency allows Mosaic to support many interaction models without ever allowing transport concerns to leak into the business itself.

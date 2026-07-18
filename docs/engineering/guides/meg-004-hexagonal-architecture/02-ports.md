@@ -12,30 +12,7 @@ Status: Draft
 
 # Purpose
 
-The Domain must interact with the outside world.
-
-Examples include:
-
-- loading Aggregates
-- publishing Domain Events
-- reading metadata
-- writing blob storage
-- retrieving configuration
-- querying external providers
-
-However, the Domain should remain completely unaware of:
-
-- PostgreSQL
-- DuckDB
-- TMDB
-- Jellyfin
-- Docker
-- HTTP
-- Filesystems
-
-Ports solve this problem.
-
-They define the contracts through which the Domain communicates with external systems without depending upon those systems.
+The Domain must interact with the outside world: loading Aggregates, publishing Domain Events, reading metadata, writing blob storage, retrieving configuration and querying external providers. It must nevertheless remain completely unaware of PostgreSQL, DuckDB, TMDB, Jellyfin, Docker, HTTP and filesystems. Ports solve this problem by defining the contracts through which the Domain communicates with external systems without depending upon those systems.
 
 ---
 
@@ -45,57 +22,19 @@ Within Mosaic:
 
 > **The Domain owns every contract it depends upon.**
 
-A Port represents a business capability.
-
-It does **not** represent a technology.
-
-Infrastructure implements Ports.
-
-The Domain defines them.
-
-This inversion of ownership is the defining characteristic of Hexagonal Architecture.
+A Port represents a business capability, not a technology. The Domain defines Ports and infrastructure implements them, and this inversion of ownership is the defining characteristic of Hexagonal Architecture.
 
 ---
 
 # What Is A Port?
 
-A Port is an interface representing a business capability required by the Domain.
-
-Examples include:
-
-```
-
-MediaRepository
-```
-
-```
-
-MetadataProvider
-```
-
-```
-
-ArtworkStore
-```
-
-```
-
-Clock
-```
-
-Each Port answers one question.
-
-> **What does the Domain require?**
-
-Not:
-
-> **How is it implemented?**
+A Port is an interface representing a business capability required by the Domain, such as `MediaRepository`, `MetadataProvider`, `ArtworkStore` or `Clock`. Each Port answers one question — **what does the Domain require?** — and never **how is it implemented?**
 
 ---
 
 # Why Ports Exist
 
-Without Ports:
+Without Ports, business behaviour reaches straight through to the storage engine.
 
 ```mermaid
 flowchart TD
@@ -110,9 +49,7 @@ N2 --> N3
 N3 --> N4
 ```
 
-The Domain now understands infrastructure.
-
-Instead:
+The Domain now understands infrastructure. Instead:
 
 ```mermaid
 flowchart TD
@@ -125,58 +62,19 @@ N1 --> N2
 N2 --> N3
 ```
 
-The Domain understands only:
-
-```
-
-PlaybackRepository
-```
-
-Everything else becomes replaceable.
+The Domain understands only `PlaybackRepository`, and everything else becomes replaceable.
 
 ---
 
 # The Domain Owns The Port
 
-One of the most important principles of Hexagonal Architecture is:
-
-```mermaid
-flowchart TD
-
-N1["Domain"]
-N2["Defines Interface"]
-N3["Infrastructure Implements"]
-
-N1 --> N2
-N2 --> N3
-```
-
-Not:
-
-```mermaid
-flowchart TD
-
-N1["Infrastructure"]
-N2["Defines Interface"]
-N3["Domain Uses"]
-
-N1 --> N2
-N2 --> N3
-```
-
-Ownership always belongs to the Domain.
-
-The business decides what it needs.
-
-Infrastructure satisfies those needs.
+One of the most important principles of Hexagonal Architecture is that the Domain defines the interface and infrastructure implements it, never the reverse. Ownership always belongs to the Domain: the business decides what it needs, and infrastructure satisfies those needs.
 
 ---
 
 # Ports Describe Behaviour
 
-Ports should describe business behaviour.
-
-Good.
+Ports should describe business behaviour. Good:
 
 ```go
 type PlaybackRepository interface {
@@ -187,7 +85,7 @@ type PlaybackRepository interface {
 }
 ```
 
-Poor.
+Poor:
 
 ```go
 type PostgreSQLRepository interface {
@@ -196,80 +94,25 @@ type PostgreSQLRepository interface {
 }
 ```
 
-The first describes business intent.
-
-The second describes implementation.
-
-Ports should never leak technology.
+The first describes business intent; the second describes implementation. Ports should never leak technology.
 
 ---
 
 # Business Language
 
-Port names should reinforce the ubiquitous language.
-
-Good.
-
-```
-
-CollectionRepository
-```
-
-```
-
-MetadataProvider
-```
-
-```
-
-RecommendationEngine
-```
-
-Poor.
-
-```
-
-DatabaseAccess
-```
-
-```
-
-StorageLayer
-```
-
-```
-
-PersistenceManager
-```
-
-Business concepts should always dominate technical vocabulary.
+Port names should reinforce the ubiquitous language. `CollectionRepository`, `MetadataProvider` and `RecommendationEngine` are good; `DatabaseAccess`, `StorageLayer` and `PersistenceManager` are poor. Business concepts should always dominate technical vocabulary.
 
 ---
 
 # Ports Are Stable
 
-Infrastructure changes frequently.
-
-Ports should not.
-
-Changing a Port affects:
-
-- the Domain
-- every Adapter
-- every test
-- every implementation
-
-Ports therefore form part of the long-term architectural contract.
-
-They should evolve deliberately.
+Infrastructure changes frequently; Ports should not. Changing a Port affects the Domain, every Adapter, every test and every implementation, so Ports form part of the long-term architectural contract and should evolve deliberately.
 
 ---
 
 # Ports Are Small
 
-Ports SHOULD remain focused.
-
-Good.
+Ports should remain focused. Good:
 
 ```go
 type ArtworkProvider interface {
@@ -278,7 +121,7 @@ type ArtworkProvider interface {
 }
 ```
 
-Poor.
+Poor:
 
 ```go
 type MediaPlatform interface {
@@ -297,271 +140,67 @@ type MediaPlatform interface {
 }
 ```
 
-Large Ports increase coupling.
-
-Small Ports improve flexibility.
-
-This aligns closely with Go's preference for small interfaces representing behaviour rather than broad capability sets. ([go.dev](https://go.dev/doc/effective_go))
+Large Ports increase coupling while small Ports improve flexibility. This aligns closely with Go's preference for small interfaces representing behaviour rather than broad capability sets. ([go.dev](https://go.dev/doc/effective_go))
 
 ---
 
 # Business First
 
-A useful question when designing a Port is:
-
-> **What would the business ask for?**
-
-Not:
-
-> **What can PostgreSQL provide?**
-
-The Domain should remain entirely unaware of implementation constraints.
+A useful question when designing a Port is **what would the business ask for?**, not **what can PostgreSQL provide?** The Domain should remain entirely unaware of implementation constraints.
 
 ---
 
 # Technology Neutral
 
-Ports should never reference:
-
-- SQL
-- REST
-- HTTP
-- Kafka
-- NATS
-- Docker
-- Redis
-
-Poor.
-
-```
-
-SQLRepository
-```
-
-Good.
-
-```
-
-MediaRepository
-```
-
-Technology belongs behind the Port.
+Ports should never reference SQL, REST, HTTP, Kafka, NATS, Docker or Redis: `SQLRepository` is poor where `MediaRepository` is good. Technology belongs behind the Port.
 
 ---
 
 # Ports Are Intent
 
-Ports communicate intent.
-
-Example.
-
-```
-
-MetadataProvider
-```
-
-communicates:
-
-> Retrieve metadata.
-
-It says nothing about:
-
-- TMDB
-- AniList
-- Local Cache
-- Filesystem
-
-Those become Adapter concerns.
+Ports communicate intent. `MetadataProvider` communicates "retrieve metadata" while saying nothing about TMDB, AniList, a local cache or the filesystem. Those become Adapter concerns.
 
 ---
 
 # One Responsibility
 
-Each Port SHOULD describe one responsibility.
-
-Examples.
-
-```
-
-MetadataProvider
-```
-
-```
-
-ArtworkStore
-```
-
-```
-
-Clock
-```
-
-Avoid combining unrelated concepts.
-
-Poor.
-
-```
-
-MediaInfrastructure
-```
-
-One Port should answer one business question.
+Each Port should describe one responsibility — `MetadataProvider`, `ArtworkStore`, `Clock` — and avoid combining unrelated concepts, as a Port such as `MediaInfrastructure` does. One Port should answer one business question.
 
 ---
 
 # Domain Dependencies
 
-Everything the Domain depends upon should enter through Ports.
-
-Examples include:
-
-- repositories
-- providers
-- storage
-- time
-- identity generation
-
-This dramatically improves:
-
-- testing
-- replacement
-- evolution
-
-The Domain remains isolated.
+Everything the Domain depends upon should enter through Ports, including repositories, providers, storage, time and identity generation. This dramatically improves testing, replacement and evolution, and the Domain remains isolated.
 
 ---
 
 # Input vs Output
 
-Not all Ports are identical.
-
-Some receive requests.
-
-Others perform work on behalf of the Domain.
-
-Hexagonal Architecture traditionally distinguishes these as:
-
-- Driving Ports
-- Driven Ports
-
-The next two chapters explore this distinction.
+Not all Ports are identical. Some receive requests; others perform work on behalf of the Domain. Hexagonal Architecture traditionally distinguishes these as Driving Ports and Driven Ports, and the next two chapters explore this distinction.
 
 ---
 
 # Ports Are Not Adapters
 
-A common mistake is confusing:
-
-```
-
-Port
-```
-
-with
-
-```
-
-Adapter
-```
-
-Ports define contracts.
-
-Adapters implement contracts.
-
-The Port belongs to the Domain.
-
-The Adapter belongs to Infrastructure.
-
-The two should never be combined.
+A common mistake is confusing a Port with an Adapter. Ports define contracts and Adapters implement them; the Port belongs to the Domain and the Adapter belongs to Infrastructure. The two should never be combined.
 
 ---
 
 # Testing
 
-Ports make testing straightforward.
-
-Example.
-
-```mermaid
-flowchart TD
-
-N1["PlaybackRepository"]
-N2["Fake Repository"]
-
-N1 --> N2
-```
-
-The Domain remains unaware that no real database exists.
-
-Tests become:
-
-- deterministic
-- fast
-- infrastructure independent
-
-This is one of the primary practical benefits of Hexagonal Architecture.
+Ports make testing straightforward. A test can substitute a fake repository for `PlaybackRepository`, and the Domain remains unaware that no real database exists. Tests become deterministic, fast and infrastructure independent, which is one of the primary practical benefits of Hexagonal Architecture.
 
 ---
 
 # Port Evolution
 
-Ports should evolve slowly.
-
-Whenever a Port changes ask:
-
-- Is the Domain changing?
-- Or merely the infrastructure?
-
-If only infrastructure changed:
-
-The Port probably should not.
-
-Ports should remain stable as technologies evolve.
+Ports should evolve slowly. Whenever a Port changes, ask whether the Domain is changing or merely the infrastructure. If only infrastructure changed, the Port probably should not, because Ports should remain stable as technologies evolve.
 
 ---
 
 # Mosaic Examples
 
-Examples of Ports within Mosaic include:
-
-```
-
-LibraryRepository
-```
-
-```
-
-PlaybackRepository
-```
-
-```
-
-MetadataProvider
-```
-
-```
-
-ArtworkStore
-```
-
-```
-
-BlobStore
-```
-
-```
-
-IdentityGenerator
-```
-
-```
-
-Clock
-```
-
-Every Port expresses a business dependency.
-
-None express technology.
+Ports within Mosaic include `LibraryRepository`, `PlaybackRepository`, `MetadataProvider`, `ArtworkStore`, `BlobStore`, `IdentityGenerator` and `Clock`. Every one expresses a business dependency; none express technology.
 
 ---
 
@@ -571,53 +210,23 @@ The following practices are prohibited.
 
 ## Technology Ports
 
-```
-
-PostgresRepository
-```
-
-```
-
-RedisProvider
-```
-
----
+Ports named for their implementation, such as `PostgresRepository` or `RedisProvider`.
 
 ## Generic Ports
 
-```
-
-Storage
-```
-
-without business meaning.
-
----
+Ports such as `Storage` without business meaning.
 
 ## Large Ports
 
 Interfaces representing unrelated capabilities.
 
----
-
 ## Infrastructure Dependencies
 
-Ports importing:
-
-- SQL
-- HTTP
-- Runtime
-- Logging
-
----
+Ports importing SQL, HTTP, Runtime or Logging.
 
 ## Shared Ownership
 
-Infrastructure defining contracts consumed by the Domain.
-
-The Domain owns the contract.
-
-Always.
+Infrastructure defining contracts consumed by the Domain. The Domain owns the contract, always.
 
 ---
 
@@ -625,14 +234,14 @@ Always.
 
 Within Mosaic:
 
-- Ports MUST belong to the Domain.
-- Ports MUST describe business behaviour.
-- Ports MUST remain technology independent.
-- Ports SHOULD remain small.
-- Ports SHOULD reinforce the ubiquitous language.
-- Infrastructure MUST implement Ports.
-- Ports SHOULD evolve slowly.
-- Business requirements MUST drive Port design.
+- Ports must belong to the Domain.
+- Ports must describe business behaviour.
+- Ports must remain technology independent.
+- Ports should remain small.
+- Ports should reinforce the ubiquitous language.
+- Infrastructure must implement Ports.
+- Ports should evolve slowly.
+- Business requirements must drive Port design.
 
 ---
 
@@ -653,24 +262,10 @@ N2 --> N3
 N3 --> N4
 ```
 
-Ports define the contracts.
-
-Adapters satisfy them.
-
-The next chapter introduces the first category of Ports:
-
-**Driving Ports**, which define how the outside world requests business behaviour from the Domain.
+Ports define the contracts and Adapters satisfy them. The next chapter introduces the first category of Ports: **Driving Ports**, which define how the outside world requests business behaviour from the Domain.
 
 ---
 
 # Summary
 
-Ports are one of the most important concepts within Hexagonal Architecture.
-
-They invert the traditional ownership of dependencies.
-
-Instead of infrastructure telling the Domain how to behave:
-
-The Domain tells infrastructure what it requires.
-
-That inversion protects the business from technology and ensures the Domain remains the most stable part of the Mosaic platform.
+Ports are one of the most important concepts within Hexagonal Architecture because they invert the traditional ownership of dependencies. Instead of infrastructure telling the Domain how to behave, the Domain tells infrastructure what it requires. That inversion protects the business from technology and ensures the Domain remains the most stable part of the Mosaic platform.
