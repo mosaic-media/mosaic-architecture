@@ -35,6 +35,6 @@ Version: 0.1
 
 # Deferred Follow-Ups
 
-- **Canonising the content-agnostic object model in full.** The node/relation model is described at principle level in [MEG-007 §15](../../guides/meg-007-storage-architecture/15-v2-storage-architecture.md). Its complete table-level design (identity scheme, ordering, source bindings, orphan handling) is a further storage-architecture effort, not settled here.
+- **The content-agnostic object model.** The node/relation model is described at principle level in [MEG-007 §15](../../guides/meg-007-storage-architecture/15-v2-storage-architecture.md) and canonised at field level in [MEG-007 §16 — Object Model](../../guides/meg-007-storage-architecture/16-object-model.md). Remaining open points — the concrete identifier scheme, fractional ordering at scale, relation-confidence reverification, and single versus per-context schema — are tracked in that chapter's Open Questions.
 - **Confirming bounded contexts against a single transaction scope.** The media-domain contexts must not read across each other's tables; the reading that one transaction spans the acting context's stores plus the shared outbox needs confirmation when those contexts are built (carried from [MAD-001 §04](../mad-001-transactional-store-extensibility/04-consequences.md)).
 - **Provider union and priority routing.** How several Modules of the same capability cooperate (union or context priority) is routing owned by [MAC-001 §03](../mac-001-platform-architecture/03-capability-model.md), distinct from this storage-and-delivery decision.
