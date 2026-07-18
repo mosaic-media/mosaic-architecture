@@ -9,13 +9,19 @@ Version: 0.2
 
 Architecture documentation contains accepted Mosaic platform structure and clearly separated proposals for architecture that is not yet authoritative.
 
-MAC documents are authoritative Architecture Canon. MDP documents preserve proposals and must be read according to their recorded Disposition.
+MAC documents are authoritative Architecture Canon. MAD documents record accepted architecture decisions and their reasoning. MDP documents preserve proposals and must be read according to their recorded Disposition.
 
 ## Architecture Canon in Brief
 
 | Specification | In one sentence |
 |---------------|-----------------|
 | [MAC-001 — Platform Architecture](mac-001-platform-architecture/index.md) | Defines the accepted Platform structure, its responsibilities and the boundaries between the Platform, Supervisor, capabilities and Modules. |
+
+## Architecture Decisions
+
+| Decision | Status | In one sentence |
+|----------|--------|-----------------|
+| [MAD-001 — Transactional Store Extensibility](mad-001-transactional-store-extensibility/index.md) | Accepted | Records why the Platform transaction boundary resolves stores through a uniform port instead of a closed interface of named Core Platform stores. |
 
 ## Deferred Proposals
 

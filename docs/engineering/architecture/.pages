@@ -2,4 +2,5 @@ title: Architecture
 arrange:
   - index.md
   - mac-001-platform-architecture
+  - mad-001-transactional-store-extensibility
   - mdp-001-adaptive-composition-runtime
