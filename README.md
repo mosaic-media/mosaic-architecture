@@ -108,7 +108,11 @@ Chapter-level files are preferred over large monolithic documents because they a
 
 References should appear near the end of a specification and glossary should remain the final authored chapter.
 
-Every authored Markdown page begins with `File`, `Document`, `Status`, and `Version` metadata. Source pages do not carry review-status summaries or manual previous/next links; document maturity comes from metadata and page transitions come from MkDocs.
+Every authored Markdown page begins with exactly three metadata fields: `File`, `Document`, and `Status`. The schema is defined by [MDG-001 — Documentation Authority Guide](docs/engineering/documentation/mdg-001-documentation-authority-guide/07-repository-organisation.md).
+
+`Status` is one of `Draft`, `Review`, `Active`, `Deprecated`, or `Superseded`, with `Deferred`, `Accepted`, `Rejected`, and `Withdrawn` additionally available to MDP proposals. Prose documents carry no version number; only the contracts defined by MIP documents carry a major compatibility version such as `Event Protocol v1`, declared in the document body. Specifications still carrying a legacy `Version` field are tolerated by tooling until they are migrated.
+
+Source pages do not carry review-status summaries or manual previous/next links; document authority comes from `Status` and page transitions come from MkDocs.
 
 Every reference to another published Mosaic document is a relative Markdown hyperlink. Identifier-only references link to the target specification's `index.md`; named references use the catalogued `ID — Canonical Title`, while chapter-specific references may link directly to the relevant chapter or anchor. Unpublished identifiers remain unlinked and are marked `planned; not yet published` or `deferred; not yet published`.
 
@@ -147,7 +151,7 @@ The MkDocs portal is configured with:
 - one-click, whole-specification PDF downloads
 - GitHub repository and edit-page links
 
-Metadata comments are preserved in source files. A MkDocs hook renders the document identity, Status, and Version visibly in the generated site at build time.
+Metadata comments are preserved in source files. A MkDocs hook renders the document identity and Status visibly in the generated site at build time, along with a legacy Version row where one is still declared.
 
 ## Landing Pages and Navigation
 

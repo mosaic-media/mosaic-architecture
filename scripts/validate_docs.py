@@ -26,8 +26,13 @@ BOOK_ROOTS = [
 ]
 SLUG_RE = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
 METADATA_RE = re.compile(r"\A<!--\n(?P<body>.*?)\n-->", re.DOTALL)
-REQUIRED_FIELDS = ("File", "Document", "Status", "Version")
+REQUIRED_FIELDS = ("File", "Document", "Status")
 DOCUMENT_ID_RE = re.compile(r"\b(?:MDP|MAD|MAC|MEG|MIP|MOP|MDL|MDS|MDG|MRM)-\d{3}\b")
+# MDG-001 chapter 03 defines the Status lifecycle. Proposal-only values apply to MDP.
+STATUS_VALUES = frozenset({"Draft", "Review", "Active", "Deprecated", "Superseded"})
+PROPOSAL_STATUS_VALUES = frozenset({"Deferred", "Accepted", "Rejected", "Withdrawn"})
+# MDG-001 chapter 03 removes the document version field. Legacy values are tolerated
+# until every specification has been migrated, but no new document may declare one.
 VERSION_RE = re.compile(r"^\d+\.\d+(?:\.\d+)?$")
 H1_RE = re.compile(r"^#\s+(?P<title>.+?)\s*$", re.MULTILINE)
 LINK_RE = re.compile(r"!?\[[^\]]*\]\((?P<target>[^)]+)\)")
@@ -202,6 +207,17 @@ def parse_metadata(path: Path, text: str, errors: list[str]) -> Optional[dict[st
             f"(declares {declared_file})"
         )
 
+    status = fields.get("Status")
+    document_id = fields.get("Document", "")
+    allowed = set(STATUS_VALUES)
+    if document_id.startswith("MDP-"):
+        allowed |= PROPOSAL_STATUS_VALUES
+    if status and status not in allowed:
+        errors.append(
+            f"Markdown metadata has invalid Status: {relative_path(path)} ({status}); "
+            f"expected one of {', '.join(sorted(allowed))}"
+        )
+
     version = fields.get("Version")
     if version and not VERSION_RE.fullmatch(version):
         errors.append(f"Markdown metadata has invalid Version: {relative_path(path)} ({version})")
@@ -283,6 +299,9 @@ def validate_book(book: Path, metadata: dict[Path, dict[str, str]], errors: list
                 values[field].add(fields[field])
 
     for field, distinct in values.items():
+        # A migrated book declares no Version at all; a legacy book must declare one value.
+        if field == "Version" and not distinct:
+            continue
         if len(distinct) != 1:
             errors.append(
                 f"Book has inconsistent {field} metadata: {relative_path(book)} "
@@ -305,8 +324,11 @@ def validate_book(book: Path, metadata: dict[Path, dict[str, str]], errors: list
     table_fields = {
         "Document": table_value(text, ("Document", "Document ID")),
         "Status": table_value(text, ("Status",)),
-        "Version": table_value(text, ("Version",)),
     }
+    # Version is no longer part of the schema. Where a legacy row survives it must
+    # still agree with the metadata block it duplicates.
+    if "Version" in fields:
+        table_fields["Version"] = table_value(text, ("Version",))
     for field, value in table_fields.items():
         if value is None:
             errors.append(f"Document Control table is missing {field}: {relative_path(control)}")

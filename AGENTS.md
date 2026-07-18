@@ -11,7 +11,8 @@ Agents working in this repo should preserve the existing documentation structure
 Before creating, splitting, renaming, reorganising, or materially editing specifications, read the relevant [MDG-001](docs/engineering/documentation/mdg-001-documentation-authority-guide/index.md) chapters:
 
 - `02-document-types.md` for document-type responsibilities and separation of concerns.
-- `03-versioning.md` for status and version progression.
+- `03-versioning.md` for the Status lifecycle and contract versioning.
+- `10-standards-mapping.md` for the open standard each document type profiles.
 - `04-writing-standards.md` for tone, terminology, diagrams, references, glossary, and Markdown rules.
 - `06-cross-references.md` for references, traceability, and avoiding duplication.
 - `07-repository-organisation.md` for folder, chapter, metadata, generated-content, and navigation conventions.
@@ -56,10 +57,10 @@ glossary.md
 - Keep one authoritative home for each architectural concept. Summarise only when necessary and use references instead of duplicating explanations.
 - Make every reference to another published Mosaic document a relative Markdown hyperlink. Link identifier-only references to the target `index.md`, use the catalogued `ID — Canonical Title` when naming a document, and link directly to a chapter or anchor when appropriate. Leave unavailable identifiers unlinked and mark them `planned; not yet published` or `deferred; not yet published`.
 - Keep one major specification folder per commit when committing documentation imports or large additions.
-- Preserve and maintain metadata comments at the top of every authored Markdown file under `docs/`. `File:` must match the current repo-relative path, and `Document:`, `Status:`, and `Version:` must remain accurate.
-- Do not add Review Status sections or manual previous/next page links. Metadata communicates maturity and MkDocs provides page transitions.
+- Preserve and maintain metadata comments at the top of every authored Markdown file under `docs/`. The block contains exactly three fields: `File:` must match the current repo-relative path, and `Document:` and `Status:` must remain accurate. Do not add a `Version:` field to any document.
+- Do not add Review Status sections or manual previous/next page links. Metadata communicates authority through Status and MkDocs provides page transitions.
 - Use `AdamNi-7080` for personally owned specifications; preserve explicit team or organisational ownership where responsibility genuinely belongs to that group.
-- Update `Version:` only when [MDG-001](docs/engineering/documentation/mdg-001-documentation-authority-guide/index.md) says the change is meaningful. Do not bump versions for typo-only or formatting-only edits.
+- Change `Status:` only for a real lifecycle transition as defined by [MDG-001](docs/engineering/documentation/mdg-001-documentation-authority-guide/03-versioning.md). Do not change Status for typo-only or formatting-only edits. Only the contract a MIP defines carries a version, declared in the document body.
 - Put decision records close to the specification they govern, usually in `*-adrs.md`.
 - Update affected chapters when a decision changes the meaning of an existing specification.
 - Keep References near the end and Glossary as the final chapter of each specification. `.pages` files should list references before glossary when both exist.

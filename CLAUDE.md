@@ -11,10 +11,11 @@ Follow the existing documentation structure and keep `README.md` up to date when
 Before creating, splitting, renaming, reorganising, or materially editing specifications, consult the relevant [MDG-001](docs/engineering/documentation/mdg-001-documentation-authority-guide/index.md) chapters:
 
 - `02-document-types.md` for where each kind of content belongs.
-- `03-versioning.md` for status and version changes.
+- `03-versioning.md` for the Status lifecycle and contract versioning.
 - `04-writing-standards.md` for tone, terminology, diagrams, references, glossary, and Markdown rules.
 - `06-cross-references.md` for traceability and duplication control.
 - `07-repository-organisation.md` for folders, chapter order, metadata, generated content, and navigation.
+- `10-standards-mapping.md` for the open standard each document type profiles.
 
 If this file conflicts with [MDG-001](docs/engineering/documentation/mdg-001-documentation-authority-guide/index.md), follow [MDG-001](docs/engineering/documentation/mdg-001-documentation-authority-guide/index.md) and update this file.
 
@@ -57,8 +58,8 @@ references.md
 - Keep MIP content under `docs/engineering/protocols`.
 - Keep MOP content under `docs/engineering/operations`.
 - Preserve existing naming conventions, metadata blocks, and chapter ordering.
-- Keep specification metadata accurate. `File:` must match the current repo-relative Markdown path, and `Document:`, `Status:`, and `Version:` must reflect the specification.
-- Update `Version:` only for meaningful [MDG-001](docs/engineering/documentation/mdg-001-documentation-authority-guide/index.md) review progression. Do not bump versions for typo-only or formatting-only edits.
+- Keep specification metadata accurate. The block contains exactly three fields: `File:` must match the current repo-relative Markdown path, and `Document:` and `Status:` must reflect the specification. Do not add a `Version:` field to any document.
+- Change `Status:` only for a real lifecycle transition as defined by [MDG-001](docs/engineering/documentation/mdg-001-documentation-authority-guide/03-versioning.md). Do not change Status for typo-only or formatting-only edits. Only the contract a MIP defines carries a version, declared in the document body.
 - Keep each document type within its [MDG-001](docs/engineering/documentation/mdg-001-documentation-authority-guide/index.md) responsibility: MAC defines accepted architecture, MEG explains engineering practice, MIP defines integration contracts, MOP defines operational procedures, MDL/MDS define design language and system material, and MDG defines documentation standards.
 - Prefer one authoritative home for each concept. Replace duplicated explanations with concise summaries and links to the owning specification.
 - Make every reference to another published Mosaic document a relative Markdown hyperlink. Link identifier-only references to the target `index.md`, use the catalogued `ID — Canonical Title` when naming a document, and link directly to a chapter or anchor when appropriate. Leave unavailable identifiers unlinked and mark them `planned; not yet published` or `deferred; not yet published`.

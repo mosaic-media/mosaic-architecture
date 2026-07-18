@@ -50,9 +50,12 @@ def on_page_markdown(markdown: str, page, config, files) -> str:
         f"    | --- | --- |",
         f"    | {metadata['document_label']} | {metadata['document']} |",
         f"    | Status | {metadata['status']} |",
-        f"    | Version | {metadata['version']} |",
-        "",
     ]
+    # MDG-001 chapter 03 removes the document version field. Legacy pages that still
+    # declare one keep rendering it until they are migrated.
+    if metadata["version"]:
+        table.append(f"    | Version | {metadata['version']} |")
+    table.append("")
 
     return markdown[: match.end()] + "\n".join(table) + "\n" + markdown[match.end() :]
 
@@ -111,7 +114,7 @@ def _parse_metadata(comment: str, markdown: str, src_uri: str) -> dict[str, str]
     status = fields.get("status")
     version = fields.get("version")
 
-    if not document or not status or not version:
+    if not document or not status:
         return None
 
     is_specification = ID_RE.fullmatch(document) is not None
@@ -120,7 +123,7 @@ def _parse_metadata(comment: str, markdown: str, src_uri: str) -> dict[str, str]
         "document": document.upper() if is_specification else document,
         "document_label": "Document ID" if is_specification else "Document",
         "status": status,
-        "version": version,
+        "version": version or "",
     }
 
 
