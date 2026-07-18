@@ -52,4 +52,4 @@ sequenceDiagram
 
 Platform rollback means Supervisor activates an earlier Generation.
 
-The Platform must not attempt to reverse database mutations during Generation rollback. Database recovery belongs to the persistence and recovery strategy in [MEG-005 — Runtime Architecture](../meg-005-runtime-architecture/21-persistence-and-recovery.md).
+The Platform must not attempt to reverse database mutations during Generation rollback. Database recovery belongs to the persistence and recovery strategy in [MEG-005 — Runtime Architecture](../meg-005-runtime-architecture/20-persistence-and-recovery.md).

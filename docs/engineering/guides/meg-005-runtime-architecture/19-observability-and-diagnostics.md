@@ -1,5 +1,5 @@
 <!--
-File: docs/engineering/guides/meg-005-runtime-architecture/20-observability-and-diagnostics.md
+File: docs/engineering/guides/meg-005-runtime-architecture/19-observability-and-diagnostics.md
 Document: MEG-005
 Status: Draft
 -->

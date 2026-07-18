@@ -1,5 +1,5 @@
 <!--
-File: docs/engineering/guides/meg-005-runtime-architecture/19-configuration-and-secrets.md
+File: docs/engineering/guides/meg-005-runtime-architecture/18-configuration-and-secrets.md
 Document: MEG-005
 Status: Draft
 -->

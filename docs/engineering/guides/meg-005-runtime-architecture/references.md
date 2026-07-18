@@ -1,5 +1,5 @@
 <!--
-File: docs/engineering/guides/meg-005-runtime-architecture/17-references.md
+File: docs/engineering/guides/meg-005-runtime-architecture/references.md
 Document: MEG-005
 Status: Draft
 -->

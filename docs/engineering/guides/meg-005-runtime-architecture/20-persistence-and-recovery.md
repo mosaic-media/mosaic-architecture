@@ -1,5 +1,5 @@
 <!--
-File: docs/engineering/guides/meg-005-runtime-architecture/21-persistence-and-recovery.md
+File: docs/engineering/guides/meg-005-runtime-architecture/20-persistence-and-recovery.md
 Document: MEG-005
 Status: Draft
 -->

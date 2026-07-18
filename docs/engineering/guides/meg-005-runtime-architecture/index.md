@@ -253,9 +253,15 @@ engineering/
 
         16-contributor-guidance.md
 
-        18-graphql-projection.md
+        17-graphql-projection.md
 
-        17-references.md
+        18-configuration-and-secrets.md
+
+        19-observability-and-diagnostics.md
+
+        20-persistence-and-recovery.md
+
+        references.md
 
         glossary.md
 ```

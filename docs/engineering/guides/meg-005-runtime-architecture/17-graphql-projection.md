@@ -1,5 +1,5 @@
 <!--
-File: docs/engineering/guides/meg-005-runtime-architecture/18-graphql-projection.md
+File: docs/engineering/guides/meg-005-runtime-architecture/17-graphql-projection.md
 Document: MEG-005
 Status: Draft
 -->
