@@ -79,6 +79,8 @@ Capabilities persist through Platform-owned storage contracts exposed by the SDK
 
 Store resolution stays uniform so that Core Platform bounded contexts and first-party capabilities participate in a transaction identically — not so that external Modules can inject storage. This preserves the architectural equality of built-in and Module-delivered capabilities required by [MEG-006 — Module Platform](../meg-006-module-platform/index.md) without granting any store a private path into the transaction boundary.
 
+The reasoning behind this shape, and the alternatives rejected, are recorded in [MAD-001 — Transactional Store Extensibility](../../architecture/mad-001-transactional-store-extensibility/index.md).
+
 ---
 
 # Error Categories

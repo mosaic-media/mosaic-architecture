@@ -82,6 +82,8 @@ A closed `Tx` interface enumerating Core Platform stores gave a capability no wa
 
 It is unblocked by moving to uniform, port-based store resolution ([03 — Platform Contracts](03-platform-contracts.md)): Core Platform and capability stores are resolved identically, and the storage adapter is a replaceable port. The promoted `contracts/platform/v1` surface therefore includes the storage port the reference capability depends on.
 
+The reasoning, the alternatives weighed and the deferred follow-ups are recorded in [MAD-001 — Transactional Store Extensibility](../../architecture/mad-001-transactional-store-extensibility/index.md).
+
 ---
 
 # Stop Point Before SDK

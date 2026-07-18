@@ -12,6 +12,7 @@ Version: 0.1
 # Normative Mosaic References
 
 - [MAC-001 — Platform Architecture](../../architecture/mac-001-platform-architecture/index.md)
+- [MAD-001 — Transactional Store Extensibility](../../architecture/mad-001-transactional-store-extensibility/index.md)
 - [MEG-001 — Go Engineering Standards](../meg-001-go-engineering-standards/index.md)
 - [MEG-002 — Event-Driven Runtime](../meg-002-event-driven-runtime/index.md)
 - [MEG-004 — Hexagonal Architecture](../meg-004-hexagonal-architecture/index.md)
