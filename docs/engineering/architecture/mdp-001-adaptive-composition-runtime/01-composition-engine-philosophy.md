@@ -1,7 +1,7 @@
 <!--
 File: docs/engineering/architecture/mdp-001-adaptive-composition-runtime/01-composition-engine-philosophy.md
 Document: MDP-001
-Status: Draft
+Status: Deferred
 -->
 
 # Composition Engine Philosophy

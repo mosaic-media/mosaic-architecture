@@ -1,7 +1,7 @@
 <!--
 File: docs/engineering/architecture/mdp-001-adaptive-composition-runtime/14-adaptive-tile-model.md
 Document: MDP-001
-Status: Draft
+Status: Deferred
 -->
 
 # Adaptive Tile Model

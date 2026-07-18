@@ -1,7 +1,7 @@
 <!--
 File: docs/engineering/architecture/mdp-001-adaptive-composition-runtime/09-composition-caching.md
 Document: MDP-001
-Status: Draft
+Status: Deferred
 -->
 
 # Composition Caching

@@ -1,7 +1,7 @@
 <!--
 File: docs/engineering/architecture/mdp-001-adaptive-composition-runtime/10-multi-device-composition.md
 Document: MDP-001
-Status: Draft
+Status: Deferred
 -->
 
 # Multi-Device Composition

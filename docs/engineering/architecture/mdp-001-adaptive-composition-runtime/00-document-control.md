@@ -1,7 +1,7 @@
 <!--
 File: docs/engineering/architecture/mdp-001-adaptive-composition-runtime/00-document-control.md
 Document: MDP-001
-Status: Draft
+Status: Deferred
 -->
 
 # Document Control
@@ -17,12 +17,11 @@ Status: Draft
 | Document ID | MDP-001 |
 | Title | Mosaic Design Proposal — Adaptive Composition Runtime |
 | Classification | Internal |
-| Status | Draft |
-| Disposition | Deferred |
+| Status | Deferred |
 | Delivery Target | Unscheduled post-v1 research |
 | Owner | AdamNi-7080 |
 | Parent Specifications | [MDL-001](../../../design/language/mdl-001-vision/index.md) → [MDL-005](../../../design/language/mdl-005-composition-model/index.md), [MDS-001](../../../design/system/mds-001-design-token-architecture/index.md) → [MDS-005](../../../design/system/mds-005-motion-system/index.md) |
-| Repository | `/engineering/architecture/MDP-001 Adaptive Composition Runtime/` |
+| Repository | `docs/engineering/architecture/mdp-001-adaptive-composition-runtime/` |
 
 ---
 

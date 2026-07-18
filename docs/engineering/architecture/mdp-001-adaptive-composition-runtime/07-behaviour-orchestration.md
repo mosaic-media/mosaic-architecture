@@ -1,7 +1,7 @@
 <!--
 File: docs/engineering/architecture/mdp-001-adaptive-composition-runtime/07-behaviour-orchestration.md
 Document: MDP-001
-Status: Draft
+Status: Deferred
 -->
 
 # Behaviour Orchestration

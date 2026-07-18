@@ -1,7 +1,7 @@
 <!--
 File: docs/engineering/architecture/mdp-001-adaptive-composition-runtime/index.md
 Document: MDP-001
-Status: Draft
+Status: Deferred
 -->
 
 # MDP-001 — Adaptive Composition Runtime
@@ -42,7 +42,9 @@ It does not render layouts.
 
 It solves understanding.
 
-The proposal preserves solver, depth, Tile and normalised-layout mathematics for possible future review. None of its contents are Mosaic v1 conformance requirements.
+The proposal preserves solver, depth and normalised-layout mathematics for possible future review. None of its contents are Mosaic v1 conformance requirements.
+
+The behavioural Tile model that was formerly carried here is preserved separately as [MDP-002 — Tile Framework](../mdp-002-tile-framework/index.md). The two were reviewed and deferred together and can be reactivated independently.
 
 ---
 
@@ -235,9 +237,6 @@ docs/engineering/architecture/
     14-adaptive-tile-model.md
     15-motion-model.md
     16-unresolved-questions.md
-    17-tile-philosophy.md
-    ...
-    29-tile-contributor-guidance.md
     references.md
     glossary.md
 ```
