@@ -54,6 +54,22 @@ N5 --> N6
 
 Each specification is maintained as a separate book. Its landing page summarises purpose and scope; focused chapters contain the detail. Use the navigation or search to move directly to a topic, and follow cross-references when a concept is owned by another specification.
 
-## Current Documentation
+## How to Tell What You Can Rely On
 
-The current documentation set is draft material. Draft does not mean disposable: changes should be intentional, reviewed, and traceable.
+Every page declares a `Status`. It answers one question: can you rely on this?
+
+| Status | Meaning |
+|--------|---------|
+| Draft | Being written. Not authoritative. |
+| Review | Complete enough to assess. Not yet authoritative. |
+| Active | Authoritative. |
+| Deprecated | Published for reference. Not for new work. |
+| Superseded | Replaced, and names its replacement. |
+
+Proposals additionally use Deferred, Accepted, Rejected and Withdrawn. Most of the library is currently Draft, which does not mean disposable: changes should be intentional, reviewed and traceable.
+
+Prose carries no version number. Only a contract defined by an Integration Protocol is versioned, as a major integer such as `Event Protocol v1`. The full lifecycle is defined by [MDG-001 — Documentation Authority Guide](engineering/documentation/mdg-001-documentation-authority-guide/03-versioning.md).
+
+## Contributing
+
+Architecture changes through an accepted proposal and a recorded decision, never by editing the Canon directly. New specifications are scaffolded from templates rather than copied. See the contributing guide in the repository root and [MDG-001 — Documentation Authority Guide](engineering/documentation/mdg-001-documentation-authority-guide/index.md).
