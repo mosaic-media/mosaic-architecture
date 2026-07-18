@@ -160,3 +160,5 @@ Identifiers are permanent. `MAD-003` means one thing forever.
 ## Questions
 
 If you are unsure which document type fits, or whether your change is editorial or architectural, open an issue using the documentation change template rather than guessing. Choosing wrongly is more expensive to correct than asking.
+
+If you hit a contradiction between two specifications, or a passage too vague to act on, record it in [review/open-questions.md](review/open-questions.md) rather than resolving it by inference. That register is deliberately unpublished, and answering an entry there is often more valuable than editing the prose around it.

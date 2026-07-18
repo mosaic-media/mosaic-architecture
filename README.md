@@ -59,9 +59,12 @@ docs/
     operations/    Runtime, support, and operational specifications
   roadmaps/        Cross-disciplinary Mosaic Roadmaps
 templates/         Authoritative starting point for each document type
+review/            Open questions and documentation defects, not published
 ```
 
 `templates/` sits outside `docs/` deliberately: MkDocs never renders it and `scripts/validate_docs.py` never scans it, so placeholder identifiers do not register as defects. See [templates/README.md](templates/README.md).
+
+`review/` sits outside `docs/` for the same reason. [review/open-questions.md](review/open-questions.md) records contradictions, underspecified passages and duplication found during documentation work — problems that cannot be fixed by editing prose because resolving them requires knowing what Mosaic actually does. Keeping it unpublished means an open contradiction can be named plainly without appearing on the site as though it were content.
 
 The current imported specification set lives in:
 
