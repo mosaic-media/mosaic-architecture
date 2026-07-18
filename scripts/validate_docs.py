@@ -48,7 +48,21 @@ STATUS_VALUES = frozenset({"Draft", "Review", "Active", "Deprecated", "Supersede
 PROPOSAL_STATUS_VALUES = frozenset({"Deferred", "Accepted", "Rejected", "Withdrawn"})
 # An owner must identify someone accountable. These values do not.
 PLACEHOLDER_OWNERS = frozenset(
-    {"", "tbd", "tbc", "todo", "unknown", "none", "n/a", "na", "owner", "git-username"}
+    {
+        "",
+        "tbd",
+        "tbc",
+        "todo",
+        "unknown",
+        "none",
+        "n/a",
+        "na",
+        "owner",
+        "git-username",
+        # Deliberate marker: a migration that cannot evidence an owner writes this so the
+        # gap is reported rather than silently inherited by whoever last touched the file.
+        "unassigned",
+    }
 )
 H1_RE = re.compile(r"^#\s+(?P<title>.+?)\s*$", re.MULTILINE)
 SECTION_RE = re.compile(r"^#\s+(?P<title>.+?)\s*$", re.MULTILINE)
