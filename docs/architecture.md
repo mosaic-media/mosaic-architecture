@@ -90,9 +90,11 @@ Helpers that don't implement a full contract surface: `crypto/` (AES-GCM) and `f
 
 A `Registry` holding modules that present a `Manifest{ID, Version, Fulfills []string}`. Discovery is by registration rather than filesystem scan, but the shape deliberately mirrors how an external module would be discovered.
 
-### `contracts/platform/v1/` — the public SDK surface
+### The published SDK — its own module
 
-**Populated with the content surface** ([ADR 0016](adr/0016-published-contract-surface.md)): the content models (`Node`, `Part`, `Relation`, `SourceBinding` and their vocabularies), the nine content command, query and result types, the `ContentService` interface `internal/platform/app.Service` implements, and an opaque `Caller`. The store contracts, `Tx` and the identity and configuration models are **not** here — they are Platform↔engine plumbing and stay internal. `test/sdkprobe` (a separate module importing only this package) and `test/sdkboundary` (which builds it) enforce that no internal type leaks into a public signature, and `capabilities/reference` — the reference capability — uses this package and nothing else, kept honest by its own import-parsing boundary test.
+The public contract surface ([ADR 0016](adr/0016-published-contract-surface.md)) has been **extracted into a standalone module**, [`github.com/mosaic-media/mosaic-sdk`](https://github.com/mosaic-media/mosaic-sdk) at `v0.1.0`. The Platform depends on it as an ordinary tagged dependency, importing `github.com/mosaic-media/mosaic-sdk/contracts/platform/v1`.
+
+It carries the content models (`Node`, `Part`, `Relation`, `SourceBinding` and their vocabularies), the nine content command, query and result types, the `ContentService` interface `internal/platform/app.Service` implements, and an opaque `Caller`. The store contracts, `Tx` and the identity and configuration models are **not** in it — they are Platform↔engine plumbing and stay internal. Because the SDK is a separate module, Go itself forbids it from importing the Platform's `internal/`, so an internal-type leak is a compile error rather than something a test must catch. `capabilities/reference` (the reference capability) and `test/sdkprobe` build against the SDK and nothing else of the Platform's; `test/sdkboundary` compiles the probe as a standing check.
 
 Known gap: `ContentService` exposes no *read* for relations (`ListFrom`/`ListTo`), so a capability can create edges but not query them back through the surface. The reference capability does not need it; it is a candidate addition rather than a defect.
 

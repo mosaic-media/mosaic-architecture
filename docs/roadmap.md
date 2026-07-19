@@ -6,11 +6,11 @@ Derived from the real state of `mosaic-platform`, not from a plan written ahead 
 
 ## Where the build actually is
 
-The Platform boots against real PostgreSQL, serves a GraphQL schema, runs an outbox worker with retry and dead-lettering, resolves secrets, reports component health, shuts down gracefully with a final outbox drain, holds a content-agnostic object graph, and exposes a content command and query API over that graph. That API's surface is now published in `contracts/platform/v1` — the models, the nine services, the `ContentService` interface and an opaque `Caller` — and an external module compiles against it in the test suite. Every slice passes `go build`, `go vet` and `go test -race` against a real database.
+The Platform boots against real PostgreSQL, serves a GraphQL schema, runs an outbox worker with retry and dead-lettering, resolves secrets, reports component health, shuts down gracefully with a final outbox drain, holds a content-agnostic object graph, and exposes a content command and query API over that graph. That API's surface has been extracted into a standalone SDK module — [`github.com/mosaic-media/mosaic-sdk`](https://github.com/mosaic-media/mosaic-sdk) at `v0.1.0`, holding the models, the nine services, the `ContentService` interface and an opaque `Caller` — which the Platform and the reference capability both depend on as an external module. Every slice passes `go build`, `go vet` and `go test -race` against a real database.
 
 Two further slices — uniform store resolution and its PostgreSQL follow-up — were built and then reverted under [ADR 0012](adr/0012-capabilities-do-not-own-stores.md), which found they solved a case the architecture had already ruled out.
 
-The content model, its published surface, and a capability that uses only that surface have all landed — **the thesis test passes.** What remains is extracting the surface into a standalone SDK repository a third party builds against.
+The content model, its published surface, a capability that uses only that surface, and the surface's extraction into a standalone SDK module have all landed — **the thesis test passes and the critical path is complete.** What follows (media formats, module distribution, the Shell) builds on a foundation that is proven rather than assumed.
 
 ---
 
@@ -73,13 +73,15 @@ The original plan ([ADR 0015](adr/0015-open-and-closed-vocabularies.md)) had thi
 
 **Exit criteria — met.** The surface of [ADR 0016](adr/0016-published-contract-surface.md) is published into `contracts/platform/v1`, and one capability does all four using only those packages, acting as its invoking user ([ADR 0017](adr/0017-how-a-capability-acts.md)), owning no schema and touching no Platform code.
 
-### 4 — SDK extraction readiness
+### 4 — SDK extraction — **done**
 
-Whether the contracts proven across the completed slices can leave the Platform repository as a standalone SDK a third party can build against.
+Whether the contracts proven across the completed slices can leave the Platform repository as a standalone SDK a third party can build against. They can, and they have: the surface is now its own module, [`github.com/mosaic-media/mosaic-sdk`](https://github.com/mosaic-media/mosaic-sdk), published at `v0.1.0`.
 
-**Exit criteria.** Import boundaries are enforced, and the promoted `contracts/platform/v1` surface is confirmed to expose no private Platform internals. This slice *verifies* isolation; it does not populate the surface for the first time — that happens in step 3.
+`contracts/platform/v1` moved out of the Platform repository into the SDK module unchanged, and the Platform now depends on it as an ordinary tagged dependency — no `replace` directive, so a fresh clone resolves it through the module proxy. Three separate modules build against the published SDK: the Platform, the reference capability, and `test/sdkprobe`. The surface holds no private Platform internals, because Go itself now forbids it — an external module cannot import the Platform's `internal/`, so a leak would fail to compile rather than needing a test to catch it.
 
-The standing check is the one ADR 0016 makes an enforcement: a throwaway module compiled against the published package builds only if the surface is importable and self-contained, so an `internal/` leak fails the build rather than being rediscovered by hand.
+**Exit criteria — met.** The surface left the repository as a standalone module, and the Platform and the reference capability build against it as external consumers.
+
+The SDK is versioned `v0.1.0` deliberately: it is pre-1.0 and may still change. The relation-read gap noted in step 3, and any surface a second capability turns out to need, are the kind of change a `v0.x` bump absorbs before the surface is declared stable.
 
 ### The stop point — cleared
 
@@ -89,7 +91,7 @@ The standing check is the one ADR 0016 makes an enforcement: a throwaway module 
 
 The reference capability landed against `contracts/platform/v1` alone, enforced by a boundary test that parses its imports. It needed no private import, so the line held rather than being waved through — which is what makes the surface ready to extract.
 
-**Step 3 was the thesis test, and it passed.** A capability can be built entirely against the published contract surface. Step 4 confirms the surface can leave this repository as that same standalone thing a third party depends on.
+**Step 3 was the thesis test, and it passed; step 4 extracted the surface it proved.** A capability can be built entirely against the published contract surface, and that surface is now a standalone module a third party depends on rather than a package inside this repository. The extension model is real, end to end.
 
 ### Acceptance baseline
 
