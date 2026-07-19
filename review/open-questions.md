@@ -192,11 +192,15 @@ The grantor is never named. Chapter 09 mentions human involvement only for *chan
 
 Whether the security model has a human consent gate, and at which stage authority is conferred, is a design fact. Either reading invents the platform's consent model.
 
-**Resolution:**
+**Resolution:** *Partially settled by the Q-061 decision; this entry stays open.*
+
+**Settled — the stage.** Authority is conferred at activation, by injection. Permission validation and approval complete as an activation prerequisite; the Runtime then constructs the capability with only the authorised contracts. MEG-006 chapter 09's "granted during activation", chapter 09's guideline "granted before execution" and chapter 06's prerequisite rule are reconciled into one boundary rather than three.
+
+**Still open — the grantor.** Whether a human operator must approve permissions on first install, or whether the Runtime grants validated declarations automatically, is undecided. MEG-009 chapter 05 draws an explicit `Approval` stage between Validation and Activation and states authority is granted because "it is declared, it is reviewed, it is approved, it is required"; MEG-006 has no counterpart and mentions human involvement only for permission *changes*. This is a product decision about the install flow rather than an engineering one and has not been guessed.
 
 ## Q-061 — What happens when a permission is denied, and can one be revoked?
 
-**Status:** `Open`
+**Status:** `Answered`
 **Where:** [MEG-006 ch09](../docs/engineering/guides/meg-006-module-platform/09-permissions.md), *Permission Enforcement*, *Permission Denial*, *Optional Permissions*
 **Also:** [MEG-009 ch05](../docs/engineering/guides/meg-009-security-architecture/05-capability-permissions.md)
 
@@ -208,7 +212,18 @@ MEG-006 never mentions **revocation**, while MEG-009 requires it to be immediate
 
 Denial semantics and revocability are runtime behaviour with security consequences and cannot be inferred from the prose.
 
-**Resolution:**
+**Resolution:** Option A — **contract injection**, MEG-009 chapter 05's model. A permission determines whether a Runtime Contract is injected into the capability at all, not whether a call on an always-present contract succeeds. Authority is resolved once, at activation.
+
+Consequences adopted with the model:
+
+- **Activation-time denial.** A manifest declaring a permission that is not granted fails activation; the capability does not start. This matches MEG-006 chapter 06's existing prerequisite rule that "activation must not begin at all" if a prerequisite fails.
+- **No runtime denial path.** MEG-006 chapter 09's "the SDK rejects the request" is withdrawn. A capability either holds a contract or was never activated, so there is no per-call denial to specify, diagnose or handle.
+- **Revocation** follows MEG-009 chapter 05, the only specified model and the one consistent with injection: contracts are removed and execution stops. MEG-006 gains it; it currently omits revocation entirely.
+- **Optional permissions** become contracts that may legitimately be absent, checked once by the capability rather than per call.
+
+Recorded caveat, accepted as part of the decision: under [MEG-006 ADR-001](../docs/engineering/guides/meg-006-module-platform/16-adrs.md) Mosaic is one statically linked Go binary in which Module code is ordinary Go code with no process boundary. Withholding a contract therefore prevents *accidental* use of undeclared authority but cannot contain a module that deliberately imports what it wants. The permission model is a safety, declaration and audit mechanism, not containment. Containment remains Q-066. Whether this caveat is written into the documentation is a separate decision, not yet made.
+
+Consultancy decision on best-practice grounds; no implementation exists. Owner delegated design authority for entries answerable from industry practice.
 
 ## Q-062 — Three chapters give three different capability lifecycle orders
 
@@ -268,6 +283,7 @@ Two incompatible models are described for the same subject:
 
 **Status:** `Open`
 **Where:** [MEG-006 ch12](../docs/engineering/guides/meg-006-module-platform/12-isolation.md), [ch13](../docs/engineering/guides/meg-006-module-platform/13-platform-guidelines.md), [ch16 ADR-001](../docs/engineering/guides/meg-006-module-platform/16-adrs.md)
+**Also:** [MEG-009 ch08](../docs/engineering/guides/meg-009-security-architecture/08-module-trust.md), *Capability Isolation*
 
 Chapter 12 asserts that an execution failure in one capability should not affect unrelated capabilities, that the Runtime should ensure Playback continues, and that a misbehaving module remains constrained by permissions, contracts and Runtime boundaries. No mechanism is named anywhere — no panic recovery, goroutine supervision, worker boundary or resource quota. The only support offered is a citation to the AWS bulkhead pattern, which describes pool or process partitioning.
 
@@ -285,6 +301,8 @@ This is the most consequential entry recorded against MEG-006: the isolation cla
 The struct embeds `Logger`, `Scheduler`, `Configuration`, `Events` and `Health` as bare type names, but the chapter then accesses them as methods — `ctx.Configuration()`, `ctx.Scheduler()`, `ctx.Events()`, `ctx.Logger()`, `ctx.Health()` — which embedded fields would not provide. The struct and the call sites cannot both be right; both were preserved exactly.
 
 Separately, `ctx.BlobStore()` is used as the worked permissions example but is not among the SDK's listed contracts, models or context members, and `blob.read` is the chapter's only permission string.
+
+**Constrained by the Q-061 decision, not resolved by it.** Contract injection makes the capability context a per-capability object constructed at activation from the granted permissions, so a fixed struct with bare embedded fields cannot be right — two capabilities with different permissions must receive different contexts. That rules out the declared form but does not by itself settle the accessor shape, and the real signatures still require the SDK contract (Q-076, MIP-004).
 
 **Resolution:**
 
@@ -520,14 +538,20 @@ MEG-006's equivalent chapter is *not* a stub — it carries four complete record
 
 ## Q-068 — MEG-006 and MEG-009 both define the capability permission model
 
-**Status:** `Open`
+**Status:** `Answered`
 **Where:** [MEG-006 ch09](../docs/engineering/guides/meg-006-module-platform/09-permissions.md), [MEG-009 ch05](../docs/engineering/guides/meg-009-security-architecture/05-capability-permissions.md)
 
 The two chapters share the epigraph, the least-privilege `blob.read` / `blob.*` example, the `ctx.BlobStore()` enforcement example, the Marketplace justification section, the Permission Evolution triple, the Runtime Visibility question and most anti-patterns. MEG-006 chapter 09 contains no link to MEG-009, and MEG-006's index lists MEG-009 under *future companion specifications* although it is present and Draft.
 
 Where they diverge they diverge substantively — see Q-060, Q-061 and Q-080 — and MEG-009 additionally owns Secrets and Revocation that MEG-006 omits. Deduplicating therefore changes rules rather than wording, and deciding whether a guide chapter or the security architecture owns the model is an authority decision.
 
-**Resolution:**
+**Resolution:** **MEG-009 owns the capability permission model.** Chapter 05 is the authority for what a permission is, how authority is conferred and enforced, revocation, secrets and the zero-trust framing.
+
+MEG-006 chapter 09 is reduced to the module-author view: how a capability declares permissions in its manifest, what the declaration commits it to, and what a module author can expect at activation. It defers to MEG-009 for the model rather than restating it.
+
+MEG-006's index also lists MEG-009 under *future companion specifications* although MEG-009 is on disk with `Status: Draft`, and chapter 09 contains no link to MEG-009 at all. Both are corrected as part of applying this.
+
+Consultancy decision on best-practice grounds; no implementation exists. Owner delegated design authority for entries answerable from industry practice.
 
 ## Q-069 — MEG-006 chapter 07 restates chapters 03 to 06, and 08 overlaps 14
 
