@@ -50,7 +50,7 @@ It does not own:
 
 # Maturity
 
-Version 0.1 is the first complete engineering design.
+This is the first complete engineering design.
 
 It requires prototype measurements before technical review, particularly for CSS filter cost, renderer crossover points, video sampling cadence and [MIP-003](../../protocols/mip-003-uv-light-frame-protocol/index.md) payload choices.
 
