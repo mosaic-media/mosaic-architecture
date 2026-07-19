@@ -43,6 +43,27 @@ Shutdown should never interrupt business behaviour unnecessarily. Instead, the R
 
 ---
 
+# Runtime Lifecycle
+
+Shutdown is one transition within a lifecycle the Runtime follows in full.
+
+```mermaid
+flowchart TD
+
+N1["Starting"]
+N2["Running"]
+N3["Stopping"]
+N4["Stopped"]
+
+N1 --> N2
+N2 --> N3
+N3 --> N4
+```
+
+Only the Runtime moves between these states, and capabilities react to a transition rather than causing one. This is why shutdown can be ordered at all: a single owner decides when each phase begins, and no component has to infer from its peers that stopping has started. Lifecycle state is distinct from the health progression described later in this chapter, which reports what the Runtime is willing to serve rather than which phase it occupies.
+
+---
+
 # Shutdown Goals
 
 Shutdown is judged by what survives it rather than by how quickly it finishes. A successful shutdown should ensure:
@@ -129,6 +150,14 @@ With admission closed, capabilities finish the existing business work they were 
 
 Capabilities should receive a cancellation requested notification, and they alone decide how to leave business state consistent. The Runtime never decides business correctness.
 
+Long-running work should therefore observe cancellation rather than wait to be interrupted by it.
+
+```go
+ctx.Done()
+```
+
+A task that checks for cancellation periodically can clean up, return a meaningful status and avoid leaving partial state behind, whereas one that never checks will still be running when the shutdown budget expires and will be terminated mid-operation. Business correctness takes precedence over shutdown speed, but a capability that ignores cancellation entirely is what forces the Runtime into the forced termination it is trying to avoid.
+
 ---
 
 # Stage 4 — Worker Drain
@@ -187,7 +216,9 @@ The Runtime should distinguish between external work and internal continuations.
 
 # Shutdown Deadlines
 
-Graceful shutdown should remain bounded, because draining that waits indefinitely is indistinguishable from a hang. Shutdown runs against a budget — 60 seconds, for example — within which graceful completion is attempted, and forced termination follows if that budget expires. The timeout should remain configurable, but infinite shutdown is prohibited.
+Graceful shutdown should remain bounded, because draining that waits indefinitely is indistinguishable from a hang. Shutdown runs against a single budget covering every stage, defaulting to **30 seconds**, within which graceful completion is attempted; forced termination follows if that budget expires. The timeout should remain configurable, but infinite shutdown is prohibited.
+
+The default is 30 seconds because the Runtime's budget must fit inside whatever grace period its supervising orchestrator allows, and 30 seconds is the Kubernetes default for `terminationGracePeriodSeconds`. A Runtime that budgets longer than its orchestrator grants is killed part-way through draining, which produces exactly the abandoned work and unreleased resources this chapter exists to prevent. Raising the Runtime timeout therefore requires raising the orchestrator grace period to match, and the two values should be changed together.
 
 ---
 
