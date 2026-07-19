@@ -28,11 +28,36 @@ This was the real blocker, and it had been mistaken for something else. The refe
 
 **Deliberately not in the slice, and still unbuilt:** export formats, the filesystem projection, streaming, the job queue, `LISTEN/NOTIFY`, and IPTV listings. None blocks the reference capability.
 
-**Carried forward:** no application service commands the graph yet. The reference capability should go through application services rather than reaching for `Tx` itself, so command handlers over the content model are the likely first move in step 2.
+### 2 — Content commands and queries
 
-### 2 — Reference capability path
+The stores exist and are proven, but nothing above them does. No application service touches the graph, so the only way in is `Tx`, which the composition root holds — and a capability reaching for `Tx` directly would bypass the policy engine entirely.
 
-Attempted twice and correctly reported as blocked rather than forced.
+This slice puts the command order over the content model: add a work, attach a part, relate two nodes, resolve a binding. It also builds the read side, which is missing more than it looks. `SourceBindingStore.FindBySource(provider, ref)` answers *"have I already bound this exact provider reference?"* and nothing else. **"Do I already have this anime?" — by title, or by external id — is unanswerable today.** The `nodes_external_ids_gin` and `nodes (media_type, title)` indexes exist from migration 0012 and no query reaches either.
+
+It is scheduled ahead of the reference capability because it is needed under every possible resolution of the boundary problem below, so none of it can be wasted.
+
+### 3 — Reference capability path
+
+Attempted twice and correctly reported as blocked rather than forced. **It is blocked a third time, on something new**, and the block is recorded here rather than discovered mid-slice.
+
+#### Blocked: contracts cannot be promoted as they stand
+
+Step 3's exit criteria require promoting the proven contracts into `contracts/platform/v1` first. That is not a move. Every contract signature references `domain.Node`, `domain.User`, `domain.Session` — and those live in `internal/platform/domain`, which Go forbids an external module from importing. Verified by compiling a separate module against this one:
+
+```
+main.go:8:2: use of internal package
+  github.com/mosaic-media/mosaic-platform/internal/platform/domain not allowed
+```
+
+So promotion needs a decision before it needs work: does the domain package leave `internal/`, does `contracts/platform/v1` carry a curated parallel type set with conversion at the boundary, or do contracts stop taking domain types at all? Each has a different blast radius, and every contract added before the decision is more surface to move afterwards. This is step 4's subject matter arriving early because step 3 depends on it.
+
+#### Blocked: a capability has no way to act
+
+`policy.Subject` carries a `UserID` and an `AuthStrength`. There is no module, capability or system principal anywhere in the policy engine, so a capability today must borrow a human's session id to do anything at all. This may resolve cheaply — *capabilities always act on behalf of an invoking user* is a legitimate answer that needs no new machinery — but it is currently undecided, and "undecided" is not the same as "cheap".
+
+#### The slice itself
+
+Its purpose changed under [ADR 0012](adr/0012-capabilities-do-not-own-stores.md). It was to prove a capability could own a store and join a transaction. Since capabilities own no schema, it should now prove what a capability actually does, shaped like the anime module the platform exists to support:
 
 Its purpose changed under [ADR 0012](adr/0012-capabilities-do-not-own-stores.md). It was to prove a capability could own a store and join a transaction. Since capabilities own no schema, it should now prove what a capability actually does, shaped like the anime module the platform exists to support:
 
@@ -41,15 +66,19 @@ Its purpose changed under [ADR 0012](adr/0012-capabilities-do-not-own-stores.md)
 - create nodes and relations in the generic model
 - publish an event
 
+Sourcing metadata needs no Platform HTTP contract, which is worth stating because it looks like a gap and is not one. Capabilities compile into the binary with trust established before the build ([ADR 0007](adr/0007-static-go-module-composition.md)), so a capability imports `net/http` itself. A Platform-provided client is worth having eventually for rate limiting and secret handling; it is not a prerequisite.
+
 **It also carries the `media_types` registry** ([ADR 0015](adr/0015-open-and-closed-vocabularies.md)). Media types are an open vocabulary, and normalisation already collapses spelling variants, but nothing yet catches a value that was never a real type. The fix is a Platform-owned table a module contributes to through its manifest — which is precisely the "declare through the manifest, Platform acts on it" shape this slice exists to prove, so the consumer and the mechanism should land together rather than one retrofitting the other.
 
-**Exit criteria.** The proven contracts are promoted into `contracts/platform/v1` *first*, then one capability does all four using only those packages, owning no schema and touching no Platform code.
+**Exit criteria.** The boundary decision above is made and applied, the proven contracts are promoted into `contracts/platform/v1`, and then one capability does all four using only those packages, owning no schema and touching no Platform code.
 
-### 3 — SDK extraction readiness
+### 4 — SDK extraction readiness
 
 Whether the contracts proven across the completed slices can leave the Platform repository as a standalone SDK a third party can build against.
 
-**Exit criteria.** Import boundaries are enforced, and the promoted `contracts/platform/v1` surface is confirmed to expose no private Platform internals. This slice *verifies* isolation; it does not populate the surface for the first time — that happens in step 2.
+**Exit criteria.** Import boundaries are enforced, and the promoted `contracts/platform/v1` surface is confirmed to expose no private Platform internals. This slice *verifies* isolation; it does not populate the surface for the first time — that happens in step 3.
+
+A cheap standing check falls out of the block found above: compiling a throwaway module against this one catches an `internal/` leak immediately, and it should become a test rather than something rediscovered by hand.
 
 ### The stop point
 
@@ -59,7 +88,7 @@ Whether the contracts proven across the completed slices can leave the Platform 
 
 This is the rule to hold the line on. A private import that gets waved through is the moment the ecosystem becomes second-class — the community developer hits a wall the built-in modules never hit, and the extension model quietly stops being real.
 
-**Steps 2 and 3 together are the thesis test.** If a capability can be built entirely against the published contract surface, the module ecosystem works. If it cannot, the extension model needs rethinking — and better to learn that now than after building media formats on top of it.
+**Steps 3 and 4 together are the thesis test.** If a capability can be built entirely against the published contract surface, the module ecosystem works. If it cannot, the extension model needs rethinking — and better to learn that now than after building media formats on top of it.
 
 ### Acceptance baseline
 
