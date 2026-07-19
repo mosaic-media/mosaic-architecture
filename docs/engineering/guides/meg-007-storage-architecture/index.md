@@ -220,9 +220,9 @@ engineering/
 
 └── meg/
 
-    └── MEG-007 Storage Architecture/
+    └── meg-007-storage-architecture/
 
-        README.md
+        index.md
 
         00-document-control.md
 
