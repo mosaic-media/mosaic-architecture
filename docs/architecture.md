@@ -92,7 +92,7 @@ A `Registry` holding modules that present a `Manifest{ID, Version, Fulfills []st
 
 ### `contracts/platform/v1/` — the public SDK surface
 
-**Currently empty apart from `doc.go`.** Promoting the proven contracts here is the next milestone. It was once recorded as the thing blocking the reference capability; [ADR 0012](adr/0012-capabilities-do-not-own-stores.md) found the real blocker was the missing content model, which has since landed.
+**Currently empty apart from `doc.go`.** Its contents are decided ([ADR 0016](adr/0016-published-contract-surface.md)): the content command, query and result types, a service interface, the content models, and an opaque `Caller` — **not** the store contracts, which are Platform↔engine plumbing and stay internal. Populating it is the first half of the reference-capability slice.
 
 ---
 
@@ -209,7 +209,7 @@ Stated plainly so nothing here is mistaken for a description of something real.
 
 - **Command handlers over the content model.** The four stores exist and pass the contract suite against real PostgreSQL, but no application service commands them, so there is no validate → authenticate → authorise → transact path into the graph. The `Tx` fakes in `internal/platform/app` and `internal/transport/graphql` return nil for the content stores for exactly this reason.
 - **IPTV programme listings.** ADR 0013 gives them their own lightweight table keyed to the channel node, deliberately outside the Node machinery. That table is unbuilt.
-- **Module permissions.** The policy engine governs *user* authority. Module authority is undecided and unimplemented.
+- **Module-granular permissions.** The policy engine governs *user* authority, and a capability acts as its invoking user ([ADR 0017](adr/0017-how-a-capability-acts.md)). Authority a module holds *distinct* from that user — and a system principal for background work — is scoped to future ADRs, not built.
 - **External modules.** Only the built-in shape exists.
 - **Jobs and diagnostics history.** Tables exist from earlier migrations with no contract or service above them. GraphQL resolvers for them return `Unavailable` rather than faking success.
 - **Session refresh and device pairing.** No backing service.

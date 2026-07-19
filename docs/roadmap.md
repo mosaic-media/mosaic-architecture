@@ -43,22 +43,15 @@ It was scheduled ahead of the reference capability because it is needed under ev
 
 ### 3 — Reference capability path
 
-Attempted twice and correctly reported as blocked rather than forced. **It is blocked a third time, on something new**, and the block is recorded here rather than discovered mid-slice.
+Attempted twice and correctly reported as blocked rather than forced. It was blocked a third time on two things neither attempt had reached — both now decided, so the slice is buildable.
 
-#### Blocked: contracts cannot be promoted as they stand
+#### Decided: what the published surface is ([ADR 0016](adr/0016-published-contract-surface.md))
 
-Step 3's exit criteria require promoting the proven contracts into `contracts/platform/v1` first. That is not a move. Every contract signature references `domain.Node`, `domain.User`, `domain.Session` — and those live in `internal/platform/domain`, which Go forbids an external module from importing. Verified by compiling a separate module against this one:
+The block was that every contract signature references a `domain` type under `internal/`, which Go forbids an external module from importing. The fix corrected the roadmap's own framing: a capability does **not** call the store contracts (`NodeStore`, `Tx`, `StorageAdapter`) — those are Platform↔engine plumbing. It calls the application-service API. So the published surface is the content command, query and result types, a service interface, the content models they carry, and an opaque `Caller`; the store contracts and the identity/config models stay internal. The models move rather than being duplicated or generated, and a throwaway module compiled against the surface becomes a standing test that an internal type never leaks into a public signature.
 
-```
-main.go:8:2: use of internal package
-  github.com/mosaic-media/mosaic-platform/internal/platform/domain not allowed
-```
+#### Decided: how a capability acts ([ADR 0017](adr/0017-how-a-capability-acts.md))
 
-So promotion needs a decision before it needs work: does the domain package leave `internal/`, does `contracts/platform/v1` carry a curated parallel type set with conversion at the boundary, or do contracts stop taking domain types at all? Each has a different blast radius, and every contract added before the decision is more surface to move afterwards. This is step 4's subject matter arriving early because step 3 depends on it.
-
-#### Blocked: a capability has no way to act
-
-`policy.Subject` carries a `UserID` and an `AuthStrength`. There is no module, capability or system principal anywhere in the policy engine, so a capability today must borrow a human's session id to do anything at all. This may resolve cheaply — *capabilities always act on behalf of an invoking user* is a legitimate answer that needs no new machinery — but it is currently undecided, and "undecided" is not the same as "cheap".
+A capability does not originate authority. The Platform invokes it within a context carrying a principal, and it forwards that context to every service it calls. For the reference capability the principal is the invoking user, so nothing in the policy engine changes and every created node traces to the person who caused it. A system principal for background work, and module-granular authority, are named future decisions rather than machinery built now.
 
 #### The slice itself
 
@@ -73,7 +66,7 @@ Sourcing metadata needs no Platform HTTP contract, which is worth stating becaus
 
 **It also carries the `media_types` registry** ([ADR 0015](adr/0015-open-and-closed-vocabularies.md)). Media types are an open vocabulary, and normalisation already collapses spelling variants, but nothing yet catches a value that was never a real type. The fix is a Platform-owned table a module contributes to through its manifest — which is precisely the "declare through the manifest, Platform acts on it" shape this slice exists to prove, so the consumer and the mechanism should land together rather than one retrofitting the other.
 
-**Exit criteria.** The boundary decision above is made and applied, the proven contracts are promoted into `contracts/platform/v1`, and then one capability does all four using only those packages, owning no schema and touching no Platform code.
+**Exit criteria.** The surface of [ADR 0016](adr/0016-published-contract-surface.md) is published into `contracts/platform/v1` — the content services, models and `Caller`, not the store contracts — and then one capability does all four using only those packages, acting as its invoking user ([ADR 0017](adr/0017-how-a-capability-acts.md)), owning no schema and touching no Platform code.
 
 ### 4 — SDK extraction readiness
 
@@ -81,7 +74,7 @@ Whether the contracts proven across the completed slices can leave the Platform 
 
 **Exit criteria.** Import boundaries are enforced, and the promoted `contracts/platform/v1` surface is confirmed to expose no private Platform internals. This slice *verifies* isolation; it does not populate the surface for the first time — that happens in step 3.
 
-A cheap standing check falls out of the block found above: compiling a throwaway module against this one catches an `internal/` leak immediately, and it should become a test rather than something rediscovered by hand.
+The standing check is the one ADR 0016 makes an enforcement: a throwaway module compiled against the published package builds only if the surface is importable and self-contained, so an `internal/` leak fails the build rather than being rediscovered by hand.
 
 ### The stop point
 

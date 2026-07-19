@@ -52,6 +52,8 @@ nav:
       - 13. The object graph: adr/0013-object-graph.md
       - 14. Storage authority and transaction scope: adr/0014-storage-authority-and-transaction-scope.md
       - 15. Open and closed vocabularies: adr/0015-open-and-closed-vocabularies.md
+      - 16. The published contract surface: adr/0016-published-contract-surface.md
+      - 17. How a capability acts: adr/0017-how-a-capability-acts.md
 
 markdown_extensions:
   - admonition
