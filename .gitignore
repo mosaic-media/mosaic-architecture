@@ -1,15 +1,10 @@
-site/
-.cache/
-.venv/
-__pycache__/
-*.pyc
-
-# Node tooling for markdownlint. Installed on demand; CI uses the pinned action.
-node_modules/
-package-lock.json
-
-# lychee link-check cache.
-.lycheecache
-
-# JetBrains IDE state. Per-developer, not project content.
+# Local tooling and editor state
 .idea/
+.vscode/
+
+# Artefacts from the retired documentation system
+site/
+output/
+node_modules/
+.pytest_cache/
+.lycheecache

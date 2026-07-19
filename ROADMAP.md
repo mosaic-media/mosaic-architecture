@@ -33,11 +33,34 @@ Already attempted twice and correctly reported as blocked rather than forced. A 
 
 Step 1 removes both walls. This slice then proves a capability can own a store, join a transaction, and persist atomically without touching Platform code.
 
+**Exit criteria.** The proven contracts are promoted into `contracts/platform/v1` *first*, then one non-media capability proves the registration and persistence path using only those packages.
+
 ### 3 — SDK extraction readiness
 
 Whether the contracts proven across slices 1–14 can leave the Platform repository as a standalone SDK a third party can build against.
 
+**Exit criteria.** Import boundaries are enforced, and the promoted `contracts/platform/v1` surface is confirmed to expose no private Platform internals. This slice *verifies* isolation; it does not populate the surface for the first time — that happens in step 2.
+
+### The stop point
+
+> **The Platform is ready for SDK work when the reference capability uses only published contract packages and no private Platform internals.**
+>
+> **If the reference capability requires a private import, the contracts are not ready to publish.**
+
+This is the rule to hold the line on. A private import that gets waved through is the moment the ecosystem becomes second-class — the community developer hits a wall the built-in modules never hit, and the extension model quietly stops being real.
+
 **Steps 2 and 3 together are the thesis test.** If a capability can be built entirely against the published contract surface, the module ecosystem works. If it cannot, the extension model needs rethinking — and better to learn that now than after building media formats on top of it.
+
+### Acceptance baseline
+
+Before the foundation is considered ready for SDK extraction:
+
+- `go test ./...` passes
+- adapter contract tests pass against real PostgreSQL
+- migration tests run from an empty database
+- import boundary checks pass
+- GraphQL resolver tests prove service routing
+- Supervisor health probes pass against a running process
 
 ---
 

@@ -1,8 +1,0 @@
-blank_issues_enabled: false
-contact_links:
-  - name: Documentation standards
-    url: https://github.com/mosaic-media/mosaic-architecture/blob/main/docs/engineering/documentation/mdg-001-documentation-authority-guide/index.md
-    about: MDG-001 is the authority for how Mosaic documentation is written, organised and reviewed.
-  - name: Contributing guide
-    url: https://github.com/mosaic-media/mosaic-architecture/blob/main/CONTRIBUTING.md
-    about: How to propose a change, scaffold a document and run the checks.

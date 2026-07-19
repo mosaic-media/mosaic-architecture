@@ -133,11 +133,28 @@ Readiness is false if any component reports Unavailable; Degraded alone does not
 
 ## Testing
 
-`test/contract/` holds an adapter-agnostic suite proving any storage implementation satisfies the contracts. It runs against real PostgreSQL — embedded by default, or dockerised.
+`test/contract/` holds an adapter-agnostic suite proving any storage implementation satisfies the contracts. It runs against real PostgreSQL — embedded by default, or dockerised. The PostgreSQL adapter passes the same behavioural tests a future storage adapter would have to pass.
 
-Integration tests run against a real database, not mocks. Boundary tests parse imports rather than grepping text. Where a test could pass by construction, it was verified to fail against a deliberately introduced violation.
+Integration tests run against a real database, not mocks. Application service tests run without PostgreSQL, against contract fakes. Boundary tests parse import declarations rather than grepping text. Where a test could pass by construction, it was verified to fail against a deliberately introduced violation.
 
 Gate for every change: `go build ./...`, `go vet ./...`, `go test ./... -race`.
+
+### Standing gates
+
+Each of these must keep passing. They are the properties that stop the architecture eroding.
+
+| Gate | Evidence required |
+|---|---|
+| Contract compile | Core contracts compile without adapters |
+| Import boundary | Modules and transports cannot import private Platform internals |
+| Application service | Commands enforce validation, authentication, policy and transactions |
+| Storage contract | Adapter passes the shared contract suite against real PostgreSQL |
+| Migration | Fresh install and upgrade path both tested |
+| Outbox | State change and event append commit atomically |
+| Policy | Denied actions cannot mutate state |
+| GraphQL | Resolvers call services, not database packages |
+| Diagnostics | Health reporting and support-bundle redaction verified |
+| Supervisor | Process exposes readiness, liveness and shutdown behaviour |
 
 ---
 
