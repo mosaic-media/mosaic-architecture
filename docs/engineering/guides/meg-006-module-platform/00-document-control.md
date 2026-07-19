@@ -33,7 +33,7 @@ Unlike Runtime Architecture, which defines **how capabilities execute**, this sp
 - how they are composed into Platform packages
 - how they become operational
 
-Version 0.8 defines the Test Harness as a deterministic suite of development-only Modules, records event-simulation ownership and defers versioned Scenario Profiles pending a protocol decision.
+This specification defines the Test Harness as a deterministic suite of development-only Modules, records event-simulation ownership and defers versioned Scenario Profiles pending a protocol decision.
 
 ---
 

@@ -216,7 +216,7 @@ The following specifications complement MEG-006, and where they overlap with it 
 
 ---
 
-## Planned Engineering Specifications
+## Engineering Specifications
 
 - [MEG-007 — Storage Architecture](../meg-007-storage-architecture/index.md)
 - [MEG-008 — Observability](../meg-008-observability/index.md)
@@ -242,9 +242,14 @@ The following specifications complement MEG-006, and where they overlap with it 
 - [MDS-003 — Material System](../../../design/system/mds-003-material-system/index.md)
 - [MDS-004 — Typography System](../../../design/system/mds-004-typography-system/index.md)
 - [MDS-005 — Motion System](../../../design/system/mds-005-motion-system/index.md)
-- [MDP-001 — Adaptive Composition Runtime](../../architecture/mdp-001-adaptive-composition-runtime/index.md)
-- [MDP-001 — Adaptive Composition Runtime](../../architecture/mdp-001-adaptive-composition-runtime/14-adaptive-tile-model.md)
 - [MDS-008 — Component Library](../../../design/system/mds-008-component-library/index.md)
+
+---
+
+## Mosaic Design Proposals
+
+- [MDP-001 — Adaptive Composition Runtime](../../architecture/mdp-001-adaptive-composition-runtime/index.md)
+- [MDP-001 ch14 — Adaptive Tile Model](../../architecture/mdp-001-adaptive-composition-runtime/14-adaptive-tile-model.md)
 
 ---
 

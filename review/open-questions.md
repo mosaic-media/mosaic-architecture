@@ -1039,16 +1039,33 @@ Small, but each changes meaning, so none were fixed during the rewrite.
 
 ## Q-020 — `ArtworkProvider` or `ArtworkStore`?
 
-**Status:** `Open`
+**Status:** `Resolved`
 **Where:** [MEG-004 ch02](../docs/engineering/guides/meg-004-hexagonal-architecture/02-ports.md), *Ports Are Small*
 
 Used once as `ArtworkProvider`; every other mention across the guide is `ArtworkStore`. Likely a typo in a normative example, but the two names imply different Port responsibilities.
+
+**Resolution:** Corrected in the MEG-004 chapter 02 code sample only, to match the ten uses of `ArtworkStore` elsewhere in that guide.
+
+**The entry's premise was wrong.** `ArtworkProvider` is not a stray typo: it is an established SDK contract name in MEG-006 chapters 04 and 08. MEG-006 was deliberately left untouched, and the resulting cross-document divergence is recorded as Q-104.
+
+Consultancy decision on best-practice grounds; no implementation exists. Owner delegated design authority for entries answerable from industry practice.
+
+## Q-104 — The artwork Port and the artwork SDK contract have different names
+
+**Status:** `Open`
+**Where:** [MEG-004 ch02](../docs/engineering/guides/meg-004-hexagonal-architecture/02-ports.md), [ch04](../docs/engineering/guides/meg-004-hexagonal-architecture/04-driven-ports.md); [MEG-006 ch04](../docs/engineering/guides/meg-006-module-platform/04-registration.md), [ch08](../docs/engineering/guides/meg-006-module-platform/08-module-sdk.md)
+
+Surfaced while resolving Q-020. MEG-004 names the Domain-facing artwork Port `ArtworkStore`, using it ten times and arguing for it explicitly — "a Port named for Blob Storage is poor where `ArtworkStore` is preferred". MEG-006 names the Module-facing SDK contract for the same capability `ArtworkProvider`, listing it beside `MetadataProvider`, `MediaProvider`, `SearchProvider`, `AuthenticationProvider` and `NotificationProvider`.
+
+Q-020 assumed `ArtworkProvider` was a one-off typo. It is not; it is an established name in MEG-006. Only the single MEG-004 code sample was corrected, leaving the cross-document divergence untouched.
+
+Whether a Domain Port and the SDK contract for the same capability are meant to share a name is undecided. They may legitimately differ — a Port expresses what the Domain requires, an SDK contract expresses what a Module implements — but nothing states that, and MEG-004 uses `MetadataProvider` for a Port while MEG-006 uses the same string for an SDK contract, so the two vocabularies already overlap inconsistently.
 
 **Resolution:**
 
 ## Q-021 — Stale repository trees describing a layout that no longer exists
 
-**Status:** `Open`
+**Status:** `Resolved`
 **Where:** [MEG-004 index](../docs/engineering/guides/meg-004-hexagonal-architecture/index.md), [MEG-005 index](../docs/engineering/guides/meg-005-runtime-architecture/index.md), [MEG-003 index](../docs/engineering/guides/meg-003-domain-driven-design/index.md), [MEG-006 index](../docs/engineering/guides/meg-006-module-platform/index.md), [MEG-002 index](../docs/engineering/guides/meg-002-event-driven-runtime/index.md), all *Repository Structure*
 
 The tree names `README.md` as the folder's landing file; the real file is `index.md`. The folder path shown, `engineering/meg/MEG-004 Hexagonal Architecture/`, does not match the real `docs/engineering/guides/meg-004-hexagonal-architecture/`.
@@ -1057,18 +1074,22 @@ Preserved verbatim under the no-invention rule. Other specifications may carry t
 
 MEG-005, MEG-003, MEG-006 and MEG-002 confirm this is a pattern rather than a one-off. Each shows `engineering/meg/<Document Title>/` containing `README.md`, with the same two defects, while the chapter filenames they list are correct. Only the folder path and the landing filename are stale. Whether these trees are meant to be accurate or merely illustrative should be settled once and applied to every specification that carries one.
 
-**Resolution:**
+**Resolution:** Repository trees are meant to be accurate, not illustrative. Corrected to `docs/` / `engineering/guides/` / `<slug>/` with `index.md` as the landing file. Found in **ten** index files, not the five the entry recorded: MEG-001 through MEG-010.
+
+Consultancy decision on best-practice grounds; no implementation exists. Owner delegated design authority for entries answerable from industry practice.
 
 ## Q-022 — MDP-001 listed twice with an identical label
 
-**Status:** `Open`
+**Status:** `Resolved`
 **Where:** [MEG-004 references](../docs/engineering/guides/meg-004-hexagonal-architecture/references.md), [MEG-005 references](../docs/engineering/guides/meg-005-runtime-architecture/references.md), [MEG-003 references](../docs/engineering/guides/meg-003-domain-driven-design/references.md), [MEG-006 references](../docs/engineering/guides/meg-006-module-platform/references.md), [MEG-002 references](../docs/engineering/guides/meg-002-event-driven-runtime/references.md)
 
 Listed once pointing at `index.md` and once at `14-adaptive-tile-model.md`, both labelled "MDP-001 — Adaptive Composition Runtime". The second entry needs a distinguishing label.
 
 All five guides checked so far carry the identical pair, so the fix should be applied to each. All three also file MDP-001 under a *Mosaic Design Specifications* heading although it lives under `docs/engineering/architecture/` — see Q-040, which records that alongside the MEG-005 glossary defects.
 
-**Resolution:**
+**Resolution:** Both entries kept; the second relabelled `MDP-001 ch14 — Adaptive Tile Model`. Found in **nine** references files, not five. MDP-001 was also misfiled under *Mosaic Design Specifications* between MDS entries although it is a Design Proposal living under `docs/engineering/architecture/`; it now has its own *Mosaic Design Proposals* section in all nine. MEG-014 carries only the index entry under no MDS heading and was left alone.
+
+Consultancy decision on best-practice grounds; no implementation exists. Owner delegated design authority for entries answerable from industry practice.
 
 ## Q-023 — MEG-004 index diagram implies a false dependency
 
@@ -1127,14 +1148,16 @@ Redrawing any of these asserts a structure that is not recorded, so all were lef
 
 ## Q-038 — "open for module" is a mangled Open/Closed Principle
 
-**Status:** `Open`
+**Status:** `Resolved`
 **Where:** [MEG-005 ch03](../docs/engineering/guides/meg-005-runtime-architecture/03-capability-registry.md), *Why A Registry Exists*
 
 The closing sentence reads "The Runtime becomes open for module while remaining closed for modification." The intended reference is the Open/Closed Principle — open for *extension* — and MDG-001 terminology replaces *Extension* with *Module*, which looks to have been applied mechanically to a fixed external term of art, leaving ungrammatical text.
 
 The fix could be "open for modules", or restoring "extension" as an external term the terminology mapping should not touch, or a rephrase avoiding both. That is a terminology-authority decision, so the sentence was left byte-identical.
 
-**Resolution:**
+**Resolution:** *Extension* restored as a fixed external term of art: the sentence now reads "open for extension while remaining closed for modification". [MDG-001 ch04](../docs/engineering/documentation/mdg-001-documentation-authority-guide/04-writing-standards.md) *Terminology* gains a paragraph recording that the mapping governs Mosaic's own vocabulary only, and must not be applied to external terms of art, external source titles or URLs. That paragraph also governs the mangled Chrome URLs in Q-081.
+
+Consultancy decision on best-practice grounds; no implementation exists. Owner delegated design authority for entries answerable from industry practice.
 
 ## Q-039 — Unverifiable citations used for load-bearing claims
 
@@ -1151,7 +1174,7 @@ All were preserved verbatim. Someone should confirm each source is real and cita
 
 ## Q-040 — MEG-005 reference and glossary defects
 
-**Status:** `Open`
+**Status:** `Resolved`
 **Where:** [MEG-005 references](../docs/engineering/guides/meg-005-runtime-architecture/references.md), [glossary](../docs/engineering/guides/meg-005-runtime-architecture/glossary.md)
 
 Four small defects, each changing meaning rather than wording, so none were fixed:
@@ -1163,11 +1186,15 @@ Four small defects, each changing meaning rather than wording, so none were fixe
 
 See also Q-022, which covers the duplicated MDP-001 entry in the same file.
 
-**Resolution:**
+**Resolution:** Three of the four fixed. `Kernel` merged into `Runtime Kernel`, retaining both the ownership list and the microkernel citation; the now-empty `# K` section removed. *Recovery UI* now capitalises Embedded Recovery Renderer. MDP-001 refiled as recorded under Q-022.
+
+**The fourth instruction was wrong and was not applied.** MDS-006 and MDS-007 are `Status: Superseded` on disk, not missing published documents, so they were deliberately not added to the reference lists. Merging the glossary entries does not settle Q-029, which asks whether *Runtime Kernel* and *Microkernel Runtime* name the same component; the merged entry retains "resembles a microkernel" as a simile rather than an identity claim.
+
+Consultancy decision on best-practice grounds; no implementation exists. Owner delegated design authority for entries answerable from industry practice.
 
 ## Q-041 — Unanchored version numbers in Document Control
 
-**Status:** `Open`
+**Status:** `Resolved`
 **Where:** [MEG-005 ch00](../docs/engineering/guides/meg-005-runtime-architecture/00-document-control.md), [MEG-006 ch00](../docs/engineering/guides/meg-006-module-platform/00-document-control.md), [MEG-002 ch00](../docs/engineering/guides/meg-002-event-driven-runtime/00-document-control.md), all *Purpose*
 
 "Version 0.4 records the Supervisor Build Pipeline as an isolated runtime composition and activation flow." MEG-005 declares no version anywhere, and CLAUDE.md forbids a `Version:` metadata field, so the number refers to nothing. Under [MDG-001 ch03](../docs/engineering/documentation/mdg-001-documentation-authority-guide/03-versioning.md) only the contract a MIP defines carries a version.
@@ -1176,7 +1203,9 @@ MEG-006 and MEG-002 carry the identical construction — "Version 0.8 defines th
 
 The sentences are presumably leftovers from versioned drafts, but deleting them would remove the only statement of what each revision covers.
 
-**Resolution:**
+**Resolution:** The version clause is deleted and the substantive scope statement kept, rephrased to carry the same content without the number. Found in **five** files, not three: MEG-002, MEG-005, MEG-006, MEG-014 and MEG-015.
+
+Consultancy decision on best-practice grounds; no implementation exists. Owner delegated design authority for entries answerable from industry practice.
 
 ## Q-056 — MEG-003 diagrams draw splits and cycles as straight chains
 
@@ -1208,7 +1237,7 @@ Each of these is small, each changes meaning, and none were normalised:
 
 ## Q-058 — Published specifications listed as planned or future
 
-**Status:** `Open`
+**Status:** `Resolved`
 **Where:** [MEG-003 index](../docs/engineering/guides/meg-003-domain-driven-design/index.md) and [references](../docs/engineering/guides/meg-003-domain-driven-design/references.md); [MEG-006 index](../docs/engineering/guides/meg-006-module-platform/index.md) and [references](../docs/engineering/guides/meg-006-module-platform/references.md); [MEG-002 index](../docs/engineering/guides/meg-002-event-driven-runtime/index.md) and [references](../docs/engineering/guides/meg-002-event-driven-runtime/references.md)
 
 Both lists describe MEG-004 as future or planned. [MEG-004](../docs/engineering/guides/meg-004-hexagonal-architecture/index.md) is published, and is the calibration reference this rewrite is measured against. The index also lists MEG-006 before MEG-005.
@@ -1219,16 +1248,20 @@ MEG-002 is the worst instance found: its `references.md` lists **eight** specifi
 
 Correcting it means knowing the real Status of every MEG in each list, which is a lifecycle question governed by [MDG-001 ch03](../docs/engineering/documentation/mdg-001-documentation-authority-guide/03-versioning.md) rather than an editorial one.
 
-**Resolution:**
+**Resolution:** Every MEG-001 to MEG-010 carries `Status: Draft` on disk, so none is planned or future. *Future companion specifications* becomes *Companion specifications* and *Planned Engineering Specifications* becomes *Engineering Specifications* across MEG-002, MEG-003 and MEG-006. The MEG-006-before-MEG-005 ordering is corrected in MEG-002 and MEG-003.
+
+Consultancy decision on best-practice grounds; no implementation exists. Owner delegated design authority for entries answerable from industry practice.
 
 ## Q-059 — Citation label does not match its subject
 
-**Status:** `Open`
+**Status:** `Resolved`
 **Where:** [MEG-003 ch09](../docs/engineering/guides/meg-003-domain-driven-design/09-aggregate-roots.md), *Identity*
 
 The aggregate-root article is cited with the link text "Baeldung on Kotlin", which does not match the subject matter and looks like a copy error. Preserved verbatim; worth checking against `references.md`.
 
-**Resolution:**
+**Resolution:** Relabelled *Baeldung on Computer Science*. The cited URL is `baeldung.com/cs/aggregate-root-ddd`, which is Baeldung's computer science section and has nothing to do with Kotlin.
+
+Consultancy decision on best-practice grounds; no implementation exists. Owner delegated design authority for entries answerable from industry practice.
 
 ## Q-079 — MEG-006 diagrams contradict the prose beside them
 
@@ -1312,14 +1345,16 @@ Chapter 04 owns event naming and MIP-001 owns the contract, so this may encode a
 
 ## Q-101 — MEG-002 glossary defects
 
-**Status:** `Open`
+**Status:** `Resolved`
 **Where:** [MEG-002 glossary](../docs/engineering/guides/meg-002-event-driven-runtime/glossary.md)
 
 - **Module event visibility is defined twice under three names.** *Event Visibility* defines both public and private events, then *Private Event* and *Public Event* define the same concepts again with more precision, adding "manifest-declared subscriptions" which *Event Visibility* omits. Which is canonical depends on whether MIP-002 owns the classification; chapter 18 links MIP-002 for exactly this, the glossary does not.
 - **Alphabetical order is broken in section E:** Event, Event Bus, Event Envelope, *Event Visibility*, *Event Payload*. This interacts with the entry above, so both are worth fixing together.
 - **`SWR` is defined but unused.** *Common Acronyms* expands SWR to Stale-While-Revalidate; the term appears nowhere else in MEG-002 and has no runtime referent, so it appears carried over from another document's glossary.
 
-**Resolution:**
+**Resolution:** All three fixed. *Private Event* and *Public Event* remain canonical and *Event Visibility* becomes a pointer to them; *Event Payload* and *Event Visibility* swapped to restore alphabetical order in section E; the unused `SWR` acronym row deleted.
+
+Consultancy decision on best-practice grounds; no implementation exists. Owner delegated design authority for entries answerable from industry practice.
 
 ---
 

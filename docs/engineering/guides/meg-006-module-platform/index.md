@@ -174,10 +174,10 @@ After reading MEG-006 contributors should understand how modules are discovered,
 # Repository Structure
 
 ```text
-engineering/
-└── meg/
-    └── MEG-006 Module Platform/
-        README.md
+docs/
+└── engineering/guides/
+    └── meg-006-module-platform/
+        index.md
         00-document-control.md
         01-module-philosophy.md
         02-module-manifest.md
@@ -212,7 +212,7 @@ Required reading:
 - [MEG-004 — Hexagonal Architecture](../meg-004-hexagonal-architecture/index.md)
 - [MEG-005 — Runtime Architecture](../meg-005-runtime-architecture/index.md)
 
-Future companion specifications:
+Companion specifications:
 
 - [MEG-007 — Storage Architecture](../meg-007-storage-architecture/index.md)
 - [MEG-008 — Observability](../meg-008-observability/index.md)
