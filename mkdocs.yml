@@ -37,8 +37,17 @@ nav:
   - Architecture: architecture.md
   - Roadmap: roadmap.md
   - Decisions:
-      - Transactional store extensibility: adr/0001-transactional-store-extensibility.md
-      - Module storage and delivery: adr/0002-module-storage-and-delivery-model.md
+      - 1. Transactional store extensibility: adr/0001-transactional-store-extensibility.md
+      - 2. Module storage and delivery: adr/0002-module-storage-and-delivery-model.md
+      - 3. Platform as execution kernel: adr/0003-platform-as-execution-kernel.md
+      - 4. Supervisor as host manager: adr/0004-supervisor-as-host-manager.md
+      - 5. Supervisor guarantees an interface: adr/0005-supervisor-guarantees-an-interface.md
+      - 6. Supervisor orchestrates isolated builds: adr/0006-supervisor-orchestrates-isolated-builds.md
+      - 7. Static Go module composition: adr/0007-static-go-module-composition.md
+      - 8. SDK as public contract language: adr/0008-sdk-as-public-contract-language.md
+      - 9. Developer Platform toolchain: adr/0009-developer-platform-toolchain.md
+      - 10. Test Harness as development modules: adr/0010-test-harness-as-development-modules.md
+      - 11. Platform transports events: adr/0011-platform-transports-events.md
 
 markdown_extensions:
   - admonition

@@ -60,23 +60,23 @@ These were stated directly and are load-bearing.
 
 ### Inherited from prior sessions — needs confirmation
 
-These exist as full decision records with context, alternatives and consequences. They are the only records in the old repository written in that heavyweight form, which is why they are the ones worth carrying forward. **They have not been confirmed in conversation and should each be accepted, amended or dropped.**
+These were recorded before the reset as full decision records with context, alternatives and consequences. They were the only records written in that heavyweight form, which is why they were carried forward rather than deleted. **They have not been confirmed in conversation and should each be accepted, amended or dropped.**
 
 | Record | What it decides |
 |---|---|
-| MAD-001 | Transactional store extensibility — stores resolved uniformly through a typed accessor rather than named methods; storage behind a `StorageAdapter` port so PostgreSQL can be replaced; the SDK exposes storage for use, not modification |
-| MAD-002 | A Module is a Go library compiled into the binary; the Platform owns storage and schema; essential and community modules differ only in delivery, not architecture; analytical processing sits behind a port |
-| MAC-001 ADR-001 | Platform as execution kernel |
-| MEG-002 ADR-001 | Platform transports events; Modules own domain events |
-| MEG-005 ADR-001 | Supervisor as Mosaic host manager |
-| MEG-005 ADR-002 | Supervisor guarantees an intelligent interface |
-| MEG-005 ADR-003 | Supervisor orchestrates isolated runtime builds |
-| MEG-006 ADR-001 | Static Go module composition |
-| MEG-006 ADR-002 | SDK as public contract language |
-| MEG-006 ADR-003 | Developer Platform as integrated toolchain |
-| MEG-006 ADR-004 | Test Harness as development modules |
+| [ADR 0001](adr/0001-transactional-store-extensibility.md) | Stores resolved uniformly through a typed accessor rather than named methods; storage behind a `StorageAdapter` port so PostgreSQL can be replaced; the SDK exposes storage for use, not modification |
+| [ADR 0002](adr/0002-module-storage-and-delivery-model.md) | A Module is a Go library compiled into the binary; the Platform owns storage and schema; essential and community modules differ only in delivery, not architecture; analytical processing sits behind a port |
+| [ADR 0003](adr/0003-platform-as-execution-kernel.md) | The Platform is a runtime, not an application. It owns contracts and orchestration; Modules own business behaviour |
+| [ADR 0004](adr/0004-supervisor-as-host-manager.md) | The Supervisor is the always-running host-level manager, sitting below Shell, Platform and Generations |
+| [ADR 0005](adr/0005-supervisor-guarantees-an-interface.md) | The Supervisor is the only public entry point and degrades through progressively simpler interfaces rather than disappearing |
+| [ADR 0006](adr/0006-supervisor-orchestrates-isolated-builds.md) | The Supervisor orchestrates isolated runtime builds |
+| [ADR 0007](adr/0007-static-go-module-composition.md) | Modules are Go libraries compiled into one binary — no plugins, no RPC |
+| [ADR 0008](adr/0008-sdk-as-public-contract-language.md) | The SDK is the public contract language between Platform and Modules |
+| [ADR 0009](adr/0009-developer-platform-toolchain.md) | The Developer Platform is an integrated toolchain |
+| [ADR 0010](adr/0010-test-harness-as-development-modules.md) | The Test Harness is built from development-only Modules |
+| [ADR 0011](adr/0011-platform-transports-events.md) | The Platform transports events; Modules own domain events and their names |
 
-MEG-005 ADR-001 and ADR-002 appear to be the recorded form of the "not your own IT support" goal. MEG-006 ADR-001 is the recorded form of the static-compilation choice.
+ADR 0004 and ADR 0005 are the recorded form of the "not your own IT support" goal. **ADR 0007 is the recorded form of the static-compilation choice**, and therefore the origin of the isolation trade-off below.
 
 ---
 
@@ -122,7 +122,7 @@ The `mosaic-platform` repository has built fourteen slices. Where code exists, *
 | Delivery semantics | At-least-once. Subscribers must be idempotent; a retry redelivers to every subscriber of that type |
 | Error taxonomy | Seven categories — `InvalidArgument`, `Unauthenticated`, `PermissionDenied`, `NotFound`, `Conflict`, `Unavailable`, `Internal`. No driver type escapes a module boundary |
 | Command boundary | Validate, authenticate, authorise, open `UnitOfWork`, load, apply, persist state and outbox in one transaction, return a Platform type |
-| Storage extensibility | `Store[T](tx)` resolves any store uniformly; `StorageAdapter` is a port. MAD-001 |
+| Storage extensibility | `Store[T](tx)` resolves any store uniformly; `StorageAdapter` is a port. ADR 0001 |
 | Package tiers | Core Platform, built-in module, external module. Postgres is a built-in module, not an adapter |
 | User authorisation | Real ABAC-shaped policy engine, default-deny, enforced at the application service |
 

@@ -16,7 +16,7 @@ Two slices remain in the foundation sequence, and both are blocked behind one pi
 
 Everything below is one thread. Nothing else should start until it lands, because it is the test of Mosaic's central thesis: **that a developer who is not you can extend Mosaic through the SDK.**
 
-### 1 — Finish the MAD-001 migration
+### 1 — Finish the ADR 0001 migration
 
 The additive half landed: `Store[T](tx)` and the `StorageAdapter` port exist. The subtractive half has not, and until it does the store-resolution mechanism is a delegation shim over the accessors it was meant to replace.
 
@@ -25,7 +25,7 @@ The additive half landed: `Store[T](tx)` and the `StorageAdapter` port exist. Th
 - Migrate the seven command handlers still calling `tx.Foo()` — `create_local_user`, `authenticate_local_user`, `revoke_session`, `set_user_status`, `draft_config_version`, `validate_config_version`, `activate_config_version` — plus the GraphQL package's test fake.
 - Populate `contracts/platform/v1`, currently `doc.go` and nothing else.
 
-MAD-001 rated this high blast radius and it is. It is also the gate on everything after it.
+ADR 0001 rated this high blast radius and it is. It is also the gate on everything after it.
 
 ### 2 — Reference capability path
 

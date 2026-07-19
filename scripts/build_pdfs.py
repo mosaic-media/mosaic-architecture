@@ -32,6 +32,15 @@ PAGES = {
     "roadmap/": "Mosaic-Roadmap.pdf",
     "adr/0001-transactional-store-extensibility/": "ADR-0001-Transactional-Store-Extensibility.pdf",
     "adr/0002-module-storage-and-delivery-model/": "ADR-0002-Module-Storage-And-Delivery-Model.pdf",
+    "adr/0003-platform-as-execution-kernel/": "ADR-0003-Platform-As-Execution-Kernel.pdf",
+    "adr/0004-supervisor-as-host-manager/": "ADR-0004-Supervisor-As-Host-Manager.pdf",
+    "adr/0005-supervisor-guarantees-an-interface/": "ADR-0005-Supervisor-Guarantees-An-Interface.pdf",
+    "adr/0006-supervisor-orchestrates-isolated-builds/": "ADR-0006-Supervisor-Orchestrates-Isolated-Builds.pdf",
+    "adr/0007-static-go-module-composition/": "ADR-0007-Static-Go-Module-Composition.pdf",
+    "adr/0008-sdk-as-public-contract-language/": "ADR-0008-SDK-As-Public-Contract-Language.pdf",
+    "adr/0009-developer-platform-toolchain/": "ADR-0009-Developer-Platform-Toolchain.pdf",
+    "adr/0010-test-harness-as-development-modules/": "ADR-0010-Test-Harness-As-Development-Modules.pdf",
+    "adr/0011-platform-transports-events/": "ADR-0011-Platform-Transports-Events.pdf",
 }
 
 
