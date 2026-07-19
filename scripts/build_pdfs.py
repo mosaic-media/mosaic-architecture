@@ -42,6 +42,8 @@ PAGES = {
     "adr/0010-test-harness-as-development-modules/": "ADR-0010-Test-Harness-As-Development-Modules.pdf",
     "adr/0011-platform-transports-events/": "ADR-0011-Platform-Transports-Events.pdf",
     "adr/0012-capabilities-do-not-own-stores/": "ADR-0012-Capabilities-Do-Not-Own-Stores.pdf",
+    "adr/0013-object-graph/": "ADR-0013-Object-Graph.pdf",
+    "adr/0014-storage-authority-and-transaction-scope/": "ADR-0014-Storage-Authority-And-Transaction-Scope.pdf",
 }
 
 

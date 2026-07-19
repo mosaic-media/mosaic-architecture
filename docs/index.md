@@ -106,6 +106,9 @@ Each of these words must carry exactly one meaning, everywhere.
 | **Supervisor** | The component that selects modules, builds the binary and manages the running system | The Platform, or the Runtime |
 | **Store** | A typed persistence contract resolved within a transaction | The database |
 | **Node tree** | The content-agnostic object model | A filesystem |
+| **Single binary** | The Platform Binary the Supervisor compiles Modules into (ADR 0007) | The database, which runs as its own process. "Single binary dropped" referred only to not bundling PostgreSQL |
+| **Canon** | Reserved. The database is authoritative (ADR 0014) | `.mos` and NFO, which are exports |
+| **Part** | The bytes an item plays, local path or remote reference | A section of a file, or a node |
 
 Add to this table whenever a word starts carrying two meanings. Removing an ambiguity is cheaper than debugging what it generated.
 

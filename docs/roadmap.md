@@ -20,13 +20,15 @@ Everything below is one thread. Nothing else should start until it lands, becaus
 
 ### 1 — The content-agnostic object model
 
-The node tree, relation graph and per-type attribute storage that [ADR 0002](adr/0002-module-storage-and-delivery-model.md) describes at principle level and nothing implements.
+The node tree, relation graph and per-type attribute storage. Designed in [ADR 0013](adr/0013-object-graph.md), with authority and media linking settled in [ADR 0014](adr/0014-storage-authority-and-transaction-scope.md). Not implemented.
 
 The schema today holds identity, sessions, permissions, configuration, events, jobs, diagnostics and a blob registry — twenty-five tables, every one of them infrastructure. `object_records` tracks stored files by id, kind, location and size; it is not content. **There is no node tree and no relation graph, so a capability has nowhere to put an anime.**
 
 This is the real blocker, and it was mistaken for something else. The reference capability was recorded as blocked on an empty `contracts/platform/v1` and a closed `Tx`; both were symptoms of building the extension mechanism before the thing it extends.
 
-Its design is a genuine piece of work — identifiers, how a node carries type-specific attributes, how relations are typed, ordering at scale — all of which ADR 0002 explicitly deferred.
+**Scope of the first slice:** `nodes`, `parts`, `relations` and `source_bindings`, their domain types and store contracts, the stores added to `Tx`, and adapter-agnostic contract tests against real PostgreSQL. Identifiers are UUIDv7 in native `uuid` columns.
+
+**Not in this slice:** export formats, the filesystem projection, streaming, the job queue, `LISTEN/NOTIFY`, and IPTV listings. Each is a later slice and none blocks the reference capability.
 
 ### 2 — Reference capability path
 
@@ -77,6 +79,9 @@ Deliberately unplanned in detail. These follow only once the extension mechanism
 - **First real module** — one media format end to end, built the way a community developer would build it. The first honest test of the SDK's ergonomics.
 - **Module permissions** — what a module declares, who grants it, what enforcement means given modules compile into the binary. See the isolation tradeoff in [the overview](index.md); this is a declaration and audit mechanism, not containment.
 - **Module distribution** — how the Supervisor discovers, selects and pulls a community module. Manifest shape, signing, trust tiers.
+- **Export formats** — NFO for other systems, `.mos` for Mosaic-to-Mosaic portability. Generated on demand from authoritative state ([ADR 0014](adr/0014-storage-authority-and-transaction-scope.md)).
+- **Job queue** — the `jobs` tables exist with no service on them. `SELECT ... FOR UPDATE SKIP LOCKED` is the intended pattern, for import, provider sync and enrichment.
+- **`LISTEN`/`NOTIFY`** — an accelerator over the outbox worker's existing poll, not a replacement for it. Notifications are dropped when no listener is connected, so the poll stays as the floor.
 - **Shell and SDUI** — the server-driven interface.
 - **Mosaic Design Language** — acrylic with weight, artwork as the light source.
 
