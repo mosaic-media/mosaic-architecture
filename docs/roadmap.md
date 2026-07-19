@@ -28,13 +28,18 @@ This was the real blocker, and it had been mistaken for something else. The refe
 
 **Deliberately not in the slice, and still unbuilt:** export formats, the filesystem projection, streaming, the job queue, `LISTEN/NOTIFY`, and IPTV listings. None blocks the reference capability.
 
-### 2 — Content commands and queries
+### 2 — Content commands and queries — **done**
 
-The stores exist and are proven, but nothing above them does. No application service touches the graph, so the only way in is `Tx`, which the composition root holds — and a capability reaching for `Tx` directly would bypass the policy engine entirely.
+The stores existed and were proven, but nothing above them did. No application service touched the graph, so the only way in was `Tx`, which the composition root holds — and a capability reaching for `Tx` directly would bypass the policy engine entirely.
 
-This slice puts the command order over the content model: add a work, attach a part, relate two nodes, resolve a binding. It also builds the read side, which is missing more than it looks. `SourceBindingStore.FindBySource(provider, ref)` answers *"have I already bound this exact provider reference?"* and nothing else. **"Do I already have this anime?" — by title, or by external id — is unanswerable today.** The `nodes_external_ids_gin` and `nodes (media_type, title)` indexes exist from migration 0012 and no query reaches either.
+This slice put the command order over the content model. Nine application services now exist, each validating, authenticating, authorising and — for writes — committing state and an outbox event in one transaction:
 
-It is scheduled ahead of the reference capability because it is needed under every possible resolution of the boundary problem below, so none of it can be wasted.
+- **Reads:** `SearchContent` (title substring, media type, kind), `FindContentByExternalID` (provider id against the GIN index), `GetContentNode` (one node, optionally its direct children). Before this, `FindBySource` answered only *"have I bound this exact provider reference?"*; "do I already have this anime?" by title or external id was unanswerable, and the `nodes_external_ids_gin` and `nodes (media_type, title)` indexes had no query reaching them.
+- **Writes:** `AddContentWork`, `AddContentChild`, `AttachContentPart` build the containment tree; `RelateContent`, `BindContentSource`, `ResolveContentBinding` write the association graph and resolve identity.
+
+Two shapes were decided in the building. A child inherits its work id and media type from its parent, so a season cannot declare a different media type than its series. A binding is created confirmed or pending-review, never rejected — rejection is a resolution of an existing binding, not a state to create one in.
+
+It was scheduled ahead of the reference capability because it is needed under every resolution of the boundary problem below, so none of it could be wasted. It did **not** resolve either blocker: every content command still authorises on a user session, and the contracts still reference `domain` types under `internal/`.
 
 ### 3 — Reference capability path
 
@@ -56,8 +61,6 @@ So promotion needs a decision before it needs work: does the domain package leav
 `policy.Subject` carries a `UserID` and an `AuthStrength`. There is no module, capability or system principal anywhere in the policy engine, so a capability today must borrow a human's session id to do anything at all. This may resolve cheaply — *capabilities always act on behalf of an invoking user* is a legitimate answer that needs no new machinery — but it is currently undecided, and "undecided" is not the same as "cheap".
 
 #### The slice itself
-
-Its purpose changed under [ADR 0012](adr/0012-capabilities-do-not-own-stores.md). It was to prove a capability could own a store and join a transaction. Since capabilities own no schema, it should now prove what a capability actually does, shaped like the anime module the platform exists to support:
 
 Its purpose changed under [ADR 0012](adr/0012-capabilities-do-not-own-stores.md). It was to prove a capability could own a store and join a transaction. Since capabilities own no schema, it should now prove what a capability actually does, shaped like the anime module the platform exists to support:
 
