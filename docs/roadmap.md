@@ -41,6 +41,8 @@ Its purpose changed under [ADR 0012](adr/0012-capabilities-do-not-own-stores.md)
 - create nodes and relations in the generic model
 - publish an event
 
+**It also carries the `media_types` registry** ([ADR 0015](adr/0015-open-and-closed-vocabularies.md)). Media types are an open vocabulary, and normalisation already collapses spelling variants, but nothing yet catches a value that was never a real type. The fix is a Platform-owned table a module contributes to through its manifest — which is precisely the "declare through the manifest, Platform acts on it" shape this slice exists to prove, so the consumer and the mechanism should land together rather than one retrofitting the other.
+
 **Exit criteria.** The proven contracts are promoted into `contracts/platform/v1` *first*, then one capability does all four using only those packages, owning no schema and touching no Platform code.
 
 ### 3 — SDK extraction readiness

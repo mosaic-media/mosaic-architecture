@@ -39,19 +39,21 @@ The constants the Platform declares for these are a starting vocabulary for its 
 
 The JSONB `attributes` and `external_ids` columns follow the open rule for the same reason, as ADR 0013 already established: the schema does not validate them, and correctness belongs to the writing capability.
 
-### Enforcement today is nothing, and that has a cost
+### Open does not mean unguarded
 
-This is stated plainly rather than left to be discovered. `anime_series`, `anime-series` and `animeseries` are three distinct media types that browse as three separate libraries. Nothing catches it. A typo in a capability is silent fragmentation, surfacing as a user wondering why half their anime disappeared.
+An open vocabulary invites a specific failure: `anime_series`, `anime-series` and `Anime Series` are three distinct values that browse as three separate libraries, and a user discovers it by wondering where half their anime went. Openness is a decision about *who may add a type*, not a licence to let one concept fragment into several.
 
-That cost is accepted **for now** and is not permanent.
+Two mechanisms address it, and they are not alternatives — they cover different halves.
 
-### The anticipated mechanism, and its trigger
+**Normalisation, now.** Values are stored canonically: lowercased, with any run of separators collapsed to a single underscore. `Anime Series`, `anime-series` and `ANIME_SERIES` all persist as `anime_series`. This is a function rather than a constraint, so a new media type still needs no migration, and it is a contract obligation rather than an adapter detail — any implementation of `NodeStore` owes it, and writes return the canonical value. A colon survives, so a future module-supplied type can namespace itself (`animekit:ova`).
 
-The eventual answer is a Platform-owned `media_types` registry — a table the Platform seeds, that a module contributes to through the manifest it already declares, with a foreign key from `nodes.media_type`. It gives referential integrity while keeping ADR 0013's phrase literally true: adding a media type is a row.
+The distinction that matters: a shape `CHECK` would *reject* `anime-series`, leaving the author to guess the house style. Normalisation *converts* it, which is what the user actually needs.
 
-**It is not built now, and the trigger for building it is: when something other than Platform code can introduce a media type.**
+**A registry, with the reference capability.** Normalisation collapses spelling variants of a correct concept. It cannot recover `animeseries`, which has no separator to fix, or `anmie_series`, which is simply wrong. Only a closed-by-membership check catches those: a Platform-owned `media_types` table with a foreign key from `nodes.media_type`, seeded by the Platform and contributed to by a module through the manifest it already declares. That keeps ADR 0013's phrase literally true — adding a media type is a row.
 
-Today every value is written by Platform code or by a capability in this repository, where a typo is a bug found in review. The registry's value appears when a third party ships a module. Building it earlier would require answering questions nothing is asking — what an uninstall does to a registered type, and what happens to nodes still using one — and inventing answers to unasked questions is the specific failure that retired the previous specification corpus.
+**It lands with the reference capability slice**, not before and not on a vague trigger. That slice exists to prove a module can declare things through its manifest and have the Platform act on them, using only published contracts and owning no schema. Media-type registration is exactly that shape, so the slice that needs the registry is the slice that proves it works; building it earlier means retrofitting it to a consumer that did not exist.
+
+Until then a value that was never a real type still lands silently. That is a known, bounded gap: every media type today is written by Platform constants or by a capability in this repository, where a typo is a bug caught in review rather than shipped to a user.
 
 ## Alternatives considered
 
@@ -59,7 +61,9 @@ Today every value is written by Platform code or by a capability in this reposit
 
 **Building the `media_types` registry now.** Correct destination, wrong time. *Rejected:* it forces answers on uninstall semantics and orphaned-type handling while there is no external module system to give those answers meaning. Recorded above as anticipated, with an explicit trigger, so the intent is not lost.
 
-**A shape constraint** — `CHECK (media_type ~ '^[a-z][a-z0-9_]*$')`. Cheap, and catches `Anime Series` or `anime-series`. *Rejected:* it catches malformed values but not misspelled ones, which is the failure that actually costs a user their library, so it buys little. It also risks reintroducing the original problem in miniature: if module-supplied types later want namespacing (`animekit:ova`), a strict pattern blocks it and relaxing it becomes the migration this ADR exists to avoid. Better to add the registry, which subsumes it.
+**A shape constraint** — `CHECK (media_type ~ '^[a-z][a-z0-9_]*$')`. *Rejected in favour of normalisation, which is strictly better at the same cost.* A constraint rejects `anime-series` and leaves the author to guess what was wanted; normalisation converts it to the right value. The constraint also risks reintroducing the original problem in miniature: if module-supplied types later want namespacing, a strict pattern blocks it and relaxing it becomes the migration this ADR exists to avoid.
+
+**Normalising and stopping there**, treating the registry as unnecessary. *Rejected:* normalisation cannot recover a missing separator or a misspelling, so the larger failure — a value that was never a real type — would stay open indefinitely rather than being owed to a named slice.
 
 **Treating every one of these columns as open**, including `node_kind` and `part_role`. Uniform and simple to state. *Rejected:* Platform code switches on those values. An unrecognised `node_kind` is not a new media type, it is a traversal that does not know what it is looking at, and it should fail at write time rather than at read time.
 
@@ -69,7 +73,9 @@ Today every value is written by Platform code or by a capability in this reposit
 
 **The Platform never ratifies a media type.** It has no list to be added to and no opinion to express, which is what keeps a module from needing a Platform change to ship.
 
-**Typos fragment silently until the registry lands.** This is the accepted cost, and it is a known gap rather than an oversight. A capability writing media types is responsible for using constants rather than string literals.
+**Spelling variants converge; invented types do not, until the registry lands.** Normalisation makes the common case safe and the remaining gap narrow: a value that was never a real type still persists silently. That is a known, bounded gap rather than an oversight, and it is owed to a named slice rather than to "later". A capability writing media types should use constants rather than string literals regardless.
+
+**Writes may return a value different from the one passed in.** Stores canonicalise, so a caller writing `Anime Series` reads back `anime_series`. This is deliberate and contract-level rather than adapter-specific, and it means normalisation must be idempotent — a read-modify-write cycle cannot be allowed to drift.
 
 **There is now a rule for future columns.** When the object graph grows a column with a small set of allowed values, the open/closed question has an answer — ask whether Platform code branches on it — instead of being settled per column by whoever implements it.
 
