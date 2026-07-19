@@ -173,6 +173,7 @@ Each of these must keep passing. They are the properties that stop the architect
 
 Stated plainly so nothing here is mistaken for a description of something real.
 
+- **The content model.** There is no node tree, no relation graph and no attribute storage. Every table in the schema is infrastructure — identity, sessions, permissions, configuration, events, jobs, diagnostics, and a blob registry that tracks files rather than content. **A capability currently has nowhere to put an anime.** Designed in ADR 0013 and ADR 0014; not implemented.
 - **Module permissions.** The policy engine governs *user* authority. Module authority is undecided and unimplemented.
 - **External modules.** Only the built-in shape exists.
 - **Jobs and diagnostics history.** Tables exist from earlier migrations with no contract or service above them. GraphQL resolvers for them return `Unavailable` rather than faking success.
