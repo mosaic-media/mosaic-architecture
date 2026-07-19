@@ -92,7 +92,7 @@ A `Registry` holding modules that present a `Manifest{ID, Version, Fulfills []st
 
 ### `contracts/platform/v1/` — the public SDK surface
 
-**Currently empty apart from `doc.go`.** Its contents are decided ([ADR 0016](adr/0016-published-contract-surface.md)): the content command, query and result types, a service interface, the content models, and an opaque `Caller` — **not** the store contracts, which are Platform↔engine plumbing and stay internal. Populating it is the first half of the reference-capability slice.
+**Populated with the content surface** ([ADR 0016](adr/0016-published-contract-surface.md)): the content models (`Node`, `Part`, `Relation`, `SourceBinding` and their vocabularies), the nine content command, query and result types, the `ContentService` interface `internal/platform/app.Service` implements, and an opaque `Caller`. The store contracts, `Tx` and the identity and configuration models are **not** here — they are Platform↔engine plumbing and stay internal. `test/sdkprobe` (a separate module importing only this package) and `test/sdkboundary` (which builds it) enforce that no internal type leaks into a public signature.
 
 ---
 

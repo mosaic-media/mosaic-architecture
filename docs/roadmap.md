@@ -6,11 +6,11 @@ Derived from the real state of `mosaic-platform`, not from a plan written ahead 
 
 ## Where the build actually is
 
-Thirteen slices are complete. The Platform boots against real PostgreSQL, serves a GraphQL schema, runs an outbox worker with retry and dead-lettering, resolves secrets, reports component health, shuts down gracefully with a final outbox drain, and holds a content-agnostic object graph. Every slice passes `go build`, `go vet` and `go test -race` against a real database.
+The Platform boots against real PostgreSQL, serves a GraphQL schema, runs an outbox worker with retry and dead-lettering, resolves secrets, reports component health, shuts down gracefully with a final outbox drain, holds a content-agnostic object graph, and exposes a content command and query API over that graph. That API's surface is now published in `contracts/platform/v1` — the models, the nine services, the `ContentService` interface and an opaque `Caller` — and an external module compiles against it in the test suite. Every slice passes `go build`, `go vet` and `go test -race` against a real database.
 
 Two further slices — uniform store resolution and its PostgreSQL follow-up — were built and then reverted under [ADR 0012](adr/0012-capabilities-do-not-own-stores.md), which found they solved a case the architecture had already ruled out.
 
-The content model was the last thing blocking the critical path. What remains is the thesis test itself.
+The content model and its published surface were the things blocking the critical path. What remains is the thesis test itself: a capability that uses only that surface.
 
 ---
 
@@ -43,19 +43,23 @@ It was scheduled ahead of the reference capability because it is needed under ev
 
 ### 3 — Reference capability path
 
-Attempted twice and correctly reported as blocked rather than forced. It was blocked a third time on two things neither attempt had reached — both now decided, so the slice is buildable.
+Attempted twice and correctly reported as blocked rather than forced. It was blocked a third time on two things neither attempt had reached — both decided (ADR 0016, ADR 0017), and the first half of the build has now landed.
 
-#### Decided: what the published surface is ([ADR 0016](adr/0016-published-contract-surface.md))
+#### Done: the published surface ([ADR 0016](adr/0016-published-contract-surface.md))
 
-The block was that every contract signature references a `domain` type under `internal/`, which Go forbids an external module from importing. The fix corrected the roadmap's own framing: a capability does **not** call the store contracts (`NodeStore`, `Tx`, `StorageAdapter`) — those are Platform↔engine plumbing. It calls the application-service API. So the published surface is the content command, query and result types, a service interface, the content models they carry, and an opaque `Caller`; the store contracts and the identity/config models stay internal. The models move rather than being duplicated or generated, and a throwaway module compiled against the surface becomes a standing test that an internal type never leaks into a public signature.
+The block was that every contract signature references a `domain` type under `internal/`, which Go forbids an external module from importing. The fix corrected the roadmap's own framing: a capability does **not** call the store contracts (`NodeStore`, `Tx`, `StorageAdapter`) — those are Platform↔engine plumbing. It calls the application-service API.
+
+`contracts/platform/v1` now holds that surface: the content models (moved out of `internal/platform/domain`, not duplicated), the nine content command, query and result types, the `ContentService` interface `app.Service` implements, and an opaque `Caller`. The store contracts and the identity and configuration models stayed internal. The enforcement is a standing test — `test/sdkprobe` is a separate Go module that imports only `v1` and exercises the whole service; `test/sdkboundary` builds it, and because an external module cannot import `internal/`, a public signature that leaked an internal type fails that build. Verified by watching it fail on a deliberately added internal import.
 
 #### Decided: how a capability acts ([ADR 0017](adr/0017-how-a-capability-acts.md))
 
-A capability does not originate authority. The Platform invokes it within a context carrying a principal, and it forwards that context to every service it calls. For the reference capability the principal is the invoking user, so nothing in the policy engine changes and every created node traces to the person who caused it. A system principal for background work, and module-granular authority, are named future decisions rather than machinery built now.
+A capability does not originate authority. The Platform invokes it within a context carrying a principal, and it forwards that context to every service it calls. For the reference capability the principal is the invoking user, so nothing in the policy engine changes and every created node traces to the person who caused it. This is realised as the `Caller`: a session reference the capability forwards, only as authoritative as the session behind it. A system principal for background work, and module-granular authority, are named future decisions rather than machinery built now.
 
-#### The slice itself
+#### Remaining: the capability itself, and the registry
 
-Its purpose changed under [ADR 0012](adr/0012-capabilities-do-not-own-stores.md). It was to prove a capability could own a store and join a transaction. Since capabilities own no schema, it should now prove what a capability actually does, shaped like the anime module the platform exists to support:
+The surface is published; what is left is a capability that uses it. `test/sdkprobe` is *shaped* like one — it compiles against `v1` — but it is a build-time stand-in, not a capability wired to a running Platform.
+
+The capability's purpose changed under [ADR 0012](adr/0012-capabilities-do-not-own-stores.md). It was to prove a capability could own a store and join a transaction. Since capabilities own no schema, it should now prove what a capability actually does, shaped like the anime module the platform exists to support:
 
 - source metadata from an external provider
 - search existing content
@@ -66,7 +70,7 @@ Sourcing metadata needs no Platform HTTP contract, which is worth stating becaus
 
 **It also carries the `media_types` registry** ([ADR 0015](adr/0015-open-and-closed-vocabularies.md)). Media types are an open vocabulary, and normalisation already collapses spelling variants, but nothing yet catches a value that was never a real type. The fix is a Platform-owned table a module contributes to through its manifest — which is precisely the "declare through the manifest, Platform acts on it" shape this slice exists to prove, so the consumer and the mechanism should land together rather than one retrofitting the other.
 
-**Exit criteria.** The surface of [ADR 0016](adr/0016-published-contract-surface.md) is published into `contracts/platform/v1` — the content services, models and `Caller`, not the store contracts — and then one capability does all four using only those packages, acting as its invoking user ([ADR 0017](adr/0017-how-a-capability-acts.md)), owning no schema and touching no Platform code.
+**Exit criteria.** The surface of [ADR 0016](adr/0016-published-contract-surface.md) is published into `contracts/platform/v1` — done — and then one capability does all four using only those packages, acting as its invoking user ([ADR 0017](adr/0017-how-a-capability-acts.md)), owning no schema and touching no Platform code.
 
 ### 4 — SDK extraction readiness
 
