@@ -84,7 +84,7 @@ Helpers that don't implement a full contract surface: `crypto/` (AES-GCM) and `f
 
 ### `internal/transport/` — inbound
 
-`graphql/` — a hand-built executable schema. `health/` — the Supervisor handoff endpoints.
+`graphql/` — a hand-built schema over graphql-go, **served over HTTP** by a hand-written handler (`/graphql`). Resolvers cover Auth, Users, Permissions, Configuration and the **content model** (search, node read, and the six content mutations), each calling one application service — the content resolvers project the published SDK's models and pass a `Caller` built from the request's session. `health/` — the Supervisor handoff endpoints. The composition root serves the client-facing API and the operational handoff on separate ports (`:8081` and `:8080`), and constructs `app.Service` with an Argon2id password hasher.
 
 ### `internal/composition/builtin/` — module discovery
 
@@ -211,11 +211,10 @@ Each of these must keep passing. They are the properties that stop the architect
 
 Stated plainly so nothing here is mistaken for a description of something real.
 
-- **Command handlers over the content model.** The four stores exist and pass the contract suite against real PostgreSQL, but no application service commands them, so there is no validate → authenticate → authorise → transact path into the graph. The `Tx` fakes in `internal/platform/app` and `internal/transport/graphql` return nil for the content stores for exactly this reason.
+- **Permissions management.** `PermissionStore` is read-only; roles and grants are written only by raw SQL in test fixtures. There is no contract or command to create a role or grant one, so there is no way through the Platform to give a user authority — which also means no in-band way to bootstrap the first admin (creating the user and password credential goes through contracts; the role does not). This is the next thing needed to make the running binary usable by a human rather than only by a test that seeds directly.
 - **IPTV programme listings.** ADR 0013 gives them their own lightweight table keyed to the channel node, deliberately outside the Node machinery. That table is unbuilt.
 - **Module-granular permissions.** The policy engine governs *user* authority, and a capability acts as its invoking user ([ADR 0017](adr/0017-how-a-capability-acts.md)). Authority a module holds *distinct* from that user — and a system principal for background work — is scoped to future ADRs, not built.
 - **External modules.** Only the built-in shape exists.
 - **Jobs and diagnostics history.** Tables exist from earlier migrations with no contract or service above them. GraphQL resolvers for them return `Unavailable` rather than faking success.
 - **Session refresh and device pairing.** No backing service.
 - **Shell, SDUI, design language.** Nothing.
-- **HTTP transport for GraphQL.** The schema is executable and tested, but not yet served.
