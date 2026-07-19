@@ -51,7 +51,7 @@ MEG-015 does not own:
 
 # Maturity
 
-Version 0.1 defines the first implementation-grade Platform guide. It is sufficient for repository scaffolding, first port implementation, adapter contract tests and the initial Supervisor handoff.
+This specification defines the first implementation-grade Platform guide. It is sufficient for repository scaffolding, first port implementation, adapter contract tests and the initial Supervisor handoff.
 
 It still requires implementation feedback before technical review, especially around generated SDK extraction and production-grade operational defaults.
 
