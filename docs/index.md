@@ -116,7 +116,7 @@ Add to this table whenever a word starts carrying two meanings. Removing an ambi
 
 ## Settled In Code
 
-The `mosaic-platform` repository has built fourteen slices. Where code exists, **the code is authoritative** and this repository does not restate it. Questions the old corpus argued about for chapters are already answered:
+The `mosaic-platform` repository has thirteen slices standing, with two more built and then reverted under [ADR 0012](adr/0012-capabilities-do-not-own-stores.md). Where code exists, **the code is authoritative** and this repository does not restate it. Questions the old corpus argued about for chapters are already answered:
 
 | Question | Answer, in code |
 |---|---|
@@ -125,7 +125,7 @@ The `mosaic-platform` repository has built fourteen slices. Where code exists, *
 | Delivery semantics | At-least-once. Subscribers must be idempotent; a retry redelivers to every subscriber of that type |
 | Error taxonomy | Seven categories — `InvalidArgument`, `Unauthenticated`, `PermissionDenied`, `NotFound`, `Conflict`, `Unavailable`, `Internal`. No driver type escapes a module boundary |
 | Command boundary | Validate, authenticate, authorise, open `UnitOfWork`, load, apply, persist state and outbox in one transaction, return a Platform type |
-| Storage extensibility | `Store[T](tx)` resolves any store uniformly; `StorageAdapter` is a port. ADR 0001 |
+| Storage extensibility | `Tx` names a closed, Platform-owned store set; capabilities own no schema, so there is nothing to register. `StorageAdapter` remains a port. ADR 0012, superseding ADR 0001 |
 | Package tiers | Core Platform, built-in module, external module. Postgres is a built-in module, not an adapter |
 | User authorisation | Real ABAC-shaped policy engine, default-deny, enforced at the application service |
 
