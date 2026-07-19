@@ -210,9 +210,9 @@ engineering/
 
 └── meg/
 
-    └── MEG-009 Security Architecture/
+    └── meg-009-security-architecture/
 
-        README.md
+        index.md
 
         00-document-control.md
 
