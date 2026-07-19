@@ -187,25 +187,6 @@ An Isolated Runtime Build must not mutate the active Generation.
 
 ---
 
-# K
-
-## Kernel
-
-The central coordinating component of the Runtime.
-
-The Runtime Kernel owns:
-
-- lifecycle
-- Runtime Services
-- startup
-- shutdown
-
-It intentionally owns no business behaviour.
-
-The Runtime Kernel resembles a microkernel by keeping only essential coordination responsibilities while delegating execution to specialised services.  [AWS Documentation](https://docs.aws.amazon.com/prescriptive-guidance/latest/cloud-design-patterns/hexagonal-architecture.html)
-
----
-
 # L
 
 ## Lifecycle
@@ -250,7 +231,7 @@ The user-facing recovery experience used to diagnose and recover Mosaic when nor
 
 Recovery UI should normally be rendered by the Shell from Recovery SDUI.
 
-When the Shell is unavailable, the embedded recovery renderer displays Recovery SDUI in the browser.
+When the Shell is unavailable, the Embedded Recovery Renderer displays Recovery SDUI in the browser.
 
 Recovery UI knows about Generations, logs, health, configuration, storage, network, diagnostics and recovery actions, but it does not know media semantics.
 
@@ -332,13 +313,22 @@ The Shell and client renderers render Runtime SDUI, which the Supervisor does no
 
 ## Runtime Kernel
 
-The architectural centre of the Runtime, through which every Runtime Service is coordinated.
+The central coordinating component of the Runtime, and the architectural centre through which every Runtime Service is coordinated.
 
-It should remain:
+The Runtime Kernel owns:
+
+- lifecycle
+- Runtime Services
+- startup
+- shutdown
+
+It intentionally owns no business behaviour, and should remain:
 
 - small
 - stable
 - business agnostic
+
+The Runtime Kernel resembles a microkernel by keeping only essential coordination responsibilities while delegating execution to specialised services.  [AWS Documentation](https://docs.aws.amazon.com/prescriptive-guidance/latest/cloud-design-patterns/hexagonal-architecture.html)
 
 ---
 

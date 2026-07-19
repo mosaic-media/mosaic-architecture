@@ -23,7 +23,7 @@ Status: Draft
 
 # Purpose
 
-This document establishes the governance, authority and lifecycle of the Mosaic Runtime Architecture specification. MEG-005 defines the internal architecture of the Mosaic Runtime, and unlike [MEG-002](../meg-002-event-driven-runtime/index.md), which defines **runtime behaviour**, this specification defines the **components, responsibilities and relationships** that make the runtime possible. Version 0.4 records the Supervisor Build Pipeline as an isolated runtime composition and activation flow.
+This document establishes the governance, authority and lifecycle of the Mosaic Runtime Architecture specification. MEG-005 defines the internal architecture of the Mosaic Runtime, and unlike [MEG-002](../meg-002-event-driven-runtime/index.md), which defines **runtime behaviour**, this specification defines the **components, responsibilities and relationships** that make the runtime possible. It records the Supervisor Build Pipeline as an isolated runtime composition and activation flow.
 
 It answers:
 

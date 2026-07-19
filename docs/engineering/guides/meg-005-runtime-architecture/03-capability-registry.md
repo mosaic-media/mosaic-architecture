@@ -100,7 +100,7 @@ N3 --> N4
 N4 --> N5
 ```
 
-The Runtime then becomes tightly coupled to every capability, so every new capability requires Runtime modification. With a Registry the direction reverses, and the Runtime becomes open for module while remaining closed for modification.
+The Runtime then becomes tightly coupled to every capability, so every new capability requires Runtime modification. With a Registry the direction reverses, and the Runtime becomes open for extension while remaining closed for modification.
 
 ```mermaid
 flowchart TD

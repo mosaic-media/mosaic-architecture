@@ -155,10 +155,10 @@ The chapters that follow develop the architecture in order. After reading MEG-00
 # Repository Structure
 
 ```text
-engineering/
-└── meg/
-    └── MEG-005 Runtime Architecture/
-        README.md
+docs/
+└── engineering/guides/
+    └── meg-005-runtime-architecture/
+        index.md
         00-document-control.md
         01-runtime-philosophy.md
         02-runtime-kernel.md
