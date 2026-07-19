@@ -80,7 +80,9 @@ Infrastructure implementing Platform contracts, using the same registration and 
 
 ### `internal/adapters/` — not module-shaped
 
-Helpers that don't implement a full contract surface: `crypto/` (AES-GCM) and `filesystem/` (atomic writes). Storage engines do **not** belong here.
+Helpers that don't implement a full contract surface: `crypto/` (AES-GCM for the secret vault, and an Argon2id `PasswordHasher`) and `filesystem/` (atomic writes). Storage engines do **not** belong here.
+
+An adapter is not a built-in module: there is no manifest and no registration through `internal/composition/builtin`, because each fulfils a single small port rather than a broad contract surface. It is still swappable, behind the same hexagonal seam — the composition root wires it directly. The password hasher satisfies the `domain.PasswordVerifier` port (`Hash`/`Verify`) and is chosen in `main.go`, so replacing Argon2id with bcrypt, scrypt or an HSM-backed signer is a one-line change there. The `crypto` package imports no Platform code, so the compile-time assertion that it satisfies the port lives in its external test package rather than coupling the adapter to `domain`.
 
 ### `internal/transport/` — inbound
 
