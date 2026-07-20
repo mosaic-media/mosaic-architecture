@@ -65,6 +65,8 @@ nav:
       - 24. Primitives and definitions: adr/0024-primitives-and-definitions.md
       - 25. The SDUI contract repository: adr/0025-sdui-contract-repository.md
       - 26. The React SDUI runtime: adr/0026-react-sdui-runtime.md
+      - 27. Modules as typed capability providers: adr/0027-modules-as-typed-capability-providers.md
+      - 28. Virtual browse and materialized library: adr/0028-virtual-and-materialized-content.md
 
 markdown_extensions:
   - admonition
