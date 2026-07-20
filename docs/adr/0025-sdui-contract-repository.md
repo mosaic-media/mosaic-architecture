@@ -11,9 +11,9 @@ So the contract must be extracted now, and a format chosen for it.
 
 ## Decision
 
-Extract the SDUI contract into its own repository, **[`mosaic-sdui`](https://github.com/mosaic-media/mosaic-sdui)** — the interface counterpart of [`mosaic-sdk`](https://github.com/mosaic-media/mosaic-sdk). It holds three things, with a per-language binding for each consumer:
+Extract the SDUI contract into its own repository, **[`mosaic-sdui`](https://github.com/mosaic-media/mosaic-sdui)** — the interface counterpart of [`mosaic-sdk`](https://github.com/mosaic-media/mosaic-sdk). It holds three things:
 
-- **The schema** — `UINode` (the open node tree), the `Action` envelope, and `ComponentDefinition` — with a Go binding for producers (the Platform, Modules) and a TypeScript binding for the Shell; Dart later.
+- **The schema** — `UINode` (the open node tree), the `Action` envelope, and `ComponentDefinition`, as **one JSON Schema file that is the single source of truth**. The per-language bindings are **generated** from it (Go for producers, TypeScript for the Shell, Dart later) — never hand-written, so the contract cannot drift across languages. A drift guard fails on stale bindings, and conformance tests validate what the producer helpers emit against the schema.
 - **The standard definition library** — `PosterCard`, `HeroBanner`, `Section`, … as `ComponentDefinition` *data*, not per-client code. A client registers them; a producer emits the type; every client renders it identically, the Module shipping **no** UI code. Only the primitives stay per-client native ([ADR 0024](0024-primitives-and-definitions.md)).
 - **The design tokens** — in W3C DTCG format, compiled to the Shell's CSS variables and (later) a Flutter theme.
 
@@ -37,4 +37,4 @@ Licensed **Apache-2.0**, like the SDK — a contract surface must be permissive 
 
 ## Implementation
 
-`mosaic-sdui` carries `schema/` (JSON Schema 2020-12), `sdui/` (the Go producer binding — `Node`/`Action` types that marshal to the exact wire shape, plus ergonomic standard-component builders), `definitions/` (the library as data, seeded from the Shell), `tokens/` (DTCG), and `ts/` (the TypeScript binding). The Go module builds and tests. The next slice wires the Shell to consume the bindings, definitions and tokens — retiring its local copies — and builds the Platform's emit-side against the Go binding.
+`mosaic-sdui` carries `schema/sdui.schema.json` (the source of truth), generated bindings (`sdui/contract/` Go, `ts/contract.gen.ts` TypeScript) with a hand-written ergonomic layer over the Go types (aliases, `Action` constructors, standard-component builders), `definitions/` (the library as data, seeded from the Shell), and `tokens/` (DTCG). `scripts/generate.sh` regenerates via quicktype; `scripts/check-generated.sh` is the drift guard; conformance tests hold the hand-written layer to the schema. The Go module builds and tests. The next slice wires the Shell to consume the generated bindings, definitions and tokens — retiring its local copies — and builds the Platform's emit-side against the Go binding.
