@@ -6,7 +6,9 @@ Derived from the real state of `mosaic-platform`, not from a plan written ahead 
 
 ## Where the build actually is
 
-The Platform boots against real PostgreSQL, serves a GraphQL schema, runs an outbox worker with retry and dead-lettering, resolves secrets, reports component health, shuts down gracefully with a final outbox drain, holds a content-agnostic object graph, and exposes a content command and query API over that graph. That API's surface has been extracted into a standalone SDK module — [`github.com/mosaic-media/mosaic-sdk`](https://github.com/mosaic-media/mosaic-sdk) at `v0.1.0`, holding the models, the nine services, the `ContentService` interface and an opaque `Caller` — which the Platform and the reference capability both depend on as an external module. Every slice passes `go build`, `go vet` and `go test -race` against a real database.
+The Platform boots against real PostgreSQL, serves a GraphQL schema, runs an outbox worker with retry and dead-lettering, resolves secrets, reports component health, shuts down gracefully with a final outbox drain, holds a content-agnostic object graph, and exposes a content command and query API over that graph. That API's surface has been extracted into a standalone SDK module — [`github.com/mosaic-media/mosaic-sdk`](https://github.com/mosaic-media/mosaic-sdk), published at `v0.3.0`, holding the models, the nine services, the `ContentService` interface, the `Capability` interface a module implements, and an opaque `Caller` — which the Platform, the reference capability and the first optional module depend on as an external module. Every slice passes `go build`, `go vet` and `go test -race` against a real database.
+
+The repositories are public and licensed ([ADR 0022](adr/0022-licensing.md)): the Platform under AGPL-3.0 with a module-linking exception, the SDK under Apache-2.0, optional modules under their authors' choice (the first is MIT), and this documentation under CC-BY-4.0.
 
 Two further slices — uniform store resolution and its PostgreSQL follow-up — were built and then reverted under [ADR 0012](adr/0012-capabilities-do-not-own-stores.md), which found they solved a case the architecture had already ruled out.
 
@@ -22,7 +24,7 @@ Everything below is one thread. Nothing else should start until it lands, becaus
 
 The node tree and relation graph, designed in [ADR 0013](adr/0013-object-graph.md), with authority and media linking settled in [ADR 0014](adr/0014-storage-authority-and-transaction-scope.md).
 
-`nodes`, `parts`, `relations` and `source_bindings` shipped with domain types, store contracts, PostgreSQL implementations, the four stores added to `Tx`, and adapter-agnostic contract tests against real PostgreSQL. Identifiers are UUIDv7 in native `uuid` columns; the twenty-five infrastructure tables keep their `text`/UUIDv4 ids and were not migrated. ADR 0013's four deliberate non-uniformities each have a contract test, since each is cheap to normalise away by accident.
+`nodes`, `parts`, `relations` and `source_bindings` shipped with domain types, store contracts, PostgreSQL implementations, the four stores added to `Tx`, and adapter-agnostic contract tests against real PostgreSQL. Identifiers are UUIDv7 in native `uuid` columns; the existing infrastructure tables keep their `text`/UUIDv4 ids and were not migrated. ADR 0013's four deliberate non-uniformities each have a contract test, since each is cheap to normalise away by accident.
 
 This was the real blocker, and it had been mistaken for something else. The reference capability was recorded as blocked on an empty `contracts/platform/v1` and a closed `Tx`; both were symptoms of building the extension mechanism before the thing it extends. A capability now has somewhere to put an anime.
 
@@ -77,11 +79,11 @@ The original plan ([ADR 0015](adr/0015-open-and-closed-vocabularies.md)) had thi
 
 Whether the contracts proven across the completed slices can leave the Platform repository as a standalone SDK a third party can build against. They can, and they have: the surface is now its own module, [`github.com/mosaic-media/mosaic-sdk`](https://github.com/mosaic-media/mosaic-sdk), published at `v0.1.0`.
 
-`contracts/platform/v1` moved out of the Platform repository into the SDK module unchanged, and the Platform now depends on it as an ordinary tagged dependency — no `replace` directive, so a fresh clone resolves it through the module proxy. Three separate modules build against the published SDK: the Platform, the reference capability, and `test/sdkprobe`. The surface holds no private Platform internals, because Go itself now forbids it — an external module cannot import the Platform's `internal/`, so a leak would fail to compile rather than needing a test to catch it.
+`contracts/platform/v1` moved out of the Platform repository into the SDK module unchanged, and the Platform now depends on it as an ordinary tagged dependency — no `replace` directive, so a fresh clone resolves it through the module proxy. Several separate modules build against the published SDK: the Platform, the reference capability, `test/sdkprobe`, and the Stremio module in its own repository. The surface holds no private Platform internals, because Go itself now forbids it — an external module cannot import the Platform's `internal/`, so a leak would fail to compile rather than needing a test to catch it.
 
 **Exit criteria — met.** The surface left the repository as a standalone module, and the Platform and the reference capability build against it as external consumers.
 
-The SDK is versioned `v0.1.0` deliberately: it is pre-1.0 and may still change. The relation-read gap noted in step 3, and any surface a second capability turns out to need, are the kind of change a `v0.x` bump absorbs before the surface is declared stable.
+The SDK is pre-1.0 deliberately (now at `v0.3.0`) and may still change. The relation-read gap noted in step 3, and any surface a second capability turns out to need, are the kind of change a `v0.x` bump absorbs before the surface is declared stable.
 
 ### The stop point — cleared
 
@@ -125,7 +127,7 @@ An **official optional module** is built exactly as a third-party module would b
 
 The reference capability already proved the *authoring* half — a package can be written against the SDK alone and drive `ContentService`. This slice built the *composition and invocation* half, which did not exist:
 
-- **A capability/registration surface in the SDK** (an `v0.2.0` addition). ADR 0008 always reserved "capability interfaces" and "module registration APIs" for the SDK, but ADR 0016 populated only the content services. The shape: a `Capability` interface a module implements — `Manifest()` plus `Import(ctx, ContentService, Caller, query)` — and a minimal `Manifest`.
+- **A capability/registration surface in the SDK** (a `v0.2.0` addition, since evolved to `v0.3.0` — see the settings gap below). ADR 0008 always reserved "capability interfaces" and "module registration APIs" for the SDK, but ADR 0016 populated only the content services. The shape: a `Capability` interface a module implements — `Manifest()` plus `Import(ctx, ContentService, ImportRequest)` — and a minimal `Manifest`.
 - **A capability registry and an `ImportContent` command in the Platform.** The composition root registers each module's capability; a generic `importContent(capabilityId, query)` command authenticates and authorises the caller, then invokes the named capability, forwarding that caller so the module acts as its invoking user ([ADR 0017](adr/0017-how-a-capability-acts.md)) and passing the Platform itself as the `ContentService`.
 - **The GraphQL `importContent` mutation** over that command, so a user triggers an import over the served API.
 - **Static composition** ([ADR 0007](adr/0007-static-go-module-composition.md)): the composition root imports the module and registers it, standing in for the Supervisor's eventual build-time module *selection*. **Not blocked on the Supervisor** — the mechanism of how a module plugs in is what this defines; the Supervisor automating *which* modules is later.
@@ -143,7 +145,7 @@ The reference capability already proved the *authoring* half — a package can b
 - **User-managed module settings — done ([ADR 0021](adr/0021-module-settings.md)).** A user adds a Stremio addon by manifest URL at runtime rather than by an env var at composition time. A Platform-owned `ModuleSettingsStore` (one jsonb document per module id), generic `configureModule`/`moduleSettings` commands and GraphQL, and SDK `v0.3.0` handing a module its settings through `ImportRequest`. Retired the `MOSAIC_STREMIO_ADDONS` bridge.
 - **Module-declared cron/jobs — identified, not built.** A module needs to register recurring work the Platform runs (cleanup, periodic refresh). This converges three deferred pieces at once: the jobs runner (tables exist, no service), a scheduler/recurrence layer (none), and the **system principal** ([ADR 0017](adr/0017-how-a-capability-acts.md)'s named gap — a no-user job has no session to forward). It is the "Background work" thread below, now with a concrete trigger.
 
-**Harden the SDK toward stable (it is `v0.1.0` on purpose), in parallel or alongside:**
+**Harden the SDK toward stable (it is pre-1.0 on purpose, now `v0.3.0`), in parallel or alongside:**
 
 - **The relation-read gap.** `ContentService` can write edges (`RelateContent`) but has no `ListFrom`/`ListTo` to read them, so a capability can't query the graph it builds. Small and additive — a `v0.x` bump. The most self-contained next thing.
 - **A second capability** — a different media type (music, comics), built against the SDK, to stress the surface from a fresh angle and surface what a real second consumer needs before the surface stabilises. Likely forces the relation-read gap and, if it introduces a novel media type, the `media_types` registry.
@@ -160,7 +162,7 @@ The reference capability already proved the *authoring* half — a package can b
 - **Export formats** — NFO for other systems, `.mos` for Mosaic-to-Mosaic portability, generated on demand from authoritative state ([ADR 0014](adr/0014-storage-authority-and-transaction-scope.md)).
 - **Job queue** — the `jobs` tables exist with no service; `SELECT ... FOR UPDATE SKIP LOCKED` is the intended pattern, for import, provider sync and enrichment.
 - **`LISTEN`/`NOTIFY`** — an accelerator over the outbox worker's poll, not a replacement; notifications drop when no listener is connected, so the poll stays the floor.
-- **Shell and SDUI** — the server-driven interface.
+- **Shell and SDUI** — the server-driven interface. **Now underway** in `mosaic-shell`: a React/TypeScript/Vite component library with a first skin — the human-facing surface the Platform has so far lacked, since everything built to date is reachable only through the GraphQL API.
 - **Mosaic Design Language** — acrylic with weight, artwork as the light source.
 
 ---

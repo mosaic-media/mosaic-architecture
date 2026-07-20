@@ -18,7 +18,10 @@ Two constraints bounded the design. A module may import **only** the SDK ([ADR 0
 The SDK (`v0.2.0`) gains the capability side of its contract:
 
 - A `Capability` interface a module implements: `Manifest()` plus
-  `Import(ctx, ContentService, Caller, query) (ImportResult, error)`.
+  `Import(ctx, ContentService, Caller, query) (ImportResult, error)`. (The
+  `Caller` and `query` were folded into an `ImportRequest` struct in `v0.3.0` —
+  [ADR 0021](0021-module-settings.md) — so the interface can grow without
+  breaking again.)
 - A minimal `Manifest` — `ID`, `Version`, `Name`. It starts small and grows
   as the module system needs it (declared permissions, sourced media types);
   those are named future additions, not omissions.

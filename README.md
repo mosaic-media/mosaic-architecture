@@ -2,7 +2,7 @@
 
 A self-hosted media server that covers every format in one place — music, television, film, anime, comics, manga, audiobooks — without requiring the user to run three separate systems, or to become their own IT support.
 
-This repository holds Mosaic's architecture and direction. The implementation lives in [`mosaic-platform`](https://github.com/mosaic-media/mosaic-platform).
+This repository holds Mosaic's architecture and direction. The implementation lives across sibling repositories: the Platform ([`mosaic-platform`](https://github.com/mosaic-media/mosaic-platform)), the published SDK modules build against ([`mosaic-sdk`](https://github.com/mosaic-media/mosaic-sdk)), optional modules in their own repositories (the first is [`mosaic-module-stremio`](https://github.com/mosaic-media/mosaic-module-stremio)), and the Shell (`mosaic-shell`, the server-driven interface, in progress).
 
 ---
 
@@ -17,7 +17,7 @@ Published at **[mosaic-media.github.io/mosaic-architecture](https://mosaic-media
 | **[Roadmap](docs/roadmap.md)** | What is being built next, and what is blocking it |
 | **[Decisions](docs/adr/)** | Architecture decision records |
 
-Three pages and two decision records. That is the whole repository.
+Three pages and a numbered series of decision records. That is the whole repository.
 
 ---
 
@@ -41,7 +41,7 @@ The cause was structural. The repository was serving as both memory across sessi
 
 The full prior corpus is preserved at tag `pre-reset-2026-07-19` and can be recovered in whole or in part at any time.
 
-The `docs/` directory is what remains of it. It is **legacy and not authoritative**. It is being retired as its remaining useful content is absorbed here.
+`docs/` was rebuilt from scratch after the reset. It now holds the current, authoritative documentation — the three pages and the ADRs linked above — and nothing of the old taxonomy remains in it.
 
 ## License
 

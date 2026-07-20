@@ -57,6 +57,7 @@ These were stated directly and are load-bearing.
 | Single PostgreSQL; node tree plus relation graph; links not a store; no DuckDB | Flexibility for new formats without schema change |
 | SDUI | Chosen deliberately as the interface model |
 | Mosaic Design Language — acrylic with weight, artwork as light source | Premium feel; media carries emotional connection |
+| Open source: AGPL-3.0 Platform with a module-linking exception, permissive SDK ([ADR 0022](adr/0022-licensing.md)) | Protect the core from closed-SaaS forks while keeping the module ecosystem open under any license |
 
 ### Inherited from prior sessions — needs confirmation
 
@@ -116,7 +117,7 @@ Add to this table whenever a word starts carrying two meanings. Removing an ambi
 
 ## Settled In Code
 
-The `mosaic-platform` repository has thirteen slices standing, with two more built and then reverted under [ADR 0012](adr/0012-capabilities-do-not-own-stores.md). Where code exists, **the code is authoritative** and this repository does not restate it. Questions the old corpus argued about for chapters are already answered:
+The `mosaic-platform` repository has the full critical path standing — a runnable process, the first optional module and its user-managed settings — with two slices built and then reverted under [ADR 0012](adr/0012-capabilities-do-not-own-stores.md). Where code exists, **the code is authoritative** and this repository does not restate it. Questions the old corpus argued about for chapters are already answered:
 
 | Question | Answer, in code |
 |---|---|

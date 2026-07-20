@@ -58,6 +58,7 @@ nav:
       - 19. Module capability and invocation: adr/0019-module-capability-and-invocation.md
       - 20. Optional-module composition: adr/0020-optional-module-composition.md
       - 21. User-managed module settings: adr/0021-module-settings.md
+      - 22. Licensing: adr/0022-licensing.md
 
 markdown_extensions:
   - admonition
