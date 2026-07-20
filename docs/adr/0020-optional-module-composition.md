@@ -1,0 +1,57 @@
+# 20. Optional-module composition
+
+**Status:** Accepted. Parts are a deliberate bridge until the Supervisor's Build Pipeline exists.
+**Date:** 2026-07-20
+
+## Context
+
+[ADR 0019](0019-module-capability-and-invocation.md) settled how the Platform *invokes* a module. This records how an optional module *gets into the binary* in the first place.
+
+The end state is already decided. [ADR 0007](0007-static-go-module-composition.md) says a module is an ordinary Go library implementing the SDK, and the **Supervisor** resolves selected module manifests and drives a **Build Pipeline** that prepares a temporary workspace, edits a temporary `go.mod`, generates a single `imports.go` of blank imports, and builds a statically linked binary. Each module's `init()` registers it with the SDK registry. None of that machinery exists yet — there is no Supervisor Build Pipeline and no generated `imports.go`.
+
+Something has to compose the first optional module now, without inventing the Build Pipeline ahead of the Supervisor. The question is what shape that takes, and how to keep it honest about being a bridge.
+
+An **official optional module** — authored by the Mosaic team but built exactly as a third party would build one — is the vehicle. "Official" describes only its authorship, not its shape; building it the third-party way is what proves the third-party way exists.
+
+## Decision
+
+**An optional module is its own Go module outside `internal/`, importing only the SDK, statically composed into the binary by explicit registration in the composition root.**
+
+- **Its own Go module, outside `internal/`.** The Stremio module lives at
+  `modules/stremio/` with module path
+  `github.com/mosaic-media/mosaic-module-stremio`, importing only the SDK —
+  enforced by a boundary test and, because it is a separate module, by Go
+  itself (an external module cannot import another module's `internal/`).
+- **Explicit registration in the composition root.** `main.go` constructs the
+  module and registers its `Capability` into the `app.CapabilityRegistry`
+  ([ADR 0019](0019-module-capability-and-invocation.md)). The Platform reaches
+  an in-repo module through a `replace => ./modules/stremio` directive, so a
+  fresh clone still builds.
+- **This explicit registration is a bridge.** It stands in for [ADR 0007](0007-static-go-module-composition.md)'s Build-Pipeline-generated `imports.go` and `init()`-based selection, exactly as `EnsureAdmin` ([ADR 0018](0018-first-admin-bootstrap.md)) bridges Supervisor onboarding. The *mechanism* of how a module plugs in is what this defines; the Supervisor automating *which* modules is later.
+
+This fixes three package kinds that are easy to confuse:
+
+| Location | Kind | Trust / shape |
+|---|---|---|
+| `internal/modules/` | Built-in module (e.g. Postgres) | Compiled-in, required, fully trusted; not independently versioned |
+| `modules/` | Optional external-shaped module (e.g. Stremio) | Its own Go module, SDK-only, optional, invoked through the registry |
+| `capabilities/reference/` | A package *inside* the Platform module | The authoring/boundary proof, not its own module |
+
+## Alternatives considered
+
+**Put the module under `internal/`.** *Rejected:* it could not be its own Go module, and "imports only the SDK" could not be proven from inside the Platform module — the whole point is to build it the way a third party must.
+
+**Build the Supervisor Build Pipeline now.** *Rejected:* it is premature and Supervisor-scoped ([ADR 0004](0004-supervisor-as-host-manager.md), [ADR 0006](0006-supervisor-orchestrates-isolated-builds.md)). Defining the plug-in mechanism does not require automating module selection.
+
+**Runtime plugin loading.** *Rejected* by [ADR 0007](0007-static-go-module-composition.md).
+
+## Consequences
+
+The composition-and-invocation path is real and, for in-repo modules, reproducible: the `replace => ./modules/stremio` is in-repo, so a fresh clone builds it. A module is only active when configured (the Stremio module registers only when `MOSAIC_STREMIO_ADDONS` is set), which keeps an unconfigured module from presenting a capability that can source nothing.
+
+Two honest debts remain, both bridges rather than the end state:
+
+1. **The Platform temporarily depends on the module directly.** [ADR 0008](0008-sdk-as-public-contract-language.md) says the Platform must not depend on modules; in the end state the Build Pipeline imports selected modules into a *temporary* workspace, not the Platform's own `go.mod`. Until that pipeline exists, the composition root importing the module is the stand-in.
+2. **The SDK is reached by a local `replace` until `v0.2.0` is published.** The `Capability` surface ([ADR 0019](0019-module-capability-and-invocation.md)) is committed in `../mosaic-sdk` but not yet tagged/pushed, so both the Platform and the module carry `replace github.com/mosaic-media/mosaic-sdk => ../mosaic-sdk`. Publishing means tagging `v0.2.0`, pushing the SDK, and dropping those replaces — deferred until the owner pushes. A fresh clone therefore needs the sibling SDK working tree until then.
+
+When the Supervisor's Build Pipeline lands, it replaces the explicit registration and the direct dependency with generated `imports.go` and `init()` registration; this ADR's registration path is the seam it slots into.

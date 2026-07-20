@@ -10,7 +10,7 @@ The Platform boots against real PostgreSQL, serves a GraphQL schema, runs an out
 
 Two further slices — uniform store resolution and its PostgreSQL follow-up — were built and then reverted under [ADR 0012](adr/0012-capabilities-do-not-own-stores.md), which found they solved a case the architecture had already ruled out.
 
-The content model, its published surface, a capability that uses only that surface, and the surface's extraction into a standalone SDK module have all landed — **the thesis test passes and the critical path is complete.** What follows (media formats, module distribution, the Shell) builds on a foundation that is proven rather than assumed.
+The content model, its published surface, a capability that uses only that surface, and the surface's extraction into a standalone SDK module have all landed — **the thesis test passes and the critical path is complete.** Since then the first optional module (the **Stremio** addon source) has been composed into the binary and invoked through a capability registry, so the composition-and-invocation half of the extension story works too ([ADR 0019](adr/0019-module-capability-and-invocation.md), [ADR 0020](adr/0020-optional-module-composition.md)). What follows (a second module, media formats, module distribution, the Shell) builds on a foundation that is proven rather than assumed.
 
 ---
 
@@ -117,13 +117,13 @@ Before the foundation is considered ready for SDK extraction:
 
 ## What is next
 
-The critical path is complete and the platform runs. The **chosen next slice is the first official optional module** — it is the honest end-to-end test of the extension story and it drives the module-system design. The other threads below run around it.
+The critical path is complete and the platform runs. The first optional module has since landed (below); the remaining threads run around it.
 
-### The next slice: an official optional module
+### The first optional module — **done**
 
-An **official optional module** is built exactly as a third-party module would be — its own Go module, importing only the SDK and nothing of the Platform's, compiled into the binary and invoked by the Platform. "Official" describes only its authorship (the Mosaic team), not its shape; the discipline is the point, because building it the third-party way is what proves the third-party way exists. The first one is an **Anime module**: source anime metadata from a provider and add it to the library.
+An **official optional module** is built exactly as a third-party module would be — its own Go module, importing only the SDK and nothing of the Platform's, compiled into the binary and invoked by the Platform. "Official" describes only its authorship (the Mosaic team), not its shape; the discipline is the point, because building it the third-party way is what proves the third-party way exists. It shipped as the **Stremio addon-source module** (movies and TV), not the anime module first sketched here — because the reference capability is *already* an anime importer, so a second anime consumer would only re-walk the same shape, whereas a different media type stresses the surface from a fresh angle and is the first thing to exercise [ADR 0014](adr/0014-storage-authority-and-transaction-scope.md)'s `RemoteLocation` Part path.
 
-The reference capability already proved the *authoring* half — a package can be written against the SDK alone and drive `ContentService`. This slice builds the *composition and invocation* half, which does not exist yet:
+The reference capability already proved the *authoring* half — a package can be written against the SDK alone and drive `ContentService`. This slice built the *composition and invocation* half, which did not exist:
 
 - **A capability/registration surface in the SDK** (an `v0.2.0` addition). ADR 0008 always reserved "capability interfaces" and "module registration APIs" for the SDK, but ADR 0016 populated only the content services. The shape: a `Capability` interface a module implements — `Manifest()` plus `Import(ctx, ContentService, Caller, query)` — and a minimal `Manifest`.
 - **A capability registry and an `ImportContent` command in the Platform.** The composition root registers each module's capability; a generic `importContent(capabilityId, query)` command authenticates and authorises the caller, then invokes the named capability, forwarding that caller so the module acts as its invoking user ([ADR 0017](adr/0017-how-a-capability-acts.md)) and passing the Platform itself as the `ContentService`.
@@ -132,9 +132,11 @@ The reference capability already proved the *authoring* half — a package can b
 
 **Approach: a walking skeleton.** Build the thinnest real vertical end to end — SDK surface → a separate module → static composition → one invocation → real content in PostgreSQL — deciding shapes in code, then capturing what solidifies as ADRs (the module capability/invocation contract, and the composition model), written retrospectively once the code settles rather than as an RFC first.
 
-**Invocation model decided:** the Platform invokes a *registered capability*. The module depends only on the SDK; the Platform owns the invocation surface and routes to it. The alternative — a module contributing its own GraphQL — was rejected because a third party can't import the Platform's transport without breaking the SDK-only boundary.
+**Invocation model:** the Platform invokes a *registered capability*. The module depends only on the SDK; the Platform owns the invocation surface and routes to it. The alternative — a module contributing its own GraphQL — was rejected because a third party can't import the Platform's transport without breaking the SDK-only boundary. Captured in [ADR 0019](adr/0019-module-capability-and-invocation.md) and [ADR 0020](adr/0020-optional-module-composition.md), written after the code settled.
 
-**Deliberately still deferred by this slice:** the full manifest shape (starts minimal, grows), the `media_types` registry (the Anime module uses known media types), and module-granular permissions (it acts with the invoking user's authority). Those remain future work below.
+**Resource-aware, so streams do not gate metadata.** The module uses whatever resources each configured addon declares (Stremio's `meta`, `stream`, …). Metadata creates the Work and its season/episode tree with an external-id binding; streams attach a `RemoteLocation` Part. The two are independent — a meta-only addon yields metadata with *no* Parts, so a user can enrich local media through Stremio addons without adopting remote streaming.
+
+**Deliberately still deferred by this slice:** the full manifest shape (starts minimal, grows), the `media_types` registry (the Stremio module uses known media types), module-granular permissions (it acts with the invoking user's authority), and play-time stream *resolution*/transcoding (the future Remote Media module — the Stremio module only snapshots a stream location). Those remain future work below.
 
 **Harden the SDK toward stable (it is `v0.1.0` on purpose), in parallel or alongside:**
 
