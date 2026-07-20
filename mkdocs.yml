@@ -72,6 +72,7 @@ nav:
       - 31. The Shell is a pure renderer: adr/0031-server-owned-app-shell.md
       - 32. The live session over a WebSocket: adr/0032-live-session-websocket.md
       - 33. Supervisor-driven live handover: adr/0033-supervisor-driven-live-handover.md
+      - 34. Rich metadata preview: adr/0034-rich-metadata-preview.md
 
 markdown_extensions:
   - admonition
