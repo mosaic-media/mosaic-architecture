@@ -1,0 +1,11 @@
+/* Theme-aware Mosaic logo: swap the header/nav mark to match the colour scheme.
+   theme.logo (mkdocs.yml) sets the dark-scheme default; this overrides it for the
+   light scheme. The content:url() trick replaces the <img> per scheme. */
+
+[data-md-color-scheme="default"] .md-logo img {
+  content: url("../assets/mosaic-icon-light.png");
+}
+
+[data-md-color-scheme="slate"] .md-logo img {
+  content: url("../assets/mosaic-icon-dark.png");
+}
