@@ -139,7 +139,9 @@ Two decisions answer this, written ahead of the build (unusually) and now **Acce
 
    **Verified end to end in a browser** against real PostgreSQL and the live Cinemeta + Torrentio addons: search returns virtual results with posters, a virtual result opens a metadata preview, *Add to library* materialises a Work + feature item + imdb source binding + a Torrentio magnet `RemoteLocation` part, and the item then reads *In library* on the next search. The `importContent`-returns-a-scalar half of the ABI was found this way — every Add-to-library click failed until it was fixed.
 
-   **Known gaps, deferred:** the `SearchBar`'s `$value` client-side input binding and `Query`-into-region partial refresh (the search chrome drives full-screen re-fetch for now); a real detail screen's playback/parts; and the Mosaic Design Language skin over the Shell's neutral tokens.
+   **Artwork** is proxied through the Platform's own origin ([ADR 0030](adr/0030-artwork-proxy-and-cache.md)) so a CORS-less CDN can no longer break the image or the artlight wash, and the viewer's IP never reaches the CDN. Slice 1 (the proxy) is built and verified live; the durable filesystem cache of a materialised item's chosen art, and picking the best of several artwork candidates, are slice 2.
+
+   **Known gaps, deferred:** the `SearchBar`'s `$value` client-side input binding and `Query`-into-region partial refresh (the search chrome drives full-screen re-fetch for now); the artwork durable cache + candidate selection ([ADR 0030](adr/0030-artwork-proxy-and-cache.md) slice 2); a Shell loading-state race if a search is issued *during* the boot sign-in (harmless on a settled page); a real detail screen's playback/parts; and the Mosaic Design Language skin over the Shell's neutral tokens.
 
 **Two seams left open on purpose** (named, not answered — an agent hitting them should stop and decide, not invent):
 

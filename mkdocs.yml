@@ -68,6 +68,7 @@ nav:
       - 27. Modules as typed capability providers: adr/0027-modules-as-typed-capability-providers.md
       - 28. Virtual browse and materialized library: adr/0028-virtual-and-materialized-content.md
       - 29. The Platform's SDUI emit-side: adr/0029-sdui-emit-side.md
+      - 30. The artwork proxy (and cache): adr/0030-artwork-proxy-and-cache.md
 
 markdown_extensions:
   - admonition
