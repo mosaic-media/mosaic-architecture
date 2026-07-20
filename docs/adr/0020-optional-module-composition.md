@@ -17,16 +17,18 @@ An **official optional module** — authored by the Mosaic team but built exactl
 
 **An optional module is its own Go module outside `internal/`, importing only the SDK, statically composed into the binary by explicit registration in the composition root.**
 
-- **Its own Go module, outside `internal/`.** The Stremio module lives at
-  `modules/stremio/` with module path
-  `github.com/mosaic-media/mosaic-module-stremio`, importing only the SDK —
-  enforced by a boundary test and, because it is a separate module, by Go
-  itself (an external module cannot import another module's `internal/`).
+- **Its own Go module, its own repository.** The Stremio module is
+  [`mosaic-module-stremio`](https://github.com/mosaic-media/mosaic-module-stremio),
+  module path `github.com/mosaic-media/mosaic-module-stremio`, importing only
+  the SDK — enforced by a boundary test and, because it is a separate module, by
+  Go itself (an external module cannot import another module's `internal/`). It
+  began nested at `modules/stremio/` while the composition shape settled, then
+  moved to its own repository as a third-party module would be.
 - **Explicit registration in the composition root.** `main.go` constructs the
   module and registers its `Capability` into the `app.CapabilityRegistry`
   ([ADR 0019](0019-module-capability-and-invocation.md)). The Platform reaches
-  an in-repo module through a `replace => ./modules/stremio` directive, so a
-  fresh clone still builds.
+  the module through a `replace => ../mosaic-module-stremio` directive (a local
+  dev bridge until the module is tagged and pushed).
 - **This explicit registration is a bridge.** It stands in for [ADR 0007](0007-static-go-module-composition.md)'s Build-Pipeline-generated `imports.go` and `init()`-based selection, exactly as `EnsureAdmin` ([ADR 0018](0018-first-admin-bootstrap.md)) bridges Supervisor onboarding. The *mechanism* of how a module plugs in is what this defines; the Supervisor automating *which* modules is later.
 
 This fixes three package kinds that are easy to confuse:
@@ -47,11 +49,11 @@ This fixes three package kinds that are easy to confuse:
 
 ## Consequences
 
-The composition-and-invocation path is real and, for in-repo modules, reproducible: the `replace => ./modules/stremio` is in-repo, so a fresh clone builds it. A module is only active when configured (the Stremio module registers only when `MOSAIC_STREMIO_ADDONS` is set), which keeps an unconfigured module from presenting a capability that can source nothing.
+The composition-and-invocation path is real: the Platform requires the module and reaches it through `replace => ../mosaic-module-stremio` until the module is tagged and pushed. The module is always registered; the addons it sources from are user-managed settings set at runtime ([ADR 0021](0021-module-settings.md)), not composition-time config — so the module is available even before any addon is configured. (An earlier cut gated registration on a `MOSAIC_STREMIO_ADDONS` env var; ADR 0021 retired it.)
 
 Two honest debts remain, both bridges rather than the end state:
 
 1. **The Platform temporarily depends on the module directly.** [ADR 0008](0008-sdk-as-public-contract-language.md) says the Platform must not depend on modules; in the end state the Build Pipeline imports selected modules into a *temporary* workspace, not the Platform's own `go.mod`. Until that pipeline exists, the composition root importing the module is the stand-in.
-2. **The SDK is reached by a local `replace` until `v0.2.0` is published.** The `Capability` surface ([ADR 0019](0019-module-capability-and-invocation.md)) is committed in `../mosaic-sdk` but not yet tagged/pushed, so both the Platform and the module carry `replace github.com/mosaic-media/mosaic-sdk => ../mosaic-sdk`. Publishing means tagging `v0.2.0`, pushing the SDK, and dropping those replaces — deferred until the owner pushes. A fresh clone therefore needs the sibling SDK working tree until then.
+2. **The SDK is reached by a local `replace` until it is published.** The `Capability` surface ([ADR 0019](0019-module-capability-and-invocation.md)) and the settings addition ([ADR 0021](0021-module-settings.md)) are committed in `../mosaic-sdk` at `v0.3.0` but not yet tagged/pushed, so the Platform and the module both carry `replace github.com/mosaic-media/mosaic-sdk => ../mosaic-sdk`. Publishing means tagging `v0.3.0`, pushing the SDK, and dropping those replaces — deferred until the owner pushes. Fresh clones therefore need the sibling SDK working tree until then.
 
 When the Supervisor's Build Pipeline lands, it replaces the explicit registration and the direct dependency with generated `imports.go` and `init()` registration; this ADR's registration path is the seam it slots into.
