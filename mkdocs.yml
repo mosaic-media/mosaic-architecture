@@ -77,6 +77,7 @@ nav:
       - 36. Capability-gated affordances: adr/0036-capability-gated-affordances.md
       - 37. Completing the Stremio source surface: adr/0037-completing-the-stremio-source-surface.md
       - 38. Module-contributed settings UI: adr/0038-module-contributed-settings-ui.md
+      - 39. Server-owned navigation: adr/0039-server-owned-navigation.md
 
 markdown_extensions:
   - admonition
