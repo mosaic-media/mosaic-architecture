@@ -70,6 +70,14 @@ scrubbing pipeline.**
   every level, and no expert-mode toggle or debug level reveals it. A resolved
   Secret Broker value must never reach any other constructor, and the fail-closed
   default means a mistake there is a redaction rather than a disclosure.
+- **The vocabulary crosses both boundaries it has to.** The SDK mirrors these
+  four classes so a module classifies its own values
+  ([ADR 0059](0059-modules-observe-through-the-sdk.md)), and the Supervisor uses
+  the same ones so one reader parses both processes' records
+  ([ADR 0060](0060-the-supervisor-observes-independently.md)). A containment
+  property that stops at a repository boundary is not a containment property —
+  third-party module code is exactly where an unclassified value is most likely
+  to originate, and it is text an administrator's browser will render.
 
 ## Alternatives considered
 

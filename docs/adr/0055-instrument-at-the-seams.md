@@ -56,9 +56,13 @@ The nine seams:
    span above.
 7. **The outbox worker loop** — a span per drain, with the per-event links
    described in [ADR 0054](0054-the-correlation-id-is-the-trace-id.md).
-8. **Capability invocation** — the module boundary. `CapabilityRegistry`'s
-   invocation path is **wrapped, not edited inline**: a decorator around the
-   `Capability` the registry holds. Modules are statically composed today
+8. **Capability invocation** — the module boundary, and the seam that does the
+   most work. `CapabilityRegistry`'s invocation path is **wrapped, not edited
+   inline**: a decorator around the `Capability` the registry holds. It spans the
+   invocation, and it is also where the module's own telemetry surface
+   ([ADR 0059](0059-modules-observe-through-the-sdk.md)) is seeded into the
+   context, where module attribution is stamped so a module cannot forge it, and
+   where per-module quota is applied. Modules are statically composed today
    ([ADR 0007](0007-static-go-module-composition.md)) and moving them out of
    process over a socket is exploratory; if that happens, the decorator is
    replaced by a gRPC interceptor at the same seam rather than duplicated beside

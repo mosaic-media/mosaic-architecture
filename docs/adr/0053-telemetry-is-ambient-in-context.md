@@ -109,7 +109,13 @@ OTel API. They share the redaction vocabulary and nothing else.
   a formatting choice at one sink, not a second logging path.
 - **One import of the OTel API lands in the Platform tier.** It is Apache-2.0,
   stable at v1, and API-only, so it constrains nothing about which backend is
-  used or whether one exists at all.
+  used or whether one exists at all. It stops at the Platform: the SDK declares
+  its own dependency-free surface for modules
+  ([ADR 0059](0059-modules-observe-through-the-sdk.md)) rather than re-exporting
+  this one, so an implementation choice here never becomes a published contract.
+- **The same ambient shape is what the module surface adopts.** `TelemetryFrom(ctx)`
+  in the SDK is this decision applied across the module boundary, which is what
+  lets one pattern cover eight entry points there and every call site here.
 
 ## Implementation implications
 

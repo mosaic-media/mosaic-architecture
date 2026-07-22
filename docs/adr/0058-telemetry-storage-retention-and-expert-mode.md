@@ -157,12 +157,14 @@ operator and a real obstacle to an illegitimate one.
   screen, so a future Flutter client gets the diagnostics surface without
   additional work — which is the same argument that put content screens on the
   emit-side ([ADR 0029](0029-sdui-emit-side.md)).
-- **The Supervisor is not accounted for here.** It is largely unbuilt
-  ([ADR 0004](0004-supervisor-as-host-manager.md)–[ADR 0007](0007-static-go-module-composition.md)),
-  and when it exists it is the natural owner of cross-process collection. The
-  design accommodates it — process identity is already a resource attribute on
-  every signal ([ADR 0053](0053-telemetry-is-ambient-in-context.md)) — but
-  nothing here waits on it.
+- **The Supervisor observes itself, separately** ([ADR 0060](0060-the-supervisor-observes-independently.md)).
+  Neither sink here covers a Platform that never starts, because both live inside
+  it. The Supervisor keeps its own file-only telemetry for that case and merges
+  into this surface when the Platform is up; the Platform never depends on it.
+- **Module records land in these sinks too** ([ADR 0059](0059-modules-observe-through-the-sdk.md)),
+  attributed and quota-bounded by the Platform. The viewer must render
+  module-supplied text as untrusted content, since it originates outside the
+  trust boundary.
 
 ## Implementation implications
 
