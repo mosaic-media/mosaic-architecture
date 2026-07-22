@@ -38,6 +38,7 @@ nav:
   - Mosaic: index.md
   - Architecture: architecture.md
   - Roadmap: roadmap.md
+  - Unreachable capability: unreachable-capability.md
   - Decisions:
       - 1. Transactional store extensibility: adr/0001-transactional-store-extensibility.md
       - 2. Module storage and delivery: adr/0002-module-storage-and-delivery-model.md

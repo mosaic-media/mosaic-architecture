@@ -145,13 +145,23 @@ reporting GraphQL handles worst.
   replacement signs in over `AuthService`, then subscribes and navigates over
   `SessionService`, asserting the pushed content region. It proves the same
   stack through the only transport there now is.
-- **Some Platform capability is genuinely unreachable from a client**, and the
-  roadmap must say so: creating roles, granting them, drafting/activating config
-  versions, and setting user status have application services, policy actions and
-  tests, but nothing a user can press. That was already true — a GraphQL mutation
-  with no UI is not a feature — but it was easy to mistake the schema for a
-  surface. `bootstrap.EnsureAdmin` remains the only in-band way to establish the
-  first authority.
+- **Some Platform capability is genuinely unreachable from a client**: creating
+  roles, granting them, drafting/activating config versions, and setting user
+  status have application services, policy actions and tests, but nothing a user
+  can press. That was already true — a GraphQL mutation with no UI is not a
+  feature — but it was easy to mistake the schema for a surface.
+  `bootstrap.EnsureAdmin` remains the only in-band way to establish the first
+  authority.
+- **The gap gets a register rather than a sentence.** Deleting a surface makes
+  its absence invisible: the application services keep their tests, so the build
+  stays green and the roadmap keeps saying "done". [Unreachable
+  capability](../unreachable-capability.md) enumerates every affected operation,
+  classifies it (owed / migrated / never worked), and states what discharging it
+  requires. Enumerating the deleted schema to write it surfaced a case this ADR
+  did not cause and would otherwise have missed: `app.CreateLocalUser` is a
+  complete, well-tested command that **no transport has ever exposed**, so Mosaic
+  has never had a way to create a second user. Adding a row to that register is
+  now part of removing a client path.
 
 ## Implementation implications
 
