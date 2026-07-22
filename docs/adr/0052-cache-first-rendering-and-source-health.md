@@ -76,13 +76,24 @@ unreachable.**
 - **"No results" and "the source failed" must never render the same.** They are
   different states and only one of them is the user's to act on. A failed fetch
   is logged, counted, and rendered as a failure — never as an empty library.
-- **A source that stays unreachable gets a persistent notification, not a
-  toast.** A toast is transient by design ([ADR 0041](0041-cross-client-transport-two-lane-rpc.md)
-  carries them for exactly that): it is right for "import finished" and wrong
-  for a condition that is still true a minute later. After repeated failures the
-  Platform pushes a standing indicator into a shell region, and clears it when a
-  source answers again. Degraded-but-working is a state the interface should
-  hold, not announce once and forget.
+- **A source that stays unreachable gets a persistent notification.** A toast is
+  transient by design ([ADR 0041](0041-cross-client-transport-two-lane-rpc.md)
+  carries them for exactly that): right for "import finished", wrong for a
+  condition still true a minute later. Degraded-but-working is a state the
+  interface should hold, not announce once and forget.
+- **One notification surface, two lifetimes — not two surfaces.** A persistent
+  notice appears exactly where a toast does and shares its stack: new arrivals
+  enter at the bottom and push anything still standing upward. What differs is
+  only *when it leaves* — a toast expires on a timer, a notice stays until the
+  user dismisses it or the Platform clears it because the condition resolved.
+  Giving a lasting condition its own region would put two competing places to
+  look for "something is wrong", and the one that appears less often is the one
+  people stop checking.
+- **A notice is therefore identified, not just displayed.** A toast can be
+  fire-and-forget because it removes itself; a notice the server must later
+  retract cannot. It carries an id so a repeat failure updates the standing
+  notice rather than stacking a fifth copy of it, and so recovery can clear the
+  exact one it fixed.
 - **Staleness is shown, not hidden.** A snapshot rendered while revalidation is
   in flight reuses the pending indicator; a snapshot being served *because*
   revalidation failed says so, with its age. A two-day-old home screen beats an
