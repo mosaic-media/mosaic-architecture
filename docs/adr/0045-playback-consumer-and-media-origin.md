@@ -142,8 +142,11 @@ consequences worth recording plainly:
   `io.ReadSeekCloser`, and an ffmpeg pipe has neither an index nor a length. The
   remux path therefore answers `200` and never `206`, and reports
   `Accept-Ranges: none` rather than claiming ranges it cannot serve. **A remuxed
-  stream cannot be seeked**; making it seekable means HLS segmenting or
-  restarting the encoder at an offset, both later slices.
+  stream cannot be seeked** — and that is why the pipe is the wrong output.
+  [ADR 0050](0050-probing-and-the-per-stream-playback-decision.md) replaces it
+  with HLS, where a seek is a segment request; this caveat expires with the
+  fragmented-MP4-down-a-pipe path it describes. A pure copy of every stream still
+  relays progressively and keeps byte-range seeking for free.
 - **The origin is the natural home for recovery too.** Because it fetches
   upstream before writing anything to the response, it can re-resolve a dead
   link and continue without the client noticing

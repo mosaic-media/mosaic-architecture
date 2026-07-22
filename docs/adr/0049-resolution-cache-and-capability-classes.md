@@ -52,6 +52,12 @@ class that needed them; invalidate on failure rather than on a clock.**
   ([ADR 0014](0014-storage-authority-and-transaction-scope.md)'s single
   source-selection path), and this is that use. Candidates never expire, so
   storing all of them costs nothing to keep correct.
+- **Probe results join the durable tier.** What a release actually *is* —
+  container, video codec, every audio track — describes the bytes rather than the
+  viewer or the moment, so it persists on the Part beside the candidate and is
+  never re-derived ([ADR 0050](0050-probing-and-the-per-stream-playback-decision.md)).
+  A re-resolved URL for the same release does not re-probe: the link changed, the
+  file did not.
 - **A capability class, not a device and not a user.** A client declares its
   profile on `Attach` ([ADR 0047](0047-player-as-client-primitive.md)); the
   Platform reduces that declaration to a **class** — a stable digest of the

@@ -66,21 +66,27 @@ container mismatch. Transcoding is deferred, not designed around.**
 - **Profiles reduce to a class.** Two clients declaring the same containers and
   codecs are one class, so caching and precomputation do not fragment per device
   or per person (ADR 0049).
-- **Needing a remux is a ranking cost, not just a flag.** A candidate that must
-  be piped through ffmpeg starts a second or two later than one that direct-plays
-  and cannot be seeked at all, so an acceptable-quality MP4 should outrank a
-  marginally better Matroska. Compatibility decides what is *possible*; this
-  decides what is *pleasant*.
+- **Needing work is a ranking cost, not just a flag.** A candidate that must go
+  through ffmpeg starts later than one that direct-plays, so an acceptable-quality
+  MP4 should outrank a marginally better Matroska. Compatibility decides what is
+  *possible*; this decides what is *pleasant*. **Refined by
+  [ADR 0050](0050-probing-and-the-per-stream-playback-decision.md):** the cost is
+  not one number. Copy-everything beats an audio-only encode, which beats a video
+  encode; "remux or transcode" was too coarse an axis, and the per-stream plan is
+  what ranking should actually price.
 - **`StreamLink` grows the technical fields selection needs** — container, video
   codec, audio codec — completing what ADR 0037 started when it added quality,
   size and seeders "so a future source-picker can rank and display candidates".
   Parsing is best-effort from release text and `behaviorHints`, exactly as the
   existing fields are, and a source that reports nothing leaves them zero.
-- **A container probe backs up the parse.** Release-name text lies, and an
-  unparsed candidate is not the same as an incompatible one. A single ranged read
-  of the first bytes identifies the container from its magic number — `1A 45 DF A3`
-  for Matroska, `ftyp` for MP4 — which is cheap, decisive, and only needed for
-  the few candidates that reach the top of the ranking.
+- **A probe confirms the winner.** Release-name text lies, and an unparsed
+  candidate is not the same as an incompatible one. **Superseded by
+  [ADR 0050](0050-probing-and-the-per-stream-playback-decision.md):** a
+  magic-number read identifies only the container, and it was the audio codec
+  that usually decided playability. ffprobe against the resolved URL answers the
+  whole question — container, video codec, every audio track — and its results
+  persist on the Part. The parse still ranks the list; the probe settles the one
+  about to play.
 - **No playable candidate is an honest, specific failure**, not a silent one:
   the count of releases found and the reason each was rejected, rendered as a
   real state rather than a spinner that never resolves.
@@ -123,12 +129,14 @@ subsystem, session lifecycle and hardware-acceleration story to reach a result
 that is usually already in the candidate list. Selection first, transcoding when
 selection demonstrably runs out.
 
-**Stream-copy remux (MKV → fMP4) without re-encoding.** *Deferred, and the most
-likely next step.* It is dramatically cheaper than transcoding — no re-encode,
-near-zero CPU — and it converts the large population of h264/AAC-in-MKV releases
-that selection must currently reject. It is the obvious follow-on once the
-selection data shows how often selection fails, and that ordering matters: the
-selection metrics are what justify building it.
+**Stream-copy remux (MKV → fMP4) without re-encoding.** *Built, then superseded
+in shape by [ADR 0050](0050-probing-and-the-per-stream-playback-decision.md).*
+It shipped and it is genuinely cheap, but two of its premises were wrong. It
+answered only the container, so an h264+AC3 release became a playable container
+with undecodable audio — the per-stream decision (copy the video, encode only the
+audio) is what actually plays it. And fragmented MP4 down a pipe cannot be
+seeked, which HLS output fixes. The cheapness was real; the framing was too
+coarse.
 
 **Pick at import and store the choice.** *Rejected.* It bakes one client's
 profile into shared library state, so a browser's limitation would degrade
@@ -194,8 +202,9 @@ can grow when something needs it.
 
 ## Implementation implications
 
-SDK: container, video-codec and audio-codec fields on `StreamLink`; the client
-capability profile on the session `Attach`
+SDK: container, video-codec and audio-codec fields on `StreamLink`, filled by the
+module's dialect translation ([ADR 0051](0051-modules-as-anti-corruption-layers.md));
+the client capability profile on the session `Attach`
 ([ADR 0047](0047-player-as-client-primitive.md)). Module: extend
 `parseStreamMeta` to decode container and codecs from release text and
 `behaviorHints.filename`. Platform: candidate gathering, profile filtering and
