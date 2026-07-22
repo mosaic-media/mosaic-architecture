@@ -48,11 +48,19 @@ an integration, not merely that the repo belongs to Mosaic.**
 |---|---|---|
 | **Core / contracts** | bare name | `platform`, `sdk`, `sdui`, `architecture` |
 | **Modules** — inbound, Mosaic consumes an upstream (ACL) | `module-<system>` | `module-stremio-addons` |
+| **Consumer modules** — act on the materialised library rather than sourcing from an upstream | `module-<capability>` | `module-remote-playback` ([ADR 0045](0045-playback-consumer-and-media-origin.md)) |
 | **Gateways** — outbound, Mosaic hosts a foreign protocol for downstream clients (facade) | `gateway-<system>` | *reserved — none built; e.g. a future `gateway-jellyfin`* |
 | **Clients** — web / native | target name, not framework name | `web` ([ADR 0042](0042-frontend-workspace.md)); future `ios`, `android` |
 
-Three points of the scheme are load-bearing:
+Four points of the scheme are load-bearing:
 
+- **A consumer module names its *capability*, because it has no upstream.**
+  [ADR 0036](0036-capability-gated-affordances.md)'s consumer roles act on the
+  materialised library rather than pulling a system in, so `<system>` has nothing
+  to fill it. `module-remote-playback` names what it does. It keeps the `module-`
+  prefix because it is a Module in the [ADR 0007](0007-static-go-module-composition.md)
+  sense — compiled in, SDK-only, independently versioned — and the prefix marks
+  that shape, not the direction.
 - **`module-<system>` names the *foreign system*, precisely.** The Stremio repo
   is `module-stremio-addons`, not `module-stremio`, because it is specifically a
   client of the Stremio **addon protocol** — not the Stremio SDK, not the

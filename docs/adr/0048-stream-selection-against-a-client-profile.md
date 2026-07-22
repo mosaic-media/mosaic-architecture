@@ -1,0 +1,190 @@
+# 48. Stream selection against a client profile
+
+**Status:** Proposed
+**Date:** 2026-07-22
+
+## Context
+
+[ADR 0045](0045-playback-consumer-and-media-origin.md) resolves a Part to bytes
+and [ADR 0047](0047-player-as-client-primitive.md) plays them. Neither answers
+the question that decides whether playback actually *works*: **the bytes a source
+offers are frequently ones the client cannot decode.**
+
+The constraint is sharper than it first looks. A browser plays media through
+Media Source Extensions, and MSE accepts only fragmented MP4 and WebM —
+**Matroska cannot pass through it at all**, whatever codec sits inside. So a
+1080p h264 release in an MKV container is as unplayable in a browser as an HEVC
+one. Codec support then narrows it further: Chrome will not decode AC3 or EAC3
+audio, and HEVC support varies by platform and build.
+
+The conventional answer is a transcoder. Jellyfin does it, and so does
+[remux](https://github.com/lostb1t/remux), whose `playback/decision.rs` reads a
+client `DeviceProfile`, calls `check_direct_play`, and falls back to building an
+HLS transcode URL. It is the correct answer for a server whose library is *one
+file per item* — when there is exactly one set of bytes, making them playable is
+the only move available.
+
+**Mosaic's situation is different, and the difference is the whole of this
+decision.** A Stremio addon — an aggregator like AIOStreams especially — returns
+*many* streams for one item: different releases, containers, codecs, audio
+tracks, qualities, from many scrapers at once. The library is not one file per
+item; it is a menu. When the menu contains an h264/AAC MP4 alongside twenty
+HEVC/EAC3 MKVs, transcoding the MKV is doing expensive work to reach a result
+that was already sitting in the list.
+
+## Decision
+
+**A client declares its capabilities; the Platform selects the stream that
+client can play. Selection, not transcoding, is the primary answer to codec and
+container mismatch. Transcoding is deferred, not designed around.**
+
+- **The client declares a capability profile on `Attach`**
+  ([ADR 0047](0047-player-as-client-primitive.md)) — containers, video codecs and
+  audio codecs it can decode. The web client does not hand-maintain this: Shaka
+  Player's static support probe reports what the browser actually supports, so
+  the profile is measured rather than assumed, and a browser-version quirk does
+  not become a server-side lookup table nobody maintains.
+- **The Platform ranks candidates against the profile at play time.** Resolution
+  gathers every stream the registry's `StreamProvider`s offer for the item,
+  filters to those the profile can decode, then ranks the survivors by the
+  quality signals [ADR 0037](0037-completing-the-stremio-source-surface.md)
+  already parses — resolution, size, swarm health. The best playable candidate
+  becomes the ticket.
+- **Selection happens per playback, never at import.** The profile differs
+  between two clients of one install, and a debrid link is short-lived anyway
+  (ADR 0045). The Part's stored location is an identity hint; the candidate list
+  is re-resolved every time. This is what [ADR 0036](0036-capability-gated-affordances.md)
+  meant by "play-time resolution".
+- **`StreamLink` grows the technical fields selection needs** — container, video
+  codec, audio codec — completing what ADR 0037 started when it added quality,
+  size and seeders "so a future source-picker can rank and display candidates".
+  Parsing is best-effort from release text and `behaviorHints`, exactly as the
+  existing fields are, and a source that reports nothing leaves them zero.
+- **A container probe backs up the parse.** Release-name text lies, and an
+  unparsed candidate is not the same as an incompatible one. A single ranged read
+  of the first bytes identifies the container from its magic number — `1A 45 DF A3`
+  for Matroska, `ftyp` for MP4 — which is cheap, decisive, and only needed for
+  the few candidates that reach the top of the ranking.
+- **No playable candidate is an honest, specific failure**, not a silent one:
+  the count of releases found and the reason each was rejected, rendered as a
+  real state rather than a spinner that never resolves.
+- **The user can override.** The source picker lists candidates with
+  incompatible ones marked and explained. Automatic selection is a default, not a
+  cage — a user who knows their setup can pick anything.
+- **Bandwidth is a profile dimension, and selection prefers what fits.** The
+  client reports measured throughput alongside its codec support, and ranking
+  breaks ties toward candidates the connection can sustain. **Ordering candidates
+  by bitrate needs no duration**: runtime is constant across releases of one
+  item, so `SizeBytes` — already populated from `behaviorHints.videoSize` — is a
+  valid proxy for comparing *these* candidates to each other. Absolute bitrate
+  would need a duration, and `ContentMetadata.Runtime` is display-only by
+  [ADR 0034](0034-rich-metadata-preview.md), so selection deliberately does not
+  depend on one.
+- **Sustained stalling triggers reselection at the current position.** When
+  playback repeatedly rebuffers, the Platform re-resolves to a lighter candidate
+  and resumes where the user was. This is **not** seamless and is not presented
+  as though it were: the viewer sees a rebuffer, and possibly a second or two of
+  drift, because two releases do not share an exact timeline. It reuses machinery
+  built anyway — "resume at position T" is
+  [ADR 0046](0046-playback-state-is-platform-owned.md)'s mechanism and "pick a
+  different candidate" is the ranker above — so the switch is a stall detector
+  and some wiring rather than a subsystem.
+
+**This makes the web client a deliberately limited-mode client, and that is
+accepted.** Selection cannot manufacture a compatible release that no scraper
+offers, and MP4 is scarce at high quality — much of what selection finds will be
+h264/AAC at 720p or 1080p while the 2160p HEVC releases stay unplayable in a
+browser. That trade is taken knowingly: a desktop client with libmpv is the real
+answer to a fat profile, and it is deferred to a later thread.
+
+## Alternatives considered
+
+**Transcode on demand, as remux and Jellyfin do.** *Deferred, not rejected on
+merit.* It is the right answer when there is one file per item, and Mosaic will
+need it eventually — for a library of local files, and for the releases selection
+cannot cover. But making it the *primary* mechanism here means paying an ffmpeg
+subsystem, session lifecycle and hardware-acceleration story to reach a result
+that is usually already in the candidate list. Selection first, transcoding when
+selection demonstrably runs out.
+
+**Stream-copy remux (MKV → fMP4) without re-encoding.** *Deferred, and the most
+likely next step.* It is dramatically cheaper than transcoding — no re-encode,
+near-zero CPU — and it converts the large population of h264/AAC-in-MKV releases
+that selection must currently reject. It is the obvious follow-on once the
+selection data shows how often selection fails, and that ordering matters: the
+selection metrics are what justify building it.
+
+**Pick at import and store the choice.** *Rejected.* It bakes one client's
+profile into shared library state, so a browser's limitation would degrade
+playback for a desktop client on the same install, and it snapshots a link that
+will have expired by play time.
+
+**Let the client fetch candidates and choose.** *Rejected*, for the reason
+[ADR 0036](0036-capability-gated-affordances.md) rejected client-side gating: it
+puts selection policy, debrid credentials and release-name parsing into four
+clients, each re-implementing it. The client knows what it can decode; the server
+knows what is on offer. Declaring the first and deciding on the second is the
+correct division.
+
+**Seamless adaptive bitrate across candidates, switching renditions mid-stream as
+YouTube and Netflix do.** *Rejected — it cannot be built from these inputs, and
+that is structural rather than a matter of effort.* ABR requires renditions that
+are one encode at several bitrates: segment boundaries on aligned keyframes, a
+shared timeline and an identical timescale, so a player can append a segment from
+a different rendition into the same buffer without a visible seam. Stremio
+candidates are *different releases by different groups* — different GOP
+structures, different keyframe positions, frequently different runtimes (varying
+intros, edits, framerate conversions) — delivered as progressive files with no
+segments to switch at and no common timeline to switch on. **True ABR therefore
+requires transcoding one source into a ladder**, which is the deferred slice
+below; there is no path to it that avoids an encoder. Recorded explicitly because
+"why can't Mosaic adapt quality like Netflix" is a question that will recur, and
+the answer is not obvious from the outside.
+
+**A full Jellyfin-style `DeviceProfile`** — codec conditions, bitrate ceilings,
+resolution limits, subtitle delivery methods. *Rejected as premature.* Most of
+that surface exists to parameterise a transcoder. With selection as the
+mechanism, containers and codecs carry nearly all the decision, and the profile
+can grow when something needs it.
+
+## Consequences
+
+- **The profile earns its keep immediately, with no transcoder behind it.** This
+  is the payoff for capability negotiation: it does real work in the first slice
+  rather than waiting for transcoding to exist.
+- **Provider precedence gets a real answer** — [ADR 0027](0027-modules-as-typed-capability-providers.md)'s
+  open seam. Candidates rank by compatibility first, then quality, with the user
+  able to override. The seam is closed for foreground playback; background
+  auto-play inherits the same ranking.
+- **Aggregator addons become a strength rather than noise.** AIOStreams returning
+  forty candidates is exactly what makes selection viable; a single-scraper source
+  would leave nothing to choose between.
+- **Selection quality depends on parsing quality.** Release-name text is
+  adversarial and inconsistent; the probe bounds how wrong the parse can be, but
+  it does not make the parse good. Expect this to need iteration against real
+  AIOStreams output.
+- **Web is honestly limited, and says so.** Some items will have no playable
+  candidate. Naming that in the UI, with counts and reasons, is the difference
+  between a known constraint and a bug report.
+- **Quality adaptation is coarse, and honestly so.** Selection plus
+  stall-triggered reselection gives a real response to a degrading connection —
+  it just costs a visible rebuffer where a commercial service would glide. That
+  is the ceiling of what a menu of unrelated releases can deliver, and the UI
+  should not imply otherwise.
+- **The failure data is the input to the next decision.** How often selection
+  finds nothing, how often it reselects downward, and what it rejected, is what
+  says whether the next slice is stream-copy remux, full transcoding, or the
+  desktop client.
+
+## Implementation implications
+
+SDK: container, video-codec and audio-codec fields on `StreamLink`; the client
+capability profile on the session `Attach`
+([ADR 0047](0047-player-as-client-primitive.md)). Module: extend
+`parseStreamMeta` to decode container and codecs from release text and
+`behaviorHints.filename`. Platform: candidate gathering, profile filtering and
+ranking inside `ResolvePlayback`
+([ADR 0045](0045-playback-consumer-and-media-origin.md)), the container probe,
+and the no-candidate state on the emit-side. Web: Shaka Player, with its support
+probe feeding the declared profile, and the source picker rendering candidates
+with incompatible ones marked.
