@@ -78,9 +78,13 @@ outbox.**
   actions, gated exactly like every other action, surfaced in expert mode
   ([ADR 0058](0058-telemetry-storage-retention-and-expert-mode.md)). Access
   control on the audit log is not new machinery; it is the authorization system
-  the Platform already enforces, pointed at itself. Note that a bootstrapped
-  administrator does not receive these actions by default — audit reading is a
-  grant, not an attribute of being an admin.
+  the Platform already enforces, pointed at itself. **Corrected by
+  [ADR 0069](0069-privilege-cannot-escalate.md):** this record said the
+  bootstrapped account does not receive these actions. It does — it is the
+  superuser, and withholding an action from the only account that exists
+  creates a permission nobody can ever be granted. The tier that does not
+  receive them by default is the *administrator* the superuser allocates, which
+  is what this paragraph was reaching for.
 - **Retention is long, configurable, and floored.** An operator may set audit
   retention, but not below a compile-time floor of 30 days, and **a change to any
   retention setting is itself an audited action**. "Shorten retention, act, wait"
@@ -127,8 +131,9 @@ does not control, which is where a SIEM integration would take them.
   audit persists for a year or more. Its retention job, its partitions and its
   growth need to be sized on that basis, not on the log volume.
 - **`audit.read` is a genuine escalation.** It reveals what every user did.
-  Granting it is a decision, which is why it is separate from the admin bootstrap
-  set rather than folded into it.
+  Granting it is a decision, which is why it is a separate action an
+  administrator must be given individually rather than something implied by
+  administering the install ([ADR 0069](0069-privilege-cannot-escalate.md)).
 - **This unblocks nothing by itself, and needs the jobs runner.** Retention
   deletion and partition management are recurring no-user work, which needs the
   jobs runner, a scheduler and the **system principal**
