@@ -1,6 +1,16 @@
 # 46. Playback state is Platform-owned
 
-**Status:** Proposed
+**Status:** Accepted (built, except the continue-watching rail and watched marks
+on `EpisodeRow`, which are slice 6). The store, the commands and queries, the
+session-side coalescing and the Resume affordance are built and verified live.
+Implementation added a floor this record does not anticipate — a completion
+threshold cannot be applied to a duration a player has not settled on, or an
+item finishes the instant it starts — and a `Found` flag distinguishing "never
+started" from "started and at zero", which a detail screen renders as Play
+versus Restart. Building it also surfaced something outside its scope: a preset
+is snapshotted into a role row at creation, so `playback.write` never reached an
+account seeded before the action existed; the bootstrap now reconciles the owner
+account's role on every boot.
 **Date:** 2026-07-22
 
 ## Context
