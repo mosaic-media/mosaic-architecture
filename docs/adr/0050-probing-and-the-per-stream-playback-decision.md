@@ -7,8 +7,14 @@ passing HDR10 metadata to an SDR browser decoder produces a purple-and-green
 picture. **Unbuilt: the HLS emission below.** Encoded output is fragmented MP4
 down a pipe, which has no index and no length, so the origin answers
 `Accept-Ranges: none` and a remuxed stream cannot be seeked — this record's
-claim to retire ADR 0045's non-seekable caveat is therefore not yet true. The
-probe result is sealed into the ticket rather than persisted on the Part.
+claim to retire ADR 0045's non-seekable caveat is therefore not yet true.
+**Probe results are now durable on the Part, with one departure:** the technical
+columns this record points at cannot hold a track list, and the four-audio-track
+release below is exactly why that matters — so the full result is stored as a
+versioned document in `Part.Attributes` and the columns carry the summary. The
+probe is authoritative over the module's parse, as decided here. Recording it
+authorises `content.bind`, so a read-only viewer cannot warm the cache; that
+awaits the system principal.
 **Date:** 2026-07-22
 
 ## Context
