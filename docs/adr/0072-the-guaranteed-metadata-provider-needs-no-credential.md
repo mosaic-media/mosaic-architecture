@@ -1,8 +1,9 @@
 # 72. The guaranteed metadata provider needs no credential
 
-**Status:** Built in part. `module-cinemeta` exists, passes its gates and was
-verified against the live service. It is **not** yet registered in the Platform's
-composition root, and `module-stremio-addons` still bundles its Cinemeta default.
+**Status:** Built. `module-cinemeta` v0.1.0 is published and registered in the
+Platform's composition root, and `module-stremio-addons` v0.20.0 has dropped its
+bundled Cinemeta default. Verified live: a fresh session's home screen renders
+Cinemeta's catalogs and search returns its results with no configuration.
 Resolves the question [ADR 0035](0035-metadata-as-required-capability.md)'s
 Status line records as open. Refines
 [ADR 0062](0062-two-module-tiers.md)'s guarantee clause.
