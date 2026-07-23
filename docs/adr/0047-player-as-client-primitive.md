@@ -1,6 +1,17 @@
 # 47. The player is a client primitive over a server-issued ticket
 
-**Status:** Proposed
+**Status:** Accepted (built, except progress reporting). `playPart` resolves to
+a `Player` node carrying a ticket URL, and the web runtime renders it. **The
+capability declaration is now built**: `AttachRequest` carries an optional
+`ClientProfile`, the web Shell fills it from the browser's own `canPlayType`,
+and the Platform records it on the live session and ranks against it — the
+hard-coded browser preference at the `playPart` call site is gone, surviving
+only as the fallback for a client that declares nothing. **Still unbuilt:** no
+client reports progress back, so the node carries no subtitle tracks and no
+next-up reference and its resume offset is always zero. **Partly superseded:**
+the "web client is Shaka Player" bullet below was reversed by
+[ADR 0070](0070-the-web-player-is-the-browser.md) — the renderer is a bare
+`<video>` element. The rest of this record stands.
 **Date:** 2026-07-22
 
 ## Context

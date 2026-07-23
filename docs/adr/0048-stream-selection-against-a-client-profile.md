@@ -1,6 +1,16 @@
 # 48. Stream selection against a client profile
 
-**Status:** Proposed
+**Status:** Accepted (built, against a client-declared profile). Candidate
+gathering, profile filtering and ranking are built inside `ResolvePlayback`,
+and it reports what it chose out of how many. **The profile is now declared
+rather than assumed** (ADR 0047), and ranking gained an HDR term the record does
+not anticipate: HDR a client cannot render is penalised, because rendering it
+means a tone-map and a tone-map is a full video re-encode. **Unbuilt:** the
+source picker, and the no-candidate state with its counts and reasons. **Partly
+superseded:** the clause below sourcing that profile from Shaka Player's support
+probe was reversed by [ADR 0070](0070-the-web-player-is-the-browser.md) — the
+measurement stands, its source is the browser's own APIs. The rest of this
+record stands.
 **Date:** 2026-07-22
 
 ## Context
