@@ -151,6 +151,41 @@ library editing" — but it is **not** the same gap as the permissions one, and
 restoring an RPC would not fix it. What fixes it is an editing surface, which is
 a design question before it is a transport question.
 
+### Grouping the library by streaming service
+
+| Capability | Where it lives | Reachable? |
+|---|---|---|
+| Filter the library by a module's attributes | `SearchContentQuery.AttributesContain` → `NodeQuery.AttributesContain` (SDK `v0.19.0`) | No client path. |
+| Streaming availability per work | `module-tmdb` writes the `tmdbWatch` attribute at import (`v0.4.0`) | Stored, queryable, never read by a screen. |
+
+**This row is different from every other one here, and the difference is worth
+stating: it was left unreachable on purpose, and the reason is correctness
+rather than schedule.**
+
+Both halves work. A TMDB import records which services carry a title in the
+configured region, `SearchContent` will filter on it by containment against an
+indexed document, and the contract suite proves any `StorageAdapter` must answer
+that. What does not exist is anything that *refreshes* it — the jobs runner,
+scheduler and system principal are all named-and-unbuilt
+([ADR 0017](adr/0017-how-a-capability-acts.md), [ADR 0058](adr/0058-telemetry-storage-retention-and-expert-mode.md)).
+
+Streaming availability churns monthly. A group that says "on Netflix" for
+something that left in March is **actively wrong**, which is a worse failure
+than an absent group: a user can see that a feature is missing, and cannot see
+that a feature is lying. So the storage and the query landed and the surface did
+not, deliberately, with the `checkedAt` timestamp written alongside every record
+so the eventual refresh knows what to re-fetch first.
+
+**What discharges this row** is a scheduled refresh, and then a browse surface
+over it — in that order. Building the surface first would put a confidently
+wrong answer in front of a user, which is the one outcome worth avoiding.
+
+Adjacent and *not* blocked: a provider **catalog** — "what's on Netflix" as a
+discover-backed rail — needs none of this, because it asks TMDB live rather than
+reading anything stored. `module-tmdb`'s custom catalogs already do it with a
+`with_watch_providers` query. That is a different feature (browse the source's
+catalogue, with library items marked) and it is reachable today.
+
 ---
 
 ## Migrated
