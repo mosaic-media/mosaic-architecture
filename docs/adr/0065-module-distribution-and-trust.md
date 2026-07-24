@@ -4,11 +4,15 @@
 by [ADR 0079](0079-the-platform-manages-extension-modules.md) — the Platform, not
 the Supervisor, verifies and installs extension modules — and the distribution,
 signing and trust *mechanism* below stands unchanged. The **verification gate**
-is built (Platform-side): a module's signed manifest, its declared digest, and
-its SDK major are checked before it is run, with `tools/modulesign` the publisher
-side. Not built: the signed repository index that delivers the artefacts, the
-user-consent surface for adding a repository, and real key custody for the
-official key.
+and the **signed-repository install flow** are built (Platform-side): a module's
+signed manifest, its declared digest and its SDK major are checked before it is
+run; a repository is a signed index over HTTPS trusted per repository, and the
+Platform fetches, verifies, stores and keeps provenance for a module installed
+from one. `tools/modulesign` is the publisher side (sign, sign-index). Not built:
+the admin surface that collects a user's consent to add a repository, real key
+custody for the official key, and the composition-root wiring to a live official
+repository — the machinery exists; a running Platform does not yet install from a
+real repository.
 **Date:** 2026-07-22
 
 Depends on [ADR 0062](0062-two-module-tiers.md),
