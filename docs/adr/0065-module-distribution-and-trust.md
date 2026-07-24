@@ -1,6 +1,9 @@
 # 65. Module distribution and trust: signed binaries and user-added repositories
 
-**Status:** Proposed
+**Status:** Proposed. Partly superseded: the **actor** is reversed by
+[ADR 0079](0079-the-platform-manages-extension-modules.md) — the Platform, not
+the Supervisor, verifies and installs extension modules — and the distribution,
+signing and trust *mechanism* below stands unchanged.
 **Date:** 2026-07-22
 
 Depends on [ADR 0062](0062-two-module-tiers.md),

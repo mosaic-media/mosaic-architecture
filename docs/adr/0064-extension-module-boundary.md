@@ -16,8 +16,12 @@ excludes, the case that would otherwise leave the Platform's own PostgreSQL
 reachable. Still unbuilt: OS-level network denial (layer 3), which is what turns
 the proxy from the easy path into the only path. `module-stremio-addons` runs as
 its own process and is proven doing so against the real boundary; the Platform
-still composes it statically, because the cutover is a distribution decision
-that also waits on the Supervisor.
+still composes it statically, because the cutover is a distribution decision.
+**Partly superseded: the "Supervisor owns the install" division is reversed by
+[ADR 0079](0079-the-platform-manages-extension-modules.md)** — the Platform
+manages extension modules end to end, including download and verification; the
+process ownership this record built (spawn, health, restart, kill) stands and is
+what that division now extends backwards over install.
 **Date:** 2026-07-22
 
 Depends on [ADR 0062](0062-two-module-tiers.md). Supersedes
