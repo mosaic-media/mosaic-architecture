@@ -74,11 +74,18 @@ which repository, at which version, verified against whose key* — the identity
 and provenance. The verified binary on disk is a cache of that record,
 re-acquirable from the recorded repository and version if it is missing.
 
-At boot the Platform reads the set and **re-adopts each entry**: it re-verifies
-the artefact against the trusted key — verification happens in the process that
-grants authority, every time it spawns, per ADR 0079 — and spawns and registers
-it. A restart therefore reconstructs exactly the running set the user last chose,
-with no operator action and no re-consent.
+At boot the Platform reads the set and **re-adopts each entry** from the on-disk
+cache: it re-verifies the cached binary against the manifest that was
+authenticated at install — the digest re-checked in the process that grants
+authority, immediately before every spawn (ADR 0079) — and spawns and registers
+it. This confirms the exact **pinned** bytes without re-fetching an index that
+may by then list a newer version, so a registry that has moved on does not
+silently upgrade an install. The signature-and-key check runs at install (and at
+any reinstall or update), which is the act that grants authority; boot re-adoption
+re-confirms the bytes that act vouched for. Only when the cache is gone does boot
+re-install from the repository, re-verifying against the trusted key. A restart
+therefore reconstructs exactly the running set the user last chose, with no
+operator action and no re-consent.
 
 ### Adoption is dynamic, because the trigger is a live user action
 
@@ -139,10 +146,13 @@ must not depend on. It is Platform state.
   an available-not-installed extension: a fresh Platform does not have it until a
   user installs it, and `RequireComposedRoleClasses` still passes because Stremio
   fills no required class and the core metadata floor is unchanged.
-- **Verification runs at every adoption** — at install and again at each boot's
-  re-adoption — in the Platform, immediately before spawn. Re-verifying an
-  on-disk binary is cheap and is the posture ADR 0079 chose over trusting an
-  earlier check.
+- **The binary and its authenticated manifest are cached on disk beside each
+  other.** The store's row is the durable record of intent; the cache is the
+  bytes. Boot re-adoption re-hashes the cached binary against the cached
+  manifest's digest — cheap, offline, and preserving the pin — and reaches the
+  repository only to install, reinstall, or replace a missing cache. That is the
+  posture ADR 0079 chose: verify in the process that grants authority, every time
+  it spawns, over trusting an earlier check.
 - **Uninstall must revoke cleanly**: stop the process, unregister the capability
   so nothing resolves it, and drop the install record. In-flight invocation
   handles die with the process, which is the existing guarantee.
