@@ -116,6 +116,8 @@ nav:
       - 74. Artwork is a candidate set (proposed): adr/0074-artwork-is-a-candidate-set.md
       - 75. The artwork provider role (proposed): adr/0075-the-artwork-provider-role.md
       - 76. A curated stream provider beside the addon host (built): adr/0076-a-curated-stream-provider-beside-the-addon-host.md
+      - 77. go-plugin is the extension module harness (proposed): adr/0077-go-plugin-as-the-extension-harness.md
+      - 78. Core modules keep their repositories (proposed): adr/0078-core-modules-keep-their-repositories.md
 
 markdown_extensions:
   - admonition

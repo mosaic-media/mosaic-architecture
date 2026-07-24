@@ -1,9 +1,12 @@
 # 44. The SDUI and session contracts are protobuf in one workspace
 
-**Status:** Accepted (built) — the `sdui` repository carries the `proto`
-workspace with generated Go and TypeScript, and encoding option (b) landed: the
-typed `mosaic.sdui.v1.UINode` rides the session envelope directly, with no JSON
-step.
+**Status:** Accepted (built in part) — the `proto` workspace, generated Go and
+TypeScript are built, and encoding option (b) landed: the typed
+`mosaic.sdui.v1.UINode` rides the session envelope directly, with no JSON step.
+**The `sdui` → `contracts` rename is outstanding**: the repository is still
+`sdui` and `platform` still requires `github.com/mosaic-media/sdui`.
+[ADR 0064](0064-extension-module-boundary.md) presumes the rename has happened,
+so it blocks the module wire.
 **Date:** 2026-07-21
 
 ## Context
