@@ -227,6 +227,24 @@ honest question is "what can a user not reach", not "what did ADR 0061 delete":
   in on boot and has no sign-out affordance, so nothing calls it.
 - **There is no sign-in UI.** `devSignIn` authenticates on boot with credentials
   from build-time environment variables. A real login form is unbuilt.
+- **`SetContentArtwork` has no client path, and the artwork picker it exists for
+  does not exist.** The command is implemented, validated, authorised and
+  transactional; the artwork enrichment pass calls it
+  ([ADR 0075](adr/0075-the-artwork-provider-role.md)), so it is exercised
+  server-side and its tests pass. What nobody can press is the half it was
+  *designed* for: [ADR 0074](adr/0074-artwork-is-a-candidate-set.md) stores every
+  poster, logo and backdrop a source offered as candidates specifically so a user
+  can choose among them, and there is no screen that renders the alternatives.
+  Selection resolves by a stated rule and a user cannot override it.
+
+    This is the register's own failure mode in miniature: the rule produces
+    visibly better art than before, so the feature *looks* delivered, and the
+    reason artwork was moved onto the node at all
+    ([ADR 0071](adr/0071-content-artwork-is-stored-on-the-node.md) — "user-swappable
+    artwork becomes possible") is the part still owed. It also has a second-order
+    debt: `SetContentArtwork` replaces rather than merges, so once a picker
+    exists, a user's choice needs marking as theirs or the next enrichment pass
+    will overwrite it.
 
 ---
 

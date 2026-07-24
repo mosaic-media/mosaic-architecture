@@ -113,6 +113,8 @@ nav:
       - 71. Content artwork is stored on the node (built): adr/0071-content-artwork-is-stored-on-the-node.md
       - 72. The guaranteed metadata provider needs no credential (built): adr/0072-the-guaranteed-metadata-provider-needs-no-credential.md
       - '73. Stream resolution is decoupled from metadata provenance': adr/0073-stream-resolution-is-decoupled-from-metadata-provenance.md
+      - 74. Artwork is a candidate set (proposed): adr/0074-artwork-is-a-candidate-set.md
+      - 75. The artwork provider role (proposed): adr/0075-the-artwork-provider-role.md
 
 markdown_extensions:
   - admonition
