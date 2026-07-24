@@ -1,11 +1,17 @@
 # 40. Definitions and the skin are server-delivered data
 
-**Status:** Accepted (built for definitions, not for the skin). The session
-pushes the component-definition library on connect, before the shell, and the
-client falls back to its bundled definitions if the payload is malformed. **The
-token set is still baked into the client** (`sdui-react`'s `tokens.css`), so the
-skin tier below is unbuilt and the negotiation and versioning that go with it are
-untested.
+**Status:** Accepted; **both tiers now built**. **Partly superseded: the
+bundled-fallback clause was reversed by [ADR 0082](0082-components-are-authored-only-in-the-contract.md)
+— the client now bundles no definitions at all, and components are authored only
+in the contract; the rest stands.** The session pushes the component-definition
+library on connect, before the shell, and now the **design tokens** with it: the
+set lives in the contract (`tokens/tokens.json`), the Platform serves it, and a
+client applies it over a bootstrap copy synced from the same source — a token
+changed in the contract reaches a running client with no client build, which was
+this record's whole claim and was unbuilt for its first year. The style
+*vocabulary* the tokens are spent through (`BoxStyle`/`TextStyle`) is likewise
+specified in the schema now, so a second client has something to implement.
+Negotiation and versioning of the UI bundle remain untested.
 **Date:** 2026-07-21
 
 ## Context
