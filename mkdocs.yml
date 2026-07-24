@@ -119,6 +119,7 @@ nav:
       - 77. go-plugin is the extension module harness (proposed): adr/0077-go-plugin-as-the-extension-harness.md
       - 78. Core modules keep their repositories (proposed): adr/0078-core-modules-keep-their-repositories.md
       - 79. The Platform manages extension modules (proposed): adr/0079-the-platform-manages-extension-modules.md
+      - 80. Deployment topologies (proposed): adr/0080-deployment-topologies.md
 
 markdown_extensions:
   - admonition
