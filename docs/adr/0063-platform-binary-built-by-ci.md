@@ -1,6 +1,13 @@
 # 63. The Platform binary is built by CI; the Supervisor selects, not compiles
 
-**Status:** Proposed
+**Status:** Proposed; the CI release matrix is built (the producing half). A
+version tag cross-compiles the one Platform binary to linux/amd64, linux/arm64,
+darwin and windows with checksums, publishes a GitHub release, and builds a thin
+multi-arch container image from the same bytes ([ADR 0080](0080-deployment-topologies.md)).
+Unbuilt: signing the artefacts (waits on key custody, [ADR 0065](0065-module-distribution-and-trust.md)),
+and the Supervisor that downloads, verifies and activates a release — the
+consuming half — which does not exist. Core-module *selection* is built
+separately (see the roadmap).
 **Date:** 2026-07-22
 
 Relocates [ADR 0006](0006-supervisor-orchestrates-isolated-builds.md)'s build
