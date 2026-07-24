@@ -1,9 +1,14 @@
 # 65. Module distribution and trust: signed binaries and user-added repositories
 
-**Status:** Proposed. Partly superseded: the **actor** is reversed by
-[ADR 0079](0079-the-platform-manages-extension-modules.md) — the Platform, not
+**Status:** Proposed; built in part. Partly superseded: the **actor** is reversed
+by [ADR 0079](0079-the-platform-manages-extension-modules.md) — the Platform, not
 the Supervisor, verifies and installs extension modules — and the distribution,
-signing and trust *mechanism* below stands unchanged.
+signing and trust *mechanism* below stands unchanged. The **verification gate**
+is built (Platform-side): a module's signed manifest, its declared digest, and
+its SDK major are checked before it is run, with `tools/modulesign` the publisher
+side. Not built: the signed repository index that delivers the artefacts, the
+user-consent surface for adding a repository, and real key custody for the
+official key.
 **Date:** 2026-07-22
 
 Depends on [ADR 0062](0062-two-module-tiers.md),
