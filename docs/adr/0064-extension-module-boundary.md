@@ -8,10 +8,16 @@ this record left open is measured and answered: a callback costs ~700µs, so a
 batched verbs are not needed.** Process lifecycle is
 built — health probing, restart with backoff, and a crash-loop policy that
 disables a module rather than exiting the Platform, which closes the open
-crash-loop question below. Still unbuilt: the egress forward proxy and its deny
-list, and OS-level network denial. `module-stremio-addons` can run as its own
-process and is proven doing so against the real boundary, but the Platform still
-composes it statically, because the cutover waits on that egress proxy.
+crash-loop question below. The egress forward proxy and its deny list are built
+too (layer 2): every module's outbound call goes through a per-module CONNECT
+proxy applying netguard's deny list, and `sdk/host` forces the module's
+transport through it — including for loopback, which `HTTP_PROXY` alone
+excludes, the case that would otherwise leave the Platform's own PostgreSQL
+reachable. Still unbuilt: OS-level network denial (layer 3), which is what turns
+the proxy from the easy path into the only path. `module-stremio-addons` runs as
+its own process and is proven doing so against the real boundary; the Platform
+still composes it statically, because the cutover is a distribution decision
+that also waits on the Supervisor.
 **Date:** 2026-07-22
 
 Depends on [ADR 0062](0062-two-module-tiers.md). Supersedes
