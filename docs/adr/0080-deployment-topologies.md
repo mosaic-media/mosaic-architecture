@@ -1,6 +1,10 @@
 # 80. Deployment topologies: a native binary that runs in a container or on bare metal
 
-**Status:** Proposed
+**Status:** Proposed. Partly built: the reportable egress-containment posture
+(roadmap slice 5.2) — the Platform determines its posture per this table and
+reports it at boot and in the support bundle, so the layer-3 guarantee is stated
+per deployment rather than claimed uniformly. The OS-level enforcement mechanisms
+themselves remain deployment-provided.
 **Date:** 2026-07-24
 
 Consolidates a decision scattered across [ADR 0004](0004-supervisor-as-host-manager.md)
