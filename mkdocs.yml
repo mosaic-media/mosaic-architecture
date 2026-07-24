@@ -120,6 +120,7 @@ nav:
       - 78. Core modules keep their repositories (proposed): adr/0078-core-modules-keep-their-repositories.md
       - 79. The Platform manages extension modules (proposed): adr/0079-the-platform-manages-extension-modules.md
       - 80. Deployment topologies (proposed): adr/0080-deployment-topologies.md
+      - 81. Extension installation is user-initiated and persistent (proposed): adr/0081-extension-installation-is-user-initiated-and-persistent.md
 
 markdown_extensions:
   - admonition
